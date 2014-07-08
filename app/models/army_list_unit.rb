@@ -3,12 +3,13 @@ class ArmyListUnit < ActiveRecord::Base
   belongs_to :unit
   belongs_to :unit_category
   has_many :army_list_unit_magic_items, :dependent => :destroy
-  has_many :magic_items, :through => :army_list_unit_magic_items, :select => 'magic_items.*, army_list_units_magic_items.quantity'
+  has_many :magic_items, -> { select 'magic_items.*, army_list_units_magic_items.quantity' }, :through => :army_list_unit_magic_items
   has_and_belongs_to_many :magic_standards
   has_and_belongs_to_many :extra_items
   has_and_belongs_to_many :unit_options
-  has_many :army_list_unit_troops, :order => 'position', :dependent => :destroy
+  has_many :army_list_unit_troops, -> { order 'position' }, :dependent => :destroy
 
+  attr_accessible :unit_id, :name
   accepts_nested_attributes_for :army_list_unit_troops
   accepts_nested_attributes_for :army_list_unit_magic_items, :allow_destroy => true
 
@@ -21,7 +22,7 @@ class ArmyListUnit < ActiveRecord::Base
 
   before_validation :on => :create do
     self.name = unit.name if unit.is_unique
-    self.name = unit.name + " \#" + (army_list.army_list_units.where(:unit_id => unit).count() + 1).to_s unless name?
+    self.name = unit.name + ' #' + (army_list.army_list_units.where(:unit_id => unit).count() + 1).to_s unless name?
     self.unit_category = unit.unit_category
     self.size = 0
     self.value_points = 0.0

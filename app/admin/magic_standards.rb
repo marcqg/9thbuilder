@@ -1,7 +1,7 @@
 ActiveAdmin.register MagicStandard do
-  menu :parent => "Magic Items", :priority => 1
+  menu :parent => 'Magic Items', :priority => 1
 
-  config.sort_order = "name_asc"
+  config.sort_order = 'name_asc'
 
   controller do
     def create
@@ -10,7 +10,7 @@ ActiveAdmin.register MagicStandard do
   end
 
   action_item :only => :show do
-    link_to "New Magic Standard", new_admin_magic_standard_url
+    link_to 'New Magic Standard', new_admin_magic_standard_url
   end
 
   filter :army
@@ -23,7 +23,7 @@ ActiveAdmin.register MagicStandard do
     column :army, :sortable => :army_id
     column :name
     column :value_points
-    default_actions
+    actions
   end
 
   form do |f|

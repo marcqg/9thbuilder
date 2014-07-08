@@ -1,9 +1,9 @@
 //= require jquery
 //= require jquery_ujs
-//= require jquery-ui
+//= require jquery.ui.all
+//= require jquery.ui.touch-punch
 //= require jquery.formalize
 //= require jquery.colorbox
-//= require jquery.ui.touch-punch
 
 jQuery(function($) {
 

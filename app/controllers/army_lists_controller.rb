@@ -8,13 +8,13 @@ class ArmyListsController < ApplicationController
   # GET /army_lists
   # GET /army_lists.xml
   def index
-    unless params.include?(:search) then
-      params[:search] = {}
-      params[:search][:army_id_eq] = current_user.favorite_army.try(:id)
+    unless params.include?(:q) then
+      params[:q] = {}
+      params[:q][:army_id_eq] = current_user.favorite_army.try(:id)
     end
 
-    @search = current_user.army_lists.includes(:army).order('value_points DESC').search(params[:search])
-    @army_lists = @search.relation
+    @search = current_user.army_lists.includes(:army).order('value_points DESC').search(params[:q])
+    @army_lists = @search.result
 
     respond_to do |format|
       format.html # index.html.erb

@@ -29,7 +29,7 @@ ActiveAdmin.register SpecialRule do
   end
 
   action_item :only => :show do
-    link_to "New Special Rule", new_admin_special_rule_path('special_rule[unit_id]' => special_rule.unit)
+    link_to 'New Special Rule', new_admin_special_rule_path('special_rule[unit_id]' => special_rule.unit)
   end
 
   filter :unit
@@ -42,12 +42,12 @@ ActiveAdmin.register SpecialRule do
     column :name
     column :troop, :sortable => :troop_id
     column :position
-    default_actions
+    actions
   end
 
   form do |f|
     f.inputs do
-      f.input :army_filter, :as => :select, :collection => Army.order(:name), :disabled => Army.disabled.pluck(:id), :label => "Army FILTER"
+      f.input :army_filter, :as => :select, :collection => Army.order(:name), :disabled => Army.disabled.pluck(:id), :label => 'Army FILTER'
       f.input :unit, :collection => Unit.includes(:army).order('armies.name', 'units.name').collect { |u| [u.army.name + ' - ' + u.name, u.id] }
       f.input :troop, :collection => Troop.includes(:unit => [:army]).order('armies.name', 'units.name', 'troops.position').collect { |t| [t.unit.army.name + ' - ' + t.unit.name + ' - ' + t.name, t.id] }
       f.input :name

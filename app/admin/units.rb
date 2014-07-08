@@ -20,12 +20,12 @@ ActiveAdmin.register Unit do
   end
 
   action_item :only => :show do
-    link_to "New Unit", new_admin_unit_path
+    link_to 'New Unit', new_admin_unit_path
   end
 
-  action_item :only => :show do
-    link_to "Duplicate Unit", duplicate_admin_unit_path(unit), :method => :post
-  end
+  # action_item :only => :show do
+  #   link_to 'Duplicate Unit', duplicate_admin_unit_path(unit), :method => :post
+  # end
 
   filter :army
   filter :unit_category
@@ -42,7 +42,7 @@ ActiveAdmin.register Unit do
     column :max_size
     column :value_points
     column :is_unique
-    default_actions
+    actions
   end
 
   form do |f|
@@ -74,8 +74,8 @@ ActiveAdmin.register Unit do
       row :is_unique
     end
 
-    panel "Troops details" do
-      div :class => "unit_troops_details" do
+    panel 'Troops details' do
+      div :class => 'unit_troops_details' do
         table_for unit.troops do
           column :id
           column :troop_type
@@ -94,60 +94,60 @@ ActiveAdmin.register Unit do
           column :unit_option
           column :position
           column do |troop|
-            link_to "Mont.", move_higher_admin_troop_path(troop), :method => :post unless troop.first?
+            link_to 'Mont.', move_higher_admin_troop_path(troop), :method => :post unless troop.first?
           end
           column do |troop|
-            link_to "Desc.", move_lower_admin_troop_path(troop), :method => :post unless troop.last?
+            link_to 'Desc.', move_lower_admin_troop_path(troop), :method => :post unless troop.last?
           end
           column do |troop|
-            link_to "Voir", admin_troop_path(troop)
+            link_to 'Voir', admin_troop_path(troop)
           end
         end
       end
     end
 
-    panel "Equipments Details" do
-      div :class => "unit_equipments_details" do
-        table_for unit.equipments, "data-url" => sort_admin_equipments_path(:unit_id => unit) do
+    panel 'Equipments Details' do
+      div :class => 'unit_equipments_details' do
+        table_for unit.equipments, 'data-url' => sort_admin_equipments_path(:unit_id => unit) do
           column :id
           column :name
           column :troop
           column :position
           column do |equipment|
-            link_to "Mont.", move_higher_admin_equipment_path(equipment), :method => :post unless equipment.first?
+            link_to 'Mont.', move_higher_admin_equipment_path(equipment), :method => :post unless equipment.first?
           end
           column do |equipment|
-            link_to "Desc.", move_lower_admin_equipment_path(equipment), :method => :post unless equipment.last?
+            link_to 'Desc.', move_lower_admin_equipment_path(equipment), :method => :post unless equipment.last?
           end
           column do |equipment|
-            link_to "Voir", admin_equipment_path(equipment)
+            link_to 'Voir', admin_equipment_path(equipment)
           end
         end
       end
     end
 
-    panel "Special Rules Details" do
-      div :class => "unit_special_rules_details" do
-        table_for unit.special_rules, "data-url" => sort_admin_special_rules_path(:unit_id => unit) do
+    panel 'Special Rules Details' do
+      div :class => 'unit_special_rules_details' do
+        table_for unit.special_rules, 'data-url' => sort_admin_special_rules_path(:unit_id => unit) do
           column :id
           column :name
           column :troop
           column :position
           column do |special_rule|
-            link_to "Mont.", move_higher_admin_special_rule_path(special_rule), :method => :post unless special_rule.first?
+            link_to 'Mont.', move_higher_admin_special_rule_path(special_rule), :method => :post unless special_rule.first?
           end
           column do |special_rule|
-            link_to "Desc.", move_lower_admin_special_rule_path(special_rule), :method => :post unless special_rule.last?
+            link_to 'Desc.', move_lower_admin_special_rule_path(special_rule), :method => :post unless special_rule.last?
           end
           column do |special_rule|
-            link_to "Voir", admin_special_rule_path(special_rule)
+            link_to 'Voir', admin_special_rule_path(special_rule)
           end
         end
       end
     end
 
-    panel "Options Details" do
-      div :class => "unit_unit_options_details" do
+    panel 'Options Details' do
+      div :class => 'unit_unit_options_details' do
         table_for unit.unit_options do
           column :id
           column :name
@@ -160,13 +160,13 @@ ActiveAdmin.register Unit do
           column :is_unique_choice
           column :position
           column do |unit_option|
-            link_to "Mont.", move_higher_admin_unit_option_path(unit_option), :method => :post unless unit_option.first?
+            link_to 'Mont.', move_higher_admin_unit_option_path(unit_option), :method => :post unless unit_option.first?
           end
           column do |unit_option|
-            link_to "Desc.", move_lower_admin_unit_option_path(unit_option), :method => :post unless unit_option.last?
+            link_to 'Desc.', move_lower_admin_unit_option_path(unit_option), :method => :post unless unit_option.last?
           end
           column do |unit_option|
-            link_to "Voir", admin_unit_option_path(unit_option)
+            link_to 'Voir', admin_unit_option_path(unit_option)
           end
         end
       end

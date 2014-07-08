@@ -2,11 +2,11 @@ class Unit < ActiveRecord::Base
   belongs_to :army
   belongs_to :unit_category
   has_many :army_list_units, :dependent => :destroy
-  has_many :equipments, :order => "position", :dependent => :destroy
-  has_many :special_rules, :order => "position", :dependent => :destroy
-  has_many :troops, :order => "position", :dependent => :destroy
-  has_many :unit_options, :order => ["parent_id", "position"], :dependent => :destroy
-  has_many :mount_options, :class_name => "UnitOption", :foreign_key => "mount_id", :dependent => :nullify
+  has_many :equipments, -> { order 'position' }, :dependent => :destroy
+  has_many :special_rules, -> { order 'position' }, :dependent => :destroy
+  has_many :troops, -> { order 'position' }, :dependent => :destroy
+  has_many :unit_options, -> { order ['parent_id', 'position'] }, :dependent => :destroy
+  has_many :mount_options, :class_name => 'UnitOption', :foreign_key => 'mount_id', :dependent => :nullify
 
   normalize_attributes :magic, :notes
 
@@ -16,18 +16,18 @@ class Unit < ActiveRecord::Base
   validates_numericality_of :value_points, :greater_than_or_equal_to => 0, :allow_nil => true
   validates_inclusion_of :is_unique, :in => [true, false]
 
-  scope :base_category, where(:unit_category_id => 3)
-  scope :mount_category, where(:unit_category_id => 6)
+  scope :base_category, -> { where(:unit_category_id => 3) }
+  scope :mount_category, -> { where(:unit_category_id => 6) }
 
   def self.for_select(army_list)
     army_list_units = army_list.army_list_units.collect { |alu| alu.unit }
 
-    UnitCategory.where("id <> 6").map do |unit_category|
+    UnitCategory.where('id <> 6').map do |unit_category|
       [
         unit_category.name,
         unit_category.units
           .where(:army_id => army_list.army)
-          .order("is_unique", "name")
+          .order('is_unique', 'name')
           .reject { |unit| unit.in?(army_list_units) if unit.is_unique }
           .map { |u| [u.name, u.id] }
       ]

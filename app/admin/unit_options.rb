@@ -1,5 +1,5 @@
 ActiveAdmin.register UnitOption do
-  menu :parent => "Units"
+  menu :parent => 'Units'
 
   controller do
     def create
@@ -22,7 +22,7 @@ ActiveAdmin.register UnitOption do
   end
 
   action_item :only => :show do
-    link_to "New Unit Option", new_admin_unit_option_path('unit_option[unit_id]' => unit_option.unit)
+    link_to 'New Unit Option', new_admin_unit_option_path('unit_option[unit_id]' => unit_option.unit)
   end
 
   filter :unit, :collection => proc { Unit.includes(:army).order('armies.name', 'units.name').collect { |r| [r.army.name + ' - ' + r.name, r.id] } }
@@ -43,12 +43,12 @@ ActiveAdmin.register UnitOption do
     column :is_extra_items
     column :is_unique_choice
     # column :position
-    default_actions
+    actions
   end
 
   form do |f|
     f.inputs do
-      f.input :army_filter, :as => :select, :collection => Army.order(:name), :disabled => Army.disabled.pluck(:id), :label => "Army FILTER"
+      f.input :army_filter, :as => :select, :collection => Army.order(:name), :disabled => Army.disabled.pluck(:id), :label => 'Army FILTER'
       f.input :unit, :collection => Unit.includes(:army).order('armies.name', 'units.name').collect { |u| [u.army.name + ' - ' + u.name, u.id] }
       f.input :parent, :collection => UnitOption.includes(:unit => [:army]).order('armies.name', 'units.name', 'unit_options.position').collect { |uo| [uo.unit.army.name + ' - ' + uo.unit.name + ' - ' + uo.name, uo.id] }
       f.input :mount, :collection => Unit.includes(:army).mount_category.order('armies.name', 'units.name').collect { |u| [u.army.name + ' - ' + u.name, u.id] }

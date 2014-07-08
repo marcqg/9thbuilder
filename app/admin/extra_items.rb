@@ -1,7 +1,7 @@
 ActiveAdmin.register ExtraItem do
   menu :priority => 7
 
-  config.sort_order = "name_asc"
+  config.sort_order = 'name_asc'
 
   controller do
     def create
@@ -10,7 +10,7 @@ ActiveAdmin.register ExtraItem do
   end
 
   action_item :only => :show do
-    link_to "New Extra Item", new_admin_extra_item_path
+    link_to 'New Extra Item', new_admin_extra_item_path
   end
 
   filter :extra_item_category
@@ -23,7 +23,7 @@ ActiveAdmin.register ExtraItem do
     column :extra_item_category, :sortable => :extra_item_category_id
     column :name
     column :value_points
-    default_actions
+    actions
   end
 
   form do |f|

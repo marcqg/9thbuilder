@@ -1,11 +1,12 @@
 <% title "Mes listes d'armée" %>
 
 <div id="subheader" class="grid_14">
-  <%= form_for @search, :url => army_lists_path, :html => {:method => :get} do |f| %>
+  <%= search_form_for @search do |f| %>
     <p>
-      <%= f.label :army_id_eq, "Filtrer par" %> <%= f.collection_select :army_id_eq, Army.order(:name), :id, :name, :disabled => Army.disabled.pluck(:id), :include_blank => true %>
-      <%= f.label :value_points_gte, "de" %> <%= f.text_field :value_points_gte %>
-      <%= f.label :value_points_lte, "a" %> <%= f.text_field :value_points_lte %> <%= f.label :value_points_lte, "points" %>
+      <%= f.label :army_id_eq, "Filtrer par" %> <%= f.select :army_id_eq, options_from_collection_for_select(Army.order(:name), :id, :name, {disabled: ->(army) { army.units.empty? } }), {include_blank: true} %>
+      <%# , Army.order(:name), :id, :name, :disabled => Army.disabled.pluck(:id), :include_blank => true %>
+      <%= f.label :value_points_gteq, "de" %> <%= f.search_field :value_points_gteq %>
+      <%= f.label :value_points_lteq, "a" %> <%= f.search_field :value_points_lteq %> <%= f.label :value_points_lteq, "points" %>
       <%= f.submit "Valider" %>
     </p>
   <% end %>

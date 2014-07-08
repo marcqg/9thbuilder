@@ -3,8 +3,8 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <title><%= content_for?(:title) ? yield(:title) : "Bienvenue" %> • Whbab</title>
-  <%= stylesheet_link_tag "application", :media => :all %>
-  <%= javascript_include_tag "application" %>
+  <%= stylesheet_link_tag "application", media: 'all', "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= javascript_tag "BASE_URL = '#{root_path}';" %>
   <%= csrf_meta_tag %>
   <%= yield(:head) %>
@@ -27,7 +27,7 @@
     </div>
     <% if user_signed_in? %>
     <ul class="menu" style="display:none">
-      <li><%= link_to "Mes listes d'armée", army_lists_path("search[army_id_eq]" => "") %></li>
+      <li><%= link_to "Mes listes d'armée", army_lists_path("q[army_id_eq]" => "") %></li>
       <li><%= link_to "Préférence", edit_user_registration_path %></li>
       <li><a href="mailto:support@whbab.com">Aide</a></li>
       <li><%= link_to "Déconnexion", destroy_user_session_path %></li>
@@ -54,3 +54,4 @@
 
 </body>
 </html>
+

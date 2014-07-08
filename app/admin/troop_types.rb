@@ -1,7 +1,7 @@
 ActiveAdmin.register TroopType do
-  menu :parent => "Troops"
+  menu :parent => 'Troops'
 
-  config.sort_order = "name_asc"
+  config.sort_order = 'name_asc'
 
   filter :name
 end
