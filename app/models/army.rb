@@ -8,4 +8,5 @@ class Army < ActiveRecord::Base
   validates_presence_of :name
 
   scope :disabled, -> { where('id NOT IN (SELECT DISTINCT army_id FROM units)') }
+  scope :disabled_or_obsolete -> { where('id NOT IN (SELECT DISTINCT army_id FROM units) OR name LIKE \'%obsolète%\'') }
 end
