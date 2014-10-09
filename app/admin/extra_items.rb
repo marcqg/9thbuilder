@@ -1,6 +1,8 @@
 ActiveAdmin.register ExtraItem do
   menu :priority => 7
 
+  permit_params :extra_item_category_id, :name, :value_points
+
   config.sort_order = 'name_asc'
 
   controller do
@@ -32,6 +34,6 @@ ActiveAdmin.register ExtraItem do
       f.input :name
       f.input :value_points
     end
-    f.buttons
+    f.actions
   end
 end

@@ -1,6 +1,8 @@
 ActiveAdmin.register MagicStandard do
   menu :parent => 'Magic Items', :priority => 1
 
+  permit_params :army_id, :override_id, :name, :value_points
+
   config.sort_order = 'name_asc'
 
   controller do
@@ -33,6 +35,6 @@ ActiveAdmin.register MagicStandard do
       f.input :name
       f.input :value_points
     end
-    f.buttons
+    f.actions
   end
 end

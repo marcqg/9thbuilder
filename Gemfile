@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.1.2'
+gem 'rails', '4.1.6'
 # Use mysql as the database for Active Record
 gem 'mysql2'
 # Use SCSS for stylesheets
@@ -39,9 +39,8 @@ gem 'spring', group: :development
 # gem 'debugger', group: [:development, :test]
 
 gem 'activeadmin', github: 'gregbell/active_admin'
-gem 'jquery-ui-rails', '~> 4.2.1' # TEMP
+gem 'jquery-ui-rails'
 gem 'devise'
-gem 'protected_attributes'
 gem 'seedbank'
 gem 'acts_as_list'
 gem 'ransack'

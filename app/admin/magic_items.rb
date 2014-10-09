@@ -1,6 +1,8 @@
 ActiveAdmin.register MagicItem do
   menu :priority => 8
 
+  permit_params :army_id, :magic_item_category_id, :override_id, :name, :value_points, :is_multiple
+
   config.sort_order = 'name_asc'
 
   controller do
@@ -39,6 +41,6 @@ ActiveAdmin.register MagicItem do
       f.input :value_points
       f.input :is_multiple
     end
-    f.buttons
+    f.actions
   end
 end

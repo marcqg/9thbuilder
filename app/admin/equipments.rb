@@ -1,6 +1,8 @@
 ActiveAdmin.register Equipment do
   menu :priority => 5
 
+  permit_params :unit_id, :troop_id, :name, :position
+
   controller do
     def create
       create! { new_admin_equipment_url }
@@ -53,6 +55,6 @@ ActiveAdmin.register Equipment do
       f.input :name
       f.input :position
     end
-    f.buttons
+    f.actions
   end
 end

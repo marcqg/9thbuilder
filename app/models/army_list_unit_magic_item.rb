@@ -3,6 +3,4 @@ class ArmyListUnitMagicItem < ActiveRecord::Base
 
   belongs_to :army_list_unit
   belongs_to :magic_item
-
-  attr_accessible :id, :army_list_unit_id, :magic_item_id, :quantity
 end

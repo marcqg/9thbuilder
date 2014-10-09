@@ -1,6 +1,8 @@
 ActiveAdmin.register SpecialRule do
   menu :priority => 6
 
+  permit_params :unit_id, :troop_id, :name, :position
+
   controller do
     def create
       create! { new_admin_special_rule_url }
@@ -53,6 +55,6 @@ ActiveAdmin.register SpecialRule do
       f.input :name
       f.input :position
     end
-    f.buttons
+    f.actions
   end
 end

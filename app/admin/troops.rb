@@ -1,6 +1,8 @@
 ActiveAdmin.register Troop do
   menu :priority => 4
 
+  permit_params :unit_id, :unit_option_id, :troop_type_id, :name, :M, :WS, :BS, :S, :T, :W, :I, :A, :LD, :value_points, :min_size, :position
+
   controller do
     def create
       create! { new_admin_troop_url }
@@ -72,6 +74,6 @@ ActiveAdmin.register Troop do
       f.input :min_size
       f.input :position
     end
-    f.buttons
+    f.actions
   end
 end

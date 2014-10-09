@@ -9,9 +9,6 @@ class User < ActiveRecord::Base
 
   validates_presence_of :name
 
-  # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :name, :favorite_army_id
-
   def update_with_password(params={})
     params.delete :current_password
     self.update_without_password params

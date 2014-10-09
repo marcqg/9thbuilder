@@ -3,8 +3,7 @@
 <div id="subheader" class="grid_14">
   <%= search_form_for @search do |f| %>
     <p>
-      <%= f.label :army_id_eq, "Filtrer par" %> <%= f.select :army_id_eq, options_from_collection_for_select(Army.order(:name), :id, :name, {disabled: ->(army) { army.units.empty? } }), {include_blank: true} %>
-      <%# , Army.order(:name), :id, :name, :disabled => Army.disabled.pluck(:id), :include_blank => true %>
+      <%= f.label :army_id_eq, "Filtrer par" %> <%= f.select :army_id_eq, options_from_collection_for_select(Army.order('name'), :id, :name, {disabled: ->(army) { army.units.empty? } }), {include_blank: true} %>
       <%= f.label :value_points_gteq, "de" %> <%= f.search_field :value_points_gteq %>
       <%= f.label :value_points_lteq, "a" %> <%= f.search_field :value_points_lteq %> <%= f.label :value_points_lteq, "points" %>
       <%= f.submit "Valider" %>

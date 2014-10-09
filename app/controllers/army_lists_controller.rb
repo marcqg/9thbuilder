@@ -75,7 +75,7 @@ class ArmyListsController < ApplicationController
   # POST /army_lists
   # POST /army_lists.xml
   def create
-    @army_list = ArmyList.new(params[:army_list])
+    @army_list = ArmyList.new(army_list_params)
     @army_list.user = current_user
 
     respond_to do |format|
@@ -95,7 +95,7 @@ class ArmyListsController < ApplicationController
     @army_list = current_user.army_lists.find(params[:id])
 
     respond_to do |format|
-      if @army_list.update_attributes(params[:army_list])
+      if @army_list.update(army_list_params)
         format.html { redirect_to @army_list }
         format.xml  { head :ok }
       else
@@ -168,4 +168,9 @@ class ArmyListsController < ApplicationController
       end
     end
   end
+
+  private
+    def army_list_params
+      params.require(:army_list).permit(:army_id, :name, :notes)
+    end
 end

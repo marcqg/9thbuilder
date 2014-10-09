@@ -1,6 +1,8 @@
 ActiveAdmin.register Unit do
   menu :priority => 3
 
+  permit_params :army_id, :name, :value_points, :min_size, :max_size, :magic, :notes, :is_unique
+
   controller do
     def create
       create! { new_admin_unit_url }
@@ -53,11 +55,11 @@ ActiveAdmin.register Unit do
       f.input :value_points
       f.input :min_size
       f.input :max_size
-      f.input :is_unique
       f.input :magic
       f.input :notes
+      f.input :is_unique
     end
-    f.buttons
+    f.actions
   end
 
   show do

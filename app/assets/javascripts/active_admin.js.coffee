@@ -1,3 +1,3 @@
 #= require active_admin/base
-#= require jquery.ui.all
+#= require jquery-ui
 #= require admin

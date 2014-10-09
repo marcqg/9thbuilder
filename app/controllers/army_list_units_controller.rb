@@ -80,7 +80,7 @@ class ArmyListUnitsController < ApplicationController
   # POST /army_list/1/army_list_units.xml
   def create
     @army_list = current_user.army_lists.find(params[:army_list_id])
-    @army_list_unit = @army_list.army_list_units.build(params[:army_list_unit])
+    @army_list_unit = @army_list.army_list_units.build(army_list_unit_params)
 
     respond_to do |format|
       if @army_list_unit.save
@@ -99,15 +99,11 @@ class ArmyListUnitsController < ApplicationController
   # PUT /army_list/1/army_list_units/1
   # PUT /army_list/1/army_list_units/1.xml
   def update
-    params[:army_list_unit][:unit_option_ids] ||= []
-    params[:army_list_unit][:extra_item_ids] ||= []
-    params[:army_list_unit][:magic_standard_ids] ||= []
-
     @army_list = current_user.army_lists.find(params[:army_list_id])
     @army_list_unit = @army_list.army_list_units.find(params[:id])
 
     respond_to do |format|
-      if @army_list_unit.update_attributes(params[:army_list_unit])
+      if @army_list_unit.update(army_list_unit_params)
         @army_list_unit.save
 
         format.html { redirect_to @army_list }
@@ -146,8 +142,17 @@ class ArmyListUnitsController < ApplicationController
   # POST /army_lists/1/army_list_units/sort
   def sort
     params[:army_list_units].each_with_index do |id, index|
-      ArmyListUnit.update_all({ :position => index + 1 }, { :army_list_id => params[:army_list_id], :id => id })
+      ArmyListUnit.where(:army_list_id => params[:army_list_id], :id => id).update_all(:position => index + 1)
     end
     render :nothing => true
   end
+
+  private
+    def army_list_unit_params
+      # params[:army_list_unit][:unit_option_ids] ||= []
+      # params[:army_list_unit][:extra_item_ids] ||= []
+      # params[:army_list_unit][:magic_standard_ids] ||= []
+
+      params.require(:army_list_unit).permit(:unit_id, :unit_category_id, :name, :notes, unit_option_ids: [], extra_item_ids: [], magic_standard_ids: [], army_list_unit_troops_attributes: [:id, :army_list_unit_id, :troop_id, :size], army_list_unit_magic_items_attributes: [:id, :army_list_unit_id, :magic_item_id, :quantity])
+    end
 end

@@ -6,8 +6,6 @@ class ArmyList < ActiveRecord::Base
   validates_presence_of :army_id, :user_id, :name, :value_points
   validates_numericality_of :value_points, :greater_than_or_equal_to => 0
 
-  attr_accessible :army_id, :name, :notes
-
   normalize_attributes :name, :notes
 
   before_validation(:on => :create) do
