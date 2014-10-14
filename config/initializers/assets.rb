@@ -6,3 +6,6 @@ Rails.application.config.assets.version = '2.0'
 # Precompile additional assets.
 # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
 Rails.application.config.assets.precompile += %w( pdf.css )
+
+# Add app/assets/fonts to the asset path
+Rails.application.config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
