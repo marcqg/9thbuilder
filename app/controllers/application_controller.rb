@@ -8,7 +8,11 @@ class ApplicationController < ActionController::Base
   layout Proc.new { |controller| controller.request.xhr? ? false : 'application' }
 
   def set_locale
-    I18n.locale = params[:locale] || I18n.default_locale
+    if request.subdomain.blank? or request.subdomain == 'www'
+      I18n.locale = I18n.default_locale
+    else
+      I18n.locale = request.subdomain
+    end
   end
 
   def after_sign_in_path_for(resource_or_scope)
