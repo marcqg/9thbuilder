@@ -49,6 +49,6 @@ test:
 #
 production:
   <<: *default
-  database: whbab_production
-  username: whbab
-  password: <%= ENV['WHBAB_DATABASE_PASSWORD'] %>
+  database: <%= ENV['DB_NAME'] %>
+  username: <%= ENV['DB_user'] %>
+  password: <%= ENV['DB_PASS'] %>
