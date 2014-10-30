@@ -20,4 +20,33 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  welcome: "Welcome"
+  help: "help"
+  close: "Close"
+
+  menu:
+    label: "Main menu"
+    army_lists: "My army lists"
+    preferences: "Preferences"
+    help: "Help"
+    signout: "Sign out"
+    signin: "Sign in"
+    signup: "Sign up"
+
+  signin:
+    title: "Sign in"
+    form:
+      email: "Email"
+      password: "Password"
+      remember: "Remember me"
+      submit: "Save"
+
+  signup:
+    title: "Sign up"
+    form:
+      name: "Name or nickname"
+      email: "Email address"
+      password: "Password"
+      confirmation: "Password confirmation"
+      favorite_army: "--Favorite army--"
+      submit: "Save"

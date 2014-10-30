@@ -12,6 +12,10 @@
   width: 120px;
 }
 
+html[lang=en] .home .signin input[type=email], html[lang=en] .home input[type=password] {
+  width: 138px;
+}
+
 .home .signin input, .home .signup input {
   height: 30px;
 }
@@ -37,6 +41,10 @@
   font-size: 10px;
   color: #fff;
   opacity: 0.90;
+}
+
+html[lang=en] .home .signin a {
+  margin-left: 50px;
 }
 
 .home h1 {
