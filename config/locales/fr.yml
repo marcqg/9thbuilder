@@ -39,7 +39,11 @@ fr:
       email: "Email"
       password: "Mot de passe"
       remember: "Se souvenir de moi"
-      submit: "Vaider"
+      submit: "Valider"
+    lost:
+        password: "J'ai perdu mon mot de passe !"
+        confirmation: "Je n'ai pas reçu d'email de confirmation"
+    information: "Pour toutes questions n'hésitez pas à consulter l'<a href=\"mailto:support@whbab.com\">aide en ligne</a>"
 
   signup:
     title: "S'inscrire"
@@ -50,3 +54,25 @@ fr:
       confirmation: "Confirmation du mot de passe"
       favorite_army: "--Armée favorite--"
       submit: "Valider"
+    lost:
+        password: "J'ai perdu mon mot de passe !"
+        confirmation: "Je n'ai pas reçu d'email de confirmation"
+    information: "Pour toutes questions n'hésitez pas à consulter l'<a href=\"mailto:support@whbab.com\">aide en ligne</a>"
+
+  password:
+    title: "J'ai perdu mon mot de passe"
+    form:
+        email: "Email"
+        submit: "Valider"
+    lost:
+        confirmation: "Je n'ai pas reçu d'email de confirmation"
+    information: "Pour toutes questions n'hésitez pas à consulter l'<a href=\"mailto:support@whbab.com\">aide en ligne</a>"
+
+  confirmation:
+    title: "Renvoyer les instructions de confirmation"
+    form:
+        email: "Email"
+        submit: "Valider"
+    lost:
+        password: "J'ai perdu mon mot de passe !"
+    information: "Pour toutes questions n'hésitez pas à consulter l'<a href=\"mailto:support@whbab.com\">aide en ligne</a>"

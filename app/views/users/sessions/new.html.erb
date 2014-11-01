@@ -14,6 +14,6 @@
   <p><%= f.submit t('signin.form.submit') %></p>
 <% end %>
 
-<%= link_to "J'ai perdu mon mot de passe !", new_password_path(resource_name) %><br />
-<%= link_to "Je n'ai pas reçu d'email de confirmation", new_confirmation_path(resource_name) %><br />
-Pour toutes questions n'hésitez pas à consulter l'<a href="mailto:support@whbab.com">aide en ligne</a>
+<%= link_to t('signin.lost.password'), new_password_path(resource_name) %><br />
+<%= link_to t('signin.lost.confirmation'), new_confirmation_path(resource_name) %><br />
+<%=raw t('signin.information') %>

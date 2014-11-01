@@ -40,6 +40,10 @@ en:
       password: "Password"
       remember: "Remember me"
       submit: "Save"
+    lost:
+      password: "I have lost my password!"
+      confirmation: "I didn't received my confirmation email"
+    information: "For any questions, contact us on <a href=\"mailto:support@whbab.com\">online help</a>"
 
   signup:
     title: "Sign up"
@@ -50,3 +54,25 @@ en:
       confirmation: "Password confirmation"
       favorite_army: "--Favorite army--"
       submit: "Save"
+    lost:
+      password: "I have lost my password!"
+      confirmation: "I didn't received my confirmation email"
+    information: "For any questions, contact us on <a href=\"mailto:support@whbab.com\">online help</a>"
+
+  password:
+    title: "I have lost my password"
+    form:
+      email: "Email"
+      submit: "Save"
+    lost:
+      confirmation: "I didn't received my confirmation email"
+    information: "For any questions, contact us on <a href=\"mailto:support@whbab.com\">online help</a>"
+
+  confirmation:
+    title: "Re-send confirmation instructions"
+    form:
+      email: "Email"
+      submit: "Save"
+    lost:
+      password: "I have lost my password!"
+    information: "For any questions, contact us on <a href=\"mailto:support@whbab.com\">online help</a>"
