@@ -43,10 +43,11 @@ class ArmyListsController < ApplicationController
   def export
     @army_list = ArmyList.find(params[:id])
     @verbosity = params[:verbosity]
+    @include_magics = params[:include_magics]
 
     respond_to do |format|
       format.html { render :template => @verbosity.nil? ? "army_lists/export" : "army_lists/export_#{@verbosity}", :layout => @verbosity.nil? ? nil : "pdf.html.erb" }
-      format.pdf  { render :template => "army_lists/export_#{@verbosity}", :pdf => "whbab_#{@verbosity}_#{@army_list.id}" }
+      format.pdf  { render :template => "army_lists/export_#{@verbosity}.html.erb", :pdf => "whbab_#{@verbosity}_#{@army_list.id}" }
     end
   end
 
