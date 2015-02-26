@@ -23,7 +23,7 @@ ActiveAdmin.register UnitOption do
     redirect_to admin_unit_url(resource.unit)
   end
 
-  action_item :only => :show do
+  action_item :new, :only => :show do
     link_to 'New Unit Option', new_admin_unit_option_path('unit_option[unit_id]' => unit_option.unit)
   end
 

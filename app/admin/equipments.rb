@@ -30,7 +30,7 @@ ActiveAdmin.register Equipment do
     render :nothing => true
   end
 
-  action_item :only => :show do
+  action_item :new, :only => :show do
     link_to 'New Equipment', new_admin_equipment_path('equipment[unit_id]' => equipment.unit)
   end
 

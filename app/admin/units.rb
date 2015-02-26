@@ -21,11 +21,11 @@ ActiveAdmin.register Unit do
     redirect_to edit_admin_unit_url(new_unit)
   end
 
-  action_item :only => :show do
+  action_item :new, :only => :show do
     link_to 'New Unit', new_admin_unit_path
   end
 
-  # action_item :only => :show do
+  # action_item :duplicate, :only => :show do
   #   link_to 'Duplicate Unit', duplicate_admin_unit_path(unit), :method => :post
   # end
 

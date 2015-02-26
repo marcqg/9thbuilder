@@ -11,7 +11,7 @@ ActiveAdmin.register MagicItem do
     end
   end
 
-  action_item :only => :show do
+  action_item :new, :only => :show do
     link_to 'New Magic Item', new_admin_magic_item_path
   end
 

@@ -11,7 +11,7 @@ ActiveAdmin.register ExtraItem do
     end
   end
 
-  action_item :only => :show do
+  action_item :new, :only => :show do
     link_to 'New Extra Item', new_admin_extra_item_path
   end
 

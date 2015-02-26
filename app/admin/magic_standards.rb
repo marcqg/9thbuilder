@@ -11,7 +11,7 @@ ActiveAdmin.register MagicStandard do
     end
   end
 
-  action_item :only => :show do
+  action_item :new, :only => :show do
     link_to 'New Magic Standard', new_admin_magic_standard_url
   end
 

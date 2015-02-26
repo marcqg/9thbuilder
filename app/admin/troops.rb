@@ -23,7 +23,7 @@ ActiveAdmin.register Troop do
     redirect_to admin_unit_url(resource.unit)
   end
 
-  action_item :only => :show do
+  action_item :new, :only => :show do
     link_to 'New Troop', new_admin_troop_path('troop[unit_id]' => troop.unit)
   end
 
