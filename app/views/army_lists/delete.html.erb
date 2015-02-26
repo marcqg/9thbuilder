@@ -1,11 +1,11 @@
 <div class="popin">
 
-  <h1>Exporter<br />liste <%= @army_list.army.name %></h1>
+  <h1><%=raw t('army_list.delete.title') %> <%= @army_list.army.name %></h1>
 
   <%= form_for @army_list, :method => :delete do |f| %>
-    <p>Etes-vous certain de vouloir supprimer la liste :<br /><strong><%= @army_list.name %></strong> ?</p>
+    <p><%=t 'army_list.delete.information' %><br /><strong><%= @army_list.name %></strong> ?</p>
 
-    <p class="close"><%= f.submit "!!! Supprimer !!!" %></p>
+    <p class="close"><%= f.submit t('army_list.delete.submit') %></p>
   <% end %>
 
 </div>

@@ -1,4 +1,4 @@
-<% title "Liste d'armée • #{@army_list.name}" %>
+<% title t('army_list.show.title', :name => @army_list.name) %>
 
 <div class="army_list_portrait">
   <%= image_tag "/system/armies/#{@army_list.army.id}/portrait.png", :size => '65x64' %>
@@ -10,13 +10,13 @@
   <%= form_tag edit_army_list_path(@army_list), :method => 'get', 'data-popin' => true, 'class' => 'actions' do %>
     <%= submit_tag '&rarr;'.html_safe %>
     <%= select_tag 'action', options_for_select([
-      ['Editer', edit_army_list_path(@army_list)],
-      ['Exporter', export_army_list_path(@army_list)],
-      ['Dupliquer', new_from_army_list_path(@army_list)],
-      ['Supprimer', delete_army_list_path(@army_list)]
+      [ t('army_list.show.edit'), edit_army_list_path(@army_list) ],
+      [ t('army_list.show.export'), export_army_list_path(@army_list) ],
+      [ t('army_list.show.duplicate'), new_from_army_list_path(@army_list) ],
+      [ t('army_list.show.delete'), delete_army_list_path(@army_list) ]
     ]), :id => nil %>
   <% end %>
-  <button data-url="<%= export_army_list_path @army_list, :verbosity => 'full', :format => 'pdf' %>" data-target="_blank" class="left">Imprimer</button>
+  <button data-url="<%= export_army_list_path @army_list, :verbosity => 'full', :format => 'pdf' %>" data-target="_blank" class="left"><%=t 'army_list.show.print' %></button>
 </div>
 
 <ol class="army_list_units_overview" data-url="<%= sort_army_list_army_list_units_path @army_list %>">
@@ -29,11 +29,11 @@
 
 <% if @army_list.notes? %>
   <div class="army_list_notes">
-    <h3>Remarques</h3>
+    <h3><%=t 'army_list.show.notes' %></h3>
     <ul><li>
     <%= @army_list.notes %>
     </li></ul>
   </div>
 <% end %>
 
-<a href="<%= new_army_list_army_list_unit_path @army_list %>" class="army_list_unit_new" data-popin="true">Ajouter une unité</a>
+<a href="<%= new_army_list_army_list_unit_path @army_list %>" class="army_list_unit_new" data-popin="true"><%= t('army_list.show.add_unit') %></a>

@@ -1,4 +1,4 @@
-<% title "Liste d'armée • #{@army_list.name}" %>
+<% title t('army_list.show.title', :name => @army_list.name) %>
 
 <% if @army_list.notes? %>
   <div class="army_list_value_notes"><%= @army_list.notes %></div>

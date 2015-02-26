@@ -16,12 +16,12 @@
     <div class="value_points">
       <strong><%= value_points army_list_unit.value_points %></strong> points
     </div>
-    <div class="actions" style="background: url(<%= image_path "/system/unit_categories/#{army_list_unit.unit_category.id}/ribbon.png" %>) 100% 100% no-repeat">
+    <div class="actions" style="background: url(<%= image_path "/system/unit_categories/#{army_list_unit.unit_category.id}/ribbon_#{locale}.png" %>) 100% 100% no-repeat">
       <%= form_tag edit_army_list_army_list_unit_path(army_list_unit.army_list, army_list_unit), :method => "get", "data-popin" => true do %>
         <%= select_tag 'action', options_for_select([
-          ['Editer', edit_army_list_army_list_unit_path(army_list_unit.army_list, army_list_unit)],
-          ['Dupliquer', new_from_army_list_army_list_unit_path(army_list_unit.army_list, army_list_unit)],
-          ['Supprimer', delete_army_list_army_list_unit_path(army_list_unit.army_list, army_list_unit)]
+          [ t('army_list_unit.show.edit'), edit_army_list_army_list_unit_path(army_list_unit.army_list, army_list_unit) ],
+          [ t('army_list_unit.show.duplicate'), new_from_army_list_army_list_unit_path(army_list_unit.army_list, army_list_unit) ],
+          [ t('army_list_unit.show.delete'), delete_army_list_army_list_unit_path(army_list_unit.army_list, army_list_unit) ]
         ]), :id => nil %>
         <%= submit_tag '&rarr;'.html_safe %>
       <% end %>
@@ -34,17 +34,17 @@
     <table>
       <thead>
         <tr>
-          <th>Profil</th>
-          <th>M</th>
-          <th>CC</th>
-          <th>CT</th>
-          <th>F</th>
-          <th>E</th>
-          <th>PV</th>
-          <th>I</th>
-          <th>A</th>
-          <th>Cd</th>
-          <th>Type de troupe</th>
+          <th><%= t('army_list_unit.show.troops.profile') %></th>
+          <th><%= t('army_list_unit.show.troops.M') %></th>
+          <th><%= t('army_list_unit.show.troops.WS') %></th>
+          <th><%= t('army_list_unit.show.troops.BS') %></th>
+          <th><%= t('army_list_unit.show.troops.S') %></th>
+          <th><%= t('army_list_unit.show.troops.T') %></th>
+          <th><%= t('army_list_unit.show.troops.W') %></th>
+          <th><%= t('army_list_unit.show.troops.I') %></th>
+          <th><%= t('army_list_unit.show.troops.A') %></th>
+          <th><%= t('army_list_unit.show.troops.LD') %></th>
+          <th><%= t('army_list_unit.show.troops.type') %></th>
           <th></th>
         </tr>
       </thead>
@@ -59,37 +59,17 @@
     <!-- OPTIONS, MAGIC ITEMS, MAGIC STANDARDS, EXTRA ITEMS -->
     <% if army_list_unit.unit_options.any? or army_list_unit.magic_items.any? or army_list_unit.extra_items.any? or army_list_unit.magic_standards.any? %>
       <div class="options">
-        <% if army_list_unit.unit_options.any? %>
-          <h4>Options</h4>
-          <% army_list_unit.unit_options.each do |option| %>
-            <em><%= value_points(option.value_points) %> pts<%= '/fig.' if option.is_per_model %></em>
-            • <%= option.name %><br />
-          <% end %>
-        <% end %>
+        <!-- OPTIONS -->
+        <%= render :partial => "army_list_units_unit_options/show", :locals => { :unit_options => army_list_unit.unit_options } %>
 
-        <% if army_list_unit.magic_items.any? %>
-          <h4>Objets magiques</h4>
-          <% army_list_unit.magic_items.each do |magic_item| %>
-            <em><%= value_points(magic_item.value_points) %> pts</em>
-            • <%= magic_item.name %><%= magic_item.quantity > 1 ? " (x#{magic_item.quantity})" : '' %><br />
-          <% end %>
-        <% end %>
+        <!-- MAGIC ITEMS -->
+        <%= render :partial => "army_list_units_magic_items/show", :locals => { :magic_items => army_list_unit.magic_items } %>
 
-        <% if army_list_unit.extra_items.any? %>
-          <h4><%= @army_list.army.extra_item_categories.first.name %></h4>
-          <% army_list_unit.extra_items.each do |extra_item| %>
-            <em><%= value_points(extra_item.value_points) %> pts</em>
-            • <%= extra_item.name %><br />
-          <% end %>
-        <% end %>
+        <!-- EXTRA ITEMS -->
+        <%= render :partial => "army_list_units_extra_items/show", :locals => { :extra_item_category => @army_list.army.extra_item_categories.first, :extra_items => army_list_unit.extra_items } %>
 
-        <% if army_list_unit.magic_standards.any? %>
-          <h4>Bannière magique</h4>
-          <% army_list_unit.magic_standards.each do |magic_standard| %>
-            <em><%= value_points(magic_standard.value_points) %> pts</em>
-            • <%= magic_standard.name %><br />
-          <% end %>
-        <% end %>
+        <!-- MAGIC STANDARDS -->
+        <%= render :partial => "army_list_units_magic_standards/show", :locals => { :magic_standards => army_list_unit.magic_standards } %>
       </div>
     <% end %>
 
@@ -117,13 +97,13 @@
 
     <!-- MAGIC -->
     <% if army_list_unit.magic? %>
-      <h4>Magie</h4>
+      <h4><%=t 'army_list_unit.show.magic' %></h4>
       <%= army_list_unit.magic %><br />
     <% end %>
 
     <!-- NOTES -->
     <% if army_list_unit.notes? %>
-      <h4>Remarques</h4>
+      <h4><%=t 'army_list_unit.show.notes' %></h4>
       <%= simple_format army_list_unit.notes %>
     <% end %>
 

@@ -1,0 +1,7 @@
+<% if extra_items.any? %>
+  <h4><%= extra_item_category.name %></h4>
+  <% extra_items.each do |extra_item| %>
+    <em><%= value_points(extra_item.value_points) %> pts</em>
+    • <%= extra_item.name %><br />
+  <% end %>
+<% end %>

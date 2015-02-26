@@ -1,14 +1,14 @@
-<% title t('password.title') -%>
+<% title t('password_lost.title') -%>
 
-<h2><%=t 'password.title' %></h2>
+<h2><%=t 'password_lost.title' %></h2>
 
 <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
   <%= devise_error_messages! %>
 
-  <p><%= f.email_field :email, placeholder: t('password.form.email'), autofocus: true %></p>
+  <p><%= f.email_field :email, placeholder: t('password_lost.form.email'), autofocus: true %></p>
 
-  <p><%= f.submit t('password.form.submit') %></p>
+  <p><%= f.submit t('password_lost.form.submit') %></p>
 <% end %>
 
-<%= link_to t('password.lost.confirmation'), new_confirmation_path(resource_name) %><br />
-<%=raw t('password.information') %>
+<%= link_to t('password_lost.lost.confirmation'), new_confirmation_path(resource_name) %><br />
+<%=raw t('password_lost.information') %>

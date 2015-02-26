@@ -29,7 +29,7 @@
     <ul class="menu" style="display:none">
       <li><%= link_to t('menu.army_lists'), army_lists_path("q[army_id_eq]" => "") %></li>
       <li><%= link_to t('menu.preferences'), edit_user_registration_path %></li>
-      <li><a href="mailto:support@whbab.com"><%=t :help %></a></li>
+      <li><a href="mailto:support@whbab.com"><%=t 'menu.help' %></a></li>
       <li><%= link_to t('menu.signout'), destroy_user_session_path %></li>
     </ul>
     <% end %>

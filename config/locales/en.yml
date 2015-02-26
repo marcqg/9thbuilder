@@ -23,6 +23,8 @@ en:
   welcome: "Welcome"
   help: "help"
   close: "Close"
+  save: "Save"
+  next: "Next"
 
   menu:
     label: "Main menu"
@@ -32,6 +34,91 @@ en:
     signout: "Sign out"
     signin: "Sign in"
     signup: "Sign up"
+
+  army_list:
+    index:
+      title: "My army lists"
+      filter: "Filter by"
+      from: "from"
+      to: "to"
+      add: "Create new army list"
+    show:
+      title: "Army list • %{name}"
+      print: "Print"
+      edit: "Edit"
+      export: "Export"
+      duplicate: "Duplicate"
+      delete: "Delete"
+      notes: "Notes"
+      add_unit: "Add unit"
+    new:
+      title: "Create<br />new list"
+    edit:
+      title: "Update<br />list"
+    delete:
+      title: "Delete<br />list"
+      information: "Are you sure to destroy this list:"
+      submit: "!!! Delete !!!"
+    export:
+      title: "Export<br />list"
+      information: "Choose format for list export:"
+      include_magics: "Include magic items/standards?"
+      pdf_full: "Full PDF"
+      pdf_lite: "Lite PDF"
+      html_full: "Full HTML"
+      html_lite: "Lite HTML"
+    duplicate:
+      title: "Duplicate<br />list"
+      information: "Are you sure to duplicate list:"
+    form:
+      name: "Name"
+      notes: "Notes"
+
+  army_list_unit:
+    show:
+      edit: "Edit"
+      duplicate: "Duplicate"
+      delete: "Delete"
+      troops:
+        profile: "Profile"
+        M: "M"
+        WS: "WS"
+        BS: "BS"
+        S: "S"
+        T: "T"
+        W: "W"
+        I: "I"
+        A: "A"
+        LD: "Ld"
+        type: "Troop's type"
+      magic_items: "Magic items"
+      magic_standards: "Magic standards"
+      unit_options: "Options"
+      equipments: "Equipments"
+      special_rules: "Special rules"
+      magic: "Magic"
+      notes: "Notes"
+    new:
+      title: "Add<br />new unit"
+    edit:
+      title: "Edit"
+      options: "Options"
+      magic_items: "Magic items"
+      extra_items: "Special"
+      magic_standards: "Magic standards"
+      form:
+        magic: "Magic"
+        notes: "Notes"
+    delete:
+      title: "Delete<br />unit"
+      information: "Are you sure to destroy this unit:"
+      submit: "!!! Delete !!!"
+    duplicate:
+      title: "Duplicate"
+      target: "To:"
+      new_army_list: "New #{name} list"
+    form:
+      name: "Name"
 
   signin:
     title: "Sign in"
@@ -59,13 +146,24 @@ en:
       confirmation: "I didn't received my confirmation email"
     information: "For any questions, contact us on <a href=\"mailto:support@whbab.com\">online help</a>"
 
-  password:
+  password_lost:
     title: "I have lost my password"
     form:
       email: "Email"
       submit: "Save"
     lost:
       confirmation: "I didn't received my confirmation email"
+    information: "For any questions, contact us on <a href=\"mailto:support@whbab.com\">online help</a>"
+
+  password_change:
+    title: "Change your password"
+    form:
+        password: "Password"
+        confirmation: "Password confirmation"
+        submit: "Save"
+    lost:
+        password: "I have lost my password!"
+        confirmation: "I didn't received my confirmation email"
     information: "For any questions, contact us on <a href=\"mailto:support@whbab.com\">online help</a>"
 
   confirmation:
@@ -76,3 +174,19 @@ en:
     lost:
       password: "I have lost my password!"
     information: "For any questions, contact us on <a href=\"mailto:support@whbab.com\">online help</a>"
+
+  profile:
+    title: "My account"
+    form:
+      name: "Name or nickname"
+      email: "Email address"
+      favorite_army: "Favorite army"
+      password: "Password"
+      password_help: "Leave it empty if you don't want to change your password"
+      confirmation: "Password confirmation"
+      submit: "Save"
+    delete:
+      title: "Account deletion"
+      information: "You are not satisfied? <a href=\"mailto:support@whbab.com\">Contact us</a> or"
+      link: "immediately destroy your account"
+    back: "Previous page"

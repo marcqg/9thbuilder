@@ -1,29 +1,29 @@
-<h2>Mon compte</h2>
+<h2><%=t 'profile.title' %></h2>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= devise_error_messages! %>
 
-  <p><%= f.text_field :name, placeholder: "Nom ou pseudo", autofocus: true %></p>
+  <p><%= f.text_field :name, placeholder: t('profile.form.name'), autofocus: true %></p>
 
-  <p><%= f.email_field :email, placeholder: "Adresse email" %></p>
+  <p><%= f.email_field :email, placeholder: t('profile.form.email') %></p>
 
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
     <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
   <% end %>
 
-  <p><%= f.label :favorite_army_id, "Armée favorite" %><br />
+  <p><%= f.label :favorite_army_id, t('profile.form.favorite_army') %><br />
   <%= f.collection_select :favorite_army_id, Army.all, :id, :name, include_blank: true %></p>
 
-  <p><i>Laissez vide si vous ne désirez pas changer de mot de passe</i><br />
-  <%= f.password_field :password, placeholder: "Mot de passe", autocomplete: "off" %></p>
+  <p><i><%=t 'profile.form.password_help' %></i><br />
+  <%= f.password_field :password, placeholder: t('profile.form.password'), autocomplete: "off" %></p>
 
-  <p><%= f.password_field :password_confirmation, placeholder: "Confirmation du mot de passe", autocomplete: "off" %></p>
+  <p><%= f.password_field :password_confirmation, placeholder: t('profile.form.confirmation'), autocomplete: "off" %></p>
 
-  <p><%= f.submit "Valider" %></p>
+  <p><%= f.submit t('profile.form.submit') %></p>
 <% end %>
 
-<h3>Supprimer mon compte</h3>
+<h3><%=t 'profile.delete.title' %></h3>
 
-<p>Vous n'êtes pas satisfait ? <a href="mailto:support@whbab.com">Écrivez nous</a> ou <%= link_to "supprimer votre compte", registration_path(resource_name), confirm: "Are you sure?", method: :delete %> directement.</p>
+<p><%=raw t('profile.delete.information') %> <%= link_to t('profile.delete.link'), registration_path(resource_name), confirm: "Are you sure?", method: :delete %>.</p>
 
-<%= link_to "Page précédente", :back %>
+<%= link_to t('profile.back'), :back %>

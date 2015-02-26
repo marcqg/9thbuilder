@@ -1,0 +1,7 @@
+<% if magic_items.any? %>
+  <h4><%= t('army_list_unit.show.magic_items') %></h4>
+  <% magic_items.each do |magic_item| %>
+    <em><%= value_points(magic_item.value_points) %> pts</em>
+    • <%= magic_item.name %><%= magic_item.quantity > 1 ? " (x#{magic_item.quantity})" : '' %><br />
+  <% end %>
+<% end %>

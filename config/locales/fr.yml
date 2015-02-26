@@ -23,6 +23,8 @@ fr:
   welcome: "Bienvenue"
   help: "aide"
   close: "Fermer"
+  save: "Valider"
+  next: "Suivant"
 
   menu:
     label: "Menu principal"
@@ -32,6 +34,91 @@ fr:
     signout: "Déconnexion"
     signin: "Se connecter"
     signup: "S'inscrire"
+
+  army_list:
+    index:
+      title: "Mes listes d'armée"
+      filter: "Filtrer par"
+      from: "de"
+      to: "a"
+      add: "Créer une nouvelle liste d'armée"
+    show:
+      title: "Liste d'armée • #{name}"
+      print: "Imprimer"
+      edit: "Editer"
+      export: "Exporter"
+      duplicate: "Dupliquer"
+      delete: "Supprimer"
+      notes: "Remarques"
+      add_unit: "Ajouter une unité"
+    new:
+      title: "Creer<br />une nouvelle liste"
+    edit:
+      title: "Editer<br />liste"
+    delete:
+      title: "Supprimer<br />liste"
+      information: "Etes-vous certain de vouloir supprimer la liste :"
+      submit: "!!! Supprimer !!!"
+    export:
+      title: "Exporter<br />liste"
+      information: "Choisissez le format pour exporter la liste :"
+      include_magics: "Inclure objets/étendards magiques ?"
+      pdf_full: "PDF complet"
+      pdf_lite: "PDF tournoi"
+      html_full: "HTML complet"
+      html_lite: "HTML tournoi"
+    duplicate:
+      title: "Dupliquer<br />liste"
+      information: "Etes-vous certain de vouloir dupliquer la liste :"
+    form:
+      name: "Nom"
+      notes: "Remarques"
+
+  army_list_unit:
+    show:
+      edit: "Editer"
+      duplicate: "Dupliquer"
+      delete: "Supprimer"
+      troops:
+        profile: "Profil"
+        M: "M"
+        WS: "CC"
+        BS: "CT"
+        S: "F"
+        T: "E"
+        W: "PV"
+        I: "I"
+        A: "A"
+        LD: "Cd"
+        type: "Type de troupe"
+      magic_items: "Objets magiques"
+      magic_standards: "Bannières magiques"
+      unit_options: "Options"
+      equipments: "Equipements"
+      special_rules: "Règles spéciales"
+      magic: "Magie"
+      notes: "Remarques"
+    new:
+      title: "Ajouter<br />une unite"
+    edit:
+      title: "Editer"
+      options: "Options"
+      magic_items: "Objets magiques"
+      extra_items: "Speciale"
+      magic_standards: "Bannieres magiques"
+      form:
+        magic: "Magie"
+        notes: "Remarques"
+    delete:
+      title: "Supprimer<br />une unite"
+      information: "Etes-vous certain de vouloir supprimer l'unité :"
+      submit: "!!! Supprimer !!!"
+    duplicate:
+      title: "Dupliquer"
+      target: "Vers :"
+      new_army_list: "Nouvelle liste #{name}"
+    form:
+      name: "Nom"
 
   signin:
     title: "Se connecter"
@@ -59,12 +146,23 @@ fr:
         confirmation: "Je n'ai pas reçu d'email de confirmation"
     information: "Pour toutes questions n'hésitez pas à consulter l'<a href=\"mailto:support@whbab.com\">aide en ligne</a>"
 
-  password:
+  password_lost:
     title: "J'ai perdu mon mot de passe"
     form:
         email: "Email"
         submit: "Valider"
     lost:
+        confirmation: "Je n'ai pas reçu d'email de confirmation"
+    information: "Pour toutes questions n'hésitez pas à consulter l'<a href=\"mailto:support@whbab.com\">aide en ligne</a>"
+
+  password_change:
+    title: "Changer votre mot de passe"
+    form:
+        password: "Mot de passe"
+        confirmation: "Confirmation du mot de passe"
+        submit: "Valider"
+    lost:
+        password: "J'ai perdu mon mot de passe !"
         confirmation: "Je n'ai pas reçu d'email de confirmation"
     information: "Pour toutes questions n'hésitez pas à consulter l'<a href=\"mailto:support@whbab.com\">aide en ligne</a>"
 
@@ -76,3 +174,19 @@ fr:
     lost:
         password: "J'ai perdu mon mot de passe !"
     information: "Pour toutes questions n'hésitez pas à consulter l'<a href=\"mailto:support@whbab.com\">aide en ligne</a>"
+
+  profile:
+    title: "Mon compte"
+    form:
+      name: "Nom ou pseudo"
+      email: "Adresse email"
+      favorite_army: "Armée favorite"
+      password: "Mot de passe"
+      password_help: "Laissez vide si vous ne désirez pas changer de mot de passe"
+      confirmation: "Confirmation du mot de passe"
+      submit: "Valider"
+    delete:
+      title: "Supprimer mon compte"
+      information: "Vous n'êtes pas satisfait ? <a href=\"mailto:support@whbab.com\">Écrivez nous</a> ou"
+      link: "supprimer votre compte directement"
+    back: "Page précédente"

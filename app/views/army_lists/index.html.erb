@@ -1,12 +1,12 @@
-<% title "Mes listes d'armée" %>
+<% title t('army_list.index.title') %>
 
 <div id="subheader" class="grid_14">
   <%= search_form_for @search do |f| %>
     <p>
-      <%= f.label :army_id_eq, "Filtrer par" %> <%= f.select :army_id_eq, options_from_collection_for_select(Army.order('name'), :id, :name, {disabled: ->(army) { army.units.empty? } }), {include_blank: true} %>
-      <%= f.label :value_points_gteq, "de" %> <%= f.search_field :value_points_gteq %>
-      <%= f.label :value_points_lteq, "a" %> <%= f.search_field :value_points_lteq %> <%= f.label :value_points_lteq, "points" %>
-      <%= f.submit "Valider" %>
+      <%= f.label :army_id_eq, t('army_list.index.filter') %> <%= f.select :army_id_eq, options_from_collection_for_select(Army.order('name'), :id, :name, {disabled: ->(army) { army.units.empty? } }), {include_blank: true} %>
+      <%= f.label :value_points_gteq, t('army_list.index.from') %> <%= f.search_field :value_points_gteq %>
+      <%= f.label :value_points_lteq, t('army_list.index.to') %> <%= f.search_field :value_points_lteq %> <%= f.label :value_points_lteq, "points" %>
+      <%= f.submit t(:save) %>
     </p>
   <% end %>
 </div>
@@ -26,6 +26,6 @@
 <div class="grid_4 <%= @army_lists.any? ? alternate_cell_class(@army_lists.length) : "suffix_6 prefix_6" %>">
   <div class="army_list_row">
     <p><a href="<%= new_army_list_path(:army_id => @search.army_id_eq) %>" data-popin="true"><%= image_tag "bt_new_army_list.png", :size => "220x132" %></a></p>
-    <p>Créer une nouvelle liste d'armée</p>
+    <p><%=t 'army_list.index.add' %></p>
   </div>
 </div>

@@ -1,0 +1,7 @@
+<% if magic_standards.any? %>
+  <h4><%= t('army_list_unit.show.magic_standards') %></h4>
+  <% magic_standards.each do |magic_standard| %>
+    <em><%= value_points(magic_standard.value_points) %> pts</em>
+    • <%= magic_standard.name %><br />
+  <% end %>
+<% end %>

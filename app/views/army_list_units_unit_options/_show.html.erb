@@ -1,0 +1,7 @@
+<% if unit_options.any? %>
+  <h4><%=t 'army_list_unit.show.unit_options' %></h4>
+  <% unit_options.each do |option| %>
+    <em><%= value_points(option.value_points) %> pts<%= '/fig.' if option.is_per_model %></em>
+    • <%= option.name %><br />
+  <% end %>
+<% end %>

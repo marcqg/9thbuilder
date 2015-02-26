@@ -5,7 +5,7 @@
   <p><%= f.collection_select :army_id, Army.order(:name), :id, :name, :disabled => Army.disabled_or_obsolete.pluck(:id) %></p>
   <% end %>
 
-  <p><%= f.text_field :name, :placeholder => "Nom", :class => "input_xxlarge" %></p>
-  <p><%= f.text_area :notes, :placeholder => "Remarques", :size => "" %></p>
-  <p><%= f.submit "Valider" %></p>
+  <p><%= f.text_field :name, :placeholder => t('army_list.form.name'), :class => "input_xxlarge" %></p>
+  <p><%= f.text_area :notes, :placeholder => t('army_list.form.notes'), :size => "" %></p>
+  <p><%= f.submit t(:save) %></p>
 <% end %>

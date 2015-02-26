@@ -1,15 +1,15 @@
 <div class="popin">
 
-  <h1>Ajouter<br />une unite</h1>
+  <h1><%=raw t('army_list_unit.new.title') %></h1>
 
   <%= form_for [@army_list, @army_list_unit], :remote => true do |f| %>
     <%= render "shared/form_errors", :object => @army_list_unit %>
 
       <p><%= f.select :unit_id, grouped_options_for_select(Unit.for_select(@army_list), @army_list_unit.unit_id) %></p>
 
-      <p><%= f.text_field :name, :placeholder => "Nom" %></p>
+      <p><%= f.text_field :name, :placeholder => t('army_list_unit.form.name') %></p>
 
-    <p><%= f.submit "Suivant" %></p>
+    <p><%= f.submit t(:next) %></p>
   <% end %>
 
 </div>
