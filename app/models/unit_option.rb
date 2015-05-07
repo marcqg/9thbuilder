@@ -1,16 +1,18 @@
 class UnitOption < ActiveRecord::Base
   belongs_to :unit
   belongs_to :parent, :class_name => 'UnitOption'
-  belongs_to :depend, :class_name => 'UnitOption'
   belongs_to :mount, :class_name => 'Unit'
   has_many :children, -> { order 'position' }, :class_name => 'UnitOption', :foreign_key => 'parent_id', :dependent => :nullify
   has_one :troop, :dependent => :nullify
-  has_and_belongs_to_many :army_list_units
+  # has_and_belongs_to_many :army_list_units
+  has_many :army_list_unit_unit_options, :dependent => :destroy
+  has_many :army_list_units, :through => :army_list_unit_unit_options
 
   validates_presence_of :unit_id, :name
   validates_numericality_of :value_points, :greater_than_or_equal_to => 0, :allow_nil => true
   validates_numericality_of :position, :greater_than_or_equal_to => 1, :only_integer => true, :allow_nil => true
   validates_inclusion_of :is_per_model, :in => [true, false]
+  validates_inclusion_of :is_multiple, :in => [true, false]
   validates_inclusion_of :is_magic_items, :in => [true, false]
   validates_inclusion_of :is_magic_standards, :in => [true, false]
   validates_inclusion_of :is_unique_choice, :in => [true, false]

@@ -84,7 +84,6 @@ jQuery(function($) {
   $('body').on('change', '#army_list_unit_unit_options input, #army_list_unit_magic_items input, #army_list_unit_extra_items input, #army_list_unit_magic_standards input', function(evt) {
     var total     = 0.0,
         $changed  = $(this),
-        $slaves   = $('.edit_army_list_unit input[data-depend='+$changed.val()+']'),
         $siblings = $changed.closest('ul').find('> li > label input[data-radio]').not($changed),
         $div      = $changed.closest('div');
 
@@ -154,11 +153,24 @@ jQuery(function($) {
     updateArmyListUnitValuePoints();
   });
 
+  $('body').on('keyup', '.edit_army_list_unit #army_list_unit_unit_options .army_list_unit_unit_option_quantity', function() {
+    var quantity = parseInt($(this).val());
+
+    if (isNaN(quantity)) return false;
+
+    var value_points = quantity * parseFloat($(this).prev('label').find('input[data-is-multiple]').data('value-points'));
+
+    $(this).prev('label').prev('em').find('span').html(String(value_points).replace('.', ','));
+
+    updateArmyListUnitValuePoints();
+  });
+
 });
 
 function updateArmyListUnitDepend($changed)
 {
-  var $slaves = $('.edit_army_list_unit input[data-depend='+$changed.val()+']');
+  var $master = $changed.is('input[name$="[_destroy]"]') ? $changed.closest('li').find('> input[name$="[unit_option_id]"]') : $changed,
+      $slaves = $('.edit_army_list_unit input[data-depend='+$master.val()+']');
 
   if ($changed.prop('checked')) {
     $slaves.attr('disabled', false);
@@ -179,10 +191,10 @@ function updateArmyListUnitValuePoints()
     $div.find('input:checked').each(function() {
       var value_points = parseFloat($(this).parent('label').prev('em').find('span').html().replace(',', '.'));
 
-      var $quantity = $(this).parent('label').next('input[type=number]');
+      var $quantity = $(this).parent('label').next('input[name$="[quantity]"]');
 
       if ($quantity.length) {
-        var value_points = value_points * parseInt($quantity.val());
+        value_points = parseFloat($(this).data('value-points')) * parseInt($quantity.val());
 
         if (isNaN(value_points)) {
           return true;
@@ -265,7 +277,11 @@ function popin(url)
 
       var masters = [];
       $('#army_list_unit_unit_options input[data-depend], #army_list_unit_magic_items input[data-depend], #army_list_unit_extra_items input[data-depend], #army_list_unit_magic_standards input[data-depend]').each(function() {
-        masters.push('#army_list_unit_unit_option_ids_' + $(this).data('depend'));
+        var selector = '#army_list_unit_unit_option_ids_' + $(this).data('depend');
+
+        if ($.inArray(selector, masters) < 0) {
+          masters.push(selector);
+        }
       });
 
       $(masters.join(', ')).change();

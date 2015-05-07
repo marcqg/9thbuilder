@@ -149,10 +149,6 @@ class ArmyListUnitsController < ApplicationController
 
   private
     def army_list_unit_params
-      # params[:army_list_unit][:unit_option_ids] ||= []
-      # params[:army_list_unit][:extra_item_ids] ||= []
-      # params[:army_list_unit][:magic_standard_ids] ||= []
-
-      params.require(:army_list_unit).permit(:unit_id, :unit_category_id, :name, :notes, unit_option_ids: [], extra_item_ids: [], magic_standard_ids: [], army_list_unit_troops_attributes: [:id, :army_list_unit_id, :troop_id, :size], army_list_unit_magic_items_attributes: [:id, :army_list_unit_id, :magic_item_id, :quantity, :_destroy])
+      params.require(:army_list_unit).permit(:unit_id, :unit_category_id, :name, :notes, extra_item_ids: [], magic_standard_ids: [], army_list_unit_troops_attributes: [:id, :army_list_unit_id, :troop_id, :size], army_list_unit_unit_options_attributes: [:id, :army_list_unit_id, :unit_option_id, :quantity, :_destroy], army_list_unit_magic_items_attributes: [:id, :army_list_unit_id, :magic_item_id, :quantity, :_destroy])
     end
 end

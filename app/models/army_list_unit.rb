@@ -7,10 +7,13 @@ class ArmyListUnit < ActiveRecord::Base
   has_many :magic_items, -> { select 'magic_items.*, army_list_units_magic_items.quantity' }, :through => :army_list_unit_magic_items
   has_and_belongs_to_many :magic_standards
   has_and_belongs_to_many :extra_items
-  has_and_belongs_to_many :unit_options
+  # has_and_belongs_to_many :unit_options
+  has_many :army_list_unit_unit_options, :dependent => :destroy
+  has_many :unit_options, -> { select 'unit_options.*, army_list_units_unit_options.quantity' }, :through => :army_list_unit_unit_options
 
   accepts_nested_attributes_for :army_list_unit_troops
   accepts_nested_attributes_for :army_list_unit_magic_items, :allow_destroy => true
+  accepts_nested_attributes_for :army_list_unit_unit_options, :allow_destroy => true
 
   normalize_attributes :name, :notes
 
@@ -43,9 +46,14 @@ class ArmyListUnit < ActiveRecord::Base
     self.size = 0
     self.value_points = 0.0
 
-    unit_options.reject{ |option| option.is_magic_standards || option.is_magic_items }.each do |option|
-      factor = option.is_per_model ? army_list_unit_troops.first.size.to_i : 1
-      self.value_points = self.value_points + factor * option.value_points
+    # unit_options.reject{ |option| option.is_magic_standards || option.is_magic_items }.each do |option|
+    #   factor = option.is_per_model ? army_list_unit_troops.first.size.to_i : 1
+    #   self.value_points = self.value_points + factor * option.value_points
+    # end
+
+    army_list_unit_unit_options.each do |army_list_unit_unit_option|
+      army_list_unit_unit_option.quantity = army_list_unit_troops.first.size.to_i if army_list_unit_unit_option.unit_option.is_per_model
+      self.value_points = self.value_points + army_list_unit_unit_option.unit_option.value_points * army_list_unit_unit_option.quantity
     end
 
     army_list_unit_magic_items.each do |army_list_unit_magic_item|
@@ -84,14 +92,15 @@ class ArmyListUnit < ActiveRecord::Base
   acts_as_list :scope => :army_list
 
   def unit_options_value_points()
-    value_points = 0
+    unit_options.sum('quantity * value_points').to_i
+    # value_points = 0
 
-    unit_options.reject{ |option| option.is_magic_standards || option.is_magic_items }.each do |option|
-      factor = option.is_per_model ? army_list_unit_troops.first.size.to_i : 1
-      value_points = value_points + factor * option.value_points
-    end
+    # unit_options.reject{ |option| option.is_magic_standards || option.is_magic_items }.each do |option|
+    #   factor = option.is_per_model ? army_list_unit_troops.first.size.to_i : 1
+    #   value_points = value_points + factor * option.value_points
+    # end
 
-    return value_points
+    # return value_points
   end
 
   def magic_items_value_points()
