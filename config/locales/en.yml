@@ -39,9 +39,10 @@ en:
     index:
       title: "My army lists"
       filter: "Filter by"
-      from: "from"
-      to: "to"
+      and: "and"
+      name_or_notes: "Name or notes"
       add: "Create new army list"
+      search: "Submit"
     show:
       title: "Army list • %{name}"
       print: "Print"

@@ -4,9 +4,8 @@
   <%= search_form_for @search do |f| %>
     <p>
       <%= f.label :army_id_eq, t('army_list.index.filter') %> <%= f.select :army_id_eq, options_from_collection_for_select(Army.order('name'), :id, :name, {disabled: ->(army) { army.units.empty? } }), {include_blank: true} %>
-      <%= f.label :value_points_gteq, t('army_list.index.from') %> <%= f.search_field :value_points_gteq %>
-      <%= f.label :value_points_lteq, t('army_list.index.to') %> <%= f.search_field :value_points_lteq %> <%= f.label :value_points_lteq, "points" %>
-      <%= f.submit t(:save) %>
+      <%= f.label :name_or_notes_cont, t('army_list.index.and') %> <%= f.search_field :name_or_notes_cont, { placeholder: t('army_list.index.name_or_notes') } %>
+      <%= f.submit t('army_list.index.search') %>
     </p>
   <% end %>
 </div>

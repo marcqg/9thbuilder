@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
 
   before_action :set_locale
 
-  layout Proc.new { |controller| controller.request.xhr? ? false : 'application' }
+  layout -> (controller) { controller.request.xhr? ? false : 'application' }
 
   def set_locale
     if request.subdomain.blank? or request.subdomain == 'www'

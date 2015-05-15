@@ -39,9 +39,10 @@ fr:
     index:
       title: "Mes listes d'armée"
       filter: "Filtrer par"
-      from: "de"
-      to: "a"
+      and: "et"
+      name_or_notes: "Nom or remarques"
       add: "Créer une nouvelle liste d'armée"
+      search: "Valider"
     show:
       title: "Liste d'armée • #{name}"
       print: "Imprimer"
