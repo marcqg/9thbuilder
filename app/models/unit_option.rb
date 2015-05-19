@@ -4,7 +4,6 @@ class UnitOption < ActiveRecord::Base
   belongs_to :mount, :class_name => 'Unit'
   has_many :children, -> { order 'position' }, :class_name => 'UnitOption', :foreign_key => 'parent_id', :dependent => :nullify
   has_one :troop, :dependent => :nullify
-  # has_and_belongs_to_many :army_list_units
   has_many :army_list_unit_unit_options, :dependent => :destroy
   has_many :army_list_units, :through => :army_list_unit_unit_options
 
