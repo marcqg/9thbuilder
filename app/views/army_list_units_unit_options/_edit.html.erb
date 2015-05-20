@@ -8,19 +8,25 @@ end
 
 army_list_unit_unit_option = army_list_unit.army_list_unit_unit_options.detect { |aluuo| aluuo.unit_option == option }
 
+unless army_list_unit_unit_option.nil?
+  value_points = army_list_unit_unit_option.quantity * option.value_points
+else
+  value_points = option.is_per_model ? option.value_points * army_list_unit.size : option.value_points
+end
+
 %>
 <li>
   <% if option.value_points.nil? %>
     <strong><%= option.name %></strong>
   <% else %>
     <%= hidden_field_tag "army_list_unit[army_list_unit_unit_options_attributes][#{option.id}][_destroy]", 1 %>
-    <em><span><%= value_points(option.is_per_model ? option.value_points * army_list_unit.size : option.value_points) %></span> pts</em>
+    <em><span><%= value_points(value_points) %></span> pts</em>
     <label><%= check_box_tag "army_list_unit[army_list_unit_unit_options_attributes][#{option.id}][_destroy]", false, army_list_unit.unit_options.member?(option), :id => "army_list_unit_unit_option_ids_#{option.id}", "data-depend" => depend.try(:id), "data-radio" => option.is_unique_choice ? true : nil, "data-per-model" => option.is_per_model ? true : nil, "data-is-multiple" => option.is_multiple ? true : nil, "data-value-points" => option.value_points %> <%= option.name %></label>
 
     <% if option.is_multiple %>
-      x <%= number_field_tag "army_list_unit[army_list_unit_unit_options_attributes][#{option.id}][quantity]", army_list_unit_unit_option.try(:quantity), :min => 1, :disabled => army_list_unit.unit_options.member?(option), "data-per-model" => option.is_per_model ? true : nil, :class => "army_list_unit_unit_option_quantity", :style => "position:relative; top:0; height:1.5em; width:20px; text-align:center;" %>
+      x <%= number_field_tag "army_list_unit[army_list_unit_unit_options_attributes][#{option.id}][quantity]", army_list_unit_unit_option.try(:quantity), :min => 1, :disabled => !army_list_unit.unit_options.member?(option), "data-per-model" => option.is_per_model ? true : nil, :class => "army_list_unit_unit_option_quantity", :style => "position:relative; top:0; height:1.5em; width:20px; text-align:center;" %>
     <% else %>
-      <%= hidden_field_tag "army_list_unit[army_list_unit_unit_options_attributes][#{option.id}][quantity]", option.is_per_model ? army_list_unit.size : 1, :disabled => army_list_unit.unit_options.member?(option) ? nil : true, "data-per-model" => option.is_per_model ? true : nil %>
+      <%= hidden_field_tag "army_list_unit[army_list_unit_unit_options_attributes][#{option.id}][quantity]", option.is_per_model ? army_list_unit.size : 1, :disabled => !army_list_unit.unit_options.member?(option) ? nil : true, "data-per-model" => option.is_per_model ? true : nil %>
     <% end %>
 
     <%= hidden_field_tag "army_list_unit[army_list_unit_unit_options_attributes][#{option.id}][id]", army_list_unit_unit_option.try(:id) %>

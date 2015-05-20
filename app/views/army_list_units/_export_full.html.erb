@@ -53,7 +53,7 @@
       <th>Options</th>
       <td colspan="10">
         <% army_list_unit.unit_options.each_with_index do |option, index| %>
-          <%= "• " if index > 0 %> <%= option.name %>
+          <%= "• " if index > 0 %> <%= option.name %><%= " x#{option.quantity}" if option.is_multiple %>
         <% end %>
       </td>
     </tr>
