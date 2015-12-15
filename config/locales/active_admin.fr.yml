@@ -1,8 +1,0 @@
-fr:
-  active_admin:
-    globalize:
-      translations: "Traductions"
-      language:
-        de: "DE"
-        en: "EN"
-        fr: "FR"
