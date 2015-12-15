@@ -4,10 +4,10 @@ class ArmyListUnitsController < ApplicationController
   # GET /army_list/1/army_list_units/new
   # GET /army_list/1/army_list_units/new.xml
   def new
-    @army_list = current_user.army_lists.find(params[:army_list_id])
     @army_list_unit = @army_list.army_list_units.build({
       :unit_id => @army_list.army.units.base_category.first.id
     })
+    @army_list = current_user.army_lists.find_by_uuid!(params[:army_list_uuid])
 
     respond_to do |format|
       format.html # new.html.erb
@@ -17,7 +17,7 @@ class ArmyListUnitsController < ApplicationController
 
   # GET /army_list/1/army_list_units/1/edit
   def edit
-    @army_list = current_user.army_lists.find(params[:army_list_id])
+    @army_list = current_user.army_lists.find_by_uuid!(params[:army_list_uuid])
     @army_list_unit = @army_list.army_list_units.find(params[:id])
 
     @available_unit_options = @army_list_unit.unit.unit_options.without_parent.exclude_magics_and_extra
@@ -28,13 +28,13 @@ class ArmyListUnitsController < ApplicationController
 
   # GET /army_list/1/army_list_units/1/new_from
   def new_from
-    @army_list = current_user.army_lists.find(params[:army_list_id])
+    @army_list = current_user.army_lists.find_by_uuid!(params[:army_list_uuid])
     @army_list_unit = @army_list.army_list_units.find(params[:id])
   end
 
   # POST /army_list/1/army_list_units/1/duplicate
   def duplicate
-    @base_army_list = current_user.army_lists.find(params[:army_list_id])
+    @base_army_list = current_user.army_lists.find_by_uuid!(params[:army_list_uuid])
     @base_army_list_unit = @base_army_list.army_list_units.find(params[:id])
 
     @army_list = ArmyList.find_or_initialize_by_id(params[:army_list_unit][:army_list_id])
@@ -79,7 +79,7 @@ class ArmyListUnitsController < ApplicationController
   # POST /army_list/1/army_list_units
   # POST /army_list/1/army_list_units.xml
   def create
-    @army_list = current_user.army_lists.find(params[:army_list_id])
+    @army_list = current_user.army_lists.find_by_uuid!(params[:army_list_uuid])
     @army_list_unit = @army_list.army_list_units.build(army_list_unit_params)
 
     respond_to do |format|
@@ -99,7 +99,7 @@ class ArmyListUnitsController < ApplicationController
   # PUT /army_list/1/army_list_units/1
   # PUT /army_list/1/army_list_units/1.xml
   def update
-    @army_list = current_user.army_lists.find(params[:army_list_id])
+    @army_list = current_user.army_lists.find_by_uuid!(params[:army_list_uuid])
     @army_list_unit = @army_list.army_list_units.find(params[:id])
 
     respond_to do |format|
@@ -122,14 +122,14 @@ class ArmyListUnitsController < ApplicationController
 
   # GET /army_list/1/army_list_units/1/delete
   def delete
-    @army_list = current_user.army_lists.find(params[:army_list_id])
+    @army_list = current_user.army_listsfind_by_uuid!(params[:army_list_uuid])
     @army_list_unit = @army_list.army_list_units.find(params[:id])
   end
 
   # DELETE /army_list/1/army_list_units/1
   # DELETE /army_list/1/army_list_units/1.xml
   def destroy
-    @army_list = current_user.army_lists.find(params[:army_list_id])
+    @army_list = current_user.army_listsfind_by_uuid!(params[:army_list_uuid])
     @army_list_unit = @army_list.army_list_units.find(params[:id])
     @army_list_unit.destroy
 

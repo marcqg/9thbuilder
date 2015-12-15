@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150226235034) do
+ActiveRecord::Schema.define(version: 20151213193915) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.integer  "resource_id",   limit: 4,     null: false
@@ -120,6 +120,7 @@ ActiveRecord::Schema.define(version: 20150226235034) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "notes",        limit: 65535
+    t.string   "uuid",         limit: 36,                            null: false
   end
 
   add_index "army_lists", ["army_id"], name: "index_army_lists_on_army_id", using: :btree
