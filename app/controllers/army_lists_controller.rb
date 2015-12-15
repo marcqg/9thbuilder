@@ -38,16 +38,16 @@ class ArmyListsController < ApplicationController
   end
 
   # GET /army_lists/1/export
-  # GET /army_lists/1/export_:verbosity.html
-  # GET /army_lists/1/export_:verbosity.pdf
+  # GET /army_lists/1/export_:verbosity_:magics.html
+  # GET /army_lists/1/export_:verbosity_:magics.pdf
   def export
     @army_list = ArmyList.find(params[:id])
     @verbosity = params[:verbosity]
-    @include_magics = params[:include_magics]
+    @include_magics = params[:magics] == 'nomagics' ? false : true
 
     respond_to do |format|
-      format.html { render :template => @verbosity.nil? ? "army_lists/export" : "army_lists/export_#{@verbosity}", :layout => @verbosity.nil? ? nil : "pdf.html.erb" }
-      format.pdf  { render :template => "army_lists/export_#{@verbosity}.html.erb", :pdf => "whbab_#{@verbosity}_#{@army_list.id}" }
+      format.html { render :template => @verbosity.nil? ? 'army_lists/export' : "army_lists/export_#{@verbosity}", :layout => @verbosity.nil? ? nil : 'pdf.html.erb' }
+      format.pdf  { render :template => "army_lists/export_#{@verbosity}.html.erb", :pdf => "9thbuilder_#{@verbosity}_#{params[:magics]}_#{@army_list.id}" }
     end
   end
 

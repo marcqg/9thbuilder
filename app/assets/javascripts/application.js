@@ -46,7 +46,12 @@ jQuery(function($) {
         $popin  = $(this).closest('.popin');
 
     $popin.find('button[data-url]').each(function() {
-      $(this).data('params', checked ? 'include_magics=1' : null);
+      if (checked) {
+        $(this).data('url', $(this).data('url').replace('_nomagics', '_magics'));
+      }
+      else {
+        $(this).data('url', $(this).data('url').replace('_magics', '_nomagics'));
+      }
     });
   });
 

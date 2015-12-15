@@ -7,10 +7,10 @@
   <p><label><%= check_box_tag :include_magics, 1, true %> <%=t 'army_list.export.include_magics' %></label></p>
 
   <p>
-    <button data-url="<%= export_army_list_path @army_list, :verbosity => 'full', :format => 'pdf' %>" data-target="_blank" data-params="include_magics=1"><%=t 'army_list.export.pdf_full' %></button>
-    <button data-url="<%= export_army_list_path @army_list, :verbosity => 'lite', :format => 'pdf' %>" data-target="_blank" data-params="include_magics=1"><%=t 'army_list.export.pdf_lite' %></button>
-    <button data-url="<%= export_army_list_path @army_list, :verbosity => 'full', :format => 'html' %>" data-target="_blank" data-params="include_magics=1"><%=t 'army_list.export.html_full' %></button>
-    <button data-url="<%= export_army_list_path @army_list, :verbosity => 'lite', :format => 'html' %>" data-target="_blank" data-params="include_magics=1"><%=t 'army_list.export.html_lite' %></button>
+    <button data-url="<%= export_army_list_path @army_list, :verbosity => 'full', :magics => 'magics', :format => 'pdf' %>" data-target="_blank"><%=t 'army_list.export.pdf_full' %></button>
+    <button data-url="<%= export_army_list_path @army_list, :verbosity => 'lite', :magics => 'magics', :format => 'pdf' %>" data-target="_blank"><%=t 'army_list.export.pdf_lite' %></button>
+    <button data-url="<%= export_army_list_path @army_list, :verbosity => 'full', :magics => 'magics', :format => 'html' %>" data-target="_blank"><%=t 'army_list.export.html_full' %></button>
+    <button data-url="<%= export_army_list_path @army_list, :verbosity => 'lite', :magics => 'magics', :format => 'html' %>" data-target="_blank"><%=t 'army_list.export.html_lite' %></button>
   </p>
 
 </div>
