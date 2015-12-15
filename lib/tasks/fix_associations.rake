@@ -1,6 +1,7 @@
 require 'rake'
 
-namespace :whbab do
+namespace :ninethbuilder do
+
   desc "Fix wrong associations during unit duplication"
   task :fix_associations => :environment do
     @troops = []
@@ -67,4 +68,5 @@ namespace :whbab do
     puts "Fix special_rules.troop_id foreign key: #{@special_rules.size}"
     puts "Fix units.unit_option_id foreign key: #{@unit_options.size}"
   end
+
 end

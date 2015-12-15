@@ -131,7 +131,7 @@ en:
     lost:
       password: "I have lost my password!"
       confirmation: "I didn't received my confirmation email"
-    information: "For any questions, contact us on <a href=\"mailto:support@whbab.com\">online help</a>"
+    information: "For any questions, contact us on <a href=\"mailto:support@9thbuilder.com\">online help</a>"
 
   signup:
     title: "Sign up"
@@ -145,7 +145,7 @@ en:
     lost:
       password: "I have lost my password!"
       confirmation: "I didn't received my confirmation email"
-    information: "For any questions, contact us on <a href=\"mailto:support@whbab.com\">online help</a>"
+    information: "For any questions, contact us on <a href=\"mailto:support@9thbuilder.com\">online help</a>"
 
   password_lost:
     title: "I have lost my password"
@@ -154,7 +154,7 @@ en:
       submit: "Save"
     lost:
       confirmation: "I didn't received my confirmation email"
-    information: "For any questions, contact us on <a href=\"mailto:support@whbab.com\">online help</a>"
+    information: "For any questions, contact us on <a href=\"mailto:support@9thbuilder.com\">online help</a>"
 
   password_change:
     title: "Change your password"
@@ -165,7 +165,7 @@ en:
     lost:
         password: "I have lost my password!"
         confirmation: "I didn't received my confirmation email"
-    information: "For any questions, contact us on <a href=\"mailto:support@whbab.com\">online help</a>"
+    information: "For any questions, contact us on <a href=\"mailto:support@9thbuilder.com\">online help</a>"
 
   confirmation:
     title: "Re-send confirmation instructions"
@@ -174,7 +174,7 @@ en:
       submit: "Save"
     lost:
       password: "I have lost my password!"
-    information: "For any questions, contact us on <a href=\"mailto:support@whbab.com\">online help</a>"
+    information: "For any questions, contact us on <a href=\"mailto:support@9thbuilder.com\">online help</a>"
 
   profile:
     title: "My account"
@@ -188,6 +188,6 @@ en:
       submit: "Save"
     delete:
       title: "Account deletion"
-      information: "You are not satisfied? <a href=\"mailto:support@whbab.com\">Contact us</a> or"
+      information: "You are not satisfied? <a href=\"mailto:support@9thbuilder.com\">Contact us</a> or"
       link: "immediately destroy your account"
     back: "Previous page"

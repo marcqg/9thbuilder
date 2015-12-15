@@ -131,7 +131,7 @@ fr:
     lost:
         password: "J'ai perdu mon mot de passe !"
         confirmation: "Je n'ai pas reçu d'email de confirmation"
-    information: "Pour toutes questions n'hésitez pas à consulter l'<a href=\"mailto:support@whbab.com\">aide en ligne</a>"
+    information: "Pour toutes questions n'hésitez pas à consulter l'<a href=\"mailto:support@9thbuilder.com\">aide en ligne</a>"
 
   signup:
     title: "S'inscrire"
@@ -145,7 +145,7 @@ fr:
     lost:
         password: "J'ai perdu mon mot de passe !"
         confirmation: "Je n'ai pas reçu d'email de confirmation"
-    information: "Pour toutes questions n'hésitez pas à consulter l'<a href=\"mailto:support@whbab.com\">aide en ligne</a>"
+    information: "Pour toutes questions n'hésitez pas à consulter l'<a href=\"mailto:support@9thbuilder.com\">aide en ligne</a>"
 
   password_lost:
     title: "J'ai perdu mon mot de passe"
@@ -154,7 +154,7 @@ fr:
         submit: "Valider"
     lost:
         confirmation: "Je n'ai pas reçu d'email de confirmation"
-    information: "Pour toutes questions n'hésitez pas à consulter l'<a href=\"mailto:support@whbab.com\">aide en ligne</a>"
+    information: "Pour toutes questions n'hésitez pas à consulter l'<a href=\"mailto:support@9thbuilder.com\">aide en ligne</a>"
 
   password_change:
     title: "Changer votre mot de passe"
@@ -165,7 +165,7 @@ fr:
     lost:
         password: "J'ai perdu mon mot de passe !"
         confirmation: "Je n'ai pas reçu d'email de confirmation"
-    information: "Pour toutes questions n'hésitez pas à consulter l'<a href=\"mailto:support@whbab.com\">aide en ligne</a>"
+    information: "Pour toutes questions n'hésitez pas à consulter l'<a href=\"mailto:support@9thbuilder.com\">aide en ligne</a>"
 
   confirmation:
     title: "Renvoyer les instructions de confirmation"
@@ -174,7 +174,7 @@ fr:
         submit: "Valider"
     lost:
         password: "J'ai perdu mon mot de passe !"
-    information: "Pour toutes questions n'hésitez pas à consulter l'<a href=\"mailto:support@whbab.com\">aide en ligne</a>"
+    information: "Pour toutes questions n'hésitez pas à consulter l'<a href=\"mailto:support@9thbuilder.com\">aide en ligne</a>"
 
   profile:
     title: "Mon compte"
@@ -188,6 +188,6 @@ fr:
       submit: "Valider"
     delete:
       title: "Supprimer mon compte"
-      information: "Vous n'êtes pas satisfait ? <a href=\"mailto:support@whbab.com\">Écrivez nous</a> ou"
+      information: "Vous n'êtes pas satisfait ? <a href=\"mailto:support@9thbuilder.com\">Écrivez nous</a> ou"
       link: "supprimer votre compte directement"
     back: "Page précédente"

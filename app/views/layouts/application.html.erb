@@ -2,7 +2,7 @@
 <html lang="<%= locale %>">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <title><%= content_for?(:title) ? yield(:title) : t(:welcome) %> • Whbab</title>
+  <title><%= content_for?(:title) ? yield(:title) : t(:welcome) %> • 9thbuilder</title>
   <%= stylesheet_link_tag "application", media: 'all', "data-turbolinks-track" => false %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => false %>
   <%= javascript_tag "BASE_URL = '#{root_path}';" %>
@@ -14,7 +14,7 @@
 <div id="wrapper">
   <div id="header" class="container_16">
     <h1 class="grid_3 suffix_9">
-      <a href="<%= root_path %>">Warhammer Battle<br />
+      <a href="<%= root_path %>">The 9th Age<br />
       <em>Army Builder</em></a>
     </h1>
     <div class="grid_4 welcome">
@@ -29,7 +29,7 @@
     <ul class="menu" style="display:none">
       <li><%= link_to t('menu.army_lists'), army_lists_path("q[army_id_eq]" => "") %></li>
       <li><%= link_to t('menu.preferences'), edit_user_registration_path %></li>
-      <li><a href="mailto:support@whbab.com"><%=t 'menu.help' %></a></li>
+      <li><a href="mailto:support@9thbuilder.com"><%=t 'menu.help' %></a></li>
       <li><%= link_to t('menu.signout'), destroy_user_session_path %></li>
     </ul>
     <% end %>
@@ -43,7 +43,7 @@
     <div class="grid_16 links">
       <a href="https://www.facebook.com/whbarmybuilder" target="_blank">facebook.com/whbarmybuilder</a> <%= image_tag "pict_links.png", :size => "18x11" %>
       <a href="http://twitter.com/whbab" target="_blank">twitter.com/whbab</a> <%= image_tag "pict_links.png", :size => "18x11" %>
-      <a href="mailto:support@whbab.com"><%=t :help %></a>
+      <a href="mailto:support@9thbuilder.com"><%=t :help %></a>
     </div>
   </div>
 </div>
