@@ -84,7 +84,7 @@ class ArmyListsController < ApplicationController
         format.html { redirect_to @army_list }
         format.xml  { render :xml => @army_list, :status => :created, :location => @army_list }
       else
-        format.html { render :action => "new", :layout => nil }
+        format.html { render :action => 'new', :layout => nil }
         format.xml  { render :xml => @army_list.errors, :status => :unprocessable_entity }
       end
     end
@@ -100,7 +100,7 @@ class ArmyListsController < ApplicationController
         format.html { redirect_to @army_list }
         format.xml  { head :ok }
       else
-        format.html { render :action => "edit" }
+        format.html { render :action => 'edit' }
         format.xml  { render :xml => @army_list.errors, :status => :unprocessable_entity }
       end
     end
@@ -130,7 +130,7 @@ class ArmyListsController < ApplicationController
     @army_list = ArmyList.new
     @army_list.user = @base_army_list.user
     @army_list.army = @base_army_list.army
-    @army_list.name = @base_army_list.name + " copie"
+    @army_list.name =  "#{@base_army_list.name} copie"
     @army_list.notes = @base_army_list.notes
     @army_list.save
 
@@ -162,9 +162,9 @@ class ArmyListsController < ApplicationController
 
         format.html { redirect_to @army_list }
         format.xml  { render :xml => @army_list, :status => :created, :location => @army_list }
-        format.js   { render :action => "create" }
+        format.js   { render :action => 'create' }
       else
-        format.html { render :action => "new_from" }
+        format.html { render :action => 'new_from' }
         format.xml  { render :xml => @army_list.errors, :status => :unprocessable_entity }
       end
     end
