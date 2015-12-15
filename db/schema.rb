@@ -160,7 +160,7 @@ ActiveRecord::Schema.define(version: 20150226235034) do
     t.string  "name",                   limit: 255,                                         null: false
     t.decimal "value_points",                       precision: 7, scale: 1,                 null: false
     t.integer "override_id",            limit: 4
-    t.boolean "is_multiple",            limit: 1,                           default: false, null: false
+    t.boolean "is_multiple",                                                default: false, null: false
   end
 
   add_index "magic_items", ["army_id"], name: "index_magic_items_on_army_id", using: :btree
@@ -226,13 +226,13 @@ ActiveRecord::Schema.define(version: 20150226235034) do
     t.string  "name",               limit: 255,                                         null: false
     t.decimal "value_points",                   precision: 7, scale: 1
     t.integer "position",           limit: 4,                                           null: false
-    t.boolean "is_per_model",       limit: 1,                                           null: false
-    t.boolean "is_magic_items",     limit: 1,                                           null: false
-    t.boolean "is_magic_standards", limit: 1,                                           null: false
-    t.boolean "is_unique_choice",   limit: 1,                                           null: false
-    t.boolean "is_extra_items",     limit: 1,                                           null: false
+    t.boolean "is_per_model",                                                           null: false
+    t.boolean "is_magic_items",                                                         null: false
+    t.boolean "is_magic_standards",                                                     null: false
+    t.boolean "is_unique_choice",                                                       null: false
+    t.boolean "is_extra_items",                                                         null: false
     t.integer "mount_id",           limit: 4
-    t.boolean "is_multiple",        limit: 1,                           default: false, null: false
+    t.boolean "is_multiple",                                            default: false, null: false
   end
 
   add_index "unit_options", ["mount_id"], name: "index_unit_options_on_mount_id", using: :btree
@@ -248,7 +248,7 @@ ActiveRecord::Schema.define(version: 20150226235034) do
     t.decimal "value_points",                   precision: 7, scale: 1
     t.string  "magic",            limit: 255
     t.text    "notes",            limit: 65535
-    t.boolean "is_unique",        limit: 1,                             default: false, null: false
+    t.boolean "is_unique",                                              default: false, null: false
   end
 
   add_index "units", ["army_id"], name: "index_units_on_army_id", using: :btree

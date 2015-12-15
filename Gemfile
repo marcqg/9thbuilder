@@ -2,9 +2,9 @@ source 'https://rubygems.org'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.1'
+gem 'rails', '4.2.4'
 # Use mysql as the database for Active Record
-gem 'mysql2'
+gem 'mysql2', '~> 0.3.13'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -43,6 +43,7 @@ group :development, :test do
   gem 'spring'
 end
 
+gem 'routing-filter'
 gem 'activeadmin', github: 'activeadmin/activeadmin'
 gem 'jquery-ui-rails'
 gem 'devise'
@@ -51,6 +52,6 @@ gem 'acts_as_list'
 gem 'ransack'
 gem 'wisepdf'
 gem 'attribute_normalizer'
-gem 'newrelic_rpm'
+gem 'uuidtools'
 gem 'better_errors', group: :development
 gem 'binding_of_caller', group: :development
