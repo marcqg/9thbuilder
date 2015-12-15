@@ -279,4 +279,36 @@ ActiveRecord::Schema.define(version: 20150226235034) do
   add_index "users", ["favorite_army_id"], name: "index_users_on_favorite_army_id", using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "army_list_units", "army_lists"
+  add_foreign_key "army_list_units", "units"
+  add_foreign_key "army_list_units_extra_items", "army_list_units", on_delete: :cascade
+  add_foreign_key "army_list_units_extra_items", "extra_items", on_delete: :cascade
+  add_foreign_key "army_list_units_magic_items", "army_list_units", on_delete: :cascade
+  add_foreign_key "army_list_units_magic_items", "magic_items", on_delete: :cascade
+  add_foreign_key "army_list_units_magic_standards", "army_list_units", on_delete: :cascade
+  add_foreign_key "army_list_units_magic_standards", "magic_standards", on_delete: :cascade
+  add_foreign_key "army_list_units_unit_options", "army_list_units", on_delete: :cascade
+  add_foreign_key "army_list_units_unit_options", "unit_options", on_delete: :cascade
+  add_foreign_key "army_lists", "armies"
+  add_foreign_key "army_lists", "users"
+  add_foreign_key "equipments", "troops", on_delete: :nullify
+  add_foreign_key "equipments", "units"
+  add_foreign_key "extra_item_categories", "armies"
+  add_foreign_key "extra_items", "extra_item_categories"
+  add_foreign_key "magic_items", "armies"
+  add_foreign_key "magic_items", "magic_item_categories"
+  add_foreign_key "magic_items", "magic_items", column: "override_id"
+  add_foreign_key "magic_standards", "armies"
+  add_foreign_key "magic_standards", "magic_standards", column: "override_id"
+  add_foreign_key "special_rules", "troops", on_delete: :nullify
+  add_foreign_key "special_rules", "units"
+  add_foreign_key "troops", "troop_types"
+  add_foreign_key "troops", "unit_options", on_delete: :nullify
+  add_foreign_key "troops", "units"
+  add_foreign_key "unit_options", "unit_options", column: "parent_id"
+  add_foreign_key "unit_options", "units"
+  add_foreign_key "unit_options", "units", column: "mount_id", on_delete: :nullify
+  add_foreign_key "units", "armies"
+  add_foreign_key "units", "unit_categories"
+  add_foreign_key "users", "armies", column: "favorite_army_id", on_delete: :nullify
 end
