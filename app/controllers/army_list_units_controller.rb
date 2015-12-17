@@ -118,14 +118,14 @@ class ArmyListUnitsController < ApplicationController
 
   # GET /army_list/1/army_list_units/1/delete
   def delete
-    @army_list = current_user.army_listsfind_by_uuid!(params[:army_list_uuid])
+    @army_list = current_user.army_lists.find_by_uuid!(params[:army_list_uuid])
     @army_list_unit = @army_list.army_list_units.find(params[:id])
   end
 
   # DELETE /army_list/1/army_list_units/1
   # DELETE /army_list/1/army_list_units/1.xml
   def destroy
-    @army_list = current_user.army_listsfind_by_uuid!(params[:army_list_uuid])
+    @army_list = current_user.army_lists.find_by_uuid!(params[:army_list_uuid])
     @army_list_unit = @army_list.army_list_units.find(params[:id])
     @army_list_unit.destroy
 
