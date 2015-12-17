@@ -28,6 +28,6 @@ class UnitOption < ActiveRecord::Base
   attr_accessor :army_filter
 
   def army_filter
-    army_filter ||= unit.try(:army).try(:id)
+    @army_filter ||= unit.try(:army).try(:id)
   end
 end
