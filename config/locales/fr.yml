@@ -44,7 +44,7 @@ fr:
       add: "Créer une nouvelle liste d'armée"
       search: "Valider"
     show:
-      title: "Liste d'armée • #{name}"
+      title: "Liste d'armée • %{name}"
       print: "Imprimer"
       edit: "Editer"
       export: "Exporter"
@@ -117,7 +117,7 @@ fr:
     duplicate:
       title: "Dupliquer"
       target: "Vers :"
-      new_army_list: "Nouvelle liste #{name}"
+      new_army_list: "Nouvelle liste %{name}"
     form:
       name: "Nom"
 

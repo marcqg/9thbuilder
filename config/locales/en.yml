@@ -117,7 +117,7 @@ en:
     duplicate:
       title: "Duplicate"
       target: "To:"
-      new_army_list: "New #{name} list"
+      new_army_list: "New %{name} list"
     form:
       name: "Name"
 
