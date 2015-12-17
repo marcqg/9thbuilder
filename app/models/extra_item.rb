@@ -1,6 +1,7 @@
 class ExtraItem < ActiveRecord::Base
   belongs_to :extra_item_category
-  has_and_belongs_to_many :army_list_units
+  has_many :army_list_unit_extra_items, dependent: :destroy
+  has_many :army_list_units, through: :army_list_unit_extra_items
 
   validates_presence_of :extra_item_category_id, :name, :value_points
   validates_numericality_of :value_points, greater_than_or_equal_to: 0

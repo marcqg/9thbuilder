@@ -4,10 +4,12 @@ class ArmyListUnit < ActiveRecord::Base
   belongs_to :unit_category
   has_many :army_list_unit_troops, -> { order 'position' }, dependent: :destroy
   has_many :army_list_unit_magic_items, dependent: :destroy
-  has_many :magic_items, -> { select 'magic_items.*, army_list_units_magic_items.quantity' }, through: :army_list_unit_magic_items
-  has_and_belongs_to_many :magic_standards
-  has_and_belongs_to_many :extra_items
+  has_many :army_list_unit_magic_standards, dependent: :destroy
+  has_many :army_list_unit_extra_items, dependent: :destroy
   has_many :army_list_unit_unit_options, dependent: :destroy
+  has_many :magic_items, -> { select 'magic_items.*, army_list_units_magic_items.quantity' }, through: :army_list_unit_magic_items
+  has_many :magic_standards, through: :army_list_unit_magic_standards
+  has_many :extra_items, through: :army_list_unit_extra_items
   has_many :unit_options, -> { select 'unit_options.*, army_list_units_unit_options.quantity' }, through: :army_list_unit_unit_options
 
   accepts_nested_attributes_for :army_list_unit_troops
