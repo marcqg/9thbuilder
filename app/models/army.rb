@@ -5,7 +5,7 @@ class Army < ActiveRecord::Base
   has_many :units, -> { order 'name' }, dependent: :destroy
   has_many :favorite_users, class_name: 'User', foreign_key: 'favorite_army_id', dependent: :nullify
 
-  validates_presence_of :name
+  validates :name, presence: true
 
   scope :disabled, -> { where('id NOT IN (SELECT DISTINCT army_id FROM units)') }
   scope :disabled_or_obsolete, -> { where('id NOT IN (SELECT DISTINCT army_id FROM units) OR name LIKE \'%obsolète%\'') }

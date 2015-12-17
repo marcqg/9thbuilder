@@ -7,14 +7,14 @@ class UnitOption < ActiveRecord::Base
   has_many :army_list_unit_unit_options, dependent: :destroy
   has_many :army_list_units, through: :army_list_unit_unit_options
 
-  validates_presence_of :unit_id, :name
-  validates_numericality_of :value_points, greater_than_or_equal_to: 0, allow_nil: true
-  validates_numericality_of :position, greater_than_or_equal_to: 1, only_integer: true, allow_nil: true
-  validates_inclusion_of :is_per_model, in: [true, false]
-  validates_inclusion_of :is_multiple, in: [true, false]
-  validates_inclusion_of :is_magic_items, in: [true, false]
-  validates_inclusion_of :is_magic_standards, in: [true, false]
-  validates_inclusion_of :is_unique_choice, in: [true, false]
+  validates :unit_id, :name, presence: true
+  validates :value_points, numericality: { greater_than_or_equal_to: 0, allow_nil: true }
+  validates :position, numericality: { greater_than_or_equal_to: 1, only_integer: true, allow_nil: true }
+  validates :is_per_model, inclusion: { in: [true, false] }
+  validates :is_multiple, inclusion: { in: [true, false] }
+  validates :is_magic_items, inclusion: { in: [true, false] }
+  validates :is_magic_standards, inclusion: { in: [true, false] }
+  validates :is_unique_choice, inclusion: { in: [true, false] }
 
   acts_as_list scope: 'unit_id = #{unit_id} AND COALESCE(parent_id, \'\') = \'#{parent_id}\''
 

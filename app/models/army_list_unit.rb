@@ -18,10 +18,10 @@ class ArmyListUnit < ActiveRecord::Base
 
   normalize_attributes :name, :notes
 
-  validates_presence_of :army_list_id, :unit_id, :unit_category_id, :name, :value_points, :size
-  validates_numericality_of :value_points, greater_than_or_equal_to: 0
-  validates_numericality_of :size, greater_than_or_equal_to: 0, only_integer: true
-  validates_numericality_of :position, greater_than_or_equal_to: 1, only_integer: true, allow_nil: true
+  validates :army_list_id, :unit_id, :unit_category_id, :name, :value_points, :size, presence: true
+  validates :value_points, numericality: { greater_than_or_equal_to: 0 }
+  validates :size, numericality: { greater_than_or_equal_to: 0, only_integer: true }
+  validates :position, numericality: { greater_than_or_equal_to: 1, only_integer: true, allow_nil: true }
 
   before_validation on: :create do
     self.name = unit.name if unit.is_unique

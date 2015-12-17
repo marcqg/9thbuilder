@@ -3,8 +3,8 @@ class ArmyList < ActiveRecord::Base
   belongs_to :user
   has_many :army_list_units, -> { order 'position' }, dependent: :destroy
 
-  validates_presence_of :army_id, :user_id, :uuid, :name, :value_points
-  validates_numericality_of :value_points, greater_than_or_equal_to: 0
+  validates :army_id, :user_id, :uuid, :name, :value_points, presence: true
+  validates :value_points, numericality: { greater_than_or_equal_to: 0 }
 
   normalize_attributes :name, :notes
 

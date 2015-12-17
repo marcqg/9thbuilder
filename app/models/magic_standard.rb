@@ -4,7 +4,7 @@ class MagicStandard < ActiveRecord::Base
   has_many :army_list_units, through: :army_list_unit_magic_standards
   has_one :override, class_name: 'MagicStandard', foreign_key: 'override_id'
 
-  validates_numericality_of :value_points, greater_than_or_equal_to: 0
+  validates :value_points, numericality: { greater_than_or_equal_to: 0 }
 
   scope :available_for, lambda { |army, value_points_limit|
     if army.id == 22

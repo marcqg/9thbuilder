@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable, email_regexp: /@/
 
-  validates_presence_of :name
+  validates :name, presence: true
 
   def update_with_password(params = {})
     params.delete :current_password

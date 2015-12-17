@@ -10,11 +10,11 @@ class Unit < ActiveRecord::Base
 
   normalize_attributes :magic, :notes
 
-  validates_presence_of :army_id, :unit_category_id, :name, :min_size
-  validates_numericality_of :min_size, greater_than_or_equal_to: 1, only_integer: true
-  validates_numericality_of :max_size, greater_than_or_equal_to: :min_size, only_integer: true, allow_nil: true
-  validates_numericality_of :value_points, greater_than_or_equal_to: 0, allow_nil: true
-  validates_inclusion_of :is_unique, in: [true, false]
+  validates :army_id, :unit_category_id, :name, :min_size, presence: true
+  validates :min_size, numericality: { greater_than_or_equal_to: 1, only_integer: true }
+  validates :max_size, numericality: { greater_than_or_equal_to: :min_size, only_integer: true, allow_nil: true }
+  validates :value_points, numericality: { greater_than_or_equal_to: 0, allow_nil: true }
+  validates :is_unique, inclusion: { in: [true, false] }
 
   scope :base_category, -> { where(unit_category_id: 3) }
   scope :mount_category, -> { where(unit_category_id: 6) }

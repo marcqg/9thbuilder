@@ -3,8 +3,8 @@ class ExtraItem < ActiveRecord::Base
   has_many :army_list_unit_extra_items, dependent: :destroy
   has_many :army_list_units, through: :army_list_unit_extra_items
 
-  validates_presence_of :extra_item_category_id, :name, :value_points
-  validates_numericality_of :value_points, greater_than_or_equal_to: 0
+  validates :extra_item_category_id, :name, :value_points, presence: true
+  validates :value_points, numericality: { greater_than_or_equal_to: 0 }
 
   scope :available_for, lambda { |extra_item_category, value_points_limit|
     if value_points_limit.nil?
