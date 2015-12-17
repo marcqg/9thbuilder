@@ -1,5 +1,5 @@
 ActiveAdmin.register ExtraItemCategory do
-  menu :parent => 'Extra Items'
+  menu parent: 'Extra Items'
 
   permit_params :army_id, :name
 

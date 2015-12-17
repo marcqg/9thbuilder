@@ -1,5 +1,5 @@
 ActiveAdmin.register TroopType do
-  menu :parent => 'Troops'
+  menu parent: 'Troops'
 
   permit_params :name
 

@@ -1,5 +1,5 @@
 ActiveAdmin.register User do
-  menu :priority => 9
+  menu priority: 9
 
   filter :email
   filter :name
@@ -9,7 +9,7 @@ ActiveAdmin.register User do
     id_column
     column :email
     column :name
-    column :favorite_army, :sortable => :favorite_army_id
+    column :favorite_army, sortable: :favorite_army_id
     column :created_at
     column :updated_at
     actions

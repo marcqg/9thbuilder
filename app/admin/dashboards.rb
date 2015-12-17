@@ -1,9 +1,8 @@
 ActiveAdmin.register_page 'Dashboard' do
-  menu :priority => 1, :label => proc{ I18n.t('active_admin.dashboard') }
+  menu priority: 1, label: proc { I18n.t('active_admin.dashboard') }
 
-  content :title => proc{ I18n.t('active_admin.dashboard') } do
-
-    @users = User.includes(:army_lists).sort do |b,a|
+  content title: proc { I18n.t('active_admin.dashboard') } do
+    @users = User.includes(:army_lists).sort do |b, a|
       a.army_lists.size <=> b.army_lists.size
     end
 
@@ -39,7 +38,6 @@ ActiveAdmin.register_page 'Dashboard' do
     # end
 
     columns do
-
       column do
         if @troops.any?
           panel 'Troops inconsistency' do
@@ -112,7 +110,6 @@ ActiveAdmin.register_page 'Dashboard' do
             end
           end
         end
-
       end # column
 
       column do
@@ -128,18 +125,15 @@ ActiveAdmin.register_page 'Dashboard' do
 
         panel 'Top 10 users' do
           table_for @users[0..9] do
-              column 'Name' do |user|
-                link_to user.name, admin_user_path(user)
-              end
-              column 'Army lists count' do |user|
-                user.army_lists.size.to_s
-              end
+            column 'Name' do |user|
+              link_to user.name, admin_user_path(user)
             end
+            column 'Army lists count' do |user|
+              user.army_lists.size.to_s
+            end
+          end
         end
       end # column
-
     end # columns
-
   end # content
-
 end

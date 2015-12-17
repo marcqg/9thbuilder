@@ -1,9 +1,8 @@
 require 'rake'
 
 namespace :ninethbuilder do
-
-  desc "Fix wrong associations during unit duplication"
-  task :fix_associations => :environment do
+  desc 'Fix wrong associations during unit duplication'
+  task fix_associations: :environment do
     @troops = []
     @equipments = []
     @special_rules = []
@@ -11,55 +10,47 @@ namespace :ninethbuilder do
 
     Unit.all.each do |unit|
       unit.troops.includes(:unit_option).where.not(unit_option_id: nil).each do |troop|
-        if troop.unit_option.unit.id != unit.id
-          unit_option = unit.unit_options.detect { |uo| troop.unit_option.name == uo.name }
+        next unless troop.unit_option.unit.id != unit.id
+        unit_option = unit.unit_options.detect { |uo| troop.unit_option.name == uo.name }
 
-          unless unit_option.nil?
-            troop.unit_option = unit_option
-            troop.save
+        next if unit_option.nil?
+        troop.unit_option = unit_option
+        troop.save
 
-            @troops.push troop
-          end
-        end
+        @troops.push troop
       end
 
       unit.equipments.includes(:troop).where.not(troop_id: nil).each do |equipment|
-        if equipment.troop.unit.id != unit.id
-          troop = unit.troops.detect { |t| equipment.troop.name == t.name }
+        next unless equipment.troop.unit.id != unit.id
+        troop = unit.troops.detect { |t| equipment.troop.name == t.name }
 
-          unless troop.nil?
-            equipment.troop = troop
-            equipment.save
+        next if troop.nil?
+        equipment.troop = troop
+        equipment.save
 
-            @equipments.push equipment
-          end
-        end
+        @equipments.push equipment
       end
 
       unit.special_rules.includes(:troop).where.not(troop_id: nil).each do |special_rule|
-        if special_rule.troop.unit.id != unit.id
-          troop = unit.troops.detect { |t| special_rule.troop.name == t.name }
+        next unless special_rule.troop.unit.id != unit.id
+        troop = unit.troops.detect { |t| special_rule.troop.name == t.name }
 
-          unless troop.nil?
-            special_rule.troop = troop
-            special_rule.save
+        next if troop.nil?
+        special_rule.troop = troop
+        special_rule.save
 
-            @special_rules.push special_rule
-          end
-        end
+        @special_rules.push special_rule
       end
 
       unit.unit_options.includes(:parent).where.not(parent_id: nil).each do |unit_option|
-        if unit_option.parent.unit.id != unit.id
-          parent = unit.unit_options.detect { |uo| unit_option.parent.name == uo.name }
+        next unless unit_option.parent.unit.id != unit.id
+        parent = unit.unit_options.detect { |uo| unit_option.parent.name == uo.name }
 
-          unless parent.nil?
-            unit_option.parent = parent
-            unit_option.save
+        next if parent.nil?
+        unit_option.parent = parent
+        unit_option.save
 
-            @unit_options.push unit_option
-          end
-        end
+        @unit_options.push unit_option
       end
     end
 
@@ -68,5 +59,4 @@ namespace :ninethbuilder do
     puts "Fix special_rules.troop_id foreign key: #{@special_rules.size}"
     puts "Fix units.unit_option_id foreign key: #{@unit_options.size}"
   end
-
 end

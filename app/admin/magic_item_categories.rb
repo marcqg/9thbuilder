@@ -1,5 +1,5 @@
 ActiveAdmin.register MagicItemCategory do
-  menu :parent => 'Magic Items'
+  menu parent: 'Magic Items'
 
   permit_params :name
 

@@ -13,7 +13,6 @@ module DevisePermittedParameters
     devise_parameter_sanitizer.for(:account_update) << :name
     devise_parameter_sanitizer.for(:account_update) << :favorite_army_id
   end
-
 end
 
 DeviseController.send :include, DevisePermittedParameters

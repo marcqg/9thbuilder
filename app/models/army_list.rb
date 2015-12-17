@@ -1,21 +1,21 @@
 class ArmyList < ActiveRecord::Base
   belongs_to :army
   belongs_to :user
-  has_many :army_list_units, -> { order 'position' }, :dependent => :destroy
+  has_many :army_list_units, -> { order 'position' }, dependent: :destroy
 
   validates_presence_of :army_id, :user_id, :uuid, :name, :value_points
-  validates_numericality_of :value_points, :greater_than_or_equal_to => 0
+  validates_numericality_of :value_points, greater_than_or_equal_to: 0
 
   normalize_attributes :name, :notes
 
-  before_validation(:on => :create) do
-    self.uuid = UUIDTools::UUID.random_create().to_s
-    self.name = 'Liste ' + army.name + ' #' + (user.army_lists.where(:army_id => army).count() + 1).to_s unless name?
+  before_validation(on: :create) do
+    self.uuid = UUIDTools::UUID.random_create.to_s
+    self.name = 'Liste ' + army.name + ' #' + (user.army_lists.where(army_id: army).count + 1).to_s unless name?
     self.value_points = 0.0
   end
 
   def to_param
-    self.uuid
+    uuid
   end
 
   def value_points_details

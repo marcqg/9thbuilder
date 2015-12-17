@@ -1,8 +1,6 @@
 module ArmyListUnitsHelper
   def characteristic(charac)
-    if charac.blank?
-      return '-'
-    end
+    return '-' if charac.blank?
     charac
   end
 end

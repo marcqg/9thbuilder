@@ -1,14 +1,12 @@
 class ArmyListsController < ApplicationController
-  before_filter do |controller|
-    unless controller.action_name == 'export'
-      authenticate_user!
-    end
+  before_action do |controller|
+    authenticate_user! unless controller.action_name == 'export'
   end
 
   # GET /army_lists
   # GET /army_lists.xml
   def index
-    unless params.include?(:q) then
+    unless params.include?(:q)
       params[:q] = {}
       params[:q][:army_id_eq] = current_user.favorite_army.try(:id)
     end
@@ -18,7 +16,7 @@ class ArmyListsController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @army_lists }
+      format.xml  { render xml: @army_lists }
     end
   end
 
@@ -29,7 +27,7 @@ class ArmyListsController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.xml  { render :xml => @army_list }
+      format.xml  { render xml: @army_list }
     end
   end
 
@@ -42,8 +40,8 @@ class ArmyListsController < ApplicationController
     @include_magics = params[:magics] == 'nomagics' ? false : true
 
     respond_to do |format|
-      format.html { render :template => @verbosity.nil? ? 'army_lists/export' : "army_lists/export_#{@verbosity}", :layout => @verbosity.nil? ? nil : 'pdf.html.erb' }
-      format.pdf  { render :template => "army_lists/export_#{@verbosity}.html.erb", :pdf => "9thbuilder_#{@verbosity}_#{params[:magics]}_#{@army_list.id}" }
+      format.html { render template: @verbosity.nil? ? 'army_lists/export' : "army_lists/export_#{@verbosity}", layout: @verbosity.nil? ? nil : 'pdf.html.erb' }
+      format.pdf  { render template: "army_lists/export_#{@verbosity}.html.erb", pdf: "9thbuilder_#{@verbosity}_#{params[:magics]}_#{@army_list.id}" }
     end
   end
 
@@ -55,7 +53,7 @@ class ArmyListsController < ApplicationController
 
     respond_to do |format|
       format.html # new.html.erb
-      format.xml  { render :xml => @army_list }
+      format.xml  { render xml: @army_list }
     end
   end
 
@@ -78,10 +76,10 @@ class ArmyListsController < ApplicationController
     respond_to do |format|
       if @army_list.save
         format.html { redirect_to @army_list }
-        format.xml  { render :xml => @army_list, :status => :created, :location => @army_list }
+        format.xml  { render xml: @army_list, status: :created, location: @army_list }
       else
-        format.html { render :action => 'new', :layout => nil }
-        format.xml  { render :xml => @army_list.errors, :status => :unprocessable_entity }
+        format.html { render action: 'new', layout: nil }
+        format.xml  { render xml: @army_list.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -96,8 +94,8 @@ class ArmyListsController < ApplicationController
         format.html { redirect_to @army_list }
         format.xml  { head :ok }
       else
-        format.html { render :action => 'edit' }
-        format.xml  { render :xml => @army_list.errors, :status => :unprocessable_entity }
+        format.html { render action: 'edit' }
+        format.xml  { render xml: @army_list.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -114,7 +112,7 @@ class ArmyListsController < ApplicationController
     @army_list.destroy
 
     respond_to do |format|
-      format.html { redirect_to army_lists_url(:search => { :army_id_eq => @army_list.army }) }
+      format.html { redirect_to army_lists_url(search: { army_id_eq: @army_list.army }) }
       format.xml  { head :ok }
     end
   end
@@ -131,12 +129,10 @@ class ArmyListsController < ApplicationController
     @army_list.save
 
     @base_army_list.army_list_units.each do |base_army_list_unit|
-      army_list_unit = @army_list.army_list_units.build({
-        :unit_id => base_army_list_unit.unit_id,
-        :unit_category_id => base_army_list_unit.unit_category_id,
-        :value_points => base_army_list_unit.value_points,
-        :size => base_army_list_unit.size
-      })
+      army_list_unit = @army_list.army_list_units.build(unit_id: base_army_list_unit.unit_id,
+                                                        unit_category_id: base_army_list_unit.unit_category_id,
+                                                        value_points: base_army_list_unit.value_points,
+                                                        size: base_army_list_unit.size)
       army_list_unit.army_list_unit_troops << base_army_list_unit.army_list_unit_troops.collect do |alut|
         army_list_unit_troop = alut.dup
         army_list_unit_troop.army_list_unit = army_list_unit
@@ -157,17 +153,18 @@ class ArmyListsController < ApplicationController
         @army_list.reload
 
         format.html { redirect_to @army_list }
-        format.xml  { render :xml => @army_list, :status => :created, :location => @army_list }
-        format.js   { render :action => 'create' }
+        format.xml  { render xml: @army_list, status: :created, location: @army_list }
+        format.js   { render action: 'create' }
       else
-        format.html { render :action => 'new_from' }
-        format.xml  { render :xml => @army_list.errors, :status => :unprocessable_entity }
+        format.html { render action: 'new_from' }
+        format.xml  { render xml: @army_list.errors, status: :unprocessable_entity }
       end
     end
   end
 
   private
-    def army_list_params
-      params.require(:army_list).permit(:army_id, :name, :notes)
-    end
+
+  def army_list_params
+    params.require(:army_list).permit(:army_id, :name, :notes)
+  end
 end

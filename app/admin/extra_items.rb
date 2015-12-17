@@ -1,5 +1,5 @@
 ActiveAdmin.register ExtraItem do
-  menu :priority => 7
+  menu priority: 7
 
   permit_params :extra_item_category_id, :name, :value_points
 
@@ -11,7 +11,7 @@ ActiveAdmin.register ExtraItem do
     end
   end
 
-  action_item :new, :only => :show do
+  action_item :new, only: :show do
     link_to 'New Extra Item', new_admin_extra_item_path
   end
 
@@ -22,7 +22,7 @@ ActiveAdmin.register ExtraItem do
   index do
     selectable_column
     id_column
-    column :extra_item_category, :sortable => :extra_item_category_id
+    column :extra_item_category, sortable: :extra_item_category_id
     column :name
     column :value_points
     actions
@@ -30,7 +30,7 @@ ActiveAdmin.register ExtraItem do
 
   form do |f|
     f.inputs do
-      f.input :extra_item_category, :collection => ExtraItemCategory.includes(:army).order(:name).collect { |ei| [ei.army.name + ' - ' + ei.name, ei.id] }
+      f.input :extra_item_category, collection: ExtraItemCategory.includes(:army).order(:name).collect { |ei| [ei.army.name + ' - ' + ei.name, ei.id] }
       f.input :name
       f.input :value_points
     end
