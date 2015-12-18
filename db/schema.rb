@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151213193915) do
+ActiveRecord::Schema.define(version: 20151218054317) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.integer  "resource_id",   limit: 4,     null: false
@@ -78,7 +78,7 @@ ActiveRecord::Schema.define(version: 20151213193915) do
   add_index "army_list_units", ["unit_category_id"], name: "index_army_list_units_on_unit_category_id", using: :btree
   add_index "army_list_units", ["unit_id"], name: "index_army_list_units_on_unit_id", using: :btree
 
-  create_table "army_list_units_extra_items", id: false, force: :cascade do |t|
+  create_table "army_list_units_extra_items", force: :cascade do |t|
     t.integer "army_list_unit_id", limit: 4, null: false
     t.integer "extra_item_id",     limit: 4, null: false
   end
@@ -95,7 +95,7 @@ ActiveRecord::Schema.define(version: 20151213193915) do
   add_index "army_list_units_magic_items", ["army_list_unit_id"], name: "index_army_list_units_magic_items_on_army_list_unit_id", using: :btree
   add_index "army_list_units_magic_items", ["magic_item_id"], name: "index_army_list_units_magic_items_on_magic_item_id", using: :btree
 
-  create_table "army_list_units_magic_standards", id: false, force: :cascade do |t|
+  create_table "army_list_units_magic_standards", force: :cascade do |t|
     t.integer "army_list_unit_id", limit: 4, null: false
     t.integer "magic_standard_id", limit: 4, null: false
   end
