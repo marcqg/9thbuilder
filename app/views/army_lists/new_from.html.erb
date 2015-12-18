@@ -1,6 +1,6 @@
 <div class="popin">
 
-  <h1><%=raw t('army_list.duplicate.title') %> <%= @army_list.army.name %></h1>
+  <h1><%== t('army_list.duplicate.title') %> <%= @army_list.army.name %></h1>
 
   <%= form_for @army_list, :url => duplicate_army_list_path, :method => :post do |f| %>
     <p><%=t 'army_list.duplicate.information' %><br /><strong><%= @army_list.name %></strong> ?</p>

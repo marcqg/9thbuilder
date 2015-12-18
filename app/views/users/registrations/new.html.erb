@@ -18,6 +18,8 @@
   <p><%= f.submit t('signup.form.submit') %></p>
 <% end %>
 
-<%= link_to t('signup.lost.password'), new_password_path(resource_name) %><br />
-<%= link_to t('signup.lost.confirmation'), new_confirmation_path(resource_name) %><br />
-<%=raw t('signup.information') %>
+<p>
+  <%= link_to t('signup.lost.password'), new_password_path(resource_name) %><br />
+  <%= link_to t('signup.lost.confirmation'), new_confirmation_path(resource_name) %><br />
+  <%== t('signup.information') %>
+</p>

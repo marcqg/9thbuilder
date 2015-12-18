@@ -1,6 +1,6 @@
 <div class="popin">
 
-  <h1><%=raw t('army_list_unit.delete.title') %></h1>
+  <h1><%== t('army_list_unit.delete.title') %></h1>
 
   <%= form_for [@army_list, @army_list_unit], :method => :delete do |f| %>
     <p><%=t 'army_list_unit.delete.information' %> <strong><%= @army_list_unit.name %></strong> ?</p>
