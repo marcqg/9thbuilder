@@ -9,4 +9,8 @@ class Army < ActiveRecord::Base
 
   scope :disabled, -> { where('id NOT IN (SELECT DISTINCT army_id FROM units)') }
   scope :disabled_or_obsolete, -> { where('id NOT IN (SELECT DISTINCT army_id FROM units) OR name LIKE \'%obsolète%\'') }
+
+  def obsolete?
+    name =~ /obsolète/i
+  end
 end

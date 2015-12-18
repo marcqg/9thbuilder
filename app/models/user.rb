@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   has_many :army_lists, dependent: :destroy
+  has_many :armies, -> { distinct }, through: :army_lists
   belongs_to :favorite_army, class_name: 'Army'
 
   # Include default devise modules. Others available are:

@@ -14,6 +14,8 @@ class ArmyListsController < ApplicationController
     @search = current_user.army_lists.includes(:army).order('value_points DESC').search(params[:q])
     @army_lists = @search.result
 
+    @army = Army.find(params[:q][:army_id_eq]) unless params[:q][:army_id_eq].blank?
+
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render xml: @army_lists }
@@ -111,8 +113,11 @@ class ArmyListsController < ApplicationController
     @army_list = current_user.army_lists.find_by_uuid!(params[:uuid])
     @army_list.destroy
 
+    army = @army_list.army
+    army = nil unless current_user.armies.include?(army)
+
     respond_to do |format|
-      format.html { redirect_to army_lists_url(search: { army_id_eq: @army_list.army }) }
+      format.html { redirect_to army_lists_url(q: { army_id_eq: army }) }
       format.xml  { head :ok }
     end
   end
