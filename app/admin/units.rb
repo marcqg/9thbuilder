@@ -20,9 +20,9 @@ ActiveAdmin.register Unit do
     link_to 'New Unit', new_admin_unit_path
   end
 
-  # action_item :duplicate, :only => :show do
-  #   link_to 'Duplicate Unit', duplicate_admin_unit_path(unit), :method => :post
-  # end
+  action_item :duplicate, only: :show do
+    link_to 'Duplicate Unit', duplicate_admin_unit_path(unit), :method => :post
+  end
 
   filter :army
   filter :unit_category
