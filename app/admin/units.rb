@@ -1,7 +1,7 @@
 ActiveAdmin.register Unit do
   menu priority: 3
 
-  permit_params :army_id, :name, :value_points, :min_size, :max_size, :magic, :notes, :is_unique
+  permit_params :army_id, :unit_category_id, :name, :value_points, :min_size, :max_size, :magic, :notes, :is_unique
 
   controller do
     def create
