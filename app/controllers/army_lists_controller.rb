@@ -129,7 +129,7 @@ class ArmyListsController < ApplicationController
     @army_list = ArmyList.new
     @army_list.user = @base_army_list.user
     @army_list.army = @base_army_list.army
-    @army_list.name =  "#{@base_army_list.name} copie"
+    @army_list.name =  "#{@base_army_list.name} copy"
     @army_list.notes = @base_army_list.notes
     @army_list.save
 

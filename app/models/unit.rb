@@ -39,7 +39,7 @@ class Unit < ActiveRecord::Base
     new_unit_options = {}
 
     new_unit = dup
-    new_unit.name = "Copie de #{new_unit.name}"
+    new_unit.name = "Copy of #{new_unit.name}"
     new_unit.troops << troops.collect { |troop| new_troops[troop.id] = troop.dup }
     new_unit.equipments << equipments.collect(&:dup)
     new_unit.special_rules << special_rules.collect(&:dup)

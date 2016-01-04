@@ -10,7 +10,7 @@ class ArmyList < ActiveRecord::Base
 
   before_validation(on: :create) do
     self.uuid = UUIDTools::UUID.random_create.to_s
-    self.name = 'Liste ' + army.name + ' #' + (user.army_lists.where(army_id: army).count + 1).to_s unless name?
+    self.name = 'List ' + army.name + ' #' + (user.army_lists.where(army_id: army).count + 1).to_s unless name?
     self.value_points = 0.0
   end
 
