@@ -152,6 +152,7 @@ jQuery(function($) {
         var value_points = size * parseFloat($(this).data('value-points'));
 
         $(this).parent('label').prev('em').find('span').html(String(value_points).replace('.', ','));
+        $(this).parent('label').next('input').val(size);
       });
     }
 
@@ -217,12 +218,20 @@ function updateArmyListUnitValuePoints()
 
   if ($('#army_list_unit_troops').length) {
     $('#army_list_unit_troops tr').each(function() {
-      var size         = parseInt($(this).find('.army_list_unit_troop_size').val()),
-          value_points = parseFloat($(this).data('value-points'));
+      var size              = parseInt($(this).find('.army_list_unit_troop_size').val()),
+          value_points      = parseFloat($(this).data('value-points')),
+          min_size          = parseInt($popin.find('h1').data('min-size')),
+          unit_value_points = parseFloat($popin.find('h1').data('value-points'));
 
       if (isNaN(size)) return;
 
-      total += size * value_points;
+      if (isNaN(value_points)) {
+        total += size * unit_value_points;
+      }
+      else {
+        total += min_size * unit_value_points;
+        total += (size - min_size) * value_points;
+      }
     });
   }
   else {

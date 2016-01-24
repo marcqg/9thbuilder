@@ -66,7 +66,13 @@ class ArmyListUnit < ActiveRecord::Base
 
     if unit.value_points
       self.size = army_list_unit_troops.first.size.to_i + size
-      self.value_points = army_list_unit_troops.first.size.to_i * unit.value_points + value_points
+
+      if army_list_unit_troops.first.troop.value_points.nil?
+        self.value_points = army_list_unit_troops.first.size.to_i * unit.value_points + value_points
+      else
+        self.value_points = unit.min_size.to_i * unit.value_points + value_points
+        self.value_points = (army_list_unit_troops.first.size.to_i - unit.min_size) * army_list_unit_troops.first.troop.value_points + value_points
+      end
     else
       army_list_unit_troops.reject { |alut| alut.troop.value_points.nil? }.each do |army_list_unit_troop|
         self.size = army_list_unit_troop.size.to_i + size

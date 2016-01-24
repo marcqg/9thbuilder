@@ -148,13 +148,14 @@ ActiveAdmin.register Unit do
         table_for unit.unit_options do
           column :id
           column :name
-          column :mount
           column :value_points
           column :is_per_model
           column :is_magic_items
           column :is_magic_standards
           column :is_extra_items
           column :is_unique_choice
+          column :is_multiple
+          column :mount
           column :position
           column do |unit_option|
             link_to 'Mont.', move_higher_admin_unit_option_path(unit_option), method: :post unless unit_option.first?
