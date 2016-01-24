@@ -21,7 +21,7 @@ ActiveAdmin.register Unit do
   end
 
   action_item :duplicate, only: :show do
-    link_to 'Duplicate Unit', duplicate_admin_unit_path(unit), :method => :post
+    link_to 'Duplicate Unit', duplicate_admin_unit_path(unit), method: :post
   end
 
   filter :army
