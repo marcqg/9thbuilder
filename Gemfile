@@ -42,6 +42,7 @@ group :development, :test do
   gem 'spring'
 end
 
+gem 'dotenv-rails'
 gem 'routing-filter'
 gem 'activeadmin', github: 'activeadmin/activeadmin'
 gem 'jquery-ui-rails'
