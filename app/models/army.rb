@@ -14,4 +14,20 @@ class Army < ActiveRecord::Base
   def obsolete?
     name =~ /obsolète/i
   end
+
+  def duplicate
+    new_units = {}
+
+    new_army = dup
+    new_army.name = "Copy of #{new_army.name}"
+    new_army.units << units.collect { |unit| new_units[unit.id] = unit.duplicate }
+
+    new_army.units.each do |unit|
+      unit.unit_options.map do |unit_option|
+        unit_option.mount = new_units[unit_option.mount.id] unless unit_option.mount.nil?
+      end
+    end
+
+    new_army
+  end
 end

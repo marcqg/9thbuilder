@@ -7,4 +7,12 @@ ActiveAdmin.register ExtraItemCategory do
 
   filter :army
   filter :name
+
+  index do
+    selectable_column
+    id_column
+    column :army, sortable: :army_id
+    column :name
+    actions
+  end
 end
