@@ -145,7 +145,20 @@ jQuery(function($) {
   $('body').on('keyup', '.edit_army_list_unit #army_list_unit_troops .army_list_unit_troop_size', function() {
     var size = parseInt($(this).val());
 
-    if (isNaN(size)) return false;
+    var minSize = parseInt($(this).closest('tr').data('min-size')),
+        maxSize = parseInt($(this).closest('.popin').find('h1').data('max-size'));
+
+    if (isNaN(minSize)) {
+      minSize = parseInt($(this).closest('.popin').find('h1').data('min-size'));
+    }
+
+    if (isNaN(size) || size < minSize) {
+      $(this).val(size = minSize);
+    }
+
+    if (!isNaN(maxSize) && size > maxSize) {
+      $(this).val(size = maxSize);
+    }
 
     if ($(this).attr('id') == 'army_list_unit_army_list_unit_troops_attributes_0_size') {
       $('#army_list_unit_unit_options input[data-per-model]').each(function() {
@@ -229,7 +242,7 @@ function updateArmyListUnitValuePoints()
         total += size * unit_value_points;
       }
       else {
-        total += min_size * unit_value_points;
+        total += Math.ceil(min_size * unit_value_points);
         total += (size - min_size) * value_points;
       }
     });

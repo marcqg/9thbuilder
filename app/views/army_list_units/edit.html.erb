@@ -1,6 +1,6 @@
 <div class="popin">
 
-  <h1 data-value-points="<%= @army_list_unit.unit.value_points %>" data-min-size="<%= @army_list_unit.unit.min_size %>"><%=t 'army_list_unit.edit.title' %><br /><%=transliterate @army_list_unit.unit.name %>
+  <h1 data-value-points="<%= @army_list_unit.unit.value_points %>" data-min-size="<%= @army_list_unit.unit.min_size %>" data-max-size="<%= @army_list_unit.unit.max_size %>"><%=t 'army_list_unit.edit.title' %><br /><%=transliterate @army_list_unit.unit.name %>
   <div style="float:right"><span style="font-size:34px;line-height:17px"><%= value_points(@army_list_unit.value_points) %></span> pts</div></h1>
 
   <%= form_for [@army_list, @army_list_unit] do |f| %>
@@ -14,7 +14,7 @@
     <% if @army_list_unit.unit.min_size != @army_list_unit.unit.max_size %>
       <table id="army_list_unit_troops">
         <% @army_list_unit.army_list_unit_troops.reject{ |alut| @army_list_unit.unit.value_points and alut.position > 1 or @army_list_unit.unit.value_points.nil? and alut.troop.value_points.nil? }.each do |army_list_unit_troop| %>
-        <tr data-value-points="<%= army_list_unit_troop.troop.value_points %>">
+        <tr data-value-points="<%= army_list_unit_troop.troop.value_points %>" data-min-size="<%= army_list_unit_troop.troop.min_size %>">
           <%= f.fields_for :army_list_unit_troops, army_list_unit_troop do |troop_fields| %>
           <td><%= troop_fields.label :size, army_list_unit_troop.troop.name + " x" %></td>
           <td><%= troop_fields.text_field :size, :placeholder => "Taille", :class => "army_list_unit_troop_size" %></td>
