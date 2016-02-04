@@ -43,7 +43,7 @@ class ArmyListsController < ApplicationController
 
     respond_to do |format|
       format.html { render template: @verbosity.nil? ? 'army_lists/export' : "army_lists/export_#{@verbosity}", layout: @verbosity.nil? ? nil : 'pdf.html.erb' }
-      format.pdf  { render template: "army_lists/export_#{@verbosity}.html.erb", pdf: "9thbuilder_#{@verbosity}_#{params[:magics]}_#{@army_list.id}" }
+      format.pdf  { render template: "army_lists/export_#{@verbosity}.html.erb", pdf: "9thbuilder_#{@verbosity}_#{params[:magics]}_#{@army_list.uuid}" }
     end
   end
 
