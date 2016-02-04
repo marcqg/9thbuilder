@@ -35,7 +35,7 @@ class ArmyListUnitsController < ApplicationController
     @base_army_list = current_user.army_lists.find_by_uuid!(params[:army_list_uuid])
     @base_army_list_unit = @base_army_list.army_list_units.find(params[:id])
 
-    @army_list = ArmyList.find_or_initialize_by_id(params[:army_list_unit][:army_list_id])
+    @army_list = ArmyList.find_or_initialize_by(id: params[:army_list_unit][:army_list_id])
     @army_list.army_id = @base_army_list.army_id
     @army_list.user_id = current_user.id
     @army_list.save
