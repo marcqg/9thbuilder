@@ -317,6 +317,10 @@ input[type=number]::-webkit-outer-spin-button {
   padding-right: 5px;
 }
 
+.edit_army_list_unit #army_list_unit_name {
+  width: 100%;
+}
+
 .edit_army_list_unit .army_list_unit_troop_size {
   width: 30px;
   text-align: right;
