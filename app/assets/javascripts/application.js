@@ -152,12 +152,8 @@ jQuery(function($) {
       minSize = parseInt($(this).closest('.popin').find('h1').data('min-size'));
     }
 
-    if (isNaN(size) || size < minSize) {
-      $(this).val(size = minSize);
-    }
-
-    if (!isNaN(maxSize) && size > maxSize) {
-      $(this).val(size = maxSize);
+    if (isNaN(size) || size < minSize || (!isNaN(maxSize) && size > maxSize)) {
+      return false;
     }
 
     if ($(this).attr('id') == 'army_list_unit_army_list_unit_troops_attributes_0_size') {
