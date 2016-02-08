@@ -18,7 +18,7 @@
           <%= f.fields_for :army_list_unit_troops, army_list_unit_troop do |troop_fields| %>
           <td><%= troop_fields.label :size, army_list_unit_troop.troop.name + " x" %></td>
           <td><%= troop_fields.text_field :size, :placeholder => "Taille", :class => "army_list_unit_troop_size" %></td>
-          <td><%= value_points(army_list_unit_troop.troop.value_points || @army_list_unit.unit.value_points) %> pts/fig.</td>
+          <td><%= value_points(army_list_unit_troop.troop.value_points || @army_list_unit.unit.value_points) %> pts<%=t :per_model %></td>
           <% end %>
         </tr>
         <% end %>

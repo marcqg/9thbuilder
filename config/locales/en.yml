@@ -25,6 +25,7 @@ en:
   close: "Close"
   save: "Save"
   next: "Next"
+  per_model: "/mod."
 
   menu:
     label: "Main menu"

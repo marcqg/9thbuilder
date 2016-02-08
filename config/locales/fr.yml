@@ -25,6 +25,7 @@ fr:
   close: "Fermer"
   save: "Valider"
   next: "Suivant"
+  per_model: "/fig."
 
   menu:
     label: "Menu principal"
