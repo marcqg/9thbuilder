@@ -7,18 +7,18 @@ class MagicStandard < ActiveRecord::Base
   validates :value_points, numericality: { greater_than_or_equal_to: 0 }
 
   scope :available_for, lambda { |army, value_points_limit|
-    # if army.id == 22
-    #   if value_points_limit.nil?
-    #     where('army_id = :army_id', army_id: army).order('value_points DESC', 'name')
-    #   else
-    #     where('army_id = :army_id', army_id: army).where('value_points <= ?', value_points_limit).order('value_points DESC', 'name')
-    #   end
-    # else
+    if army.id == 3 || army.id == 5
+      if value_points_limit.nil?
+        where('army_id = :army_id', army_id: army).order('value_points DESC', 'name')
+      else
+        where('army_id = :army_id', army_id: army).where('value_points <= ?', value_points_limit).order('value_points DESC', 'name')
+      end
+    else
       if value_points_limit.nil?
         where('army_id = :army_id OR (army_id IS NULL AND id NOT IN (SELECT override_id FROM magic_standards WHERE army_id = :army_id AND override_id IS NOT NULL))', army_id: army).order('value_points DESC', 'name')
       else
         where('army_id = :army_id OR (army_id IS NULL AND id NOT IN (SELECT override_id FROM magic_standards WHERE army_id = :army_id AND override_id IS NOT NULL))', army_id: army).where('value_points <= ?', value_points_limit).order('value_points DESC', 'name')
       end
-    # end
+    end
   }
 end
