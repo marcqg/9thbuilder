@@ -5,7 +5,7 @@ class ArmyListUnitsController < ApplicationController
   # GET /army_list/1/army_list_units/new.xml
   def new
     @army_list = current_user.army_lists.find_by_uuid!(params[:army_list_uuid])
-    @army_list_unit = @army_list.army_list_units.build(unit_id: @army_list.army.units.base_category.first.id)
+    @army_list_unit = @army_list.army_list_units.build(unit_id: @army_list.army.units.core_category.first.id)
 
     respond_to do |format|
       format.html # new.html.erb
