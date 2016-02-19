@@ -44,7 +44,7 @@
           <li>
             <strong><%= magic_item_category.name %></strong>
             <ul style="<%= 'display:none' if index > 0 %>">
-              <%= render :partial => "army_list_units_magic_items/edit", :collection => magic_items, :as => :magic_item, :locals => { :army_list_unit => @army_list_unit, :unit_option => @magic_items_option } %>
+              <%= render :partial => "army_list_units_magic_items/edit", :collection => magic_items, :as => :magic_item, :locals => { :army_list => @army_list, :army_list_unit => @army_list_unit, :unit_option => @magic_items_option } %>
             </ul>
           </li>
           <% end %>
