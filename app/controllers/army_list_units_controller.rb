@@ -137,8 +137,9 @@ class ArmyListUnitsController < ApplicationController
 
   # POST /army_lists/1/army_list_units/sort
   def sort
+    army_list = current_user.army_lists.find_by_uuid!(params[:army_list_uuid])
     params[:army_list_units].each_with_index do |id, index|
-      ArmyListUnit.where(army_list_id: params[:army_list_id], id: id).update_all(position: index + 1)
+      ArmyListUnit.where(army_list_id: army_list.id, id: id).update_all(position: index + 1)
     end
     render nothing: true
   end
