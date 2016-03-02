@@ -82,6 +82,7 @@ en:
       duplicate: "Duplicate"
       delete: "Delete"
       troops:
+        name: "Troops"
         profile: "Profile"
         M: "M"
         WS: "WS"

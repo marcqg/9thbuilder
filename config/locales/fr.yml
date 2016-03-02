@@ -82,6 +82,7 @@ fr:
       duplicate: "Dupliquer"
       delete: "Supprimer"
       troops:
+        name: "Troupes"
         profile: "Profil"
         M: "M"
         WS: "CC"
