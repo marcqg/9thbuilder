@@ -13,7 +13,7 @@
   <!-- TROOPS -->
   <% if army_list_unit_troops.any? %>
   <tr class="army_list_unit_more lite">
-    <th>Troupes</th>
+    <th><%= t('army_list_unit.show.troops.name') %></th>
     <td colspan="10">
       <% army_list_unit_troops.each_with_index do |alut, index| %>
         <%= "• " if index > 0 %> <%= alut.troop.name %> <em>x<%= alut.size %></em>
@@ -25,7 +25,7 @@
   <!-- OPTIONS, MAGIC ITEMS, MAGIC STANDARDS, EXTRA ITEMS -->
   <% if army_list_unit.unit_options.any? %>
     <tr class="army_list_unit_more lite">
-      <th>Options</th>
+      <th><%=t 'army_list_unit.show.unit_options' %></th>
       <td colspan="10">
         <% army_list_unit.unit_options.each_with_index do |option, index| %>
           <%= "• " if index > 0 %> <%= option.name %><%= " x#{option.quantity}" if option.is_multiple %>
@@ -35,7 +35,7 @@
   <% end %>
   <% if include_magics and army_list_unit.magic_items.any? %>
     <tr class="army_list_unit_more lite">
-      <th>Objets magiques</th>
+      <th><%=t 'army_list_unit.show.magic_items' %></th>
       <td colspan="10">
         <% army_list_unit.magic_items.each_with_index do |magic_item, index| %>
           <%= "• " if index > 0 %> <%= magic_item.name %><% if magic_item.quantity > 1 %> (x<%= magic_item.quantity %>)<% end %>
@@ -55,7 +55,7 @@
   <% end %>
   <% if include_magics and army_list_unit.magic_standards.any? %>
     <tr class="army_list_unit_more lite">
-      <th>Bannière magique</th>
+      <th><%=t 'army_list_unit.show.magic_standards' %></th>
       <td colspan="10">
         <% army_list_unit.magic_standards.each_with_index do |magic_standard, index| %>
           <%= "• " if index > 0 %> <%= magic_standard.name %>
