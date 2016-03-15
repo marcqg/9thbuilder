@@ -6,7 +6,8 @@
   <%= form_for [@army_list, @army_list_unit] do |f| %>
     <%= render "shared/form_errors", :object => @army_list_unit %>
 
-    <p><%= f.text_field :name, :placeholder => t('army_list_unit.form.name') %></p>
+    <p><%= f.text_field :name, :placeholder => t('army_list_unit.form.name') %>
+    <%= f.collection_select :unit_category_id, UnitCategory.where('id <> 6'), :id, :name %></p>
 
     <% if @army_list_unit.unit.min_size != @army_list_unit.unit.max_size %>
       <table id="army_list_unit_troops">

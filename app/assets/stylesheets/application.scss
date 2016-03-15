@@ -318,7 +318,12 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .edit_army_list_unit #army_list_unit_name {
-  width: 100%;
+  width: 80%;
+}
+
+.edit_army_list_unit #army_list_unit_unit_category_id {
+  margin-left: 2%;
+  width: 16%;
 }
 
 .edit_army_list_unit .army_list_unit_troop_size {
