@@ -22,6 +22,7 @@ Rails.application.routes.draw do
       get 'new_from', on: :member
       post 'duplicate', on: :member
       post 'sort', on: :collection
+      post 'rearrange', on: :collection
     end
   end
 

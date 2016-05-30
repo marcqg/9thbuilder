@@ -144,6 +144,28 @@ class ArmyListUnitsController < ApplicationController
     render nothing: true
   end
 
+  # POST /army_lists/1/army_list_units/rearrange
+  def rearrange
+    army_list = current_user.army_lists.find_by_uuid!(params[:army_list_uuid])
+    # params[:army_list_units].each_with_index do |id, index|
+    #   ArmyListUnit.where(army_list_id: army_list.id, id: id).update_all(position: index + 1)
+    # end
+
+    army_list_units = []
+
+    UnitCategory.all.each do |unit_category|
+      army_list.army_list_units.where(unit_category: unit_category).reorder(value_points: :desc).each do |army_list_unit|
+        army_list_units << army_list_unit.id
+      end
+    end
+
+    army_list_units.each_with_index do |id, index|
+      ArmyListUnit.where(army_list_id: army_list.id, id: id).update_all(position: index + 1)
+    end
+
+    redirect_to army_list
+  end
+
   private
 
   def army_list_unit_params

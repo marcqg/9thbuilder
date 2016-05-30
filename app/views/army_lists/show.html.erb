@@ -37,3 +37,5 @@
 <% end %>
 
 <a href="<%= new_army_list_army_list_unit_path @army_list %>" class="army_list_unit_new" data-popin="true"><%= t('army_list.show.add_unit') %></a>
+
+<a href="<%= rearrange_army_list_army_list_units_path @army_list %>" class="army_list_unit_rearrange" data-method="post"><%= t('army_list.show.rearrange_units') %></a>
