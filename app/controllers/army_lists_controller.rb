@@ -71,6 +71,11 @@ class ArmyListsController < ApplicationController
     @army_list = current_user.army_lists.find_by_uuid!(params[:uuid])
   end
 
+  # GET /army_list/1/compliance
+  def compliance
+    @army_list = current_user.army_lists.find_by_uuid!(params[:uuid])
+  end
+
   # POST /army_lists
   # POST /army_lists.xml
   def create

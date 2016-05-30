@@ -149,11 +149,12 @@ input[type=number] {
   font-style: normal;
 }
 
-.army_list_unit_new {
+.army_list_unit_new, .army_list_unit_rearrange, .army_list_unit_compliance {
   clear: right;
   float: right;
   display: block;
   margin-right: 10px;
+  margin-bottom: 15px;
   padding-top: 45px;
   padding-right: 10px;
   width: 170px;

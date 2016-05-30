@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151218054317) do
+ActiveRecord::Schema.define(version: 20160315212700) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.integer  "resource_id",   limit: 4,     null: false
@@ -216,9 +216,12 @@ ActiveRecord::Schema.define(version: 20151218054317) do
   add_index "troops", ["unit_option_id"], name: "index_troops_on_unit_option_id", using: :btree
 
   create_table "unit_categories", force: :cascade do |t|
-    t.string  "name",      limit: 255, null: false
-    t.integer "min_quota", limit: 4
-    t.integer "max_quota", limit: 4
+    t.string  "name",                     limit: 255, null: false
+    t.integer "min_quota",                limit: 4
+    t.integer "max_quota",                limit: 4
+    t.integer "warband_max_duplicate",    limit: 4
+    t.integer "army_max_duplicate",       limit: 4
+    t.integer "grand_army_max_duplicate", limit: 4
   end
 
   create_table "unit_options", force: :cascade do |t|

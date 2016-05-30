@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   get 'army_lists/:uuid/export(_(:verbosity)_(:magics))' => 'army_lists#export', as: :export_army_list
 
   resources :army_lists, param: :uuid do
+    get 'compliance', on: :member
     get 'delete', on: :member
     get 'export', on: :member
     get 'new_from', on: :member

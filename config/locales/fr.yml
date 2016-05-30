@@ -50,6 +50,7 @@ fr:
       edit: "Editer"
       export: "Exporter"
       duplicate: "Dupliquer"
+      compliance: "Conformité"
       delete: "Supprimer"
       notes: "Remarques"
       add_unit: "Ajouter une unité"
@@ -69,6 +70,8 @@ fr:
       pdf_lite: "PDF tournoi"
       html_full: "HTML complet"
       html_lite: "HTML tournoi"
+    compliance:
+      title: "Conformite<br />liste"
     duplicate:
       title: "Dupliquer<br />liste"
       information: "Etes-vous certain de vouloir dupliquer la liste :"
