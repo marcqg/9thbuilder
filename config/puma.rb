@@ -9,7 +9,7 @@ threads threads_count, threads_count
 
 # Specifies the `port` that Puma will listen on to receive requests, default is 3000.
 #
-# port        ENV.fetch("PORT") { 3000 }
+port        ENV.fetch("PORT") { 3000 }
 
 # Specifies the `environment` that Puma will run in.
 #
@@ -45,9 +45,3 @@ workers ENV.fetch("WEB_CONCURRENCY") { 2 }
 
 # Allow puma to be restarted by `rails restart` command.
 plugin :tmp_restart
-
-pidfile 'tmp/pids/puma.pid'
-state_path 'tmp/pids/puma.state'
-bind 'unix://tmp/sockets/puma.sock'
-activate_control_app 'unix://tmp/sockets/pumactl.sock'
-tag '9thbuilder'
