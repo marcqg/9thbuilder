@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160620201154) do
+ActiveRecord::Schema.define(version: 20161012170951) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.integer  "resource_id",   limit: 4,     null: false
@@ -280,6 +280,8 @@ ActiveRecord::Schema.define(version: 20160620201154) do
   add_index "users", ["favorite_army_id"], name: "index_users_on_favorite_army_id", using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "army_list_unit_troops", "army_list_units", on_delete: :cascade
+  add_foreign_key "army_list_unit_troops", "troops", on_delete: :cascade
   add_foreign_key "army_list_units", "army_lists"
   add_foreign_key "army_list_units", "units"
   add_foreign_key "army_list_units_extra_items", "army_list_units", on_delete: :cascade
