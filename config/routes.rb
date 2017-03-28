@@ -5,7 +5,6 @@ Rails.application.routes.draw do
   filter :locale, exclude: %r{^/admin}
 
   ActiveAdmin.routes(self)
-  devise_for :admin_users, ActiveAdmin::Devise.config
   devise_for :users
 
   get 'army_lists/:uuid.pdf', to: redirect('/army_lists/%{id}/export_full_magics.pdf')
