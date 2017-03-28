@@ -27,7 +27,7 @@ class RolifyCreateRoles < ActiveRecord::Migration[5.0]
     execute 'INSERT INTO users_roles (user_Id, role_id)
               SELECT id, 1
               FROM users
-              WHERE `email` NOT IN (SELECT `email` FROM admin_users)'
+              WHERE `email` IN (SELECT `email` FROM admin_users)'
 
     drop_table :admin_users
 
