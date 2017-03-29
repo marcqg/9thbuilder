@@ -59,6 +59,12 @@ gem 'http_accept_language'
 gem 'inherited_resources', '~> 1.7'
 gem 'activeadmin', github: 'activeadmin/activeadmin'
 
+# Translations
+gem 'globalize', github: 'globalize/globalize'
+gem 'activemodel-serializers-xml'
+gem 'globalize-accessors'
+gem "activeadmin-globalize", github: 'stefanoverna/activeadmin-globalize', branch: 'master'
+
 #autantification
 gem 'devise'
 
