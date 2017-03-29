@@ -16,14 +16,14 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for(resource_or_scope)
-    if resource_or_scope.is_a?(User) && authenticate_active_admin_user
+    if resource_or_scope.is_a?(User) && authenticate_active_admin_user!
       admin_dashboard_path
     else
       army_lists_path
     end
   end
 
-  def authenticate_active_admin_user
+  def authenticate_active_admin_user!
     authenticate_user!
     unless current_user.has_role? :administrator
       flash[:alert] = 'Unauthorized Access!'
