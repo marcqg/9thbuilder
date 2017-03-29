@@ -1,4 +1,4 @@
-class ExtraItemCategory < ActiveRecord::Base
+class ExtraItemCategory < ApplicationRecord
   belongs_to :army
   has_many :extra_items, dependent: :destroy
 

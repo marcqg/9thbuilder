@@ -1,4 +1,4 @@
-class ArmyList < ActiveRecord::Base
+class ArmyList < ApplicationRecord
   belongs_to :army
   belongs_to :user
   has_many :army_list_units, -> { order 'position' }, dependent: :destroy

@@ -1,4 +1,4 @@
-class UnitOption < ActiveRecord::Base
+class UnitOption < ApplicationRecord
   belongs_to :unit
   belongs_to :parent, class_name: 'UnitOption'
   belongs_to :mount, class_name: 'Unit'

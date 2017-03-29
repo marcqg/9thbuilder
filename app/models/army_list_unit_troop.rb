@@ -1,4 +1,4 @@
-class ArmyListUnitTroop < ActiveRecord::Base
+class ArmyListUnitTroop < ApplicationRecord
   belongs_to :troop
   belongs_to :army_list_unit
 
