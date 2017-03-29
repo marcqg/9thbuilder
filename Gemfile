@@ -15,6 +15,7 @@ gem 'coffee-rails', '~> 4.1.0'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
+gem 'jquery-ui-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -42,25 +43,37 @@ end
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
   gem 'web-console'
+
+  gem 'better_errors'
+
+  gem 'binding_of_caller'
 end
 
+#routing
 gem 'routing-filter'
+
+#Default language
 gem 'http_accept_language'
+
+#Back
 gem 'inherited_resources', '~> 1.7'
 gem 'activeadmin', github: 'activeadmin/activeadmin'
-gem 'jquery-ui-rails'
+
+#autantification
 gem 'devise'
-gem 'seedbank'
-gem 'acts_as_list'
-gem 'ransack'
-gem 'wisepdf'
-gem 'attribute_normalizer'
-gem 'uuidtools'
-gem 'better_errors', group: :development
-gem 'binding_of_caller', group: :development
 
 #User role (Admin/Moderator)
 gem 'rolify'
+
+#custom seed command line
+gem 'seedbank'
+
+#Helper 
+gem 'acts_as_list' 			#list
+gem 'ransack' 				#search
+gem 'wisepdf' 				#pdf export
+gem 'attribute_normalizer' 	#data integrity / params permit
+gem 'uuidtools' 			#UUID
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
