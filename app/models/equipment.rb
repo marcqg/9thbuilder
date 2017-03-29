@@ -1,4 +1,4 @@
-class Equipment < ActiveRecord::Base
+class Equipment < ApplicationRecord
   belongs_to :unit
   belongs_to :troop
 

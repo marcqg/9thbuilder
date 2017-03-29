@@ -1,4 +1,4 @@
-class ArmyListUnitUnitOption < ActiveRecord::Base
+class ArmyListUnitUnitOption < ApplicationRecord
   self.table_name = 'army_list_units_unit_options'
 
   belongs_to :army_list_unit

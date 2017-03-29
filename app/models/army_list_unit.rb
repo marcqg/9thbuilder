@@ -1,4 +1,4 @@
-class ArmyListUnit < ActiveRecord::Base
+class ArmyListUnit < ApplicationRecord
   belongs_to :army_list
   belongs_to :unit
   belongs_to :unit_category

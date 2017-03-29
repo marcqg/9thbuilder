@@ -1,4 +1,4 @@
-class Troop < ActiveRecord::Base
+class Troop < ApplicationRecord
   belongs_to :troop_type
   belongs_to :unit
   belongs_to :unit_option

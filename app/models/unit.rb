@@ -1,4 +1,4 @@
-class Unit < ActiveRecord::Base
+class Unit < ApplicationRecord
   belongs_to :army
   belongs_to :unit_category
   has_many :army_list_units, dependent: :destroy
