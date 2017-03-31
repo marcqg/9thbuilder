@@ -63,7 +63,6 @@ gem 'activeadmin', github: 'activeadmin/activeadmin'
 gem 'globalize', github: 'globalize/globalize'
 gem 'activemodel-serializers-xml'
 gem 'globalize-accessors'
-gem "activeadmin-globalize", github: 'stefanoverna/activeadmin-globalize', branch: 'master'
 
 #autantification
 gem 'devise'
