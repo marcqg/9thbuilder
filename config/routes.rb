@@ -2,30 +2,32 @@ Rails.application.routes.draw do
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
-  filter :locale, exclude: %r{^/admin}
+  localized do
+    #filter :locale, exclude: %r{^/admin}
 
-  ActiveAdmin.routes(self)
-  devise_for :users
+    ActiveAdmin.routes(self)
+    devise_for :users
 
-  get 'army_lists/:uuid.pdf', to: redirect('/army_lists/%{id}/export_full_magics.pdf')
-  get 'army_lists/:uuid/export(_(:verbosity)_(:magics))' => 'army_lists#export', as: :export_army_list
+    get 'army_lists/:uuid.pdf', to: redirect('/army_lists/%{id}/export_full_magics.pdf')
+    get 'army_lists/:uuid/export(_(:verbosity)_(:magics))' => 'army_lists#export', as: :export_army_list
 
-  resources :army_lists, param: :uuid do
-    get 'delete', on: :member
-    get 'export', on: :member
-    get 'new_from', on: :member
-    post 'duplicate', on: :member
-
-    resources :army_list_units do
+    resources :army_lists, param: :uuid do
       get 'delete', on: :member
+      get 'export', on: :member
       get 'new_from', on: :member
       post 'duplicate', on: :member
-      post 'sort', on: :collection
+
+      resources :army_list_units do
+        get 'delete', on: :member
+        get 'new_from', on: :member
+        post 'duplicate', on: :member
+        post 'sort', on: :collection
+      end
     end
+    # You can have the root of your site routed with "root"
+    root 'home#index'
   end
 
-  # You can have the root of your site routed with "root"
-  root 'home#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

@@ -7,6 +7,8 @@ class UnitOption < ApplicationRecord
   has_many :army_list_unit_unit_options, dependent: :destroy
   has_many :army_list_units, through: :army_list_unit_unit_options
 
+  translates :name
+
   validates :unit_id, :name, presence: true
   validates :value_points, numericality: { greater_than_or_equal_to: 0, allow_nil: true }
   validates :position, numericality: { greater_than_or_equal_to: 1, only_integer: true, allow_nil: true }

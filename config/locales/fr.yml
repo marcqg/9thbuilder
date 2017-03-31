@@ -35,6 +35,18 @@ fr:
     signout: "Déconnexion"
     signin: "Se connecter"
     signup: "S'inscrire"
+    languages:
+      lang: La langue
+      de: Allemagne
+      fr: français
+      en: Anglais
+      hu: hongrois
+      it: Italien - Italiano
+      ko: coréen
+      pl: polonais
+      ru: russe
+      sr: serbe
+      es: Espagnol - Español
 
   army_list:
     index:

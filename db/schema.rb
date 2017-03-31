@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170323162102) do
+ActiveRecord::Schema.define(version: 20170331130059) do
 
   create_table "active_admin_comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.integer  "resource_id",                 null: false
@@ -27,7 +27,6 @@ ActiveRecord::Schema.define(version: 20170323162102) do
   end
 
   create_table "armies", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
-    t.string "name", null: false
   end
 
   create_table "army_list_unit_troops", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
@@ -44,14 +43,13 @@ ActiveRecord::Schema.define(version: 20170323162102) do
     t.integer  "unit_id"
     t.integer  "unit_category_id"
     t.string   "name"
-    t.decimal  "value_points",                    precision: 8, scale: 2
+    t.decimal  "value_points",                   precision: 8, scale: 2
     t.integer  "size"
     t.integer  "position"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.text     "notes",             limit: 65535
+    t.text     "notes",            limit: 65535
     t.string   "magic"
-    t.integer  "unit_category_id2"
     t.index ["army_list_id"], name: "index_army_list_units_on_army_list_id", using: :btree
     t.index ["unit_category_id"], name: "index_army_list_units_on_unit_category_id", using: :btree
     t.index ["unit_id"], name: "index_army_list_units_on_unit_id", using: :btree
@@ -100,9 +98,28 @@ ActiveRecord::Schema.define(version: 20170323162102) do
     t.index ["user_id"], name: "index_army_lists_on_user_id", using: :btree
   end
 
+  create_table "army_translations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "army_id",    null: false
+    t.string   "locale",     null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string   "name"
+    t.index ["army_id"], name: "index_army_translations_on_army_id", using: :btree
+    t.index ["locale"], name: "index_army_translations_on_locale", using: :btree
+  end
+
+  create_table "equipment_translations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "equipment_id", null: false
+    t.string   "locale",       null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.string   "name"
+    t.index ["equipment_id"], name: "index_equipment_translations_on_equipment_id", using: :btree
+    t.index ["locale"], name: "index_equipment_translations_on_locale", using: :btree
+  end
+
   create_table "equipments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.integer "unit_id",  null: false
-    t.string  "name",     null: false
     t.integer "position", null: false
     t.integer "troop_id"
     t.index ["troop_id"], name: "index_equipments_on_troop_id", using: :btree
@@ -111,25 +128,61 @@ ActiveRecord::Schema.define(version: 20170323162102) do
 
   create_table "extra_item_categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.integer "army_id", null: false
-    t.string  "name",    null: false
     t.index ["army_id"], name: "index_extra_item_categories_on_army_id", using: :btree
+  end
+
+  create_table "extra_item_category_translations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "extra_item_category_id", null: false
+    t.string   "locale",                 null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.string   "name"
+    t.index ["extra_item_category_id"], name: "index_fe18d90e32ab2fbb564dd3d49e312483fffe727a", using: :btree
+    t.index ["locale"], name: "index_extra_item_category_translations_on_locale", using: :btree
+  end
+
+  create_table "extra_item_translations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "extra_item_id", null: false
+    t.string   "locale",        null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.string   "name"
+    t.index ["extra_item_id"], name: "index_extra_item_translations_on_extra_item_id", using: :btree
+    t.index ["locale"], name: "index_extra_item_translations_on_locale", using: :btree
   end
 
   create_table "extra_items", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.integer "extra_item_category_id",                         null: false
-    t.string  "name",                                           null: false
     t.decimal "value_points",           precision: 8, scale: 2, null: false
     t.index ["extra_item_category_id"], name: "index_extra_items_on_extra_item_category_id", using: :btree
   end
 
   create_table "magic_item_categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
-    t.string "name", null: false
+  end
+
+  create_table "magic_item_category_translations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "magic_item_category_id", null: false
+    t.string   "locale",                 null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.string   "name"
+    t.index ["locale"], name: "index_magic_item_category_translations_on_locale", using: :btree
+    t.index ["magic_item_category_id"], name: "index_95ba1a02dda97edf72f3c4182315767fd2f0c3e5", using: :btree
+  end
+
+  create_table "magic_item_translations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "magic_item_id", null: false
+    t.string   "locale",        null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.string   "name"
+    t.index ["locale"], name: "index_magic_item_translations_on_locale", using: :btree
+    t.index ["magic_item_id"], name: "index_magic_item_translations_on_magic_item_id", using: :btree
   end
 
   create_table "magic_items", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.integer "magic_item_category_id",                                         null: false
     t.integer "army_id"
-    t.string  "name",                                                           null: false
     t.decimal "value_points",           precision: 8, scale: 2,                 null: false
     t.integer "override_id"
     t.boolean "is_multiple",                                    default: false, null: false
@@ -138,9 +191,18 @@ ActiveRecord::Schema.define(version: 20170323162102) do
     t.index ["override_id"], name: "index_magic_items_on_override_id", using: :btree
   end
 
+  create_table "magic_standard_translations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "magic_standard_id", null: false
+    t.string   "locale",            null: false
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.string   "name"
+    t.index ["locale"], name: "index_magic_standard_translations_on_locale", using: :btree
+    t.index ["magic_standard_id"], name: "index_magic_standard_translations_on_magic_standard_id", using: :btree
+  end
+
   create_table "magic_standards", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.integer "army_id"
-    t.string  "name",         null: false
     t.integer "value_points", null: false
     t.integer "override_id"
     t.index ["army_id"], name: "index_magic_standards_on_army_id", using: :btree
@@ -158,23 +220,50 @@ ActiveRecord::Schema.define(version: 20170323162102) do
     t.index ["resource_type", "resource_id"], name: "index_roles_on_resource_type_and_resource_id", using: :btree
   end
 
+  create_table "special_rule_translations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "special_rule_id", null: false
+    t.string   "locale",          null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.string   "name"
+    t.index ["locale"], name: "index_special_rule_translations_on_locale", using: :btree
+    t.index ["special_rule_id"], name: "index_special_rule_translations_on_special_rule_id", using: :btree
+  end
+
   create_table "special_rules", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.integer "unit_id",  null: false
-    t.string  "name",     null: false
     t.integer "position", null: false
     t.integer "troop_id"
     t.index ["troop_id"], name: "index_special_rules_on_troop_id", using: :btree
     t.index ["unit_id"], name: "index_special_rules_on_unit_id", using: :btree
   end
 
+  create_table "troop_translations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "troop_id",   null: false
+    t.string   "locale",     null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string   "name"
+    t.index ["locale"], name: "index_troop_translations_on_locale", using: :btree
+    t.index ["troop_id"], name: "index_troop_translations_on_troop_id", using: :btree
+  end
+
+  create_table "troop_type_translations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "troop_type_id", null: false
+    t.string   "locale",        null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.string   "name"
+    t.index ["locale"], name: "index_troop_type_translations_on_locale", using: :btree
+    t.index ["troop_type_id"], name: "index_troop_type_translations_on_troop_type_id", using: :btree
+  end
+
   create_table "troop_types", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
-    t.string "name", null: false
   end
 
   create_table "troops", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.integer "unit_id",                                          null: false
     t.integer "troop_type_id"
-    t.string  "name",                                             null: false
     t.decimal "value_points",             precision: 8, scale: 2
     t.integer "position",                                         null: false
     t.string  "M",              limit: 5
@@ -194,16 +283,33 @@ ActiveRecord::Schema.define(version: 20170323162102) do
   end
 
   create_table "unit_categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
-    t.string  "name",      null: false
     t.integer "min_quota"
     t.integer "max_quota"
-    t.integer "army_id"
+  end
+
+  create_table "unit_category_translations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "unit_category_id", null: false
+    t.string   "locale",           null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.string   "name"
+    t.index ["locale"], name: "index_unit_category_translations_on_locale", using: :btree
+    t.index ["unit_category_id"], name: "index_unit_category_translations_on_unit_category_id", using: :btree
+  end
+
+  create_table "unit_option_translations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "unit_option_id", null: false
+    t.string   "locale",         null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.string   "name"
+    t.index ["locale"], name: "index_unit_option_translations_on_locale", using: :btree
+    t.index ["unit_option_id"], name: "index_unit_option_translations_on_unit_option_id", using: :btree
   end
 
   create_table "unit_options", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.integer "unit_id",                                                    null: false
     t.integer "parent_id"
-    t.string  "name",                                                       null: false
     t.decimal "value_points",       precision: 8, scale: 2
     t.integer "position",                                                   null: false
     t.boolean "is_per_model",                                               null: false
@@ -218,17 +324,25 @@ ActiveRecord::Schema.define(version: 20170323162102) do
     t.index ["unit_id"], name: "index_unit_options_on_unit_id", using: :btree
   end
 
+  create_table "unit_translations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "unit_id",    null: false
+    t.string   "locale",     null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string   "name"
+    t.index ["locale"], name: "index_unit_translations_on_locale", using: :btree
+    t.index ["unit_id"], name: "index_unit_translations_on_unit_id", using: :btree
+  end
+
   create_table "units", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
-    t.integer "army_id",                                                                 null: false
-    t.integer "unit_category_id",                                                        null: false
-    t.string  "name",                                                                    null: false
-    t.integer "min_size",                                                default: 1,     null: false
+    t.integer "army_id",                                                                null: false
+    t.integer "unit_category_id",                                                       null: false
+    t.integer "min_size",                                               default: 1,     null: false
     t.integer "max_size"
-    t.decimal "value_points",                    precision: 8, scale: 2
+    t.decimal "value_points",                   precision: 8, scale: 2
     t.string  "magic"
-    t.text    "notes",             limit: 65535
-    t.boolean "is_unique",                                               default: false, null: false
-    t.integer "unit_category_id2"
+    t.text    "notes",            limit: 65535
+    t.boolean "is_unique",                                              default: false, null: false
     t.index ["army_id"], name: "index_units_on_army_id", using: :btree
     t.index ["unit_category_id"], name: "index_units_on_unit_category_id", using: :btree
   end
