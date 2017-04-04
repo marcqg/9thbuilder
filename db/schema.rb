@@ -446,6 +446,27 @@ ActiveRecord::Schema.define(version: 20170406143816) do
   end
 
   add_foreign_key "armies", "ninth_age_versions", column: "version_id", on_delete: :cascade
+
+  create_table "version_translations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "version_id", null: false
+    t.string   "locale",     null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string   "name"
+    t.index ["locale"], name: "index_version_translations_on_locale", using: :btree
+    t.index ["version_id"], name: "index_version_translations_on_version_id", using: :btree
+  end
+
+  create_table "versions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "major",      default: 0,     null: false
+    t.integer  "minor",      default: 0,     null: false
+    t.integer  "fix",        default: 0,     null: false
+    t.boolean  "public",     default: false, null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
+
+  add_foreign_key "armies", "versions", on_delete: :cascade
   add_foreign_key "army_list_unit_troops", "army_list_units", on_delete: :cascade
   add_foreign_key "army_list_unit_troops", "troops", on_delete: :cascade
   add_foreign_key "army_list_units", "army_lists"

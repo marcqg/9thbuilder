@@ -1,4 +1,5 @@
 class Army < ApplicationRecord
+  belongs_to :version
   has_many :army_lists, dependent: :destroy
   has_many :magic_items, dependent: :destroy
   has_many :magic_standards, dependent: :destroy
