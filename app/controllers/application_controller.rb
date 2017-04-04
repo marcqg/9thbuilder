@@ -7,11 +7,14 @@ class ApplicationController < ActionController::Base
 
   layout -> (controller) { controller.request.xhr? ? false : 'application' }
 
-  def after_sign_in_path_for(resource_or_scope)
-    if resource_or_scope.is_a?(User) && authenticate_active_admin_user!
+  def after_sign_in_path_for(resource)
+    sign_in_url = new_user_session_url
+    if request.referer == sign_in_url
+      super
+    elsif authenticate_active_admin_user!
       admin_dashboard_path
     else
-      army_lists_path
+      stored_location_for(resource) || request.referer || army_lists_path
     end
   end
 
