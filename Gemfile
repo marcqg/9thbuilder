@@ -52,12 +52,15 @@ end
 #routing
 gem 'routing-filter'
 
-#Default language
-gem 'http_accept_language'
-
 #Back
 gem 'inherited_resources', '~> 1.7'
 gem 'activeadmin', github: 'activeadmin/activeadmin'
+
+# Translations
+gem 'route_translator'
+gem 'globalize', github: 'globalize/globalize'
+gem 'activemodel-serializers-xml'
+gem 'globalize-accessors'
 
 #autantification
 gem 'devise'

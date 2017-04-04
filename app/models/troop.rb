@@ -5,6 +5,8 @@ class Troop < ApplicationRecord
   has_many :equipments, dependent: :nullify
   has_many :special_rules, dependent: :nullify
 
+  translates :name
+
   validates :unit_id, :name, presence: true
   validates :value_points, numericality: { greater_than_or_equal_to: 0, allow_nil: true }
   validates :position, numericality: { greater_than_or_equal_to: 1, only_integer: true, allow_nil: true }

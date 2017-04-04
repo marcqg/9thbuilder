@@ -3,6 +3,8 @@ class ExtraItem < ApplicationRecord
   has_many :army_list_unit_extra_items, dependent: :destroy
   has_many :army_list_units, through: :army_list_unit_extra_items
 
+  translates :name
+
   validates :extra_item_category_id, :name, :value_points, presence: true
   validates :value_points, numericality: { greater_than_or_equal_to: 0 }
 

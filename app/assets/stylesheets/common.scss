@@ -83,7 +83,7 @@ form.button_to, form.button_to div {
   top: -2px;
 }
 
-#header .menu {
+#header .menu, #header .menu-lang {
   display: block;
   position: absolute;
   top: 38px;
@@ -101,16 +101,20 @@ form.button_to, form.button_to div {
   z-index: 100;
 }
 
-#header .menu li {
+#header .menu li, #header .menu-lang li {
   margin: 5px 0;
 }
 
-#header .menu a {
+#header .menu a, #header .menu-lang a {
   color: #fff;
   text-decoration: none;
+  width:100%;
+  text-align:left;
+  padding:0;
+  height:45px;
 }
 
-#header .menu a:hover {
+#header .menu a:hover, #header .menu-lang a:hover {
   text-decoration: underline;
 }
 

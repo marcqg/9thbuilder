@@ -11,7 +11,7 @@
     <%= submit_tag '&rarr;'.html_safe %>
     <%= select_tag 'action', options_for_select([
       [ t('army_list.show.edit'), edit_army_list_path(@army_list) ],
-      [ t('army_list.show.export'), export_army_list_path(@army_list) ],
+      [ t('army_list.show.export'), export_army_list_path(@army_list, 'full', 'magics') ],
       [ t('army_list.show.duplicate'), new_from_army_list_path(@army_list) ],
       [ t('army_list.show.delete'), delete_army_list_path(@army_list) ]
     ]), :id => nil %>

@@ -3,23 +3,18 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
-  before_action :set_locale
+  before_action :configure_permitted_parameters, if: :devise_controller?
 
   layout -> (controller) { controller.request.xhr? ? false : 'application' }
 
-  def set_locale
-    I18n.locale = params[:locale] || http_accept_language.compatible_language_from(I18n.available_locales) || I18n.default_locale
-  end
-
-  def default_url_options(_options = {})
-    { locale: I18n.locale }
-  end
-
-  def after_sign_in_path_for(resource_or_scope)
-    if resource_or_scope.is_a?(User) && authenticate_active_admin_user!
+  def after_sign_in_path_for(resource)
+    sign_in_url = new_user_session_url
+    if request.referer == sign_in_url
+      super
+    elsif authenticate_active_admin_user!
       admin_dashboard_path
     else
-      army_lists_path
+      stored_location_for(resource) || request.referer || army_lists_path
     end
   end
 
@@ -31,4 +26,10 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  protected
+
+    def configure_permitted_parameters
+      devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :favorite_army_id])
+      devise_parameter_sanitizer.permit(:account_update, keys: [:name, :favorite_army_id])
+    end
 end

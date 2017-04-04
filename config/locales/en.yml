@@ -35,6 +35,18 @@ en:
     signout: "Sign out"
     signin: "Sign in"
     signup: "Sign up"
+    languages:
+      lang: "Language"
+      de: "Germany"
+      fr: "French"
+      en: "English"
+      hu: "Hungarian"
+      it: "Italian - Italiano"
+      ko: "Korean"
+      pl: "Polish"
+      ru: "Russian"
+      sr: "Serbian"
+      es: "Spanish - Español"
 
   army_list:
     index:

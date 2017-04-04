@@ -13,11 +13,21 @@
 
 <div id="wrapper">
   <div id="header" class="container_16">
-    <h1 class="grid_3 suffix_9">
+    <h1 class="grid_4 suffix_6">
       <a href="<%= root_path %>">The 9th Age<br />
       <em>Army Builder</em></a>
     </h1>
-    <div class="grid_4 welcome">
+    <div class="grid_3 welcome">
+      <a class="lang"><%= t('menu.languages.lang') %></a>
+      <ul class="menu-lang" style="display:none">
+        <% I18n.available_locales.each do |language| %>
+          <li>
+            <%= link_to "#{image_tag(asset_path("langues/langue-#{language}.png"))} #{t("menu.languages.#{language}")}".html_safe, url_for(locale: language.to_s, only_path: true) %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+    <div class="grid_3 welcome">
       <% if user_signed_in? %>
       <strong><%=t 'menu.label' %> <%= image_tag "menu_arrow.png", :size => "11x9" %></strong>
       <% else %>

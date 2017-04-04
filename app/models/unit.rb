@@ -8,6 +8,8 @@ class Unit < ApplicationRecord
   has_many :unit_options, -> { order %w(parent_id position) }, dependent: :destroy
   has_many :mount_options, class_name: 'UnitOption', foreign_key: 'mount_id', dependent: :nullify
 
+  translates :name
+
   normalize_attributes :magic, :notes
 
   validates :army_id, :unit_category_id, :name, :min_size, presence: true
@@ -26,8 +28,9 @@ class Unit < ApplicationRecord
       [
         unit_category.name,
         unit_category.units
+          .includes(:translations)
           .where(army_id: army_list.army)
-          .order('is_unique', 'name')
+          .order('is_unique', 'unit_translations.name')
           .reject { |unit| unit.in?(army_list_units) if unit.is_unique }
           .map { |u| [u.name, u.id] }
       ]
