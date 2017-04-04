@@ -11,7 +11,7 @@ class Army < ApplicationRecord
   validates :name, presence: true
 
   scope :disabled, -> { where('id NOT IN (SELECT DISTINCT army_id FROM units)') }
-  scope :disabled_or_obsolete, -> { where('id NOT IN (SELECT DISTINCT army_id FROM units) OR name LIKE \'%obsolète%\'') }
+  scope :disabled_or_obsolete, -> { where('id NOT IN (SELECT DISTINCT army_id FROM units)') }
 
   def obsolete?
     name =~ /obsolète/i
