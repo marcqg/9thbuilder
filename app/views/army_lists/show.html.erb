@@ -6,7 +6,7 @@
   <h1 title="<%= @army_list.name %>"><%=transliterate @army_list.name.truncate(35) %></h1>
 </div>
 
-<div id="subheader" class="grid_14 army_list">
+<div id="subheader" class="col-md-11 army_list">
   <%= form_tag edit_army_list_path(@army_list), :method => 'get', 'data-popin' => true, 'class' => 'actions' do %>
     <%= submit_tag '&rarr;'.html_safe %>
     <%= select_tag 'action', options_for_select([

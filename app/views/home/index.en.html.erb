@@ -1,8 +1,8 @@
-<h1 class="grid_4 suffix_6">
+<h1 class="col-md-4">
   The 9th Age<br />
   <em>Army Builder</em>
 </h1>
-<div class="grid_6 signin">
+<div class="col-md-offset-6 col-md-5 signin">
   <%= form_for resource, :as => resource_name, :url => session_path(resource_name) do |f| %>
     <p><%= f.email_field :email, :placeholder => "Email" %>
     <%= f.password_field :password, :placeholder => "Password" %>
@@ -11,11 +11,11 @@
   <% end %>
 </div>
 
-<h2 class="grid_10 catcher">
+<h2 class="col-md-8 catcher">
   Compose<span> and </span>store<br />
   <em>your favorites armies!</em>
 </h2>
-<div class="grid_6 signup">
+<div class="col-md-4 signup">
   <%= form_for resource, :as => resource_name, :url => registration_path(resource_name) do |f| %>
     <strong>Join us</strong>
     <p><%= f.text_field :name, :placeholder => "Name" %></p>
@@ -24,7 +24,7 @@
   <% end %>
 </div>
 
-<div class="grid_16 disclaimer">
+<div class="col-md-12 disclaimer">
   <a class="twitter-timeline" href="https://twitter.com/9thbuilder" data-widget-id="683965147501727745" width="300" height="300" lang="en">Tweets de @9thbuilder</a>
   <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 
