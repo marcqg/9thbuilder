@@ -138,9 +138,11 @@ en:
   signin:
     title: "Sign in"
     form:
+      register: "Join us"
       email: "Email"
       password: "Password"
       remember: "Remember me"
+      lost: "Forgot ?"
       submit: "Save"
     lost:
       password: "I have lost my password!"
