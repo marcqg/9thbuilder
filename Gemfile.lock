@@ -122,6 +122,7 @@ GEM
       activesupport (>= 4.1.0)
     globalize-accessors (0.2.1)
       globalize (~> 5.0, >= 5.0.0)
+    gravtastic (3.2.6)
     has_scope (0.7.0)
       actionpack (>= 4.1, < 5.1)
       activesupport (>= 4.1, < 5.1)
@@ -283,6 +284,7 @@ DEPENDENCIES
   font-awesome-rails
   globalize!
   globalize-accessors
+  gravtastic
   inherited_resources (~> 1.7)
   jbuilder (~> 2.5)
   jquery-rails

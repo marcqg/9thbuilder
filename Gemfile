@@ -62,7 +62,7 @@ gem 'globalize', github: 'globalize/globalize'
 gem 'activemodel-serializers-xml'
 gem 'globalize-accessors'
 
-#autantification
+#autentification
 gem 'devise'
 
 #User role (Admin/Moderator)
@@ -77,6 +77,9 @@ gem 'ransack' 				#search
 gem 'wisepdf' 				#pdf export
 gem 'attribute_normalizer' 	#data integrity / params permit
 gem 'uuidtools' 			#UUID
+
+#Avatar
+gem 'gravtastic'
 
 #CSS
 gem 'bootstrap-sass'

@@ -8,7 +8,7 @@
 <body>
 
 <div id="wrapper">
-  <div id="header" class="container_16">
+  <div id="header">
     <h1>
       <strong>The 9th Age</strong>
       Army Builder
@@ -22,7 +22,7 @@
     <%= yield %>
   </div>
 
-  <div id="footer" class="container_16">
+  <div id="footer">
     <div class="user_name"><%=transliterate @army_list.user.name %></div>
     <div class="site"><%= link_to "9thbuilder.com", @army_list %></div>
     <div class="today"><%= @army_list.updated_at.strftime "%d/%m/%Y" %></div>
