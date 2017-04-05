@@ -1,0 +1,1 @@
+json.partial! "ninth_age/magics/magic", ninth_age_magic: @ninth_age_magic

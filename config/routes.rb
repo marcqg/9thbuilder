@@ -25,12 +25,14 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :versions,  only: [:index, :show]
+    namespace :ninth_age do
+      resources :versions,  only: [:index, :show]
 
-    resources :magics,  only: [:index]
+      resources :magics,  only: [:index]
 
-    scope '/version-:version_id' do
-      resources :magics,  only: [:show]
+      scope '/version-:version_id' do
+        resources :magics,  only: [:show]
+      end
     end
 
     # You can have the root of your site routed with "root"

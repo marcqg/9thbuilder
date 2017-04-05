@@ -1,0 +1,29 @@
+<h1><%= t('magics.index.title') %></h1>
+<div>
+  <% @magics.each do |magic| %>
+      <article class="grid_3 magic-<%= magic.id %> text-center">
+        <h4><%= magic.name %></h4>
+        <%= link_to t('magics.index.show'), ninth_age_magic_path(magic.ninth_age_version_id, magic) %>
+        <p><%=magic.version%></p>
+      </article>
+  <% end %>
+</div>
+
+<script>
+  $(document).ready(function () {
+    $("div[class*=magic-]").click(function () {
+      window.location = $(this).find("a").attr("href");
+      return false;
+    });
+
+    var highestBox = 0;
+
+    $("div[class*=magic-]").each(function(){
+      if($(this).height() > highestBox){
+        highestBox = $(this).height();
+      }
+    })
+
+    $("div[class*=magic-]").height(highestBox);
+  });
+</script>

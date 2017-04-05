@@ -1,0 +1,1 @@
+json.extract! ninth_age_version, :id, :name
