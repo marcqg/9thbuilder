@@ -90,6 +90,8 @@ GEM
     bootstrap-sass (3.3.7)
       autoprefixer-rails (>= 5.2.1)
       sass (>= 3.3.4)
+    bitmask_attributes (1.0.0)
+      activerecord (>= 3.1)
     bourbon (4.3.3)
       sass (~> 3.4)
       thor (~> 0.19)
@@ -288,7 +290,11 @@ DEPENDENCIES
   autoprefixer-rails
   better_errors
   binding_of_caller
+<<<<<<< HEAD
   bootstrap-sass
+=======
+  bitmask_attributes
+>>>>>>> Versions + magics + spells
   byebug
   coffee-rails (~> 4.1.0)
   devise

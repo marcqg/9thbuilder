@@ -24,6 +24,15 @@ Rails.application.routes.draw do
         post 'sort', on: :collection
       end
     end
+
+    resources :versions,  only: [:index, :show]
+
+    resources :magics,  only: [:index]
+
+    scope '/version-:version_id' do
+      resources :magics,  only: [:show]
+    end
+
     # You can have the root of your site routed with "root"
     root 'home#index'
   end

@@ -446,6 +446,7 @@ ActiveRecord::Schema.define(version: 20170406143816) do
   end
 
   add_foreign_key "armies", "ninth_age_versions", column: "version_id", on_delete: :cascade
+<<<<<<< HEAD
 
   create_table "version_translations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "version_id", null: false
