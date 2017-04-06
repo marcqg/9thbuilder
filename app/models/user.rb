@@ -1,5 +1,7 @@
 class User < ApplicationRecord
   rolify
+  include Gravtastic
+  gravtastic
 
   has_many :army_lists, dependent: :destroy
   has_many :armies, -> { distinct }, through: :army_lists

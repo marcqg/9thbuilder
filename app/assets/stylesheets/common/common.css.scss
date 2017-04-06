@@ -120,10 +120,8 @@ form.button_to, form.button_to div {
 
 #subheader {
   margin: 0 50px;
-  margin-top: -2px;
   margin-bottom: 20px;
   padding: 8px 20px;
-  height: 24px;
   font: 18px "godofwarregular";
 
   background-color: rgba(71, 11, 3, 0.2);
@@ -133,6 +131,10 @@ form.button_to, form.button_to div {
   -moz-border-radius-bottomleft: 5px;
   border-bottom-right-radius: 5px;
   border-bottom-left-radius: 5px;
+
+  p {
+    margin: 0 !important;
+  }
 }
 
 #content {

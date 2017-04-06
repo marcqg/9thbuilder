@@ -1,0 +1,50 @@
+<h1 class="col-md-4 col-xs-12 col-sm-12">
+  The 9th Age<br/>
+  <em>Army Builder</em>
+</h1>
+<div class="col-md-offset-3 col-md-5 col-xs-12 col-sm-12 signin">
+  <%= form_for resource, :as => resource_name, :url => session_path(resource_name) do |f| %>
+      <p><%= f.email_field :email, :placeholder => t('signin.form.email') %>
+        <%= f.password_field :password, :placeholder => t('signin.form.password') %>
+        <%= f.submit t('menu.signin') %></p>
+      <p><%= f.check_box :remember_me %> <%= f.label :remember_me, t('signin.form.remember') %> <%= link_to t('signin.form.lost'), new_password_path(resource_name) %></p>
+  <% end %>
+</div>
+
+<h2 class="col-md-8 col-xs-12 col-sm-12 catcher">
+  Composez<span> et </span>archivez<br/>
+  <em>vos armees favorites !</em>
+</h2>
+<div class="col-md-4 col-xs-12 col-sm-12 signup">
+  <%= form_for resource, :as => resource_name, :url => registration_path(resource_name) do |f| %>
+      <strong><%= t('signup.form.register') %></strong>
+      <p><%= f.text_field :name, :placeholder => t('signup.form.name') %></p>
+      <p><%= f.email_field :email, :placeholder => t('signup.form.email') %></p>
+      <p><%= f.submit t('next') %></p>
+  <% end %>
+</div>
+
+<div class="col-md-12 col-xs-12 col-sm-12 disclaimer">
+  <div class="col-md-8 col-xs-12 col-sm-12">
+    <p><strong><%= t('home.whoarewe.title') %></strong> <%= t('home.whoarewe.description') %></p>
+    <p><strong>Artworks</strong><br/>
+      <%= raw t('home.thank') %><br/><br/>
+      <%= raw t('home.army.first') %><br/><br/>
+      <%= raw t('home.army.second') %><br/><br/>
+      <%= raw t('home.army.three') %><br/><br/>
+      <%= raw t('home.army.four') %></p>
+  </div>
+  <div class="col-md-4 col-xs-12 col-sm-12">
+    <a class="twitter-timeline" href="https://twitter.com/9thbuilder" data-widget-id="683965147501727745" width="300" height="300" lang="en">Tweets
+      de @9thbuilder</a>
+    <script>!function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https';
+        if (!d.getElementById(id)) {
+            js = d.createElement(s);
+            js.id = id;
+            js.src = p + "://platform.twitter.com/widgets.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }
+    }(document, "script", "twitter-wjs");</script>
+  </div>
+</div>

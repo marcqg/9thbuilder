@@ -17,7 +17,7 @@ gem 'coffee-rails', '~> 4.1.0'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-gem 'turbolinks'
+#gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
 # bundle exec rake doc:rails generates the API under doc/api.
@@ -61,6 +61,7 @@ gem 'route_translator'
 gem 'globalize', github: 'globalize/globalize'
 gem 'activemodel-serializers-xml'
 gem 'globalize-accessors'
+gem 'rails-i18n', '~> 5.0.0'
 
 #autentification
 gem 'devise'
@@ -80,6 +81,9 @@ gem 'uuidtools' 			#UUID
 
 #Avatar
 gem 'gravtastic'
+
+#Images
+gem 'paperclip', '~> 5.1.0'
 
 #CSS
 gem 'bootstrap-sass'
