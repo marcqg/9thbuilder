@@ -1,3 +1,5 @@
+@import "common/global";
+
 @font-face {
     font-family: 'godofwarregular';
     src: font-url('godofwar-webfont.eot');
@@ -119,8 +121,7 @@ form.button_to, form.button_to div {
 }
 
 #subheader {
-  margin: 0 50px;
-  margin-bottom: 20px;
+  margin: 0px 0px 20px 0px;
   padding: 8px 20px;
   font: 18px "godofwarregular";
 
@@ -131,6 +132,10 @@ form.button_to, form.button_to div {
   -moz-border-radius-bottomleft: 5px;
   border-bottom-right-radius: 5px;
   border-bottom-left-radius: 5px;
+
+  @media #{$portrait} {
+    margin: 50px 50px 20px 0;
+  }
 
   p {
     margin: 0 !important;
@@ -145,6 +150,9 @@ form.button_to, form.button_to div {
   padding: 20px 0;
   // height: 30px;
   // background: image-url("bg_footer.png") 50% 100% no-repeat;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 }
 
 #footer .links {

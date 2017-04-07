@@ -23,16 +23,15 @@
 
 <div class="row">
 
-  <ol class="army_list_units_overview col-md-10" data-url="<%= sort_army_list_army_list_units_path @army_list %>">
+  <ol class="army_list_units_overview col-md-10 col-sm-12" data-url="<%= sort_army_list_army_list_units_path @army_list %>">
     <%= render partial: 'army_list_units/show', collection: @army_list.army_list_units, as: :army_list_unit %>
   </ol>
 
-  <div class="col-md-2">
+  <div class="col-md-2 col-sm-12 army-list-zone-action">
 
     <div class="army_list_value_points">
       <%= render 'value_points' %>
     </div>
-
     <% if @army_list.notes? %>
         <div class="army_list_notes">
           <h3><%= t 'army_list.show.notes' %></h3>
@@ -45,6 +44,7 @@
     <% end %>
 
     <a href="<%= new_army_list_army_list_unit_path @army_list %>" class="army_list_unit_new" data-popin="true"><%= t('army_list.show.add_unit') %></a>
+
   </div>
 
 </div>
