@@ -1,6 +1,6 @@
 <% title t('army_list.index.title') %>
 
-<div id="subheader" class="grid_14">
+<div id="subheader">
   <%= search_form_for @search do |f| %>
     <p>
       <%= f.label :army_id_eq, t('army_list.index.filter') %> <%= f.select :army_id_eq, options_from_collection_for_select(current_user.armies.includes(:translations).order(:name), :id, :name, f.object.army_id_eq), { disabled: -> (army) { army.units.empty? } , include_blank: true } %>
@@ -12,9 +12,11 @@
 
 <% @army_lists.each_with_index do |army_list, i| %>
 
-<div class="grid_4 <%= alternate_cell_class(i) %>">
+<div class="col-md-3 <%= alternate_cell_class(i) %>">
   <div class="army_list_row">
-    <p class="thumb"><a href="<%= army_list_path(army_list) %>"><%= image_tag "/system/armies/#{army_list.army.id}/thumb.png", :size => "220x132" %></a></p>
+    <p class="thumb"><a href="<%= army_list_path(army_list) %>"><% unless army_list.army.logo.nil? %>
+          <%= image_tag army_list.army.logo.url, alt: army_list.army.name, :size => "220x132" %>
+          <% end %></a></p>
     <p class="value_points"><%= value_points army_list.value_points %><br /><small style="font-size:20px">points</small></p>
     <p><%= army_list.name.truncate(60) %></p>
   </div>
@@ -24,7 +26,7 @@
 
 <% if @army.nil? || !@army.obsolete? %>
 
-  <div class="grid_4 <%= @army_lists.any? ? alternate_cell_class(@army_lists.length) : "suffix_6 prefix_6" %>">
+  <div class="col-md-3 <%= @army_lists.any? ? alternate_cell_class(@army_lists.length) : "col-md-offset-4 col-md-offset-4" %>">
     <div class="army_list_row">
       <p><a href="<%= new_army_list_path(:army_id => @search.army_id_eq) %>" data-popin="true"><%= image_tag "bt_new_army_list.png", :size => "220x132" %></a></p>
       <p><%=t 'army_list.index.add' %></p>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170331130059) do
+ActiveRecord::Schema.define(version: 20170406143816) do
 
   create_table "active_admin_comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.integer  "resource_id",                 null: false
@@ -27,6 +27,12 @@ ActiveRecord::Schema.define(version: 20170331130059) do
   end
 
   create_table "armies", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
+    t.integer  "version_id",        default: 0
+    t.string   "logo_file_name"
+    t.string   "logo_content_type"
+    t.integer  "logo_file_size"
+    t.datetime "logo_updated_at"
+    t.index ["version_id"], name: "index_armies_on_version_id", using: :btree
   end
 
   create_table "army_list_unit_troops", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
@@ -209,6 +215,66 @@ ActiveRecord::Schema.define(version: 20170331130059) do
     t.index ["override_id"], name: "index_magic_standards_on_override_id", using: :btree
   end
 
+  create_table "ninth_age_magic_spell_translations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "ninth_age_magic_spell_id",               null: false
+    t.string   "locale",                                 null: false
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
+    t.string   "name"
+    t.string   "range"
+    t.string   "casting_value"
+    t.text     "effect",                   limit: 65535
+    t.index ["locale"], name: "index_ninth_age_magic_spell_translations_on_locale", using: :btree
+    t.index ["ninth_age_magic_spell_id"], name: "index_4144dde43f58acef490f4c0a79f9a2a25ea573c8", using: :btree
+  end
+
+  create_table "ninth_age_magic_spells", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "ninth_age_magic_id", default: 0, null: false
+    t.integer  "type_lvl",           default: 0
+    t.integer  "type_target",        default: 0
+    t.integer  "duration",           default: 0
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.index ["ninth_age_magic_id"], name: "index_ninth_age_magic_spells_on_ninth_age_magic_id", using: :btree
+  end
+
+  create_table "ninth_age_magic_translations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "ninth_age_magic_id",               null: false
+    t.string   "locale",                           null: false
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+    t.string   "name"
+    t.text     "description",        limit: 65535
+    t.index ["locale"], name: "index_ninth_age_magic_translations_on_locale", using: :btree
+    t.index ["ninth_age_magic_id"], name: "index_ninth_age_magic_translations_on_ninth_age_magic_id", using: :btree
+  end
+
+  create_table "ninth_age_magics", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "ninth_age_version_id", default: 0, null: false
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+    t.index ["ninth_age_version_id"], name: "index_ninth_age_magics_on_ninth_age_version_id", using: :btree
+  end
+
+  create_table "ninth_age_version_translations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "ninth_age_version_id", null: false
+    t.string   "locale",               null: false
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+    t.string   "name"
+    t.index ["locale"], name: "index_ninth_age_version_translations_on_locale", using: :btree
+    t.index ["ninth_age_version_id"], name: "index_ninth_age_version_translations_on_ninth_age_version_id", using: :btree
+  end
+
+  create_table "ninth_age_versions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "major",      default: 0,     null: false
+    t.integer  "minor",      default: 0,     null: false
+    t.integer  "fix",        default: 0,     null: false
+    t.boolean  "public",     default: false, null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
+
   create_table "roles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
     t.string   "resource_type"
@@ -379,6 +445,7 @@ ActiveRecord::Schema.define(version: 20170331130059) do
     t.index ["user_id"], name: "index_users_roles_on_user_id", using: :btree
   end
 
+  add_foreign_key "armies", "ninth_age_versions", column: "version_id", on_delete: :cascade
   add_foreign_key "army_list_unit_troops", "army_list_units", on_delete: :cascade
   add_foreign_key "army_list_unit_troops", "troops", on_delete: :cascade
   add_foreign_key "army_list_units", "army_lists"
@@ -402,6 +469,8 @@ ActiveRecord::Schema.define(version: 20170331130059) do
   add_foreign_key "magic_items", "magic_items", column: "override_id"
   add_foreign_key "magic_standards", "armies"
   add_foreign_key "magic_standards", "magic_standards", column: "override_id"
+  add_foreign_key "ninth_age_magic_spells", "ninth_age_magics"
+  add_foreign_key "ninth_age_magics", "ninth_age_versions"
   add_foreign_key "special_rules", "troops", on_delete: :nullify
   add_foreign_key "special_rules", "units"
   add_foreign_key "troops", "troop_types"

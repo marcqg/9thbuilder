@@ -1,22 +1,24 @@
 <!DOCTYPE html>
 <html lang="<%= locale %>">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <title><%=t :welcome %> • 9th Age Builder</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <title><%= t :welcome %> • 9th Age Builder</title>
   <%= stylesheet_link_tag "application", media: 'all', "data-turbolinks-track" => false %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => false %>
   <%= csrf_meta_tag %>
-  <link rel="alternate" href="http://9thbuilder.com" hreflang="x-default" />
-  <link rel="alternate" href="http://9thbuilder.com/en" hreflang="en" />
-  <link rel="alternate" href="http://9thbuilder.com/fr" hreflang="fr" />
+  <link rel="alternate" href="http://9thbuilder.com" hreflang="x-default"/>
+  <link rel="alternate" href="http://9thbuilder.com/en" hreflang="en"/>
+  <link rel="alternate" href="http://9thbuilder.com/fr" hreflang="fr"/>
 </head>
 <body>
 
 <div id="wrapper_home">
-  <div class="container_16 home">
-    <%= yield %>
+  <div class="home container">
+    <div class="row">
+      <%= yield %>
+    </div>
 
-    <div id="footer" class="grid_16">
+    <div id="footer">
       <div class="links">
         <%= render "shared/links" %>
       </div>

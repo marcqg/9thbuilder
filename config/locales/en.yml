@@ -48,6 +48,17 @@ en:
       sr: "Serbian"
       es: "Spanish - Español"
 
+  home:
+    whoarewe:
+     title: "Who are we?"
+     description: "Bringing together a team of enthusiasts playing for over 15 years in Battle, Army Builder wants to be an effective and user-friendly tool to create your army lists. Supported by generous patrons, Army Builder generates no income and will never ask for money! In addition, Army Builder is an open source project."
+    thank: "We warmly thank the illustrators/companies allowing us to use their work."
+    army:
+      first: "Beast Herds, Daemon Legions, Dread Elves, Dwarven Holds, Highborn Elves, Ogre Khans, Orcs and Goblins, Saurian Ancients, Vampire Covenant, Warriors of the Dark Gods owned by <a href=\"http://www.avatars-of-war.com\" target=\"_blank\">Avatars of War</a> and created by <a href=\"http://diegogisbertllorens.deviantart.com\" target=\"_blank\">Diego Gisbert Llorens</a>"
+      second: "Empire of Sonnstahl by <a href=\"http://wraithdt.deviantart.com/art/Battle-of-Blackheath-416207912\" target=\"_blank\">Wraithdt</a>"
+      three: "Undying Dynasties by <a href=\"http://theclockworkpainter.deviantart.com/art/Queen-Khalida-493461199\" target=\"_blank\">Theclockworkpainter</a>"
+      four: "The Vermin Swarm by <a href=\"http://getsugadante.deviantart.com/art/Warhammer-Fantasy-Rat-Ogre-s-fury-587662192\" target=\"_blank\">GetsugaDante</a>"
+
   army_list:
     index:
       title: "My army lists"
@@ -138,9 +149,11 @@ en:
   signin:
     title: "Sign in"
     form:
+      register: "Join us"
       email: "Email"
       password: "Password"
       remember: "Remember me"
+      lost: "Forgot ?"
       submit: "Save"
     lost:
       password: "I have lost my password!"

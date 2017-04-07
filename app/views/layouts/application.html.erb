@@ -1,65 +1,92 @@
 <!DOCTYPE html>
 <html lang="<%= locale %>">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
   <title><%= content_for?(:title) ? yield(:title) : t(:welcome) %> • 9th Age Builder</title>
-  <%= stylesheet_link_tag "application", media: 'all', "data-turbolinks-track" => false %>
-  <%= javascript_include_tag "application", "data-turbolinks-track" => false %>
+  <%= stylesheet_link_tag "application", media: 'all' %>
+  <%= javascript_include_tag "application" %>
   <%= javascript_tag "BASE_URL = '#{root_path}';" %>
   <%= csrf_meta_tag %>
   <%= yield(:head) %>
 </head>
 <body>
 
-<div id="wrapper">
-  <div id="header" class="container_16">
-    <h1 class="grid_4 suffix_6">
-      <a href="<%= root_path %>">The 9th Age<br />
-      <em>Army Builder</em></a>
-    </h1>
-    <div class="grid_3 welcome">
-      <a class="lang"><%= t('menu.languages.lang') %></a>
-      <ul class="menu-lang" style="display:none">
-        <% I18n.available_locales.each do |language| %>
-          <li>
-            <%= link_to "#{image_tag(asset_path("langues/langue-#{language}.png"))} #{t("menu.languages.#{language}")}".html_safe, url_for(locale: language.to_s, only_path: true) %>
+  <!-- Navigation -->
+  <nav id="wrapper" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="<%= root_path %>">The 9th Age<br/><em>Army Builder</em></a>
+      </div>
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav pull-right">
+          <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+              <%= t('menu.languages.lang') %>
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu" role="menu">
+              <% I18n.available_locales.each do |language| %>
+                  <li>
+                    <%= link_to "#{image_tag(asset_path("langues/langue-#{language}.png"))} #{t("menu.languages.#{language}")}".html_safe, url_for(locale: language.to_s, only_path: true) %>
+                  </li>
+              <% end %>
+            </ul>
           </li>
-        <% end %>
-      </ul>
+          <% if user_signed_in? %>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle current-user" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= image_tag current_user.gravatar_url(:secure => :true, :default => 'identicon'), class: 'gravatar' %> <%= current_user.name %>
+                  <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><%= link_to t('menu.army_lists'), army_lists_path("q[army_id_eq]" => "") %></li>
+                  <li><%= link_to t('menu.preferences'), edit_user_registration_path %></li>
+                  <li><a href="mailto:support@9thbuilder.com"><%=t 'menu.help' %></a></li>
+                  <li><%= link_to t('menu.signout'), destroy_user_session_path %></li>
+                </ul>
+              </li>
+          <% else %>
+              <li>
+                <%= link_to("<span class=\"glyphicon glyphicon-log-in\"></span> #{t('signin.title')}".html_safe, new_user_session_path) %>
+              </li>
+              <li>
+                <%= link_to("<span class=\"glyphicon glyphicon-saved\"></span> #{t('signup.title')}".html_safe, new_user_registration_path) %>
+              </li>
+          <% end %>
+        </ul>
+      </div>
+      <!-- /.navbar-collapse -->
     </div>
-    <div class="grid_3 welcome">
-      <% if user_signed_in? %>
-      <strong><%=t 'menu.label' %> <%= image_tag "menu_arrow.png", :size => "11x9" %></strong>
-      <% else %>
-      <%= link_to t('menu.signin'), new_session_path(resource_name) %>
-      <%= link_to t('menu.signup'), new_registration_path(resource_name) %>
-      <% end %>
+    <!-- /.container -->
+  </nav>
+
+  <!-- Page Content -->
+  <div class="container" style="margin-top:40px;">
+    <!-- Page Features -->
+    <div class="row">
+      <%= yield %>
     </div>
-    <% if user_signed_in? %>
-    <ul class="menu" style="display:none">
-      <li><%= link_to t('menu.army_lists'), army_lists_path("q[army_id_eq]" => "") %></li>
-      <li><%= link_to t('menu.preferences'), edit_user_registration_path %></li>
-      <li><a href="mailto:support@9thbuilder.com"><%=t 'menu.help' %></a></li>
-      <li><%= link_to t('menu.signout'), destroy_user_session_path %></li>
-    </ul>
-    <% end %>
-  </div>
+    <!-- /.row -->
 
-  <div id="content" class="container_16">
-    <%= yield %>
   </div>
+  <!-- /.container -->
 
-  <div id="footer" class="container_16">
-    <div class="grid_16 links">
+  <%= render "shared/flash_messages" %>
+
+  <!-- Footer -->
+  <footer id="footer">
+    <div class="container links">
       <%= render "shared/links" %>
     </div>
-  </div>
-</div>
+  </footer>
 
-<%= render "shared/flash_messages" %>
-
-<%= render "layouts/ga" if Rails.env.production? %>
-
+  <%= render "layouts/ga" if Rails.env.production? %>
 </body>
 </html>
 

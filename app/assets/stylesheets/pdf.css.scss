@@ -1,8 +1,6 @@
-/*
-*= require reset
-*= require 960
-*= require_self
-*/
+@import "common/reset";
+@import "bootstrap-sprockets";
+@import "bootstrap";
 
 @font-face {
     font-family: "godofwarregular";

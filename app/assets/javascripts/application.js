@@ -5,6 +5,8 @@
 //= require jquery.formalize
 //= require jquery.colorbox
 
+//= require bootstrap
+
 jQuery(function($) {
 
   $('#header .welcome strong').click(function() {
