@@ -11,6 +11,7 @@
  * file per style scope.
  *
  *= require_tree ./common
+ *= require_tree ./ninth_age
  */
 @import "common/global";
 @import "bootstrap-sprockets";
@@ -434,4 +435,32 @@ input[type=number] {
   @media #{$portrait} {
     display: inline-flex;
   }
+}
+
+span {
+  &.highlight-red {
+    color: red !important;
+  }
+
+  &.highlight-green {
+    color: green !important;
+  }
+
+  &.highlight-blue {
+    color: blue !important;
+  }
+}
+
+.footer-back {
+  padding: 25px;
+  text-align: center;
+
+  a.link-back {
+    font-weight: bold;
+  }
+}
+
+.block-center {
+  margin: 0 auto;
+  display: block;
 }

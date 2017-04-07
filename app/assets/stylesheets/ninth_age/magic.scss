@@ -1,13 +1,12 @@
-div[class^="magic-"] {
+article[class^="magic-"] {
   border: 1px solid black;
-  margin: 10px;
   padding: 10px;
   min-height: 150px;
   cursor: pointer;
 
   > h1, > h4{
     padding: 10px;
-    margin: 0 0 15px 0;
+    margin: 0;
   }
 
   p {

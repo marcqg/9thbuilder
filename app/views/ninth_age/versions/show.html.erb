@@ -2,9 +2,33 @@
   <h1 class="text-center"><%= @version.name %></h1>
 
   <div class="row">
+    <article class="version-<%= @version.id %> col-md-4 col-xs-12 col-sm-6 text-center">
+      <%= image_tag asset_path('magic.jpg'), alt: t('magic.index.title'), height: 99, class: 'block-center' %>
+      <h4><%= t('magic.index.title') %></h4>
+      <%= link_to t('version.index.show'), ninth_age_magics_path(@version.id) %>
+    </article>
   </div>
 
   <div class="footer-back">
-    <%= link_to t('versions.show.back'), ninth_age_versions_path, class: 'link-back' %>
+    <%= link_to t('version.show.back'), ninth_age_versions_path, class: 'link-back' %>
   </div>
 </div>
+
+<script>
+    $(document).ready(function () {
+        $("article[class*=version-]").click(function () {
+            window.location = $(this).find("a").attr("href");
+            return false;
+        });
+
+        var highestBox = 0;
+
+        $("article[class*=version-]").each(function () {
+            if ($(this).height() > highestBox) {
+                highestBox = $(this).height();
+            }
+        })
+
+        $("article[class*=version-]").height(highestBox);
+    });
+</script>

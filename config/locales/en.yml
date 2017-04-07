@@ -146,6 +146,12 @@ en:
     form:
       name: "Name"
 
+  version:
+    index:
+      title: "Versions"
+      show: "Show"
+    show:
+      back: "Back"
   magic:
     range: Range
     type: Type

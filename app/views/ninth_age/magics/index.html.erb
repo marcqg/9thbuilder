@@ -1,32 +1,31 @@
 <h1><%= t('magic.index.title') %></h1>
 <div>
   <% @magics.each do |magic| %>
-      <article class="col-md-3">
-        <div class="magic-<%= magic.id %> text-center">
-          <%= image_tag magic.logo.url, alt: magic.name, height: 99, class: 'block-center' %>
-          <h4><%= magic.name %></h4>
-          <%= link_to t('magic.index.show'), ninth_age_magic_path(magic) %>
-          <p><%=magic.version%></p>
-        </div>
+      <article class="magic-<%= magic.id %> col-md-3 text-center">
+        <%= image_tag magic.logo.url, alt: magic.name, height: 99, class: 'block-center' %>
+        <h4><%= magic.name %></h4>
+        <p class="small">(<%= magic.version.name %>)</p>
+        <%= link_to t('magic.index.show'), ninth_age_magic_path(magic.version.id, magic) %>
       </article>
   <% end %>
 </div>
+<div class="clearboth"></div>
 
 <script>
-  $(document).ready(function () {
-    $("div[class*=magic-]").click(function () {
-      window.location = $(this).find("a").attr("href");
-      return false;
+    $(document).ready(function () {
+        $("article[class*=magic-]").click(function () {
+            window.location = $(this).find("a").attr("href");
+            return false;
+        });
+
+        var highestBox = 0;
+
+        $("article[class*=magic-]").each(function () {
+            if ($(this).height() > highestBox) {
+                highestBox = $(this).height();
+            }
+        })
+
+        $("article[class*=magic-]").height(highestBox);
     });
-
-    var highestBox = 0;
-
-    $("div[class*=magic-]").each(function(){
-      if($(this).height() > highestBox){
-        highestBox = $(this).height();
-      }
-    })
-
-    $("div[class*=magic-]").height(highestBox);
-  });
 </script>

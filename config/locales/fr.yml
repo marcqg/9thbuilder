@@ -146,6 +146,12 @@ fr:
     form:
       name: "Nom"
 
+  version:
+    index:
+      title: "Versions"
+      show: "Voir"
+    show:
+      back: "Retour"
   magic:
     range: Range
     type: Type

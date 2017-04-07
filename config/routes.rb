@@ -28,10 +28,8 @@ Rails.application.routes.draw do
     namespace :ninth_age do
       resources :versions,  only: [:index, :show]
 
-      resources :magics,  only: [:index]
-
       scope '/version-:version_id' do
-        resources :magics,  only: [:show]
+        resources :magics,  only: [:index, :show]
       end
     end
 
