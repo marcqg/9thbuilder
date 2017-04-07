@@ -5,7 +5,7 @@ class AddOrganisation < ActiveRecord::Migration[5.0]
       t.belongs_to :army, index: false, null: false, default: 0
       t.timestamps
     end
-    add_foreign_key :ninth_age_army_organisations, :ninth_age_armies, column: :army_id
+    add_foreign_key :ninth_age_army_organisations, :armies, column: :army_id
 
     reversible do |dir|
       dir.up do
@@ -22,7 +22,7 @@ class AddOrganisation < ActiveRecord::Migration[5.0]
       t.boolean :isSpecialRule, null: false, default: false
       t.timestamps
     end
-    add_foreign_key :ninth_age_organisations, :ninth_age_armies, column: :army_id
+    add_foreign_key :ninth_age_organisations, :armies, column: :army_id
 
     reversible do |dir|
       dir.up do

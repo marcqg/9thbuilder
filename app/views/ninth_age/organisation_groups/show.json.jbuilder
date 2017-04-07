@@ -1,0 +1,1 @@
+json.partial! 'ninth_age/organisation_groups/organisation_group', organisation_group: @organisation_group

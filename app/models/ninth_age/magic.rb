@@ -6,6 +6,20 @@ class NinthAge::Magic < ApplicationRecord
   translates :name, :description
   globalize_accessors
 
+  has_attached_file :logo,
+                    styles: { medium: '200x200>', thumb: '65x65>' },
+                    default_url: ActionController::Base.helpers.image_path('army.jpg'),
+                    path: 'images/:class/:id/:style/:filename'
+  validates_attachment_content_type :logo, content_type: /\Aimage\/.*\z/
+
+  def logo_url
+    self.logo.url
+  end
+
+  def medium_logo_url
+    self.logo.url(:medium)
+  end
+
   def cache_key
     super + '-ninth-age-' + Globalize.locale.to_s
   end

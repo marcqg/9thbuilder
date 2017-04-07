@@ -152,6 +152,11 @@ en:
     duration: Duration
     effect: Effect
     casting: Casting
+    index:
+      title: "Magics"
+      show: "Show"
+    show:
+      back: "Back"
   magic_spell:
     type_lvl:
       A: "A"

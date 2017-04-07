@@ -1,10 +1,13 @@
-<h1><%= t('magics.index.title') %></h1>
+<h1><%= t('magic.index.title') %></h1>
 <div>
   <% @magics.each do |magic| %>
-      <article class="grid_3 magic-<%= magic.id %> text-center">
-        <h4><%= magic.name %></h4>
-        <%= link_to t('magics.index.show'), ninth_age_magic_path(magic.ninth_age_version_id, magic) %>
-        <p><%=magic.version%></p>
+      <article class="col-md-3">
+        <div class="magic-<%= magic.id %> text-center">
+          <%= image_tag magic.logo.url, alt: magic.name, height: 99, class: 'block-center' %>
+          <h4><%= magic.name %></h4>
+          <%= link_to t('magic.index.show'), ninth_age_magic_path(magic) %>
+          <p><%=magic.version%></p>
+        </div>
       </article>
   <% end %>
 </div>

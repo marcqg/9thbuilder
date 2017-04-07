@@ -147,11 +147,16 @@ fr:
       name: "Nom"
 
   magic:
-    range: Gamme
+    range: Range
     type: Type
     duration: Durée
     effect: Effet
-    casting: Fonderie
+    casting: Casting
+    index:
+      title: "Magies"
+      show: "Voir"
+    show:
+      back: "Retour"
   magic_spell:
     type_lvl:
       A: A

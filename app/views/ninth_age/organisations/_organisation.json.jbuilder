@@ -1,0 +1,1 @@
+json.extract! organisation, :id, :name, :medium_logo_url
