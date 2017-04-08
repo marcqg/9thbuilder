@@ -506,8 +506,8 @@ ActiveRecord::Schema.define(version: 20170406143816) do
   end
 
   create_table "users_roles", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer "user_id"
-    t.integer "role_id"
+    t.integer "user_id", null: false
+    t.integer "role_id", null: false
     t.index ["role_id"], name: "index_users_roles_on_role_id", using: :btree
     t.index ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id", using: :btree
     t.index ["user_id"], name: "index_users_roles_on_user_id", using: :btree
@@ -528,13 +528,20 @@ ActiveRecord::Schema.define(version: 20170406143816) do
   add_foreign_key "army_list_units_unit_options", "unit_options", on_delete: :cascade
   add_foreign_key "army_lists", "armies"
   add_foreign_key "army_lists", "users"
+  add_foreign_key "army_translations", "armies", on_delete: :cascade
+  add_foreign_key "equipment_translations", "equipments", on_delete: :cascade
   add_foreign_key "equipments", "troops", on_delete: :nullify
   add_foreign_key "equipments", "units"
   add_foreign_key "extra_item_categories", "armies"
+  add_foreign_key "extra_item_category_translations", "extra_item_categories", on_delete: :cascade
+  add_foreign_key "extra_item_translations", "extra_items", on_delete: :cascade
   add_foreign_key "extra_items", "extra_item_categories"
+  add_foreign_key "magic_item_category_translations", "magic_item_categories", on_delete: :cascade
+  add_foreign_key "magic_item_translations", "magic_items", on_delete: :cascade
   add_foreign_key "magic_items", "armies"
   add_foreign_key "magic_items", "magic_item_categories"
   add_foreign_key "magic_items", "magic_items", column: "override_id"
+  add_foreign_key "magic_standard_translations", "magic_standards", on_delete: :cascade
   add_foreign_key "magic_standards", "armies"
   add_foreign_key "magic_standards", "magic_standards", column: "override_id"
   add_foreign_key "ninth_age_army_organisations", "armies"
@@ -543,15 +550,23 @@ ActiveRecord::Schema.define(version: 20170406143816) do
   add_foreign_key "ninth_age_organisation_groups", "ninth_age_army_organisations", column: "army_organisation_id"
   add_foreign_key "ninth_age_organisation_groups", "ninth_age_organisations", column: "organisation_id"
   add_foreign_key "ninth_age_organisations", "armies"
+  add_foreign_key "special_rule_translations", "special_rules", on_delete: :cascade
   add_foreign_key "special_rules", "troops", on_delete: :nullify
   add_foreign_key "special_rules", "units"
+  add_foreign_key "troop_translations", "troops", on_delete: :cascade
+  add_foreign_key "troop_type_translations", "troop_types", on_delete: :cascade
   add_foreign_key "troops", "troop_types"
   add_foreign_key "troops", "unit_options", on_delete: :nullify
   add_foreign_key "troops", "units"
+  add_foreign_key "unit_category_translations", "unit_categories", on_delete: :cascade
+  add_foreign_key "unit_option_translations", "unit_options", on_delete: :cascade
   add_foreign_key "unit_options", "unit_options", column: "parent_id"
   add_foreign_key "unit_options", "units"
   add_foreign_key "unit_options", "units", column: "mount_id", on_delete: :nullify
+  add_foreign_key "unit_translations", "units", on_delete: :cascade
   add_foreign_key "units", "armies"
   add_foreign_key "units", "unit_categories"
   add_foreign_key "users", "armies", column: "favorite_army_id", on_delete: :nullify
+  add_foreign_key "users_roles", "roles"
+  add_foreign_key "users_roles", "users"
 end

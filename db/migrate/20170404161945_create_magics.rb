@@ -7,15 +7,8 @@ class CreateMagics < ActiveRecord::Migration[5.0]
     end
     add_foreign_key :ninth_age_magics, :ninth_age_versions, column: :version_id
 
-    reversible do |dir|
-      dir.up do
-        NinthAge::Magic.create_translation_table! :name => :string, :description => :text
-      end
-
-      dir.down do
-        NinthAge::Magic.drop_translation_table!
-      end
-    end
+    NinthAge::Magic.create_translation_table! :name => :string, :description => :text
+    add_foreign_key :ninth_age_magic_translations, :ninth_age_magics, column: :ninth_age_magic_id, on_delete: :cascade
 
     create_table :ninth_age_magic_spells do |t|
       t.belongs_to :magic, null: false
@@ -27,15 +20,7 @@ class CreateMagics < ActiveRecord::Migration[5.0]
     end
     add_foreign_key :ninth_age_magic_spells, :ninth_age_magics, column: :magic_id
 
-    reversible do |dir|
-      dir.up do
-        NinthAge::MagicSpell.create_translation_table! :name => :string, :range => :string, :casting_value => :string, :effect => :text
-      end
-
-      dir.down do
-        NinthAge::MagicSpell.drop_translation_table!
-      end
-    end
-
+    NinthAge::MagicSpell.create_translation_table! :name => :string, :range => :string, :casting_value => :string, :effect => :text
+    add_foreign_key :ninth_age_magic_spell_translations, :ninth_age_magic_spells, column: :ninth_age_magic_spell_id, on_delete: :cascade
   end
 end
