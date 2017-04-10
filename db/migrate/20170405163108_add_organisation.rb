@@ -87,7 +87,6 @@ class AddOrganisation < ActiveRecord::Migration[5.0]
 
     remove_column :units, :unit_category_id
     remove_column :army_list_units, :unit_category_id
-    drop_table :unit_category_translations
     drop_table :unit_categories
 
   end
