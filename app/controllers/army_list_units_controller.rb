@@ -41,7 +41,6 @@ class ArmyListUnitsController < ApplicationController
     @army_list.save
 
     @army_list_unit = @army_list.army_list_units.build(unit_id: @base_army_list_unit.unit_id,
-                                                       unit_category_id: @base_army_list_unit.unit_category_id,
                                                        value_points: @base_army_list_unit.value_points,
                                                        size: @base_army_list_unit.size)
     @army_list_unit.army_list_unit_troops << @base_army_list_unit.army_list_unit_troops.collect do |alut|
@@ -147,6 +146,6 @@ class ArmyListUnitsController < ApplicationController
   private
 
   def army_list_unit_params
-    params.require(:army_list_unit).permit(:unit_id, :unit_category_id, :name, :notes, extra_item_ids: [], magic_standard_ids: [], army_list_unit_troops_attributes: [:id, :army_list_unit_id, :troop_id, :size], army_list_unit_unit_options_attributes: [:id, :army_list_unit_id, :unit_option_id, :quantity, :_destroy], army_list_unit_magic_items_attributes: [:id, :army_list_unit_id, :magic_item_id, :quantity, :_destroy])
+    params.require(:army_list_unit).permit(:unit_id, :name, :notes, extra_item_ids: [], magic_standard_ids: [], army_list_unit_troops_attributes: [:id, :army_list_unit_id, :troop_id, :size], army_list_unit_unit_options_attributes: [:id, :army_list_unit_id, :unit_option_id, :quantity, :_destroy], army_list_unit_magic_items_attributes: [:id, :army_list_unit_id, :magic_item_id, :quantity, :_destroy])
   end
 end

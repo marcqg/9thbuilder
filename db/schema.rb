@@ -281,14 +281,14 @@ ActiveRecord::Schema.define(version: 20170406143816) do
   create_table "ninth_age_organisation_changes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "default_organisation_id", default: 0, null: false
     t.integer  "new_organisation_id",     default: 0, null: false
-    t.integer  "figurine_id",             default: 0, null: false
+    t.integer  "unit_id",                 default: 0, null: false
     t.integer  "number",                  default: 0, null: false
     t.integer  "type_target",             default: 0
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
     t.index ["default_organisation_id"], name: "index_ninth_age_organisation_changes_on_default_organisation_id", using: :btree
-    t.index ["figurine_id"], name: "index_ninth_age_organisation_changes_on_figurine_id", using: :btree
     t.index ["new_organisation_id"], name: "index_ninth_age_organisation_changes_on_new_organisation_id", using: :btree
+    t.index ["unit_id"], name: "index_ninth_age_organisation_changes_on_unit_id", using: :btree
   end
 
   create_table "ninth_age_organisation_groups", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -544,11 +544,18 @@ ActiveRecord::Schema.define(version: 20170406143816) do
   add_foreign_key "magic_standard_translations", "magic_standards", on_delete: :cascade
   add_foreign_key "magic_standards", "armies"
   add_foreign_key "magic_standards", "magic_standards", column: "override_id"
+  add_foreign_key "ninth_age_army_organisation_translations", "ninth_age_army_organisations", on_delete: :cascade
   add_foreign_key "ninth_age_army_organisations", "armies"
+  add_foreign_key "ninth_age_magic_spell_translations", "ninth_age_magic_spells", on_delete: :cascade
   add_foreign_key "ninth_age_magic_spells", "ninth_age_magics", column: "magic_id"
+  add_foreign_key "ninth_age_magic_translations", "ninth_age_magics", on_delete: :cascade
   add_foreign_key "ninth_age_magics", "ninth_age_versions", column: "version_id"
+  add_foreign_key "ninth_age_organisation_changes", "ninth_age_organisations", column: "default_organisation_id"
+  add_foreign_key "ninth_age_organisation_changes", "ninth_age_organisations", column: "new_organisation_id"
+  add_foreign_key "ninth_age_organisation_changes", "units"
   add_foreign_key "ninth_age_organisation_groups", "ninth_age_army_organisations", column: "army_organisation_id"
   add_foreign_key "ninth_age_organisation_groups", "ninth_age_organisations", column: "organisation_id"
+  add_foreign_key "ninth_age_organisation_translations", "ninth_age_organisations", on_delete: :cascade
   add_foreign_key "ninth_age_organisations", "armies"
   add_foreign_key "special_rule_translations", "special_rules", on_delete: :cascade
   add_foreign_key "special_rules", "troops", on_delete: :nullify

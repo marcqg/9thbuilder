@@ -1,7 +1,6 @@
 class ArmyListUnit < ApplicationRecord
   belongs_to :army_list
   belongs_to :unit
-  belongs_to :unit_category
   has_many :army_list_unit_troops, -> { order 'position' }, dependent: :destroy
   has_many :army_list_unit_magic_items, dependent: :destroy
   has_many :army_list_unit_magic_standards, dependent: :destroy
@@ -18,7 +17,7 @@ class ArmyListUnit < ApplicationRecord
 
   normalize_attributes :name, :notes
 
-  validates :army_list_id, :unit_id, :unit_category_id, :name, :value_points, :size, presence: true
+  validates :army_list_id, :unit_id, :name, :value_points, :size, presence: true
   validates :value_points, numericality: { greater_than_or_equal_to: 0 }
   validates :size, numericality: { greater_than_or_equal_to: 0, only_integer: true }
   validates :position, numericality: { greater_than_or_equal_to: 1, only_integer: true, allow_nil: true }

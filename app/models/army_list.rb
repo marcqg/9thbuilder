@@ -19,18 +19,19 @@ class ArmyList < ApplicationRecord
   end
 
   def value_points_details
-    rows = ArmyList.connection.select_all "SELECT uc.id id, uct.name name, uc.min_quota min_quota, uc.max_quota max_quota, COUNT(alu.id) count, COALESCE(SUM(alu.value_points), 0.0) value_points
-      FROM unit_categories uc
-      LEFT JOIN unit_category_translations uct ON uct.unit_category_id = uc.id
-      LEFT JOIN army_list_units alu ON alu.unit_category_id = uc.id AND alu.army_list_id = #{id}
-      WHERE uc.min_quota IS NOT NULL OR uc.max_quota IS NOT NULL
-      GROUP BY uc.id, uct.name, uc.min_quota, uc.max_quota
-      ORDER BY uc.id"
 
-
-    rows.each do |row|
-      row['valid'] = row['value_points'] >= value_points * row['min_quota'] / 100 unless row['min_quota'].blank?
-      row['valid'] = row['value_points'] <= value_points * row['max_quota'] / 100 unless row['max_quota'].blank?
-    end
+    # rows = ArmyList.connection.select_all "SELECT uc.id id, uct.name name, uc.min_quota min_quota, uc.max_quota max_quota, COUNT(alu.id) count, COALESCE(SUM(alu.value_points), 0.0) value_points
+    #   FROM ninth_age_organisations o
+    #   LEFT JOIN ninth_age_organisation_translations ot ON ot.ninth_age_organisation_id = o.id
+    #   LEFT JOIN army_list_units alu ON alu.unit_category_id = uc.id AND alu.army_list_id = #{id}
+    #   WHERE uc.min_quota IS NOT NULL OR uc.max_quota IS NOT NULL
+    #   GROUP BY uc.id, uct.name, uc.min_quota, uc.max_quota
+    #   ORDER BY uc.id"
+    #
+    #
+    # rows.each do |row|
+    #   row['valid'] = row['value_points'] >= value_points * row['min_quota'] / 100 unless row['min_quota'].blank?
+    #   row['valid'] = row['value_points'] <= value_points * row['max_quota'] / 100 unless row['max_quota'].blank?
+    # end
   end
 end

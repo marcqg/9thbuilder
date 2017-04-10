@@ -3,6 +3,8 @@ class NinthAge::Organisation < ApplicationRecord
 
   belongs_to :army
 
+  has_and_belongs_to_many  :units
+
   has_many :organisation_groups
 
   has_many :army_lists

@@ -1,5 +1,7 @@
 class Army < ApplicationRecord
-  belongs_to :version
+
+  belongs_to :version, :class_name => 'NinthAge::Version'
+
   has_many :army_lists, dependent: :destroy
   has_many :magic_items, dependent: :destroy
   has_many :magic_standards, dependent: :destroy

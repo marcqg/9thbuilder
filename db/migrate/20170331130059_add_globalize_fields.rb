@@ -22,8 +22,6 @@ class AddGlobalizeFields < ActiveRecord::Migration[5.0]
         add_foreign_key :troop_type_translations, :troop_types, column: :troop_type_id, on_delete: :cascade
         Troop.create_translation_table!({ :name => :string }, { :migrate_data => true, :remove_source_columns => true })
         add_foreign_key :troop_translations, :troops, column: :troop_id, on_delete: :cascade
-        UnitCategory.create_translation_table!({ :name => :string }, { :migrate_data => true, :remove_source_columns => true })
-        add_foreign_key :unit_category_translations, :unit_categories, column: :unit_category_id, on_delete: :cascade
         UnitOption.create_translation_table!({ :name => :string }, { :migrate_data => true, :remove_source_columns => true })
         add_foreign_key :unit_option_translations, :unit_options, column: :unit_option_id, on_delete: :cascade
         Unit.create_translation_table!({ :name => :string }, { :migrate_data => true, :remove_source_columns => true })
@@ -41,7 +39,6 @@ class AddGlobalizeFields < ActiveRecord::Migration[5.0]
         SpecialRule.drop_translation_table! :migrate_data => true
         TroopType.drop_translation_table! :migrate_data => true
         Troop.drop_translation_table! :migrate_data => true
-        UnitCategory.drop_translation_table! :migrate_data => true
         UnitOption.drop_translation_table! :migrate_data => true
         Unit.drop_translation_table! :migrate_data => true
       end

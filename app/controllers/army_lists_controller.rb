@@ -137,7 +137,6 @@ class ArmyListsController < ApplicationController
 
     @base_army_list.army_list_units.each do |base_army_list_unit|
       army_list_unit = @army_list.army_list_units.build(unit_id: base_army_list_unit.unit_id,
-                                                        unit_category_id: base_army_list_unit.unit_category_id,
                                                         value_points: base_army_list_unit.value_points,
                                                         size: base_army_list_unit.size)
       army_list_unit.army_list_unit_troops << base_army_list_unit.army_list_unit_troops.collect do |alut|
