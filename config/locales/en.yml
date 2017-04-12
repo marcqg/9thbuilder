@@ -152,6 +152,12 @@ en:
       show: "Show"
     show:
       back: "Back"
+  army:
+    index:
+      title: "Armies"
+      show: "Show"
+    show:
+      back: "Back"
   magic:
     range: Range
     type: Type

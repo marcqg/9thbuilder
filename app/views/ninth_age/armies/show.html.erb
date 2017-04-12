@@ -1,0 +1,70 @@
+<div class="col-md-12 col-xs-12 col-sm-12 army-<%= @army.id %>">
+  <%= image_tag @army.logo.url, alt: @army.name, height: 99, class: 'block-center' %>
+  <h1 class="text-center"><%= @army.name %></h1>
+
+  <% if @page == 1 %>
+      <% @army.army_organisations.each do |army_organisation| %>
+          <div>
+            <% if @army.army_organisations.count > 1 %>
+                <h2 class="text-center"><%= army_organisation.name %></h2>
+                <p><%= army_organisation.description %></p>
+            <% end %>
+            <ul class="list-flex">
+              <% army_organisation.organisation_groups.each do |organisation_group| %>
+                  <li>
+                    <%= image_tag(organisation_group.organisation.medium_logo_url, alt: organisation_group.organisation.name, size: "75x75") %>
+                    <p><%= organisation_group.organisation.name.gsub(/\(([\w,\ \+\.\(\)\-]*)\)/, '<span class="text-small">(\1)</span>').html_safe %></p>
+                    <% if organisation_group.NoLimit? || organisation_group.NotAllowed? %>
+                        <p><span class="text-small">(<%= organisation_group.display_type_target %>)</span></p>
+                    <% else %>
+                        <p>
+                        <span class="text-small">(<%= organisation_group.target %> <%= organisation_group.display_type_target %>
+                          )</span></p>
+                    <% end %>
+                  </li>
+              <% end %>
+            </ul>
+          </div>
+      <% end %>
+  <% end %>
+
+  <div>
+    <% @units.each do |unit| %>
+        <article style="margin-bottom:40px;" class="unit-<%= unit.id %> text-center col-md-2">
+          <% unit.organisations.where(isSpecialRule: false).each do |organisation| %>
+              <% unless organisation.logo.nil? %>
+                  <%= image_tag organisation.medium_logo_url, size: '75x75', alt: organisation.name, border: 0 %>
+              <% end %>
+          <% end %>
+          <h1><%= unit.name %></h1>
+          <%= link_to t('army.index.show'), ninth_age_army_path(magic) %>
+        </article>
+    <% end %>
+  </div>
+  <div aria-label="Page navigation" class="apple_pagination">
+    <%= will_paginate @units, :container => false %>
+  </div>
+
+  <div class="footer-back">
+    <%= link_to t('army.show.back'), ninth_age_armies_path(@army.version_id), class: 'link-back' %>
+  </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $("article[class*=unit-]").click(function () {
+            window.location = $(this).find("a").attr("href");
+            return false;
+        });
+
+        var highestBox = 0;
+
+        $("article[class*=unit-]").each(function () {
+            if ($(this).height() > highestBox) {
+                highestBox = $(this).height();
+            }
+        })
+
+        $("article[class*=unit-]").height(highestBox);
+    });
+</script>

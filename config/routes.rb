@@ -28,8 +28,19 @@ Rails.application.routes.draw do
     namespace :ninth_age do
       resources :versions,  only: [:index, :show]
 
+      resources :magics,                only: [:show]
+      resources :armies,                only: [:show]
+      resources :army_organisations,    only: [:show]
+      resources :organisations,         only: [:show]
+      resources :organisation_groups,   only: [:show]
+
+      scope '/army-:army_id' do
+        resources :army_organisations,  only: [:index]
+      end
+
       scope '/version-:version_id' do
-        resources :magics,  only: [:index, :show]
+        resources :magics,  only: [:index]
+        resources :armies,  only: [:index]
       end
     end
 

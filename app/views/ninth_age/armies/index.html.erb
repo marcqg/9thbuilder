@@ -1,0 +1,24 @@
+<h1><%= t('army.index.all_armies') %></h1>
+<div>
+  <% @armies.each do |army| %>
+      <article class="col-md-3">
+        <div class="army-<%= army.id %> text-center">
+          <% unless army.logo.nil? %>
+              <%= image_tag army.logo.url, :class => 'img-responsive', alt: army.name, height: 150 %>
+          <% end %>
+          <h4><%= army.name %></h4>
+          <%= link_to t('army.index.show'), ninth_age_armies_path(army.version_id, army.id) %>
+          <p><%= army.version %></p>
+        </div>
+      </article>
+  <% end %>
+</div>
+
+<script>
+  $(document).ready(function () {
+    $("div[class*=army-]").click(function () {
+      window.location = $(this).find("a").attr("href");
+      return false;
+    });
+  });
+</script>

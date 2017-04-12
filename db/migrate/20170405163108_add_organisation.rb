@@ -15,6 +15,7 @@ class AddOrganisation < ActiveRecord::Migration[5.0]
       t.boolean :isSpecialRule, null: false, default: false
       t.timestamps
     end
+    add_attachment :ninth_age_organisations, :logo
     add_foreign_key :ninth_age_organisations, :armies, column: :army_id
 
     NinthAge::Organisation.create_translation_table! :name => :string
@@ -53,8 +54,7 @@ class AddOrganisation < ActiveRecord::Migration[5.0]
     add_index :ninth_age_units_organisations, [ :unit_id, :organisation_id ], name: 'ninth_age_units_organisations_unit_organisation'
     add_index :ninth_age_units_organisations, [ :organisation_id, :unit_id ], name: 'ninth_age_units_organisations_organisation_unit'
 
-
-    unit_categories = UnitCategory.all
+    unit_categories = ArmyList.connection.select_all "SELECT uc.id as id, uc.name as name, uc.min_quota as min_quota, uc.max_quota as max_quota FROM unit_categories uc;"
 
     Army.all.each do |army|
 
@@ -62,19 +62,19 @@ class AddOrganisation < ActiveRecord::Migration[5.0]
 
       unit_categories.each do |unit_category|
 
-        organisation = NinthAge::Organisation.create!({ :name => unit_category.name, :army_id => army.id })
+        organisation = NinthAge::Organisation.create!({ :name => unit_category['name'], :army_id => army.id })
 
         organisation_group = NinthAge::OrganisationGroup.create!({ army_organisation_id: army_organisation.id, organisation_id: organisation.id })
-        if unit_category.min_quota != nil
+        if unit_category['min_quota'] != nil
           organisation_group.type_target = :Min
-          organisation_group.target = unit_category.min_quota
-        elsif unit_category.max_quota != nil
+          organisation_group.target = unit_category['min_quota']
+        elsif unit_category['max_quota'] != nil
           organisation_group.type_target = :Max
-          organisation_group.target = unit_category.max_quota
+          organisation_group.target = unit_category['max_quota']
         end
         organisation_group.save
 
-        Unit.where({ army_id: army.id, unit_category_id: unit_category.id }).each do |unit|
+        Unit.where({ army_id: army.id, unit_category_id: unit_category['id'] }).each do |unit|
 
           unit.organisations << organisation
           unit.save

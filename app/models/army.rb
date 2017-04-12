@@ -2,6 +2,11 @@ class Army < ApplicationRecord
 
   belongs_to :version, :class_name => 'NinthAge::Version'
 
+  has_many :army_organisations, :class_name => 'NinthAge::ArmyOrganisation'
+  has_many :organisation_groups, :class_name => 'NinthAge::OrganisationGroup', through: :army_organisations
+
+  has_many :organisations, :class_name => 'NinthAge::Organisation'
+
   has_many :army_lists, dependent: :destroy
   has_many :magic_items, dependent: :destroy
   has_many :magic_standards, dependent: :destroy

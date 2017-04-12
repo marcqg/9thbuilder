@@ -1,0 +1,1 @@
+json.partial! 'ninth_age/armies/army', ninth_age_army: @army

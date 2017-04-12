@@ -1,0 +1,1 @@
+json.array!(@armies) { |ninth_age_army| json.partial! ninth_age_army }

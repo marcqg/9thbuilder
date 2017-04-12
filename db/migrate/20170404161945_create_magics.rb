@@ -22,5 +22,8 @@ class CreateMagics < ActiveRecord::Migration[5.0]
 
     NinthAge::MagicSpell.create_translation_table! :name => :string, :range => :string, :casting_value => :string, :effect => :text
     add_foreign_key :ninth_age_magic_spell_translations, :ninth_age_magic_spells, column: :ninth_age_magic_spell_id, on_delete: :cascade
+
+    add_attachment :armies, :logo
+    add_attachment :ninth_age_magics, :logo
   end
 end

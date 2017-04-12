@@ -1,1 +1,0 @@
-json.extract! ninth_age_organisation_change, :default_organisation_id, :new_organisation_id, :figurine_id, :number, :type_target

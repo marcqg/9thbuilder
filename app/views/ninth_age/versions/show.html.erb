@@ -7,6 +7,11 @@
       <h4><%= t('magic.index.title') %></h4>
       <%= link_to t('version.index.show'), ninth_age_magics_path(@version.id) %>
     </article>
+    <article class="version-<%= @version.id %> col-md-4 col-xs-12 col-sm-6 text-center">
+      <%= image_tag asset_path('army.jpg'), alt: t('army.index.title'), height: 99, class: 'block-center' %>
+      <h4><%= t('army.index.title') %></h4>
+      <%= link_to t('version.index.show'), ninth_age_armies_path(@version.id) %>
+    </article>
   </div>
 
   <div class="footer-back">

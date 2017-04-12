@@ -4,4 +4,8 @@ class NinthAge::Version < ApplicationRecord
 
   translates :name
   globalize_accessors
+
+  def cache_key
+    super + '-ninth-age-' + Globalize.locale.to_s
+  end
 end

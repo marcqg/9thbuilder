@@ -93,5 +93,8 @@ gem 'font-awesome-rails'
 #User a bitmack for enum (multi values)
 gem 'bitmask_attributes'
 
+#Pagination
+gem 'will_paginate', '~> 3.1.0'
+
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

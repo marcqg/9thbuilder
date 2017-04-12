@@ -1,4 +1,5 @@
 class Unit < ApplicationRecord
+  self.per_page = 18
 
   belongs_to :army
 
