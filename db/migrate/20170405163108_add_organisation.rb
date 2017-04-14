@@ -44,15 +44,15 @@ class AddOrganisation < ActiveRecord::Migration[5.0]
     add_foreign_key :ninth_age_organisation_changes, :ninth_age_organisations, column: :new_organisation_id
     add_foreign_key :ninth_age_organisation_changes, :units, column: :unit_id
 
-    create_table :ninth_age_units_organisations, id: false do |t|
+    create_table :ninth_age_organisations_units, id: false do |t|
       t.belongs_to :unit, index: false, null: false, default: 0
       t.belongs_to :organisation, index: false, null: false, default: 0
     end
-    add_foreign_key :ninth_age_units_organisations, :units, column: :unit_id
-    add_foreign_key :ninth_age_units_organisations, :ninth_age_organisations, column: :organisation_id
+    add_foreign_key :ninth_age_organisations_units, :units, column: :unit_id
+    add_foreign_key :ninth_age_organisations_units, :ninth_age_organisations, column: :organisation_id
 
-    add_index :ninth_age_units_organisations, [ :unit_id, :organisation_id ], name: 'ninth_age_units_organisations_unit_organisation'
-    add_index :ninth_age_units_organisations, [ :organisation_id, :unit_id ], name: 'ninth_age_units_organisations_organisation_unit'
+    add_index :ninth_age_organisations_units, [ :unit_id, :organisation_id ], name: 'ninth_age_units_organisations_unit_organisation'
+    add_index :ninth_age_organisations_units, [ :organisation_id, :unit_id ], name: 'ninth_age_units_organisations_organisation_unit'
 
     unit_categories = ArmyList.connection.select_all "SELECT uc.id as id, uc.name as name, uc.min_quota as min_quota, uc.max_quota as max_quota FROM unit_categories uc;"
 
@@ -66,7 +66,7 @@ class AddOrganisation < ActiveRecord::Migration[5.0]
 
         organisation_group = NinthAge::OrganisationGroup.create!({ army_organisation_id: army_organisation.id, organisation_id: organisation.id })
         if unit_category['min_quota'] != nil
-          organisation_group.type_target = :Min
+          organisation_group.type_target = :Least
           organisation_group.target = unit_category['min_quota']
         elsif unit_category['max_quota'] != nil
           organisation_group.type_target = :Max
@@ -84,9 +84,13 @@ class AddOrganisation < ActiveRecord::Migration[5.0]
       end
 
     end
-
+    remove_foreign_key :units, :unit_categories
+    remove_index :units, :unit_category_id
     remove_column :units, :unit_category_id
+
+    remove_index :army_list_units, :unit_category_id
     remove_column :army_list_units, :unit_category_id
+
     drop_table :unit_categories
 
   end
