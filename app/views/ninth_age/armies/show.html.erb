@@ -36,8 +36,8 @@
                   <%= image_tag organisation.medium_logo_url, size: '75x75', alt: organisation.name, border: 0 %>
               <% end %>
           <% end %>
-          <h1><%= unit.name %></h1>
-          <%= link_to t('army.index.show'), ninth_age_army_path(magic) %>
+          <h4><%= unit.name %></h4>
+          <%= link_to t('army.index.show'), ninth_age_unit_path(unit) %>
         </article>
     <% end %>
   </div>
