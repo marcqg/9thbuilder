@@ -9,16 +9,11 @@
 </div>
 
 <div id="subheader" class="col-md-11 army_list">
-  <%= form_tag edit_army_list_path(@army_list), :method => 'get', 'data-popin' => true, 'class' => 'actions' do %>
-      <%= submit_tag '&rarr;'.html_safe %>
-      <%= select_tag 'action', options_for_select([
-                                                      [t('army_list.show.edit'), edit_army_list_path(@army_list)],
-                                                      [t('army_list.show.export'), export_army_list_path(@army_list, 'full', 'magics')],
-                                                      [t('army_list.show.duplicate'), new_from_army_list_path(@army_list)],
-                                                      [t('army_list.show.delete'), delete_army_list_path(@army_list)]
-                                                  ]), :id => nil %>
-  <% end %>
-  <button data-url="<%= export_army_list_path @army_list, :verbosity => 'full', :format => 'pdf', :magics => 'magics' %>" data-target="_blank" class="left"><%= t 'army_list.show.print' %></button>
+  <%= link_to '<i class="fa fa-trash fa-2x pull-right" aria-hidden="true"></i>'.html_safe, delete_army_list_path(@army_list), { 'data-popin' => true } %>
+  <%= link_to '<i class="fa fa-clone fa-2x pull-right" aria-hidden="true"></i>'.html_safe, new_from_army_list_path(@army_list), { 'data-popin' => true } %>
+  <%= link_to '<i class="fa fa-download fa-2x pull-right" aria-hidden="true"></i>'.html_safe, export_army_list_path(@army_list, 'full', 'magics'), { 'data-popin' => true } %>
+  <%= link_to '<i class="fa fa-pencil-square-o fa-2x pull-right" aria-hidden="true"></i>'.html_safe, edit_army_list_path(@army_list), { 'data-popin' => true } %>
+  <%= link_to '<i class="fa fa-print fa-2x" aria-hidden="true"></i>'.html_safe, export_army_list_path(@army_list, :verbosity => 'full', :format => 'pdf', :magics => 'magics'), { 'target' => '_blank', 'class' => 'left' } %>
 </div>
 
 <div class="row">

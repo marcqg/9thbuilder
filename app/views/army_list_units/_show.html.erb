@@ -17,14 +17,9 @@
       <strong><%= value_points army_list_unit.value_points %></strong> points
     </div>
     <div class="actions pull-right">
-      <%= form_tag edit_army_list_army_list_unit_path(@army_list, army_list_unit), :method => "get", "data-popin" => true do %>
-        <%= select_tag 'action', options_for_select([
-          [ t('army_list_unit.show.edit'), edit_army_list_army_list_unit_path(@army_list, army_list_unit) ],
-          [ t('army_list_unit.show.duplicate'), new_from_army_list_army_list_unit_path(@army_list, army_list_unit) ],
-          [ t('army_list_unit.show.delete'), delete_army_list_army_list_unit_path(@army_list, army_list_unit) ]
-        ]), :id => nil %>
-        <%= submit_tag '&rarr;'.html_safe %>
-      <% end %>
+      <%= link_to '<i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i>'.html_safe, edit_army_list_army_list_unit_path(@army_list, army_list_unit), { 'data-popin' => true } %>
+      <%= link_to '<i class="fa fa-clone fa-2x" aria-hidden="true"></i>'.html_safe, new_from_army_list_army_list_unit_path(@army_list, army_list_unit), { 'data-popin' => true } %>
+      <%= link_to '<i class="fa fa-trash fa-2x" aria-hidden="true"></i>'.html_safe, delete_army_list_army_list_unit_path(@army_list, army_list_unit), { 'data-popin' => true } %>
     </div>
     <div class="clearboth"></div>
   </div>

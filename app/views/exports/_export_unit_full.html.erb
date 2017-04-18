@@ -28,7 +28,7 @@
   <!-- TROOPS -->
   <%= render :partial => 'export_unit_troop', :collection => army_list_unit.army_list_unit_troops.select { |alut| alut.troop.unit_option.nil? or army_list_unit.unit_options.include?(alut.troop.unit_option) }, :as => :alut %>
   <% if army_list_unit.unit_options.include?(mounts_option) %>
-      <%= render :partial => 'export_unit_troop', :collection => mounts_option.mount.troops.all, :as => :troop %>
+      <%= render :partial => 'export_troop', :collection => mounts_option.mount.troops.all, :as => :troop %>
   <% end %>
 
   <!-- EQUIPMENTS -->
