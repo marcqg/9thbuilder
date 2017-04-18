@@ -7,7 +7,7 @@
     <div class="name">
       <strong><%=transliterate army_list_unit.name.truncate(32) %></strong>
         <% if army_list_unit.unit.is_unique? %>
-        <i><%= army_list_unit.unit.unit_category.name %> Unique</i>
+        <i>Unique</i>
         <% else %>
         <%= army_list_unit.unit.name %>
         <% end %>
@@ -16,7 +16,7 @@
     <div class="value_points">
       <strong><%= value_points army_list_unit.value_points %></strong> points
     </div>
-    <div class="actions" style="background: url(<%= image_path "/system/unit_categories/#{army_list_unit.unit_category.id}/ribbon_#{locale}.png" %>) 100% 100% no-repeat">
+    <div class="actions pull-right">
       <%= form_tag edit_army_list_army_list_unit_path(@army_list, army_list_unit), :method => "get", "data-popin" => true do %>
         <%= select_tag 'action', options_for_select([
           [ t('army_list_unit.show.edit'), edit_army_list_army_list_unit_path(@army_list, army_list_unit) ],
@@ -26,6 +26,7 @@
         <%= submit_tag '&rarr;'.html_safe %>
       <% end %>
     </div>
+    <div class="clearboth"></div>
   </div>
 
   <div class="army_list_unit_details" style="display:none">

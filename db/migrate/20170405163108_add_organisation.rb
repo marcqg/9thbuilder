@@ -51,8 +51,21 @@ class AddOrganisation < ActiveRecord::Migration[5.0]
     add_foreign_key :ninth_age_organisations_units, :units, column: :unit_id
     add_foreign_key :ninth_age_organisations_units, :ninth_age_organisations, column: :organisation_id
 
-    add_index :ninth_age_organisations_units, [ :unit_id, :organisation_id ], name: 'ninth_age_units_organisations_unit_organisation'
-    add_index :ninth_age_organisations_units, [ :organisation_id, :unit_id ], name: 'ninth_age_units_organisations_organisation_unit'
+    add_index :ninth_age_organisations_units, [ :unit_id, :organisation_id ], name: 'ninth_age_units_organisations_unit_organisation', :unique => true
+    add_index :ninth_age_organisations_units, [ :organisation_id, :unit_id ], name: 'ninth_age_units_organisations_organisation_unit', :unique => true
+
+    create_table :ninth_age_army_list_organisations do |t|
+      t.belongs_to :army_list, index: false, null: false, default: 0
+      t.belongs_to :organisation, index: false, null: false, default: 0
+      t.integer :pts, null: false, default: 0
+      t.integer :rate, null: false, default: 0
+      t.boolean :good, null: false, default: false
+    end
+    add_foreign_key :ninth_age_army_list_organisations, :army_lists, column: :army_list_id
+    add_foreign_key :ninth_age_army_list_organisations, :ninth_age_organisations, column: :organisation_id
+
+    add_index :ninth_age_army_list_organisations, [ :army_list_id, :organisation_id ], name: 'ninth_age_army_list_organisations_army_list_organisation', :unique => true
+    add_index :ninth_age_army_list_organisations, [ :organisation_id, :army_list_id ], name: 'ninth_age_army_list_organisations_organisation_army_list', :unique => true
 
     unit_categories = ArmyList.connection.select_all "SELECT uc.id as id, uc.name as name, uc.min_quota as min_quota, uc.max_quota as max_quota FROM unit_categories uc;"
 
@@ -80,10 +93,18 @@ class AddOrganisation < ActiveRecord::Migration[5.0]
           unit.save
 
         end
-
       end
-
     end
+
+    add_column :army_lists, :army_organisation_id, :integer, :default => 0, :null => true
+    add_index :army_lists, :army_organisation_id
+
+    ActiveRecord::Base.connection.execute('UPDATE army_lists
+                                      SET army_organisation_id = (SELECT id FROM ninth_age_army_organisations WHERE army_lists.army_id = ninth_age_army_organisations.army_id)
+                                      where army_organisation_id = 0;')
+
+    add_foreign_key :army_lists, :army_organisations, column: :army_organisation_id, on_delete: :cascade
+
     remove_foreign_key :units, :unit_categories
     remove_index :units, :unit_category_id
     remove_column :units, :unit_category_id

@@ -1,11 +1,34 @@
 <%= form_for @army_list, :validate => @army_list.persisted? do |f| %>
-  <%= render "shared/form_errors", :object => @army_list %>
+    <%= render "shared/form_errors", :object => @army_list %>
 
-  <% unless @army_list.persisted? %>
-  <p><%= f.collection_select :army_id, Army.order(:name), :id, :name, :disabled => Army.disabled_or_obsolete.pluck(:id) %></p>
-  <% end %>
+    <% unless @army_list.persisted? %>
+        <p><%= f.collection_select :army_id, Army.order(:name), :id, :name, :disabled => Army.disabled_or_obsolete.pluck(:id) %></p>
+        <p><%= f.collection_select :army_organisation_id, NinthAge::ArmyOrganisation.where(:army_id => @army_list.army_id).order(:name), :id, :name %></p>
+    <% end %>
 
-  <p><%= f.text_field :name, :placeholder => t('army_list.form.name'), :class => "input_xxlarge" %></p>
-  <p><%= f.text_area :notes, :placeholder => t('army_list.form.notes'), :size => "" %></p>
-  <p><%= f.submit t(:save) %></p>
+    <p><%= f.text_field :name, :placeholder => t('army_list.form.name'), :class => "input_xxlarge" %></p>
+    <p><%= f.text_area :notes, :placeholder => t('army_list.form.notes'), :size => "" %></p>
+    <p><%= f.submit t(:save) %></p>
 <% end %>
+
+<script>
+    $(document).on('change', '#army_list_army_id', function (e) {
+        $.ajax({
+            url: Routes["ninth_age_army_organisations_" + document.documentElement.lang + "_path"]($(this).val()),
+            dataType: 'json',
+            cache: false,
+            success: function (data) {
+                var element = $('#army_list_army_organisation_id');
+                element.empty();
+
+                $.map(data, function (item) {
+                    element.append("<option value=" + item.id + ">" + item.name + "</option>");
+                })
+            }.bind(this),
+            error: function (xhr, status, err) {
+                console.error("AJAX Error: #{status}");
+            }.bind(this)
+        });
+    });
+
+</script>

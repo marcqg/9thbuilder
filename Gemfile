@@ -96,5 +96,8 @@ gem 'bitmask_attributes'
 #Pagination
 gem 'will_paginate', '~> 3.1.0'
 
+#Export route in js file
+gem 'js-routes'
+
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

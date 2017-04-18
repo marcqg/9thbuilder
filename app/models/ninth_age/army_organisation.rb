@@ -3,7 +3,7 @@ class NinthAge::ArmyOrganisation < ApplicationRecord
 
   belongs_to :army
   has_many :organisation_groups
-  has_many :organisations
+  has_many :organisations, through: :organisation_groups
 
   translates :name, :description
   globalize_accessors
