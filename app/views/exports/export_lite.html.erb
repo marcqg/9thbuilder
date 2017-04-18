@@ -23,4 +23,4 @@
   </ul>
 </div>
 
-<%= render :partial => "army_list_units/export_lite.html.erb", :collection => @army_list.army_list_units, :as => :army_list_unit, :locals => { :include_magics => @include_magics } %>
+<%= render :partial => 'export_unit_lite', :collection => @army_list.army_list_units, :as => :army_list_unit, :locals => {:include_magics => @include_magics } %>

@@ -9,7 +9,7 @@ Rails.application.routes.draw do
     devise_for :users
 
     get 'army_lists/:uuid.pdf', to: redirect('/army_lists/%{id}/export-full-magics.pdf')
-    get 'army_lists/:uuid/export-:verbosity-:magics' => 'army_lists#export', as: :export_army_list
+    get 'army_lists/:uuid/export-:verbosity-:magics' => 'exports#export', as: :export_army_list
 
     resources :army_lists, param: :uuid do
       get 'delete', on: :member
