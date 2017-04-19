@@ -174,7 +174,6 @@ input[type=number] {
 
 .army_list_unit_new {
   clear: right;
-  float: right;
   display: block;
   padding-top: 45px;
   padding-right: 10px;
@@ -186,6 +185,7 @@ input[type=number] {
   text-decoration: none;
   background: image-url("bt_new_army_list_unit.png") no-repeat;
   color: #000;
+  margin-top: 50px;
 }
 
 .army_list_value_points, .army_list_notes, .army_list_unit_new {
@@ -198,10 +198,8 @@ input[type=number] {
 }
 
 .army_list_units_overview {
-  float: left;
   position: relative;
   padding: 0;
-  height: 60px;
 
   li {
     padding: 6px 0 6px 15px;

@@ -1,4 +1,7 @@
 class ArmyListsController < ApplicationController
+  before_action do |controller|
+    authenticate_user!
+  end
 
   # GET /army_lists
   # GET /army_lists.xml

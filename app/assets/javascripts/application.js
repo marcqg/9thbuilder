@@ -1,15 +1,12 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery-ui
-//= require jquery.ui.touch-punch
-//= require jquery.formalize
-//= require jquery.colorbox
+//= require_tree ./common
 
 //= require bootstrap
 
 //= require js-routes
 
-//= require_tree ./common
 
 jQuery(function($) {
 

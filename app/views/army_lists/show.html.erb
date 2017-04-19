@@ -9,24 +9,36 @@
 </div>
 
 <div id="subheader" class="col-md-11 army_list">
-  <%= link_to '<i class="fa fa-trash fa-2x pull-right" aria-hidden="true"></i>'.html_safe, delete_army_list_path(@army_list), { 'data-popin' => true } %>
-  <%= link_to '<i class="fa fa-clone fa-2x pull-right" aria-hidden="true"></i>'.html_safe, new_from_army_list_path(@army_list), { 'data-popin' => true } %>
-  <%= link_to '<i class="fa fa-download fa-2x pull-right" aria-hidden="true"></i>'.html_safe, export_army_list_path(@army_list, 'full', 'magics'), { 'data-popin' => true } %>
-  <%= link_to '<i class="fa fa-pencil-square-o fa-2x pull-right" aria-hidden="true"></i>'.html_safe, edit_army_list_path(@army_list), { 'data-popin' => true } %>
-  <%= link_to '<i class="fa fa-print fa-2x" aria-hidden="true"></i>'.html_safe, export_army_list_path(@army_list, :verbosity => 'full', :format => 'pdf', :magics => 'magics'), { 'target' => '_blank', 'class' => 'left' } %>
+  <%= link_to '<i class="fa fa-trash fa-2x pull-right" aria-hidden="true"></i>'.html_safe, delete_army_list_path(@army_list), {'data-popin' => true} %>
+  <%= link_to '<i class="fa fa-clone fa-2x pull-right" aria-hidden="true"></i>'.html_safe, new_from_army_list_path(@army_list), {'data-popin' => true} %>
+  <%= link_to '<i class="fa fa-download fa-2x pull-right" aria-hidden="true"></i>'.html_safe, export_army_list_path(@army_list, 'full', 'magics'), {'data-popin' => true} %>
+  <%= link_to '<i class="fa fa-pencil-square-o fa-2x pull-right" aria-hidden="true"></i>'.html_safe, edit_army_list_path(@army_list), {'data-popin' => true} %>
+  <%= link_to '<i class="fa fa-print fa-2x" aria-hidden="true"></i>'.html_safe, export_army_list_path(@army_list, :verbosity => 'full', :format => 'pdf', :magics => 'magics'), {'target' => '_blank', 'class' => 'left'} %>
 </div>
 
-<div class="row">
+<div class="row" id="app-army-list">
 
-  <ol class="army_list_units_overview col-md-10 col-sm-12" data-url="<%= sort_army_list_army_list_units_path @army_list %>">
-    <%= render partial: 'army_list_units/show', collection: @army_list.army_list_units, as: :army_list_unit %>
-  </ol>
+  <div class="col-md-9">
+    <h4 class="text-center"><%= @army_list.army_organisation.name %></h4>
+    <p><%= @army_list.army_organisation.description %></p>
+    <ul class="list-flex">
+      <% @army_list.army_organisation.organisation_groups.each do |organisation_group| %>
+          <% army_list_organisation = @army_list.army_list_organisations.find_by(:organisation_id => organisation_group.organisation_id) %>
+          <li>
+            <%= image_tag(organisation_group.organisation.medium_logo_url, alt: organisation_group.organisation.name, size: '75x75') %>
+            <p><%= organisation_group.organisation.name.gsub(/\((.*)\)/, '<span class="text-small">($1)</span>') %></p>
+            <p>
+              <span class="<%= (army_list_organisation != nil && army_list_organisation.good ? 'highlight-green' : 'highlight-red') %>"><%= army_list_organisation != nil ? army_list_organisation.rate : 0 %>% <small>(<%= army_list_organisation.pts %> pts)</small></span>
+              <% if !organisation_group.NoLimit? %>
+                  <span class="text-small">(<%= organisation_group.target %>% <%= organisation_group.type_target %>)</span>
+              <% end %>
+            </p>
+          </li>
+      <% end %>
+    </ul>
+  </div>
 
-  <div class="col-md-2 col-sm-12 army-list-zone-action">
-
-    <div class="army_list_value_points">
-      <%= render 'value_points' %>
-    </div>
+  <div class="col-md-3 col-sm-12 army-list-zone-action">
     <% if @army_list.notes? %>
         <div class="army_list_notes">
           <h3><%= t 'army_list.show.notes' %></h3>
@@ -42,5 +54,7 @@
 
   </div>
 
+  <ol class="army_list_units_overview col-md-12 col-sm-12" data-url="<%= sort_army_list_army_list_units_path @army_list %>">
+    <%= render partial: 'army_list_units/show', collection: @army_list.army_list_units, as: :army_list_unit %>
+  </ol>
 </div>
-
