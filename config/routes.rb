@@ -9,7 +9,7 @@ Rails.application.routes.draw do
     devise_for :users
 
     get 'army_lists/:uuid.pdf', to: redirect('/army_lists/%{id}/export-full-magics.pdf')
-    get 'army_lists/:uuid/export-:verbosity-:magics' => 'army_lists#export', as: :export_army_list
+    get 'army_lists/:uuid/export-:verbosity-:magics' => 'exports#export', as: :export_army_list
 
     resources :army_lists, param: :uuid do
       get 'delete', on: :member
@@ -24,6 +24,27 @@ Rails.application.routes.draw do
         post 'sort', on: :collection
       end
     end
+
+    namespace :ninth_age do
+      resources :versions,              only: [:index, :show]
+
+      resources :magics,                only: [:show]
+      resources :armies,                only: [:show]
+      resources :army_organisations,    only: [:show]
+      resources :organisations,         only: [:show]
+      resources :organisation_groups,   only: [:show]
+      resources :units,                 only: [:show]
+
+      scope '/army-:army_id' do
+        resources :army_organisations,  only: [:index]
+      end
+
+      scope '/version-:version_id' do
+        resources :magics,              only: [:index]
+        resources :armies,              only: [:index]
+      end
+    end
+
     # You can have the root of your site routed with "root"
     root 'home#index'
   end

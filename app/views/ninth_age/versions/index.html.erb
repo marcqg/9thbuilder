@@ -1,0 +1,9 @@
+<h1><%= t('version.index.title') %></h1>
+<div>
+  <% @versions.each do |version| %>
+      <article class="version-<%= version.id %> col-md-4 col-xs-12 col-sm-6 text-center">
+          <h4><%= version.name %></h4>
+          <%= link_to t('version.index.show'), ninth_age_version_path(version) %>
+      </article>
+  <% end %>
+</div>

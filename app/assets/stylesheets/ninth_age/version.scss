@@ -1,0 +1,10 @@
+article[class^="version-"] {
+  padding: 10px;
+  min-height: 150px;
+  cursor: pointer;
+
+  > h1, > h4{
+    padding: 10px;
+    margin: 0;
+  }
+}

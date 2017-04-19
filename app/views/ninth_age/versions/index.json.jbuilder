@@ -1,0 +1,1 @@
+json.array! @ninth_age_versions, partial: 'ninth_age/versions/version', as: :ninth_age_version

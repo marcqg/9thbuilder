@@ -5,7 +5,7 @@ class ArmyListUnitsController < ApplicationController
   # GET /army_list/1/army_list_units/new.xml
   def new
     @army_list = current_user.army_lists.find_by_uuid!(params[:army_list_uuid])
-    @army_list_unit = @army_list.army_list_units.build(unit_id: @army_list.army.units.core_category.first.id)
+    @army_list_unit = @army_list.army_list_units.build(unit_id: @army_list.army.units.first.id)
 
     respond_to do |format|
       format.html # new.html.erb
@@ -41,7 +41,6 @@ class ArmyListUnitsController < ApplicationController
     @army_list.save
 
     @army_list_unit = @army_list.army_list_units.build(unit_id: @base_army_list_unit.unit_id,
-                                                       unit_category_id: @base_army_list_unit.unit_category_id,
                                                        value_points: @base_army_list_unit.value_points,
                                                        size: @base_army_list_unit.size)
     @army_list_unit.army_list_unit_troops << @base_army_list_unit.army_list_unit_troops.collect do |alut|
@@ -81,6 +80,7 @@ class ArmyListUnitsController < ApplicationController
     respond_to do |format|
       if @army_list_unit.save
         @army_list.reload
+        update_organisations
 
         format.html { redirect_to @army_list }
         format.xml  { render xml: @army_list_unit, status: :created, location: @army_list_unit }
@@ -101,6 +101,7 @@ class ArmyListUnitsController < ApplicationController
     respond_to do |format|
       if @army_list_unit.update(army_list_unit_params)
         @army_list_unit.save
+        update_organisations
 
         format.html { redirect_to @army_list }
         format.xml  { head :ok }
@@ -129,6 +130,8 @@ class ArmyListUnitsController < ApplicationController
     @army_list_unit = @army_list.army_list_units.find(params[:id])
     @army_list_unit.destroy
 
+    update_organisations
+
     respond_to do |format|
       format.html { redirect_to @army_list }
       format.xml  { head :ok }
@@ -147,6 +150,102 @@ class ArmyListUnitsController < ApplicationController
   private
 
   def army_list_unit_params
-    params.require(:army_list_unit).permit(:unit_id, :unit_category_id, :name, :notes, extra_item_ids: [], magic_standard_ids: [], army_list_unit_troops_attributes: [:id, :army_list_unit_id, :troop_id, :size], army_list_unit_unit_options_attributes: [:id, :army_list_unit_id, :unit_option_id, :quantity, :_destroy], army_list_unit_magic_items_attributes: [:id, :army_list_unit_id, :magic_item_id, :quantity, :_destroy])
+    params.require(:army_list_unit).permit(:unit_id, :name, :notes, extra_item_ids: [], magic_standard_ids: [], army_list_unit_troops_attributes: [:id, :army_list_unit_id, :troop_id, :size], army_list_unit_unit_options_attributes: [:id, :army_list_unit_id, :unit_option_id, :quantity, :_destroy], army_list_unit_magic_items_attributes: [:id, :army_list_unit_id, :magic_item_id, :quantity, :_destroy])
+  end
+
+  def update_organisations
+
+    NinthAge::ArmyListOrganisation.where(army_list_id: @army_list.id).update_all(pts: 0, rate: 0)
+
+    @army_list.army_list_units.each do |army_list_unit|
+
+      #Sum points for all figurines
+      army_list_unit.unit.organisations.each do |organisation|
+
+        organisation_change = NinthAge::OrganisationChange.find_by({unit_id: army_list_unit.unit_id, default_organisation_id: organisation.id})
+        isChange = nil != organisation_change && ((organisation_change.Min? && type_target.number < unit.number) || (organisation_change.Max? && type_target.number > unit.number))
+
+        org_id = (isChange ? organisation_change.new_organisation_id : organisation.id)
+
+        organisation_rate = NinthAge::ArmyListOrganisation.find_by(organisation_id: org_id, army_list_id: @army_list.id)
+
+        #if the organisation not exist, create and set properties
+        if nil == organisation_rate
+          organisation_rate = NinthAge::ArmyListOrganisation.new
+          organisation_rate.army_list_id = @army_list.id
+          organisation_rate.organisation_id = organisation.id
+          organisation_rate.pts = army_list_unit.value_points
+        else
+          organisation_rate.pts += army_list_unit.value_points
+        end
+
+        organisation_rate.save
+      end
+
+      #Sum points for mounts
+      # mountOption = unit.options.find_by({type_option: :Mount})
+      # if nil != mountOption
+      #
+      #   mount = mountOption.figurine_mount.figurine;
+      #   mount.organisations.each do |mount_organisation|
+      #
+      #     figurine_has_organisation = unit.figurine.organisations.find(mount_organisation.id);
+      #     if nil != figurine_has_organisation
+      #
+      #       organisation_rate = NinthAge::ArmyUserOrganisation.find_by(organisation_id: mount_organisation.id, army_list_id: @unit.army_list_id)
+      #
+      #       if nil == organisation_rate
+      #         organisation_rate = NinthAge::ArmyUserOrganisation.new
+      #         organisation_rate.army_list_id = @unit.army_list_id
+      #         organisation_rate.organisation_id = organisation.id
+      #         organisation_rate.pts = unit.value_points
+      #       else
+      #         organisation_rate.pts += unit.value_points
+      #       end
+      #
+      #       organisation_rate.save
+      #
+      #     end
+      #   end
+      # end
+    end
+
+    pts = NinthAge::ArmyListOrganisation.where(army_list_id: @army_list.id).map(&:pts).reduce(0, :+)
+    if pts != 0
+      NinthAge::ArmyListOrganisation.where(army_list_id: @army_list.id).each do |organisation|
+        organisation.rate = (organisation.pts * 100 / pts).round
+        organisation.save
+      end
+    end
+
+    army_organisation = NinthAge::ArmyOrganisation.find(@army_list.army_organisation_id)
+    army_organisation.organisation_groups.each do |organisation_group|
+
+      puts organisation_group.id
+
+      organisation = NinthAge::ArmyListOrganisation.find_by(army_list_id: @army_list.id, organisation_id: organisation_group.organisation_id)
+      puts organisation != nil
+      puts organisation_group.type_target
+
+      if organisation == nil
+        organisation = NinthAge::ArmyListOrganisation.new
+        organisation.army_list_id = @army_list.id
+        organisation.organisation_id = organisation_group.organisation_id
+        organisation.save
+      end
+
+      case organisation_group.type_target.to_sym
+        when :NoLimit
+          organisation.good = true
+        when :Max
+          organisation.good = organisation.rate < organisation_group.target
+        when :Least
+          organisation.good = organisation.rate > organisation_group.target
+        when :NotAllowed
+          organisation.good = organisation.rate == 0
+      end
+
+      organisation.save
+    end
   end
 end

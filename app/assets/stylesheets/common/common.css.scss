@@ -140,6 +140,10 @@ form.button_to, form.button_to div {
   p {
     margin: 0 !important;
   }
+
+  a > i {
+    color:black;
+  }
 }
 
 #content {
@@ -147,11 +151,8 @@ form.button_to, form.button_to div {
 }
 
 #footer {
-  padding: 20px 0;
-  // height: 30px;
   // background: image-url("bg_footer.png") 50% 100% no-repeat;
   position: absolute;
-  bottom: 0;
   width: 100%;
 }
 

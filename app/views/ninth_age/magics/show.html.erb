@@ -1,0 +1,63 @@
+<div class="col-md-12 col-xs-12 col-sm-12 magic-<%= @magic.id %>">
+  <%= image_tag @magic.logo.url, alt: @magic.name, height: 99, class: 'block-center' %>
+  <h1 class="text-center"><%= @magic.name %></h1>
+
+  <div>
+    <p><%= @magic.display_description %></p>
+  </div>
+
+  <div class="row">
+    <% @spells.each.with_index do |spell, index| %>
+        <div class="col-md-3 col-xs-4 col-sm-6 spell-<%= index %>">
+          <h4 class="text-center"><span>(<%= spell.display_type_lvl %>)</span> <%= spell.name %></h4>
+          <div class="info-magic">
+            <% if spell.casting_value != nil %>
+                <label><%= t('magic.casting') %> :</label>
+                <p><%= spell.display_casting_value %></p>
+            <% end %>
+          </div>
+          <div class="info-magic">
+            <% if spell.range != '' %>
+                <label><%= t('magic.range') %> :</label>
+                <p><%= spell.display_range %></p>
+            <% end %>
+          </div>
+          <div class="info-magic">
+            <% if spell.type_target != '' %>
+                <label><%= t('magic.type') %> :</label>
+                <p><%= spell.display_type_target %></p>
+            <% end %>
+          </div>
+          <div class="info-magic">
+            <% if spell.duration != '' %>
+                <label><%= t('magic.duration') %> :</label>
+                <p><%= spell.display_duration %></p>
+            <% end %>
+          </div>
+          <div class="info-magic">
+            <% if spell.effect != '' %>
+                <label><%= t('magic.effect') %> :</label>
+                <p><%= spell.display_effect %></p>
+            <% end %>
+          </div>
+        </div>
+    <% end %>
+  </div>
+  <div class="footer-back">
+    <%= link_to t('magic.show.back'), ninth_age_magics_path(@magic.version_id), class: 'link-back' %>
+  </div>
+</div>
+
+<script>
+  $(document).ready(function () {
+    var highestBox = 0;
+
+    $("div[class*=spell-]").each(function () {
+      if ($(this).height() > highestBox) {
+        highestBox = $(this).height();
+      }
+    })
+
+    $("div[class*=spell-]").height(highestBox);
+  });
+</script>

@@ -1,32 +1,14 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery-ui
-//= require jquery.ui.touch-punch
-//= require jquery.formalize
-//= require jquery.colorbox
+//= require_tree ./common
 
 //= require bootstrap
 
+//= require js-routes
+
+
 jQuery(function($) {
-
-  $('#header .welcome strong').click(function() {
-    $(this).toggleClass('over');
-    $('#header .menu').css('width', $(this).css('width')).toggle();
-  });
-
-  $('#header .welcome .lang').click(function() {
-    $(this).toggleClass('over');
-    $('#header .menu-lang').toggle( "slow" );
-  });
-
-  $('body').click(function(evt) {
-    $('#header .menu').hide();
-    $('#header .welcome strong').removeClass('over')
-  });
-
-  $('#header').click(function(evt){
-    evt.stopPropagation();
-  });
 
   $('body').on('click', 'button[data-url]:not([data-popin])', function(evt) {
     evt.preventDefault();

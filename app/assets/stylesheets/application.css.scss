@@ -11,6 +11,7 @@
  * file per style scope.
  *
  *= require_tree ./common
+ *= require_tree ./ninth_age
  */
 @import "common/global";
 @import "bootstrap-sprockets";
@@ -173,7 +174,6 @@ input[type=number] {
 
 .army_list_unit_new {
   clear: right;
-  float: right;
   display: block;
   padding-top: 45px;
   padding-right: 10px;
@@ -185,6 +185,7 @@ input[type=number] {
   text-decoration: none;
   background: image-url("bt_new_army_list_unit.png") no-repeat;
   color: #000;
+  margin-top: 50px;
 }
 
 .army_list_value_points, .army_list_notes, .army_list_unit_new {
@@ -197,25 +198,25 @@ input[type=number] {
 }
 
 .army_list_units_overview {
-  float: left;
   position: relative;
-  padding: 10px;
-  padding-left: 15px;
-  height: 60px;
-  background: image-url("bg_army_list_unit_overview.png") repeat-x;
+  padding: 0;
 
   li {
+    padding: 6px 0 6px 15px;
     list-style: none;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
+    background: image-url("bg_army_list_unit_overview.png") repeat-x;
   }
 
   .position {
-    position: absolute;
-    top: 15px;
-    left: -12px;
+    position: relative;
+    top: 7px;
+    left: -25px;
     background: white;
     padding: 2px 3px;
     border: 1px solid black;
+    width:25px;
+    float: left;
 
     &:hover {
       cursor: move;
@@ -256,14 +257,10 @@ input[type=number] {
   }
 
   .actions {
-    position: absolute;
-    top: -8px;
-    right: 5px;
-    padding-top: 20px;
-    width: 190px;
+    margin: 8px 5px 0 0;
 
-    button {
-      margin-right: 5px;
+    a > i {
+      color:black;
     }
   }
 
@@ -434,4 +431,34 @@ input[type=number] {
   @media #{$portrait} {
     display: inline-flex;
   }
+}
+
+.highlight-red {
+  color: red !important;
+}
+
+.highlight-green {
+  color: green !important;
+}
+
+.highlight-blue {
+  color: blue !important;
+}
+
+.footer-back {
+  padding: 25px;
+  text-align: center;
+
+  a.link-back {
+    font-weight: bold;
+  }
+}
+
+.block-center {
+  margin: 0 auto;
+  display: block;
+}
+
+.clearboth{
+  clear: both;
 }

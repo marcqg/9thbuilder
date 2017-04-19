@@ -1,0 +1,26 @@
+ul.list-flex {
+
+  list-style: none;
+  display: flex;
+  justify-content: center;
+
+  li {
+    text-align: center;
+    margin: 0 15px;
+
+    p {
+      margin: 0;
+      font-weight: bold;
+
+      span.text-small {
+        font-size: 0.75em;
+      }
+
+      span.text-small:before {
+        content: ' ';
+        clear: right;
+        display: block;
+      }
+    }
+  }
+}

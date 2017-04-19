@@ -8,13 +8,10 @@ class ApplicationController < ActionController::Base
   layout -> (controller) { controller.request.xhr? ? false : 'application' }
 
   def after_sign_in_path_for(resource)
-    sign_in_url = new_user_session_url
-    if request.referer == sign_in_url
-      super
-    elsif authenticate_active_admin_user!
+    if current_user.has_role? :administrator
       admin_dashboard_path
     else
-      stored_location_for(resource) || request.referer || army_lists_path
+      super
     end
   end
 

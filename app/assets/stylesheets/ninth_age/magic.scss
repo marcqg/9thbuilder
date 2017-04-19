@@ -1,0 +1,109 @@
+article[class^="magic-"] {
+  border: 1px solid black;
+  padding: 10px;
+  min-height: 150px;
+  cursor: pointer;
+
+  > h1, > h4{
+    padding: 10px;
+    margin: 0;
+  }
+
+  p {
+    margin: 0;
+  }
+}
+
+[class*="spell-"] {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  border: 1px solid #ddd;
+  border: 1px solid rgba(86, 61, 124, .2);
+
+  .info-magic {
+    label {
+      text-decoration: underline;
+      font-weight: bold;
+    }
+
+    p {
+      margin: 0 0 0 15px !important;
+    }
+  }
+}
+
+.magic-1 {
+
+  > h1, > h4 {
+    background-color: #ffe599;
+  }
+}
+
+.magic-2, .magic-3 {
+
+  > h1, > h4 {
+    background-color: #b7b7b7;
+  }
+}
+
+.magic-4 {
+
+  > h1, > h4 {
+    background-color: #cfe2f3;
+  }
+}
+
+.magic-5 {
+
+  > h1, > h4 {
+    background-color: #6aa84f;
+  }
+}
+
+.magic-6 {
+
+  > h1, > h4 {
+    background-color: #434343;
+  }
+}
+
+.magic-7 {
+
+  > h1, > h4 {
+    background-color: #073763;
+  }
+}
+
+.magic-8 {
+
+  > h1, > h4 {
+    background-color: #990000;
+  }
+}
+
+.magic-9 {
+
+  > h1, > h4 {
+    background-color: #3b4300;
+  }
+}
+
+.magic-10 {
+
+  > h1, > h4 {
+    background-color: #ff6060;
+  }
+}
+
+.magic-11 {
+
+  > h1, > h4 {
+    background-color: #741b47;
+  }
+}
+
+.magic-5, .magic-6, .magic-7, .magic-8, .magic-9, .magic-10, .magic-11 {
+  > h1, > h4 {
+    color: white;
+  }
+}

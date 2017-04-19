@@ -1,6 +1,17 @@
 <h3><%= value_points @army_list.value_points %> points</h3>
 <ul>
-  <% @army_list.value_points_details.each do |row| %>
-  <li class="<%= row['valid'] ? '' : 'red' %>"><em><%= value_points row["value_points"].to_f %> pts</em> <strong><%= row["name"].split.last.titleize %></strong> x<%= row["count"] %></li>
+  <% @army_list.army_organisation.organisation_groups.each do |organisation_group| %>
+      <% army_list_organisation = @army_list.army_list_organisations.find_by(:organisation_id => organisation_group.organisation_id) %>
+      <li class="
+        <% if army_list_organisation != nil && !army_list_organisation.good %>highlight-red
+        <% else %>highlight-green
+        <% end %>">
+        <% if army_list_organisation != nil %><em><%= army_list_organisation.pts %> pts <small>(<%= army_list_organisation.rate %> %)</small></em>
+        <% else %>
+        <% end %> <strong><%= organisation_group.organisation.name %></strong>
+        <% if !organisation_group.NoLimit? %>
+            <span class="small">(<%= organisation_group.target %> <%= organisation_group.type_target %>)</span>
+        <% end %>
+      </li>
   <% end %>
 </ul>

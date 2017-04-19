@@ -1,9 +1,13 @@
 class ArmyList < ApplicationRecord
   belongs_to :army
   belongs_to :user
+
   has_many :army_list_units, -> { order 'position' }, dependent: :destroy
 
-  validates :army_id, :user_id, :uuid, :name, :value_points, presence: true
+  belongs_to :army_organisation, :class_name => 'NinthAge::ArmyOrganisation'
+  has_many :army_list_organisations, :class_name => 'NinthAge::ArmyListOrganisation', dependent: :destroy
+
+  validates :army_id, :user_id, :army_organisation_id, :uuid, :name, :value_points, presence: true
   validates :value_points, numericality: { greater_than_or_equal_to: 0 }
 
   normalize_attributes :name, :notes
@@ -16,21 +20,5 @@ class ArmyList < ApplicationRecord
 
   def to_param
     uuid
-  end
-
-  def value_points_details
-    rows = ArmyList.connection.select_all "SELECT uc.id id, uct.name name, uc.min_quota min_quota, uc.max_quota max_quota, COUNT(alu.id) count, COALESCE(SUM(alu.value_points), 0.0) value_points
-      FROM unit_categories uc
-      LEFT JOIN unit_category_translations uct ON uct.unit_category_id = uc.id
-      LEFT JOIN army_list_units alu ON alu.unit_category_id = uc.id AND alu.army_list_id = #{id}
-      WHERE uc.min_quota IS NOT NULL OR uc.max_quota IS NOT NULL
-      GROUP BY uc.id, uct.name, uc.min_quota, uc.max_quota
-      ORDER BY uc.id"
-
-
-    rows.each do |row|
-      row['valid'] = row['value_points'] >= value_points * row['min_quota'] / 100 unless row['min_quota'].blank?
-      row['valid'] = row['value_points'] <= value_points * row['max_quota'] / 100 unless row['max_quota'].blank?
-    end
   end
 end

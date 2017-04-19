@@ -1,0 +1,1 @@
+json.array! @army_organisations, partial: 'ninth_age/army_organisations/army_organisation', as: :army_organisation

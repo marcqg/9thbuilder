@@ -146,6 +146,51 @@ fr:
     form:
       name: "Nom"
 
+  version:
+    index:
+      title: "Versions"
+      show: "Voir"
+    show:
+      back: "Retour"
+  magic:
+    range: Range
+    type: Type
+    duration: Durée
+    effect: Effet
+    casting: Casting
+    index:
+      title: "Magies"
+      show: "Voir"
+    show:
+      back: "Retour"
+  magic_spell:
+    type_lvl:
+      A: A
+      Zero: '0'
+      One: '1'
+      Two: '2'
+      Three: '3'
+      Four: '4'
+      Five: '5'
+      Six: '6'
+    duration:
+      OneTurn: Dernier tour
+      Instant: Instant
+      Permanent: Permanent
+      RemainsInPlay: Reste en jeu
+    type_target:
+      Hex: Malédiction
+      Hex_r: "|Malédiction|"
+      Missile: Missile
+      Damage: Dommage
+      Augment: Augmenter
+      Augment_b: "[Augmenter]"
+      Focused: Focused
+      Direct: Direct
+      Ground: Sol
+      Universal: Universel
+      Universal_g: "{Universel}"
+
   signin:
     title: "Se connecter"
     form:

@@ -1,0 +1,96 @@
+<div class="col-md-12 col-xs-12 col-sm-12 unit-<%= @unit.id %>">
+  <article style="margin-bottom:40px;">
+    <div class="col-md-12">
+      <div class="text-left col-md-2">
+        <% @unit.organisations.where(isSpecialRule: false).each do |organisation| %>
+            <% unless organisation.logo.nil? %>
+                <%= image_tag organisation.medium_logo_url, size: '75x75', alt: organisation.name, border: 0 %>
+            <% end %>
+        <% end %>
+      </div>
+      <div class=" col-md-8">
+        <h3 class="text-left"><strong>
+          <% if @unit.value_points == 0 %><%= t('ninth_age.figurine.mount') %>
+          <% end %> <%= @unit.name %></strong> <%= @unit.value_points %> <%= t('ninth_age.figurine.pts') %></h3>
+      </div>
+      <div class="text-right col-md-2">
+        <% @unit.organisations.where(isSpecialRule: true).each do |organisation| %>
+            <% unless organisation.logo.nil? %>
+                <%= image_tag organisation.medium_logo_url, size: '50x50', alt: organisation.name, border: 0 %>
+            <% end %>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-md-12">
+      <table class="content-stats">
+        <thead>
+        <tr>
+          <td><%= t('troop.characteristic.Name') %></td>
+          <td><%= t('troop.characteristic.M') %></td>
+          <td><%= t('troop.characteristic.CC') %></td>
+          <td><%= t('troop.characteristic.CT') %></td>
+          <td><%= t('troop.characteristic.F') %></td>
+          <td><%= t('troop.characteristic.E') %></td>
+          <td><%= t('troop.characteristic.PV') %></td>
+          <td><%= t('troop.characteristic.I') %></td>
+          <td><%= t('troop.characteristic.A') %></td>
+          <td><%= t('troop.characteristic.Cd') %></td>
+          <td><%= t('troop.characteristic.Type') %></td>
+        </tr>
+        </thead>
+        <tbody>
+        <% @unit.troops.each do |troop| %>
+            <tr>
+              <td><%= characteristic troop.name %></td>
+              <td><%= characteristic troop.M %></td>
+              <td><%= characteristic troop.WS %></td>
+              <td><%= characteristic troop.BS %></td>
+              <td><%= characteristic troop.S %></td>
+              <td><%= characteristic troop.T %></td>
+              <td><%= characteristic troop.W %></td>
+              <td><%= characteristic troop.I %></td>
+              <td><%= characteristic troop.A %></td>
+              <td><%= characteristic troop.LD %></td>
+              <td><%= troop.troop_type.try(:name) %></td>
+            </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-md-3">
+      <div>
+        <% @unit.special_rules.where(:troop => nil).each do |special_rule| %>
+            • <%= special_rule.name %><br/>
+        <% end %>
+      </div>
+      <div>
+        <% @unit.troops.each do |troop| %>
+            <% if troop.special_rules.count > 0 %>
+                <h4><%= troop.name %></h4>
+                <% troop.special_rules.each do |special_rule| %>
+                    • <%= special_rule.name %><br/>
+                <% end %>
+            <% end %>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div>
+        <% @unit.equipments.each do |equipment| %>
+            • <%= equipment.name %><br/>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div>
+        <% @unit.unit_options.where(:parent => nil).order(:position).each do |unit_option| %>
+            <p>• <%= unit_option.name %> <span class="pull-right"><%= unit_option.value_points%></span></p>
+            <% unit_option.children.order(:position).each do |children| %>
+                <p class="option-children">• <%= children.name %><span class="pull-right"><%= unit_option.value_points%></span></p>
+            <% end %>
+        <% end %>
+      </div>
+    </div>
+    <div class="clearfix"></div>
+  </article>
+</div>

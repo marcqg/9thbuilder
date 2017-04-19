@@ -1,0 +1,26 @@
+<% title t('army_list.show.title', :name => @army_list.name) %>
+
+<% if @army_list.notes? %>
+  <div class="army_list_value_notes"><%= @army_list.notes %></div>
+<% end %>
+
+<div class="army_list_value_points">
+  <ul>
+    <% @army_list.army_organisation.organisation_groups.each do |organisation_group| %>
+        <% army_list_organisation = @army_list.army_list_organisations.find_by(:organisation_id => organisation_group.organisation_id) %>
+        <li class="
+        <% if army_list_organisation != nil && !army_list_organisation.good %>highlight-red
+        <% else %>highlight-green
+        <% end %>">
+          <% if army_list_organisation != nil %><em><%= army_list_organisation.pts %> pts <small>(<%= army_list_organisation.rate %> %)</small></em>
+          <% else %>
+          <% end %> <strong><%= organisation_group.organisation.name %></strong>
+          <% if !organisation_group.NoLimit? %>
+              <span class="small">(<%= organisation_group.target %> <%= organisation_group.type_target %>)</span>
+          <% end %>
+        </li>
+    <% end %>
+  </ul>
+</div>
+
+<%= render :partial => 'export_unit_lite', :collection => @army_list.army_list_units, :as => :army_list_unit, :locals => {:include_magics => @include_magics } %>
