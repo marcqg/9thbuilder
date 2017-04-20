@@ -103,7 +103,7 @@ class AddOrganisation < ActiveRecord::Migration[5.0]
                                       SET army_organisation_id = (SELECT id FROM ninth_age_army_organisations WHERE army_lists.army_id = ninth_age_army_organisations.army_id)
                                       where army_organisation_id = 0;')
 
-    add_foreign_key :army_lists, :army_organisations, column: :army_organisation_id, on_delete: :cascade
+    add_foreign_key :army_lists, :ninth_age_army_organisations, column: :army_organisation_id, on_delete: :cascade
 
     remove_foreign_key :units, :unit_categories
     remove_index :units, :unit_category_id
