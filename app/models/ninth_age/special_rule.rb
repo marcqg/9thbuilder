@@ -1,11 +1,11 @@
-class SpecialRule < ApplicationRecord
+class NinthAge::SpecialRule < ApplicationRecord
   belongs_to :unit
   belongs_to :troop
 
-  translates :name
+  translates :name, :description
   globalize_accessors
 
-  validates :unit_id, :name, presence: true
+  validates :unit_id, :name, :description, presence: true
   validates :position, numericality: { greater_than_or_equal_to: 1, only_integer: true, allow_nil: true }
 
   acts_as_list scope: :unit

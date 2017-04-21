@@ -1,4 +1,4 @@
-ActiveAdmin.register SpecialRule do
+ActiveAdmin.register NinthAge::SpecialRule do
   menu priority: 6
 
   permit_params :unit_id, :troop_id, :name, :position
@@ -25,7 +25,7 @@ ActiveAdmin.register SpecialRule do
 
   collection_action :sort, method: :post do
     params[:special_rule].each_with_index do |id, index|
-      SpecialRule.update_all({ position: index + 1 }, unit_id: params[:unit_id], id: id)
+      NinthAge::SpecialRule.update_all({ position: index + 1 }, unit_id: params[:unit_id], id: id)
     end
     render nothing: true
   end
