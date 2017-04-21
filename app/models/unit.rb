@@ -13,6 +13,7 @@ class Unit < ApplicationRecord
   has_many :mount_options, class_name: 'UnitOption', foreign_key: 'mount_id', dependent: :nullify
 
   translates :name
+  globalize_accessors
 
   normalize_attributes :magic, :notes
 

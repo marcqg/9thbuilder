@@ -5,6 +5,7 @@ class MagicStandard < ApplicationRecord
   has_one :override, class_name: 'MagicStandard', foreign_key: 'override_id'
 
   translates :name
+  globalize_accessors
 
   validates :value_points, numericality: { greater_than_or_equal_to: 0 }
 

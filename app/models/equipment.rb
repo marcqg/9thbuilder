@@ -8,6 +8,7 @@ class Equipment < ApplicationRecord
   acts_as_list scope: :unit
 
   translates :name
+  globalize_accessors
 
   attr_accessor :army_filter
 

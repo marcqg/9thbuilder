@@ -6,6 +6,7 @@ class Troop < ApplicationRecord
   has_many :special_rules, dependent: :nullify
 
   translates :name
+  globalize_accessors
 
   validates :unit_id, :name, presence: true
   validates :value_points, numericality: { greater_than_or_equal_to: 0, allow_nil: true }
