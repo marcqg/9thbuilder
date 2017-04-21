@@ -15,6 +15,7 @@ class Army < ApplicationRecord
   has_many :favorite_users, class_name: 'User', foreign_key: 'favorite_army_id', dependent: :nullify
 
   translates :name
+  globalize_accessors
 
   validates :name, presence: true
 
