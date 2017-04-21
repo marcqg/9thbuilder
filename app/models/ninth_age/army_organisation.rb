@@ -8,6 +8,8 @@ class NinthAge::ArmyOrganisation < ApplicationRecord
   translates :name, :description
   globalize_accessors
 
+  validates :army_id, :name, :description, presence: true
+
   def cache_key
     super + '-ninth-age-' + Globalize.locale.to_s
   end

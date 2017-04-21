@@ -5,4 +5,6 @@ class NinthAge::OrganisationChange < ApplicationRecord
   belongs_to :unit
 
   enum type_target: { Min: 0, Max: 1 }
+
+  validates :default_organisation_id, :new_organisation_id, :unit_id, :type_target, presence: true
 end

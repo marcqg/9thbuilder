@@ -12,6 +12,8 @@ class NinthAge::Magic < ApplicationRecord
                     path: 'images/:class/:id/:style/:filename'
   validates_attachment_content_type :logo, content_type: /\Aimage\/.*\z/
 
+  validates :version_id, :name, :description, presence: true
+
   def logo_url
     self.logo.url
   end

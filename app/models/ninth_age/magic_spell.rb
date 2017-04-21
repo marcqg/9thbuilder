@@ -9,6 +9,8 @@ class NinthAge::MagicSpell < ApplicationRecord
   bitmask :type_target, :as => [:Hex, :Hex_r, :Missile, :Damage, :Augment, :Augment_b, :Focused, :Direct, :Ground, :Universal, :Universal_g], :null => false
   bitmask :duration, :as => [:OneTurn, :Instant, :Permanent, :RemainsInPlay], :null => false
 
+  validates :magic_id, :type_lvl, :name, :range, :casting_value, :effect, :type_target, :duration, presence: true
+
   def cache_key
     super + '-ninth-age-' + Globalize.locale.to_s
   end

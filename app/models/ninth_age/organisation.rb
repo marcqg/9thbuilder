@@ -26,6 +26,8 @@ class NinthAge::Organisation < ApplicationRecord
                     path: 'images/:class/:id/:style/:filename'
   validates_attachment_content_type :logo, content_type: /\Aimage\/.*\z/
 
+  validates :army_id, :name, presence: true
+
   def logo_url
     self.logo.url
   end

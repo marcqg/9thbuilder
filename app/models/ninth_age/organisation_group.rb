@@ -5,6 +5,8 @@ class NinthAge::OrganisationGroup < ApplicationRecord
 
   enum type_target: { NoLimit: 0, Max: 1, Least: 2, NotAllowed: 3 }
 
+  validates :army_organisation_id, :organisation_id, :type_target, presence: true
+
   def display_type_target
     I18n.t("organisation_group.display_type_target.#{type_target}", default: type_target.titleize)
   end
