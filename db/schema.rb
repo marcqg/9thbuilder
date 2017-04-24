@@ -90,17 +90,17 @@ ActiveRecord::Schema.define(version: 20170421155323) do
   end
 
   create_table "army_lists", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
-    t.integer  "army_id",                                                    null: false
-    t.integer  "user_id",                                                    null: false
-    t.string   "name",                                                       null: false
-    t.decimal  "value_points",                       precision: 8, scale: 2, null: false
+    t.integer  "army_id",                                                                null: false
+    t.integer  "user_id",                                                                null: false
+    t.string   "name",                                                                   null: false
+    t.decimal  "value_points",                       precision: 8, scale: 2,             null: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "notes",                limit: 65535
-    t.string   "uuid",                 limit: 36,                            null: false
-    t.integer  "army_organisation_id",                                       null: false
+    t.string   "uuid",                 limit: 36,                                        null: false
+    t.integer  "army_organisation_id",                                       default: 0
     t.index ["army_id"], name: "index_army_lists_on_army_id", using: :btree
-    t.index ["army_organisation_id"], name: "index_army_lists_on_ninth_age_army_organisation_id", using: :btree
+    t.index ["army_organisation_id"], name: "index_army_lists_on_army_organisation_id", using: :btree
     t.index ["user_id"], name: "index_army_lists_on_user_id", using: :btree
   end
 
@@ -342,22 +342,36 @@ ActiveRecord::Schema.define(version: 20170421155323) do
   end
 
   create_table "ninth_age_special_rule_translations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "special_rule_id",               null: false
-    t.string   "locale",                        null: false
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
+    t.integer  "ninth_age_special_rule_id",               null: false
+    t.string   "locale",                                  null: false
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
     t.string   "name"
-    t.text     "description",     limit: 65535
+    t.text     "description",               limit: 65535
     t.index ["locale"], name: "index_ninth_age_special_rule_translations_on_locale", using: :btree
-    t.index ["special_rule_id"], name: "index_ninth_age_special_rule_translations_on_special_rule_id", using: :btree
+    t.index ["ninth_age_special_rule_id"], name: "index_ed7d13913dad10860cc6f0c91dca13f4c632329a", using: :btree
+  end
+
+  create_table "ninth_age_special_rule_troops", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "special_rule_id", default: 0, null: false
+    t.integer  "troop_id",        default: 0, null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.index ["special_rule_id", "troop_id"], name: "ninth_age_special_rule_troops_rule_troop", using: :btree
+    t.index ["troop_id", "special_rule_id"], name: "ninth_age_special_rule_troops_troop_rule", using: :btree
+  end
+
+  create_table "ninth_age_special_rule_units", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "special_rule_id", default: 0, null: false
+    t.integer  "unit_id",         default: 0, null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.index ["special_rule_id", "unit_id"], name: "ninth_age_special_rule_units_rule_unit", using: :btree
+    t.index ["unit_id", "special_rule_id"], name: "ninth_age_special_rule_units_unit_rule", using: :btree
   end
 
   create_table "ninth_age_special_rules", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
-    t.integer "unit_id",  null: false
     t.integer "position", null: false
-    t.integer "troop_id"
-    t.index ["troop_id"], name: "index_ninth_age_special_rules_on_troop_id", using: :btree
-    t.index ["unit_id"], name: "index_ninth_age_special_rules_on_unit_id", using: :btree
   end
 
   create_table "ninth_age_version_translations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -563,9 +577,11 @@ ActiveRecord::Schema.define(version: 20170421155323) do
   add_foreign_key "ninth_age_organisations", "armies"
   add_foreign_key "ninth_age_organisations_units", "ninth_age_organisations", column: "organisation_id"
   add_foreign_key "ninth_age_organisations_units", "units"
-  add_foreign_key "ninth_age_special_rule_translations", "ninth_age_special_rules", column: "special_rule_id", on_delete: :cascade
-  add_foreign_key "ninth_age_special_rules", "troops", on_delete: :nullify
-  add_foreign_key "ninth_age_special_rules", "units"
+  add_foreign_key "ninth_age_special_rule_translations", "ninth_age_special_rules", on_delete: :cascade
+  add_foreign_key "ninth_age_special_rule_troops", "ninth_age_special_rules", column: "special_rule_id"
+  add_foreign_key "ninth_age_special_rule_troops", "troops"
+  add_foreign_key "ninth_age_special_rule_units", "ninth_age_special_rules", column: "special_rule_id"
+  add_foreign_key "ninth_age_special_rule_units", "units"
   add_foreign_key "troop_translations", "troops", on_delete: :cascade
   add_foreign_key "troop_type_translations", "troop_types", on_delete: :cascade
   add_foreign_key "troops", "troop_types"

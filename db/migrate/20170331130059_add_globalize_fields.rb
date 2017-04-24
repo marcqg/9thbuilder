@@ -16,8 +16,6 @@ class AddGlobalizeFields < ActiveRecord::Migration[5.0]
         add_foreign_key :magic_item_translations, :magic_items, column: :magic_item_id, on_delete: :cascade
         MagicStandard.create_translation_table!({ :name => :string }, { :migrate_data => true, :remove_source_columns => true })
         add_foreign_key :magic_standard_translations, :magic_standards, column: :magic_standard_id, on_delete: :cascade
-        SpecialRule.create_translation_table!({ :name => :string }, { :migrate_data => true, :remove_source_columns => true })
-        add_foreign_key :special_rule_translations, :special_rules, column: :special_rule_id, on_delete: :cascade
         TroopType.create_translation_table!({ :name => :string }, { :migrate_data => true, :remove_source_columns => true })
         add_foreign_key :troop_type_translations, :troop_types, column: :troop_type_id, on_delete: :cascade
         Troop.create_translation_table!({ :name => :string }, { :migrate_data => true, :remove_source_columns => true })
@@ -36,7 +34,6 @@ class AddGlobalizeFields < ActiveRecord::Migration[5.0]
 		    MagicItemCategory.drop_translation_table! :migrate_data => true
 		    MagicItem.drop_translation_table! :migrate_data => true
         MagicStandard.drop_translation_table! :migrate_data => true
-        SpecialRule.drop_translation_table! :migrate_data => true
         TroopType.drop_translation_table! :migrate_data => true
         Troop.drop_translation_table! :migrate_data => true
         UnitOption.drop_translation_table! :migrate_data => true
