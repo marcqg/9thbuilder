@@ -70,14 +70,14 @@
     <% end %>
 
     <!-- EQUIPMENTS -->
-    <%= render :partial => "equipments/show", :locals => { :equipments => army_list_unit.unit.equipments.where(:troop_id => nil), :troop => nil } %>
+    <%= render :partial => 'ninth_age/equipments/show', :locals => { :equipments => NinthAge::Equipment.joins(:units).where(units: { id: army_list_unit.unit_id }).left_outer_joins(:troops).where( troops: { :id => nil }), :troop => nil } %>
 
     <% army_list_unit.unit.troops.select{ |t| t.unit_option.nil? or army_list_unit.unit_options.include?(t.unit_option) }.each do |troop| %>
-      <%= render :partial => "equipments/show", :locals => { :equipments => troop.equipments, :troop => troop } %>
+      <%= render :partial => 'ninth_age/equipments/show', :locals => { :equipments => troop.equipments, :troop => troop } %>
     <% end %>
 
     <% if army_list_unit.unit_options.include?(mounts_option) %>
-      <%= render :partial => "equipments/show", :locals => { :equipments => mounts_option.mount.equipments, :troop => mounts_option.mount.troops.first } %>
+      <%= render :partial => 'ninth_age/equipments/show', :locals => { :equipments => mounts_option.mount.equipments, :troop => mounts_option.mount.troops.first } %>
     <% end %>
 
     <!-- SPECIAL RULES -->

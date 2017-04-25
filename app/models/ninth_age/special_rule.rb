@@ -5,7 +5,7 @@ class NinthAge::SpecialRule < ApplicationRecord
   translates :name, :description
   globalize_accessors
 
-  validates :unit_id, :name, :description, presence: true
+  validates :name, presence: true
   validates :position, numericality: { greater_than_or_equal_to: 1, only_integer: true, allow_nil: true }
 
   acts_as_list scope: :unit

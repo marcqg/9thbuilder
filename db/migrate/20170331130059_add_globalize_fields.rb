@@ -4,8 +4,6 @@ class AddGlobalizeFields < ActiveRecord::Migration[5.0]
       dir.up do
         Army.create_translation_table!({ :name => :string }, { :migrate_data => true, :remove_source_columns => true })
         add_foreign_key :army_translations, :armies, column: :army_id, on_delete: :cascade
-        Equipment.create_translation_table!({ :name => :string }, { :migrate_data => true, :remove_source_columns => true })
-        add_foreign_key :equipment_translations, :equipments, column: :equipment_id, on_delete: :cascade
         ExtraItemCategory.create_translation_table!({ :name => :string }, { :migrate_data => true, :remove_source_columns => true })
         add_foreign_key :extra_item_category_translations, :extra_item_categories, column: :extra_item_category_id, on_delete: :cascade
         ExtraItem.create_translation_table!({ :name => :string }, { :migrate_data => true, :remove_source_columns => true })
@@ -28,7 +26,6 @@ class AddGlobalizeFields < ActiveRecord::Migration[5.0]
 
       dir.down do
         Army.drop_translation_table! :migrate_data => true
-        Equipment.drop_translation_table! :migrate_data => true
         ExtraItemCategory.drop_translation_table! :migrate_data => true
         ExtraItem.drop_translation_table! :migrate_data => true
 		    MagicItemCategory.drop_translation_table! :migrate_data => true

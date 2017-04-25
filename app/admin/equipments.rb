@@ -1,4 +1,4 @@
-ActiveAdmin.register Equipment do
+ActiveAdmin.register NinthAge::Equipment do
   menu priority: 5
 
   permit_params :unit_id, :troop_id, :name, :position
@@ -25,7 +25,7 @@ ActiveAdmin.register Equipment do
 
   collection_action :sort, method: :post do
     params[:equipment].each_with_index do |id, index|
-      Equipment.update_all({ position: index + 1 }, unit_id: params[:unit_id], id: id)
+      NinthAge::Equipment.update_all({ position: index + 1 }, unit_id: params[:unit_id], id: id)
     end
     render nothing: true
   end

@@ -6,7 +6,7 @@ class Unit < ApplicationRecord
   has_and_belongs_to_many :organisations, :class_name => 'NinthAge::Organisation'
 
   has_many :army_list_units, dependent: :destroy
-  has_many :equipments, -> { order 'position' }, dependent: :destroy
+  has_and_belongs_to_many :equipments, -> { order 'position' }, :class_name => 'NinthAge::Equipment', dependent: :destroy
   has_and_belongs_to_many :special_rules, -> { order 'position' }, :class_name => 'NinthAge::SpecialRule', dependent: :destroy
   has_many :troops, -> { order 'position' }, dependent: :destroy
   has_many :unit_options, -> { order %w(parent_id position) }, dependent: :destroy

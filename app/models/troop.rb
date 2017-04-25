@@ -2,7 +2,7 @@ class Troop < ApplicationRecord
   belongs_to :troop_type
   belongs_to :unit
   belongs_to :unit_option
-  has_many :equipments, dependent: :nullify
+  has_and_belongs_to_many :equipments, :class_name => 'NinthAge::Equipment', dependent: :nullify
   has_and_belongs_to_many :special_rules, :class_name => 'NinthAge::SpecialRule', dependent: :nullify
 
   translates :name

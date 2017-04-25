@@ -36,7 +36,9 @@ Rails.application.routes.draw do
       resources :units,                 only: [:show]
 
       resources :special_rules,         only: [:index, :show]
+      resources :equipments,            only: [:index, :show]
       get '/ninth-age-special-rules/page-:page', to: 'special_rules#index'
+      get '/ninth-age-equipments/page-:page', to: 'equipments#index'
 
       scope '/army-:army_id' do
         resources :army_organisations,  only: [:index]

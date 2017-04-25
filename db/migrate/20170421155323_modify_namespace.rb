@@ -41,65 +41,65 @@ class ModifyNamespace < ActiveRecord::Migration[5.0]
     remove_column :ninth_age_special_rules, :unit_id
 
 
-    ActiveRecord::Base.connection.execute('INSERT INTO ninth_age_special_rules_troops (special_rule_id, troop_id, created_at, updated_at)
-    select new_id, troop_id, troops.created_at, troops.updated_at
-    from ninth_age_special_rules_troops troops
-    INNER JOIN
-    (select T.ninth_age_special_rule_id, t1.ninth_age_special_rule_id as new_id
-    from ninth_age_special_rule_translations T
-    LEFT OUTER JOIN (
-                        SELECT MIN(ninth_age_special_rule_id) as ninth_age_special_rule_id, name as name
-    FROM ninth_age_special_rule_translations
-    group by name
-    having count(*) > 1) as t1
-    ON T.ninth_age_special_rule_id != t1.ninth_age_special_rule_id AND T.name = t1.name
-    WHERE t1.ninth_age_special_rule_id IS NOT NULL) as t2 ON troops.special_rule_id = t2.ninth_age_special_rule_id')
-
-    ActiveRecord::Base.connection.execute('INSERT INTO ninth_age_special_rules_units (special_rule_id, unit_id, created_at, updated_at)
-    select new_id, unit_id, units.created_at, units.updated_at
-    from ninth_age_special_rules_units units
-    INNER JOIN
-    (select T.ninth_age_special_rule_id, t1.ninth_age_special_rule_id as new_id
-    from ninth_age_special_rule_translations T
-    LEFT OUTER JOIN (
-                        SELECT MIN(ninth_age_special_rule_id) as ninth_age_special_rule_id, name as name
-    FROM ninth_age_special_rule_translations
-    group by name
-    having count(*) > 1) as t1
-    ON T.ninth_age_special_rule_id != t1.ninth_age_special_rule_id AND T.name = t1.name
-    WHERE t1.ninth_age_special_rule_id IS NOT NULL) as t2 ON units.special_rule_id = t2.ninth_age_special_rule_id')
-
-    ActiveRecord::Base.connection.execute('DELETE FROM ninth_age_special_rules_troops
-    where special_rule_id in (
-    select T.ninth_age_special_rule_id
-    from ninth_age_special_rule_translations T
-    LEFT OUTER JOIN (
-                        SELECT MIN(ninth_age_special_rule_id) as ninth_age_special_rule_id, name as name
-    FROM ninth_age_special_rule_translations
-    group by name
-    having count(*) > 1) as t1
-    ON T.ninth_age_special_rule_id != t1.ninth_age_special_rule_id AND T.name = t1.name
-    WHERE t1.ninth_age_special_rule_id IS NOT NULL)')
-
-    ActiveRecord::Base.connection.execute('DELETE FROM ninth_age_special_rules_units
-    where special_rule_id in (
-    select T.ninth_age_special_rule_id
-    from ninth_age_special_rule_translations T
-    LEFT OUTER JOIN (
-                        SELECT MIN(ninth_age_special_rule_id) as ninth_age_special_rule_id, name as name
-    FROM ninth_age_special_rule_translations
-    group by name
-    having count(*) > 1) as t1
-    ON T.ninth_age_special_rule_id != t1.ninth_age_special_rule_id AND T.name = t1.name
-    WHERE t1.ninth_age_special_rule_id IS NOT NULL)')
-
-    ActiveRecord::Base.connection.execute('delete FROM ninth_age_special_rule_translations
-    where ninth_age_special_rule_id not in (select special_rule_id from ninth_age_special_rules_troops)
-    and ninth_age_special_rule_id not in (select special_rule_id from ninth_age_special_rules_units)')
-
-    ActiveRecord::Base.connection.execute('delete FROM ninth_age_special_rules
-    where id not in (select special_rule_id from ninth_age_special_rules_troops)
-    and id not in (select special_rule_id from ninth_age_special_rules_units)')
+    # ActiveRecord::Base.connection.execute('INSERT INTO ninth_age_special_rules_troops (special_rule_id, troop_id, created_at, updated_at)
+    # select new_id, troop_id, troops.created_at, troops.updated_at
+    # from ninth_age_special_rules_troops troops
+    # INNER JOIN
+    # (select T.ninth_age_special_rule_id, t1.ninth_age_special_rule_id as new_id
+    # from ninth_age_special_rule_translations T
+    # LEFT OUTER JOIN (
+    #                     SELECT MIN(ninth_age_special_rule_id) as ninth_age_special_rule_id, name as name
+    # FROM ninth_age_special_rule_translations
+    # group by name
+    # having count(*) > 1) as t1
+    # ON T.ninth_age_special_rule_id != t1.ninth_age_special_rule_id AND T.name = t1.name
+    # WHERE t1.ninth_age_special_rule_id IS NOT NULL) as t2 ON troops.special_rule_id = t2.ninth_age_special_rule_id')
+    #
+    # ActiveRecord::Base.connection.execute('INSERT INTO ninth_age_special_rules_units (special_rule_id, unit_id, created_at, updated_at)
+    # select new_id, unit_id, units.created_at, units.updated_at
+    # from ninth_age_special_rules_units units
+    # INNER JOIN
+    # (select T.ninth_age_special_rule_id, t1.ninth_age_special_rule_id as new_id
+    # from ninth_age_special_rule_translations T
+    # LEFT OUTER JOIN (
+    #                     SELECT MIN(ninth_age_special_rule_id) as ninth_age_special_rule_id, name as name
+    # FROM ninth_age_special_rule_translations
+    # group by name
+    # having count(*) > 1) as t1
+    # ON T.ninth_age_special_rule_id != t1.ninth_age_special_rule_id AND T.name = t1.name
+    # WHERE t1.ninth_age_special_rule_id IS NOT NULL) as t2 ON units.special_rule_id = t2.ninth_age_special_rule_id')
+    #
+    # ActiveRecord::Base.connection.execute('DELETE FROM ninth_age_special_rules_troops
+    # where special_rule_id in (
+    # select T.ninth_age_special_rule_id
+    # from ninth_age_special_rule_translations T
+    # LEFT OUTER JOIN (
+    #                     SELECT MIN(ninth_age_special_rule_id) as ninth_age_special_rule_id, name as name
+    # FROM ninth_age_special_rule_translations
+    # group by name
+    # having count(*) > 1) as t1
+    # ON T.ninth_age_special_rule_id != t1.ninth_age_special_rule_id AND T.name = t1.name
+    # WHERE t1.ninth_age_special_rule_id IS NOT NULL)')
+    #
+    # ActiveRecord::Base.connection.execute('DELETE FROM ninth_age_special_rules_units
+    # where special_rule_id in (
+    # select T.ninth_age_special_rule_id
+    # from ninth_age_special_rule_translations T
+    # LEFT OUTER JOIN (
+    #                     SELECT MIN(ninth_age_special_rule_id) as ninth_age_special_rule_id, name as name
+    # FROM ninth_age_special_rule_translations
+    # group by name
+    # having count(*) > 1) as t1
+    # ON T.ninth_age_special_rule_id != t1.ninth_age_special_rule_id AND T.name = t1.name
+    # WHERE t1.ninth_age_special_rule_id IS NOT NULL)')
+    #
+    # ActiveRecord::Base.connection.execute('delete FROM ninth_age_special_rule_translations
+    # where ninth_age_special_rule_id not in (select special_rule_id from ninth_age_special_rules_troops)
+    # and ninth_age_special_rule_id not in (select special_rule_id from ninth_age_special_rules_units)')
+    #
+    # ActiveRecord::Base.connection.execute('delete FROM ninth_age_special_rules
+    # where id not in (select special_rule_id from ninth_age_special_rules_troops)
+    # and id not in (select special_rule_id from ninth_age_special_rules_units)')
 
   end
 end

@@ -1,14 +1,14 @@
-class Equipment < ApplicationRecord
-  belongs_to :unit
-  belongs_to :troop
+class NinthAge::Equipment < ApplicationRecord
+  has_and_belongs_to_many :units
+  has_and_belongs_to_many :troops
 
-  validates :unit_id, :name, presence: true
+  translates :name, :description
+  globalize_accessors
+
+  validates :name, presence: true
   validates :position, numericality: { greater_than_or_equal_to: 1, only_integer: true, allow_nil: true }
 
   acts_as_list scope: :unit
-
-  translates :name
-  globalize_accessors
 
   attr_accessor :army_filter
 
