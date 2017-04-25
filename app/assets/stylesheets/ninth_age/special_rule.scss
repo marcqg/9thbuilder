@@ -1,0 +1,9 @@
+article[class^="special-rules-"] {
+  min-height: 100px;
+  cursor: pointer;
+
+  > h1, > h4{
+    padding: 10px;
+    margin: 0;
+  }
+}

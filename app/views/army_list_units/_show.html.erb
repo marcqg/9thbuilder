@@ -81,14 +81,14 @@
     <% end %>
 
     <!-- SPECIAL RULES -->
-    <%= render :partial => "special_rules/show", :locals => { :special_rules => army_list_unit.unit.special_rules.where(:troop_id => nil), :troop => nil } %>
+    <%= render :partial => 'ninth_age/special_rules/show', :locals => { :special_rules => NinthAge::SpecialRule.joins(:units).where(units: { id: army_list_unit.unit_id }).left_outer_joins(:troops).where( troops: { :id => nil }), :troop => nil } %>
 
     <% army_list_unit.unit.troops.select{ |t| t.unit_option.nil? or army_list_unit.unit_options.include?(t.unit_option) }.each do |troop| %>
-      <%= render :partial => "special_rules/show", :locals => { :special_rules => troop.special_rules, :troop => troop } %>
+      <%= render :partial => 'ninth_age/special_rules/show', :locals => { :special_rules => troop.special_rules, :troop => troop } %>
     <% end %>
 
     <% if army_list_unit.unit_options.include?(mounts_option) %>
-      <%= render :partial => "special_rules/show", :locals => { :special_rules => mounts_option.mount.special_rules, :troop => mounts_option.mount.troops.first } %>
+      <%= render :partial => 'ninth_age/special_rules/show', :locals => { :special_rules => mounts_option.mount.special_rules, :troop => mounts_option.mount.troops.first } %>
     <% end %>
 
     <!-- MAGIC -->

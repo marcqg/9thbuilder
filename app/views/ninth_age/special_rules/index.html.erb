@@ -1,12 +1,10 @@
-<h1><%= t('special_rules.index.title')%></h1>
+<h1><%= t('special_rules.index.title') %></h1>
 
 <div>
   <% @ninth_age_special_rules.each do |ninth_age_special_rule| %>
-      <article class="col-md-3">
-        <div  class="special-rules-<%= ninth_age_special_rule.id %>">
-          <h3 style="max-width:300px;"><%= ninth_age_special_rule.name %></h3>
-          <%= link_to(t('special_rules.index.show'), ninth_age_special_rule_path(ninth_age_special_rule)) %>
-        </div>
+      <article class="special-rules-<%= ninth_age_special_rule.id %> col-md-3 text-center">
+        <h4><%= ninth_age_special_rule.name %></h4>
+        <%= link_to(t('special_rules.index.show'), ninth_age_special_rule_path(ninth_age_special_rule)) %>
       </article>
   <% end %>
 </div>
@@ -15,20 +13,20 @@
 </div>
 
 <script>
-  $(document).ready(function () {
-    $("div[class*=special-rules-]").click(function () {
-      window.location = $(this).find("a").attr("href");
-      return false;
+    $(document).ready(function () {
+        $("div[class*=special-rules-]").click(function () {
+            window.location = $(this).find("a").attr("href");
+            return false;
+        });
+
+        var highestBox = 0;
+
+        $("div[class*=special-rules-]").each(function () {
+            if ($(this).height() > highestBox) {
+                highestBox = $(this).height();
+            }
+        })
+
+        $("div[class*=special-rules-]").height(highestBox);
     });
-
-    var highestBox = 0;
-
-    $("div[class*=special-rules-]").each(function(){
-      if($(this).height() > highestBox){
-        highestBox = $(this).height();
-      }
-    })
-
-    $("div[class*=special-rules-]").height(highestBox);
-  });
 </script>
