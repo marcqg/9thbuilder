@@ -1,6 +1,5 @@
 class NinthAge::SpecialRule < ApplicationRecord
-  has_and_belongs_to_many :units
-  has_and_belongs_to_many :troops
+  has_many :special_rule_unit_troops, dependent: :destroy
 
   translates :name, :description
   globalize_accessors

@@ -26,7 +26,7 @@ class ArmyListsController < ApplicationController
   # GET /army_lists/1.xml
   def show
     @army_list = current_user.army_lists
-        .includes({ army_list_units: [{ unit: [{ troops: [:troop_type, :equipments, :special_rules, :unit_option] }, :organisations] }] })
+        .includes({ army_list_units: [{ unit: [{ troops: [:troop_type, :equipment_unit_troops, :special_rule_unit_troops, :unit_option] }, :organisations] }] })
         .find_by_uuid!(params[:uuid])
 
     respond_to do |format|

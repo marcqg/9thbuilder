@@ -1,6 +1,5 @@
 class NinthAge::Equipment < ApplicationRecord
-  has_and_belongs_to_many :units
-  has_and_belongs_to_many :troops
+  has_many :equipment_unit_troops, dependent: :destroy
 
   translates :name, :description
   globalize_accessors

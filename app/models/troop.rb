@@ -2,8 +2,8 @@ class Troop < ApplicationRecord
   belongs_to :troop_type
   belongs_to :unit
   belongs_to :unit_option
-  has_and_belongs_to_many :equipments, :class_name => 'NinthAge::Equipment', dependent: :nullify
-  has_and_belongs_to_many :special_rules, :class_name => 'NinthAge::SpecialRule', dependent: :nullify
+  has_many :equipment_unit_troops, -> { order :position }, :class_name => 'NinthAge::EquipmentUnitTroop', dependent: :destroy
+  has_many :special_rule_unit_troops, -> { order :position }, :class_name => 'NinthAge::SpecialRuleUnitTroop', dependent: :destroy
 
   translates :name
   globalize_accessors
