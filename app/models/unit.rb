@@ -8,7 +8,7 @@ class Unit < ApplicationRecord
   has_many :army_list_units, dependent: :destroy
   has_many :equipment_unit_troops, -> { order :position }, :class_name => 'NinthAge::EquipmentUnitTroop', dependent: :destroy
   has_many :special_rule_unit_troops, -> { order :position }, :class_name => 'NinthAge::SpecialRuleUnitTroop', dependent: :destroy
-  has_many :troops, -> { order :position }, dependent: :destroy
+  has_many :troops, -> { order :position }, :class_name => 'NinthAge::Troop', dependent: :destroy
   has_many :unit_options, -> { order %w(parent_id position) }, dependent: :destroy
   has_many :mount_options, class_name: 'UnitOption', foreign_key: 'mount_id', dependent: :nullify
 

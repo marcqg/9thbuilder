@@ -42,10 +42,6 @@ class RolifyCreateRoles < ActiveRecord::Migration[5.0]
     add_foreign_key :magic_item_translations, :magic_items, column: :magic_item_id, on_delete: :cascade
     MagicStandard.create_translation_table!({:name => :string}, {:migrate_data => true, :remove_source_columns => true})
     add_foreign_key :magic_standard_translations, :magic_standards, column: :magic_standard_id, on_delete: :cascade
-    TroopType.create_translation_table!({:name => :string}, {:migrate_data => true, :remove_source_columns => true})
-    add_foreign_key :troop_type_translations, :troop_types, column: :troop_type_id, on_delete: :cascade
-    Troop.create_translation_table!({:name => :string}, {:migrate_data => true, :remove_source_columns => true})
-    add_foreign_key :troop_translations, :troops, column: :troop_id, on_delete: :cascade
     UnitOption.create_translation_table!({:name => :string}, {:migrate_data => true, :remove_source_columns => true})
     add_foreign_key :unit_option_translations, :unit_options, column: :unit_option_id, on_delete: :cascade
     Unit.create_translation_table!({:name => :string}, {:migrate_data => true, :remove_source_columns => true})
@@ -345,6 +341,14 @@ class RolifyCreateRoles < ActiveRecord::Migration[5.0]
 
     ActiveRecord::Base.connection.execute('delete FROM ninth_age_equipments
     where id not in (select equipment_id from ninth_age_equipment_unit_troops)')
+
+    rename_table :troops, :ninth_age_troops
+    rename_table :troops, :ninth_age_troop_types
+
+    NinthAge::TroopType.create_translation_table!({:name => :string}, {:migrate_data => true, :remove_source_columns => true})
+    add_foreign_key :ninth_age_troop_type_translations, :ninth_age_troop_types, column: :troop_type_id, on_delete: :cascade
+    NinthAge::Troop.create_translation_table!({:name => :string}, {:migrate_data => true, :remove_source_columns => true})
+    add_foreign_key :ninth_age_troop_translations, :ninth_age_troops, column: :troop_id, on_delete: :cascade
 
   end
 end

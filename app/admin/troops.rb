@@ -1,4 +1,4 @@
-ActiveAdmin.register Troop do
+ActiveAdmin.register NinthAge::Troop do
   menu priority: 4
 
   permit_params :unit_id, :unit_option_id, :troop_type_id, :name, :M, :WS, :BS, :S, :T, :W, :I, :A, :LD, :value_points, :min_size, :position
@@ -59,7 +59,7 @@ ActiveAdmin.register Troop do
       f.input :army_filter, as: :select, collection: Army.order(:name), disabled: Army.disabled.pluck(:id), label: 'Army FILTER'
       f.input :unit, collection: Unit.includes(:army).order('armies.name', 'units.name').collect { |u| [u.army.name + ' - ' + u.name, u.id] }
       f.input :unit_option, collection: UnitOption.includes(unit: [:army]).order('armies.name', 'units.name', 'unit_options.parent_id', 'unit_options.position').collect { |uo| [uo.unit.army.name + ' - ' + uo.unit.name + ' - ' + uo.name, uo.id] }
-      f.input :troop_type, collection: TroopType.order(:name)
+      f.input :troop_type, collection: NinthAge::TroopType.order(:name)
       f.input :name
       f.input :M
       f.input :WS

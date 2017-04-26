@@ -3,7 +3,7 @@ class UnitOption < ApplicationRecord
   belongs_to :parent, class_name: 'UnitOption'
   belongs_to :mount, class_name: 'Unit'
   has_many :children, -> { order 'position' }, class_name: 'UnitOption', foreign_key: 'parent_id', dependent: :nullify
-  has_one :troop, dependent: :nullify
+  has_one :troop, :class_name => 'NinthAge::Troop', dependent: :nullify
   has_many :army_list_unit_unit_options, dependent: :destroy
   has_many :army_list_units, through: :army_list_unit_unit_options
 

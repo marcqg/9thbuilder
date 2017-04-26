@@ -1,4 +1,4 @@
-ActiveAdmin.register TroopType do
+ActiveAdmin.register NinthAge::TroopType do
   menu parent: 'Troops'
 
   permit_params :name

@@ -1,4 +1,4 @@
-class TroopType < ApplicationRecord
+class NinthAge::TroopType < ApplicationRecord
   has_many :troops, dependent: :destroy
 
   translates :name
