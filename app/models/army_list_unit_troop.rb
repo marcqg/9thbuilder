@@ -1,5 +1,5 @@
 class ArmyListUnitTroop < ApplicationRecord
-  belongs_to :troop
+  belongs_to :troop, :class_name => 'NinthAge::Troop'
   belongs_to :army_list_unit
 
   validates :troop_id, :army_list_unit, presence: true

@@ -1,4 +1,4 @@
-ActiveAdmin.register ExtraItem do
+ActiveAdmin.register NinthAge::ExtraItem do
   menu priority: 7
 
   permit_params :extra_item_category_id, :name, :value_points
@@ -30,7 +30,7 @@ ActiveAdmin.register ExtraItem do
 
   form do |f|
     f.inputs do
-      f.input :extra_item_category, collection: ExtraItemCategory.includes(:army).order(:name).collect { |ei| [ei.army.name + ' - ' + ei.name, ei.id] }
+      f.input :extra_item_category, collection: NinthAge::ExtraItemCategory.includes(:army).order(:name).collect { |ei| [ei.army.name + ' - ' + ei.name, ei.id] }
       f.input :name
       f.input :value_points
     end

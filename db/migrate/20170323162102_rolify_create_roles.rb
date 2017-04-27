@@ -32,10 +32,6 @@ class RolifyCreateRoles < ActiveRecord::Migration[5.0]
     drop_table :admin_users
     Army.create_translation_table!({:name => :string}, {:migrate_data => true, :remove_source_columns => true})
     add_foreign_key :army_translations, :armies, column: :army_id, on_delete: :cascade
-    ExtraItemCategory.create_translation_table!({:name => :string}, {:migrate_data => true, :remove_source_columns => true})
-    add_foreign_key :extra_item_category_translations, :extra_item_categories, column: :extra_item_category_id, on_delete: :cascade
-    ExtraItem.create_translation_table!({:name => :string}, {:migrate_data => true, :remove_source_columns => true})
-    add_foreign_key :extra_item_translations, :extra_items, column: :extra_item_id, on_delete: :cascade
     MagicItemCategory.create_translation_table!({:name => :string}, {:migrate_data => true, :remove_source_columns => true})
     add_foreign_key :magic_item_category_translations, :magic_item_categories, column: :magic_item_category_id, on_delete: :cascade
     MagicItem.create_translation_table!({:name => :string}, {:migrate_data => true, :remove_source_columns => true})
@@ -343,12 +339,20 @@ class RolifyCreateRoles < ActiveRecord::Migration[5.0]
     where id not in (select equipment_id from ninth_age_equipment_unit_troops)')
 
     rename_table :troops, :ninth_age_troops
-    rename_table :troops, :ninth_age_troop_types
+    rename_table :troop_types, :ninth_age_troop_types
 
     NinthAge::TroopType.create_translation_table!({:name => :string}, {:migrate_data => true, :remove_source_columns => true})
-    add_foreign_key :ninth_age_troop_type_translations, :ninth_age_troop_types, column: :troop_type_id, on_delete: :cascade
+    add_foreign_key :ninth_age_troop_type_translations, :ninth_age_troop_types, column: :ninth_age_troop_type_id, on_delete: :cascade
     NinthAge::Troop.create_translation_table!({:name => :string}, {:migrate_data => true, :remove_source_columns => true})
-    add_foreign_key :ninth_age_troop_translations, :ninth_age_troops, column: :troop_id, on_delete: :cascade
+    add_foreign_key :ninth_age_troop_translations, :ninth_age_troops, column: :ninth_age_troop_id, on_delete: :cascade
+
+    rename_table :extra_items, :ninth_age_extra_items
+    rename_table :extra_item_categories, :ninth_age_extra_item_categories
+
+    NinthAge::ExtraItemCategory.create_translation_table!({:name => :string}, {:migrate_data => true, :remove_source_columns => true})
+    add_foreign_key :ninth_age_extra_item_category_translations, :ninth_age_extra_item_categories, column: :ninth_age_extra_item_category_id, on_delete: :cascade
+    NinthAge::ExtraItem.create_translation_table!({:name => :string}, {:migrate_data => true, :remove_source_columns => true})
+    add_foreign_key :ninth_age_extra_item_translations, :ninth_age_extra_items, column: :ninth_age_extra_item_id, on_delete: :cascade
 
   end
 end
