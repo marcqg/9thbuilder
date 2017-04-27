@@ -1,5 +1,5 @@
 class ArmyList < ApplicationRecord
-  belongs_to :army
+  belongs_to :army, :class_name => 'NinthAge::Army'
   belongs_to :user
 
   has_many :army_list_units, -> { order 'position' }, dependent: :destroy

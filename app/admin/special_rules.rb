@@ -49,9 +49,9 @@ ActiveAdmin.register NinthAge::SpecialRule do
 
   form do |f|
     f.inputs do
-      f.input :army_filter, as: :select, collection: Army.order(:name), disabled: Army.disabled.pluck(:id), label: 'Army FILTER'
-      f.input :unit, collection: Unit.includes(:army).order('armies.name', 'units.name').collect { |u| [u.army.name + ' - ' + u.name, u.id] }
-      f.input :troop, collection: Troop.includes(unit: [:army]).order('armies.name', 'units.name', 'troops.position').collect { |t| [t.unit.army.name + ' - ' + t.unit.name + ' - ' + t.name, t.id] }
+      f.input :army_filter, as: :select, collection: NinthAge::Army.order(:name), disabled: NinthAge::Army.disabled.pluck(:id), label: 'Army FILTER'
+      f.input :unit, collection: NinthAge::Unit.includes(:army).order('ninth_age_armies.name', 'ninth_age_units.name').collect { |u| [u.army.name + ' - ' + u.name, u.id] }
+      f.input :troop, collection: NinthAge::Troop.includes(unit: [:army]).order('ninth_age_armies.name', 'ninth_age_units.name', 'ninth_age_troops.position').collect { |t| [t.unit.army.name + ' - ' + t.unit.name + ' - ' + t.name, t.id] }
       f.input :name
       f.input :position
     end

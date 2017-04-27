@@ -1,17 +1,17 @@
-class Army < ApplicationRecord
+class NinthAge::Army < ApplicationRecord
 
-  belongs_to :version, :class_name => 'NinthAge::Version'
+  belongs_to :version
 
-  has_many :army_organisations, :class_name => 'NinthAge::ArmyOrganisation'
-  has_many :organisation_groups, :class_name => 'NinthAge::OrganisationGroup', through: :army_organisations
+  has_many :army_organisations
+  has_many :organisation_groups, through: :army_organisations
 
-  has_many :organisations, :class_name => 'NinthAge::Organisation'
+  has_many :organisations
 
   has_many :army_lists, dependent: :destroy
   has_many :magic_items, dependent: :destroy
   has_many :magic_standards, dependent: :destroy
-  has_many :extra_item_categories, :class_name => 'NinthAge::ExtraItemCategory', dependent: :destroy
-  has_many :units, -> { includes(:translations).order(:name) }, dependent: :destroy
+  has_many :extra_item_categories, dependent: :destroy
+  has_many :units, -> { includes(:translations).order(:name) }, :class_name => 'NinthAge::Unit', dependent: :destroy
   has_many :favorite_users, class_name: 'User', foreign_key: 'favorite_army_id', dependent: :nullify
 
   translates :name
@@ -19,8 +19,8 @@ class Army < ApplicationRecord
 
   validates :name, presence: true
 
-  scope :disabled, -> { where('id NOT IN (SELECT DISTINCT army_id FROM units)') }
-  scope :disabled_or_obsolete, -> { where('id NOT IN (SELECT DISTINCT army_id FROM units)') }
+  scope :disabled, -> { where('id NOT IN (SELECT DISTINCT army_id FROM ninth_age_units)') }
+  scope :disabled_or_obsolete, -> { where('id NOT IN (SELECT DISTINCT army_id FROM ninth_age_units)') }
 
   def obsolete?
     name =~ /obsolète/i

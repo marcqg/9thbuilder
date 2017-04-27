@@ -30,18 +30,11 @@ class RolifyCreateRoles < ActiveRecord::Migration[5.0]
               WHERE `email` IN (SELECT `email` FROM admin_users)'
 
     drop_table :admin_users
-    Army.create_translation_table!({:name => :string}, {:migrate_data => true, :remove_source_columns => true})
-    add_foreign_key :army_translations, :armies, column: :army_id, on_delete: :cascade
-    MagicItemCategory.create_translation_table!({:name => :string}, {:migrate_data => true, :remove_source_columns => true})
-    add_foreign_key :magic_item_category_translations, :magic_item_categories, column: :magic_item_category_id, on_delete: :cascade
-    MagicItem.create_translation_table!({:name => :string}, {:migrate_data => true, :remove_source_columns => true})
-    add_foreign_key :magic_item_translations, :magic_items, column: :magic_item_id, on_delete: :cascade
-    MagicStandard.create_translation_table!({:name => :string}, {:migrate_data => true, :remove_source_columns => true})
-    add_foreign_key :magic_standard_translations, :magic_standards, column: :magic_standard_id, on_delete: :cascade
-    UnitOption.create_translation_table!({:name => :string}, {:migrate_data => true, :remove_source_columns => true})
-    add_foreign_key :unit_option_translations, :unit_options, column: :unit_option_id, on_delete: :cascade
-    Unit.create_translation_table!({:name => :string}, {:migrate_data => true, :remove_source_columns => true})
-    add_foreign_key :unit_translations, :units, column: :unit_id, on_delete: :cascade
+
+    rename_table :armies, :ninth_age_armies
+
+    NinthAge::Army.create_translation_table!({:name => :string}, {:migrate_data => true, :remove_source_columns => true})
+    add_foreign_key :ninth_age_army_translations, :ninth_age_armies, column: :ninth_age_army_id, on_delete: :cascade
 
 
     create_table :ninth_age_versions do |t|
@@ -57,12 +50,12 @@ class RolifyCreateRoles < ActiveRecord::Migration[5.0]
 
     NinthAge::Version.create :name => 'V-1.0.0', :major => 1, :minor => 0, :fix => 0, :public => true
 
-    add_column :armies, :version_id, :integer, :default => 0, :null => true
-    add_index :armies, :version_id
+    add_column :ninth_age_armies, :version_id, :integer, :default => 0, :null => true
+    add_index :ninth_age_armies, :version_id
 
-    Army.update_all(version_id: 1)
+    NinthAge::Army.update_all(version_id: 1)
 
-    add_foreign_key :armies, :ninth_age_versions, column: :version_id, on_delete: :cascade
+    add_foreign_key :ninth_age_armies, :ninth_age_versions, column: :version_id, on_delete: :cascade
 
     create_table :ninth_age_magics do |t|
       t.belongs_to :version, null: false
@@ -87,14 +80,14 @@ class RolifyCreateRoles < ActiveRecord::Migration[5.0]
     NinthAge::MagicSpell.create_translation_table! :name => :string, :range => :string, :casting_value => :string, :effect => :text
     add_foreign_key :ninth_age_magic_spell_translations, :ninth_age_magic_spells, column: :ninth_age_magic_spell_id, on_delete: :cascade
 
-    add_attachment :armies, :logo
+    add_attachment :ninth_age_armies, :logo
     add_attachment :ninth_age_magics, :logo
 
     create_table :ninth_age_army_organisations do |t|
       t.belongs_to :army, index: false, null: false, default: 0
       t.timestamps
     end
-    add_foreign_key :ninth_age_army_organisations, :armies, column: :army_id
+    add_foreign_key :ninth_age_army_organisations, :ninth_age_armies, column: :army_id
 
     NinthAge::ArmyOrganisation.create_translation_table! :name => :string, :description => :string
     add_foreign_key :ninth_age_army_organisation_translations, :ninth_age_army_organisations, column: :ninth_age_army_organisation_id, on_delete: :cascade
@@ -105,7 +98,7 @@ class RolifyCreateRoles < ActiveRecord::Migration[5.0]
       t.timestamps
     end
     add_attachment :ninth_age_organisations, :logo
-    add_foreign_key :ninth_age_organisations, :armies, column: :army_id
+    add_foreign_key :ninth_age_organisations, :ninth_age_armies, column: :army_id
 
     NinthAge::Organisation.create_translation_table! :name => :string
     add_foreign_key :ninth_age_organisation_translations, :ninth_age_organisations, column: :ninth_age_organisation_id, on_delete: :cascade
@@ -155,53 +148,6 @@ class RolifyCreateRoles < ActiveRecord::Migration[5.0]
 
     add_index :ninth_age_army_list_organisations, [:army_list_id, :organisation_id], name: 'ninth_age_army_list_organisations_army_list_organisation', :unique => true
     add_index :ninth_age_army_list_organisations, [:organisation_id, :army_list_id], name: 'ninth_age_army_list_organisations_organisation_army_list', :unique => true
-
-    unit_categories = ArmyList.connection.select_all "SELECT uc.id as id, uc.name as name, uc.min_quota as min_quota, uc.max_quota as max_quota FROM unit_categories uc;"
-
-    Army.all.each do |army|
-
-      army_organisation = NinthAge::ArmyOrganisation.create!({:name => 'Army organisation', :army_id => army.id})
-
-      unit_categories.each do |unit_category|
-
-        organisation = NinthAge::Organisation.create!({:name => unit_category['name'], :army_id => army.id})
-
-        organisation_group = NinthAge::OrganisationGroup.create!({army_organisation_id: army_organisation.id, organisation_id: organisation.id})
-        if unit_category['min_quota'] != nil
-          organisation_group.type_target = :Least
-          organisation_group.target = unit_category['min_quota']
-        elsif unit_category['max_quota'] != nil
-          organisation_group.type_target = :Max
-          organisation_group.target = unit_category['max_quota']
-        end
-        organisation_group.save
-
-        Unit.where({army_id: army.id, unit_category_id: unit_category['id']}).each do |unit|
-
-          unit.organisations << organisation
-          unit.save
-
-        end
-      end
-    end
-
-    add_column :army_lists, :army_organisation_id, :integer, :default => 0, :null => true
-    add_index :army_lists, :army_organisation_id
-
-    ActiveRecord::Base.connection.execute('UPDATE army_lists
-                                      SET army_organisation_id = (SELECT id FROM ninth_age_army_organisations WHERE army_lists.army_id = ninth_age_army_organisations.army_id)
-                                      where army_organisation_id = 0;')
-
-    add_foreign_key :army_lists, :ninth_age_army_organisations, column: :army_organisation_id, on_delete: :cascade
-
-    remove_foreign_key :units, :unit_categories
-    remove_index :units, :unit_category_id
-    remove_column :units, :unit_category_id
-
-    remove_index :army_list_units, :unit_category_id
-    remove_column :army_list_units, :unit_category_id
-
-    drop_table :unit_categories
 
     #Translations of equipments
     create_table :ninth_age_special_rules do |t|
@@ -353,6 +299,75 @@ class RolifyCreateRoles < ActiveRecord::Migration[5.0]
     add_foreign_key :ninth_age_extra_item_category_translations, :ninth_age_extra_item_categories, column: :ninth_age_extra_item_category_id, on_delete: :cascade
     NinthAge::ExtraItem.create_translation_table!({:name => :string}, {:migrate_data => true, :remove_source_columns => true})
     add_foreign_key :ninth_age_extra_item_translations, :ninth_age_extra_items, column: :ninth_age_extra_item_id, on_delete: :cascade
+
+    rename_table :magic_items, :ninth_age_magic_items
+    rename_table :magic_item_categories, :ninth_age_magic_item_categories
+
+    NinthAge::MagicItemCategory.create_translation_table!({:name => :string}, {:migrate_data => true, :remove_source_columns => true})
+    add_foreign_key :ninth_age_magic_item_category_translations, :ninth_age_magic_item_categories, column: :ninth_age_magic_item_category_id, on_delete: :cascade
+    NinthAge::MagicItem.create_translation_table!({:name => :string}, {:migrate_data => true, :remove_source_columns => true})
+    add_foreign_key :ninth_age_magic_item_translations, :ninth_age_magic_items, column: :ninth_age_magic_item_id, on_delete: :cascade
+
+    rename_table :magic_standards, :ninth_age_magic_standards
+
+    NinthAge::MagicStandard.create_translation_table!({:name => :string}, {:migrate_data => true, :remove_source_columns => true})
+    add_foreign_key :ninth_age_magic_standard_translations, :ninth_age_magic_standards, column: :ninth_age_magic_standard_id, on_delete: :cascade
+
+    rename_table :units, :ninth_age_units
+    rename_table :unit_options, :ninth_age_unit_options
+
+    NinthAge::UnitOption.create_translation_table!({:name => :string}, {:migrate_data => true, :remove_source_columns => true})
+    add_foreign_key :ninth_age_unit_option_translations, :ninth_age_unit_options, column: :ninth_age_unit_option_id, on_delete: :cascade
+    NinthAge::Unit.create_translation_table!({:name => :string}, {:migrate_data => true, :remove_source_columns => true})
+    add_foreign_key :ninth_age_unit_translations, :ninth_age_units, column: :ninth_age_unit_id, on_delete: :cascade
+
+
+    unit_categories = ArmyList.connection.select_all 'SELECT uc.id as id, uc.name as name, uc.min_quota as min_quota, uc.max_quota as max_quota FROM unit_categories uc;'
+
+    NinthAge::Army.all.each do |army|
+
+      army_organisation = NinthAge::ArmyOrganisation.create!({:name => 'Army organisation', :army_id => army.id})
+
+      unit_categories.each do |unit_category|
+
+        organisation = NinthAge::Organisation.create!({:name => unit_category['name'], :army_id => army.id})
+
+        organisation_group = NinthAge::OrganisationGroup.create!({army_organisation_id: army_organisation.id, organisation_id: organisation.id})
+        if unit_category['min_quota'] != nil
+          organisation_group.type_target = :Least
+          organisation_group.target = unit_category['min_quota']
+        elsif unit_category['max_quota'] != nil
+          organisation_group.type_target = :Max
+          organisation_group.target = unit_category['max_quota']
+        end
+        organisation_group.save
+
+        NinthAge::Unit.where({army_id: army.id, unit_category_id: unit_category['id']}).each do |unit|
+
+          unit.organisations << organisation
+          unit.save
+
+        end
+      end
+    end
+
+    add_column :army_lists, :army_organisation_id, :integer, :default => 0, :null => true
+    add_index :army_lists, :army_organisation_id
+
+    ActiveRecord::Base.connection.execute('UPDATE army_lists
+                                      SET army_organisation_id = (SELECT id FROM ninth_age_army_organisations WHERE army_lists.army_id = ninth_age_army_organisations.army_id)
+                                      where army_organisation_id = 0;')
+
+    add_foreign_key :army_lists, :ninth_age_army_organisations, column: :army_organisation_id, on_delete: :cascade
+
+    remove_foreign_key :ninth_age_units, :unit_categories
+    remove_index :ninth_age_units, :unit_category_id
+    remove_column :ninth_age_units, :unit_category_id
+
+    remove_index :army_list_units, :unit_category_id
+    remove_column :army_list_units, :unit_category_id
+
+    drop_table :unit_categories
 
   end
 end

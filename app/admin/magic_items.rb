@@ -1,4 +1,4 @@
-ActiveAdmin.register MagicItem do
+ActiveAdmin.register NinthAge::MagicItem do
   menu priority: 8
 
   permit_params :army_id, :magic_item_category_id, :override_id, :name, :value_points, :is_multiple
@@ -34,9 +34,9 @@ ActiveAdmin.register MagicItem do
 
   form do |f|
     f.inputs do
-      f.input :army, collection: Army.order(:name)
-      f.input :magic_item_category, collection: MagicItemCategory.order(:name)
-      f.input :override, collection: MagicItem.where(army_id: nil).order(:name)
+      f.input :army, collection: NinthAge::Army.order(:name)
+      f.input :magic_item_category, collection: NinthAge::MagicItemCategory.order(:name)
+      f.input :override, collection: NinthAge::MagicItem.where(army_id: nil).order(:name)
       f.input :name
       f.input :value_points
       f.input :is_multiple

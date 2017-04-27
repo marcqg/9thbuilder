@@ -1,4 +1,4 @@
-ActiveAdmin.register Army do
+ActiveAdmin.register NinthAge::Army do
   menu priority: 2
 
   permit_params :name

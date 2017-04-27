@@ -1,9 +1,9 @@
-class MagicItem < ApplicationRecord
+class NinthAge::MagicItem < ApplicationRecord
   belongs_to :army
   belongs_to :magic_item_category
   has_many :army_list_unit_magic_items, dependent: :destroy
   has_many :army_list_units, through: :army_list_unit_magic_items
-  has_one :override, class_name: 'MagicItem', foreign_key: 'override_id'
+  has_one :override, class_name: 'NinthAge::MagicItem', foreign_key: 'override_id'
 
   translates :name
   globalize_accessors
@@ -20,9 +20,9 @@ class MagicItem < ApplicationRecord
       end
     else
       if value_points_limit.nil?
-        includes(:translations).where('army_id = :army_id OR (army_id IS NULL AND magic_items.id NOT IN (SELECT override_id FROM magic_items WHERE army_id = :army_id AND override_id IS NOT NULL))', army_id: army).order('value_points DESC', 'magic_item_translations.name')
+        includes(:translations).where('army_id = :army_id OR (army_id IS NULL AND ninth_age_magic_items.id NOT IN (SELECT override_id FROM ninth_age_magic_items WHERE army_id = :army_id AND override_id IS NOT NULL))', army_id: army).order('value_points DESC', 'ninth_age_magic_item_translations.name')
       else
-        includes(:translations). where('army_id = :army_id OR (army_id IS NULL AND magic_items.id NOT IN (SELECT override_id FROM magic_items WHERE army_id = :army_id AND override_id IS NOT NULL))', army_id: army).where('value_points <= ?', value_points_limit).order('value_points DESC', 'magic_item_translations.name')
+        includes(:translations). where('army_id = :army_id OR (army_id IS NULL AND ninth_age_magic_items.id NOT IN (SELECT override_id FROM ninth_age_magic_items WHERE army_id = :army_id AND override_id IS NOT NULL))', army_id: army).where('value_points <= ?', value_points_limit).order('value_points DESC', 'ninth_age_magic_item_translations.name')
       end
     end
   }

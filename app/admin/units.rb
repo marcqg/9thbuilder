@@ -1,4 +1,4 @@
-ActiveAdmin.register Unit do
+ActiveAdmin.register NinthAge::Unit do
   menu priority: 3
 
   permit_params :army_id, :name, :value_points, :min_size, :max_size, :magic, :notes, :is_unique

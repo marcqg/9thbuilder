@@ -1,4 +1,4 @@
-ActiveAdmin.register MagicStandard do
+ActiveAdmin.register NinthAge::MagicStandard do
   menu parent: 'Magic Items', priority: 1
 
   permit_params :army_id, :override_id, :name, :value_points
@@ -30,8 +30,8 @@ ActiveAdmin.register MagicStandard do
 
   form do |f|
     f.inputs do
-      f.input :army, collection: Army.order(:name)
-      f.input :override, collection: MagicStandard.where(army_id: nil).order(:name)
+      f.input :army, collection: NinthAge::Army.order(:name)
+      f.input :override, collection: NinthAge::MagicStandard.where(army_id: nil).order(:name)
       f.input :name
       f.input :value_points
     end

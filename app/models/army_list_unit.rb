@@ -1,15 +1,15 @@
 class ArmyListUnit < ApplicationRecord
   belongs_to :army_list
-  belongs_to :unit
+  belongs_to :unit, :class_name => 'NinthAge::Unit'
   has_many :army_list_unit_troops, -> { order 'position' }, dependent: :destroy
   has_many :army_list_unit_magic_items, dependent: :destroy
   has_many :army_list_unit_magic_standards, dependent: :destroy
   has_many :army_list_unit_extra_items, dependent: :destroy
   has_many :army_list_unit_unit_options, dependent: :destroy
-  has_many :magic_items, -> { select 'magic_items.*, army_list_units_magic_items.quantity' }, through: :army_list_unit_magic_items
-  has_many :magic_standards, through: :army_list_unit_magic_standards
-  has_many :extra_items, through: :army_list_unit_extra_items
-  has_many :unit_options, -> { select 'unit_options.*, army_list_units_unit_options.quantity' }, through: :army_list_unit_unit_options
+  has_many :magic_items, -> { select 'ninth_age_magic_items.*, army_list_units_magic_items.quantity' }, :class_name => 'NinthAge::MagicItem', through: :army_list_unit_magic_items
+  has_many :magic_standards, :class_name => 'NinthAge::MagicStandard', through: :army_list_unit_magic_standards
+  has_many :extra_items, :class_name => 'NinthAge::ExtraItem', through: :army_list_unit_extra_items
+  has_many :unit_options, -> { select 'ninth_age_unit_options.*, army_list_units_unit_options.quantity' }, :class_name => 'NinthAge::UnitOption', through: :army_list_unit_unit_options
 
   accepts_nested_attributes_for :army_list_unit_troops
   accepts_nested_attributes_for :army_list_unit_magic_items, allow_destroy: true
