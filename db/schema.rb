@@ -26,16 +26,46 @@ ActiveRecord::Schema.define(version: 20170323162102) do
     t.index ["resource_type", "resource_id"], name: "index_admin_notes_on_resource_type_and_resource_id", using: :btree
   end
 
-  create_table "army_list_unit_troops", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
+  create_table "builder_army_list_unit_extra_items", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
+    t.integer "army_list_unit_id", null: false
+    t.integer "extra_item_id",     null: false
+    t.index ["army_list_unit_id"], name: "index_builder_army_list_unit_extra_items_on_army_list_unit_id", using: :btree
+    t.index ["extra_item_id"], name: "index_builder_army_list_unit_extra_items_on_extra_item_id", using: :btree
+  end
+
+  create_table "builder_army_list_unit_magic_items", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
+    t.integer "army_list_unit_id",             null: false
+    t.integer "magic_item_id",                 null: false
+    t.integer "quantity",          default: 1, null: false
+    t.index ["army_list_unit_id"], name: "index_builder_army_list_unit_magic_items_on_army_list_unit_id", using: :btree
+    t.index ["magic_item_id"], name: "index_builder_army_list_unit_magic_items_on_magic_item_id", using: :btree
+  end
+
+  create_table "builder_army_list_unit_magic_standards", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
+    t.integer "army_list_unit_id", null: false
+    t.integer "magic_standard_id", null: false
+    t.index ["army_list_unit_id"], name: "index_builder_armylistunit_magicstandards_on_armylistunit_id", using: :btree
+    t.index ["magic_standard_id"], name: "index_builder_armylistunit_magicstandards_on_magicstandard_id", using: :btree
+  end
+
+  create_table "builder_army_list_unit_troops", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.integer "army_list_unit_id", null: false
     t.integer "troop_id",          null: false
     t.integer "size"
     t.integer "position"
-    t.index ["army_list_unit_id"], name: "index_army_list_unit_troops_on_army_list_unit_id", using: :btree
-    t.index ["troop_id"], name: "index_army_list_unit_troops_on_troop_id", using: :btree
+    t.index ["army_list_unit_id"], name: "index_builder_army_list_unit_troops_on_army_list_unit_id", using: :btree
+    t.index ["troop_id"], name: "index_builder_army_list_unit_troops_on_troop_id", using: :btree
   end
 
-  create_table "army_list_units", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
+  create_table "builder_army_list_unit_unit_options", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
+    t.integer "army_list_unit_id",             null: false
+    t.integer "unit_option_id",                null: false
+    t.integer "quantity",          default: 1, null: false
+    t.index ["army_list_unit_id"], name: "index_builder_army_list_unit_unit_options_on_army_list_unit_id", using: :btree
+    t.index ["unit_option_id"], name: "index_builder_army_list_unit_unit_options_on_unit_option_id", using: :btree
+  end
+
+  create_table "builder_army_list_units", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.integer  "army_list_id"
     t.integer  "unit_id"
     t.string   "name"
@@ -46,41 +76,11 @@ ActiveRecord::Schema.define(version: 20170323162102) do
     t.datetime "updated_at"
     t.text     "notes",        limit: 65535
     t.string   "magic"
-    t.index ["army_list_id"], name: "index_army_list_units_on_army_list_id", using: :btree
-    t.index ["unit_id"], name: "index_army_list_units_on_unit_id", using: :btree
+    t.index ["army_list_id"], name: "index_builder_army_list_units_on_army_list_id", using: :btree
+    t.index ["unit_id"], name: "index_builder_army_list_units_on_unit_id", using: :btree
   end
 
-  create_table "army_list_units_extra_items", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
-    t.integer "army_list_unit_id", null: false
-    t.integer "extra_item_id",     null: false
-    t.index ["army_list_unit_id"], name: "index_army_list_units_extra_items_on_army_list_unit_id", using: :btree
-    t.index ["extra_item_id"], name: "index_army_list_units_extra_items_on_extra_item_id", using: :btree
-  end
-
-  create_table "army_list_units_magic_items", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
-    t.integer "army_list_unit_id",             null: false
-    t.integer "magic_item_id",                 null: false
-    t.integer "quantity",          default: 1, null: false
-    t.index ["army_list_unit_id"], name: "index_army_list_units_magic_items_on_army_list_unit_id", using: :btree
-    t.index ["magic_item_id"], name: "index_army_list_units_magic_items_on_magic_item_id", using: :btree
-  end
-
-  create_table "army_list_units_magic_standards", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
-    t.integer "army_list_unit_id", null: false
-    t.integer "magic_standard_id", null: false
-    t.index ["army_list_unit_id"], name: "index_army_list_units_magic_standards_on_army_list_unit_id", using: :btree
-    t.index ["magic_standard_id"], name: "index_army_list_units_magic_standards_on_magic_standard_id", using: :btree
-  end
-
-  create_table "army_list_units_unit_options", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
-    t.integer "army_list_unit_id",             null: false
-    t.integer "unit_option_id",                null: false
-    t.integer "quantity",          default: 1, null: false
-    t.index ["army_list_unit_id"], name: "index_army_list_units_unit_options_on_army_list_unit_id", using: :btree
-    t.index ["unit_option_id"], name: "index_army_list_units_unit_options_on_unit_option_id", using: :btree
-  end
-
-  create_table "army_lists", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
+  create_table "builder_army_lists", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.integer  "army_id",                                                                null: false
     t.integer  "user_id",                                                                null: false
     t.string   "name",                                                                   null: false
@@ -90,9 +90,9 @@ ActiveRecord::Schema.define(version: 20170323162102) do
     t.text     "notes",                limit: 65535
     t.string   "uuid",                 limit: 36,                                        null: false
     t.integer  "army_organisation_id",                                       default: 0
-    t.index ["army_id"], name: "index_army_lists_on_army_id", using: :btree
-    t.index ["army_organisation_id"], name: "index_army_lists_on_army_organisation_id", using: :btree
-    t.index ["user_id"], name: "index_army_lists_on_user_id", using: :btree
+    t.index ["army_id"], name: "index_builder_army_lists_on_army_id", using: :btree
+    t.index ["army_organisation_id"], name: "index_builder_army_lists_on_army_organisation_id", using: :btree
+    t.index ["user_id"], name: "index_builder_army_lists_on_user_id", using: :btree
   end
 
   create_table "ninth_age_armies", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
@@ -533,23 +533,23 @@ ActiveRecord::Schema.define(version: 20170323162102) do
     t.index ["user_id"], name: "index_users_roles_on_user_id", using: :btree
   end
 
-  add_foreign_key "army_list_unit_troops", "army_list_units", on_delete: :cascade
-  add_foreign_key "army_list_unit_troops", "ninth_age_troops", column: "troop_id", on_delete: :cascade
-  add_foreign_key "army_list_units", "army_lists"
-  add_foreign_key "army_list_units", "ninth_age_units", column: "unit_id"
-  add_foreign_key "army_list_units_extra_items", "army_list_units", on_delete: :cascade
-  add_foreign_key "army_list_units_extra_items", "ninth_age_extra_items", column: "extra_item_id", on_delete: :cascade
-  add_foreign_key "army_list_units_magic_items", "army_list_units", on_delete: :cascade
-  add_foreign_key "army_list_units_magic_items", "ninth_age_magic_items", column: "magic_item_id", on_delete: :cascade
-  add_foreign_key "army_list_units_magic_standards", "army_list_units", on_delete: :cascade
-  add_foreign_key "army_list_units_magic_standards", "ninth_age_magic_standards", column: "magic_standard_id", on_delete: :cascade
-  add_foreign_key "army_list_units_unit_options", "army_list_units", on_delete: :cascade
-  add_foreign_key "army_list_units_unit_options", "ninth_age_unit_options", column: "unit_option_id", on_delete: :cascade
-  add_foreign_key "army_lists", "ninth_age_armies", column: "army_id"
-  add_foreign_key "army_lists", "ninth_age_army_organisations", column: "army_organisation_id", on_delete: :cascade
-  add_foreign_key "army_lists", "users"
+  add_foreign_key "builder_army_list_unit_extra_items", "builder_army_list_units", column: "army_list_unit_id", on_delete: :cascade
+  add_foreign_key "builder_army_list_unit_extra_items", "ninth_age_extra_items", column: "extra_item_id", on_delete: :cascade
+  add_foreign_key "builder_army_list_unit_magic_items", "builder_army_list_units", column: "army_list_unit_id", on_delete: :cascade
+  add_foreign_key "builder_army_list_unit_magic_items", "ninth_age_magic_items", column: "magic_item_id", on_delete: :cascade
+  add_foreign_key "builder_army_list_unit_magic_standards", "builder_army_list_units", column: "army_list_unit_id", on_delete: :cascade
+  add_foreign_key "builder_army_list_unit_magic_standards", "ninth_age_magic_standards", column: "magic_standard_id", on_delete: :cascade
+  add_foreign_key "builder_army_list_unit_troops", "builder_army_list_units", column: "army_list_unit_id", on_delete: :cascade
+  add_foreign_key "builder_army_list_unit_troops", "ninth_age_troops", column: "troop_id", on_delete: :cascade
+  add_foreign_key "builder_army_list_unit_unit_options", "builder_army_list_units", column: "army_list_unit_id", on_delete: :cascade
+  add_foreign_key "builder_army_list_unit_unit_options", "ninth_age_unit_options", column: "unit_option_id", on_delete: :cascade
+  add_foreign_key "builder_army_list_units", "builder_army_lists", column: "army_list_id"
+  add_foreign_key "builder_army_list_units", "ninth_age_units", column: "unit_id"
+  add_foreign_key "builder_army_lists", "ninth_age_armies", column: "army_id"
+  add_foreign_key "builder_army_lists", "ninth_age_army_organisations", column: "army_organisation_id", on_delete: :cascade
+  add_foreign_key "builder_army_lists", "users"
   add_foreign_key "ninth_age_armies", "ninth_age_versions", column: "version_id", on_delete: :cascade
-  add_foreign_key "ninth_age_army_list_organisations", "army_lists"
+  add_foreign_key "ninth_age_army_list_organisations", "builder_army_lists", column: "army_list_id"
   add_foreign_key "ninth_age_army_list_organisations", "ninth_age_organisations", column: "organisation_id"
   add_foreign_key "ninth_age_army_organisation_translations", "ninth_age_army_organisations", on_delete: :cascade
   add_foreign_key "ninth_age_army_organisations", "ninth_age_armies", column: "army_id"

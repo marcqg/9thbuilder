@@ -322,7 +322,7 @@ class RolifyCreateRoles < ActiveRecord::Migration[5.0]
     add_foreign_key :ninth_age_unit_translations, :ninth_age_units, column: :ninth_age_unit_id, on_delete: :cascade
 
 
-    unit_categories = ArmyList.connection.select_all 'SELECT uc.id as id, uc.name as name, uc.min_quota as min_quota, uc.max_quota as max_quota FROM unit_categories uc;'
+    unit_categories = Builder::ArmyList.connection.select_all 'SELECT uc.id as id, uc.name as name, uc.min_quota as min_quota, uc.max_quota as max_quota FROM unit_categories uc;'
 
     NinthAge::Army.all.each do |army|
 
@@ -369,5 +369,25 @@ class RolifyCreateRoles < ActiveRecord::Migration[5.0]
 
     drop_table :unit_categories
 
+
+    rename_table :army_lists,                       :builder_army_lists
+    rename_table :army_list_units,                  :builder_army_list_units
+    rename_table :army_list_units_extra_items,      :builder_army_list_unit_extra_items
+    rename_table :army_list_units_magic_items,      :builder_army_list_unit_magic_items
+
+    remove_foreign_key :army_list_units_magic_standards, :builder_army_list_units
+    remove_index :army_list_units_magic_standards,  :army_list_unit_id
+    remove_foreign_key :army_list_units_magic_standards, :ninth_age_magic_standards
+    remove_index :army_list_units_magic_standards,  :magic_standard_id
+
+    rename_table :army_list_units_magic_standards,  :builder_army_list_unit_magic_standards
+
+    add_index :builder_army_list_unit_magic_standards, :army_list_unit_id, name: 'index_builder_armylistunit_magicstandards_on_armylistunit_id'
+    add_foreign_key :builder_army_list_unit_magic_standards, :builder_army_list_units, column: :army_list_unit_id, on_delete: :cascade
+    add_index :builder_army_list_unit_magic_standards, :magic_standard_id, name: 'index_builder_armylistunit_magicstandards_on_magicstandard_id'
+    add_foreign_key :builder_army_list_unit_magic_standards, :ninth_age_magic_standards, column: :magic_standard_id, on_delete: :cascade
+
+    rename_table :army_list_unit_troops,           :builder_army_list_unit_troops
+    rename_table :army_list_units_unit_options,     :builder_army_list_unit_unit_options
   end
 end

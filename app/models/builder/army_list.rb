@@ -1,11 +1,11 @@
-class ArmyList < ApplicationRecord
+class Builder::ArmyList < ApplicationRecord
   belongs_to :army, :class_name => 'NinthAge::Army'
   belongs_to :user
 
   has_many :army_list_units, -> { order 'position' }, dependent: :destroy
 
   belongs_to :army_organisation, :class_name => 'NinthAge::ArmyOrganisation'
-  has_many :army_list_organisations, :class_name => 'NinthAge::ArmyListOrganisation', dependent: :destroy
+  has_many :army_list_organisations, dependent: :destroy
 
   validates :army_id, :user_id, :army_organisation_id, :uuid, :name, :value_points, presence: true
   validates :value_points, numericality: { greater_than_or_equal_to: 0 }

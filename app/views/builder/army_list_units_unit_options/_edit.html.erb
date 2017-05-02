@@ -35,7 +35,7 @@ end
 
   <% if option.children.exclude_magics_and_extra.any? %>
     <ul>
-      <%= render :partial => "army_list_units_unit_options/edit", :collection => option.children.exclude_magics_and_extra.all, :as => :option, :locals => { :army_list_unit => army_list_unit } %>
+      <%= render :partial => 'builder/army_list_units_unit_options/edit', :collection => option.children.exclude_magics_and_extra.all, :as => :option, :locals => { :army_list_unit => army_list_unit } %>
     </ul>
   <% end %>
 </li>

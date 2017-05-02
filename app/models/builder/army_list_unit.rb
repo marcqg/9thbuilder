@@ -1,4 +1,4 @@
-class ArmyListUnit < ApplicationRecord
+class Builder::ArmyListUnit < ApplicationRecord
   belongs_to :army_list
   belongs_to :unit, :class_name => 'NinthAge::Unit'
   has_many :army_list_unit_troops, -> { order 'position' }, dependent: :destroy

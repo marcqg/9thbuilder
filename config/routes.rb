@@ -8,20 +8,25 @@ Rails.application.routes.draw do
     ActiveAdmin.routes(self)
     devise_for :users
 
-    get 'army_lists/:uuid.pdf', to: redirect('/army_lists/%{id}/export-full-magics.pdf')
-    get 'army_lists/:uuid/export-:verbosity-:magics' => 'exports#export', as: :export_army_list
+    get 'army_lists/:uuid.pdf', to: redirect('/buildder/army_lists/%{id}/export-full-magics.pdf')
+    get 'army_lists/:uuid/export-:verbosity-:magics', to: redirect('/buildder/army_lists/%{id}/export-%{verbosity}-%{magics}')
 
-    resources :army_lists, param: :uuid do
-      get 'delete', on: :member
-      get 'export', on: :member
-      get 'new_from', on: :member
-      post 'duplicate', on: :member
+    namespace :builder do
+      get 'army_lists/:uuid.pdf', to: redirect('/army_lists/%{id}/export-full-magics.pdf')
+      get 'army_lists/:uuid/export-:verbosity-:magics' => 'exports#export', as: :export_army_list
 
-      resources :army_list_units do
+      resources :army_lists, param: :uuid do
         get 'delete', on: :member
+        get 'export', on: :member
         get 'new_from', on: :member
         post 'duplicate', on: :member
-        post 'sort', on: :collection
+
+        resources :army_list_units do
+          get 'delete', on: :member
+          get 'new_from', on: :member
+          post 'duplicate', on: :member
+          post 'sort', on: :collection
+        end
       end
     end
 

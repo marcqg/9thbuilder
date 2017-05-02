@@ -56,16 +56,16 @@
     <% if army_list_unit.unit_options.any? or army_list_unit.magic_items.any? or army_list_unit.extra_items.any? or army_list_unit.magic_standards.any? %>
       <div class="options">
         <!-- OPTIONS -->
-        <%= render :partial => "army_list_units_unit_options/show", :locals => { :unit_options => army_list_unit.unit_options } %>
+        <%= render :partial => 'builder/army_list_units_unit_options/show', :locals => { :unit_options => army_list_unit.unit_options } %>
 
         <!-- MAGIC ITEMS -->
-        <%= render :partial => "army_list_units_magic_items/show", :locals => { :magic_items => army_list_unit.magic_items } %>
+        <%= render :partial => 'builder/army_list_units_magic_items/show', :locals => { :magic_items => army_list_unit.magic_items } %>
 
         <!-- EXTRA ITEMS -->
-        <%= render :partial => "army_list_units_extra_items/show", :locals => { :extra_item_category => @army_list.army.extra_item_categories.first, :extra_items => army_list_unit.extra_items } %>
+        <%= render :partial => 'builder/army_list_units_extra_items/show', :locals => { :extra_item_category => @army_list.army.extra_item_categories.first, :extra_items => army_list_unit.extra_items } %>
 
         <!-- MAGIC STANDARDS -->
-        <%= render :partial => "army_list_units_magic_standards/show", :locals => { :magic_standards => army_list_unit.magic_standards } %>
+        <%= render :partial => 'builder/army_list_units_magic_standards/show', :locals => { :magic_standards => army_list_unit.magic_standards } %>
       </div>
     <% end %>
 

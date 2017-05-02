@@ -5,7 +5,7 @@
   <%= form_for [@army_list, @army_list_unit], :remote => true do |f| %>
     <%= render "shared/form_errors", :object => @army_list_unit %>
 
-      <p><%= f.select :unit_id, grouped_options_for_select(Unit.for_select(@army_list), @army_list_unit.unit_id) %></p>
+      <p><%= f.select :unit_id, grouped_options_for_select(NinthAge::Unit.for_select(@army_list), @army_list_unit.unit_id) %></p>
 
       <p><%= f.text_field :name, :placeholder => t('army_list_unit.form.name') %></p>
 

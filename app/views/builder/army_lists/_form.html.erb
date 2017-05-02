@@ -2,7 +2,7 @@
     <%= render "shared/form_errors", :object => @army_list %>
 
     <% unless @army_list.persisted? %>
-        <p><%= f.collection_select :army_id, Army.order(:name), :id, :name, :disabled => Army.disabled_or_obsolete.pluck(:id) %></p>
+        <p><%= f.collection_select :army_id, NinthAge::Army.order(:name), :id, :name, :disabled => Army.disabled_or_obsolete.pluck(:id) %></p>
         <p><%= f.collection_select :army_organisation_id, NinthAge::ArmyOrganisation.where(:army_id => @army_list.army_id).order(:name), :id, :name %></p>
     <% end %>
 

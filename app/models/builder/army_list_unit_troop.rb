@@ -1,4 +1,4 @@
-class ArmyListUnitTroop < ApplicationRecord
+class Builder::ArmyListUnitTroop < ApplicationRecord
   belongs_to :troop, :class_name => 'NinthAge::Troop'
   belongs_to :army_list_unit
 
