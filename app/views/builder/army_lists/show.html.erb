@@ -4,16 +4,16 @@
   <% unless @army_list.army.logo.nil? %>
       <%= image_tag @army_list.army.logo.url, alt: @army_list.army.name, height: 75 %>
   <% end %>
-  <h2><%= link_to transliterate(@army_list.army.name), army_lists_path({'q[army_id_eq]' => @army_list.army}) %></h2>
+  <h2><%= link_to transliterate(@army_list.army.name), builder_army_lists_path({'q[army_id_eq]' => @army_list.army}) %></h2>
   <h1 title="<%= @army_list.name %>"><%= transliterate @army_list.name.truncate(35) %></h1>
 </div>
 
 <div id="subheader" class="col-md-11 army_list">
-  <%= link_to '<i class="fa fa-trash fa-2x pull-right" aria-hidden="true"></i>'.html_safe, delete_army_list_path(@army_list), {'data-popin' => true} %>
-  <%= link_to '<i class="fa fa-clone fa-2x pull-right" aria-hidden="true"></i>'.html_safe, new_from_army_list_path(@army_list), {'data-popin' => true} %>
-  <%= link_to '<i class="fa fa-download fa-2x pull-right" aria-hidden="true"></i>'.html_safe, export_army_list_path(@army_list, 'full', 'magics'), {'data-popin' => true} %>
-  <%= link_to '<i class="fa fa-pencil-square-o fa-2x pull-right" aria-hidden="true"></i>'.html_safe, edit_army_list_path(@army_list), {'data-popin' => true} %>
-  <%= link_to '<i class="fa fa-print fa-2x" aria-hidden="true"></i>'.html_safe, export_army_list_path(@army_list, :verbosity => 'full', :format => 'pdf', :magics => 'magics'), {'target' => '_blank', 'class' => 'left'} %>
+  <%= link_to '<i class="fa fa-trash fa-2x pull-right" aria-hidden="true"></i>'.html_safe, delete_builder_army_list_path(@army_list), {'data-popin' => true} %>
+  <%= link_to '<i class="fa fa-clone fa-2x pull-right" aria-hidden="true"></i>'.html_safe, new_from_builder_army_list_path(@army_list), {'data-popin' => true} %>
+  <%= link_to '<i class="fa fa-download fa-2x pull-right" aria-hidden="true"></i>'.html_safe, builder_export_army_list_path(@army_list, 'full', 'magics'), {'data-popin' => true} %>
+  <%= link_to '<i class="fa fa-pencil-square-o fa-2x pull-right" aria-hidden="true"></i>'.html_safe, edit_builder_army_list_path(@army_list), {'data-popin' => true} %>
+  <%= link_to '<i class="fa fa-print fa-2x" aria-hidden="true"></i>'.html_safe, builder_export_army_list_path(@army_list, :verbosity => 'full', :format => 'pdf', :magics => 'magics'), {'target' => '_blank', 'class' => 'left'} %>
 </div>
 
 <div class="row" id="app-army-list">
@@ -50,11 +50,11 @@
         </div>
     <% end %>
 
-    <a href="<%= new_army_list_army_list_unit_path @army_list %>" class="army_list_unit_new" data-popin="true"><%= t('army_list.show.add_unit') %></a>
+    <a href="<%= new_builder_army_list_army_list_unit_path @army_list %>" class="army_list_unit_new" data-popin="true"><%= t('army_list.show.add_unit') %></a>
 
   </div>
 
-  <ol class="army_list_units_overview col-md-12 col-sm-12" data-url="<%= sort_army_list_army_list_units_path @army_list %>">
+  <ol class="army_list_units_overview col-md-12 col-sm-12" data-url="<%= sort_builder_army_list_army_list_units_path @army_list %>">
     <%= render partial: 'builder/army_list_units/show', collection: @army_list.army_list_units, as: :army_list_unit %>
   </ol>
 </div>

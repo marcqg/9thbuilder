@@ -15,7 +15,7 @@ module Builder
       @search = current_user.army_lists.includes(:army).order('value_points DESC').search(params[:q])
       @army_lists = @search.result
 
-      @army = Army.find(params[:q][:army_id_eq]) unless params[:q][:army_id_eq].blank?
+      @army = NinthAge::Army.find(params[:q][:army_id_eq]) unless params[:q][:army_id_eq].blank?
 
       respond_to do |format|
         format.html # index.html.erb
@@ -39,7 +39,7 @@ module Builder
     # GET /army_lists/new
     # GET /army_lists/new.xml
     def new
-      @army_list = ArmyList.new
+      @army_list = Builder::ArmyList.new
       @army_list.army_id = params[:army_id] || current_user.favorite_army.try(:id)
 
       respond_to do |format|
@@ -61,7 +61,7 @@ module Builder
     # POST /army_lists
     # POST /army_lists.xml
     def create
-      @army_list = ArmyList.new(army_list_params)
+      @army_list = Builder::ArmyList.new(army_list_params)
       @army_list.user = current_user
 
       respond_to do |format|
@@ -106,7 +106,7 @@ module Builder
       army = nil unless current_user.armies.include?(army)
 
       respond_to do |format|
-        format.html { redirect_to army_lists_url(q: {army_id_eq: army}) }
+        format.html { redirect_to builder_army_lists_url(q: {army_id_eq: army}) }
         format.xml { head :ok }
       end
     end
@@ -115,9 +115,10 @@ module Builder
     def duplicate
       @base_army_list = current_user.army_lists.find_by_uuid!(params[:uuid])
 
-      @army_list = ArmyList.new
-      @army_list.user = @base_army_list.user
-      @army_list.army = @base_army_list.army
+      @army_list = Builder::ArmyList.new
+      @army_list.user_id = @base_army_list.user_id
+      @army_list.army_id = @base_army_list.army_id
+      @army_list.army_organisation_id = @base_army_list.army_organisation_id
       @army_list.name = "#{@base_army_list.name} copy"
       @army_list.notes = @base_army_list.notes
       @army_list.save
@@ -158,7 +159,7 @@ module Builder
     private
 
     def army_list_params
-      params.require(:army_list).permit(:army_id, :army_organisation_id, :name, :notes)
+      params.require(:builder_army_list).permit(:army_id, :army_organisation_id, :name, :notes)
     end
   end
 end

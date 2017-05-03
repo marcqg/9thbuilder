@@ -10,8 +10,8 @@ module Builder
       @include_magics = params[:magics] == 'nomagics' ? false : true
 
       respond_to do |format|
-        format.html { render template: @verbosity.nil? ? 'exports/export' : "exports/export_#{@verbosity}", layout: @verbosity.nil? ? nil : 'pdf.html.erb' }
-        format.pdf { render template: "exports/export_#{@verbosity}.html.erb", pdf: "9thbuilder_#{@verbosity}_#{params[:magics]}_#{@army_list.uuid}" }
+        format.html { render template: @verbosity.nil? ? 'builder/exports/export' : "builder/exports/export_#{@verbosity}", layout: @verbosity.nil? ? nil : 'pdf.html.erb' }
+        format.pdf { render template: "builder/exports/export_#{@verbosity}.html.erb", pdf: "9thbuilder_#{@verbosity}_#{params[:magics]}_#{@army_list.uuid}" }
       end
     end
   end

@@ -2,7 +2,7 @@
     <%= render "shared/form_errors", :object => @army_list %>
 
     <% unless @army_list.persisted? %>
-        <p><%= f.collection_select :army_id, NinthAge::Army.order(:name), :id, :name, :disabled => Army.disabled_or_obsolete.pluck(:id) %></p>
+        <p><%= f.collection_select :army_id, NinthAge::Army.order(:name), :id, :name, :disabled => NinthAge::Army.disabled_or_obsolete.pluck(:id) %></p>
         <p><%= f.collection_select :army_organisation_id, NinthAge::ArmyOrganisation.where(:army_id => @army_list.army_id).order(:name), :id, :name %></p>
     <% end %>
 
@@ -12,13 +12,14 @@
 <% end %>
 
 <script>
-    $(document).on('change', '#army_list_army_id', function (e) {
+    $(document).on('change', '#builder_army_list_army_id', function (e) {
         $.ajax({
             url: Routes["ninth_age_army_organisations_" + document.documentElement.lang + "_path"]($(this).val()),
             dataType: 'json',
             cache: false,
+            localCache: true,
             success: function (data) {
-                var element = $('#army_list_army_organisation_id');
+                var element = $('#builder_army_list_army_organisation_id');
                 element.empty();
 
                 $.map(data, function (item) {

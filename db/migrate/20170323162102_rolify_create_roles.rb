@@ -136,18 +136,18 @@ class RolifyCreateRoles < ActiveRecord::Migration[5.0]
     add_index :ninth_age_organisations_units, [:unit_id, :organisation_id], name: 'ninth_age_units_organisations_unit_organisation', :unique => true
     add_index :ninth_age_organisations_units, [:organisation_id, :unit_id], name: 'ninth_age_units_organisations_organisation_unit', :unique => true
 
-    create_table :ninth_age_army_list_organisations do |t|
+    create_table :builder_army_list_organisations do |t|
       t.belongs_to :army_list, index: false, null: false, default: 0
       t.belongs_to :organisation, index: false, null: false, default: 0
       t.integer :pts, null: false, default: 0
       t.integer :rate, null: false, default: 0
       t.boolean :good, null: false, default: false
     end
-    add_foreign_key :ninth_age_army_list_organisations, :army_lists, column: :army_list_id
-    add_foreign_key :ninth_age_army_list_organisations, :ninth_age_organisations, column: :organisation_id
+    add_foreign_key :builder_army_list_organisations, :army_lists, column: :army_list_id
+    add_foreign_key :builder_army_list_organisations, :ninth_age_organisations, column: :organisation_id
 
-    add_index :ninth_age_army_list_organisations, [:army_list_id, :organisation_id], name: 'ninth_age_army_list_organisations_army_list_organisation', :unique => true
-    add_index :ninth_age_army_list_organisations, [:organisation_id, :army_list_id], name: 'ninth_age_army_list_organisations_organisation_army_list', :unique => true
+    add_index :builder_army_list_organisations, [:army_list_id, :organisation_id], name: 'builder_army_list_organisations_army_list_organisation', :unique => true
+    add_index :builder_army_list_organisations, [:organisation_id, :army_list_id], name: 'builder_army_list_organisations_organisation_army_list', :unique => true
 
     #Translations of equipments
     create_table :ninth_age_special_rules do |t|

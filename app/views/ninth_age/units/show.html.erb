@@ -59,15 +59,15 @@
     </div>
     <div class="col-md-3">
       <div>
-        <% @unit.special_rules.where(:troop => nil).each do |special_rule| %>
+        <% @unit.special_rule_unit_troops.where(:troop => nil).map(&:special_rule).each do |special_rule| %>
             • <%= special_rule.name %><br/>
         <% end %>
       </div>
       <div>
         <% @unit.troops.each do |troop| %>
-            <% if troop.special_rules.count > 0 %>
+            <% if troop.special_rule_unit_troops.map(&:special_rule).count > 0 %>
                 <h4><%= troop.name %></h4>
-                <% troop.special_rules.each do |special_rule| %>
+                <% troop.special_rule_unit_troops.map(&:special_rule).each do |special_rule| %>
                     • <%= special_rule.name %><br/>
                 <% end %>
             <% end %>
@@ -76,7 +76,7 @@
     </div>
     <div class="col-md-3">
       <div>
-        <% @unit.equipments.each do |equipment| %>
+        <% @unit.equipment_unit_troops.map(&:equipment).each do |equipment| %>
             • <%= equipment.name %><br/>
         <% end %>
       </div>

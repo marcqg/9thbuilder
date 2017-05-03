@@ -3,7 +3,7 @@
   <h1 data-value-points="<%= @army_list_unit.unit.value_points %>" data-min-size="<%= @army_list_unit.unit.min_size %>" data-max-size="<%= @army_list_unit.unit.max_size %>"><%=t 'army_list_unit.edit.title' %><br /><%=transliterate @army_list_unit.unit.name %>
   <div style="float:right"><span style="font-size:34px;line-height:17px"><%= value_points(@army_list_unit.value_points) %></span> pts</div></h1>
 
-  <%= form_for [@army_list, @army_list_unit] do |f| %>
+  <%= form_for [@army_list, @army_list_unit], url: builder_army_list_army_list_unit_path do |f| %>
     <%= render "shared/form_errors", :object => @army_list_unit %>
 
     <p><%= f.text_field :name, :placeholder => t('army_list_unit.form.name') %>
@@ -38,7 +38,7 @@
       <td><div id="army_list_unit_magic_items" data-value-points-limit="<%= @magic_items_option.value_points %>">
         <h3><%=t 'army_list_unit.edit.magic_items' %><br /><span><%= value_points(@army_list_unit.magic_items_value_points + (@magic_items_option.is_extra_items? ? @army_list_unit.extra_items_value_points : 0)) %></span>/<%= value_points(@magic_items_option.value_points) %> pts</h3>
         <ul>
-          <% MagicItemCategory.all.each_with_index do |magic_item_category, index| %>
+          <% NinthAge::MagicItemCategory.all.each_with_index do |magic_item_category, index| %>
           <%- magic_items = magic_item_category.magic_items.available_for(@army_list.army, @magic_items_option.value_points).all %>
           <%- next if magic_items.empty? %>
           <li>

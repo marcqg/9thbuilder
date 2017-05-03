@@ -2,7 +2,7 @@
 
   <h1><%=t 'army_list_unit.duplicate.title' %><br /><%= @army_list_unit.name %></h1>
 
-  <%= form_for [@army_list, @army_list_unit], :url => duplicate_army_list_army_list_unit_path, :method => :post, :remote => true, :html => { :class => "duplicate_army_list_unit", :id => "duplicate_army_list_unit_#{@army_list_unit.id}" } do |f| %>
+  <%= form_for [@army_list, @army_list_unit], :url => duplicate_builder_army_list_army_list_unit_path, :method => :post, :remote => true, :html => { :class => "duplicate_army_list_unit", :id => "duplicate_builder_army_list_unit_#{@army_list_unit.id}" } do |f| %>
     <%= render "shared/form_errors", :object => @army_list_unit %>
 
     <p>

@@ -2,7 +2,7 @@
 
   <h1><%== t('army_list_unit.delete.title') %></h1>
 
-  <%= form_for [@army_list, @army_list_unit], :method => :delete do |f| %>
+  <%= form_for [@army_list, @army_list_unit], url: builder_army_list_army_list_unit_path, :method => :delete do |f| %>
     <p><%=t 'army_list_unit.delete.information' %><br /><strong><%= @army_list_unit.name %></strong> ?</p>
 
     <p class="close"><%= f.submit t('army_list_unit.delete.submit') %></p>

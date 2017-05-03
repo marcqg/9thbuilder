@@ -2,7 +2,7 @@
 
   <h1><%== t('army_list_unit.new.title') %></h1>
 
-  <%= form_for [@army_list, @army_list_unit], :remote => true do |f| %>
+  <%= form_for [@army_list, @army_list_unit], url: builder_army_list_army_list_units_path, :remote => true do |f| %>
     <%= render "shared/form_errors", :object => @army_list_unit %>
 
       <p><%= f.select :unit_id, grouped_options_for_select(NinthAge::Unit.for_select(@army_list), @army_list_unit.unit_id) %></p>

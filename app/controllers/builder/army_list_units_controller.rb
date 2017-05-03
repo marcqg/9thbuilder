@@ -36,7 +36,7 @@ module Builder
       @base_army_list = current_user.army_lists.find_by_uuid!(params[:army_list_uuid])
       @base_army_list_unit = @base_army_list.army_list_units.find(params[:id])
 
-      @army_list = Builder::ArmyList.find_or_initialize_by(id: params[:army_list_unit][:army_list_id])
+      @army_list = Builder::ArmyList.find_or_initialize_by(id: params[:builder_army_list_unit][:army_list_id])
       @army_list.army_id = @base_army_list.army_id
       @army_list.user_id = current_user.id
       @army_list.save
@@ -151,7 +151,7 @@ module Builder
     private
 
     def army_list_unit_params
-      params.require(:army_list_unit).permit(:unit_id, :name, :notes, extra_item_ids: [], magic_standard_ids: [], army_list_unit_troops_attributes: [:id, :army_list_unit_id, :troop_id, :size], army_list_unit_unit_options_attributes: [:id, :army_list_unit_id, :unit_option_id, :quantity, :_destroy], army_list_unit_magic_items_attributes: [:id, :army_list_unit_id, :magic_item_id, :quantity, :_destroy])
+      params.require(:builder_army_list_unit).permit(:unit_id, :name, :notes, extra_item_ids: [], magic_standard_ids: [], army_list_unit_troops_attributes: [:id, :army_list_unit_id, :troop_id, :size], army_list_unit_unit_options_attributes: [:id, :army_list_unit_id, :unit_option_id, :quantity, :_destroy], army_list_unit_magic_items_attributes: [:id, :army_list_unit_id, :magic_item_id, :quantity, :_destroy])
     end
 
     def update_organisations
