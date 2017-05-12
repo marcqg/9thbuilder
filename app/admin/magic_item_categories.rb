@@ -1,5 +1,5 @@
 ActiveAdmin.register NinthAge::MagicItemCategory do
-  menu parent: 'Magic Items'
+  menu parent: 'Ninth Age Magic Items'
 
   permit_params :name
 

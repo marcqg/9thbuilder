@@ -26,6 +26,15 @@ GIT
       activerecord (>= 4.2, < 5.1)
       request_store (~> 1.0)
 
+GIT
+  remote: git://github.com/twintags/activeadmin-translate.git
+  revision: 7b657483040aed497ca609676e01150387b8c9b4
+  specs:
+    activeadmin-translate (0.2.7)
+      activeadmin
+      globalize
+      railties
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -282,6 +291,7 @@ PLATFORMS
 
 DEPENDENCIES
   activeadmin!
+  activeadmin-translate!
   activemodel-serializers-xml
   acts_as_list
   attribute_normalizer

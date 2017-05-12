@@ -52,16 +52,17 @@ end
 #routing
 gem 'routing-filter'
 
-#Back
-gem 'inherited_resources', '~> 1.7'
-gem 'activeadmin', github: 'activeadmin/activeadmin'
-
 # Translations
 gem 'route_translator'
 gem 'globalize', github: 'globalize/globalize'
 gem 'activemodel-serializers-xml'
 gem 'globalize-accessors'
 gem 'rails-i18n', '~> 5.0.0'
+
+#Back
+gem 'inherited_resources', '~> 1.7'
+gem 'activeadmin', github: 'activeadmin/activeadmin'
+gem 'activeadmin-translate', github: 'twintags/activeadmin-translate'
 
 #autentification
 gem 'devise'

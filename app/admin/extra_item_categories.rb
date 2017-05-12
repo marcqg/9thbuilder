@@ -1,5 +1,5 @@
 ActiveAdmin.register NinthAge::ExtraItemCategory do
-  menu parent: 'Extra Items'
+  menu parent: 'Ninth Age Extra Items'
 
   permit_params :army_id, :name
 

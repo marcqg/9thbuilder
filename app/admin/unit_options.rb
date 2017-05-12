@@ -1,5 +1,5 @@
 ActiveAdmin.register NinthAge::UnitOption do
-  menu parent: 'Units'
+  menu parent: 'Ninth Age Units'
 
   permit_params :unit_id, :parent_id, :mount_id, :name, :value_points, :position, :is_per_model, :is_multiple, :is_magic_items, :is_magic_standards, :is_extra_items, :is_unique_choice
 
