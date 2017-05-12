@@ -35,7 +35,6 @@ ActiveAdmin.register NinthAge::Army do
     selectable_column
     id_column
     column :name
-    translation_status
     actions
   end
 
