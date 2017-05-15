@@ -3,6 +3,5 @@ class NinthAge::TroopType < ApplicationRecord
 
   translates :name
   globalize_accessors
-
-  validates :name, presence: true
+  accepts_nested_attributes_for :translations, allow_destroy: true
 end
