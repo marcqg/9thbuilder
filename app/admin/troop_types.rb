@@ -1,7 +1,7 @@
 ActiveAdmin.register NinthAge::TroopType do
   menu parent: 'Ninth Age Troops'
 
-  permit_params :name, translations_attributes: [:id, :name, :locale, :_destroy]
+  permit_params :name, :locale, translations_attributes: [:id, :name, :locale, :_destroy]
 
   #config.sort_order = 'name_asc'
 

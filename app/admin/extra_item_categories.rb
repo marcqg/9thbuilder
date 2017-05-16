@@ -1,7 +1,7 @@
 ActiveAdmin.register NinthAge::ExtraItemCategory do
   menu parent: 'Ninth Age Extra Items'
 
-  permit_params :name, :army_id, translations_attributes: [:id, :name, :locale, :_destroy]
+  permit_params :name, :locale, :army_id, translations_attributes: [:id, :name, :locale, :_destroy]
 
   #config.sort_order = 'name_asc'
 

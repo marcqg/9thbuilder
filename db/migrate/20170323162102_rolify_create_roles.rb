@@ -158,7 +158,7 @@ class RolifyCreateRoles < ActiveRecord::Migration[5.0]
     add_foreign_key :ninth_age_special_rule_translations, :ninth_age_special_rules, column: :ninth_age_special_rule_id, on_delete: :cascade
 
 
-    create_table :ninth_age_special_rule_unit_troops, id: false do |t|
+    create_table :ninth_age_special_rule_unit_troops do |t|
       t.belongs_to :special_rule, index: false, null: false, default: 0
       t.belongs_to :unit, index: false, null: false, default: 0
       t.belongs_to :troop, index: false, null: true, default: 0
@@ -226,7 +226,7 @@ class RolifyCreateRoles < ActiveRecord::Migration[5.0]
     add_foreign_key :ninth_age_equipment_translations, :ninth_age_equipments, column: :ninth_age_equipment_id, on_delete: :cascade
 
 
-    create_table :ninth_age_equipment_unit_troops, id: false do |t|
+    create_table :ninth_age_equipment_unit_troops do |t|
       t.belongs_to :equipment, index: false, null: false, default: 0
       t.belongs_to :unit, index: false, null: false, default: 0
       t.belongs_to :troop, index: false, null: true, default: 0
