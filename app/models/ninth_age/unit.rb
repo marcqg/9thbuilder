@@ -14,14 +14,21 @@ class NinthAge::Unit < ApplicationRecord
 
   translates :name
   globalize_accessors
+  accepts_nested_attributes_for :translations, allow_destroy: true
+
+  def cache_key
+    super + '-ninth-age-' + Globalize.locale.to_s
+  end
 
   normalize_attributes :magic, :notes
 
-  validates :army_id, :name, :min_size, presence: true
+  validates :army_id, :min_size, presence: true
   validates :min_size, numericality: {greater_than_or_equal_to: 1, only_integer: true}
   validates :max_size, numericality: {greater_than_or_equal_to: :min_size, only_integer: true, allow_nil: true}
   validates :value_points, numericality: {greater_than_or_equal_to: 0, allow_nil: true}
   validates :is_unique, inclusion: {in: [true, false]}
+
+  scope :mount_category, -> { where(is_mount: true) }
 
   def self.for_select(army_list)
     army_list_units = army_list.army_list_units.collect(&:unit)

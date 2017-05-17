@@ -9,8 +9,13 @@ class NinthAge::UnitOption < ApplicationRecord
 
   translates :name
   globalize_accessors
+  accepts_nested_attributes_for :translations, allow_destroy: true
 
-  validates :unit_id, :name, presence: true
+  def cache_key
+    super + '-ninth-age-' + Globalize.locale.to_s
+  end
+
+  validates :unit_id, presence: true
   validates :value_points, numericality: { greater_than_or_equal_to: 0, allow_nil: true }
   validates :position, numericality: { greater_than_or_equal_to: 1, only_integer: true, allow_nil: true }
   validates :is_per_model, inclusion: { in: [true, false] }

@@ -1,7 +1,7 @@
 ActiveAdmin.register NinthAge::Equipment do
   menu priority: 5
 
-  permit_params :name, :locale, :position, translations_attributes: [:id, :name, :locale, :_destroy]
+  permit_params :name, :locale, :position, translations_attributes: [:id, :name, :description, :locale, :_destroy]
 
   #config.sort_order = 'name_asc'
 
@@ -23,6 +23,7 @@ ActiveAdmin.register NinthAge::Equipment do
     selectable_column
     id_column
     column :name
+    column :description
     actions
   end
 
@@ -30,6 +31,7 @@ ActiveAdmin.register NinthAge::Equipment do
     f.inputs do
       f.translate_inputs do |t|
         t.input :name
+        t.input :description
       end
     end
 
@@ -40,6 +42,7 @@ ActiveAdmin.register NinthAge::Equipment do
     panel 'Translations' do
       translate_attributes_table_for model do
         row :name
+        row :description
       end
     end
   end

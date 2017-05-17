@@ -18,6 +18,10 @@ class NinthAge::Army < ApplicationRecord
   globalize_accessors
   accepts_nested_attributes_for :translations, allow_destroy: true
 
+  def cache_key
+    super + '-ninth-age-' + Globalize.locale.to_s
+  end
+
   scope :disabled, -> { where('id NOT IN (SELECT DISTINCT army_id FROM ninth_age_units)') }
   scope :disabled_or_obsolete, -> { where('id NOT IN (SELECT DISTINCT army_id FROM ninth_age_units)') }
 

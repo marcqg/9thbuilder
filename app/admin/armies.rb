@@ -1,7 +1,7 @@
 ActiveAdmin.register NinthAge::Army do
   menu priority: 2
 
-  permit_params :name, :version_id, translations_attributes: [:id, :name, :locale, :_destroy]
+  permit_params :version_id, translations_attributes: [:id, :name, :locale, :_destroy]
 
   #config.sort_order = 'name_asc'
 

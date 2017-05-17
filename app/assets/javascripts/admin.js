@@ -1,15 +1,15 @@
 jQuery(function($) {
   // UNIT OPTION - ARMY_FILTER
-  $('#unit_option_unit_id').clone().attr('id', 'unit_option_unit_id_clone').hide().appendTo('body');
-  $('#unit_option_parent_id').clone().attr('id', 'unit_option_parent_id_clone').hide().appendTo('body');
-  $('#unit_option_mount_id').clone().attr('id', 'unit_option_mount_id_clone').hide().appendTo('body');
+  $('#ninth_age_unit_option_unit_id').clone().attr('id', 'ninth_age_unit_option_unit_id_clone').hide().appendTo('body');
+  $('#ninth_age_unit_option_parent_id').clone().attr('id', 'ninth_age_unit_option_parent_id_clone').hide().appendTo('body');
+  $('#ninth_age_unit_option_mount_id').clone().attr('id', 'ninth_age_unit_option_mount_id_clone').hide().appendTo('body');
 
-  $('#unit_option_army_filter').change(function() {
+  $('#ninth_age_unit_option_army_filter').change(function() {
     var $filter = $(this).find('option[value="' + this.value + '"]');
 
-    $('#unit_option_unit_id').html($('#unit_option_unit_id_clone').html());
+    $('#ninth_age_unit_option_unit_id').html($('#ninth_age_unit_option_unit_id_clone').html());
 
-    $('#unit_option_unit_id option').each(function() {
+    $('#ninth_age_unit_option_unit_id option').each(function() {
       var $option = $(this);
 
       if ($filter.html() && $option.html() && $option.html().indexOf($filter.html() + ' - ') !== 0) {
@@ -17,9 +17,9 @@ jQuery(function($) {
       }
     });
 
-    $('#unit_option_parent_id').html($('#unit_option_parent_id_clone').html());
+    $('#ninth_age_unit_option_parent_id').html($('#ninth_age_unit_option_parent_id_clone').html());
 
-    $('#unit_option_parent_id option').each(function() {
+    $('#ninth_age_unit_option_parent_id option').each(function() {
       var $option = $(this);
 
       if ($filter.html() && $option.html() && $option.html().indexOf($filter.html() + ' - ') !== 0) {
@@ -27,9 +27,9 @@ jQuery(function($) {
       }
     });
 
-    $('#unit_option_mount_id').html($('#unit_option_mount_id_clone').html());
+    $('#ninth_age_unit_option_mount_id').html($('#ninth_age_unit_option_mount_id_clone').html());
 
-    $('#unit_option_mount_id option').each(function() {
+    $('#ninth_age_unit_option_mount_id option').each(function() {
       var $option = $(this);
 
       if ($filter.html() && $option.html() && $option.html().indexOf($filter.html() + ' - ') !== 0) {
@@ -38,12 +38,12 @@ jQuery(function($) {
     });
   }).change();
 
-  $('#unit_option_unit_id').change(function() {
+  $('#ninth_age_unit_option_unit_id').change(function() {
     var $filter = $(this).find('option[value="' + this.value + '"]');
 
-    $('#unit_option_parent_id').html($('#unit_option_parent_id_clone').html());
+    $('#ninth_age_unit_option_parent_id').html($('#ninth_age_unit_option_parent_id_clone').html());
 
-    $('#unit_option_parent_id option').each(function() {
+    $('#ninth_age_unit_option_parent_id option').each(function() {
       var $option = $(this);
 
       if ($filter.html() && $option.html() && $option.html().indexOf($filter.html() + ' - ') !== 0) {
@@ -53,12 +53,12 @@ jQuery(function($) {
   }).change();
 
   // UNIT OPTION - PARENT
-  $('#unit_option_unit_id').change(function() {
+  $('#ninth_age_unit_option_unit_id').change(function() {
     var $filter = $(this).find('option[value="' + this.value + '"]');
 
-    $('#unit_option_parent_id').html($('#unit_option_parent_id_clone').html());
+    $('#ninth_age_unit_option_parent_id').html($('#unit_option_parent_id_clone').html());
 
-    $('#unit_option_parent_id option').each(function() {
+    $('#ninth_age_unit_option_parent_id option').each(function() {
       var $option = $(this);
 
       if ($filter.html() && $option.html() && $option.html().indexOf($filter.html() + ' - ') !== 0) {
@@ -68,15 +68,15 @@ jQuery(function($) {
   }).change();
 
   // EQUIPEMENT - ARMY_FILTER
-  $('#equipment_unit_id').clone().attr('id', 'equipment_unit_id_clone').hide().appendTo('body');
-  $('#equipment_troop_id').clone().attr('id', 'equipment_troop_id_clone').hide().appendTo('body');
+  $('#ninth_age_equipment_unit_troop_unit_id').clone().attr('id', 'ninth_age_equipment_unit_troop_unit_id_clone').hide().appendTo('body');
+  $('#ninth_age_equipment_unit_troop_troop_id').clone().attr('id', 'ninth_age_equipment_unit_troop_troop_id_clone').hide().appendTo('body');
 
-  $('#equipment_army_filter').change(function() {
+  $('#ninth_age_equipment_unit_troop_army_filter').change(function() {
     var $filter = $(this).find('option[value="' + this.value + '"]');
 
-    $('#equipment_unit_id').html($('#equipment_unit_id_clone').html());
+    $('#ninth_age_equipment_unit_troop_unit_id').html($('#ninth_age_equipment_unit_troop_unit_id_clone').html());
 
-    $('#equipment_unit_id option').each(function() {
+    $('#ninth_age_equipment_unit_troop_unit_id option').each(function() {
       var $option = $(this);
 
       if ($filter.html() && $option.html() && $option.html().indexOf($filter.html() + ' - ') !== 0) {
@@ -84,9 +84,9 @@ jQuery(function($) {
       }
     });
 
-    $('#equipment_troop_id').html($('#equipment_troop_id_clone').html());
+    $('#ninth_age_equipment_unit_troop_troop_id').html($('#ninth_age_equipment_unit_troop_troop_id_clone').html());
 
-    $('#equipment_troop_id option').each(function() {
+    $('#ninth_age_equipment_unit_troop_troop_id option').each(function() {
       var $option = $(this);
 
       if ($filter.html() && $option.html() && $option.html().indexOf($filter.html() + ' - ') !== 0) {
@@ -96,12 +96,12 @@ jQuery(function($) {
   }).change();
 
   // EQUIPEMENT - TROOP
-  $('#equipment_unit_id').change(function() {
+  $('#ninth_age_equipment_unit_troop_unit_id').change(function() {
     var $filter = $(this).find('option[value="' + this.value + '"]');
 
-    $('#equipment_troop_id').html($('#equipment_troop_id_clone').html());
+    $('#ninth_age_equipment_unit_troop_troop_id').html($('#ninth_age_equipment_unit_troop_troop_id_clone').html());
 
-    $('#equipment_troop_id option').each(function() {
+    $('#ninth_age_equipment_unit_troop_troop_id option').each(function() {
       var $option = $(this);
 
       if ($filter.html() && $option.html() && $option.html().indexOf($filter.html() + ' - ') !== 0) {
@@ -111,15 +111,15 @@ jQuery(function($) {
   }).change();
 
   // SPECIAL_RULE - ARMY_FILTER
-  $('#special_rule_unit_id').clone().attr('id', 'special_rule_unit_id_clone').hide().appendTo('body');
-  $('#special_rule_troop_id').clone().attr('id', 'special_rule_troop_id_clone').hide().appendTo('body');
+  $('#ninth_age_special_rule_unit_troop_unit_id').clone().attr('id', 'ninth_age_special_rule_unit_troop_unit_id_clone').hide().appendTo('body');
+  $('#ninth_age_special_rule_unit_troop_troop_id').clone().attr('id', 'ninth_age_special_rule_unit_troop_troop_id_clone').hide().appendTo('body');
 
-  $('#special_rule_army_filter').change(function() {
+  $('#ninth_age_special_rule_unit_troop_army_filter').change(function() {
     var $filter = $(this).find('option[value="' + this.value + '"]');
 
-    $('#special_rule_unit_id').html($('#special_rule_unit_id_clone').html());
+    $('#ninth_age_special_rule_unit_troop_unit_id').html($('#ninth_age_special_rule_unit_troop_unit_id_clone').html());
 
-    $('#special_rule_unit_id option').each(function() {
+    $('#ninth_age_special_rule_unit_troop_unit_id option').each(function() {
       var $option = $(this);
 
       if ($filter.html() && $option.html() && $option.html().indexOf($filter.html() + ' - ') !== 0) {
@@ -127,9 +127,9 @@ jQuery(function($) {
       }
     });
 
-    $('#special_rule_troop_id').html($('#special_rule_troop_id_clone').html());
+    $('#ninth_age_special_rule_unit_troop_troop_id').html($('#ninth_age_special_rule_unit_troop_troop_id_clone').html());
 
-    $('#special_rule_troop_id option').each(function() {
+    $('#ninth_age_special_rule_unit_troop_troop_id option').each(function() {
       var $option = $(this);
 
       if ($filter.html() && $option.html() && $option.html().indexOf($filter.html() + ' - ') !== 0) {
@@ -139,12 +139,12 @@ jQuery(function($) {
   }).change();
 
   // SPECIAL_RULE - TROOP
-  $('#special_rule_unit_id').change(function() {
+  $('#ninth_age_special_rule_unit_troop_unit_id').change(function() {
     var $filter = $(this).find('option[value="' + this.value + '"]');
 
-    $('#special_rule_troop_id').html($('#special_rule_troop_id_clone').html());
+    $('#ninth_age_special_rule_unit_troop_troop_id').html($('#ninth_age_special_rule_unit_troop_troop_id_clone').html());
 
-    $('#special_rule_troop_id option').each(function() {
+    $('#ninth_age_special_rule_unit_troop_troop_id option').each(function() {
       var $option = $(this);
 
       if ($filter.html() && $option.html() && $option.html().indexOf($filter.html() + ' - ') !== 0) {
@@ -154,15 +154,15 @@ jQuery(function($) {
   }).change();
 
   // TROOP - ARMY_FILTER
-  $('#troop_unit_id').clone().attr('id', 'troop_unit_id_clone').hide().appendTo('body');
-  $('#troop_unit_option_id').clone().attr('id', 'troop_unit_option_id_clone').hide().appendTo('body');
+  $('#ninth_age_troop_unit_id').clone().attr('id', 'ninth_age_troop_unit_id_clone').hide().appendTo('body');
+  $('#ninth_age_troop_unit_option_id').clone().attr('id', 'ninth_age_troop_unit_option_id_clone').hide().appendTo('body');
 
-  $('#troop_army_filter').change(function() {
+  $('#ninth_age_troop_army_filter').change(function() {
     var $filter = $(this).find('option[value="' + this.value + '"]');
 
-    $('#troop_unit_id').html($('#troop_unit_id_clone').html());
+    $('#ninth_age_troop_unit_id').html($('#ninth_age_troop_unit_id_clone').html());
 
-    $('#troop_unit_id option').each(function() {
+    $('#ninth_age_troop_unit_id option').each(function() {
       var $option = $(this);
 
       if ($filter.html() && $option.html() && $option.html().indexOf($filter.html() + ' - ') !== 0) {
@@ -170,9 +170,9 @@ jQuery(function($) {
       }
     });
 
-    $('#troop_unit_option_id').html($('#troop_unit_option_id_clone').html());
+    $('#ninth_age_troop_unit_option_id').html($('#ninth_age_troop_unit_option_id_clone').html());
 
-    $('#troop_unit_option_id option').each(function() {
+    $('#ninth_age_troop_unit_option_id option').each(function() {
       var $option = $(this);
 
       if ($filter.html() && $option.html() && $option.html().indexOf($filter.html() + ' - ') !== 0) {
@@ -182,12 +182,12 @@ jQuery(function($) {
   }).change();
 
   // TROOP - UNIT_OPTION
-  $('#troop_unit_id').change(function() {
+  $('#ninth_age_troop_unit_id').change(function() {
     var $filter = $(this).find('option[value="' + this.value + '"]');
 
-    $('#troop_unit_option_id').html($('#troop_unit_option_id_clone').html());
+    $('#ninth_age_troop_unit_option_id').html($('#ninth_age_troop_unit_option_id_clone').html());
 
-    $('#troop_unit_option_id option').each(function() {
+    $('#ninth_age_troop_unit_option_id option').each(function() {
       var $option = $(this);
 
       if ($filter.html() && $option.html() && $option.html().indexOf($filter.html() + ' - ') !== 0) {
@@ -197,7 +197,7 @@ jQuery(function($) {
   }).change();
 
   // UNIT SHOW - SORTABLE
-  $('.unit_equipments_details table')
+  $('.ninth_age_unit_equipments_details table')
     .sortable({
       items: 'tbody tr',
       helper: function(e, ui) {
@@ -208,14 +208,14 @@ jQuery(function($) {
       },
       update: function(event, ui) {
         $.post($(this).data('url'), $(this).sortable('serialize'), function() {
-          $('.unit_equipments_details table').load(window.location.href + ' .unit_equipments_details table > *');
+          $('.ninth_age_unit_equipments_details table').load(window.location.href + ' .unit_equipments_details table > *');
         });
       }
     })
     .disableSelection()
   ;
 
-  $('.unit_special_rules_details table')
+  $('.ninth_age_unit_special_rules_details table')
     .sortable({
       items: 'tbody tr',
       helper: function(e, ui) {
@@ -226,7 +226,7 @@ jQuery(function($) {
       },
       update: function(event, ui) {
         $.post($(this).data('url'), $(this).sortable('serialize'), function() {
-          $('.unit_special_rules_details table').load(window.location.href + ' .unit_special_rules_details table > *');
+          $('.ninth_age_unit_special_rules_details table').load(window.location.href + ' .unit_special_rules_details table > *');
         });
       }
     })

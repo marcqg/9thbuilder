@@ -3,17 +3,19 @@ class NinthAge::MagicSpell < ApplicationRecord
   belongs_to :magic
 
   enum type_lvl: { Zero: 0, One: 1, Two: 2, Three: 3, Four: 4, Five: 5, Six: 6, A: 7, T: 8}
+
   translates :name, :range, :casting_value, :effect
   globalize_accessors
-
-  bitmask :type_target, :as => [:Hex, :Hex_r, :Missile, :Damage, :Augment, :Augment_b, :Focused, :Direct, :Ground, :Universal, :Universal_g], :null => false
-  bitmask :duration, :as => [:OneTurn, :Instant, :Permanent, :RemainsInPlay], :null => false
-
-  validates :magic_id, :type_lvl, :name, :range, :casting_value, :effect, :type_target, :duration, presence: true
+  accepts_nested_attributes_for :translations, allow_destroy: true
 
   def cache_key
     super + '-ninth-age-' + Globalize.locale.to_s
   end
+
+  bitmask :type_target, :as => [:Hex, :Hex_r, :Missile, :Damage, :Augment, :Augment_b, :Focused, :Direct, :Ground, :Universal, :Universal_g], :null => false
+  bitmask :duration, :as => [:OneTurn, :Instant, :Permanent, :RemainsInPlay], :null => false
+
+  validates :magic_id, :type_lvl, :type_target, :duration, presence: true
 
   def highlight(text)
     if text != nil

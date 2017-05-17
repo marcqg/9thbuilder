@@ -5,6 +5,11 @@ class NinthAge::Magic < ApplicationRecord
 
   translates :name, :description
   globalize_accessors
+  accepts_nested_attributes_for :translations, allow_destroy: true
+
+  def cache_key
+    super + '-ninth-age-' + Globalize.locale.to_s
+  end
 
   has_attached_file :logo,
                     styles: { medium: '200x200>', thumb: '65x65>' },
@@ -12,7 +17,7 @@ class NinthAge::Magic < ApplicationRecord
                     path: 'images/:class/:id/:style/:filename'
   validates_attachment_content_type :logo, content_type: /\Aimage\/.*\z/
 
-  validates :version_id, :name, :description, presence: true
+  validates :version_id, presence: true
 
   def logo_url
     self.logo.url
@@ -20,10 +25,6 @@ class NinthAge::Magic < ApplicationRecord
 
   def medium_logo_url
     self.logo.url(:medium)
-  end
-
-  def cache_key
-    super + '-ninth-age-' + Globalize.locale.to_s
   end
 
   def highlight(text)

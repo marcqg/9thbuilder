@@ -7,12 +7,13 @@ class NinthAge::ArmyOrganisation < ApplicationRecord
 
   translates :name, :description
   globalize_accessors
-
-  validates :army_id, :name, presence: true
+  accepts_nested_attributes_for :translations, allow_destroy: true
 
   def cache_key
     super + '-ninth-age-' + Globalize.locale.to_s
   end
+
+  validates :army_id, presence: true
 
   def as_json(options={})
     super(:include => [{organisation_groups: {include: {organisation: {}}}}])

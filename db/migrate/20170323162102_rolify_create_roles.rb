@@ -389,5 +389,10 @@ class RolifyCreateRoles < ActiveRecord::Migration[5.0]
 
     rename_table :army_list_unit_troops,           :builder_army_list_unit_troops
     rename_table :army_list_units_unit_options,     :builder_army_list_unit_unit_options
+
+    add_column :ninth_age_units, :is_mount, :boolean, :default => 0, :null => false
+    ActiveRecord::Base.connection.execute('UPDATE ninth_age_units
+                                      SET is_mount = 1
+                                      WHERE id in (SELECT ninth_age_unit_id FROM ninth_age_unit_translations where name like \'%Mount%\')')
   end
 end

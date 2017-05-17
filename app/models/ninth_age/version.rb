@@ -4,8 +4,7 @@ class NinthAge::Version < ApplicationRecord
 
   translates :name
   globalize_accessors
-
-  validates :name, presence: true
+  accepts_nested_attributes_for :translations, allow_destroy: true
 
   def cache_key
     super + '-ninth-age-' + Globalize.locale.to_s

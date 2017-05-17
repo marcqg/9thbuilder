@@ -7,8 +7,13 @@ class NinthAge::MagicItem < ApplicationRecord
 
   translates :name
   globalize_accessors
+  accepts_nested_attributes_for :translations, allow_destroy: true
 
-  validates :magic_item_category_id, :name, :value_points, presence: true
+  def cache_key
+    super + '-ninth-age-' + Globalize.locale.to_s
+  end
+
+  validates :magic_item_category_id, :value_points, presence: true
   validates :value_points, numericality: { greater_than_or_equal_to: 0 }
 
   scope :available_for, lambda { |army, value_points_limit|
