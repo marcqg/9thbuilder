@@ -1,5 +1,5 @@
 ActiveAdmin.register NinthAge::Equipment do
-  menu priority: 5
+  menu parent: 'Ninth Age Unit Specialisations', priority: 1
 
   permit_params :name, :locale, :position, translations_attributes: [:id, :name, :description, :locale, :_destroy]
 

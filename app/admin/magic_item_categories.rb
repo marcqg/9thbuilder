@@ -1,5 +1,5 @@
 ActiveAdmin.register NinthAge::MagicItemCategory do
-  menu parent: 'Ninth Age Magic Items'
+  menu parent: 'Ninth Age Magic', priority: 3
 
   permit_params :name, :locale, translations_attributes: [:id, :name, :locale, :_destroy]
 

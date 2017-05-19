@@ -1,5 +1,5 @@
 ActiveAdmin.register NinthAge::MagicStandard do
-  menu parent: 'Ninth Age Magic Items', priority: 1
+  menu parent: 'Ninth Age Magic', priority: 5
 
   permit_params :army_id, :override_id, :locale, :value_points, translations_attributes: [:id, :name, :locale, :_destroy]
 

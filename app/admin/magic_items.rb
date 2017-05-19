@@ -1,5 +1,5 @@
 ActiveAdmin.register NinthAge::MagicItem do
-  menu priority: 8
+  menu parent: 'Ninth Age Magic', priority: 4
 
   permit_params :army_id, :magic_item_category_id, :override_id, :locale, :value_points, :is_multiple, translations_attributes: [:id, :name, :locale, :_destroy]
 

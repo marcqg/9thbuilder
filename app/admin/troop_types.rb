@@ -1,5 +1,5 @@
 ActiveAdmin.register NinthAge::TroopType do
-  menu parent: 'Ninth Age Troops'
+  menu parent: 'Ninth Age Army', priority: 8
 
   permit_params :name, :locale, translations_attributes: [:id, :name, :locale, :_destroy]
 

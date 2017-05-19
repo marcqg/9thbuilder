@@ -1,5 +1,5 @@
 ActiveAdmin.register NinthAge::Army do
-  menu priority: 2
+  menu parent: 'Ninth Age Army', priority: 2
 
   permit_params :version_id, translations_attributes: [:id, :name, :locale, :_destroy]
 

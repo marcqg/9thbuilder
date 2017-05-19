@@ -1,5 +1,5 @@
 ActiveAdmin.register NinthAge::ArmyOrganisation do
-  menu parent: 'Ninth Age Organisations', priority: 1
+  menu parent: 'Ninth Age Army', priority: 3
 
   permit_params :army_id, :locale, translations_attributes: [:id, :name, :description, :locale, :_destroy]
 
@@ -49,6 +49,22 @@ ActiveAdmin.register NinthAge::ArmyOrganisation do
       translate_attributes_table_for model do
         row :name
         row :description
+      end
+    end
+
+    panel 'Organisation Details' do
+      div class: 'organisations_details' do
+        table_for model.organisation_groups do
+          column :id
+          column do |organisation_group|
+            organisation_group.organisation.name
+          end
+          column :type_target
+          column :target
+          column do |organisation_group|
+            link_to 'Voir', admin_ninth_age_organisation_group_path(organisation_group)
+          end
+        end
       end
     end
   end

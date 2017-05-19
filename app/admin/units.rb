@@ -1,5 +1,5 @@
 ActiveAdmin.register NinthAge::Unit do
-  menu priority: 3
+  menu parent: 'Ninth Age Army', priority: 7
 
   permit_params :army_id, :locale, :value_points, :min_size, :max_size, :magic, :notes, :is_unique, translations_attributes: [:id, :name, :locale, :_destroy]
 

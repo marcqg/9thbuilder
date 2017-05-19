@@ -1,5 +1,5 @@
 ActiveAdmin.register NinthAge::ExtraItemCategory do
-  menu parent: 'Ninth Age Extra Items'
+  menu parent: 'Ninth Age Unit Specialisations', priority: 3
 
   permit_params :name, :locale, :army_id, translations_attributes: [:id, :name, :locale, :_destroy]
 

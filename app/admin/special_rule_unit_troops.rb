@@ -1,5 +1,5 @@
 ActiveAdmin.register NinthAge::SpecialRuleUnitTroop do
-  menu parent: 'Ninth Age Special Rules'
+  menu parent: 'Ninth Age Unit Specialisations', priority: 6
 
   permit_params :unit_id, :troop_id, :special_rule_id, :position
 

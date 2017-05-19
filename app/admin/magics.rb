@@ -1,5 +1,5 @@
 ActiveAdmin.register NinthAge::Magic do
-  menu priority: 8
+  menu parent: 'Ninth Age Magic', priority: 1
 
   permit_params :name, :locale, translations_attributes: [:id, :name, :locale, :_destroy]
 

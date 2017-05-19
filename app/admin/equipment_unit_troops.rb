@@ -1,5 +1,5 @@
 ActiveAdmin.register NinthAge::EquipmentUnitTroop do
-  menu parent: 'Ninth Age Equipments'
+  menu parent: 'Ninth Age Unit Specialisations', priority: 2
 
   permit_params :unit_id, :troop_id, :equipment_id, :position
 

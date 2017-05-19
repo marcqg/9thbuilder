@@ -1,5 +1,5 @@
 ActiveAdmin.register NinthAge::SpecialRule do
-  menu priority: 6
+  menu parent: 'Ninth Age Unit Specialisations', priority: 5
 
   permit_params :locale, :position, translations_attributes: [:id, :name, :description, :locale, :_destroy]
 

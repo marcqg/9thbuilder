@@ -1,5 +1,5 @@
 ActiveAdmin.register NinthAge::UnitOption do
-  menu parent: 'Ninth Age Units'
+  menu parent: 'Ninth Age Army', priority: 10
 
   permit_params :unit_id, :parent_id, :mount_id, :value_points, :position, :is_per_model, :is_multiple, :is_magic_items, :is_magic_standards, :is_extra_items, :is_unique_choice, :locale, translations_attributes: [:id, :name, :locale, :_destroy]
 
