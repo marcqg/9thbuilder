@@ -403,19 +403,19 @@ ActiveRecord::Schema.define(version: 20170323162102) do
   end
 
   create_table "ninth_age_troops", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
-    t.integer "unit_id",                                          null: false
+    t.integer "unit_id",                                           null: false
     t.integer "troop_type_id"
-    t.decimal "value_points",             precision: 8, scale: 2
-    t.integer "position",                                         null: false
-    t.string  "M",              limit: 5
-    t.string  "WS",             limit: 5
-    t.string  "BS",             limit: 5
-    t.string  "S",              limit: 5
-    t.string  "T",              limit: 5
-    t.string  "W",              limit: 5
-    t.string  "I",              limit: 5
-    t.string  "A",              limit: 5
-    t.string  "LD",             limit: 5
+    t.decimal "value_points",              precision: 8, scale: 2
+    t.integer "position",                                          null: false
+    t.string  "M",              limit: 15
+    t.string  "WS",             limit: 15
+    t.string  "BS",             limit: 15
+    t.string  "S",              limit: 15
+    t.string  "T",              limit: 15
+    t.string  "W",              limit: 15
+    t.string  "I",              limit: 15
+    t.string  "A",              limit: 15
+    t.string  "LD",             limit: 15
     t.integer "min_size"
     t.integer "unit_option_id"
     t.index ["troop_type_id"], name: "index_ninth_age_troops_on_troop_type_id", using: :btree
