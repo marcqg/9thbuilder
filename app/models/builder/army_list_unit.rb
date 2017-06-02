@@ -23,7 +23,7 @@ class Builder::ArmyListUnit < ApplicationRecord
   validates :position, numericality: { greater_than_or_equal_to: 1, only_integer: true, allow_nil: true }
 
   before_validation on: :create do
-    self.name = unit.name if unit.is_unique
+    self.name = unit.name if unit.max == 1
     self.name = unit.name + ' #' + (army_list.army_list_units.where(unit_id: unit).count + 1).to_s unless name?
     self.size = 0
     self.value_points = 0.0

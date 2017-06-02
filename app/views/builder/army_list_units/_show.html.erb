@@ -6,7 +6,7 @@
     </div>
     <div class="name">
       <strong><%=transliterate army_list_unit.name.truncate(32) %></strong>
-        <% if army_list_unit.unit.is_unique? %>
+        <% if army_list_unit.unit.max == 1 %>
         <i>Unique</i>
         <% else %>
         <%= army_list_unit.unit.name %>

@@ -7,7 +7,7 @@
 
     <p>
       <%= f.label :army_list_id, t('army_list_unit.duplicate.target') %>
-      <%= f.select :army_list_id, options_from_collection_for_select(current_user.army_lists.where(:army_id => @army_list.army_id).reject{ |al| al.army_list_units.collect{ |alu| alu.unit }.include?(@army_list_unit.unit) if @army_list_unit.unit.is_unique }, :id, :name, @army_list.id), { :include_blank => t('army_list_unit.duplicate.new_army_list', :name => @army_list.army.name) } %>
+      <%= f.select :army_list_id, options_from_collection_for_select(current_user.army_lists.where(:army_id => @army_list.army_id).reject{ |al| al.army_list_units.collect{ |alu| alu.unit }.include?(@army_list_unit.unit) if @army_list_unit.unit.max == 1 }, :id, :name, @army_list.id), { :include_blank => t('army_list_unit.duplicate.new_army_list', :name => @army_list.army.name) } %>
     </p>
 
     <p><%= f.submit t(:next) %></p>

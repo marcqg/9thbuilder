@@ -321,6 +321,25 @@ class RolifyCreateRoles < ActiveRecord::Migration[5.0]
     NinthAge::Unit.create_translation_table!({:name => :string}, {:migrate_data => true, :remove_source_columns => true})
     add_foreign_key :ninth_age_unit_translations, :ninth_age_units, column: :ninth_age_unit_id, on_delete: :cascade
 
+    add_column :ninth_age_units, :is_mount, :boolean, :default => 0, :null => false
+    ActiveRecord::Base.connection.execute('UPDATE ninth_age_units
+                                      SET is_mount = 1
+                                      WHERE id in (SELECT ninth_age_unit_id FROM ninth_age_unit_translations where name like \'%Mount%\')')
+
+    add_column :ninth_age_units, :type_figurine, :integer, :default => 0, :null => false
+    add_column :ninth_age_units, :base, :integer, :default => 0, :null => false
+    add_column :ninth_age_units, :max, :integer, :default => 0
+    add_column :ninth_age_units, :max_model, :integer
+    add_column :ninth_age_units, :pts_setup, :integer, :default => 0, :null => false
+    add_column :ninth_age_units, :pts_add_figurine, :integer, :default => 0
+    add_column :ninth_age_units, :order, :integer, :default => 0, :null => false
+
+    ActiveRecord::Base.connection.execute('UPDATE ninth_age_units SET pts_setup = value_points WHERE value_points is not null;')
+    ActiveRecord::Base.connection.execute('UPDATE ninth_age_units SET max = 1 WHERE is_unique = 1;')
+
+    remove_column :ninth_age_units, :is_unique
+    remove_column :ninth_age_units, :value_points
+
 
     unit_categories = Builder::ArmyList.connection.select_all 'SELECT uc.id as id, uc.name as name, uc.min_quota as min_quota, uc.max_quota as max_quota FROM unit_categories uc;'
 
@@ -389,10 +408,5 @@ class RolifyCreateRoles < ActiveRecord::Migration[5.0]
 
     rename_table :army_list_unit_troops,           :builder_army_list_unit_troops
     rename_table :army_list_units_unit_options,     :builder_army_list_unit_unit_options
-
-    add_column :ninth_age_units, :is_mount, :boolean, :default => 0, :null => false
-    ActiveRecord::Base.connection.execute('UPDATE ninth_age_units
-                                      SET is_mount = 1
-                                      WHERE id in (SELECT ninth_age_unit_id FROM ninth_age_unit_translations where name like \'%Mount%\')')
   end
 end

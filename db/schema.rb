@@ -461,13 +461,19 @@ ActiveRecord::Schema.define(version: 20170323162102) do
   end
 
   create_table "ninth_age_units", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
-    t.integer "army_id",                                                            null: false
-    t.integer "min_size",                                           default: 1,     null: false
+    t.integer "army_id",                                        null: false
+    t.integer "min_size",                       default: 1,     null: false
     t.integer "max_size"
-    t.decimal "value_points",               precision: 8, scale: 2
     t.string  "magic"
-    t.text    "notes",        limit: 65535
-    t.boolean "is_unique",                                          default: false, null: false
+    t.text    "notes",            limit: 65535
+    t.boolean "is_mount",                       default: false, null: false
+    t.integer "type_figurine",                  default: 0,     null: false
+    t.integer "base",                           default: 0,     null: false
+    t.integer "max",                            default: 0
+    t.integer "max_model"
+    t.integer "pts_setup",                      default: 0,     null: false
+    t.integer "pts_add_figurine",               default: 0
+    t.integer "order",                          default: 0,     null: false
     t.index ["army_id"], name: "index_ninth_age_units_on_army_id", using: :btree
   end
 

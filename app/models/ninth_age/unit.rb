@@ -12,6 +12,9 @@ class NinthAge::Unit < ApplicationRecord
   has_many :unit_options, -> { order %w(parent_id position) }, dependent: :destroy
   has_many :mount_options, class_name: 'UnitOption', foreign_key: 'mount_id', dependent: :nullify
 
+  enum type_figurine: { Infantry: 0, WarBeast: 1, MonstrousInfantry: 2, MonstrousBeast: 3, MonstrousCavalry: 5, Swarm: 6, Cavalry: 7, Chariot: 8, Monster: 9, WarMachine: 10, RiddenMonster: 11}
+  enum base: { TwentyTwenty: 0, TwentyFiveTwentyFive: 1, FortyForty: 2, TwentyFiveFifty: 4, FiftyFifty: 5, FiftySeventyFive: 6, FiftyHundred: 7, SixtyHundred: 8, SixtyRound: 9, FortyTwenty: 10, FortySixty: 11, HundredFiftyHundred: 12, SeventyFiveRound: 13, FortyRound: 14, SeventyFiveFifty: 15, HundredHundred: 16 , HundredFifty: 17 }
+
   translates :name
   globalize_accessors
   accepts_nested_attributes_for :translations, allow_destroy: true
@@ -25,8 +28,11 @@ class NinthAge::Unit < ApplicationRecord
   validates :army_id, :min_size, presence: true
   validates :min_size, numericality: {greater_than_or_equal_to: 1, only_integer: true}
   validates :max_size, numericality: {greater_than_or_equal_to: :min_size, only_integer: true, allow_nil: true}
-  validates :value_points, numericality: {greater_than_or_equal_to: 0, allow_nil: true}
-  validates :is_unique, inclusion: {in: [true, false]}
+  validates :max, numericality: {greater_than_or_equal_to: :min_size, only_integer: true, allow_nil: true}
+  validates :max_model, numericality: {greater_than_or_equal_to: :min_size, only_integer: true, allow_nil: true}
+  validates :order, numericality: {greater_than_or_equal_to: :min_size, only_integer: true, allow_nil: true}
+  validates :pts_setup, numericality: {greater_than_or_equal_to: 0, allow_nil: true}
+  validates :pts_add_figurine, numericality: {greater_than_or_equal_to: 0, only_integer: true, allow_nil: true}
 
   scope :mount_category, -> { where(is_mount: true) }
 
@@ -37,8 +43,8 @@ class NinthAge::Unit < ApplicationRecord
       [
           organisation.name,
           organisation.units.includes(:translations)
-              .order('is_unique', 'ninth_age_unit_translations.name')
-              .reject { |u| u.in?(army_list_units) if u.is_unique }
+              .order('max', 'ninth_age_unit_translations.name')
+              .reject { |u| u.in?(army_list_units) if u.max == 1 }
               .map { |u| [u.name, u.id] }
       ]
     end
