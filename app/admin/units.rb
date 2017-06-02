@@ -65,8 +65,9 @@ ActiveAdmin.register NinthAge::Unit do
       end
     end
     f.actions
+  end
 
-    show do |model|
+  show do |model|
     attributes_table do
       row :id
       row :army

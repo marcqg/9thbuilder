@@ -26,11 +26,11 @@ class NinthAge::Unit < ApplicationRecord
   normalize_attributes :magic, :notes
 
   validates :army_id, :min_size, presence: true
-  validates :min_size, numericality: {greater_than_or_equal_to: 1, only_integer: true}
-  validates :max_size, numericality: {greater_than_or_equal_to: :min_size, only_integer: true, allow_nil: true}
-  validates :max, numericality: {greater_than_or_equal_to: :min_size, only_integer: true, allow_nil: true}
-  validates :max_model, numericality: {greater_than_or_equal_to: :min_size, only_integer: true, allow_nil: true}
-  validates :order, numericality: {greater_than_or_equal_to: :min_size, only_integer: true, allow_nil: true}
+  validates :min_size, numericality: {greater_than_or_equal_to: 0, only_integer: true}
+  validates :max_size, numericality: {greater_than_or_equal_to: 0, only_integer: true, allow_nil: true}
+  validates :max, numericality: {greater_than_or_equal_to: 0, only_integer: true, allow_nil: true}
+  validates :max_model, numericality: {greater_than_or_equal_to: 0, only_integer: true, allow_nil: true}
+  validates :order, numericality: {greater_than_or_equal_to: 0, only_integer: true, allow_nil: true}
   validates :pts_setup, numericality: {greater_than_or_equal_to: 0, allow_nil: true}
   validates :pts_add_figurine, numericality: {greater_than_or_equal_to: 0, only_integer: true, allow_nil: true}
 

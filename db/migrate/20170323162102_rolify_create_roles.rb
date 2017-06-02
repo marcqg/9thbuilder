@@ -408,5 +408,16 @@ class RolifyCreateRoles < ActiveRecord::Migration[5.0]
 
     rename_table :army_list_unit_troops,           :builder_army_list_unit_troops
     rename_table :army_list_units_unit_options,     :builder_army_list_unit_unit_options
+
+    change_column :ninth_age_toops, :M, :string, :limit => 15
+    change_column :ninth_age_toops, :WS, :string, :limit => 15
+    change_column :ninth_age_toops, :BS, :string, :limit => 15
+    change_column :ninth_age_toops, :S, :string, :limit => 15
+    change_column :ninth_age_toops, :T, :string, :limit => 15
+    change_column :ninth_age_toops, :W, :string, :limit => 15
+    change_column :ninth_age_toops, :I, :string, :limit => 15
+    change_column :ninth_age_toops, :A, :string, :limit => 15
+    change_column :ninth_age_toops, :LD, :string, :limit => 15
+
   end
 end
