@@ -1,0 +1,6 @@
+<% if magic_items.any? %>
+  <h4><%=t 'army_list_unit.show.magic_items' %> <%= "(#{troop.name})" unless troop.nil? %></h4>
+  <% magic_items.each do |magic_item| %>
+    • <%= magic_item.name %><br />
+  <% end %>
+<% end %>

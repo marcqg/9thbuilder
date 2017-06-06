@@ -1,0 +1,1 @@
+json.array! @ninth_age_magic_standards, partial: 'ninth_age/magic_standards/magic_standard', as: :ninth_age_magic_standard

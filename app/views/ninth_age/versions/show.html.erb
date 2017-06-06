@@ -12,6 +12,16 @@
       <h4><%= t('army.index.title') %></h4>
       <%= link_to t('version.index.show'), ninth_age_armies_path(@version.id) %>
     </article>
+    <article class="version-<%= @version.id %> col-md-4 col-xs-12 col-sm-6 text-center">
+      <%= image_tag asset_path('magic-item.jpg'), alt: t('magic-item.index.title'), height: 99, class: 'block-center' %>
+      <h4><%= t('magic-item.index.title') %></h4>
+      <%= link_to t('version.index.show'), ninth_age_magic_items_path() %>
+    </article>
+    <article class="version-<%= @version.id %> col-md-4 col-xs-12 col-sm-6 text-center">
+      <%= image_tag asset_path('magic-standard.jpg'), alt: t('magic-standard.index.title'), height: 99, class: 'block-center' %>
+      <h4><%= t('magic-standard.index.title') %></h4>
+      <%= link_to t('version.index.show'), ninth_age_magic_standards_path() %>
+    </article>
   </div>
 
   <div class="footer-back">

@@ -42,8 +42,12 @@ Rails.application.routes.draw do
       resources :units,                 only: [:show]
 
       resources :special_rules,         only: [:index, :show]
+      resources :magic_items,           only: [:index, :show]
+      resources :magic_standards,       only: [:index, :show]
       resources :equipments,            only: [:index, :show]
       get '/ninth-age-special-rules/page-:page', to: 'special_rules#index'
+      get '/ninth-age-magic-items/page-:page', to: 'magic_items#index'
+      get '/ninth-age-magic-standards/page-:page', to: 'magic_standards#index'
       get '/ninth-age-equipments/page-:page', to: 'equipments#index'
 
       scope '/army-:army_id' do

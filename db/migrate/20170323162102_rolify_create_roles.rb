@@ -306,11 +306,13 @@ class RolifyCreateRoles < ActiveRecord::Migration[5.0]
     NinthAge::MagicItemCategory.create_translation_table!({:name => :string}, {:migrate_data => true, :remove_source_columns => true})
     add_foreign_key :ninth_age_magic_item_category_translations, :ninth_age_magic_item_categories, column: :ninth_age_magic_item_category_id, on_delete: :cascade
     NinthAge::MagicItem.create_translation_table!({:name => :string}, {:migrate_data => true, :remove_source_columns => true})
+    NinthAge::MagicItem.add_translation_fields! description: :text
     add_foreign_key :ninth_age_magic_item_translations, :ninth_age_magic_items, column: :ninth_age_magic_item_id, on_delete: :cascade
 
     rename_table :magic_standards, :ninth_age_magic_standards
 
     NinthAge::MagicStandard.create_translation_table!({:name => :string}, {:migrate_data => true, :remove_source_columns => true})
+    NinthAge::MagicStandard.add_translation_fields! description: :text
     add_foreign_key :ninth_age_magic_standard_translations, :ninth_age_magic_standards, column: :ninth_age_magic_standard_id, on_delete: :cascade
 
     rename_table :units, :ninth_age_units
@@ -418,6 +420,5 @@ class RolifyCreateRoles < ActiveRecord::Migration[5.0]
     change_column :ninth_age_troops, :I, :string, :limit => 15
     change_column :ninth_age_troops, :A, :string, :limit => 15
     change_column :ninth_age_troops, :LD, :string, :limit => 15
-
   end
 end

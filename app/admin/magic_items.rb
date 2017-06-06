@@ -36,6 +36,7 @@ ActiveAdmin.register NinthAge::MagicItem do
       f.input :override, collection: NinthAge::MagicItem.where(army_id: nil).order(:name)
       f.translate_inputs do |t|
         t.input :name
+        t.input :description
       end
       f.input :value_points
       f.input :is_multiple

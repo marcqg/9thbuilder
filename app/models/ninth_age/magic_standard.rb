@@ -4,7 +4,7 @@ class NinthAge::MagicStandard < ApplicationRecord
   has_many :army_list_units, through: :army_list_unit_magic_standards
   has_one :override, class_name: 'MagicStandard', foreign_key: 'override_id'
 
-  translates :name
+  translates :name, :description
   globalize_accessors
   accepts_nested_attributes_for :translations, allow_destroy: true
 

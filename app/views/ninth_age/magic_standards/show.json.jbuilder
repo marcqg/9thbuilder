@@ -1,0 +1,1 @@
+json.partial! 'ninth_age/magic_standards/magic_standard', ninth_age_magic_standard: @ninth_age_magic_standard
