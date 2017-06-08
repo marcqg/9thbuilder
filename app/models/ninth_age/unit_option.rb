@@ -7,7 +7,7 @@ class NinthAge::UnitOption < ApplicationRecord
   has_many :army_list_unit_unit_options, dependent: :destroy
   has_many :army_list_units, through: :army_list_unit_unit_options
 
-  translates :name
+  translates :name, :description, :name_upgrade
   globalize_accessors
   accepts_nested_attributes_for :translations, allow_destroy: true
 
@@ -24,6 +24,8 @@ class NinthAge::UnitOption < ApplicationRecord
   validates :is_magic_standards, inclusion: { in: [true, false] }
   validates :is_extra_items, inclusion: { in: [true, false] }
   validates :is_unique_choice, inclusion: { in: [true, false] }
+  validates :is_required, inclusion: { in: [true, false] }
+  validates :is_magic, inclusion: { in: [true, false] }
 
   acts_as_list scope: 'unit_id = #{unit_id} AND COALESCE(parent_id, \'\') = \'#{parent_id}\''
 

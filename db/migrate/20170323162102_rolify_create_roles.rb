@@ -319,6 +319,8 @@ class RolifyCreateRoles < ActiveRecord::Migration[5.0]
     rename_table :unit_options, :ninth_age_unit_options
 
     NinthAge::UnitOption.create_translation_table!({:name => :string}, {:migrate_data => true, :remove_source_columns => true})
+    NinthAge::UnitOption.add_translation_fields! description: :text
+    NinthAge::UnitOption.add_translation_fields! name_upgrade: :text
     add_foreign_key :ninth_age_unit_option_translations, :ninth_age_unit_options, column: :ninth_age_unit_option_id, on_delete: :cascade
     NinthAge::Unit.create_translation_table!({:name => :string}, {:migrate_data => true, :remove_source_columns => true})
     add_foreign_key :ninth_age_unit_translations, :ninth_age_units, column: :ninth_age_unit_id, on_delete: :cascade
@@ -420,5 +422,20 @@ class RolifyCreateRoles < ActiveRecord::Migration[5.0]
     change_column :ninth_age_troops, :I, :string, :limit => 15
     change_column :ninth_age_troops, :A, :string, :limit => 15
     change_column :ninth_age_troops, :LD, :string, :limit => 15
+
+
+    add_column :ninth_age_unit_options, :is_required, :boolean, :default => false, :null => false
+    add_column :ninth_age_unit_options, :is_magic, :boolean, :default => false, :null => false
+    add_column :ninth_age_unit_options, :is_upgratable, :boolean, :default => false, :null => false
+
+    add_column :ninth_age_unit_options, :magic_id, :integer, :null => true
+    add_column :ninth_age_unit_options, :organisation_id, :integer, :null => true
+    add_column :ninth_age_unit_options, :value_points_upgrade, :integer, :null => true
+    add_column :ninth_age_unit_options, :upgrade_target, :integer, :default => 0, :null => false
+
+    add_column :ninth_age_unit_options, :max, :integer, :null => true
+    add_column :ninth_age_unit_options, :max_model, :integer, :null => true
+    add_column :ninth_age_unit_options, :min_model, :integer, :null => true
+    add_column :ninth_age_unit_options, :max_unit, :integer, :null => true
   end
 end

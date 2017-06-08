@@ -426,27 +426,40 @@ ActiveRecord::Schema.define(version: 20170323162102) do
   end
 
   create_table "ninth_age_unit_option_translations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "ninth_age_unit_option_id", null: false
-    t.string   "locale",                   null: false
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.integer  "ninth_age_unit_option_id",               null: false
+    t.string   "locale",                                 null: false
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
     t.string   "name"
+    t.text     "description",              limit: 65535
+    t.text     "name_upgrade",             limit: 65535
     t.index ["locale"], name: "index_ninth_age_unit_option_translations_on_locale", using: :btree
     t.index ["ninth_age_unit_option_id"], name: "index_3eb812a99d96523232efee7c3e6a269e0424207a", using: :btree
   end
 
   create_table "ninth_age_unit_options", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
-    t.integer "unit_id",                                                    null: false
+    t.integer "unit_id",                                                      null: false
     t.integer "parent_id"
-    t.decimal "value_points",       precision: 8, scale: 2
-    t.integer "position",                                                   null: false
-    t.boolean "is_per_model",                                               null: false
-    t.boolean "is_magic_items",                                             null: false
-    t.boolean "is_magic_standards",                                         null: false
-    t.boolean "is_unique_choice",                                           null: false
-    t.boolean "is_extra_items",                                             null: false
+    t.decimal "value_points",         precision: 8, scale: 2
+    t.integer "position",                                                     null: false
+    t.boolean "is_per_model",                                                 null: false
+    t.boolean "is_magic_items",                                               null: false
+    t.boolean "is_magic_standards",                                           null: false
+    t.boolean "is_unique_choice",                                             null: false
+    t.boolean "is_extra_items",                                               null: false
     t.integer "mount_id"
-    t.boolean "is_multiple",                                default: false, null: false
+    t.boolean "is_multiple",                                  default: false, null: false
+    t.boolean "is_required",                                  default: false, null: false
+    t.boolean "is_magic",                                     default: false, null: false
+    t.boolean "is_upgratable",                                default: false, null: false
+    t.integer "magic_id"
+    t.integer "organisation_id"
+    t.integer "value_points_upgrade"
+    t.integer "upgrade_target",                               default: 0,     null: false
+    t.integer "max"
+    t.integer "max_model"
+    t.integer "min_model"
+    t.integer "max_unit"
     t.index ["mount_id"], name: "index_ninth_age_unit_options_on_mount_id", using: :btree
     t.index ["parent_id"], name: "index_ninth_age_unit_options_on_parent_id", using: :btree
     t.index ["unit_id"], name: "index_ninth_age_unit_options_on_unit_id", using: :btree
