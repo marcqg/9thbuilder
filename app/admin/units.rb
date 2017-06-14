@@ -1,7 +1,7 @@
 ActiveAdmin.register NinthAge::Unit do
   menu parent: 'Ninth Age Army', priority: 7
 
-  permit_params :army_id, :locale, :pts_setup, :pts_add_figurine, :min_size, :max_size, :magic, :notes, :max, :max_model, :order, :type_figurine, :base, translations_attributes: [:id, :name, :locale, :_destroy]
+  permit_params :army_id, :locale, :value_points, :pts_add_figurine, :min_size, :max_size, :magic, :notes, :max, :max_model, :order, :type_figurine, :base, translations_attributes: [:id, :name, :locale, :_destroy]
 
   controller do
     def create
@@ -35,7 +35,7 @@ ActiveAdmin.register NinthAge::Unit do
     column :name
     column :min_size
     column :max_size
-    column :pts_setup
+    column :value_points
     column :max
     column :max_model
     column :type_figurine
@@ -48,7 +48,7 @@ ActiveAdmin.register NinthAge::Unit do
     f.inputs do
       f.input :army, collection: NinthAge::Army.order(:name)
       f.input :organisation_ids, as: :select, collection: NinthAge::Organisation.includes(:army).collect { |o| [o.army.name + ' - ' + o.name, o.id] }, multiple: true
-      f.input :pts_setup
+      f.input :value_points
       f.input :pts_add_figurine
       f.input :min_size
       f.input :max_size
@@ -76,7 +76,7 @@ ActiveAdmin.register NinthAge::Unit do
       end
       row :min_size
       row :max_size
-      row :pts_setup
+      row :value_points
       row :pts_add_figurine
       row :magic
       row :notes

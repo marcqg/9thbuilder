@@ -1,6 +1,6 @@
 <% if special_rules.any? %>
   <h4><%=t 'army_list_unit.show.special_rules' %> <%= "(#{troop.name})" unless troop.nil? %></h4>
   <% special_rules.each do |special_rule| %>
-    • <%= special_rule.name %><br />
+    • <%= special_rule.special_rule.name %><br />
   <% end %>
 <% end %>

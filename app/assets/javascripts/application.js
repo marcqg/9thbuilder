@@ -10,7 +10,7 @@
 
 jQuery(function($) {
 
-  $('body').on('click', 'button[data-url]:not([data-popin])', function(evt) {
+  $(document).on('click', 'button[data-url]:not([data-popin])', function(evt) {
     evt.preventDefault();
 
     var url = $(this).data('url'),
@@ -28,9 +28,9 @@ jQuery(function($) {
     }
   });
 
-  $('body').on('click', 'a[data-popin], button[data-popin]', popinHandler);
-  $('body').on('submit', 'form[data-popin]', popinHandler);
-  $('body').on('change', 'input[name=include_magics]', function() {
+  $(document).on('click', 'a[data-popin], button[data-popin]', popinHandler);
+  $(document).on('submit', 'form[data-popin]', popinHandler);
+  $(document).on('change', 'input[name=include_magics]', function() {
     var checked = $(this).prop('checked'),
         $popin  = $(this).closest('.popin');
 
@@ -57,25 +57,25 @@ jQuery(function($) {
     })
   ;
 
-  $('body').on('click', '.army_list_unit_overview .name', function() {
+  $(document).on('click', '.army_list_unit_overview .name', function() {
     $(this).closest('.army_list_unit_overview').next('.army_list_unit_details').slideToggle('fast');
   });
 
-  $('body').on('change', '.army_list_unit_overview .actions select, #subheader .actions select', function() {
+  $(document).on('change', '.army_list_unit_overview .actions select, #subheader .actions select', function() {
     $(this).closest('form').attr('action', $(this).val());
   });
 
-  $('body').on('click', '#army_list_unit_magic_items ul li strong', function() {
+  $(document).on('click', '#army_list_unit_magic_items ul li strong', function() {
     $('#army_list_unit_magic_items ul li ul').not($(this).next('ul')).slideUp('fast');
     $(this).next('ul').slideToggle('fast', function() { $.colorbox.resize(); });
   });
 
-  $('body').on('click', '#army_list_unit_extra_items ul li strong', function() {
+  $(document).on('click', '#army_list_unit_extra_items ul li strong', function() {
     $('#army_list_unit_extra_items ul li ul').not($(this).next('ul')).slideUp('fast');
     $(this).next('ul').slideToggle('fast', function() { $.colorbox.resize(); });
   });
 
-  $('body').on('change', '#army_list_unit_unit_options input, #army_list_unit_magic_items input, #army_list_unit_extra_items input, #army_list_unit_magic_standards input', function(evt) {
+  $(document).on('change', '#army_list_unit_unit_options input, #army_list_unit_magic_items input, #army_list_unit_extra_items input, #army_list_unit_magic_standards input', function(evt) {
     var total     = 0.0,
         $changed  = $(this),
         $siblings = $changed.closest('ul').find('> li > label input[data-radio]').not($changed),
@@ -131,21 +131,16 @@ jQuery(function($) {
     updateArmyListUnitValuePoints();
   });
 
-  $('body').on('keyup', '.edit_army_list_unit #army_list_unit_troops .army_list_unit_troop_size', function() {
+    /**
+     * Update all value_points when the size of the unit change
+     */
+  $(document).on('change', '.edit_builder_army_list_unit #army_list_unit_troops .army_list_unit_troop_size', function() {
     var size = parseInt($(this).val());
+    $('.edit_builder_army_list_unit #army_list_unit_troops .army_list_unit_troop_size_value').text(size);
 
-    var minSize = parseInt($(this).closest('tr').data('min-size')),
-        maxSize = parseInt($(this).closest('.popin').find('h1').data('max-size'));
-
-    if (isNaN(minSize)) {
-      minSize = parseInt($(this).closest('.popin').find('h1').data('min-size'));
-    }
-
-    if (isNaN(size) || size < minSize || (!isNaN(maxSize) && size > maxSize)) {
-      return false;
-    }
-
-    if ($(this).attr('id') == 'army_list_unit_army_list_unit_troops_attributes_0_size') {
+    //Update options when the size of the unit changes
+    if ($(this).attr('id') == 'builder_army_list_unit_army_list_unit_troops_attributes_0_size') {
+      console.log('$(#army_list_unit_unit_options input[data-per-model])', $('#army_list_unit_unit_options input[data-per-model]').length);
       $('#army_list_unit_unit_options input[data-per-model]').each(function() {
         var value_points = size * parseFloat($(this).data('value-points'));
 
@@ -157,7 +152,7 @@ jQuery(function($) {
     updateArmyListUnitValuePoints();
   });
 
-  $('body').on('keyup', '.edit_army_list_unit #army_list_unit_unit_options .army_list_unit_unit_option_quantity', function() {
+  $(document).on('keyup', '.edit_builder_army_list_unit #army_list_unit_unit_options .army_list_unit_unit_option_quantity', function() {
     var quantity = parseInt($(this).val());
 
     if (isNaN(quantity)) return false;
@@ -170,11 +165,10 @@ jQuery(function($) {
   });
 
 });
-
 function updateArmyListUnitDepend($changed)
 {
   var $master = $changed.is('input[name$="[_destroy]"]') ? $changed.closest('li').find('> input[name$="[unit_option_id]"]') : $changed,
-      $slaves = $('.edit_army_list_unit input[data-depend='+$master.val()+']');
+      $slaves = $('.edit_builder_army_list_unit input[data-depend='+$master.val()+']');
 
   if ($changed.prop('checked')) {
     $slaves.attr('disabled', false);
@@ -186,6 +180,10 @@ function updateArmyListUnitDepend($changed)
   }
 }
 
+/**
+ * Update value_point in the unit form during the edition
+ * @param $changed
+ */
 function updateArmyListUnitValuePoints()
 {
   $('#army_list_unit_unit_options, #army_list_unit_magic_items, #army_list_unit_extra_items, #army_list_unit_magic_standards').each(function() {
@@ -223,11 +221,8 @@ function updateArmyListUnitValuePoints()
 
       if (isNaN(size)) return;
 
-      if (isNaN(value_points)) {
-        total += size * unit_value_points;
-      }
-      else {
-        total += Math.ceil(min_size * unit_value_points);
+        total += unit_value_points;
+      if (!isNaN(value_points)) {
         total += (size - min_size) * value_points;
       }
     });
@@ -288,7 +283,7 @@ function popin(url)
       $('#cboxLoadedContent form :input:visible:first').focus();
 
       var masters = [];
-      $('#army_list_unit_unit_options input[data-depend], #army_list_unit_magic_items input[data-depend], #army_list_unit_extra_items input[data-depend], #army_list_unit_magic_standards input[data-depend]').each(function() {
+      $('#builder_army_list_unit_unit_options input[data-depend], #builder_army_list_unit_magic_items input[data-depend], #builder_army_list_unit_extra_items input[data-depend], #builder_army_list_unit_magic_standards input[data-depend]').each(function() {
         var selector = '#army_list_unit_unit_option_ids_' + $(this).data('depend');
 
         if ($.inArray(selector, masters) < 0) {
@@ -298,8 +293,8 @@ function popin(url)
 
       $(masters.join(', ')).change();
 
-      $('#army_list_unit_magic_items input:first').change();
-      $('#army_list_unit_extra_items input:first').change();
+      $('#builder_army_list_unit_magic_items input:first').change();
+      $('#builder_army_list_unit_extra_items input:first').change();
     },
     onClosed: function() {
       $('#cboxClose').css('opacity', 0);

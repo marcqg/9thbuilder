@@ -334,15 +334,11 @@ class RolifyCreateRoles < ActiveRecord::Migration[5.0]
     add_column :ninth_age_units, :base, :integer, :default => 0, :null => false
     add_column :ninth_age_units, :max, :integer, :default => 0
     add_column :ninth_age_units, :max_model, :integer
-    add_column :ninth_age_units, :pts_setup, :integer, :default => 0, :null => false
-    add_column :ninth_age_units, :pts_add_figurine, :integer, :default => 0
     add_column :ninth_age_units, :order, :integer, :default => 0, :null => false
 
-    ActiveRecord::Base.connection.execute('UPDATE ninth_age_units SET pts_setup = value_points WHERE value_points is not null;')
     ActiveRecord::Base.connection.execute('UPDATE ninth_age_units SET max = 1 WHERE is_unique = 1;')
 
     remove_column :ninth_age_units, :is_unique
-    remove_column :ninth_age_units, :value_points
 
 
     unit_categories = Builder::ArmyList.connection.select_all 'SELECT uc.id as id, uc.name as name, uc.min_quota as min_quota, uc.max_quota as max_quota FROM unit_categories uc;'
@@ -437,5 +433,9 @@ class RolifyCreateRoles < ActiveRecord::Migration[5.0]
     add_column :ninth_age_unit_options, :max_model, :integer, :null => true
     add_column :ninth_age_unit_options, :min_model, :integer, :null => true
     add_column :ninth_age_unit_options, :max_unit, :integer, :null => true
+
+    ActiveRecord::Base.connection.execute('UPDATE ninth_age_units
+                                            SET value_points = value_points * min_size
+                                            WHERE max_size is not null and min_size!= max_size;')
   end
 end

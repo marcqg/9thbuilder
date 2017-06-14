@@ -1,7 +1,7 @@
 ActiveAdmin.register NinthAge::UnitOption do
   menu parent: 'Ninth Age Army', priority: 10
 
-  permit_params :unit_id, :parent_id, :mount_id, :value_points, :position, :is_per_model, :is_multiple, :is_magic_items, :is_magic_standards, :is_extra_items, :is_unique_choice, :locale, translations_attributes: [:id, :name, :locale, :_destroy]
+  permit_params :unit_id, :parent_id, :mount_id, :value_points, :position, :is_per_model, :is_multiple, :is_magic, :is_upgratable, :magic_id, :organisation_id, :value_points_upgrade, :upgrade_target, :max, :max_model, :min_model, :max_unit, :is_magic_items, :is_magic_standards, :is_extra_items, :is_unique_choice, :locale, translations_attributes: [:id, :name, :locale, :_destroy]
 
   controller do
     def create
@@ -58,6 +58,17 @@ ActiveAdmin.register NinthAge::UnitOption do
       f.input :position
       f.input :is_per_model
       f.input :is_multiple
+      f.input :is_required
+      f.input :is_magic
+      f.input :is_upgratable
+      f.input :magic, collection: NinthAge::Magic.collect { |u| [u.name, u.id] }
+      f.input :organisation, collection: NinthAge::Organisation.collect { |u| [u.name, u.id] }
+      f.input :value_points_upgrade
+      f.input :upgrade_target
+      f.input :max
+      f.input :max_model
+      f.input :min_model
+      f.input :max_unit
       f.input :is_magic_items
       f.input :is_magic_standards
       f.input :is_extra_items
