@@ -197,6 +197,26 @@ en:
       Universal: Universal
       Universal_g: "{Universal}"
 
+  magic_items:
+    index:
+      title: Magic items
+      show: Show
+
+  magic_standards:
+    index:
+      title: Magic Standards
+      show: Show
+
+  special_rules:
+    index:
+      title: Special rules
+      show: Show
+
+  equipments:
+    index:
+      title: Equipments
+      show: Show
+
   signin:
     title: "Sign in"
     form:

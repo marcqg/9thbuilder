@@ -1,4 +1,7 @@
 class NinthAge::SpecialRule < ApplicationRecord
+
+  belongs_to :version
+
   has_many :special_rule_unit_troops, dependent: :destroy
 
   translates :name, :description

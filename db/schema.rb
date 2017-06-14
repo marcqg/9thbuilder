@@ -166,8 +166,10 @@ ActiveRecord::Schema.define(version: 20170323162102) do
   end
 
   create_table "ninth_age_equipments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "version_id", default: 0, null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.index ["version_id"], name: "index_ninth_age_equipments_on_version_id", using: :btree
   end
 
   create_table "ninth_age_extra_item_categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
@@ -377,8 +379,10 @@ ActiveRecord::Schema.define(version: 20170323162102) do
   end
 
   create_table "ninth_age_special_rules", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "version_id", default: 0, null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.index ["version_id"], name: "index_ninth_age_special_rules_on_version_id", using: :btree
   end
 
   create_table "ninth_age_troop_translations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

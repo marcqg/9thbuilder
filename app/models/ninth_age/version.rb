@@ -1,6 +1,8 @@
 class NinthAge::Version < ApplicationRecord
   has_many :armies, dependent: :destroy
   has_many :magics, dependent: :destroy
+  has_many :special_rules, dependent: :destroy
+  has_many :equipments, dependent: :destroy
 
   translates :name
   globalize_accessors

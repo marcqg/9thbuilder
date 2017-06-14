@@ -40,15 +40,13 @@ Rails.application.routes.draw do
       resources :organisations,         only: [:show]
       resources :organisation_groups,   only: [:show]
       resources :units,                 only: [:show]
+      resources :special_rules,         only: [:show]
+      resources :equipments,            only: [:show]
 
-      resources :special_rules,         only: [:index, :show]
       resources :magic_items,           only: [:index, :show]
       resources :magic_standards,       only: [:index, :show]
-      resources :equipments,            only: [:index, :show]
-      get '/ninth-age-special-rules/page-:page', to: 'special_rules#index'
-      get '/ninth-age-magic-items/page-:page', to: 'magic_items#index'
-      get '/ninth-age-magic-standards/page-:page', to: 'magic_standards#index'
-      get '/ninth-age-equipments/page-:page', to: 'equipments#index'
+      get '/ninth-age-magic-items/page-:page',      to: 'magic_items#index'
+      get '/ninth-age-magic-standards/page-:page',  to: 'magic_standards#index'
 
       scope '/army-:army_id' do
         resources :army_organisations,  only: [:index]
@@ -57,6 +55,11 @@ Rails.application.routes.draw do
       scope '/version-:version_id' do
         resources :magics,              only: [:index]
         resources :armies,              only: [:index]
+        resources :special_rules,       only: [:index]
+        resources :equipments,          only: [:index]
+
+        get '/ninth-age-special-rules/page-:page',  to: 'special_rules#index'
+        get '/ninth-age-equipments/page-:page',     to: 'equipments#index'
       end
     end
 

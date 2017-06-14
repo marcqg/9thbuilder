@@ -1,4 +1,7 @@
 class NinthAge::Equipment < ApplicationRecord
+
+  belongs_to :version
+
   has_many :equipment_unit_troops, dependent: :destroy
 
   translates :name, :description

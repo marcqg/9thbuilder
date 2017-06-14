@@ -2,25 +2,35 @@
   <h1 class="text-center"><%= @version.name %></h1>
 
   <div class="row">
-    <article class="version-<%= @version.id %> col-md-4 col-xs-12 col-sm-6 text-center">
+    <article class="version-<%= @version.id %> col-md-3 col-xs-12 col-sm-6 text-center">
       <%= image_tag asset_path('magic.jpg'), alt: t('magic.index.title'), height: 99, class: 'block-center' %>
       <h4><%= t('magic.index.title') %></h4>
       <%= link_to t('version.index.show'), ninth_age_magics_path(@version.id) %>
     </article>
-    <article class="version-<%= @version.id %> col-md-4 col-xs-12 col-sm-6 text-center">
+    <article class="version-<%= @version.id %> col-md-3 col-xs-12 col-sm-6 text-center">
       <%= image_tag asset_path('army.jpg'), alt: t('army.index.title'), height: 99, class: 'block-center' %>
       <h4><%= t('army.index.title') %></h4>
-      <%= link_to t('version.index.show'), ninth_age_armies_path(@version.id) %>
+      <%= link_to t('army.index.show'), ninth_age_armies_path(@version.id) %>
     </article>
-    <article class="version-<%= @version.id %> col-md-4 col-xs-12 col-sm-6 text-center">
-      <%= image_tag asset_path('magic-item.jpg'), alt: t('magic-item.index.title'), height: 99, class: 'block-center' %>
-      <h4><%= t('magic-item.index.title') %></h4>
-      <%= link_to t('version.index.show'), ninth_age_magic_items_path() %>
+    <article class="version-<%= @version.id %> col-md-3 col-xs-12 col-sm-6 text-center">
+      <%= image_tag asset_path('magic-item.jpg'), alt: t('magic_items.index.title'), height: 99, class: 'block-center' %>
+      <h4><%= t('magic_items.index.title') %></h4>
+      <%= link_to t('magic_items.index.show'), ninth_age_magic_items_path %>
     </article>
-    <article class="version-<%= @version.id %> col-md-4 col-xs-12 col-sm-6 text-center">
-      <%= image_tag asset_path('magic-standard.jpg'), alt: t('magic-standard.index.title'), height: 99, class: 'block-center' %>
-      <h4><%= t('magic-standard.index.title') %></h4>
-      <%= link_to t('version.index.show'), ninth_age_magic_standards_path() %>
+    <article class="version-<%= @version.id %> col-md-3 col-xs-12 col-sm-6 text-center">
+      <%= image_tag asset_path('magic-standard.jpg'), alt: t('magic_standards.index.title'), height: 99, class: 'block-center' %>
+      <h4><%= t('magic_standards.index.title') %></h4>
+      <%= link_to t('magic_standards.index.show'), ninth_age_magic_standards_path %>
+    </article>
+    <article class="version-<%= @version.id %> col-md-3 col-xs-12 col-sm-6 text-center">
+      <%= image_tag asset_path('magic-item.jpg'), alt: t('special_rules.index.title'), height: 99, class: 'block-center' %>
+      <h4><%= t('special_rules.index.title') %></h4>
+      <%= link_to t('special_rules.index.show'), ninth_age_special_rules_path(@version.id) %>
+    </article>
+    <article class="version-<%= @version.id %> col-md-3 col-xs-12 col-sm-6 text-center">
+      <%= image_tag asset_path('magic-standard.jpg'), alt: t('equipments.index.title'), height: 99, class: 'block-center' %>
+      <h4><%= t('equipments.index.title') %></h4>
+      <%= link_to t('equipments.index.show'), ninth_age_equipments_path(@version.id) %>
     </article>
   </div>
 

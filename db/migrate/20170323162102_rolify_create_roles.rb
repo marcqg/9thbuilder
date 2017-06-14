@@ -151,12 +151,11 @@ class RolifyCreateRoles < ActiveRecord::Migration[5.0]
 
     #Translations of equipments
     create_table :ninth_age_special_rules do |t|
-
+      t.belongs_to :version, index: true, null: false, default: 0
       t.timestamps
     end
     NinthAge::SpecialRule.create_translation_table!({:name => :string, :description => :text})
     add_foreign_key :ninth_age_special_rule_translations, :ninth_age_special_rules, column: :ninth_age_special_rule_id, on_delete: :cascade
-
 
     create_table :ninth_age_special_rule_unit_troops do |t|
       t.belongs_to :special_rule, index: false, null: false, default: 0
@@ -172,8 +171,8 @@ class RolifyCreateRoles < ActiveRecord::Migration[5.0]
     add_index :ninth_age_special_rule_unit_troops, [:special_rule_id, :unit_id, :troop_id], name: 'ninth_age_special_rules_troops_rule_troop', :unique => true
 
 
-    ActiveRecord::Base.connection.execute('INSERT INTO ninth_age_special_rules (id, created_at, updated_at)
-                                      SELECT id, NOW(), NOW() FROM special_rules;')
+    ActiveRecord::Base.connection.execute('INSERT INTO ninth_age_special_rules (id, created_at, updated_at, version_id)
+                                      SELECT id, NOW(), NOW(), 1 FROM special_rules;')
 
     ActiveRecord::Base.connection.execute('INSERT INTO ninth_age_special_rule_unit_troops (position, special_rule_id, unit_id, troop_id, created_at, updated_at)
                                       SELECT position, id, unit_id, troop_id, NOW(), NOW() FROM special_rules;')
@@ -219,7 +218,7 @@ class RolifyCreateRoles < ActiveRecord::Migration[5.0]
 
     #Translations of equipments
     create_table :ninth_age_equipments do |t|
-
+      t.belongs_to :version, index: true, null: false, default: 0
       t.timestamps
     end
     NinthAge::Equipment.create_translation_table!({:name => :string, :description => :text})
@@ -240,8 +239,8 @@ class RolifyCreateRoles < ActiveRecord::Migration[5.0]
     add_index :ninth_age_equipment_unit_troops, [:equipment_id, :unit_id, :troop_id], name: 'ninth_age_equipments_troops_rule_troop', :unique => true
 
 
-    ActiveRecord::Base.connection.execute('INSERT INTO ninth_age_equipments (id, created_at, updated_at)
-                                      SELECT id, NOW(), NOW() FROM equipments;')
+    ActiveRecord::Base.connection.execute('INSERT INTO ninth_age_equipments (id, created_at, updated_at, version_id)
+                                      SELECT id, NOW(), NOW(), 1 FROM equipments;')
 
     ActiveRecord::Base.connection.execute('INSERT INTO ninth_age_equipment_unit_troops (position, equipment_id, unit_id, troop_id, created_at, updated_at)
                                       SELECT position, id, unit_id, troop_id, NOW(), NOW() FROM equipments;')
