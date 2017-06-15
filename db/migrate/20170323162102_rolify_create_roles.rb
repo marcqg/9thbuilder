@@ -436,5 +436,20 @@ class RolifyCreateRoles < ActiveRecord::Migration[5.0]
     ActiveRecord::Base.connection.execute('UPDATE ninth_age_units
                                             SET value_points = value_points * min_size
                                             WHERE max_size is not null and min_size!= max_size;')
+
+    add_column :ninth_age_magic_items, :version_id, :integer, :default => 0, :null => true
+    add_column :ninth_age_extra_items, :version_id, :integer, :default => 0, :null => true
+    add_column :ninth_age_magic_standards, :version_id, :integer, :default => 0, :null => true
+    add_index :ninth_age_magic_items, :version_id
+    add_index :ninth_age_extra_items, :version_id
+    add_index :ninth_age_magic_standards, :version_id
+
+    ActiveRecord::Base.connection.execute('UPDATE ninth_age_magic_items SET version_id = 1')
+    ActiveRecord::Base.connection.execute('UPDATE ninth_age_extra_items SET version_id = 1')
+    ActiveRecord::Base.connection.execute('UPDATE ninth_age_magic_standards SET version_id = 1')
+
+    change_column :ninth_age_magic_items, :version_id, :integer, :default => 0, :null => false
+    change_column :ninth_age_extra_items, :version_id, :integer, :default => 0, :null => false
+    change_column :ninth_age_magic_standards, :version_id, :integer, :default => 0, :null => false
   end
 end

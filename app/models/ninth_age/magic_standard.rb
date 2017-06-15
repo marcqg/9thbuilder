@@ -1,4 +1,7 @@
 class NinthAge::MagicStandard < ApplicationRecord
+
+  belongs_to :version
+
   belongs_to :army
   has_many :army_list_unit_magic_standards, dependent: :destroy
   has_many :army_list_units, through: :army_list_unit_magic_standards

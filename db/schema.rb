@@ -198,9 +198,11 @@ ActiveRecord::Schema.define(version: 20170323162102) do
   end
 
   create_table "ninth_age_extra_items", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
-    t.integer "extra_item_category_id",                         null: false
-    t.decimal "value_points",           precision: 8, scale: 2, null: false
+    t.integer "extra_item_category_id",                                     null: false
+    t.decimal "value_points",           precision: 8, scale: 2,             null: false
+    t.integer "version_id",                                     default: 0, null: false
     t.index ["extra_item_category_id"], name: "index_ninth_age_extra_items_on_extra_item_category_id", using: :btree
+    t.index ["version_id"], name: "index_ninth_age_extra_items_on_version_id", using: :btree
   end
 
   create_table "ninth_age_magic_item_categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
@@ -233,9 +235,11 @@ ActiveRecord::Schema.define(version: 20170323162102) do
     t.decimal "value_points",           precision: 8, scale: 2,                 null: false
     t.integer "override_id"
     t.boolean "is_multiple",                                    default: false, null: false
+    t.integer "version_id",                                     default: 0,     null: false
     t.index ["army_id"], name: "index_ninth_age_magic_items_on_army_id", using: :btree
     t.index ["magic_item_category_id"], name: "index_ninth_age_magic_items_on_magic_item_category_id", using: :btree
     t.index ["override_id"], name: "index_ninth_age_magic_items_on_override_id", using: :btree
+    t.index ["version_id"], name: "index_ninth_age_magic_items_on_version_id", using: :btree
   end
 
   create_table "ninth_age_magic_spell_translations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -274,10 +278,12 @@ ActiveRecord::Schema.define(version: 20170323162102) do
 
   create_table "ninth_age_magic_standards", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.integer "army_id"
-    t.integer "value_points", null: false
+    t.integer "value_points",             null: false
     t.integer "override_id"
+    t.integer "version_id",   default: 0, null: false
     t.index ["army_id"], name: "index_ninth_age_magic_standards_on_army_id", using: :btree
     t.index ["override_id"], name: "index_ninth_age_magic_standards_on_override_id", using: :btree
+    t.index ["version_id"], name: "index_ninth_age_magic_standards_on_version_id", using: :btree
   end
 
   create_table "ninth_age_magic_translations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

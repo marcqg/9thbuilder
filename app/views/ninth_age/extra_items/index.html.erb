@@ -1,0 +1,32 @@
+<h1><%= t('extra_items.index.title') %></h1>
+
+<div>
+  <% @ninth_age_extra_items.each do |ninth_age_extra_item| %>
+      <article class="extra-items-<%= ninth_age_extra_item.id %> col-md-3 text-center">
+        <h4><%= ninth_age_extra_item.name %></h4>
+        <%= link_to(t('extra_items.index.show'), ninth_age_extra_item_path(ninth_age_extra_item)) %>
+      </article>
+  <% end %>
+</div>
+<div aria-label="Page navigation" class="apple_pagination">
+  <%= will_paginate @ninth_age_extra_items, :container => false %>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $("div[class*=extra-items-]").click(function () {
+            window.location = $(this).find("a").attr("href");
+            return false;
+        });
+
+        var highestBox = 0;
+
+        $("div[class*=extra-items-]").each(function () {
+            if ($(this).height() > highestBox) {
+                highestBox = $(this).height();
+            }
+        })
+
+        $("div[class*=extra-items-]").height(highestBox);
+    });
+</script>

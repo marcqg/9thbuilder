@@ -1,4 +1,7 @@
 class NinthAge::MagicItem < ApplicationRecord
+
+  belongs_to :version
+
   belongs_to :army
   belongs_to :magic_item_category
   has_many :army_list_unit_magic_items, dependent: :destroy

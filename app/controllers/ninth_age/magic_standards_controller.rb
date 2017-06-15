@@ -4,8 +4,9 @@ module NinthAge
     # GET /ninth_age_special_rules
     # GET /ninth_age_special_rules.json
     def index
+      @version = NinthAge::Version.find(params[:version_id])
       page = params[:page].present? ? params[:page].to_i : 1
-      @ninth_age_magic_standards = NinthAge::MagicStandard.with_translations.paginate(:page => page)
+      @ninth_age_magic_standards = NinthAge::MagicStandard.with_translations.where(:version_id => params[:version_id]).paginate(:page => page)
 
       respond_to do |format|
         format.html
@@ -14,7 +15,8 @@ module NinthAge
     end
 
     def all
-      @ninth_age_magic_standards = NinthAge::MagicStandard.with_translations.all
+      @version = NinthAge::Version.find(params[:version_id])
+      @ninth_age_magic_standards = NinthAge::MagicStandard.with_translations.where(:version_id => params[:version_id])
 
       respond_to do |format|
         format.json

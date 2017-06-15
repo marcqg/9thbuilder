@@ -197,6 +197,11 @@ en:
       Universal: Universal
       Universal_g: "{Universal}"
 
+  extra_items:
+    index:
+      title: Extra items
+      show: Show
+
   magic_items:
     index:
       title: Magic items
