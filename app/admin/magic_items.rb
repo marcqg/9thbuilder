@@ -1,7 +1,7 @@
 ActiveAdmin.register NinthAge::MagicItem do
   menu parent: 'Ninth Age Magic', priority: 4
 
-  permit_params :army_id, :magic_item_category_id, :override_id, :locale, :value_points, :is_multiple, translations_attributes: [:id, :name, :locale, :_destroy]
+  permit_params :army_id, :magic_item_category_id, :override_id, :locale, :value_points, :is_multiple, :type_figurine, :type_target, :type_duration, :max, translations_attributes: [:id, :name, :locale, :_destroy]
 
   controller do
     def create
@@ -40,6 +40,10 @@ ActiveAdmin.register NinthAge::MagicItem do
       end
       f.input :value_points
       f.input :is_multiple
+      f.input :type_figurine
+      f.input :type_target
+      f.input :type_duration
+      f.input :max
     end
     f.actions
   end
@@ -51,6 +55,10 @@ ActiveAdmin.register NinthAge::MagicItem do
       row :override
       row :value_points
       row :is_multiple
+      row :type_figurine
+      row :type_target
+      row :type_duration
+      row :max
     end
     panel 'Translations' do
       translate_attributes_table_for model do

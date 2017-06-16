@@ -236,6 +236,10 @@ ActiveRecord::Schema.define(version: 20170323162102) do
     t.integer "override_id"
     t.boolean "is_multiple",                                    default: false, null: false
     t.integer "version_id",                                     default: 0,     null: false
+    t.integer "type_figurine"
+    t.integer "type_target"
+    t.integer "type_duration"
+    t.integer "max",                                            default: 0,     null: false
     t.index ["army_id"], name: "index_ninth_age_magic_items_on_army_id", using: :btree
     t.index ["magic_item_category_id"], name: "index_ninth_age_magic_items_on_magic_item_category_id", using: :btree
     t.index ["override_id"], name: "index_ninth_age_magic_items_on_override_id", using: :btree

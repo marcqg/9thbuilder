@@ -168,47 +168,18 @@ module Builder
 
           org_id = (isChange ? organisation_change.new_organisation_id : organisation.id)
 
-          organisation_rate = Builder::ArmyListOrganisation.find_by(organisation_id: org_id, army_list_id: @army_list.id)
-
-          #if the organisation not exist, create and set properties
-          if nil == organisation_rate
-            organisation_rate = Builder::ArmyListOrganisation.new
-            organisation_rate.army_list_id = @army_list.id
-            organisation_rate.organisation_id = organisation.id
-            organisation_rate.pts = army_list_unit.value_points
-          else
-            organisation_rate.pts += army_list_unit.value_points
-          end
-
-          organisation_rate.save
+          Builder::ArmyListOrganisation.create_or_add(org_id, @army_list.id, mount.value_points)
         end
 
         #Sum points for mounts
-        # mountOption = unit.options.find_by({type_option: :Mount})
-        # if nil != mountOption
-        #
-        #   mount = mountOption.figurine_mount.figurine;
-        #   mount.organisations.each do |mount_organisation|
-        #
-        #     figurine_has_organisation = unit.figurine.organisations.find(mount_organisation.id);
-        #     if nil != figurine_has_organisation
-        #
-        #       organisation_rate = NinthAge::ArmyUserOrganisation.find_by(organisation_id: mount_organisation.id, army_list_id: @unit.army_list_id)
-        #
-        #       if nil == organisation_rate
-        #         organisation_rate = NinthAge::ArmyUserOrganisation.new
-        #         organisation_rate.army_list_id = @unit.army_list_id
-        #         organisation_rate.organisation_id = organisation.id
-        #         organisation_rate.pts = unit.value_points
-        #       else
-        #         organisation_rate.pts += unit.value_points
-        #       end
-        #
-        #       organisation_rate.save
-        #
-        #     end
-        #   end
-        # end
+        mount_option = army_list_unit.unit_options.where.not(:mount => nil).first
+        if nil != mount_option
+
+          mount_option.mount.organisations.each do |mount_organisation|
+
+            Builder::ArmyListOrganisation.create_or_add(mount_organisation.id, @army_list.id, mount_option.mount.value_points)
+          end
+        end
       end
 
       pts = Builder::ArmyListOrganisation.where(army_list_id: @army_list.id).map(&:pts).reduce(0, :+)

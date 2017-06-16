@@ -1,5 +1,35 @@
 class RolifyCreateRoles < ActiveRecord::Migration[5.0]
   def change
+
+    execute 'INSERT INTO magic_item_categories (name) VALUES (\'MagicBanner\'),
+                  (\'Totem\'),
+                  (\'Daemonic Item\'),
+                  (\'Champion Weapon\'),
+                  (\'Anvil Rune\'),
+                  (\'Arcane Rune\'),
+                  (\'Armour Rune\'),
+                  (\'Battle Rune\'),
+                  (\'Talismanic Rune\'),
+                  (\'Weapon Rune\'),
+                  (\'Path of Magic for Mage\'),
+                  (\'Oath\'),
+                  (\'Virtue\'),
+                  (\'BigName\'),
+                  (\'Cuatl Lord Discipline\'),
+                  (\'Aspects of Nature\'),
+                  (\'Kindred\'),
+                  (\'Monarchs of Undeath\'),
+                  (\'Path of Magic for Death Cult Hierarch\'),
+                  (\'Blood line\'),
+                  (\'Magical Item\'),
+                  (\'Magic Weapons Champion\'),
+                  (\'Standard Rune\'),
+                  (\'Daemonic Weapon\'),
+                  (\'Daemonic Talisman\'),
+                  (\'Daemonic Enchanted Item\'),
+                  (\'Daemonic Arcane Item\'),
+                  (\'Gifts of the Dark God\');'
+
     create_table(:roles) do |t|
       t.string :name
       t.references :resource, :polymorphic => true
@@ -46,7 +76,7 @@ class RolifyCreateRoles < ActiveRecord::Migration[5.0]
       t.timestamps
     end
 
-    NinthAge::Version.create_translation_table!({:name => :string})
+    version = NinthAge::Version.create_translation_table!({:name => :string})
 
     NinthAge::Version.create :name => 'V-1.0.0', :major => 1, :minor => 0, :fix => 0, :public => true
 
@@ -451,5 +481,14 @@ class RolifyCreateRoles < ActiveRecord::Migration[5.0]
     change_column :ninth_age_magic_items, :version_id, :integer, :default => 0, :null => false
     change_column :ninth_age_extra_items, :version_id, :integer, :default => 0, :null => false
     change_column :ninth_age_magic_standards, :version_id, :integer, :default => 0, :null => false
+
+    ActiveRecord::Base.connection.execute('UPDATE ninth_age_units
+                                            SET value_points = value_points * min_size
+                                            WHERE max_size is not null and min_size!= max_size;')
+
+    add_column :ninth_age_magic_items, :type_figurine, :integer, :null => true
+    add_column :ninth_age_magic_items, :type_target, :integer, :null => true
+    add_column :ninth_age_magic_items, :type_duration, :integer, :null => true
+    add_column :ninth_age_magic_items, :max, :integer, :default => 0, :null => false
   end
 end
