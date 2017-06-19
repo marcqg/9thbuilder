@@ -7,7 +7,7 @@
 </head>
 <body>
 
-<div id="wrapper" class="container">
+<div id="wrapper" class="container container-pdf">
   <div id="header">
     <h1>
       <strong>The 9th Age</strong>
@@ -16,7 +16,7 @@
     <% unless @army_list.army.logo.nil? %>
         <%= image_tag @army_list.army.logo.url, alt: @army_list.army.name, :size => "90x90" %>
     <% end %>
-    <h2><%=transliterate @army_list.army.name %> -<strong><%= value_points @army_list.value_points %></strong> points</h2>
+    <h2><%=transliterate @army_list.army.name %> (<%=transliterate @army_list.army.version.name %>) -<strong><%= value_points @army_list.value_points %></strong> points</h2>
     <h2><%=transliterate @army_list.name.truncate(50) %></h2>
   </div>
 

@@ -14,7 +14,7 @@
         <% end %>">
           <% if army_list_organisation != nil %><em><%= army_list_organisation.pts %> pts <small>(<%= army_list_organisation.rate %> %)</small></em>
           <% else %>
-          <% end %> <strong><%= organisation_group.organisation.name %></strong>
+          <% end %> <strong><%= organisation_group.organisation.name.gsub(/\(([\w,\ \+\.\(\)\-]*)\)/, '<span class="text-small">(\1)</span>').html_safe %></strong>
           <% if !organisation_group.NoLimit? %>
               <span class="small">(<%= organisation_group.target %> <%= organisation_group.type_target %>)</span>
           <% end %>

@@ -10,19 +10,19 @@ army_list_unit_magic_item = army_list_unit.army_list_unit_magic_items.detect { |
 
 %>
 <li>
-  <%= hidden_field_tag "army_list_unit[army_list_unit_magic_items_attributes][#{magic_item.id}][_destroy]", 1 %>
+  <%= hidden_field_tag "builder_army_list_unit[army_list_unit_magic_items_attributes][#{magic_item.id}][_destroy]", 1 %>
   <em><span><%= value_points(magic_item.value_points) %></span> pts</em>
   <label>
-    <%= check_box_tag "army_list_unit[army_list_unit_magic_items_attributes][#{magic_item.id}][_destroy]", false, army_list_unit.magic_items.member?(magic_item), :id => "army_list_unit_magic_item_ids_#{magic_item.id}", "data-depend" => depend.try(:id), "data-radio" => army_list.army_id != 5 ? true : nil, "data-value-points" => magic_item.value_points  %>
+    <%= check_box_tag "builder_army_list_unit[army_list_unit_magic_items_attributes][#{magic_item.id}][_destroy]", false, army_list_unit.magic_items.member?(magic_item), :id => "army_list_unit_magic_item_ids_#{magic_item.id}", "data-depend" => depend.try(:id), "data-radio" => army_list.army_id != 5 ? true : nil, "data-value-points" => magic_item.value_points  %>
     <%= magic_item.name %>
   </label>
 
   <% if magic_item.is_multiple? %>
-    x <%= number_field_tag "army_list_unit[army_list_unit_magic_items_attributes][#{magic_item.id}][quantity]", army_list_unit_magic_item.try(:quantity), :min => 1, :style => "position:relative; top:0; height:1.5em; width:20px; text-align:center;" %>
+    x <%= number_field_tag "builder_army_list_unit[army_list_unit_magic_items_attributes][#{magic_item.id}][quantity]", army_list_unit_magic_item.try(:quantity), :min => 1, :style => "position:relative; top:0; height:1.5em; width:20px; text-align:center;" %>
   <% else %>
-    <%= hidden_field_tag "army_list_unit[army_list_unit_magic_items_attributes][#{magic_item.id}][quantity]", 1 %>
+    <%= hidden_field_tag "builder_army_list_unit[army_list_unit_magic_items_attributes][#{magic_item.id}][quantity]", 1 %>
   <% end %>
 
-  <%= hidden_field_tag "army_list_unit[army_list_unit_magic_items_attributes][#{magic_item.id}][id]", army_list_unit_magic_item.try(:id) %>
-  <%= hidden_field_tag "army_list_unit[army_list_unit_magic_items_attributes][#{magic_item.id}][magic_item_id]", magic_item.id %>
+  <%= hidden_field_tag "builder_army_list_unit[army_list_unit_magic_items_attributes][#{magic_item.id}][id]", army_list_unit_magic_item.try(:id) %>
+  <%= hidden_field_tag "builder_army_list_unit[army_list_unit_magic_items_attributes][#{magic_item.id}][magic_item_id]", magic_item.id %>
 </li>

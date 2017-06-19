@@ -5,102 +5,113 @@
       <%= "%02d" % army_list_unit.position %>
     </div>
     <div class="name">
-      <strong><%=transliterate army_list_unit.name.truncate(32) %></strong>
-        <% if army_list_unit.unit.max == 1 %>
-        <i>Unique</i>
-        <% else %>
-        <%= army_list_unit.unit.name %>
-        <% end %>
-        <%= "<em>x#{army_list_unit.size}</em>".html_safe if army_list_unit.size > 1 %>
+      <strong><%= transliterate army_list_unit.name.truncate(32) %></strong>
+      <% if army_list_unit.unit.max == 1 %>
+          <i>Unique</i>
+      <% else %>
+          <%= army_list_unit.unit.name %>
+      <% end %>
+      <%= "<em>x#{army_list_unit.size}</em>".html_safe if army_list_unit.size > 1 %>
     </div>
     <div class="value_points">
       <strong><%= value_points army_list_unit.value_points %></strong> points
     </div>
     <div class="actions pull-right">
-      <%= link_to '<i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i>'.html_safe, edit_builder_army_list_army_list_unit_path(@army_list, army_list_unit), { 'data-popin' => true } %>
-      <%= link_to '<i class="fa fa-clone fa-2x" aria-hidden="true"></i>'.html_safe, new_from_builder_army_list_army_list_unit_path(@army_list, army_list_unit), { 'data-popin' => true } %>
-      <%= link_to '<i class="fa fa-trash fa-2x" aria-hidden="true"></i>'.html_safe, delete_builder_army_list_army_list_unit_path(@army_list, army_list_unit), { 'data-popin' => true } %>
+      <%= link_to '<i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i>'.html_safe, edit_builder_army_list_army_list_unit_path(@army_list, army_list_unit), {'data-popin' => true} %>
+      <%= link_to '<i class="fa fa-clone fa-2x" aria-hidden="true"></i>'.html_safe, new_from_builder_army_list_army_list_unit_path(@army_list, army_list_unit), {'data-popin' => true} %>
+      <%= link_to '<i class="fa fa-trash fa-2x" aria-hidden="true"></i>'.html_safe, delete_builder_army_list_army_list_unit_path(@army_list, army_list_unit), {'data-popin' => true} %>
     </div>
     <div class="clearboth"></div>
   </div>
 
   <div class="army_list_unit_details" style="display:none">
 
+    <!-- ORGANISATIONS -->
+    <div>
+      <ul class="list-flex organisation-list">
+        <% army_list_unit.unit.organisations.each do |organisation| %>
+            <li class="organisation">
+              <%= image_tag(organisation.medium_logo_url, alt: organisation.name, size: '75x75') %>
+              <p><%= organisation.name.gsub(/\(([\w,\ \+\.\(\)\-]*)\)/, '<span class="text-small">(\1)</span>').html_safe %></p>
+             </li>
+        <% end %>
+      </ul>
+    </div>
     <!-- TROOPS -->
     <table>
       <thead>
-        <tr>
-          <th><%= t('army_list_unit.show.troops.profile') %></th>
-          <th><%= t('army_list_unit.show.troops.M') %></th>
-          <th><%= t('army_list_unit.show.troops.WS') %></th>
-          <th><%= t('army_list_unit.show.troops.BS') %></th>
-          <th><%= t('army_list_unit.show.troops.S') %></th>
-          <th><%= t('army_list_unit.show.troops.T') %></th>
-          <th><%= t('army_list_unit.show.troops.W') %></th>
-          <th><%= t('army_list_unit.show.troops.I') %></th>
-          <th><%= t('army_list_unit.show.troops.A') %></th>
-          <th><%= t('army_list_unit.show.troops.LD') %></th>
-          <th><%= t('army_list_unit.show.troops.type') %></th>
-          <th></th>
-        </tr>
+      <tr>
+        <th><%= t('army_list_unit.show.troops.profile') %></th>
+        <th><%= t('army_list_unit.show.troops.M') %></th>
+        <th><%= t('army_list_unit.show.troops.WS') %></th>
+        <th><%= t('army_list_unit.show.troops.BS') %></th>
+        <th><%= t('army_list_unit.show.troops.S') %></th>
+        <th><%= t('army_list_unit.show.troops.T') %></th>
+        <th><%= t('army_list_unit.show.troops.W') %></th>
+        <th><%= t('army_list_unit.show.troops.I') %></th>
+        <th><%= t('army_list_unit.show.troops.A') %></th>
+        <th><%= t('army_list_unit.show.troops.LD') %></th>
+        <th><%= t('army_list_unit.show.troops.type') %></th>
+        <th></th>
+      </tr>
       </thead>
       <tbody>
-        <%= render :partial => 'ninth_age/troops/show', :collection => army_list_unit.unit.troops.select{ |t| t.unit_option.nil? or army_list_unit.unit_options.include?(t.unit_option) }, :as => :troop, :locals => { :army_list_unit => army_list_unit } %>
-        <% if army_list_unit.unit_options.include?(mounts_option) %>
-          <%= render :partial => 'ninth_age/troops/show', :collection => mounts_option.mount.troops.all, :as => :troop, :locals => { :army_list_unit => army_list_unit } %>
-        <% end %>
+      <%= render :partial => 'ninth_age/troops/show', :collection => army_list_unit.unit.troops.select { |t| t.unit_option.nil? or army_list_unit.unit_options.include?(t.unit_option) }, :as => :troop, :locals => {:army_list_unit => army_list_unit} %>
+      <% if army_list_unit.unit_options.include?(mounts_option) %>
+          <%= render :partial => 'ninth_age/troops/show', :collection => mounts_option.mount.troops.all, :as => :troop, :locals => {:army_list_unit => army_list_unit} %>
+      <% end %>
       </tbody>
     </table>
 
     <!-- OPTIONS, MAGIC ITEMS, MAGIC STANDARDS, EXTRA ITEMS -->
     <% if army_list_unit.unit_options.any? or army_list_unit.magic_items.any? or army_list_unit.extra_items.any? or army_list_unit.magic_standards.any? %>
-      <div class="options">
-        <!-- OPTIONS -->
-        <%= render :partial => 'builder/army_list_units_unit_options/show', :locals => { :unit_options => army_list_unit.unit_options } %>
+        <div class="options">
+          <!-- OPTIONS -->
+          <%= render :partial => 'builder/army_list_units_unit_options/show', :locals => {:unit_options => army_list_unit.unit_options} %>
 
-        <!-- MAGIC ITEMS -->
-        <%= render :partial => 'builder/army_list_units_magic_items/show', :locals => { :magic_items => army_list_unit.magic_items } %>
+          <!-- MAGIC ITEMS -->
+          <%= render :partial => 'builder/army_list_units_magic_items/show', :locals => {:magic_items => army_list_unit.magic_items} %>
 
-        <!-- EXTRA ITEMS -->
-        <%= render :partial => 'builder/army_list_units_extra_items/show', :locals => { :extra_item_category => @army_list.army.extra_item_categories.first, :extra_items => army_list_unit.extra_items } %>
+          <!-- EXTRA ITEMS -->
+          <%= render :partial => 'builder/army_list_units_extra_items/show', :locals => {:extra_item_category => @army_list.army.extra_item_categories.first, :extra_items => army_list_unit.extra_items} %>
 
-        <!-- MAGIC STANDARDS -->
-        <%= render :partial => 'builder/army_list_units_magic_standards/show', :locals => { :magic_standards => army_list_unit.magic_standards } %>
-      </div>
+          <!-- MAGIC STANDARDS -->
+          <%= render :partial => 'builder/army_list_units_magic_standards/show', :locals => {:magic_standards => army_list_unit.magic_standards} %>
+        </div>
     <% end %>
 
     <!-- EQUIPMENTS -->
-    <%= render :partial => 'ninth_age/equipments/show', :locals => { :equipments => army_list_unit.unit.equipment_unit_troops.where(troop_id: nil).map(&:equipment), :troop => nil } %>
+    <%= render :partial => 'ninth_age/equipments/show', :locals => {:equipments => army_list_unit.unit.equipment_unit_troops.where(troop_id: nil).map(&:equipment), :troop => nil} %>
 
-    <% army_list_unit.unit.troops.select{ |t| t.unit_option.nil? or army_list_unit.unit_options.include?(t.unit_option) }.each do |troop| %>
-      <%= render :partial => 'ninth_age/equipments/show', :locals => { :equipments => troop.equipment_unit_troops.map(&:equipment), :troop => troop } %>
+    <% army_list_unit.unit.troops.select { |t| t.unit_option.nil? or army_list_unit.unit_options.include?(t.unit_option) }.each do |troop| %>
+        <%= render :partial => 'ninth_age/equipments/show', :locals => {:equipments => troop.equipment_unit_troops.map(&:equipment), :troop => troop} %>
     <% end %>
 
     <% if army_list_unit.unit_options.include?(mounts_option) %>
-      <%= render :partial => 'ninth_age/equipments/show', :locals => { :equipments => mounts_option.mount.equipment_unit_troops.map(&:equipment), :troop => mounts_option.mount.troops.first } %>
+        <%= render :partial => 'ninth_age/equipments/show', :locals => {:equipments => mounts_option.mount.equipment_unit_troops.map(&:equipment), :troop => mounts_option.mount.troops.first} %>
     <% end %>
 
     <!-- SPECIAL RULES -->
-    <%= render :partial => 'ninth_age/special_rules/show', :locals => { :special_rules => army_list_unit.unit.special_rule_unit_troops.where(troop_id: nil).map(&:special_rule), :troop => nil } %>
+    <%= render :partial => 'ninth_age/special_rules/show', :locals => {:special_rules => army_list_unit.unit.special_rule_unit_troops.where(troop_id: nil).map(&:special_rule), :troop => nil} %>
 
-    <% army_list_unit.unit.troops.select{ |t| t.unit_option.nil? or army_list_unit.unit_options.include?(t.unit_option) }.each do |troop| %>
-      <%= render :partial => 'ninth_age/special_rules/show', :locals => { :special_rules => troop.special_rule_unit_troops.map(&:special_rule), :troop => troop } %>
+    <% army_list_unit.unit.troops.select { |t| t.unit_option.nil? or army_list_unit.unit_options.include?(t.unit_option) }.each do |troop| %>
+        <%= render :partial => 'ninth_age/special_rules/show', :locals => {:special_rules => troop.special_rule_unit_troops.map(&:special_rule), :troop => troop} %>
     <% end %>
 
     <% if army_list_unit.unit_options.include?(mounts_option) %>
-      <%= render :partial => 'ninth_age/special_rules/show', :locals => { :special_rules => mounts_option.mount.special_rule_unit_troops.map(&:special_rule), :troop => mounts_option.mount.troops.first } %>
+        <%= render :partial => 'ninth_age/special_rules/show', :locals => {:special_rules => mounts_option.mount.special_rule_unit_troops.map(&:special_rule), :troop => mounts_option.mount.troops.first} %>
     <% end %>
 
     <!-- MAGIC -->
     <% if army_list_unit.magic? %>
-      <h4><%=t 'army_list_unit.show.magic' %></h4>
-      <%= army_list_unit.magic %><br />
+        <h4><%= t 'army_list_unit.show.magic' %></h4>
+        <%= army_list_unit.magic %><br/>
     <% end %>
 
     <!-- NOTES -->
     <% if army_list_unit.notes? %>
-      <h4><%=t 'army_list_unit.show.notes' %></h4>
-      <%= simple_format army_list_unit.notes %>
+        <h4><%= t 'army_list_unit.show.notes' %></h4>
+        <%= simple_format army_list_unit.notes %>
     <% end %>
 
     <div class="clear"></div>

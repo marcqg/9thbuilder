@@ -3,6 +3,8 @@ class NinthAge::Magic < ApplicationRecord
   belongs_to :version
   has_many :magic_spells
 
+  has_many :unit_options
+
   translates :name, :description
   globalize_accessors
   accepts_nested_attributes_for :translations, allow_destroy: true

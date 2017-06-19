@@ -164,11 +164,13 @@ module Builder
         army_list_unit.unit.organisations.each do |organisation|
 
           organisation_change = NinthAge::OrganisationChange.find_by({unit_id: army_list_unit.unit_id, default_organisation_id: organisation.id})
-          isChange = nil != organisation_change && ((organisation_change.Min? && type_target.number < unit.number) || (organisation_change.Max? && type_target.number > unit.number))
+          isChange = nil != organisation_change && ((organisation_change.Min? && organisation_change.number <= army_list_unit.size) || (organisation_change.Max? && organisation_change.number >= army_list_unit.size))
 
           org_id = (isChange ? organisation_change.new_organisation_id : organisation.id)
 
-          Builder::ArmyListOrganisation.create_or_add(org_id, @army_list.id, mount.value_points)
+          organisation_rate = Builder::ArmyListOrganisation.find_or_create_by({organisation_id: org_id, army_list_id: @army_list.id})
+          organisation_rate.pts += army_list_unit.value_points
+          organisation_rate.save
         end
 
         #Sum points for mounts
@@ -176,8 +178,9 @@ module Builder
         if nil != mount_option
 
           mount_option.mount.organisations.each do |mount_organisation|
-
-            Builder::ArmyListOrganisation.create_or_add(mount_organisation.id, @army_list.id, mount_option.mount.value_points)
+            organisation_rate = Builder::ArmyListOrganisation.find_or_create_by({organisation_id: mount_organisation.id, army_list_id: @army_list.id})
+            organisation_rate.pts += mount_option.value_points
+            organisation_rate.save
           end
         end
       end
@@ -210,9 +213,9 @@ module Builder
           when :NoLimit
             organisation.good = true
           when :Max
-            organisation.good = organisation.rate < organisation_group.target
+            organisation.good = organisation.rate <= organisation_group.target
           when :Least
-            organisation.good = organisation.rate > organisation_group.target
+            organisation.good = organisation.rate >= organisation_group.target
           when :NotAllowed
             organisation.good = organisation.rate == 0
         end

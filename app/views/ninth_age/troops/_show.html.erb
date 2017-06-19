@@ -11,9 +11,9 @@
   <td><%=characteristic troop.LD %></td>
   <td><%= troop.troop_type.try(:name) %></td>
   <td style="text-align:right"><em>
-    <% if troop.value_points %>
+    <% if troop.value_points and troop.value_points != 0 %>
       <%= value_points(troop.value_points) %> pts<%=t :per_model if army_list_unit != nil && army_list_unit.size > 1 %>
-    <% elsif troop.unit.value_points and troop.position == 1 %>
+    <% elsif troop.unit.value_points and troop.unit.value_points != 0 and troop.position == 1 %>
       <%= value_points(troop.unit.value_points) %> pts<%=t :per_model if army_list_unit != nil && army_list_unit.size > 1 %>
     <% end %>
   </em></td>
