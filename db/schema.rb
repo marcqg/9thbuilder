@@ -156,7 +156,7 @@ ActiveRecord::Schema.define(version: 20170323162102) do
   create_table "ninth_age_equipment_unit_troops", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "equipment_id", default: 0, null: false
     t.integer  "unit_id",      default: 0, null: false
-    t.integer  "troop_id",     default: 0
+    t.integer  "troop_id"
     t.integer  "position",     default: 0, null: false
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
@@ -379,7 +379,7 @@ ActiveRecord::Schema.define(version: 20170323162102) do
   create_table "ninth_age_special_rule_unit_troops", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "special_rule_id", default: 0, null: false
     t.integer  "unit_id",         default: 0, null: false
-    t.integer  "troop_id",        default: 0
+    t.integer  "troop_id"
     t.integer  "position",        default: 0, null: false
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false

@@ -190,7 +190,7 @@ class RolifyCreateRoles < ActiveRecord::Migration[5.0]
     create_table :ninth_age_special_rule_unit_troops do |t|
       t.belongs_to :special_rule, index: false, null: false, default: 0
       t.belongs_to :unit, index: false, null: false, default: 0
-      t.belongs_to :troop, index: false, null: true, default: 0
+      t.belongs_to :troop, index: false, null: true
       t.integer :position, :null => false, default: 0
       t.timestamps
     end
@@ -258,7 +258,7 @@ class RolifyCreateRoles < ActiveRecord::Migration[5.0]
     create_table :ninth_age_equipment_unit_troops do |t|
       t.belongs_to :equipment, index: false, null: false, default: 0
       t.belongs_to :unit, index: false, null: false, default: 0
-      t.belongs_to :troop, index: false, null: true, default: 0
+      t.belongs_to :troop, index: false, null: true
       t.integer :position, :null => false, default: 0
       t.timestamps
     end
