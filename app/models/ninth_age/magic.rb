@@ -21,6 +21,10 @@ class NinthAge::Magic < ApplicationRecord
 
   validates :version_id, presence: true
 
+  def name_with_version
+    "#{name} - #{version.name}"
+  end
+
   def logo_url
     self.logo.url
   end

@@ -4,7 +4,7 @@
   <% unless @army_list.army.logo.nil? %>
       <%= image_tag @army_list.army.logo.url, alt: @army_list.army.name, height: 75 %>
   <% end %>
-  <h2><%= link_to transliterate(@army_list.army.name), builder_army_lists_path({'q[army_id_eq]' => @army_list.army}) %></h2>
+  <h2><%= link_to transliterate(@army_list.army.name_with_version), builder_army_lists_path({'q[army_id_eq]' => @army_list.army}) %></h2>
   <h1 title="<%= @army_list.name %>"><%= transliterate @army_list.name.truncate(35) %></h1>
 </div>
 

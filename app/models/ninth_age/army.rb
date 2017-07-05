@@ -43,6 +43,10 @@ class NinthAge::Army < ApplicationRecord
     self.logo.url(:medium)
   end
 
+  def name_with_version
+    "#{name} - #{version.name}"
+  end
+
   def duplicate
     new_units = {}
 
