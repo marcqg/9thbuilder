@@ -25,17 +25,17 @@
       <table class="content-stats">
         <thead>
         <tr>
-          <td><%= t('troop.characteristic.Name') %></td>
-          <td><%= t('troop.characteristic.M') %></td>
-          <td><%= t('troop.characteristic.CC') %></td>
-          <td><%= t('troop.characteristic.CT') %></td>
-          <td><%= t('troop.characteristic.F') %></td>
-          <td><%= t('troop.characteristic.E') %></td>
-          <td><%= t('troop.characteristic.PV') %></td>
-          <td><%= t('troop.characteristic.I') %></td>
-          <td><%= t('troop.characteristic.A') %></td>
-          <td><%= t('troop.characteristic.Cd') %></td>
-          <td><%= t('troop.characteristic.Type') %></td>
+          <td><%= t('army_list_unit.show.troops.name') %></td>
+          <td><%= t('army_list_unit.show.troops.M') %></td>
+          <td><%= t('army_list_unit.show.troops.WS') %></td>
+          <td><%= t('army_list_unit.show.troops.BS') %></td>
+          <td><%= t('army_list_unit.show.troops.S') %></td>
+          <td><%= t('army_list_unit.show.troops.T') %></td>
+          <td><%= t('army_list_unit.show.troops.W') %></td>
+          <td><%= t('army_list_unit.show.troops.I') %></td>
+          <td><%= t('army_list_unit.show.troops.A') %></td>
+          <td><%= t('army_list_unit.show.troops.LD') %></td>
+          <td><%= t('army_list_unit.show.troops.type') %></td>
         </tr>
         </thead>
         <tbody>
@@ -58,6 +58,7 @@
       </table>
     </div>
     <div class="col-md-3">
+      <h3><%= t('army_list_unit.show.special_rules') %></h3>
       <div>
         <% @unit.special_rule_unit_troops.where(:troop => nil).map(&:special_rule).each do |special_rule| %>
             • <%= special_rule.name %><br/>
@@ -75,6 +76,7 @@
       </div>
     </div>
     <div class="col-md-3">
+      <h3><%= t('army_list_unit.show.equipments') %></h3>
       <div>
         <% @unit.equipment_unit_troops.map(&:equipment).each do |equipment| %>
             • <%= equipment.name %><br/>
@@ -82,6 +84,7 @@
       </div>
     </div>
     <div class="col-md-6">
+      <h3><%= t('army_list_unit.show.unit_options') %></h3>
       <div>
         <% @unit.unit_options.where(:parent => nil).order(:position).each do |unit_option| %>
             <p>• <%= unit_option.name %> <span class="pull-right"><%= unit_option.value_points%></span></p>
