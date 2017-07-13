@@ -1,4 +1,4 @@
-# Files in the config/locales directory are used for internationalization
+ï»¿# Files in the config/locales directory are used for internationalization
 # and are automatically loaded by Rails. If you want to use locales other
 # than English, add the necessary files in this directory.
 #
@@ -28,12 +28,12 @@ en:
   per_model: "/mini."
 
   menu:
-    label: "Menú principal"
-    army_lists: "Mis listas de ejército"
+    label: "MenÃº principal"
+    army_lists: "Mis listas de ejÃ©rcito"
     preferences: "Preferencias"
     help: "Ayuda"
-    signout: "Cerrar sesión"
-    signin: "Iniciar sesión"
+    signout: "Cerrar sesiÃ³n"
+    signin: "Iniciar sesiÃ³n"
     signup: "Registrarse"
     languages:
       lang: "Idioma"
@@ -46,55 +46,55 @@ en:
       pl: "Polish"
       ru: "Russian"
       sr: "Serbian"
-      es: "Spanish - Español"
+      es: "Spanish - EspaÃ±ol"
 
   home:
     whoarewe:
-     title: "¿Quiénes somos?"
-     description: "Conformado por un grupo de entusiastas jugadores con más de 15 años de esperiencia en Batalla, Army Builder pretende ser una efectiva y sencilla herramienta para crear tus listas de ejército. Gracias a nuestros generosos mecenas, Army Builder no genera beneficios ¡y nunca te pedirá dinero! Además, Army Builder es un proyecto de software libre."
-    thank: "Agradecemos a las compañías/ilustradores que nos permiten usar su trabajo."
+     title: "Â¿QuiÃ©nes somos?"
+     description: "Conformado por un grupo de entusiastas jugadores con mÃ¡s de 15 aÃ±os de esperiencia en Batalla, Army Builder pretende ser una efectiva y sencilla herramienta para crear tus listas de ejÃ©rcito. Gracias a nuestros generosos mecenas, Army Builder no genera beneficios Â¡y nunca te pedirÃ¡ dinero! AdemÃ¡s, Army Builder es un proyecto de software libre."
+    thank: "Agradecemos a las compaÃ±Ã­as/ilustradores que nos permiten usar su trabajo."
     army:
-      first: "Rebaños de Bestias, Legiones Demoníacas, Elfos de la Oscuridad, Bastiones Enanos, Elfos Nobles, Kanes Ogros, Orcos y Goblins, Saurios Ancestrales, Cónclave Vampírico, Guerreros de los Dioses Oscuros owned by <a href=\"http://www.avatars-of-war.com\" target=\"_blank\">Avatars of War</a> and created by <a href=\"http://diegogisbertllorens.deviantart.com\" target=\"_blank\">Diego Gisbert Llorens</a>"
+      first: "RebaÃ±os de Bestias, Legiones DemonÃ­acas, Elfos de la Oscuridad, Bastiones Enanos, Elfos Nobles, Kanes Ogros, Orcos y Goblins, Saurios Ancestrales, CÃ³nclave VampÃ­rico, Guerreros de los Dioses Oscuros owned by <a href=\"http://www.avatars-of-war.com\" target=\"_blank\">Avatars of War</a> and created by <a href=\"http://diegogisbertllorens.deviantart.com\" target=\"_blank\">Diego Gisbert Llorens</a>"
       second: "Imperio de Sonnstahl by <a href=\"http://wraithdt.deviantart.com/art/Battle-of-Blackheath-416207912\" target=\"_blank\">Wraithdt</a>"
-      three: "Dinastías Eternas by <a href=\"http://theclockworkpainter.deviantart.com/art/Queen-Khalida-493461199\" target=\"_blank\">Theclockworkpainter</a>"
-      four: "Enjambre de Alimañas by <a href=\"http://getsugadante.deviantart.com/art/Warhammer-Fantasy-Rat-Ogre-s-fury-587662192\" target=\"_blank\">GetsugaDante</a>"
+      three: "DinastÃ­as Eternas by <a href=\"http://theclockworkpainter.deviantart.com/art/Queen-Khalida-493461199\" target=\"_blank\">Theclockworkpainter</a>"
+      four: "Enjambre de AlimaÃ±as by <a href=\"http://getsugadante.deviantart.com/art/Warhammer-Fantasy-Rat-Ogre-s-fury-587662192\" target=\"_blank\">GetsugaDante</a>"
 
   army_list:
     index:
-      title: "Mis listas de ejército"
+      title: "Mis listas de ejÃ©rcito"
       filter: "Filtrar por"
       and: "y"
       name_or_notes: "Nombre o notas"
-      add: "Crear lista de ejército"
+      add: "Crear lista de ejÃ©rcito"
       search: "Aceptar"
     show:
-      title: "Lista de ejército • %{name}"
+      title: "Lista de ejÃ©rcito â€¢ %{name}"
       print: "Imprimir"
       edit: "Editar"
       export: "Exportar"
       duplicate: "Duplicar"
       delete: "Eliminar"
       notes: "Notas"
-      add_unit: "Añadir unidad"
+      add_unit: "AÃ±adir unidad"
     new:
       title: "Crear<br /> lista"
     edit:
       title: "Actualizar<br />lista"
     delete:
       title: "Eliminar<br />lista"
-      information: "¿Seguro que quieres Eliminar esta lista?"
+      information: "Â¿Seguro que quieres Eliminar esta lista?"
       submit: "!!! Eliminar  !!!"
     export:
       title: "Exportar<br />lista"
       information: "Elige un formato para exportar:"
-      include_magics: "¿Incluir objetos mágicos/estandartes?"
+      include_magics: "Â¿Incluir objetos mÃ¡gicos/estandartes?"
       pdf_full: "PDF Completo"
       pdf_lite: "PDF Reducido"
       html_full: "HTML Completo"
       html_lite: "HTML Reducido"
     duplicate:
       title: "Duplicar<br />lista"
-      information: "¿Seguro que quieres duplicar la lista?"
+      information: "Â¿Seguro que quieres duplicar la lista?"
     form:
       name: "Nombre"
       notes: "Notas"
@@ -117,7 +117,7 @@ en:
         A: "A"
         LD: "Ld"
         type: "Tipo de tropa"
-      magic_items: "Objetos Mágicos"
+      magic_items: "Objetos MÃ¡gicos"
       magic_standards: "Estandartes Magicos"
       unit_options: "Opciones"
       equipments: "Equipo"
@@ -125,19 +125,19 @@ en:
       magic: "Magia"
       notes: "Notas"
     new:
-      title: "Añadir<br />unidad"
+      title: "AÃ±adir<br />unidad"
     edit:
       title: "Editar"
       options: "Opciones"
-      magic_items: "Objetos Mágicos"
+      magic_items: "Objetos MÃ¡gicos"
       extra_items: "Especial"
-      magic_standards: "Estandartes Mágicos"
+      magic_standards: "Estandartes MÃ¡gicos"
       form:
         magic: "Magia"
         notes: "Notas"
     delete:
       title: "Eliminar<br />unidad"
-      information: "¿Seguro que quieres eliminar esta unidad?"
+      information: "Â¿Seguro que quieres eliminar esta unidad?"
       submit: "!!! Destruir !!!"
     duplicate:
       title: "Duplicar"
@@ -151,24 +151,24 @@ en:
       title: "Versiones"
       show: "Mostrar"
     show:
-      back: "Atrás"
+      back: "AtrÃ¡s"
   army:
     index:
-      title: "Ejércitos"
+      title: "EjÃ©rcitos"
       show: "Mostrar"
     show:
-      back: "Atrás"
+      back: "AtrÃ¡s"
   magic:
     range: Alcance
     type: Tipo
-    duration: Duración
+    duration: DuraciÃ³n
     effect: Efecto
     casting: Dificultad de Lanzamiento
     index:
       title: "Magia"
       show: "Mostrar"
     show:
-      back: "Atrás"
+      back: "AtrÃ¡s"
   magic_spell:
     type_lvl:
       A: "A"
@@ -181,16 +181,16 @@ en:
       Six: "6"
     duration:
       OneTurn: Dura un Turno
-      Instant: Instantáneo
+      Instant: InstantÃ¡neo
       Permanent: Permanente
       RemainsInPlay: Permanece en Juego
     type_target:
-      Hex: Maldición
-      Hex_r: "|Maldición|"
+      Hex: MaldiciÃ³n
+      Hex_r: "|MaldiciÃ³n|"
       Missile: Proyectil
-      Damage: Daño
-      Augment: Potenciación
-      Augment_b: "[Potenciación]"
+      Damage: DaÃ±o
+      Augment: PotenciaciÃ³n
+      Augment_b: "[PotenciaciÃ³n]"
       Focused: Enfocado
       Direct: Directo
       Ground: Terreno
@@ -204,12 +204,12 @@ en:
 
   magic_items:
     index:
-      title: Objetos Mágicos
+      title: Objetos MÃ¡gicos
       show: Mostrar
 
   magic_standards:
     index:
-      title: Estandartes Mágicos
+      title: Estandartes MÃ¡gicos
       show: Mostrar
 
   special_rules:
@@ -225,72 +225,72 @@ en:
   signin:
     title: "Registrarte"
     form:
-      register: "Únete"
+      register: "Ãšnete"
       email: "E-mail"
-      password: "Contraseña"
+      password: "ContraseÃ±a"
       remember: "Recordarme"
-      lost: "¿Olvidaste la contraseña?"
+      lost: "Â¿Olvidaste la contraseÃ±a?"
       submit: "Aceptar"
     lost:
-      password: "¡He olvidado mi contraseña!"
-      confirmation: "No he recibido el e-mail de confirmación"
-    information: "Para cualquier consulta, contáctanos en <a href=\"mailto:support@9thbuilder.com\">online help</a>"
+      password: "Â¡He olvidado mi contraseÃ±a!"
+      confirmation: "No he recibido el e-mail de confirmaciÃ³n"
+    information: "Para cualquier consulta, contÃ¡ctanos en <a href=\"mailto:support@9thbuilder.com\">online help</a>"
 
   signup:
-    title: "Inicia sesión"
+    title: "Inicia sesiÃ³n"
     form:
       name: "Nombre o nick"
       email: "e-mail"
-      password: "Contraseña"
-      confirmation: "Confirma la contraseña"
-      favorite_army: "--Ejército favorito--"
+      password: "ContraseÃ±a"
+      confirmation: "Confirma la contraseÃ±a"
+      favorite_army: "--EjÃ©rcito favorito--"
       submit: "Aceptar"
     lost:
-      password: "¡He perdido mi contraseña!"
-      confirmation: "No he recibido el e-mail de confirmación"
-    information: "Para cualquier consulta, contáctanos en <a href=\"mailto:support@9thbuilder.com\">online help</a>"
+      password: "Â¡He perdido mi contraseÃ±a!"
+      confirmation: "No he recibido el e-mail de confirmaciÃ³n"
+    information: "Para cualquier consulta, contÃ¡ctanos en <a href=\"mailto:support@9thbuilder.com\">online help</a>"
 
   password_lost:
-    title: "¡He perdido mi contraseña!"
+    title: "Â¡He perdido mi contraseÃ±a!"
     form:
       email: "e-mail"
       submit: "Aceptar"
     lost:
-      confirmation: "No he recibido el e-mail de confirmación"
-    information: "Para cualquier consulta, contáctanos en <a href=\"mailto:support@9thbuilder.com\">online help</a>"
+      confirmation: "No he recibido el e-mail de confirmaciÃ³n"
+    information: "Para cualquier consulta, contÃ¡ctanos en <a href=\"mailto:support@9thbuilder.com\">online help</a>"
 
   password_change:
-    title: "Cambiar tu contraseña"
+    title: "Cambiar tu contraseÃ±a"
     form:
-        password: "Contraseña"
-        confirmation: "Confirma la contraseña"
+        password: "ContraseÃ±a"
+        confirmation: "Confirma la contraseÃ±a"
         submit: "Aceptar"
     lost:
-        password: "¡He perdido mi contraseña!"
-        confirmation: "No he recibido el e-mail de confirmación"
-    information: "Para cualquier consulta, contáctanos en <a href=\"mailto:support@9thbuilder.com\">online help</a>"
+        password: "Â¡He perdido mi contraseÃ±a!"
+        confirmation: "No he recibido el e-mail de confirmaciÃ³n"
+    information: "Para cualquier consulta, contÃ¡ctanos en <a href=\"mailto:support@9thbuilder.com\">online help</a>"
 
   confirmation:
-    title: "Re-enviar instrucciones de confirmación"
+    title: "Re-enviar instrucciones de confirmaciÃ³n"
     form:
       email: "e-mail"
       submit: "Aceptar"
     lost:
-      password: "¡He perdido mi contraseña!"
-    information: "Para cualquier consulta, contáctanos en <a href=\"mailto:support@9thbuilder.com\">online help</a>"
+      password: "Â¡He perdido mi contraseÃ±a!"
+    information: "Para cualquier consulta, contÃ¡ctanos en <a href=\"mailto:support@9thbuilder.com\">online help</a>"
 
   profile:
     title: "Mi cuenta"
     form:
       name: "Nombre o nick"
       email: "e-mail"
-      favorite_army: "Ejército favorito"
-      password: "Contraseña"
-      password_help: "Dejalo vacío si no quieres cambiar tu contraseña"
-      confirmation: "Confirmación de la contraseña"
+      favorite_army: "EjÃ©rcito favorito"
+      password: "ContraseÃ±a"
+      password_help: "Dejalo vacÃ­o si no quieres cambiar tu contraseÃ±a"
+      confirmation: "ConfirmaciÃ³n de la contraseÃ±a"
       submit: "Aceptar"
     delete:
       title: "Eliminar cuenta"
-      information: "¿No estás satisfecho? <a href=\"mailto:support@9thbuilder.com\">Contáctanos</a> o"
+      information: "Â¿No estÃ¡s satisfecho? <a href=\"mailto:support@9thbuilder.com\">ContÃ¡ctanos</a> o"
       link: "Destruye tu cuenta"
-back: "Atrás"
+    back: "AtrÃ¡s"
