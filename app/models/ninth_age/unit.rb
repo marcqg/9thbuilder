@@ -12,7 +12,6 @@ class NinthAge::Unit < ApplicationRecord
   has_many :unit_options, -> { order %w(parent_id position) }, dependent: :destroy
   has_many :mount_options, class_name: 'UnitOption', foreign_key: 'mount_id', dependent: :nullify
 
-  enum type_figurine: { Infantry: 0, WarBeast: 1, MonstrousInfantry: 2, MonstrousBeast: 3, MonstrousCavalry: 5, Swarm: 6, Cavalry: 7, Chariot: 8, Monster: 9, WarMachine: 10, RiddenMonster: 11}
   enum base: { TwentyTwenty: 0, TwentyFiveTwentyFive: 1, FortyForty: 2, TwentyFiveFifty: 4, FiftyFifty: 5, FiftySeventyFive: 6, FiftyHundred: 7, SixtyHundred: 8, SixtyRound: 9, FortyTwenty: 10, FortySixty: 11, HundredFiftyHundred: 12, SeventyFiveRound: 13, FortyRound: 14, SeventyFiveFifty: 15, HundredHundred: 16 , HundredFifty: 17 }
 
   translates :name

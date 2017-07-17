@@ -9,9 +9,16 @@
         <% end %>
       </div>
       <div class=" col-md-8">
+        <%if @unit.max > 0 %>
+        <h3 class="pull-right">0 - <%= @unit.max %> per Army</h3>
+        <%end%>
         <h3 class="text-left"><strong>
           <% if @unit.value_points == 0 %><%= t('ninth_age.figurine.mount') %>
-          <% end %> <%= @unit.name %></strong> <%= @unit.value_points %> <%= t('ninth_age.figurine.pts') %></h3>
+          <% end %> <%= @unit.name %></strong> <%= number_with_precision(@unit.value_points, precision: 0) %> <%= t('ninth_age.figurine.pts') %>
+          <%if @unit.max_size > 1 %>
+          <br/><span class="small-text"><%=@unit.min_size%> models, may add up to <%=@unit.max_size - @unit.min_size%> models <%= number_with_precision(@unit.troops.first.value_points, precision: 0) %> pts/model</span>
+          <%end%>
+        </h3>
       </div>
       <div class="text-right col-md-2">
         <% @unit.organisations.where(isSpecialRule: true).each do |organisation| %>
@@ -87,10 +94,14 @@
       <h3><%= t('army_list_unit.show.unit_options') %></h3>
       <div>
         <% @unit.unit_options.where(:parent => nil).order(:position).each do |unit_option| %>
-            <p>• <%= unit_option.name %> <span class="pull-right"><%= unit_option.value_points%></span></p>
+          <% if unit_option.magic_id != nil %>
+            <p>•M <%= unit_option.magic.name %></p>
+          <% else %>
+            <p>• <%= unit_option.name %> <% if unit_option.value_points? %><span class="pull-right"><%if unit_option.is_magic_items%>up to<%end%> <%= number_with_precision(unit_option.value_points, precision: 0)  %> pts<% if unit_option.is_per_model %> / model <%end%></span><%end%></p>
             <% unit_option.children.order(:position).each do |children| %>
-                <p class="option-children">• <%= children.name %><span class="pull-right"><%= unit_option.value_points%></span></p>
+                <p class="option-children">• <%= children.name %><% if children.value_points? %><span class="pull-right"><%if unit_option.is_magic_items%>up to<%end%> <%= number_with_precision(children.value_points, precision: 0) %> pts<% if children.is_per_model %> / model <%end%></span><%end%></p>
             <% end %>
+          <% end %>
         <% end %>
       </div>
     </div>
