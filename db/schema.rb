@@ -390,8 +390,10 @@ ActiveRecord::Schema.define(version: 20170323162102) do
 
   create_table "ninth_age_special_rules", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "version_id", default: 0, null: false
+    t.integer  "army_id"
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
+    t.index ["army_id"], name: "index_ninth_age_special_rules_on_army_id", using: :btree
     t.index ["version_id"], name: "index_ninth_age_special_rules_on_version_id", using: :btree
   end
 
@@ -456,11 +458,11 @@ ActiveRecord::Schema.define(version: 20170323162102) do
     t.integer "parent_id"
     t.decimal "value_points",         precision: 8, scale: 2
     t.integer "position",                                                     null: false
-    t.boolean "is_per_model",                                                 null: false
-    t.boolean "is_magic_items",                                               null: false
-    t.boolean "is_magic_standards",                                           null: false
-    t.boolean "is_unique_choice",                                             null: false
-    t.boolean "is_extra_items",                                               null: false
+    t.boolean "is_per_model",                                 default: false, null: false
+    t.boolean "is_magic_items",                               default: false, null: false
+    t.boolean "is_magic_standards",                           default: false, null: false
+    t.boolean "is_unique_choice",                             default: false, null: false
+    t.boolean "is_extra_items",                               default: false, null: false
     t.integer "mount_id"
     t.boolean "is_multiple",                                  default: false, null: false
     t.boolean "is_required",                                  default: false, null: false

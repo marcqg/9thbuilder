@@ -1,6 +1,7 @@
 class NinthAge::SpecialRule < ApplicationRecord
 
   belongs_to :version
+  belongs_to :army
 
   has_many :special_rule_unit_troops, dependent: :destroy
 

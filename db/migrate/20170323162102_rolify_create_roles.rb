@@ -182,6 +182,7 @@ class RolifyCreateRoles < ActiveRecord::Migration[5.0]
     #Translations of equipments
     create_table :ninth_age_special_rules do |t|
       t.belongs_to :version, index: true, null: false, default: 0
+      t.belongs_to :army, index: true, null: true
       t.timestamps
     end
     NinthAge::SpecialRule.create_translation_table!({:name => :string, :description => :text})
@@ -462,6 +463,12 @@ class RolifyCreateRoles < ActiveRecord::Migration[5.0]
     add_column :ninth_age_unit_options, :max_model, :integer, :null => true
     add_column :ninth_age_unit_options, :min_model, :integer, :null => true
     add_column :ninth_age_unit_options, :max_unit, :integer, :null => true
+
+    change_column :ninth_age_unit_options, :is_per_model, :boolean, :default => false, :null => false
+    change_column :ninth_age_unit_options, :is_magic_items, :boolean, :default => false, :null => false
+    change_column :ninth_age_unit_options, :is_magic_standards, :boolean, :default => false, :null => false
+    change_column :ninth_age_unit_options, :is_unique_choice, :boolean, :default => false, :null => false
+    change_column :ninth_age_unit_options, :is_extra_items, :boolean, :default => false, :null => false
 
     ActiveRecord::Base.connection.execute('UPDATE ninth_age_units
                                             SET value_points = value_points * min_size

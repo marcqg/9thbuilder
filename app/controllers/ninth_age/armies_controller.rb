@@ -18,8 +18,8 @@ module NinthAge
       @army = NinthAge::Army.find(params[:id])
       @page = params[:page].present? ? params[:page].to_i : 1
       @units = NinthAge::Unit.where(army_id: params[:id])
+                                 .order(:order)
                                  .paginate(:page => @page)
-                                 .order(:name)
 
       respond_to do |format|
         format.html
