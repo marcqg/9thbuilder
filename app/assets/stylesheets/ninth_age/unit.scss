@@ -25,6 +25,25 @@ table.content-stats {
   }
 }
 
-.option-children{
+.option-children {
   margin-left: 10px;
+}
+
+.unit-rules, .unit-equipments {
+
+  ul {
+    list-style: inside;
+    margin-left: 2vmin;
+  }
+
+  .troop-rules, .troop-equipments {
+    margin-left: 2vmin;
+
+    ul {
+    }
+  }
+}
+
+.text-italic {
+  font-style: italic;
 }
