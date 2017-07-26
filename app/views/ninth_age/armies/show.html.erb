@@ -30,7 +30,7 @@
 
   <div>
     <% @units.each do |unit| %>
-        <article style="margin-bottom:40px;" class="unit-<%= unit.id %> text-center col-md-2">
+        <article style="margin-bottom:40px;" class="unit-<%= unit.id %> text-center col-md-2 col-sm-4">
           <% unit.organisations.where(isSpecialRule: false).each do |organisation| %>
               <% unless organisation.logo.nil? %>
                   <%= image_tag organisation.medium_logo_url, size: '75x75', alt: organisation.name, border: 0 %>

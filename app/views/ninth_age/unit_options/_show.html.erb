@@ -1,0 +1,18 @@
+<ul  class="option-children children-sub">
+  <% unit_options.order(:position).each do |unit_option| %>
+    <% if unit_option.magic_id != nil %>
+      <li><%= unit_option.magic.name %></li>
+    <% else %>
+      <li><%= unit_option.name %>
+        <% if unit_option.value_points!= nil %>
+          <% if unit_option.value_points > 0 %>
+            <span class="pull-right"><% if unit_option.is_magic_items %><%= t('up_to')%><% end %> <%= number_with_precision(unit_option.value_points, precision: 0) %> <%= t('ninth_age.figurine.pts') %> <% if unit_option.is_per_model %> <%=  t('per_model') %><% end %></span>
+          <% else %>
+            <span class="pull-right">free</span>
+          <% end %>
+        <% end %>
+      </li>
+      <%= render :partial => 'ninth_age/unit_options/show', :locals => { :unit_options => unit_option.children} %> 
+    <% end %>
+  <% end %>
+</ul>

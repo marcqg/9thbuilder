@@ -26,7 +26,12 @@ table.content-stats {
 }
 
 .option-children {
-  margin-left: 10px;
+  list-style: inside;
+  margin-left: 1vmin;
+
+  &.children-sub{
+    margin-left: 2vmin;
+  }
 }
 
 .unit-rules, .unit-equipments {

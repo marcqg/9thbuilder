@@ -9,22 +9,24 @@
         <% end %>
       </div>
       <div class=" col-md-8">
-        <% if @unit.max > 0 %>
-            <h4 class="pull-right">0 - <%= @unit.max %> per Army</h4>
-        <% end %>
+        <div class="pull-right">
+          <% if @unit.max > 0 %>
+              <h4>0 - <%= @unit.max %> Units per Army</h4>
+          <% end %>
+          <% if @unit.max_model != nil %>
+              <h4>0 - <%= @unit.max_model %> Models per Army</h4>
+          <% end %>
+        </div>
         <h3 class="text-left"><strong>
           <% if @unit.value_points == 0 %><%= t('ninth_age.figurine.mount') %>
           <% end %> <%= @unit.name %></strong>
           <% if @unit.value_points != 0 %><%= number_with_precision(@unit.value_points, precision: 0) %> <%= t('ninth_age.figurine.pts') %>
           <% end %>
           <% if @unit.max_size > 1 %>
-              <br/><span class="small-text"><strong><%= @unit.min_size %></strong>
-          models, may add up to <strong><%= @unit.max_size - @unit.min_size %></strong>
-          models <strong><%= number_with_precision(@unit.troops.first.value_points, precision: 0) %></strong> pts/model</span>
-              <% @unit.organisation_changes.each do |organisation_change| %>
-                  <br/><span class="small-text text-italic"><%= @unit.name %> units of <%= organisation_change.number %>
-          models count towards <%= organisation_change.new_organisation.name %></span>
-              <% end %>
+            <br/><span class="small-text"><%= raw t('unit.show.size', {:min_size => @unit.min_size, :max_size => @unit.max_size - @unit.min_size, :pts => number_with_precision(@unit.troops.first.value_points, precision: 0)}) %></span>
+            <% @unit.organisation_changes.each do |organisation_change| %>
+              <br/><span class="small-text text-italic"><%= raw t('unit.show.change', {:name => @unit.name, :number => organisation_change.number, :new_name => organisation_change.new_organisation.name}) %></span>
+            <% end %>
           <% end %>
         </h3>
       </div>
@@ -144,56 +146,8 @@
     </div>
     <div class="col-md-6">
       <% if @unit.unit_options.count > 0 %>
-          <h4><%= t('army_list_unit.show.unit_options') %></h4>
-          <div>
-            <% @unit.unit_options.where(:parent => nil).order(:position).each do |unit_option| %>
-                <% if unit_option.magic_id != nil %>
-                    <p>•<%= unit_option.magic.name %></p>
-                <% else %>
-                    <p>• <%= unit_option.name %>
-                      <% if unit_option.value_points!= nil %>
-                          <% if unit_option.value_points > 0 %>
-                              <span class="pull-right"><% if unit_option.is_magic_items %>up to<% end %> <%= number_with_precision(unit_option.value_points, precision: 0) %>
-                                pts
-                                <% if unit_option.is_per_model %> / model <% end %></span>
-                          <% else %>
-                              <span class="pull-right">free</span>
-                          <% end %>
-                      <% end %>
-                    </p>
-                    <% unit_option.children.order(:position).each do |children| %>
-                        <p class="option-children">•
-                          <% if children.magic_id != nil %>
-                            <%= children.magic.name %>
-                        <% else %>
-                            <%= children.name %>
-                        <% end %>
-                        <% if children.value_points? %>
-                            <% if children.value_points != 0 %>
-                                  <span class="pull-right"><% if children.is_magic_items %>up to<% end %> <%= number_with_precision(children.value_points, precision: 0) %>
-                                    pts
-                                    <% if children.is_per_model %> / model <% end %></span>
-                            <% else %>
-                                <span class="pull-right">free</span>
-                            <% end %>
-                        <% end %>
-                        </p>
-                        <% children.children.order(:position).each do |child| %>
-                            <p class="option-children children-sub">•
-                              <% if child.magic_id != nil %>
-                                <%= child.magic.name %>
-                            <% else %>
-                                <%= child.name %>
-                            <% end %>
-                            <% if child.value_points? %><span class="pull-right"><% if child.is_magic_items %>up to<% end %> <%= number_with_precision(child.value_points, precision: 0) %>
-                              pts
-                            <% if child.is_per_model %> / model <% end %></span>
-                            <% end %></p>
-                        <% end %>
-                    <% end %>
-                <% end %>
-            <% end %>
-          </div>
+        <h4><%= t('army_list_unit.show.unit_options') %></h4>          
+        <%= render :partial => 'ninth_age/unit_options/show', :locals => { :unit_options => @unit.unit_options.where(:parent => nil)} %>          
       <% end %>
     </div>
     <div class="clearfix"></div>

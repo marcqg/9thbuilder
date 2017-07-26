@@ -26,6 +26,7 @@ en:
   save: "Save"
   next: "Next"
   per_model: "/mod."
+  up_to: "up to"
 
   menu:
     label: "Main menu"
@@ -221,6 +222,11 @@ en:
     index:
       title: Equipments
       show: Show
+
+  unit:
+    show:
+      size: "<strong>%{min_size}</strong> models, may add up to <strong>%{max_size}</strong> models <strong>%{pts}</strong> pts/mod."
+      change: "%{name} units of %{number} models count towards %{new_name}"
 
   signin:
     title: "Sign in"
