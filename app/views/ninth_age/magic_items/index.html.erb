@@ -2,8 +2,9 @@
 
 <div>
   <% @ninth_age_magic_items.each do |ninth_age_magic_item| %>
-      <article class="magic-items-<%= ninth_age_magic_item.id %> col-md-3 text-center">
+      <article class="magic-items-<%= ninth_age_magic_item.id %> col-md-3 col-sm-4 text-center">
         <h4><%= ninth_age_magic_item.name %></h4>
+        <p><%=  ninth_age_magic_item.army.name %></p>
         <%= link_to(t('magic_items.index.show'), ninth_age_magic_item_path(ninth_age_magic_item)) %>
       </article>
   <% end %>
