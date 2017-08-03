@@ -7,6 +7,8 @@ class Builder::ArmyList < ApplicationRecord
   belongs_to :army_organisation, :class_name => 'NinthAge::ArmyOrganisation'
   has_many :army_list_organisations, dependent: :destroy
 
+  has_and_belongs_to_many :rounds, class_name: 'Battle::Round'
+
   validates :army_id, :user_id, :army_organisation_id, :uuid, :name, :value_points, presence: true
   validates :value_points, numericality: { greater_than_or_equal_to: 0 }
 

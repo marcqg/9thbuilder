@@ -16,6 +16,8 @@ class NinthAge::Army < ApplicationRecord
   has_many :units, -> { includes(:translations).order(:name) }, :class_name => 'NinthAge::Unit', dependent: :destroy
   has_many :favorite_users, class_name: 'User', foreign_key: 'favorite_army_id', dependent: :nullify
 
+  has_and_belongs_to_many :rounds, class_name: 'Battle::Round'
+
   translates :name
   globalize_accessors
   accepts_nested_attributes_for :translations, allow_destroy: true
