@@ -117,6 +117,7 @@ en:
         I: "I"
         A: "A"
         LD: "Ld"
+        E: "Evoked"
         type: "Troop's type"
       magic_items: "Magic items"
       magic_standards: "Magic standards"

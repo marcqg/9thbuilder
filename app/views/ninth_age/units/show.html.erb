@@ -52,6 +52,9 @@
           <td><%= t('army_list_unit.show.troops.I') %></td>
           <td><%= t('army_list_unit.show.troops.A') %></td>
           <td><%= t('army_list_unit.show.troops.LD') %></td>
+          <% if @unit.troops.where.not(:E => nil).count > 0 %>
+            <td><%= t('army_list_unit.show.troops.E') %></td>
+          <%end%>
           <td><%= t('army_list_unit.show.troops.type') %></td>
         </tr>
         </thead>
@@ -68,6 +71,9 @@
               <td><%= characteristic troop.I %></td>
               <td><%= characteristic troop.A %></td>
               <td><%= characteristic troop.LD %></td>
+              <% if troop.E != nil %>
+                <td><%= characteristic troop.E %></td>
+              <%end%>
               <td><%= troop.troop_type.try(:name) %></td>
             </tr>
         <% end %>

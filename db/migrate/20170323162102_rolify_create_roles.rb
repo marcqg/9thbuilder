@@ -448,6 +448,7 @@ class RolifyCreateRoles < ActiveRecord::Migration[5.0]
     change_column :ninth_age_troops, :I, :string, :limit => 15
     change_column :ninth_age_troops, :A, :string, :limit => 15
     change_column :ninth_age_troops, :LD, :string, :limit => 15
+    add_column :ninth_age_troops, :E, :string, :limit => 15, :null => true
 
 
     add_column :ninth_age_unit_options, :is_required, :boolean, :default => false, :null => false

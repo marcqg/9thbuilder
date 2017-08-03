@@ -436,6 +436,7 @@ ActiveRecord::Schema.define(version: 20170323162102) do
     t.string  "LD",             limit: 15
     t.integer "min_size"
     t.integer "unit_option_id"
+    t.string  "E",              limit: 15
     t.index ["troop_type_id"], name: "index_ninth_age_troops_on_troop_type_id", using: :btree
     t.index ["unit_id"], name: "index_ninth_age_troops_on_unit_id", using: :btree
     t.index ["unit_option_id"], name: "index_ninth_age_troops_on_unit_option_id", using: :btree
