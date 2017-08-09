@@ -208,6 +208,7 @@ en:
     index:
       title: Magic items
       show: Show
+    type: Type
     type_target:
       Hex: Hex
       Hex_r: "|Hex|"
@@ -233,6 +234,7 @@ en:
       FeralOrc: Feral Orc
       MonarchsOfTheDead: Monarchs of the Dead
       ModelsOnChariots: models on Chariots
+    duration: Duration
     type_duration: 
       OneTurn: Last one Turn
       Instant: Instant
