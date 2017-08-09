@@ -494,9 +494,12 @@ class RolifyCreateRoles < ActiveRecord::Migration[5.0]
                                             SET value_points = value_points * min_size
                                             WHERE max_size is not null and min_size!= max_size;')
 
-    add_column :ninth_age_magic_items, :type_figurine, :integer, :null => true
+    add_column :ninth_age_magic_items, :type_figurine, :integer, :null => false, :default => 0
     add_column :ninth_age_magic_items, :type_target, :integer, :null => true
     add_column :ninth_age_magic_items, :type_duration, :integer, :null => true
     add_column :ninth_age_magic_items, :max, :integer, :default => 0, :null => false
+
+
+    add_column :ninth_age_magic_standards, :type_figurine, :integer, :null => false, :default => 0
   end
 end

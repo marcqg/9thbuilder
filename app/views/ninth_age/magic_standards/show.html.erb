@@ -1,4 +1,10 @@
-<h1><%= @ninth_age_magic_standard.name %></h1>
+<h1>
+	<strong><%= @ninth_age_magic_standard.name %></strong> (<%= @ninth_age_magic_standard.value_points %> <%= t('ninth_age.figurine.pts') %>) 
+	<% if !@ninth_age_magic_standard.All?  %>
+		<small>- <%= @ninth_age_magic_standard.display_type_figurine %> only</small>
+	<%end%>
+</h1>
+<p class="small-text"><%= @ninth_age_magic_standard.army.name %></p>
 <div>
   <p><%= @ninth_age_magic_standard.description %></p>
 </div>

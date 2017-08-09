@@ -12,6 +12,10 @@ class NinthAge::MagicItem < ApplicationRecord
   globalize_accessors
   accepts_nested_attributes_for :translations, allow_destroy: true
 
+  enum type_figurine: { All: 0, Infantry: 1, Monster: 2, NoLargeTarget: 3, AnimisteBestial: 4, MountedCharacter: 5 , Character: 6, ModelsOnFoot: 7, MageOnFoot: 8, Goblins: 9, FeralOrc: 10, MonarchsOfTheDead:11, ModelsOnChariots: 12  }
+  bitmask :type_target, :as => [:Hex, :Hex_r, :Missile, :Damage, :Augment, :Augment_b, :Focused, :Direct, :Ground, :Universal, :Universal_g], :null => false
+  bitmask :type_duration, :as => [:OneTurn, :Instant, :Permanent, :RemainsInPlay], :null => false
+
   validates :version_id, :magic_item_category_id, :value_points, presence: true
   validates :value_points, numericality: { greater_than_or_equal_to: 0 }
 
@@ -33,4 +37,26 @@ class NinthAge::MagicItem < ApplicationRecord
           .order('value_points DESC', 'ninth_age_magic_item_translations.name')
     end
   }
+
+  def display_type_target
+    names = []
+    type_target.each do |tt|
+      display_name = highlight(I18n.t("magic_item.type_target.#{tt}", default: tt))
+      names << display_name
+    end
+    names.join(', ').html_safe
+  end
+
+  def display_type_figurine
+    I18n.t("magic_item.type_figurine.#{type_figurine}", default: type_figurine.titleize)
+  end
+
+  def display_type_duration
+    names = []
+    type_duration.each do |tt|
+      display_name = highlight(I18n.t("magic_item.type_duration.#{tt}", default: tt))
+      names << display_name
+    end
+    names.join(', ').html_safe
+  end  
 end

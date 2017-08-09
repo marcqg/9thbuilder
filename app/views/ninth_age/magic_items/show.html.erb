@@ -1,5 +1,25 @@
-<h1><%= @ninth_age_magic_item.name %> <small><%= @ninth_age_magic_item.magic_item_category.name %></small></h1>
+<h1>
+	<strong><%= @ninth_age_magic_item.name %></strong> (<%= @ninth_age_magic_item.value_points %> <%= t('ninth_age.figurine.pts') %>) 
+	<small><%= @ninth_age_magic_item.magic_item_category.name %></small>
+	<% if !@ninth_age_magic_item.All?  %>
+		<small>- <%= @ninth_age_magic_item.display_type_figurine %> only</small>
+	<%end%>
+	<% if @ninth_age_magic_item.max > 0  %>
+		<small>- <%= @ninth_age_magic_item.max %> per Army</small>
+	<%end%>
+</h1>
 <p class="small-text"><%= @ninth_age_magic_item.army.name %></p>
+
+<% if  @ninth_age_magic_item.type_target != nil %>
+<div>
+  <p>type_target : <%= @ninth_age_magic_item.type_target %></p>
+</div>
+<%end%>
+<% if  @ninth_age_magic_item.type_duration != nil %>
+<div>
+  <p>type_duration : <%= @ninth_age_magic_item.type_duration %></p>
+</div>
+<%end%>
 <div>
   <p><%= @ninth_age_magic_item.description %></p>
 </div>

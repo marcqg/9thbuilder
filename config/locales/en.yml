@@ -208,6 +208,36 @@ en:
     index:
       title: Magic items
       show: Show
+    type_target:
+      Hex: Hex
+      Hex_r: "|Hex|"
+      Missile: Missile
+      Damage: Damage
+      Augment: Augment
+      Augment_b: "[Augment]"
+      Focused: Focused
+      Direct: Direct
+      Ground: Ground
+      Universal: Universal
+      Universal_g: "{Universal}"
+    type_figurine:
+      Infantry: Infantry 
+      Monster: Monster
+      NoLargeTarget: No large target
+      AnimisteBestial: Animiste bestial
+      MountedCharacter: Mounted character
+      Character: Character
+      ModelsOnFoot: Models on foot
+      MageOnFoot: Mage On Foot
+      Goblins: Goblins 
+      FeralOrc: Feral Orc
+      MonarchsOfTheDead: Monarchs of the Dead
+      ModelsOnChariots: models on Chariots
+    type_duration: 
+      OneTurn: Last one Turn
+      Instant: Instant
+      Permanent: Permanent
+      RemainsInPlay: Remains in play
 
   magic_standards:
     index:
