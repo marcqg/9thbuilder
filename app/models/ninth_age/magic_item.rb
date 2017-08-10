@@ -17,7 +17,7 @@ class NinthAge::MagicItem < ApplicationRecord
   bitmask :type_duration, :as => [:OneTurn, :Instant, :Permanent, :RemainsInPlay], :null => false
 
   validates :version_id, :magic_item_category_id, :value_points, presence: true
-  validates :value_points, numericality: { greater_than_or_equal_to: 0 }
+  validates :value_points, numericality: { greater_than_or_equal_to: 0, only_integer: true }
 
   def name_with_version
     "#{name} - #{version.name}"

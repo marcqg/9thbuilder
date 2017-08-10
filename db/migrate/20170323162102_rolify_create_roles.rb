@@ -498,6 +498,7 @@ class RolifyCreateRoles < ActiveRecord::Migration[5.0]
     add_column :ninth_age_magic_items, :type_target, :integer, :null => true
     add_column :ninth_age_magic_items, :type_duration, :integer, :null => true
     add_column :ninth_age_magic_items, :max, :integer, :default => 0, :null => false
+    change_column :ninth_age_magic_items, :value_points, :integer, :null => false
 
 
     add_column :ninth_age_magic_standards, :type_figurine, :integer, :null => false, :default => 0
