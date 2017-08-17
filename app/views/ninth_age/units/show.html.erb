@@ -104,20 +104,20 @@
                 </div>
               </div>
           <% end %>
-          <% if @unit.special_rule_unit_troops.joins(:special_rule).where.not({ninth_age_special_rules: {army_id: @unit.army_id}}).count > 0 %>
+          <% if @unit.special_rule_unit_troops.joins(:special_rule).where('army_id IS NULL OR army_id != ?', @unit.army_id).count > 0 %>
               <div>
                 <h4><%= t('army_list_unit.show.special_rules') %></h4>
                 <ul>
-                  <% @unit.special_rule_unit_troops.joins(:special_rule).where({:troop => nil}).where.not({ninth_age_special_rules: {army_id: @unit.army_id}}).map(&:special_rule).each do |special_rule| %>
+                  <% @unit.special_rule_unit_troops.joins(:special_rule).where({:troop => nil}).where('army_id IS NULL OR army_id != ?', @unit.army_id).map(&:special_rule).each do |special_rule| %>
                       <li><%= link_to(special_rule.name, ninth_age_special_rule_path(special_rule.id)) %></li>
                   <% end %>
                 </ul>
                 <div class="troop-rules">
                   <% @unit.troops.each do |troop| %>
-                      <% if troop.special_rule_unit_troops.joins(:special_rule).where.not({ninth_age_special_rules: {army_id: @unit.army_id}}).map(&:special_rule).count > 0 %>
+                      <% if troop.special_rule_unit_troops.joins(:special_rule).where('army_id IS NULL OR army_id != ?', @unit.army_id).map(&:special_rule).count > 0 %>
                           <h5><%= troop.name %></h5>
                           <ul>
-                            <% troop.special_rule_unit_troops.joins(:special_rule).where.not({ninth_age_special_rules: {army_id: @unit.army_id}}).map(&:special_rule).each do |special_rule| %>
+                            <% troop.special_rule_unit_troops.joins(:special_rule).where('army_id IS NULL OR army_id != ?', @unit.army_id).map(&:special_rule).each do |special_rule| %>
                                 <li><%= link_to(special_rule.name, ninth_age_special_rule_path(special_rule.id)) %></li>
                             <% end %>
                           </ul>
