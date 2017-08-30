@@ -7,13 +7,17 @@ module Builder
     # GET /army_lists
     # GET /army_lists.xml
     def index
+
+      @army_lists = current_user.army_lists.includes(:army).order('value_points DESC')
+
       unless params.include?(:q)
         params[:q] = {}
         params[:q][:army_id_eq] = current_user.favorite_army.try(:id)
+        @search = current_user.army_lists.includes(:army).order('value_points DESC').search(params[:q])
+      else        
+        @search = current_user.army_lists.includes(:army).order('value_points DESC').search(params[:q])
+        @army_lists = @search.result
       end
-
-      @search = current_user.army_lists.includes(:army).order('value_points DESC').search(params[:q])
-      @army_lists = @search.result
 
       @army = NinthAge::Army.find(params[:q][:army_id_eq]) unless params[:q][:army_id_eq].blank?
 

@@ -276,6 +276,9 @@ function popin(url)
     href: url,
     close: '',
     opacity: 0.4,
+    initialWidth: '850px',
+    width: '900px',
+    maxWidth: '1024px',
     returnFocus: false,
     scrolling: false,
     onComplete: function() {
