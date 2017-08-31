@@ -31,7 +31,8 @@ class NinthAge::UnitOption < ApplicationRecord
   acts_as_list scope: 'unit_id = #{unit_id} AND COALESCE(parent_id, \'\') = \'#{parent_id}\''
 
   scope :without_parent, -> { where(parent_id: nil) }
-  scope :exclude_magics_and_extra, -> { where(is_magic_items: false, is_magic_standards: false, is_extra_items: false) }
+  #scope :exclude_magics_and_extra, -> { where(is_magic_items: false, is_magic_standards: false, is_extra_items: false) }
+  scope :exclude_magics_and_extra, -> { where(is_magic_standards: false) }
   scope :only_magic_items, -> { where(is_magic_items: true, is_magic_standards: false) }
   scope :only_magic_standards, -> { where(is_magic_items: false, is_magic_standards: true, is_extra_items: false) }
   scope :only_extra_items, -> { where(is_magic_items: false, is_magic_standards: false, is_extra_items: true) }

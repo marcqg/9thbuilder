@@ -21,25 +21,27 @@
 %>
 <li>
   <% if option.value_points.nil? %>
-      <strong><%= name %></strong>
+    <strong><%= name %></strong>
+  <% elsif option.is_magic_items || option.is_extra_items %>    
+    <strong><%= name %></strong> <% if !option.value_points.nil? %>(<em><span><%= value_points(value_points) %></span> pts</em>)<%end%>
   <% else %>
-      <%= hidden_field_tag "builder_army_list_unit[army_list_unit_unit_options_attributes][#{option.id}][_destroy]", 1 %>
-      <em><span><%= value_points(value_points) %></span> pts</em>
-      <label><%= check_box_tag "builder_army_list_unit[army_list_unit_unit_options_attributes][#{option.id}][_destroy]", false, army_list_unit.unit_options.member?(option), :id => "builder_army_list_unit_unit_option_ids_#{option.id}", "data-depend" => depend.try(:id), "data-radio" => option.is_unique_choice ? true : nil, "data-per-model" => option.is_per_model ? true : nil, "data-is-multiple" => option.is_multiple ? true : nil, "data-value-points" => option.value_points %> <%= name %></label>
+    <%= hidden_field_tag "builder_army_list_unit[army_list_unit_unit_options_attributes][#{option.id}][_destroy]", 1 %>
+    <em><span><%= value_points(value_points) %></span> pts</em>
+    <label><%= check_box_tag "builder_army_list_unit[army_list_unit_unit_options_attributes][#{option.id}][_destroy]", false, army_list_unit.unit_options.member?(option), :id => "builder_army_list_unit_unit_option_ids_#{option.id}", "data-depend" => depend.try(:id), "data-radio" => option.is_unique_choice ? true : nil, "data-per-model" => option.is_per_model ? true : nil, "data-is-multiple" => option.is_multiple ? true : nil, "data-value-points" => option.value_points %> <%= name %></label>
 
-      <% if option.is_multiple %>
-          x <%= number_field_tag "builder_army_list_unit[army_list_unit_unit_options_attributes][#{option.id}][quantity]", army_list_unit_unit_option.try(:quantity), :min => 1, :disabled => !army_list_unit.unit_options.member?(option), "data-per-model" => option.is_per_model ? true : nil, :class => "army_list_unit_unit_option_quantity", :style => "position:relative; top:0; height:1.5em; width:20px; text-align:center;" %>
-      <% else %>
-          <%= hidden_field_tag "builder_army_list_unit[army_list_unit_unit_options_attributes][#{option.id}][quantity]", option.is_per_model ? army_list_unit.size : 1, :disabled => !army_list_unit.unit_options.member?(option) ? nil : true, "data-per-model" => option.is_per_model ? true : nil %>
-      <% end %>
+    <% if option.is_multiple %>
+      x <%= number_field_tag "builder_army_list_unit[army_list_unit_unit_options_attributes][#{option.id}][quantity]", army_list_unit_unit_option.try(:quantity), :min => 1, :disabled => !army_list_unit.unit_options.member?(option), "data-per-model" => option.is_per_model ? true : nil, :class => "army_list_unit_unit_option_quantity", :style => "position:relative; top:0; height:1.5em; width:20px; text-align:center;" %>
+    <% else %>
+      <%= hidden_field_tag "builder_army_list_unit[army_list_unit_unit_options_attributes][#{option.id}][quantity]", option.is_per_model ? army_list_unit.size : 1, :disabled => !army_list_unit.unit_options.member?(option) ? nil : true, "data-per-model" => option.is_per_model ? true : nil %>
+    <% end %>
 
-      <%= hidden_field_tag "builder_army_list_unit[army_list_unit_unit_options_attributes][#{option.id}][id]", army_list_unit_unit_option.try(:id) %>
-      <%= hidden_field_tag "builder_army_list_unit[army_list_unit_unit_options_attributes][#{option.id}][unit_option_id]", option.id %>
+    <%= hidden_field_tag "builder_army_list_unit[army_list_unit_unit_options_attributes][#{option.id}][id]", army_list_unit_unit_option.try(:id) %>
+    <%= hidden_field_tag "builder_army_list_unit[army_list_unit_unit_options_attributes][#{option.id}][unit_option_id]", option.id %>
   <% end %>
 
   <% if option.children.exclude_magics_and_extra.any? %>
-      <ul>
-        <%= render :partial => 'builder/army_list_units_unit_options/edit', :collection => option.children.exclude_magics_and_extra.all, :as => :option, :locals => {:army_list_unit => army_list_unit} %>
-      </ul>
+    <ul>
+      <%= render :partial => 'builder/army_list_units_unit_options/edit', :collection => option.children.exclude_magics_and_extra.all, :as => :option, :locals => {:army_list_unit => army_list_unit} %>
+    </ul>
   <% end %>
 </li>

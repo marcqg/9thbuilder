@@ -1,37 +1,28 @@
 class RolifyCreateRoles < ActiveRecord::Migration[5.0]
   def change
 
-
-    add_column :magic_item_categories, :is_not_limited, :boolean, :null => false, :default => false
-
-    execute 'INSERT INTO magic_item_categories (name, is_not_limited) VALUES (\'MagicBanner\', 0),
-                  (\'Totem\', 0),
-                  (\'Daemonic Item\', 0),
-                  (\'Champion Weapon\', 0),
-                  (\'Anvil Rune\', 0),
-                  (\'Arcane Rune\', 0),
-                  (\'Armour Rune\', 0),
-                  (\'Battle Rune\', 0),
-                  (\'Talismanic Rune\', 0),
-                  (\'Weapon Rune\', 0),
-                  (\'Path of Magic for Mage\', 0),
-                  (\'Oath\', 0),
-                  (\'Virtue\', 1),
-                  (\'BigName\', 1),
-                  (\'Cuatl Lord Discipline\', 1),
-                  (\'Aspects of Nature\', 1),
-                  (\'Kindred\', 1),
-                  (\'Monarchs of Undeath\', 1),
-                  (\'Path of Magic for Death Cult Hierarch\', 1),
-                  (\'Blood line\', 1),
-                  (\'Magical Item\', 0),
-                  (\'Magic Weapons Champion\', 0),
-                  (\'Standard Rune\', 0),
-                  (\'Daemonic Weapon\', 0),
-                  (\'Daemonic Talisman\', 0),
-                  (\'Daemonic Enchanted Item\', 0),
-                  (\'Daemonic Arcane Item\', 0),
-                  (\'Gifts of the Dark God\', 0);'
+    execute 'INSERT INTO magic_item_categories (name) VALUES (\'MagicBanner\'),
+                  (\'Totem\'),
+                  (\'Daemonic Item\'),
+                  (\'Champion Weapon\'),
+                  (\'Anvil Rune\'),
+                  (\'Arcane Rune\'),
+                  (\'Armour Rune\'),
+                  (\'Battle Rune\'),
+                  (\'Talismanic Rune\'),
+                  (\'Weapon Rune\'),
+                  (\'Path of Magic for Mage\'),
+                  (\'Oath\'),
+                  (\'Monarchs of Undeath\'),
+                  (\'Path of Magic for Death Cult Hierarch\'),
+                  (\'Magical Item\'),
+                  (\'Magic Weapons Champion\'),
+                  (\'Standard Rune\'),
+                  (\'Daemonic Weapon\'),
+                  (\'Daemonic Talisman\'),
+                  (\'Daemonic Enchanted Item\'),
+                  (\'Daemonic Arcane Item\'),
+                  (\'Gifts of the Dark God\');'
 
     create_table(:roles) do |t|
       t.string :name
@@ -331,6 +322,7 @@ class RolifyCreateRoles < ActiveRecord::Migration[5.0]
     NinthAge::ExtraItemCategory.create_translation_table!({:name => :string}, {:migrate_data => true, :remove_source_columns => true})
     add_foreign_key :ninth_age_extra_item_category_translations, :ninth_age_extra_item_categories, column: :ninth_age_extra_item_category_id, on_delete: :cascade
     NinthAge::ExtraItem.create_translation_table!({:name => :string}, {:migrate_data => true, :remove_source_columns => true})
+    NinthAge::ExtraItem.add_translation_fields! description: :text
     add_foreign_key :ninth_age_extra_item_translations, :ninth_age_extra_items, column: :ninth_age_extra_item_id, on_delete: :cascade
 
     rename_table :magic_items, :ninth_age_magic_items
@@ -504,5 +496,8 @@ class RolifyCreateRoles < ActiveRecord::Migration[5.0]
     change_column :ninth_age_magic_items, :value_points, :integer, :null => false
 
     add_column :ninth_age_magic_standards, :type_figurine, :integer, :null => false, :default => 0
+
+
+    add_column :ninth_age_extra_items, :max, :integer, :default => 0, :null => false
   end
 end
