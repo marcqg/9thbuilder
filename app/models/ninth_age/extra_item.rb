@@ -6,7 +6,7 @@ class NinthAge::ExtraItem < ApplicationRecord
   has_many :army_list_unit_extra_items, dependent: :destroy
   has_many :army_list_units, through: :army_list_unit_extra_items
 
-  translates :name
+  translates :name, :description
   globalize_accessors
   accepts_nested_attributes_for :translations, allow_destroy: true
 
@@ -23,9 +23,16 @@ class NinthAge::ExtraItem < ApplicationRecord
 
   scope :available_for, lambda { |extra_item_category, value_points_limit|
     if value_points_limit.nil?
-      where(extra_item_category_id: extra_item_category).order('value_points DESC', 'name')
+      includes(:translations)
+      .with_locales(I18n.available_locales)
+      .where(extra_item_category_id: extra_item_category)
+      .order('value_points DESC', 'ninth_age_extra_item_translations.name')
     else
-      where(extra_item_category_id: extra_item_category).where('value_points <= ?', value_points_limit).order('value_points DESC', 'name')
+      includes(:translations)
+      .with_locales(I18n.available_locales)
+      .where(extra_item_category_id: extra_item_category)
+      .where('value_points <= ?', value_points_limit)
+      .order('value_points DESC', 'ninth_age_extra_item_translations.name')
     end
   }
 end

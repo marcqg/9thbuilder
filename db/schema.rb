@@ -188,11 +188,12 @@ ActiveRecord::Schema.define(version: 20170323162102) do
   end
 
   create_table "ninth_age_extra_item_translations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "ninth_age_extra_item_id", null: false
-    t.string   "locale",                  null: false
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.integer  "ninth_age_extra_item_id",               null: false
+    t.string   "locale",                                null: false
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
     t.string   "name"
+    t.text     "description",             limit: 65535
     t.index ["locale"], name: "index_ninth_age_extra_item_translations_on_locale", using: :btree
     t.index ["ninth_age_extra_item_id"], name: "index_a3691c2c997dc761d820ee9cc8ad386aec523816", using: :btree
   end
@@ -201,6 +202,7 @@ ActiveRecord::Schema.define(version: 20170323162102) do
     t.integer "extra_item_category_id",                                     null: false
     t.decimal "value_points",           precision: 8, scale: 2,             null: false
     t.integer "version_id",                                     default: 0, null: false
+    t.integer "max",                                            default: 0, null: false
     t.index ["extra_item_category_id"], name: "index_ninth_age_extra_items_on_extra_item_category_id", using: :btree
     t.index ["version_id"], name: "index_ninth_age_extra_items_on_version_id", using: :btree
   end

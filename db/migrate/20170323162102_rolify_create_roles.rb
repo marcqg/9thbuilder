@@ -13,14 +13,8 @@ class RolifyCreateRoles < ActiveRecord::Migration[5.0]
                   (\'Weapon Rune\'),
                   (\'Path of Magic for Mage\'),
                   (\'Oath\'),
-                  (\'Virtue\'),
-                  (\'BigName\'),
-                  (\'Cuatl Lord Discipline\'),
-                  (\'Aspects of Nature\'),
-                  (\'Kindred\'),
                   (\'Monarchs of Undeath\'),
                   (\'Path of Magic for Death Cult Hierarch\'),
-                  (\'Blood line\'),
                   (\'Magical Item\'),
                   (\'Magic Weapons Champion\'),
                   (\'Standard Rune\'),
@@ -328,6 +322,7 @@ class RolifyCreateRoles < ActiveRecord::Migration[5.0]
     NinthAge::ExtraItemCategory.create_translation_table!({:name => :string}, {:migrate_data => true, :remove_source_columns => true})
     add_foreign_key :ninth_age_extra_item_category_translations, :ninth_age_extra_item_categories, column: :ninth_age_extra_item_category_id, on_delete: :cascade
     NinthAge::ExtraItem.create_translation_table!({:name => :string}, {:migrate_data => true, :remove_source_columns => true})
+    NinthAge::ExtraItem.add_translation_fields! description: :text
     add_foreign_key :ninth_age_extra_item_translations, :ninth_age_extra_items, column: :ninth_age_extra_item_id, on_delete: :cascade
 
     rename_table :magic_items, :ninth_age_magic_items
@@ -500,7 +495,9 @@ class RolifyCreateRoles < ActiveRecord::Migration[5.0]
     add_column :ninth_age_magic_items, :max, :integer, :default => 0, :null => false
     change_column :ninth_age_magic_items, :value_points, :integer, :null => false
 
-
     add_column :ninth_age_magic_standards, :type_figurine, :integer, :null => false, :default => 0
+
+
+    add_column :ninth_age_extra_items, :max, :integer, :default => 0, :null => false
   end
 end
