@@ -14,7 +14,7 @@
         <tr data-value-points="<%= army_list_unit_troop.troop.value_points %>" data-min-size="<%= army_list_unit_troop.troop.min_size %>">
           <%= f.fields_for :army_list_unit_troops, army_list_unit_troop do |troop_fields| %>
           <td><%= troop_fields.label :size, army_list_unit_troop.troop.name + " x" %></td>
-          <td><%= troop_fields.range_field  :size, :min => @army_list_unit.unit.min_size, :max => @army_list_unit.unit.max_size, :class => "army_list_unit_troop_size" %></td>
+          <td><%= troop_fields.number_field :size, :min => @army_list_unit.unit.min_size, :max => @army_list_unit.unit.max_size, :class => "army_list_unit_troop_size" %></td>
           <td><span class="army_list_unit_troop_size_value"><%= army_list_unit_troop.size %></span> * <%= value_points(army_list_unit_troop.troop.value_points || @army_list_unit.unit.value_points) %> pts<%=t :per_model %></td>
           <% end %>
         </tr>
