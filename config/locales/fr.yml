@@ -198,7 +198,7 @@ fr:
       password: "Mot de passe"
       remember: "Se souvenir de moi"
       lost: "Oublié ?"
-      submit: "Valider"
+      submit: "Se connecter"
     lost:
         password: "J'ai perdu mon mot de passe !"
         confirmation: "Je n'ai pas reçu d'email de confirmation"
@@ -213,7 +213,7 @@ fr:
       password: "Mot de passe"
       confirmation: "Confirmation du mot de passe"
       favorite_army: "--Armée favorite--"
-      submit: "Valider"
+      submit: "S'inscrire"
     lost:
         password: "J'ai perdu mon mot de passe !"
         confirmation: "Je n'ai pas reçu d'email de confirmation"

@@ -269,7 +269,7 @@ en:
       password: "Password"
       remember: "Remember me"
       lost: "Forgot ?"
-      submit: "Save"
+      submit: "Sign-in"
     lost:
       password: "I have lost my password!"
       confirmation: "I didn't received my confirmation email"
@@ -283,7 +283,7 @@ en:
       password: "Password"
       confirmation: "Password confirmation"
       favorite_army: "--Favorite army--"
-      submit: "Save"
+      submit: "Sign-up"
     lost:
       password: "I have lost my password!"
       confirmation: "I didn't received my confirmation email"
