@@ -12,11 +12,13 @@
 
     input {
       height: 30px;
+      color: #333333;
     }
 
     input[type=submit] {
-      float: right;
-      font-size: 11px;
+      font-size: 14px;
+      font-weight: bold;
+      height: auto;
     }
 
     a {
@@ -32,6 +34,7 @@
 
     input {
       height: 30px;
+      color: #333333;
     }
 
     strong {
@@ -44,13 +47,14 @@
       margin-top: 8px;
     }
 
-    input[type=text], .home .signup input[type=email], .home .signup input[type=password] {
+    input[type=text], input[type=email], input[type=password] {
       width: 100%;
     }
 
     input[type=submit] {
-      float: right;
-      font-size: 16px;
+      font-size: 14px;
+      font-weight: bold;
+      height: auto;
     }
   }
 
@@ -92,6 +96,7 @@
   }
 
   .catcher {
+    clear:both;
     margin-top: 90px;
     text-shadow: 0px 0px 12px #000000;
     filter: dropshadow(color=#000000, offx=0, offy=0);
@@ -139,4 +144,17 @@
 
 html[lang=en] .home .signin a {
   margin-left: 50px;
+}
+
+#no-script{
+  background-color:red;
+  border: 2px solid black;
+  display: block;
+  margin: 0 auto;
+  color: white;
+  font-weight: bold;
+  font-size: 3vmin;
+  padding: 1.5vmin;
+  z-index: 1000;
+  text-align: center;
 }

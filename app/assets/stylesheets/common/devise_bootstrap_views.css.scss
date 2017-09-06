@@ -1,0 +1,35 @@
+.float-none {
+  float: none;
+}
+
+.panel {
+  padding: 0 !important;
+  margin-top: 2vmin;
+  margin-bottom: 0 !important;
+
+  .panel-heading {
+	padding: 15px;
+   	background: image-url("bg_header.png") 50% 0 repeat-x;
+	background-color: inherit !important;
+	border: 0 !important;
+	
+	h4 {
+	  margin: 0px;
+	  color: white;
+	}
+  }
+
+  .field_with_errors{
+  	input[type="email"], input[type="password"] {
+  		border: 1px solid red;
+  	}
+  }
+
+  input.btn {
+  	display: block;
+  	margin: auto;
+  	font-weight: bold;
+  	background-color: #440D01;
+  	border-color: black;
+  }
+}

@@ -1,27 +1,39 @@
-<h2><%=t 'profile.title' %></h2>
+<%= bootstrap_devise_error_messages! %>
+<div class="panel panel-default devise-bs col-md-6 col-md-offset-3">
+  <div class="panel-heading">
+    <h4><%= t('.title', resource: resource_class.model_name.human , default: "Edit #{resource_name.to_s.humanize}") %></h4>
+  </div>
+  <div class="panel-body">
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+      <div class="form-group">
+        <%= f.label :name %>
+        <%= f.text_field :name, autofocus: true, class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= f.label :email %>
+        <%= f.email_field :email, class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= f.label :favorite_army_id, t('profile.form.favorite_army') %>
+        <%= f.collection_select :favorite_army_id, NinthAge::Army.includes([:translations, :version]).order(:name), :id, :name_with_version, include_blank: true, class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= f.label :password %> <i>(<%= t('.leave_blank_if_you_don_t_want_to_change_it', default: "leave blank if you don't want to change it") %>)</i>
+        <%= f.password_field :password, autocomplete: "off", class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= f.label :password_confirmation %>
+        <%= f.password_field :password_confirmation, class: 'form-control'  %>
+      </div>
+      <div class="form-group">
+        <%= f.label :current_password %> <i>(<%= t('.we_need_your_current_password_to_confirm_your_changes', default: 'we need your current password to confirm your changes') %>)</i>
+        <%= f.password_field :current_password, class: 'form-control' %>
+      </div>
+      <%= f.submit t('.update', default: 'Update'), class: 'btn btn-primary' %>
+    <% end %>
+  </div>
+</div>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= devise_error_messages! %>
+<p><%= t('.unhappy', default: 'Unhappy') %>? <%= link_to t('.cancel_my_account', default: 'Cancel my account'), registration_path(resource_name), data: { confirm: t('.are_you_sure', default: "Are you sure?") }, method: :delete %>.</p>
 
-  <p><%= f.text_field :name, placeholder: t('profile.form.name'), autofocus: true %></p>
-
-  <p><%= f.email_field :email, placeholder: t('profile.form.email') %></p>
-
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
-  <% end %>
-
-  <p><%= f.label :favorite_army_id, t('profile.form.favorite_army') %><br />
-  <%= f.collection_select :favorite_army_id, NinthAge::Army.includes(:translations).order(:name), :id, :name_with_version, include_blank: true %></p>
-
-  <p><i><%=t 'profile.form.password_help' %></i><br />
-  <%= f.password_field :password, placeholder: t('profile.form.password'), autocomplete: "off" %></p>
-
-  <p><%= f.password_field :password_confirmation, placeholder: t('profile.form.confirmation'), autocomplete: "off" %></p>
-
-  <p><%= f.submit t('profile.form.submit') %></p>
-<% end %>
-
-<h3><%=t 'profile.delete.title' %></h3>
-
-<p><%== t('profile.delete.information') %> <%= link_to t('profile.delete.link'), registration_path(resource_name), method: :delete, data: { confirm: 'Are you sure?' } %>.</p>
+<%= link_to t('.back', default: 'Back'), :back %>

@@ -11,7 +11,7 @@ fr:
         unlock_token: Clé de déblocage
     models:
       user: Utilisateur
-  devise:
+  users:
     confirmations:
       confirmed: Votre compte a été confirmé avec succès.
       new:

@@ -14,6 +14,8 @@ module NinthAge
       end
     end
 
+    # GET /ninth_age_magic_standards/all
+    # GET /ninth_age_magic_standards/all.json
     def all
       @version = NinthAge::Version.find(params[:version_id])
       @ninth_age_magic_standards = NinthAge::MagicStandard.with_translations.where(:version_id => params[:version_id])

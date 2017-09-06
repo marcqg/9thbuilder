@@ -11,7 +11,7 @@ es:
         unlock_token: Desbloquear token
     models:
       user: Usuario
-  devise:
+  users:
     confirmations:
       confirmed: Tu cuenta ha sido confirmada satisfactoriamente.
       new:

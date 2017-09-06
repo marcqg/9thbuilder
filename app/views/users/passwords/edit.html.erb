@@ -1,18 +1,26 @@
-<% title t('password_change.title') -%>
+<%= bootstrap_devise_error_messages! %>
+<div class="panel panel-default devise-bs">
+  <div class="panel-heading">
+    <h4><%= t('.change_your_password', default: 'Change your password') %></h4>
+  </div>
+  <div class="panel-body">
+    <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put, role: 'form' }) do |f| %>
+      <%= f.hidden_field :reset_password_token %>
 
-<h2><%=t 'password_change.title' %></h2>
+      <div class="form-group">
+        <%= f.label :password, t('.new_password', default: 'New password') %>
+        <%= f.password_field :password, autofocus: true, class: 'form-control'  %>
+      </div>
 
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
-  <%= devise_error_messages! %>
-  <%= f.hidden_field :reset_password_token %>
+      <div class="form-group">
+        <%= f.label :password_confirmation, t('.confirm_new_password', default: 'Confirm new password') %>
+        <%= f.password_field :password_confirmation, class: 'form-control'  %>
+      </div>
 
-  <p><%= f.password_field :password, placeholder: t('password_change.form.password'), autofocus: true, autocomplete: "off" %></p>
-
-  <p><%= f.password_field :password_confirmation, placeholder: t('password_change.form.confirmation'), autocomplete: "off" %></p>
-
-  <p><%= f.submit t('password_change.form.submit') %>
-<% end %>
-
-<%= link_to t('password_change.lost.password'), new_password_path(resource_name) %><br />
-<%= link_to t('password_change.lost.confirmation'), new_confirmation_path(resource_name) %><br />
-<%== t('password_change.information') %>
+      <%= f.submit t('.change_my_password', default: 'Change my password'), class: 'btn btn-primary' %>
+    <% end %>
+  </div>
+</div>
+<div class="shared-links col-md-6 col-md-offset-3">
+  <%= render 'users/shared/links' %>
+</div>

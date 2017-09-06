@@ -11,7 +11,7 @@ pl:
         unlock_token: 
     models:
       user: Użytkownik
-  devise:
+  users:
     confirmations:
       confirmed: Konto zostało poprawnie aktywowane.
       new:

@@ -11,7 +11,7 @@ ko:
         unlock_token: 
     models:
       user: "사용자"
-  devise:
+  users:
     confirmations:
       confirmed: "이메일 주소가 성공적으로 인증되었습니다."
       new:

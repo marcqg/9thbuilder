@@ -17,10 +17,10 @@ module NineThBuilder
     config.time_zone = 'Paris'
 
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
-    I18n.available_locales = [:fr, :en, :de, :ko, :pl, :es]
+    I18n.available_locales = [:fr, :en, :de, :ko, :pl, :es, :it]
     I18n.default_locale = :en
     config.i18n.default_locale = :en
-    config.i18n.available_locales = [:fr, :en, :de, :ko, :pl, :es]
+    config.i18n.available_locales = [:fr, :en, :de, :ko, :pl, :es, :it]
     config.i18n.enforce_available_locales = true
     config.i18n.fallbacks = true
 

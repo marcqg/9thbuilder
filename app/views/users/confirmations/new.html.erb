@@ -1,14 +1,19 @@
-<% title t('confirmation.title') -%>
+<%= bootstrap_devise_error_messages! %>
+<div class="panel panel-default devise-bs col-md-6 col-md-offset-3">
+  <div class="panel-heading">
+    <h4><%= t('.resend_confirmation_instructions', default: 'Resend confirmation instructions') %></h4>
+  </div>
+  <div class="panel-body">
+    <%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post, role: 'form' }) do |f| %>
+      <div class="form-group">
+        <%= f.label :email %>
+        <%= f.email_field :email, autofocus: true, class: "form-control"  %>
+      </div>
 
-<h2><%=t 'confirmation.title' %></h2>
-
-<%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
-  <%= devise_error_messages! %>
-
-  <p><%= f.email_field :email, placeholder: t('confirmation.form.email'), autofocus: true %></p>
-
-  <p><%= f.submit t('confirmation.form.submit') %></p>
-<% end %>
-
-<%= link_to t('confirmation.lost.password'), new_password_path(resource_name) %><br />
-<%== t('confirmation.information') %>
+      <%= f.submit t('.resend_confirmation_instructions', default: 'Resend confirmation instructions'), class: 'btn btn-primary' %>
+    <% end %>
+  </div>
+</div>
+<div class="shared-links col-md-6 col-md-offset-3">
+  <%= render 'users/shared/links' %>
+</div>

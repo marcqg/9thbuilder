@@ -11,7 +11,7 @@ de:
         unlock_token: Entsperrungs-Token
     models:
       user: Benutzer
-  devise:
+  users:
     confirmations:
       confirmed: Ihre E-Mail Adresse wurde erfolgreich bestätigt.
       new:
