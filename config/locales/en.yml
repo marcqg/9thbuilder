@@ -99,6 +99,7 @@ en:
     form:
       name: "Name"
       notes: "Notes"
+      submit: Save
 
   army_list_unit:
     show:

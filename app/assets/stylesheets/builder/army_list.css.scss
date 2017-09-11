@@ -8,3 +8,14 @@
 		}
 	}
 }
+
+.new_builder_army_list, .edit_builder_army_list {
+	.btn {
+		display: block;
+		margin: 0 auto;
+		font-weight: bold;
+      	background-color: #440D01;
+      	border-color: black;
+      	color: white;
+	}
+}
