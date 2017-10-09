@@ -44,6 +44,7 @@ class NinthAge::Unit < ApplicationRecord
           organisation.units.includes(:translations)
               .order('max', 'ninth_age_unit_translations.name')
               .reject { |u| u.in?(army_list_units) if u.max == 1 }
+              .reject { |u| u.value_points == nil || u.value_points < 1}
               .map { |u| [u.name, u.id] }
       ]
     end

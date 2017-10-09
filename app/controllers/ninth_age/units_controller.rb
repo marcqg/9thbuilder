@@ -8,7 +8,7 @@ module NinthAge
 
       respond_to do |format|
         format.html
-        format.json { head :no_content }
+        format.json
       end
     end
   end

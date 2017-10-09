@@ -1,0 +1,1 @@
+json.partial! "ninth_age/units/unit", ninth_age_unit: @unit
