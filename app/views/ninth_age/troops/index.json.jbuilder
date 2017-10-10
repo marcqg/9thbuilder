@@ -1,0 +1,1 @@
+json.array! @troops, partial: 'ninth_age/troops/troop', as: :ninth_age_troop

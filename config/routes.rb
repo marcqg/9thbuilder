@@ -40,6 +40,8 @@ Rails.application.routes.draw do
       resources :organisations,         only: [:show]
       resources :organisation_groups,   only: [:show]
       resources :units,                 only: [:show]
+      resources :troops,                only: [:show]
+      resources :troop_types,           only: [:show]
       resources :special_rules,         only: [:show]
       resources :equipments,            only: [:show]
 
@@ -49,6 +51,10 @@ Rails.application.routes.draw do
 
       scope '/army-:army_id' do
         resources :army_organisations,  only: [:index]
+      end
+
+      scope '/units-:unit_id' do
+        resources :troops,  only: [:index]
       end
 
       scope '/version-:version_id' do
