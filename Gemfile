@@ -74,7 +74,7 @@ gem 'rolify'
 gem 'seedbank'
 
 #Helper 
-gem 'acts_as_list' 			#list
+gem 'acts_as_list', '0.9.5' 			#list
 gem 'ransack' 				#search
 gem 'wisepdf' 				#pdf export
 gem 'attribute_normalizer' 	#data integrity / params permit

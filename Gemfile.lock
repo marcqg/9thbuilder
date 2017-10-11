@@ -307,7 +307,7 @@ DEPENDENCIES
   activeadmin!
   activeadmin-translate!
   activemodel-serializers-xml
-  acts_as_list
+  acts_as_list (= 0.9.5)
   attribute_normalizer
   autoprefixer-rails
   bcrypt (~> 3.1.7)
