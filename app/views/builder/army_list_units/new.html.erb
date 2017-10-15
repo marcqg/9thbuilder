@@ -4,12 +4,16 @@
 
   <%= form_for [@army_list, @army_list_unit], url: builder_army_list_army_list_units_path, :remote => true do |f| %>
     <%= render "shared/form_errors", :object => @army_list_unit %>
+    <div class="form-group">
+      <%= f.label :unit_id %>
+      <%= f.select :unit_id, grouped_options_for_select(NinthAge::Unit.for_select(@army_list), @army_list_unit.unit_id), {}, {class: 'form-control'} %>
+    </div>
+    <div class="form-group">
+      <%= f.label :name %>
+      <%= f.text_field :name, :placeholder => t('army_list_unit.form.name'), class: 'form-control' %>
+    </div>
 
-      <p><%= f.select :unit_id, grouped_options_for_select(NinthAge::Unit.for_select(@army_list), @army_list_unit.unit_id) %></p>
-
-      <p><%= f.text_field :name, :placeholder => t('army_list_unit.form.name') %></p>
-
-    <p><%= f.submit t(:next) %></p>
+	<%= f.submit t(:next), class: 'btn btn-age' %>
   <% end %>
 
 </div>

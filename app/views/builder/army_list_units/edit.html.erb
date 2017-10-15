@@ -6,7 +6,10 @@
   <%= form_for [@army_list, @army_list_unit], url: builder_army_list_army_list_unit_path do |f| %>
     <%= render "shared/form_errors", :object => @army_list_unit %>
 
-    <p><%= f.text_field :name, :placeholder => t('army_list_unit.form.name') %>
+    <div class="form-group">
+      <%= f.label :name %>
+      <%= f.text_field :name, :placeholder => t('army_list_unit.form.name'), class: 'form-control' %>
+    </div>
 
     <% if @army_list_unit.unit.min_size != @army_list_unit.unit.max_size %>
       <table id="army_list_unit_troops">
@@ -95,17 +98,24 @@
       </div></td>
     <% end %>
 
-    </tr></table>
+    </tr>
+    </table>
 
     <div class="clear"></div>
 
     <% if @army_list_unit.unit.magic? %>
-      <p><%= f.text_area :magic, :placeholder => t('army_list_unit.edit.form.magic'), :size => "" %></p>
+    <div class="form-group">
+      <%= f.label :magic %>
+      <%= f.text_area :magic, :placeholder => t('army_list_unit.edit.form.magic'), :size => "", class: 'form-control' %>
+    </div>
     <% end %>
 
-    <p><%= f.text_area :notes, :placeholder => t('army_list_unit.edit.form.notes'), :size => "" %></p>
+    <div class="form-group">
+      <%= f.label :notes %>
+      <%= f.text_area :notes, :placeholder => t('army_list_unit.edit.form.notes'), :size => "", class: 'form-control' %>
+    </div>
 
-    <p><%= f.submit t(:save) %></p>
+    <%= f.submit t(:save), class: 'btn btn-age' %>
   <% end %>
 
 </div>

@@ -5,7 +5,7 @@
   <%= form_for @army_list, :url => duplicate_builder_army_list_path, :method => :post do |f| %>
     <p><%=t 'army_list.duplicate.information' %><br /><strong><%= @army_list.name %></strong> ?</p>
 
-    <p><%= f.submit t(:next) %></p>
+    <p><%= f.submit t(:next), class: 'btn btn-age' %></p>
   <% end %>
 
 </div>

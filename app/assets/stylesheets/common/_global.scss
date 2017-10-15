@@ -93,3 +93,50 @@ body {
 .small-text {
   font-size: 1.5vmin;
 }
+
+
+.btn-age { 
+  color: #ffffff; 
+  background-color: #56251a; 
+  border-color: #2F0900; 
+} 
+ 
+.btn-age:hover, 
+.btn-age:focus, 
+.btn-age:active, 
+.btn-age.active, 
+.open .dropdown-toggle.btn-age { 
+  color: #ffffff; 
+  background-color: #360A00; 
+  border-color: #2F0900; 
+} 
+ 
+.btn-age:active, 
+.btn-age.active, 
+.open .dropdown-toggle.btn-age { 
+  background-image: none; 
+} 
+ 
+.btn-age.disabled, 
+.btn-age[disabled], 
+fieldset[disabled] .btn-age, 
+.btn-age.disabled:hover, 
+.btn-age[disabled]:hover, 
+fieldset[disabled] .btn-age:hover, 
+.btn-age.disabled:focus, 
+.btn-age[disabled]:focus, 
+fieldset[disabled] .btn-age:focus, 
+.btn-age.disabled:active, 
+.btn-age[disabled]:active, 
+fieldset[disabled] .btn-age:active, 
+.btn-age.disabled.active, 
+.btn-age[disabled].active, 
+fieldset[disabled] .btn-age.active { 
+  background-color: #56251a; 
+  border-color: #2F0900; 
+} 
+ 
+.btn-age .badge { 
+  color: #56251a; 
+  background-color: #ffffff; 
+}

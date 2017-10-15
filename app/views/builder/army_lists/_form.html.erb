@@ -3,21 +3,26 @@
 
     <% unless @army_list.persisted? %>
         <div class="form-group">
+      <%= f.label :army_id %>
             <%= f.collection_select :army_id, NinthAge::Army.includes([:translations, :version]).order(:name), :id, :name_with_version, {include_blank: false}, {class: 'form-control'} %>
         </div>
         <div class="form-group">
+      <%= f.label :army_organisation_id %>
             <%= f.collection_select :army_organisation_id, NinthAge::ArmyOrganisation.where(:army_id => @army_list.army_id).order(:name), :id, :name, {include_blank: false}, {class: 'form-control'} %>
         </div>
     <% end %>
 
     <div class="form-group">
+      <%= f.label :name %>
         <%= f.text_field :name, :placeholder => t('army_list.form.name'), class: "form-control" %>
     </div>
+    
     <div class="form-group">
+      <%= f.label :notes %>
         <%= f.text_area :notes, :placeholder => t('army_list.form.notes'), :size => "", class: "form-control" %>
     </div>
     
-    <%= f.submit t('army_list.form.submit'), class: 'btn btn-success' %>
+    <%= f.submit t('army_list.form.submit'), class: 'btn btn-age' %>
 <% end %>
 
 <script>

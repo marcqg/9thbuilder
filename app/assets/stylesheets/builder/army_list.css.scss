@@ -9,13 +9,12 @@
 	}
 }
 
-.new_builder_army_list, .edit_builder_army_list {
+.new_builder_army_list,
+.edit_builder_army_list, 
+.new_builder_army_list_unit, 
+.edit_builder_army_list_unit {
 	.btn {
 		display: block;
 		margin: 0 auto;
-		font-weight: bold;
-      	background-color: #440D01;
-      	border-color: black;
-      	color: white;
 	}
 }
