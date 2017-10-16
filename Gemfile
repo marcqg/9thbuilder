@@ -29,6 +29,9 @@ gem 'bcrypt', '~> 3.1.7', platforms: :ruby
 # Use Puma as the app server
 gem 'puma', '~> 3.0'
 
+#CORS
+gem 'rack-cors', :require => 'rack/cors'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
@@ -73,7 +76,7 @@ gem 'rolify'
 #custom seed command line
 gem 'seedbank'
 
-#Helper 
+#Helper
 gem 'acts_as_list', '0.9.5' 			#list
 gem 'ransack' 				#search
 gem 'wisepdf' 				#pdf export
