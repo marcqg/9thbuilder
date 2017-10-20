@@ -7,7 +7,7 @@ module NinthAge
       @magics = NinthAge::Magic.where(:version_id => params[:version_id])
       respond_to do |format|
         format.html
-        format.json { head :no_content }
+        format.json
       end
     end
 
@@ -19,7 +19,7 @@ module NinthAge
 
       respond_to do |format|
         format.html
-        format.json { head :no_content }
+        format.json
       end
     end
   end

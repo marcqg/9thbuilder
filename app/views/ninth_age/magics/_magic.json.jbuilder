@@ -1,1 +1,1 @@
-json.extract! ninth_age_magic, :id, :name, :medium_logo_url
+json.extract! ninth_age_magic, :id, :name, :medium_logo_url, :version
