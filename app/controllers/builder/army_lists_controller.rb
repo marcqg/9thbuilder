@@ -23,6 +23,7 @@ module Builder
 
       respond_to do |format|
         format.html # index.html.erb
+        format.json
         format.xml { render xml: @army_lists }
       end
     end

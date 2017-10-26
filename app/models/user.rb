@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  # Include default devise modules.
+  include DeviseTokenAuth::Concerns::User
   rolify
   include Gravtastic
   gravtastic

@@ -69,6 +69,7 @@ gem 'activeadmin-translate', github: 'twintags/activeadmin-translate'
 
 #autentification
 gem 'devise'
+gem 'devise_token_auth'
 
 #User role (Admin/Moderator)
 gem 'rolify'
