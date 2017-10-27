@@ -24,7 +24,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 # Use ActiveModel has_secure_password
-gem 'bcrypt', '~> 3.1.7', platforms: :ruby
+gem 'bcrypt', '~> 3.1.11', platforms: :ruby
 
 # Use Puma as the app server
 gem 'puma', '~> 3.0'
