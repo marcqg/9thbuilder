@@ -1,1 +1,1 @@
-json.array!(@armies) { |ninth_age_army| json.partial! ninth_age_army }
+json.array! @armies, partial: 'ninth_age/armies/army', as: :ninth_age_army

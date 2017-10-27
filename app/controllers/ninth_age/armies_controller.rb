@@ -5,7 +5,7 @@ module NinthAge
     # GET /armies.json
     def index
       @version = NinthAge::Version.find(params[:version_id])
-      @armies = NinthAge::Army.where(:version_id => params[:version_id])
+      @armies = NinthAge::Army.includes(:translations).where(:version_id => params[:version_id])
       respond_to do |format|
         format.html
         format.json
