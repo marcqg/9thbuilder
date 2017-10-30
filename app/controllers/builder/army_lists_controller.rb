@@ -1,8 +1,6 @@
 module Builder
   class ArmyListsController < ApplicationController
-    before_action do |controller|
-      authenticate_user!
-    end
+    before_action :authenticate_user!
 
     # GET /army_lists
     # GET /army_lists.xml

@@ -1,10 +1,21 @@
 Rails.application.routes.draw do
-  mount_devise_token_auth_for 'User', at: 'auth'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   localized do
     #filter :locale, exclude: %r{^/admin}
+
+    # token auth routes available at /api/v1/auth
+    namespace :api do
+      namespace :v1 do
+        mount_devise_token_auth_for 'User', at: 'auth'
+
+        namespace :builder do
+          resources :army_lists,  only: [:index]
+        end
+      end
+    end
 
     ActiveAdmin.routes(self)
     devise_for :users

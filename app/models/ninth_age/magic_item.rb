@@ -27,12 +27,12 @@ class NinthAge::MagicItem < ApplicationRecord
     super + '-ninth-age-' + Globalize.locale.to_s
   end
 
-  scope :available_for, lambda { |army, value_points_limit|
+  scope :available_for, lambda { |army, version, value_points_limit|
     if value_points_limit.nil?
-      includes(:translations).where('army_id = :army_id', army_id: army)
+      includes(:translations).where('(army_id = :army_id OR (army_id IS NULL AND ninth_age_magic_items.id NOT IN (SELECT override_id FROM ninth_age_magic_items WHERE army_id = :army_id AND override_id IS NOT NULL))) AND version_id = :version_id', army_id: army, version_id: version)
           .order('value_points DESC', 'ninth_age_magic_item_translations.name')
     else
-      includes(:translations).where('army_id = :army_id', army_id: army)
+      includes(:translations).where('(army_id = :army_id OR (army_id IS NULL AND ninth_age_magic_items.id NOT IN (SELECT override_id FROM ninth_age_magic_items WHERE army_id = :army_id AND override_id IS NOT NULL))) AND version_id = :version_id', army_id: army, version_id: version)
           .where('value_points <= ?', value_points_limit)
           .order('value_points DESC', 'ninth_age_magic_item_translations.name')
     end

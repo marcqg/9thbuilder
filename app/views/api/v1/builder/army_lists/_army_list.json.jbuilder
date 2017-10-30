@@ -1,0 +1,1 @@
+json.extract! army_list, :id, :name, :uuid

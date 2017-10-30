@@ -1,0 +1,1 @@
+json.array! @army_lists, partial: 'army_list', as: :army_list

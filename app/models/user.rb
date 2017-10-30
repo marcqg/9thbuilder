@@ -20,4 +20,8 @@ class User < ApplicationRecord
     params.delete :current_password
     update_without_password params
   end
+
+  before_validation do
+    self.uid = email if uid.blank?
+  end
 end
