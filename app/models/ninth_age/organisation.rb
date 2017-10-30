@@ -26,9 +26,8 @@ class NinthAge::Organisation < ApplicationRecord
   end
 
   has_attached_file :logo,
-                    styles: { medium: '200x200>', thumb: '65x65>' },
-                    default_url: ActionController::Base.helpers.image_path('army.jpg'),
-                    path: 'images/:class/:id/:style/:filename'
+                    styles: { large:  '300x300>', medium: '200x200>', thumb: '100x100>' },
+                    default_url: ActionController::Base.helpers.image_path('organisation.jpg')
   validates_attachment_content_type :logo, content_type: /\Aimage\/.*\z/
 
   validates :army_id, presence: true

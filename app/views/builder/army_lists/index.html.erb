@@ -16,7 +16,7 @@
       <div class="army_list_row">
         <p class="thumb"><a href="<%= builder_army_list_path(army_list) %>">
           <% unless army_list.army.logo.nil? %>
-              <%= image_tag army_list.army.logo.url, alt: army_list.army.name, :size => "220x132" %>
+              <%= image_tag army_list.army.logo_large.url, alt: army_list.army.name, :size => "220x132" %>
           <% end %></a></p>
         <p class="value_points"><%= value_points army_list.value_points %><br/>
           <small style="font-size:20px">points</small>

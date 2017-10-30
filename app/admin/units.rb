@@ -25,7 +25,7 @@ ActiveAdmin.register NinthAge::Unit do
   end
 
   filter :army
-  filter :unit_category
+  #filter :unit_category
   filter :value_points
 
   index do

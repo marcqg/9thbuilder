@@ -32,17 +32,28 @@ class NinthAge::Army < ApplicationRecord
   end
 
   has_attached_file :logo,
-                    styles: { medium: '200x200>', thumb: '65x65>' },
-                    default_url: ActionController::Base.helpers.image_path('army.jpg'),
-                    path: 'images/:class/:id/:style/:filename'
+                    styles: { large:  '300x300>', medium: '200x200>', thumb: '100x100>' },
+                    default_url: ActionController::Base.helpers.image_path('army.jpg')
   validates_attachment_content_type :logo, content_type: /\Aimage\/.*\z/
+  has_attached_file :logo_large,
+                    styles: { large:  '300x300>', medium: '200x200>', thumb: '100x100>' },
+                    default_url: ActionController::Base.helpers.image_path('army.jpg')
+  validates_attachment_content_type :logo_large, content_type: /\Aimage\/.*\z/
 
   def logo_url
     self.logo.url
   end
 
+  def logo_large_url
+    self.logo_large.url
+  end
+
   def medium_logo_url
     self.logo.url(:medium)
+  end
+
+  def medium_logo_large_url
+    self.logo_large.url(:medium)
   end
 
   def name_with_version

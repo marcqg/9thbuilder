@@ -1,7 +1,7 @@
 ActiveAdmin.register NinthAge::Organisation do
   menu parent: 'Ninth Age Army', priority: 5
 
-  permit_params :army_id, :locale, translations_attributes: [:id, :name, :locale, :_destroy]
+  permit_params :army_id, :logo, :locale, translations_attributes: [:id, :name, :locale, :_destroy]
 
   #config.sort_order = 'name_asc'
 
@@ -34,6 +34,9 @@ ActiveAdmin.register NinthAge::Organisation do
       f.translate_inputs do |t|
         t.input :name
       end
+      f.inputs 'Logo' do
+        f.input :logo, as: :file
+      end
     end
 
     f.actions
@@ -43,6 +46,9 @@ ActiveAdmin.register NinthAge::Organisation do
     attributes_table do
       row :id
       row :army
+      row :logo do |ad|
+        image_tag ad.medium_logo_url
+      end
     end
     panel 'Translations' do
       translate_attributes_table_for model do

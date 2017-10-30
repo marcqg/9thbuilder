@@ -1,7 +1,7 @@
 ActiveAdmin.register NinthAge::Army do
   menu parent: 'Ninth Age Army', priority: 2
 
-  permit_params :version_id, translations_attributes: [:id, :name, :locale, :_destroy]
+  permit_params :version_id, :logo, :logo_large, :locale, translations_attributes: [:id, :name, :locale, :_destroy]
 
   #config.sort_order = 'name_asc'
 
@@ -40,8 +40,11 @@ ActiveAdmin.register NinthAge::Army do
   form do |f|
     f.inputs do
       f.input :version, collection: NinthAge::Version.order(:name)
-      f.inputs 'Picture' do
+      f.inputs 'Portrait' do
         f.input :logo, as: :file
+      end
+      f.inputs 'Thumb' do
+        f.input :logo_large, as: :file
       end
       f.translate_inputs do |t|
         t.input :name
@@ -56,6 +59,9 @@ ActiveAdmin.register NinthAge::Army do
       row :version
       row :logo do |ad|
         image_tag ad.medium_logo_url
+      end
+      row :logo_large do |ad|
+        image_tag ad.medium_logo_large_url
       end
     end
     panel 'Translations' do

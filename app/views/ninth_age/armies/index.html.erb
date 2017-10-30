@@ -4,7 +4,7 @@
       <article class="col-md-3 col-sm-4">
         <div class="army-<%= army.id %> text-center">
           <% unless army.logo.nil? %>
-              <%= image_tag army.logo.url, :class => 'img-responsive', alt: army.name, height: 150 %>
+              <%= image_tag army.medium_logo_large_url, :class => 'img-responsive', alt: army.name, height: 150 %>
           <% end %>
           <h4><%= army.name %></h4>
           <%= link_to t('army.index.show'), ninth_age_army_path(army.id) %>
