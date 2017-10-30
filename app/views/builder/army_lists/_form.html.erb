@@ -14,7 +14,12 @@
 
     <div class="form-group">
       <%= f.label :name %>
-        <%= f.text_field :name, :placeholder => t('army_list.form.name'), class: "form-control" %>
+      <%= f.text_field :name, :placeholder => t('army_list.form.name'), class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :max %>
+      <%= f.number_field :max, :placeholder => t('army_list.form.max'), class: "form-control" %>
     </div>
     
     <div class="form-group">

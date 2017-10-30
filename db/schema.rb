@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171030145211) do
+ActiveRecord::Schema.define(version: 20171030204704) do
 
   create_table "active_admin_comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.integer  "resource_id",                 null: false
@@ -100,6 +100,7 @@ ActiveRecord::Schema.define(version: 20171030145211) do
     t.text     "notes",                limit: 65535
     t.string   "uuid",                 limit: 36,                                        null: false
     t.integer  "army_organisation_id",                                       default: 0
+    t.integer  "max",                                                        default: 0, null: false
     t.index ["army_id"], name: "index_builder_army_lists_on_army_id", using: :btree
     t.index ["army_organisation_id"], name: "index_builder_army_lists_on_army_organisation_id", using: :btree
     t.index ["user_id"], name: "index_builder_army_lists_on_user_id", using: :btree

@@ -60,6 +60,10 @@ en:
       three: "Undying Dynasties by <a href=\"http://theclockworkpainter.deviantart.com/art/Queen-Khalida-493461199\" target=\"_blank\">Theclockworkpainter</a>"
       four: "The Vermin Swarm by <a href=\"http://getsugadante.deviantart.com/art/Warhammer-Fantasy-Rat-Ogre-s-fury-587662192\" target=\"_blank\">GetsugaDante</a>"
 
+  lexicon:
+    index:
+      show: "Army books"
+
   army_list:
     index:
       title: "My army lists"
@@ -98,6 +102,7 @@ en:
       information: "Are you sure to duplicate list:"
     form:
       name: "Name"
+      max: "Max point"
       notes: "Notes"
       submit: Save
 

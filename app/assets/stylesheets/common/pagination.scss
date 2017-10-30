@@ -1,7 +1,5 @@
 
 .apple_pagination {
-  background: #f1f1f1;
-  border: 1px solid #e5e5e5;
   text-align: center;
   padding: 1em;
   cursor: default;
@@ -16,7 +14,8 @@
   .current {
     font-style: normal;
     font-weight: bold;
-    background-color: #bebebe;
+    background-color: #2F0900;
+    color: white;
     display: inline-block;
     width: 1.4em;
     height: 1.4em;
@@ -28,7 +27,7 @@
   }
   a {
     text-decoration: none;
-    color: black;
+    color: #2F0900;
   }
   a:hover, a:focus {
     text-decoration: underline;

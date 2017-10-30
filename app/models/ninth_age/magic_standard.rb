@@ -25,10 +25,12 @@ class NinthAge::MagicStandard < ApplicationRecord
 
   scope :available_for, lambda { |army, version, value_points_limit|
     if value_points_limit.nil?
-      includes(:translations).where('(army_id = :army_id OR (army_id IS NULL AND ninth_age_magic_standards.id NOT IN (SELECT override_id FROM ninth_age_magic_standards WHERE army_id = :army_id AND override_id IS NOT NULL))) AND version_id = :version_id', army_id: army, version_id: version)
+      includes(:translations).where('(army_id = :army_id OR army_id IS NULL) AND ninth_age_magic_standards.id NOT IN (SELECT override_id FROM ninth_age_magic_standards WHERE army_id = :army_id AND override_id IS NOT NULL)', army_id: army)
+          .where(:version_id => version)
           .order('value_points DESC', 'ninth_age_magic_standard_translations.name')
     else
-      includes(:translations).where('(army_id = :army_id OR (army_id IS NULL AND ninth_age_magic_standards.id NOT IN (SELECT override_id FROM ninth_age_magic_standards WHERE army_id = :army_id AND override_id IS NOT NULL))) AND version_id = :version_id', army_id: army, version_id: version)
+      includes(:translations).where('(army_id = :army_id OR army_id IS NULL) AND ninth_age_magic_standards.id NOT IN (SELECT override_id FROM ninth_age_magic_standards WHERE army_id = :army_id AND override_id IS NOT NULL)', army_id: army)
+          .where(:version_id => version)
           .where('value_points <= ?', value_points_limit)
           .order('value_points DESC', 'ninth_age_magic_standard_translations.name')
     end
