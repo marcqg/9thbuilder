@@ -1,0 +1,9 @@
+.armies {
+  div[class^="army-"] {
+    min-height: 190px;
+
+    img {
+      margin: 0 auto;
+    }
+  }
+}
