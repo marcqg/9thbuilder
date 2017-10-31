@@ -1,0 +1,338 @@
+# Files in the config/locales directory are used for internationalization
+# and are automatically loaded by Rails. If you want to use locales other
+# than English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t 'hello'
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t('hello') %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# To learn more, please read the Rails Internationalization guide
+# available at http://guides.rubyonrails.org/i18n.html.
+
+it:
+  welcome: Benvenuto
+  help: Aiuto
+  close: Vicino
+  save: Salvare
+  next: Il prossimo
+  per_model: ''
+  up_to: fino a
+  menu:
+    label: Menu principale
+    army_lists: I miei eserciti elenchi
+    preferences: Preferenze
+    help: Aiuto
+    signout: disconnessione
+    signin: registrati
+    signup: Registrazione
+    languages:
+      lang: Lingua
+      de: Germania
+      fr: francese
+      en: Inglese
+      hu: ungherese
+      it: Italiano - italiano
+      ko: coreano
+      pl: polacco
+      ru: russo
+      sr: serbo
+      es: Spagnolo - Español
+  home:
+    whoarewe:
+      title: Chi siamo noi?
+      description: Costruire insieme un team di appassionati che giocano da oltre
+        15 anni in Battaglia, Builder dell'Esercito vuole essere uno strumento efficace
+        e facile da usare per creare le vostre liste dell'esercito. Supportato da
+        generosi protettori, l'Esercito Builder non genera alcun reddito e non chiederà
+        mai soldi! Inoltre, Army Builder è un progetto open source.
+    thank: Ringraziamo calorosamente gli illustratori
+    army:
+      first: 'I guerrieri degli dei Dark Gods posseduti da: <a href = "http:'
+      second: 'Impero di Sonnstahl di <a href = "http:'
+      three: 'Smentire le dinasti di <a href = "http:'
+      four: 'Il Vermin Swarm di <a href = "http:'
+    app:
+      inprogess: Un'applicazione mobile collegata a 9ThBuilder è in fase di sviluppo.
+      available:
+        on_platform: 'Attualmente disponibile su:'
+        google: Prendi su Google Play
+  lexicon:
+    index:
+      show: Libri dell'esercito
+  army_list:
+    index:
+      title: I miei eserciti elenchi
+      filter: Filtra per
+      and: e
+      name_or_notes: Nome o appunti
+      add: Crea un nuovo elenco di eserciti
+      search: Sottoscrivi
+    show:
+      title: Lista dell'esercito •% {name}
+      print: Stampare
+      edit: Modifica
+      export: Esportare
+      duplicate: Duplicare
+      delete: Elimina
+      notes: Gli appunti
+      add_unit: Aggiungi unità
+    new:
+      title: Crea <br
+    edit:
+      title: Aggiornamento <br
+    delete:
+      title: Elimina <br
+      information: 'Sei sicuro di distruggere questa lista:'
+      submit: "!!! Elimina !!!"
+    export:
+      title: Esporta <br
+      information: 'Scegli il formato per l''esportazione di elenco:'
+      include_magics: Includi oggetti magici
+      pdf_full: PDF completo
+      pdf_lite: Lite PDF
+      html_full: HTML completo
+      html_lite: Lite HTML
+    duplicate:
+      title: Duplica <br
+      information: 'Sei sicuro di duplicare l''elenco:'
+    form:
+      name: Nome
+      max: Punto massimo
+      notes: Gli appunti
+      submit: Salvare
+  army_list_unit:
+    show:
+      edit: Modifica
+      duplicate: Duplicare
+      delete: Elimina
+      troops:
+        name: Truppe
+        profile: Profilo
+        M: M
+        WS: WS
+        BS: BS
+        S: S
+        T: T
+        W: W
+        I: io
+        A: UN
+        LD: Ld
+        E: evocati
+        type: Tipo di truppa
+      magic_items: Articoli magici
+      magic_standards: Standard magici
+      unit_options: Opzioni
+      equipments: apparecchiature
+      special_rules: Regole speciali
+      magic: Magia
+      notes: Gli appunti
+    new:
+      title: Aggiungere <br
+    edit:
+      title: Modifica
+      options: Opzioni
+      magic_items: Articoli magici
+      extra_items: Speciale
+      magic_standards: Standard magici
+      form:
+        magic: Magia
+        notes: Gli appunti
+    delete:
+      title: Elimina <br
+      information: 'Sei sicuro di distruggere questa unità:'
+      submit: "!!! Elimina !!!"
+    duplicate:
+      title: Duplicare
+      target: 'A:'
+      new_army_list: Nuova lista% {name}
+    form:
+      name: Nome
+  version:
+    index:
+      title: versioni
+      show: Mostrare
+    show:
+      back: Indietro
+  army:
+    index:
+      title: eserciti
+      show: Mostrare
+    show:
+      back: Indietro
+  magic:
+    range: Gamma
+    type: Tipo
+    duration: Durata
+    effect: Effetto
+    casting: getto
+    index:
+      title: Magics
+      show: Mostrare
+    show:
+      back: Indietro
+  magic_spell:
+    type_lvl:
+      A: UN
+      Zero: '0'
+      One: '1'
+      Two: '2'
+      Three: '3'
+      Four: '4'
+      Five: '5'
+      Six: '6'
+    duration:
+      OneTurn: Ultimo giro
+      Instant: Immediato
+      Permanent: Permanente
+      RemainsInPlay: Rimane in gioco
+    type_target:
+      Hex: Hex
+      Hex_r: "| Hex |"
+      Missile: Missile
+      Damage: Danno
+      Augment: Aumentare
+      Augment_b: Aumentare
+      Focused: focalizzata
+      Direct: Diretto
+      Ground: Terra
+      Universal: universale
+      Universal_g: "{Universale}"
+  extra_items:
+    index:
+      title: Articoli aggiuntivi
+      show: Mostrare
+  magic_items:
+    index:
+      title: Articoli magici
+      show: Mostrare
+    type: Tipo
+    type_target:
+      Hex: Hex
+      Hex_r: "| Hex |"
+      Missile: Missile
+      Damage: Danno
+      Augment: Aumentare
+      Augment_b: Aumentare
+      Focused: focalizzata
+      Direct: Diretto
+      Ground: Terra
+      Universal: universale
+      Universal_g: "{Universale}"
+    type_figurine:
+      Infantry: Fanteria
+      Monster: Mostro
+      NoLargeTarget: Nessun obiettivo grande
+      AnimisteBestial: Animista bestiale
+      MountedCharacter: Carattere montato
+      Character: Carattere
+      ModelsOnFoot: Modelli a piedi
+      MageOnFoot: Mago sul piede
+      Goblins: Goblins
+      FeralOrc: Feral Orc
+      MonarchsOfTheDead: Monarchi dei Morti
+      ModelsOnChariots: modelli sui carri
+    duration: Durata
+    type_duration:
+      OneTurn: Ultimo giro
+      Instant: Immediato
+      Permanent: Permanente
+      RemainsInPlay: Rimane in gioco
+  magic_standards:
+    index:
+      title: Standard magici
+      show: Mostrare
+  special_rules:
+    index:
+      title: Regole speciali
+      show: Mostrare
+  equipments:
+    index:
+      title: apparecchiature
+      show: Mostrare
+  unit:
+    show:
+      size: "<Strong>% {min_size} <"
+      change: Le unità% {nome} di% {numero} contano a% {new_name}
+  signin:
+    title: registrati
+    form:
+      register: Unisciti a noi
+      email: E-mail
+      password: Parola d'ordine
+      remember: Ricordati di me
+      lost: Hai dimenticato?
+      submit: Registrati
+    lost:
+      password: Ho perso la mia password!
+      confirmation: Non ho ricevuto la mia email di conferma
+    information: Per qualsiasi domanda, contattaci all'indirizzo <a href="mailto:support@9thbuilder.com">
+      aiuto in linea <
+  signup:
+    title: Registrazione
+    form:
+      name: Nome o soprannome
+      email: Indirizzo email
+      password: Parola d'ordine
+      confirmation: conferma password
+      favorite_army: "- Esercito preferito--"
+      submit: Registrazione
+    lost:
+      password: Ho perso la mia password!
+      confirmation: Non ho ricevuto la mia email di conferma
+    information: Per qualsiasi domanda, contattaci all'indirizzo <a href="mailto:support@9thbuilder.com">
+      aiuto in linea <
+  password_lost:
+    title: Ho perso la mia password
+    form:
+      email: E-mail
+      submit: Salvare
+    lost:
+      confirmation: Non ho ricevuto la mia email di conferma
+    information: Per qualsiasi domanda, contattaci all'indirizzo <a href="mailto:support@9thbuilder.com">
+      aiuto in linea <
+  password_change:
+    title: Cambia la tua password
+    form:
+      password: Parola d'ordine
+      confirmation: conferma password
+      submit: Salvare
+    lost:
+      password: Ho perso la mia password!
+      confirmation: Non ho ricevuto la mia email di conferma
+    information: Per qualsiasi domanda, contattaci all'indirizzo <a href="mailto:support@9thbuilder.com">
+      aiuto in linea <
+  confirmation:
+    title: Invia nuovamente istruzioni di conferma
+    form:
+      email: E-mail
+      submit: Salvare
+    lost:
+      password: Ho perso la mia password!
+    information: Per qualsiasi domanda, contattaci all'indirizzo <a href="mailto:support@9thbuilder.com">
+      aiuto in linea <
+  profile:
+    title: Il mio account
+    form:
+      name: Nome o soprannome
+      email: Indirizzo email
+      favorite_army: Esercito preferito
+      password: Parola d'ordine
+      password_help: Lasciare vuoto se non si desidera modificare la password
+      confirmation: conferma password
+      submit: Salvare
+    delete:
+      title: Cancellazione del conto
+      information: Non sei soddisfatto? <a href="mailto:support@9thbuilder.com"> Contattaci
+        <
+      link: distruggere immediatamente il tuo account
+    back: Pagina precedente

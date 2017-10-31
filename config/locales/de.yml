@@ -1,0 +1,340 @@
+# Files in the config/locales directory are used for internationalization
+# and are automatically loaded by Rails. If you want to use locales other
+# than English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t 'hello'
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t('hello') %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# To learn more, please read the Rails Internationalization guide
+# available at http://guides.rubyonrails.org/i18n.html.
+
+de:
+  welcome: Herzlich willkommen
+  help: Hilfe
+  close: Schließen
+  save: sparen
+  next: Nächster
+  per_model: ''
+  up_to: bis zu
+  menu:
+    label: Hauptmenü
+    army_lists: Meine Armeelisten
+    preferences: Einstellungen
+    help: Hilfe
+    signout: Ausloggen
+    signin: Anmelden
+    signup: Anmelden
+    languages:
+      lang: Sprache
+      de: Deutschland
+      fr: Französisch
+      en: Englisch
+      hu: ungarisch
+      it: Italienisch - Italiano
+      ko: Koreanisch
+      pl: Polieren
+      ru: Russisch
+      sr: serbisch
+      es: Spanisch - Español
+  home:
+    whoarewe:
+      title: Wer sind wir?
+      description: Der Army Builder bringt ein Team von Enthusiasten zusammen, die
+        seit über 15 Jahren in Battle spielen. Er möchte ein effektives und benutzerfreundliches
+        Werkzeug zur Erstellung Ihrer Armeelisten sein. Unterstützt von großzügigen
+        Förderern, generiert der Army Builder kein Einkommen und wird niemals um Geld
+        bitten! Darüber hinaus ist Army Builder ein Open-Source-Projekt.
+    thank: Wir danken den Illustratoren herzlich
+    army:
+      first: 'Bestien-Herden, Dämonen-Legionen, Schreckenselfen, Zwergenfeste, Hochgeborene
+        Elben, Oger-Khane, Orks und Goblins, Saurianische Alten, Vampirbündnis, Krieger
+        der Dunklen Götter, die im Besitz von <a href = "http:'
+      second: 'Reich von Sonnstahl von <a href = "http:'
+      three: 'Undying Dynasties von <a href = "http:'
+      four: 'Der Vermin-Schwarm von <a href = "http:'
+    app:
+      inprogess: Eine mobile App, die mit 9ThBuilder verbunden ist, wird derzeit entwickelt.
+      available:
+        on_platform: 'Derzeit verfügbar auf:'
+        google: Bekomm es auf Google Play
+  lexicon:
+    index:
+      show: Armee Bücher
+  army_list:
+    index:
+      title: Meine Armeelisten
+      filter: Filtern nach
+      and: und
+      name_or_notes: Name oder Anmerkungen
+      add: Neue Armee-Liste erstellen
+      search: einreichen
+    show:
+      title: Armeeliste •% {Name}
+      print: Drucken
+      edit: Bearbeiten
+      export: Export
+      duplicate: Duplikat
+      delete: Löschen
+      notes: Notizen
+      add_unit: Einheit hinzufügen
+    new:
+      title: Erstellen Sie <br
+    edit:
+      title: Aktualisieren <br
+    delete:
+      title: Löschen <br
+      information: Sind Sie sicher, diese Liste zu zerstören?
+      submit: "!!! Löschen !!!"
+    export:
+      title: Exportieren <br
+      information: 'Wählen Sie das Format für den Listenexport aus:'
+      include_magics: Magische Gegenstände einschließen
+      pdf_full: Vollständiges PDF
+      pdf_lite: Lite PDF
+      html_full: Vollständiges HTML
+      html_lite: Lite HTML
+    duplicate:
+      title: Duplizieren <br
+      information: 'Sind Sie sicher, die Liste zu duplizieren:'
+    form:
+      name: Name
+      max: Max. Punkt
+      notes: Notizen
+      submit: sparen
+  army_list_unit:
+    show:
+      edit: Bearbeiten
+      duplicate: Duplikat
+      delete: Löschen
+      troops:
+        name: Truppen
+        profile: Profil
+        M: M
+        WS: WS
+        BS: BS
+        S: S
+        T: T
+        W: W
+        I: ich
+        A: EIN
+        LD: Ld
+        E: Evoziert
+        type: Typ der Truppe
+      magic_items: Magische Gegenstände
+      magic_standards: Magische Standards
+      unit_options: Optionen
+      equipments: Ausrüstungen
+      special_rules: Sonderregeln
+      magic: Magie
+      notes: Notizen
+    new:
+      title: Fügen Sie <br hinzu
+    edit:
+      title: Bearbeiten
+      options: Optionen
+      magic_items: Magische Gegenstände
+      extra_items: Besondere
+      magic_standards: Magische Standards
+      form:
+        magic: Magie
+        notes: Notizen
+    delete:
+      title: Löschen <br
+      information: 'Sind Sie sicher, diese Einheit zu zerstören:'
+      submit: "!!! Löschen !!!"
+    duplicate:
+      title: Duplikat
+      target: 'Nach:'
+      new_army_list: Neue% {Name} Liste
+    form:
+      name: Name
+  version:
+    index:
+      title: Versionen
+      show: Show
+    show:
+      back: Zurück
+  army:
+    index:
+      title: Armeen
+      show: Show
+    show:
+      back: Zurück
+  magic:
+    range: Angebot
+    type: Art
+    duration: Dauer
+    effect: Bewirken
+    casting: Gießen
+    index:
+      title: Magie
+      show: Show
+    show:
+      back: Zurück
+  magic_spell:
+    type_lvl:
+      A: EIN
+      Zero: '0'
+      One: '1'
+      Two: '2'
+      Three: '3'
+      Four: '4'
+      Five: '5'
+      Six: '6'
+    duration:
+      OneTurn: Letzter Zug
+      Instant: Sofortig
+      Permanent: Permanent
+      RemainsInPlay: Bleibt im Spiel
+    type_target:
+      Hex: Verhexen
+      Hex_r: "| Hex |"
+      Missile: Rakete
+      Damage: Beschädigung
+      Augment: Vermehren
+      Augment_b: Vermehren
+      Focused: Fokussiert
+      Direct: Direkt
+      Ground: Boden
+      Universal: Universal
+      Universal_g: "{Universal}"
+  extra_items:
+    index:
+      title: Zusätzliche Gegenstände
+      show: Show
+  magic_items:
+    index:
+      title: Magische Gegenstände
+      show: Show
+    type: Art
+    type_target:
+      Hex: Verhexen
+      Hex_r: "| Hex |"
+      Missile: Rakete
+      Damage: Beschädigung
+      Augment: Vermehren
+      Augment_b: Vermehren
+      Focused: Fokussiert
+      Direct: Direkt
+      Ground: Boden
+      Universal: Universal
+      Universal_g: "{Universal}"
+    type_figurine:
+      Infantry: Infanterie
+      Monster: Monster
+      NoLargeTarget: Kein großes Ziel
+      AnimisteBestial: Animiste bestialisch
+      MountedCharacter: Berittener Charakter
+      Character: Charakter
+      ModelsOnFoot: Modelle zu Fuß
+      MageOnFoot: Magier zu Fuß
+      Goblins: Goblins
+      FeralOrc: Wilder Ork
+      MonarchsOfTheDead: Monarchen der Toten
+      ModelsOnChariots: Modelle auf Chariots
+    duration: Dauer
+    type_duration:
+      OneTurn: Letzter Zug
+      Instant: Sofortig
+      Permanent: Permanent
+      RemainsInPlay: Bleibt im Spiel
+  magic_standards:
+    index:
+      title: Magische Standards
+      show: Show
+  special_rules:
+    index:
+      title: Sonderregeln
+      show: Show
+  equipments:
+    index:
+      title: Ausrüstungen
+      show: Show
+  unit:
+    show:
+      size: "<strong>% {min_size} <"
+      change: "% {name} Einheiten von% {number} -Modellen zählen zu% {new_name}"
+  signin:
+    title: Anmelden
+    form:
+      register: Begleiten Sie uns
+      email: Email
+      password: Passwort
+      remember: Erinnere dich an mich
+      lost: Vergessen ?
+      submit: Anmelden
+    lost:
+      password: Ich habe mein Passwort verloren!
+      confirmation: Ich habe meine Bestätigungs-E-Mail nicht erhalten
+    information: Bei Fragen wenden Sie sich an die <a href="mailto:support@9thbuilder.com">
+      Online-Hilfe <
+  signup:
+    title: Anmelden
+    form:
+      name: Name oder Spitzname
+      email: E-Mail-Addresse
+      password: Passwort
+      confirmation: Passwort Bestätigung
+      favorite_army: "--Favorite Armee--"
+      submit: Anmelden
+    lost:
+      password: Ich habe mein Passwort verloren!
+      confirmation: Ich habe meine Bestätigungs-E-Mail nicht erhalten
+    information: Bei Fragen wenden Sie sich an die <a href="mailto:support@9thbuilder.com">
+      Online-Hilfe <
+  password_lost:
+    title: Ich habe mein Passwort verloren
+    form:
+      email: Email
+      submit: sparen
+    lost:
+      confirmation: Ich habe meine Bestätigungs-E-Mail nicht erhalten
+    information: Bei Fragen wenden Sie sich an die <a href="mailto:support@9thbuilder.com">
+      Online-Hilfe <
+  password_change:
+    title: Ändern Sie Ihr Passwort
+    form:
+      password: Passwort
+      confirmation: Passwort Bestätigung
+      submit: sparen
+    lost:
+      password: Ich habe mein Passwort verloren!
+      confirmation: Ich habe meine Bestätigungs-E-Mail nicht erhalten
+    information: Bei Fragen wenden Sie sich an die <a href="mailto:support@9thbuilder.com">
+      Online-Hilfe <
+  confirmation:
+    title: Bestätigungsanweisungen erneut senden
+    form:
+      email: Email
+      submit: sparen
+    lost:
+      password: Ich habe mein Passwort verloren!
+    information: Bei Fragen wenden Sie sich an die <a href="mailto:support@9thbuilder.com">
+      Online-Hilfe <
+  profile:
+    title: Mein Konto
+    form:
+      name: Name oder Spitzname
+      email: E-Mail-Addresse
+      favorite_army: Lieblingsarmee
+      password: Passwort
+      password_help: Lassen Sie es leer, wenn Sie Ihr Passwort nicht ändern möchten
+      confirmation: Passwort Bestätigung
+      submit: sparen
+    delete:
+      title: Kontolöschung
+      information: Du bist nicht zufrieden? <a href="mailto:support@9thbuilder.com">
+        Kontaktieren Sie uns <
+      link: zerstöre sofort dein Konto
+    back: Vorherige Seite

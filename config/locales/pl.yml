@@ -1,0 +1,339 @@
+# Files in the config/locales directory are used for internationalization
+# and are automatically loaded by Rails. If you want to use locales other
+# than English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t 'hello'
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t('hello') %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# To learn more, please read the Rails Internationalization guide
+# available at http://guides.rubyonrails.org/i18n.html.
+
+pl:
+  welcome: Witamy
+  help: Wsparcie
+  close: Blisko
+  save: Zapisać
+  next: Następny
+  per_model: ''
+  up_to: aż do
+  menu:
+    label: Menu główne
+    army_lists: Listy mojej armii
+    preferences: Preferencje
+    help: Wsparcie
+    signout: Wyloguj się
+    signin: Zaloguj
+    signup: Zapisz się
+    languages:
+      lang: Język
+      de: Niemcy
+      fr: Francuski
+      en: język angielski
+      hu: język węgierski
+      it: Włoski - Italiano
+      ko: koreański
+      pl: Polskie
+      ru: Rosyjski
+      sr: serbski
+      es: Hiszpański - Español
+  home:
+    whoarewe:
+      title: Kim jesteśmy?
+      description: Przyłączając się do zespołu entuzjastów grających od ponad 15 lat
+        w Battle, Army Builder chce być skutecznym i przyjaznym dla użytkownika narzędziem
+        do tworzenia list armii. Army Builder nie ma przychodów i nigdy nie prosi
+        o pieniądze! Ponadto Army Builder jest projektem open source.
+    thank: Serdecznie dziękujemy ilustratorom
+    army:
+      first: 'Stwory bestii, demoniczne legiony, straszne elfy, krasnoludy, elfy wysokie,
+        ogry khany, orki i gobliny, starożytni wietnamowie, przymierza wampira, wojownicy
+        ciemności Bogowie należący do <a href = "http:'
+      second: 'Imperium Sonnstahl przez <a href = "http:'
+      three: 'Niekończąca się Dynastia przez <a href = "http:'
+      four: 'Rój Robactwo przez <a href = "http:'
+    app:
+      inprogess: Aplikacja mobilna połączona z 9ThBuilder jest w fazie projektowania.
+      available:
+        on_platform: 'Aktualnie dostępne na:'
+        google: Pobierz ją w Google Play
+  lexicon:
+    index:
+      show: Książki armii
+  army_list:
+    index:
+      title: Listy mojej armii
+      filter: Filtruj według
+      and: i
+      name_or_notes: Nazwa lub notatki
+      add: Utwórz nową listę armii
+      search: Zatwierdź
+    show:
+      title: Lista wojsk •% {name}
+      print: Wydrukować
+      edit: Edytować
+      export: Eksport
+      duplicate: Duplikować
+      delete: Kasować
+      notes: Uwagi
+      add_unit: Dodaj jednostkę
+    new:
+      title: Utwórz <br
+    edit:
+      title: Aktualizacja <br
+    delete:
+      title: Usuń <br
+      information: 'Czy na pewno usunąć tę listę:'
+      submit: "!!! Kasować !!!"
+    export:
+      title: Eksport <br
+      information: 'Wybierz format wyeksportowania listy:'
+      include_magics: Uwzględnij elementy magiczne
+      pdf_full: Pełny PDF
+      pdf_lite: Lite PDF
+      html_full: Pełny HTML
+      html_lite: Lite HTML
+    duplicate:
+      title: Duplikat <br
+      information: 'Czy na pewno chcesz powielić listę:'
+    form:
+      name: Nazwa
+      max: Maks. Punkt
+      notes: Uwagi
+      submit: Zapisać
+  army_list_unit:
+    show:
+      edit: Edytować
+      duplicate: Duplikować
+      delete: Kasować
+      troops:
+        name: Wojsko
+        profile: Profil
+        M: M
+        WS: WS
+        BS: BS
+        S: S
+        T: T
+        W: W
+        I: ja
+        A: ZA
+        LD: Ld
+        E: Wywołany
+        type: Typ Troopa
+      magic_items: Magiczne przedmioty
+      magic_standards: Magiczne standardy
+      unit_options: Opcje
+      equipments: Urządzenia
+      special_rules: Specjalne zasady
+      magic: magia
+      notes: Uwagi
+    new:
+      title: Dodaj <br
+    edit:
+      title: Edytować
+      options: Opcje
+      magic_items: Magiczne przedmioty
+      extra_items: Specjalny
+      magic_standards: Magiczne standardy
+      form:
+        magic: magia
+        notes: Uwagi
+    delete:
+      title: Usuń <br
+      information: 'Czy na pewno zniszczyć tę jednostkę:'
+      submit: "!!! Kasować !!!"
+    duplicate:
+      title: Duplikować
+      target: 'Do:'
+      new_army_list: Nowa lista% {name}
+    form:
+      name: Nazwa
+  version:
+    index:
+      title: Wersje
+      show: Pokazać
+    show:
+      back: Plecy
+  army:
+    index:
+      title: Armia
+      show: Pokazać
+    show:
+      back: Plecy
+  magic:
+    range: Zasięg
+    type: Rodzaj
+    duration: Trwanie
+    effect: Efekt
+    casting: Odlew
+    index:
+      title: Magia
+      show: Pokazać
+    show:
+      back: Plecy
+  magic_spell:
+    type_lvl:
+      A: ZA
+      Zero: '0'
+      One: '1'
+      Two: '2'
+      Three: '3'
+      Four: '4'
+      Five: '5'
+      Six: '6'
+    duration:
+      OneTurn: Ostatni jeden z kolei
+      Instant: Natychmiastowy
+      Permanent: Stały
+      RemainsInPlay: Pozostaje w grze
+    type_target:
+      Hex: Klątwa
+      Hex_r: "| Hex |"
+      Missile: Pocisk
+      Damage: Uszkodzić
+      Augment: Zwiększać
+      Augment_b: Zwiększać
+      Focused: Koncentruje się
+      Direct: Bezpośredni
+      Ground: Ziemia
+      Universal: uniwersalny
+      Universal_g: "{Uniwersalny}"
+  extra_items:
+    index:
+      title: Dodatkowe pozycje
+      show: Pokazać
+  magic_items:
+    index:
+      title: Magiczne przedmioty
+      show: Pokazać
+    type: Rodzaj
+    type_target:
+      Hex: Klątwa
+      Hex_r: "| Hex |"
+      Missile: Pocisk
+      Damage: Uszkodzić
+      Augment: Zwiększać
+      Augment_b: Zwiększać
+      Focused: Koncentruje się
+      Direct: Bezpośredni
+      Ground: Ziemia
+      Universal: uniwersalny
+      Universal_g: "{Uniwersalny}"
+    type_figurine:
+      Infantry: Piechota
+      Monster: Potwór
+      NoLargeTarget: Nie ma dużego celu
+      AnimisteBestial: Animiste bestial
+      MountedCharacter: Mocowany znak
+      Character: Postać
+      ModelsOnFoot: Modele na stopie
+      MageOnFoot: Mag Pieszo
+      Goblins: Gobliny
+      FeralOrc: Feral Orc
+      MonarchsOfTheDead: Monarchowie zmarłych
+      ModelsOnChariots: modele na Chariots
+    duration: Trwanie
+    type_duration:
+      OneTurn: Ostatni jeden z kolei
+      Instant: Natychmiastowy
+      Permanent: Stały
+      RemainsInPlay: Pozostaje w grze
+  magic_standards:
+    index:
+      title: Magiczne standardy
+      show: Pokazać
+  special_rules:
+    index:
+      title: Specjalne zasady
+      show: Pokazać
+  equipments:
+    index:
+      title: Urządzenia
+      show: Pokazać
+  unit:
+    show:
+      size: "<strong>% {min_size} <"
+      change: "% {name} jednostki% {number} modeli liczą się do% {new_name}"
+  signin:
+    title: Zaloguj
+    form:
+      register: Dołącz do nas
+      email: E-mail
+      password: Hasło
+      remember: Zapamiętaj mnie
+      lost: Zapomniałeś?
+      submit: Zaloguj
+    lost:
+      password: Zgubiłem hasło!
+      confirmation: Nie otrzymałem e-maila z potwierdzeniem
+    information: W razie jakichkolwiek pytań skontaktuj się z nami na <a href="mailto:support@9thbuilder.com">
+      pomocy online <
+  signup:
+    title: Zapisz się
+    form:
+      name: Imię lub pseudonim
+      email: Adres e-mail
+      password: Hasło
+      confirmation: Potwierdzenie hasła
+      favorite_army: "- ulubiona armia -"
+      submit: Zapisz się
+    lost:
+      password: Zgubiłem hasło!
+      confirmation: Nie otrzymałem e-maila z potwierdzeniem
+    information: W razie jakichkolwiek pytań skontaktuj się z nami na <a href="mailto:support@9thbuilder.com">
+      pomocy online <
+  password_lost:
+    title: Straciłem hasło
+    form:
+      email: E-mail
+      submit: Zapisać
+    lost:
+      confirmation: Nie otrzymałem e-maila z potwierdzeniem
+    information: W razie jakichkolwiek pytań skontaktuj się z nami na <a href="mailto:support@9thbuilder.com">
+      pomocy online <
+  password_change:
+    title: Zmień swoje hasło
+    form:
+      password: Hasło
+      confirmation: Potwierdzenie hasła
+      submit: Zapisać
+    lost:
+      password: Zgubiłem hasło!
+      confirmation: Nie otrzymałem e-maila z potwierdzeniem
+    information: W razie jakichkolwiek pytań skontaktuj się z nami na <a href="mailto:support@9thbuilder.com">
+      pomocy online <
+  confirmation:
+    title: Prześlij ponownie instrukcje potwierdzenia
+    form:
+      email: E-mail
+      submit: Zapisać
+    lost:
+      password: Zgubiłem hasło!
+    information: W razie jakichkolwiek pytań skontaktuj się z nami na <a href="mailto:support@9thbuilder.com">
+      pomocy online <
+  profile:
+    title: Moje konto
+    form:
+      name: Imię lub pseudonim
+      email: Adres e-mail
+      favorite_army: Ulubiona armia
+      password: Hasło
+      password_help: Zostaw to puste, jeśli nie chcesz zmienić hasła
+      confirmation: Potwierdzenie hasła
+      submit: Zapisać
+    delete:
+      title: Usunięcie konta
+      information: Nie jesteś zadowolony? <a href="mailto:support@9thbuilder.com">
+        Skontaktuj się z nami <
+      link: natychmiast zniszczyć konto
+    back: Poprzednia strona

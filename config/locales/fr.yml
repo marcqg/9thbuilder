@@ -58,6 +58,11 @@ fr:
       second: "Empire of Sonnstahl par <a href=\"http://wraithdt.deviantart.com/art/Battle-of-Blackheath-416207912\" target=\"_blank\">Wraithdt</a>"
       three: "Undying Dynasties par <a href=\"http://theclockworkpainter.deviantart.com/art/Queen-Khalida-493461199\" target=\"_blank\">Theclockworkpainter</a>"
       four: "The Vermin Swarm par <a href=\"http://getsugadante.deviantart.com/art/Warhammer-Fantasy-Rat-Ogre-s-fury-587662192\" target=\"_blank\">GetsugaDante</a>"
+    app:
+      inprogess: "Une application mobile connecté au 9ThBuilder est en cours de développement."
+      available:
+        on_platform: "Actuellement disponible sur :"
+        google: "Obtenez la sur Google Play"
 
   army_list:
     index:
