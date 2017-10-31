@@ -19,7 +19,9 @@
 <div class="row" id="app-army-list">
 
   <div class="col-md-9">
-    <h4 class="text-center"><%= @army_list.army_organisation.name %></h4>
+    <%if @army_list.army.army_organisations.size > 1 %>
+      <h4 class="text-center"><%= @army_list.army_organisation.name %></h4>
+    <%end%>
     <p><%= @army_list.army_organisation.description %></p>
     <ul class="list-flex">
       <% @army_list.army_organisation.organisation_groups.each do |organisation_group| %>
