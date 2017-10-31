@@ -40,6 +40,10 @@ class NinthAge::UnitOption < ApplicationRecord
 
   attr_accessor :army_filter
 
+  def is_magics_or_extra
+    return is_magic_items || is_magic_standards || is_extra_items
+  end
+
   def army_filter
     @army_filter ||= unit.try(:army).try(:id)
   end
