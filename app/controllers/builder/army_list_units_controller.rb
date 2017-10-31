@@ -20,9 +20,9 @@ module Builder
       @army_list_unit = @army_list.army_list_units.includes({army_list_unit_troops: [:troop]}).find(params[:id])
 
       @available_unit_options = @army_list_unit.unit.unit_options.without_parent
-      @magic_items_option = @army_list_unit.unit.unit_options.only_magic_items.first
-      @extra_items_option = @army_list_unit.unit.unit_options.only_extra_items.first
-      @magic_standards_option = @army_list_unit.unit.unit_options.only_magic_standards.first
+      @magic_items_option = @army_list_unit.unit.unit_options.only_magic_items.order('value_points DESC').first
+      @extra_items_option = @army_list_unit.unit.unit_options.only_extra_items.order('value_points DESC').first
+      @magic_standards_option = @army_list_unit.unit.unit_options.only_magic_standards.order('value_points DESC').first
     end
 
     # GET /army_list/1/army_list_units/1/new_from
