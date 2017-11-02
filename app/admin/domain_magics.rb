@@ -1,5 +1,5 @@
-ActiveAdmin.register NinthAge::Magic do
-  menu parent: 'Ninth Age Magic', priority: 1
+ActiveAdmin.register NinthAge::DomainMagic do
+  menu parent: 'Ninth Age Domain Magic', priority: 1
 
   permit_params :name, :version_id, :logo, :locale, translations_attributes: [:id, :name, :locale, :_destroy]
 
@@ -8,10 +8,10 @@ ActiveAdmin.register NinthAge::Magic do
   filter :name
 
   before_action only: [:create, :update] do
-    params[:ninth_age_magic][:translations_attributes].each do |k, v|
+    params[:ninth_age_domain_magic][:translations_attributes].each do |k, v|
       if v.except('id', 'locale').all? { |_, v| v.blank? }
         v.merge!(_destroy: '1')
-        params[:ninth_age_magic][:translations_attributes][k] = v
+        params[:ninth_age_domain_magic][:translations_attributes][k] = v
         v.each do |p|
           puts p
         end

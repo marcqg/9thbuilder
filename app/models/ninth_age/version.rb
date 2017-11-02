@@ -1,6 +1,6 @@
 class NinthAge::Version < ApplicationRecord
   has_many :armies, dependent: :destroy
-  has_many :magics, dependent: :destroy
+  has_many :domain_magics, dependent: :destroy
   has_many :special_rules, dependent: :destroy
   has_many :equipments, dependent: :destroy
   has_many :extra_items, dependent: :destroy

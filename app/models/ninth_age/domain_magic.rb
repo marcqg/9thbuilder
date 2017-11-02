@@ -1,7 +1,7 @@
-class NinthAge::Magic < ApplicationRecord
+class NinthAge::DomainMagic < ApplicationRecord
 
   belongs_to :version
-  has_many :magic_spells
+  has_many :domain_magic_spells
 
   has_many :unit_options
 

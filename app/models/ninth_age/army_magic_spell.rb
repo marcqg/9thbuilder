@@ -1,6 +1,6 @@
-class NinthAge::MagicSpell < ApplicationRecord
+class NinthAge::ArmyMagicSpell < ApplicationRecord
 
-  belongs_to :magic
+  belongs_to :army
 
   enum type_lvl: { Zero: 0, One: 1, Two: 2, Three: 3, Four: 4, Five: 5, Six: 6, A: 7, T: 8}
 

@@ -3,7 +3,7 @@
 
   <div class="row">
     <article class="version-<%= @version.id %> col-md-3 col-xs-12 col-sm-6 text-center">
-      <%= link_to (ninth_age_magics_path(@version.id)) do %>
+      <%= link_to (ninth_age_domain_magics_path(@version.id)) do %>
           <%= image_tag asset_path('magic.jpg'), alt: t('magic.index.title'), height: 99, class: 'block-center' %>
           <h4><%= t('magic.index.title') %></h4>
       <% end %>

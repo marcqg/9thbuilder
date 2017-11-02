@@ -13,6 +13,8 @@ class NinthAge::Unit < ApplicationRecord
   has_many :mount_options, class_name: 'UnitOption', foreign_key: 'mount_id', dependent: :nullify
   has_many :organisation_changes, dependent: :destroy
 
+  enum type_carac: {V1: 0, V2: 1}
+  enum size: {Standard: 0, Large: 1, Gigantic: 2}
   enum base: { TwentyTwenty: 0, TwentyFiveTwentyFive: 1, FortyForty: 2, TwentyFiveFifty: 4, FiftyFifty: 5, FiftySeventyFive: 6, FiftyHundred: 7, SixtyHundred: 8, SixtyRound: 9, FortyTwenty: 10, FortySixty: 11, HundredFiftyHundred: 12, SeventyFiveRound: 13, FortyRound: 14, SeventyFiveFifty: 15, HundredHundred: 16 , HundredFifty: 17 }
 
   translates :name
