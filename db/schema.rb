@@ -218,6 +218,7 @@ ActiveRecord::Schema.define(version: 20171031203724) do
     t.integer  "version_id", default: 0, null: false
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
+    t.integer  "type_lvl",   default: 0, null: false
     t.index ["version_id"], name: "index_ninth_age_equipments_on_version_id", using: :btree
   end
 
@@ -424,6 +425,7 @@ ActiveRecord::Schema.define(version: 20171031203724) do
     t.integer  "army_id"
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
+    t.integer  "type_lvl",   default: 0, null: false
     t.index ["army_id"], name: "index_ninth_age_special_rules_on_army_id", using: :btree
     t.index ["version_id"], name: "index_ninth_age_special_rules_on_version_id", using: :btree
   end
@@ -452,10 +454,10 @@ ActiveRecord::Schema.define(version: 20171031203724) do
   end
 
   create_table "ninth_age_troops", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
-    t.integer "unit_id",                                           null: false
+    t.integer "unit_id",                                                       null: false
     t.integer "troop_type_id"
     t.decimal "value_points",              precision: 8, scale: 2
-    t.integer "position",                                          null: false
+    t.integer "position",                                                      null: false
     t.string  "M",              limit: 15
     t.string  "WS",             limit: 15
     t.string  "BS",             limit: 15
@@ -468,6 +470,12 @@ ActiveRecord::Schema.define(version: 20171031203724) do
     t.integer "min_size"
     t.integer "unit_option_id"
     t.string  "E",              limit: 15
+    t.integer "type_carac",                                        default: 0, null: false
+    t.string  "carac_att"
+    t.string  "carac_of"
+    t.string  "carac_str"
+    t.string  "carac_ap"
+    t.string  "carac_agi"
     t.index ["troop_type_id"], name: "index_ninth_age_troops_on_troop_type_id", using: :btree
     t.index ["unit_id"], name: "index_ninth_age_troops_on_unit_id", using: :btree
     t.index ["unit_option_id"], name: "index_ninth_age_troops_on_unit_option_id", using: :btree
@@ -524,18 +532,31 @@ ActiveRecord::Schema.define(version: 20171031203724) do
   end
 
   create_table "ninth_age_units", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
-    t.integer "army_id",                                                             null: false
-    t.integer "min_size",                                            default: 1,     null: false
+    t.integer "army_id",                                                                null: false
+    t.integer "min_size",                                               default: 1,     null: false
     t.integer "max_size"
-    t.decimal "value_points",                precision: 8, scale: 2
+    t.decimal "value_points",                   precision: 8, scale: 2
     t.string  "magic"
-    t.text    "notes",         limit: 65535
-    t.boolean "is_mount",                                            default: false, null: false
-    t.integer "type_figurine",                                       default: 0,     null: false
-    t.integer "base",                                                default: 0,     null: false
-    t.integer "max",                                                 default: 0
+    t.text    "notes",            limit: 65535
+    t.boolean "is_mount",                                               default: false, null: false
+    t.integer "type_figurine",                                          default: 0,     null: false
+    t.integer "base",                                                   default: 0,     null: false
+    t.integer "max",                                                    default: 0
     t.integer "max_model"
-    t.integer "order",                                               default: 0,     null: false
+    t.integer "order",                                                  default: 0,     null: false
+    t.integer "size",                                                   default: 0,     null: false
+    t.integer "type_carac",                                             default: 0,     null: false
+    t.string  "carac_ground_adv"
+    t.string  "carac_ground_mar"
+    t.string  "carac_fly_adv"
+    t.string  "carac_fly_mar"
+    t.string  "carac_dis"
+    t.string  "carac_evoked"
+    t.string  "carac_hp"
+    t.string  "carac_def"
+    t.string  "carac_res"
+    t.string  "carac_as"
+    t.string  "carac_spe"
     t.index ["army_id"], name: "index_ninth_age_units_on_army_id", using: :btree
   end
 
@@ -550,12 +571,13 @@ ActiveRecord::Schema.define(version: 20171031203724) do
   end
 
   create_table "ninth_age_versions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "major",      default: 0,     null: false
-    t.integer  "minor",      default: 0,     null: false
-    t.integer  "fix",        default: 0,     null: false
-    t.boolean  "public",     default: false, null: false
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.integer  "major",       default: 0,     null: false
+    t.integer  "minor",       default: 0,     null: false
+    t.integer  "fix",         default: 0,     null: false
+    t.boolean  "public",      default: false, null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.boolean  "is_released", default: false, null: false
   end
 
   create_table "roles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

@@ -1,11 +1,14 @@
 module NinthAge
   class VersionsController < ApplicationController
-    before_action :set_version, only: [:show]
 
     # GET /versions
     # GET /versions.json
     def index
-      @versions = NinthAge::Version.all
+      @versions = NinthAge::Version.all.includes(:translations)
+      if !user_signed_in? || !current_user.has_role?(:Administrator)
+        @versions = @versions.where(:public => true)
+      end
+
       respond_to do |format|
         format.html
         format.json { head :no_content }
@@ -15,18 +18,16 @@ module NinthAge
     # GET /versions/1
     # GET /versions/1.json
     def show
+
+      @version = NinthAge::Version.find(params[:id])
+      if !@version.public && (!user_signed_in? || !current_user.has_role?(:Administrator))
+        raise ActionController::RoutingError.new('Not Found')
+      end
+
       respond_to do |format|
         format.html
         format.json { head :no_content }
       end
-    end
-
-    private
-
-    # -- Utilities
-
-    def set_version
-      @version = NinthAge::Version.find(params[:id])
     end
   end
 end

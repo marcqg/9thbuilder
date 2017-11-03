@@ -1,6 +1,7 @@
 module Builder
   class ArmyListsController < ApplicationController
     before_action :authenticate_user!
+    before_action :load_armies, only: [:new, :edit]
 
     # GET /army_lists
     # GET /army_lists.xml
@@ -160,6 +161,17 @@ module Builder
     end
 
     private
+
+    def load_armies
+      if !current_user.has_role?(:Administrator)
+        @armies = NinthAge::Army.includes([:translations, :version])
+                      .where('ninth_age_versions.public = ?', true)
+                      .order(:name)
+      else
+        @armies = NinthAge::Army.includes([:translations, :version])
+                      .order(:name)
+      end
+    end
 
     def army_list_params
       params.require(:builder_army_list).permit(:army_id, :army_organisation_id, :name, :notes)
