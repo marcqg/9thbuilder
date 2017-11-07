@@ -170,14 +170,38 @@ ActiveRecord::Schema.define(version: 20171031203724) do
     t.index ["ninth_age_army_id"], name: "index_ninth_age_army_translations_on_ninth_age_army_id", using: :btree
   end
 
+  create_table "ninth_age_domain_magic_spell_translations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "ninth_age_domain_magic_spell_id",               null: false
+    t.string   "locale",                                        null: false
+    t.datetime "created_at",                                    null: false
+    t.datetime "updated_at",                                    null: false
+    t.string   "name"
+    t.string   "range"
+    t.string   "casting_value"
+    t.text     "effect",                          limit: 65535
+    t.index ["locale"], name: "index_ninth_age_domain_magic_spell_translations_on_locale", using: :btree
+    t.index ["ninth_age_domain_magic_spell_id"], name: "index_ninth_age_domain_magic_translations_on_magic_id", using: :btree
+  end
+
   create_table "ninth_age_domain_magic_spells", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "magic_id",                null: false
-    t.integer  "type_lvl",    default: 0
-    t.integer  "type_target", default: 0
-    t.integer  "duration",    default: 0
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
-    t.index ["magic_id"], name: "index_ninth_age_domain_magic_spells_on_magic_id", using: :btree
+    t.integer  "domain_magic_id",             null: false
+    t.integer  "type_lvl",        default: 0
+    t.integer  "type_target",     default: 0
+    t.integer  "duration",        default: 0
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.index ["domain_magic_id"], name: "index_ninth_age_domain_magic_spells_on_domain_magic_id", using: :btree
+  end
+
+  create_table "ninth_age_domain_magic_translations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "ninth_age_domain_magic_id",               null: false
+    t.string   "locale",                                  null: false
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
+    t.string   "name"
+    t.text     "description",               limit: 65535
+    t.index ["locale"], name: "index_ninth_age_domain_magic_translations_on_locale", using: :btree
+    t.index ["ninth_age_domain_magic_id"], name: "index_ninth_age_domain_magic_translations_on_magic_id", using: :btree
   end
 
   create_table "ninth_age_domain_magics", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -298,19 +322,6 @@ ActiveRecord::Schema.define(version: 20171031203724) do
     t.index ["version_id"], name: "index_ninth_age_magic_items_on_version_id", using: :btree
   end
 
-  create_table "ninth_age_magic_spell_translations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "ninth_age_magic_spell_id",               null: false
-    t.string   "locale",                                 null: false
-    t.datetime "created_at",                             null: false
-    t.datetime "updated_at",                             null: false
-    t.string   "name"
-    t.string   "range"
-    t.string   "casting_value"
-    t.text     "effect",                   limit: 65535
-    t.index ["locale"], name: "index_ninth_age_magic_spell_translations_on_locale", using: :btree
-    t.index ["ninth_age_magic_spell_id"], name: "index_4144dde43f58acef490f4c0a79f9a2a25ea573c8", using: :btree
-  end
-
   create_table "ninth_age_magic_standard_translations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "ninth_age_magic_standard_id",               null: false
     t.string   "locale",                                    null: false
@@ -331,17 +342,6 @@ ActiveRecord::Schema.define(version: 20171031203724) do
     t.index ["army_id"], name: "index_ninth_age_magic_standards_on_army_id", using: :btree
     t.index ["override_id"], name: "index_ninth_age_magic_standards_on_override_id", using: :btree
     t.index ["version_id"], name: "index_ninth_age_magic_standards_on_version_id", using: :btree
-  end
-
-  create_table "ninth_age_magic_translations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "ninth_age_magic_id",               null: false
-    t.string   "locale",                           null: false
-    t.datetime "created_at",                       null: false
-    t.datetime "updated_at",                       null: false
-    t.string   "name"
-    t.text     "description",        limit: 65535
-    t.index ["locale"], name: "index_ninth_age_magic_translations_on_locale", using: :btree
-    t.index ["ninth_age_magic_id"], name: "index_ninth_age_magic_translations_on_ninth_age_magic_id", using: :btree
   end
 
   create_table "ninth_age_organisation_changes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -571,13 +571,12 @@ ActiveRecord::Schema.define(version: 20171031203724) do
   end
 
   create_table "ninth_age_versions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "major",       default: 0,     null: false
-    t.integer  "minor",       default: 0,     null: false
-    t.integer  "fix",         default: 0,     null: false
-    t.boolean  "public",      default: false, null: false
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
-    t.boolean  "is_released", default: false, null: false
+    t.integer  "major",      default: 0,     null: false
+    t.integer  "minor",      default: 0,     null: false
+    t.integer  "fix",        default: 0,     null: false
+    t.boolean  "public",     default: false, null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
   end
 
   create_table "roles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -650,7 +649,9 @@ ActiveRecord::Schema.define(version: 20171031203724) do
   add_foreign_key "ninth_age_army_organisation_translations", "ninth_age_army_organisations", on_delete: :cascade
   add_foreign_key "ninth_age_army_organisations", "ninth_age_armies", column: "army_id"
   add_foreign_key "ninth_age_army_translations", "ninth_age_armies", on_delete: :cascade
-  add_foreign_key "ninth_age_domain_magic_spells", "ninth_age_domain_magics", column: "magic_id"
+  add_foreign_key "ninth_age_domain_magic_spell_translations", "ninth_age_domain_magic_spells", on_delete: :cascade
+  add_foreign_key "ninth_age_domain_magic_spells", "ninth_age_domain_magics", column: "domain_magic_id"
+  add_foreign_key "ninth_age_domain_magic_translations", "ninth_age_domain_magics", on_delete: :cascade
   add_foreign_key "ninth_age_domain_magics", "ninth_age_versions", column: "version_id"
   add_foreign_key "ninth_age_equipment_translations", "ninth_age_equipments", on_delete: :cascade
   add_foreign_key "ninth_age_equipment_unit_troops", "ninth_age_equipments", column: "equipment_id"
@@ -665,11 +666,9 @@ ActiveRecord::Schema.define(version: 20171031203724) do
   add_foreign_key "ninth_age_magic_items", "ninth_age_armies", column: "army_id"
   add_foreign_key "ninth_age_magic_items", "ninth_age_magic_item_categories", column: "magic_item_category_id"
   add_foreign_key "ninth_age_magic_items", "ninth_age_magic_items", column: "override_id"
-  add_foreign_key "ninth_age_magic_spell_translations", "ninth_age_domain_magic_spells", column: "ninth_age_magic_spell_id", on_delete: :cascade
   add_foreign_key "ninth_age_magic_standard_translations", "ninth_age_magic_standards", on_delete: :cascade
   add_foreign_key "ninth_age_magic_standards", "ninth_age_armies", column: "army_id"
   add_foreign_key "ninth_age_magic_standards", "ninth_age_magic_standards", column: "override_id"
-  add_foreign_key "ninth_age_magic_translations", "ninth_age_domain_magics", column: "ninth_age_magic_id", on_delete: :cascade
   add_foreign_key "ninth_age_organisation_changes", "ninth_age_organisations", column: "default_organisation_id"
   add_foreign_key "ninth_age_organisation_changes", "ninth_age_organisations", column: "new_organisation_id"
   add_foreign_key "ninth_age_organisation_changes", "ninth_age_units", column: "unit_id"

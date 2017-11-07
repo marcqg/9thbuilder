@@ -1,8 +1,29 @@
 class AddMagicArmy < ActiveRecord::Migration[5.0]
   def change
 
+
+    remove_foreign_key :ninth_age_magic_translations, name: :fk_rails_a14a9a3105
+    remove_index :ninth_age_magic_translations,  :ninth_age_magic_id
+
     rename_table :ninth_age_magics, :ninth_age_domain_magics
+    rename_table :ninth_age_magic_translations, :ninth_age_domain_magic_translations
+    rename_column :ninth_age_domain_magic_translations, :ninth_age_magic_id, :ninth_age_domain_magic_id
+
+    add_index :ninth_age_domain_magic_translations,  :ninth_age_domain_magic_id, :name => 'index_ninth_age_domain_magic_translations_on_magic_id'
+    add_foreign_key :ninth_age_domain_magic_translations, :ninth_age_domain_magics, column: :ninth_age_domain_magic_id, on_delete: :cascade
+
+    remove_foreign_key :ninth_age_magic_spell_translations, name: :fk_rails_9020067c9b
+    remove_index :ninth_age_magic_spell_translations,  :ninth_age_magic_spell_id
+
     rename_table :ninth_age_magic_spells, :ninth_age_domain_magic_spells
+    rename_column :ninth_age_domain_magic_spells, :magic_id, :domain_magic_id
+
+    rename_table :ninth_age_magic_spell_translations, :ninth_age_domain_magic_spell_translations
+    rename_column :ninth_age_domain_magic_spell_translations, :ninth_age_magic_spell_id, :ninth_age_domain_magic_spell_id
+    
+    add_index :ninth_age_domain_magic_spell_translations,  :ninth_age_domain_magic_spell_id, :name => 'index_ninth_age_domain_magic_translations_on_magic_id'
+    add_foreign_key :ninth_age_domain_magic_spell_translations, :ninth_age_domain_magic_spells, column: :ninth_age_domain_magic_spell_id, on_delete: :cascade
+
 
     create_table :ninth_age_army_magic_spells do |t|
       t.belongs_to :army, index: false, null: false, default: 0

@@ -1,6 +1,6 @@
 class NinthAge::DomainMagicSpell < ApplicationRecord
 
-  belongs_to :magic
+  belongs_to :domain_magic
 
   enum type_lvl: { Zero: 0, One: 1, Two: 2, Three: 3, Four: 4, Five: 5, Six: 6, A: 7, T: 8}
 
@@ -12,10 +12,10 @@ class NinthAge::DomainMagicSpell < ApplicationRecord
     super + '-ninth-age-' + Globalize.locale.to_s
   end
 
-  bitmask :type_target, :as => [:Hex, :Hex_r, :Missile, :Damage, :Augment, :Augment_b, :Focused, :Direct, :Ground, :Universal, :Universal_g], :null => false
+  bitmask :type_target, :as => [:Hex, :Hex_r, :Missile, :Damage, :Augment, :Augment_b, :Focused, :Direct, :Ground, :Universal, :Universal_g, :Caster], :null => false
   bitmask :duration, :as => [:OneTurn, :Instant, :Permanent, :RemainsInPlay], :null => false
 
-  validates :magic_id, :type_lvl, :duration, presence: true
+  validates :domain_magic_id, :type_lvl, :duration, presence: true
 
   def highlight(text)
     if text != nil
