@@ -5,7 +5,7 @@
         <%= image_tag magic.logo.url, alt: magic.name, height: 99, class: 'block-center' %>
         <h4><%= magic.name %></h4>
         <p class="small">(<%= magic.version.name %>)</p>
-        <%= link_to t('magic.index.show'), ninth_age_magic_path(magic) %>
+        <%= link_to t('magic.index.show'), ninth_age_domain_magic_path(magic) %>
       </article>
   <% end %>
 </div>

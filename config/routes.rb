@@ -46,7 +46,7 @@ Rails.application.routes.draw do
     namespace :ninth_age do
       resources :versions,              only: [:index, :show]
 
-      resources :domain_magics,                only: [:show]
+      resources :domain_magics,         only: [:show]
       resources :armies,                only: [:show]
       resources :army_organisations,    only: [:show]
       resources :organisations,         only: [:show]
@@ -70,7 +70,7 @@ Rails.application.routes.draw do
       end
 
       scope '/version-:version_id' do
-        resources :domain_magics,              only: [:index]
+        resources :domain_magics,       only: [:index]
         resources :armies,              only: [:index]
         resources :special_rules,       only: [:index]
         resources :equipments,          only: [:index]
