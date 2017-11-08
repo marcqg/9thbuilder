@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171031203724) do
+ActiveRecord::Schema.define(version: 20171108132834) do
 
   create_table "active_admin_comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.integer  "resource_id",                 null: false
@@ -531,6 +531,21 @@ ActiveRecord::Schema.define(version: 20171031203724) do
     t.index ["ninth_age_unit_id"], name: "index_ninth_age_unit_translations_on_ninth_age_unit_id", using: :btree
   end
 
+  create_table "ninth_age_unit_type_translations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "ninth_age_unit_type_id", null: false
+    t.string   "locale",                 null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.string   "name"
+    t.index ["locale"], name: "index_ninth_age_unit_type_translations_on_locale", using: :btree
+    t.index ["ninth_age_unit_type_id"], name: "index_deefb4eb525c24946ac04ddd01ed6b8f6e5f99e2", using: :btree
+  end
+
+  create_table "ninth_age_unit_types", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "ninth_age_units", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.integer "army_id",                                                                null: false
     t.integer "min_size",                                               default: 1,     null: false
@@ -557,7 +572,9 @@ ActiveRecord::Schema.define(version: 20171031203724) do
     t.string  "carac_res"
     t.string  "carac_as"
     t.string  "carac_spe"
+    t.integer "unit_type_id"
     t.index ["army_id"], name: "index_ninth_age_units_on_army_id", using: :btree
+    t.index ["unit_type_id"], name: "fk_rails_09d59f4e7e", using: :btree
   end
 
   create_table "ninth_age_version_translations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -692,7 +709,9 @@ ActiveRecord::Schema.define(version: 20171031203724) do
   add_foreign_key "ninth_age_unit_options", "ninth_age_units", column: "mount_id", on_delete: :nullify
   add_foreign_key "ninth_age_unit_options", "ninth_age_units", column: "unit_id"
   add_foreign_key "ninth_age_unit_translations", "ninth_age_units", on_delete: :cascade
+  add_foreign_key "ninth_age_unit_type_translations", "ninth_age_unit_types", on_delete: :cascade
   add_foreign_key "ninth_age_units", "ninth_age_armies", column: "army_id"
+  add_foreign_key "ninth_age_units", "ninth_age_unit_types", column: "unit_type_id", on_delete: :cascade
   add_foreign_key "users", "ninth_age_armies", column: "favorite_army_id", on_delete: :nullify
   add_foreign_key "users_roles", "roles"
   add_foreign_key "users_roles", "users"

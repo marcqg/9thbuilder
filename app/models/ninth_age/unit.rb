@@ -3,6 +3,8 @@ class NinthAge::Unit < ApplicationRecord
 
   belongs_to :army
 
+  belongs_to :troop_type
+  
   has_and_belongs_to_many :organisations
 
   has_many :army_list_units, dependent: :destroy
