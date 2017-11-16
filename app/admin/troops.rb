@@ -59,6 +59,7 @@ ActiveAdmin.register NinthAge::Troop do
       f.input :unit, collection: NinthAge::Unit.includes(:army).collect { |u| [u.army.name + ' - ' + u.name, u.id] }
       f.input :unit_option, collection: NinthAge::UnitOption.includes(unit: [:army]).collect { |uo| [uo.unit.army.name + ' - ' + uo.unit.name + ' - ' + uo.name, uo.id] }
       f.input :troop_type, collection: NinthAge::TroopType.order(:name)
+      f.input :type_carac
       f.input :M
       f.input :WS
       f.input :BS
@@ -68,6 +69,11 @@ ActiveAdmin.register NinthAge::Troop do
       f.input :I
       f.input :A
       f.input :LD
+      f.input :carac_att
+      f.input :carac_of
+      f.input :carac_str
+      f.input :carac_ap
+      f.input :carac_agi
       f.input :value_points
       f.input :min_size
       f.input :position
@@ -85,6 +91,7 @@ ActiveAdmin.register NinthAge::Troop do
       row :troop_type
       row :unit_option
       row :value_points
+      row :type_carac
       row :M
       row :WS
       row :BS
@@ -94,6 +101,11 @@ ActiveAdmin.register NinthAge::Troop do
       row :I
       row :A
       row :LD
+      row :carac_att
+      row :carac_of
+      row :carac_str
+      row :carac_ap
+      row :carac_agi
       row :min_size
       row :position
     end

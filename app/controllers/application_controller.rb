@@ -24,7 +24,7 @@ class ApplicationController < ActionController::Base
   end
 
   rescue_from ActiveRecord::RecordNotFound, with: :not_found
-  rescue_from Exception, with: :not_found
+  # rescue_from Exception, with: :error
   rescue_from ActionController::RoutingError, with: :not_found
 
   def raise_not_found

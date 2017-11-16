@@ -192,16 +192,36 @@
   padding: 0;
 
   li {
-    padding: 6px 0 6px 15px;
+    padding: 6px 0;
     list-style: none;
     margin-bottom: 5px;
-    background: image-url("bg_army_list_unit_overview.png") repeat-x;
+    background: image-url("bg_army_list_unit_overview_content.png") repeat-x;
+
+    &::before, &::after{
+      content: "";
+      width: 16px;
+      height: 55px;
+      display: block;
+      position: absolute;
+      top: 0;
+    }
+
+    &::before{
+      background: url('bg_army_list_unit_overview_left.png') no-repeat;
+      left: 0;
+    }
+
+    &::after{
+      background: url('bg_army_list_unit_overview_right.png') no-repeat;
+      right: 0;
+    }
   }
 
   .position {
     position: relative;
+    z-index: 2;
     top: 7px;
-    left: -25px;
+    left: -10px;
     background: white;
     padding: 2px 3px;
     border: 1px solid black;
@@ -215,7 +235,7 @@
 
   .name {
     float: left;
-    width: 360px;
+    width: 33%;
     font-size: 14px;
 
     &:hover {
@@ -235,10 +255,12 @@
 
   .value_points {
     float: left;
-    width: 110px;
+    width: 10%;
     font-size: 10px;
     text-align: center;
     text-transform: uppercase;
+    background: image-url("bg_army_list_unit_overview_value_points.png") no-repeat;
+    background-position: center;
 
     strong {
       display: block;
@@ -247,7 +269,7 @@
   }
 
   .actions {
-    margin: 8px 5px 0 0;
+    margin: 8px 20px 0 0;
 
     a > i {
       color:black;
@@ -266,7 +288,7 @@
 .army_list_unit_details {
   margin: 0 10px;
   padding: 15px;
-  width: 675px;
+  //width: 675px;
 
   background-color: rgba(71, 11, 3, 0.1);
   -webkit-border-bottom-right-radius: 10px;
@@ -448,7 +470,7 @@
   display: block;
 }
 
-.clearboth{
+.clearboth, .clear{
   clear: both;
 }
 

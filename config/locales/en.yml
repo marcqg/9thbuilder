@@ -268,6 +268,28 @@ en:
       show: Show
 
   unit:
+    size:
+      Standard: "Standard"
+      Large: "Large"
+      Gigantic: "Gigantic"
+    base:
+      TwentyTwenty: "20x20mm"
+      TwentyFiveTwentyFive: "25x25mm"
+      FortyForty: "40x40mm"
+      TwentyFiveFifty: "25x50mm"
+      FiftyFifty: "50x50mm"
+      FiftySeventyFive: "50x75mm"
+      FiftyHundred: "50x100mm"
+      SixtyHundred: "60x100mm"
+      SixtyRound: "60mm round"
+      FortyTwenty: "40x20mm"
+      FortySixty: "40x60mm"
+      HundredFiftyHundred: "150x100mm"
+      SeventyFiveRound: "75mm round"
+      FortyRound: "40mm round"
+      SeventyFiveFifty: "75x50mm"
+      HundredHundred: "100x100mm"
+      HundredFifty: "100x50mm"
     show:
       size: "<strong>%{min_size}</strong> models, may add up to <strong>%{max_size}</strong> models <strong>%{pts}</strong> pts/mod."
       change: "%{name} units of %{number} models count towards %{new_name}"

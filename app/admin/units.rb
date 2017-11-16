@@ -48,6 +48,7 @@ ActiveAdmin.register NinthAge::Unit do
     f.inputs do
       f.input :army, collection: NinthAge::Army.order(:name)
       f.input :organisation_ids, as: :select, collection: NinthAge::Organisation.includes(:army).collect { |o| [o.army.name + ' - ' + o.name, o.id] }, multiple: true
+      f.input :unit_type, collection: NinthAge::UnitType.order(:name)
       f.input :value_points
       f.input :pts_add_figurine
       f.input :min_size
@@ -60,6 +61,19 @@ ActiveAdmin.register NinthAge::Unit do
       f.input :type_figurine
       f.input :base
       f.input :is_mount
+      f.input :size
+      f.input :type_carac
+      f.input :carac_ground_adv
+      f.input :carac_ground_mar
+      f.input :carac_fly_adv
+      f.input :carac_fly_mar
+      f.input :carac_dis
+      f.input :carac_evoked
+      f.input :carac_hp
+      f.input :carac_def
+      f.input :carac_res
+      f.input :carac_as
+      f.input :carac_spe
       f.translate_inputs do |t|
         t.input :name
       end
@@ -74,6 +88,7 @@ ActiveAdmin.register NinthAge::Unit do
       row :organisations do |organisation|
         organisation.name
       end
+      row :unit_type
       row :min_size
       row :max_size
       row :value_points
@@ -86,6 +101,19 @@ ActiveAdmin.register NinthAge::Unit do
       row :type_figurine
       row :base
       row :is_mount
+      row :size
+      row :type_carac
+      row :carac_ground_adv
+      row :carac_ground_mar
+      row :carac_fly_adv
+      row :carac_fly_mar
+      row :carac_dis
+      row :carac_evoked
+      row :carac_hp
+      row :carac_def
+      row :carac_res
+      row :carac_as
+      row :carac_spe
     end
     panel 'Translations' do
       translate_attributes_table_for model do
@@ -99,6 +127,7 @@ ActiveAdmin.register NinthAge::Unit do
           column :id
           column :troop_type
           column :name
+          column :type_carac
           column :M
           column :WS
           column :BS
@@ -108,6 +137,11 @@ ActiveAdmin.register NinthAge::Unit do
           column :I
           column :A
           column :LD
+          column :carac_att
+          column :carac_of
+          column :carac_str
+          column :carac_ap
+          column :carac_agi
           column :value_points
           column :min_size
           column :unit_option

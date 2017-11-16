@@ -23,13 +23,13 @@ ActiveAdmin.register NinthAge::DomainMagicSpell do
     selectable_column
     id_column
     column :name
-    column :magic
+    column :domain_magic
     actions
   end
 
   form do |f|
     f.inputs do
-      f.input :magic, collection: NinthAge::DomainMagic.order(:name)
+      f.input :domain_magic, collection: NinthAge::DomainMagic.order(:name)
       f.translate_inputs do |t|
         t.input :name
         t.input :range
@@ -43,7 +43,7 @@ ActiveAdmin.register NinthAge::DomainMagicSpell do
 
   show do |model|
     attributes_table do
-      row :magic
+      row :domain_magic
     end
     panel 'Translations' do
       translate_attributes_table_for model do

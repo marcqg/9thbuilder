@@ -3,7 +3,7 @@ class NinthAge::Unit < ApplicationRecord
 
   belongs_to :army
 
-  belongs_to :troop_type
+  belongs_to :unit_type
   
   has_and_belongs_to_many :organisations
 
@@ -38,6 +38,15 @@ class NinthAge::Unit < ApplicationRecord
   validates :value_points, presence: true, numericality: {greater_than_or_equal_to: 0, allow_nil: false}
 
   scope :mount_category, -> { where(is_mount: true) }
+
+
+  def display_size
+    I18n.t("unit.size.#{size}", default: size.titleize)
+  end
+
+  def display_base
+    I18n.t("unit.base.#{base}", default: base.titleize)
+  end
 
   def self.for_select(army_list)
     army_list_units = army_list.army_list_units.collect(&:unit)

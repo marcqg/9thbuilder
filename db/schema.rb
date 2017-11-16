@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171108132834) do
+ActiveRecord::Schema.define(version: 20171109171313) do
 
   create_table "active_admin_comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.integer  "resource_id",                 null: false
@@ -508,7 +508,7 @@ ActiveRecord::Schema.define(version: 20171108132834) do
     t.boolean "is_required",                                  default: false, null: false
     t.boolean "is_magic",                                     default: false, null: false
     t.boolean "is_upgratable",                                default: false, null: false
-    t.integer "magic_id"
+    t.integer "domain_magic_id"
     t.integer "organisation_id"
     t.integer "value_points_upgrade"
     t.integer "upgrade_target",                               default: 0,     null: false
@@ -516,6 +516,7 @@ ActiveRecord::Schema.define(version: 20171108132834) do
     t.integer "max_model"
     t.integer "min_model"
     t.integer "max_unit"
+    t.index ["domain_magic_id"], name: "index_ninth_age_options_on_magic_id", using: :btree
     t.index ["mount_id"], name: "index_ninth_age_unit_options_on_mount_id", using: :btree
     t.index ["parent_id"], name: "index_ninth_age_unit_options_on_parent_id", using: :btree
     t.index ["unit_id"], name: "index_ninth_age_unit_options_on_unit_id", using: :btree
@@ -705,6 +706,7 @@ ActiveRecord::Schema.define(version: 20171108132834) do
   add_foreign_key "ninth_age_troops", "ninth_age_unit_options", column: "unit_option_id", on_delete: :nullify
   add_foreign_key "ninth_age_troops", "ninth_age_units", column: "unit_id"
   add_foreign_key "ninth_age_unit_option_translations", "ninth_age_unit_options", on_delete: :cascade
+  add_foreign_key "ninth_age_unit_options", "ninth_age_domain_magics", column: "domain_magic_id", on_delete: :cascade
   add_foreign_key "ninth_age_unit_options", "ninth_age_unit_options", column: "parent_id"
   add_foreign_key "ninth_age_unit_options", "ninth_age_units", column: "mount_id", on_delete: :nullify
   add_foreign_key "ninth_age_unit_options", "ninth_age_units", column: "unit_id"

@@ -15,7 +15,7 @@ class NinthAge::ArmyMagicSpell < ApplicationRecord
   bitmask :type_target, :as => [:Hex, :Hex_r, :Missile, :Damage, :Augment, :Augment_b, :Focused, :Direct, :Ground, :Universal, :Universal_g], :null => false
   bitmask :duration, :as => [:OneTurn, :Instant, :Permanent, :RemainsInPlay], :null => false
 
-  validates :magic_id, :type_lvl, :duration, presence: true
+  validates :army_id, :type_lvl, :duration, presence: true
 
   def highlight(text)
     if text != nil

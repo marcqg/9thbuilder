@@ -1,7 +1,7 @@
 <ul  class="option-children children-sub">
   <% unit_options.order(:position).each do |unit_option| %>
-    <% if unit_option.magic_id != nil %>
-      <li><%= unit_option.magic.name %></li>
+    <% unless unit_option.domain_magic_id.nil? %>
+      <li><%= unit_option.domain_magic.name %></li>
     <% else %>
       <li><%= unit_option.name %>
         <% if unit_option.value_points!= nil %>

@@ -1,3 +1,7 @@
+div[class^="unit-"] {
+  margin-top: 3vmin;
+}
+
 table.content-stats {
   width: 70%;
   border: 1px solid black;
@@ -23,13 +27,65 @@ table.content-stats {
       text-align: center;
     }
   }
+
+  &.stats-global, &.stats-defensive, &.stats-offensive {
+    width: 100%;
+    padding: 0 1vmin;
+
+    &:first {
+      margin-top: 2vmin;
+    }
+
+    td {
+      border: 0;
+      width: 5%;
+
+      &[colspan="2"] {
+        width: 10%;
+      }
+
+      &:first-child {
+        width: 25%;
+        text-align: left;
+      }
+
+      &:last-child {
+        width: 50%;
+        text-align: left;
+      }
+    }
+
+    thead {
+      color: gray;
+      font-style: italic;
+    }
+
+    tbody {
+      td {
+        font-weight: bold;
+      }
+    }
+  }
+
+  &.stats-global {
+    border: 0;
+    border-top: 2px solid black;
+  }
+  &.stats-defensive {
+    border: 0;
+    border-top: 1px solid gray;
+  }
+  &.stats-offensive {
+    border: 0;
+    border-top: 1px solid gray;
+  }
 }
 
 .option-children {
   list-style: inside;
   margin-left: 1vmin;
 
-  &.children-sub{
+  &.children-sub {
     margin-left: 2vmin;
   }
 }
