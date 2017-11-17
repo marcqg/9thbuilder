@@ -32,6 +32,7 @@ ActiveAdmin.register NinthAge::ArmyMagicSpell do
       f.input :army, collection: NinthAge::Army.order(:name)
       f.translate_inputs do |t|
         t.input :name
+        t.input :description
       end
     end
 
@@ -45,6 +46,7 @@ ActiveAdmin.register NinthAge::ArmyMagicSpell do
     panel 'Translations' do
       translate_attributes_table_for model do
         row :name
+        row :description
       end
     end
   end

@@ -2,9 +2,7 @@ class NinthAge::ArmyMagicSpell < ApplicationRecord
 
   belongs_to :army
 
-  enum type_lvl: { Zero: 0, One: 1, Two: 2, Three: 3, Four: 4, Five: 5, Six: 6, A: 7, T: 8}
-
-  translates :name, :range, :casting_value, :effect
+  translates :name, :description, :range, :casting_value, :effect
   globalize_accessors
   accepts_nested_attributes_for :translations, allow_destroy: true
 
@@ -15,7 +13,7 @@ class NinthAge::ArmyMagicSpell < ApplicationRecord
   bitmask :type_target, :as => [:Hex, :Hex_r, :Missile, :Damage, :Augment, :Augment_b, :Focused, :Direct, :Ground, :Universal, :Universal_g], :null => false
   bitmask :duration, :as => [:OneTurn, :Instant, :Permanent, :RemainsInPlay], :null => false
 
-  validates :army_id, :type_lvl, :duration, presence: true
+  validates :army_id, :duration, presence: true
 
   def highlight(text)
     if text != nil

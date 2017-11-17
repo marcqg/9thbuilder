@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171109171313) do
+ActiveRecord::Schema.define(version: 20171117130910) do
 
   create_table "active_admin_comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.integer  "resource_id",                 null: false
@@ -128,13 +128,13 @@ ActiveRecord::Schema.define(version: 20171109171313) do
     t.string   "range"
     t.string   "casting_value"
     t.text     "effect",                        limit: 65535
+    t.text     "description",                   limit: 65535
     t.index ["locale"], name: "index_ninth_age_army_magic_spell_translations_on_locale", using: :btree
     t.index ["ninth_age_army_magic_spell_id"], name: "index_470d1e47675f2000858aa3595f707852fd2108a3", using: :btree
   end
 
   create_table "ninth_age_army_magic_spells", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "army_id",     default: 0, null: false
-    t.integer  "type_lvl",    default: 0, null: false
     t.integer  "type_target", default: 0, null: false
     t.integer  "duration",    default: 0, null: false
     t.datetime "created_at",              null: false
