@@ -226,3 +226,84 @@ a {
     }
   }
 }
+
+.army_list_unit_troops_v2 {
+  table.content-stats {
+    width: 70%;
+    border: 1px solid black;
+    border-collapse: collapse;
+    font-size: 100%;
+    margin: 0 auto;
+
+    thead {
+      font-weight: bold;
+    }
+
+    td {
+      text-align: center;
+      border: 1px solid black;
+      border-collapse: collapse;
+      font-size: 100%;
+      padding: 5px 0;
+      min-width: 20px;
+      min-height: 30px;
+
+      input {
+        width: 50px;
+        text-align: center;
+      }
+    }
+
+    &.stats-global, &.stats-defensive, &.stats-offensive {
+      width: 100%;
+      padding: 0 1vmin;
+
+      &:first {
+        margin-top: 2vmin;
+      }
+
+      td {
+        border: 0;
+        width: 5%;
+
+        &[colspan="2"] {
+          width: 10%;
+        }
+
+        &:first-child {
+          width: 25%;
+          text-align: left;
+        }
+
+        &:last-child {
+          width: 50%;
+          text-align: left;
+        }
+      }
+
+      thead {
+        color: gray;
+        font-style: italic;
+      }
+
+      tbody {
+        td {
+          font-weight: bold;
+        }
+      }
+    }
+
+    &.stats-global {
+      border: 0;
+      border-top: 2px solid black;
+    }
+    &.stats-defensive {
+      border: 0;
+      border-top: 1px solid gray;
+    }
+    &.stats-offensive {
+      border: 0;
+      border-top: 1px solid gray;
+    }
+  }
+}
