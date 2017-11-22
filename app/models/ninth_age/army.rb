@@ -9,7 +9,7 @@ class NinthAge::Army < ApplicationRecord
 
   has_many :special_rules
 
-  has_many :domain_magic_spells
+  has_many :army_magic_spells
 
   has_many :army_lists, dependent: :destroy
   has_many :magic_items, dependent: :destroy

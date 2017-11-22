@@ -3,28 +3,56 @@
   <h1 class="text-center"><%= @army.name %></h1>
 
   <% if @page == 1 %>
+
+      <% @army.army_magic_spells.each do |army_magic_spell| %>
+        <div class="army_magic_spell">
+          <h2 class="text-center">Racial Trait Spell</h2>
+          <%= army_magic_spell.display_description %>
+          <table>
+            <thead>
+              <th></th>
+              <th class="text-center"><%= t('magic.casting') %></th>
+              <th class="text-center"><%= t('magic.range') %></th>
+              <th class="text-center"><%= t('magic.type') %></th>
+              <th class="text-center"><%= t('magic.duration') %></th>
+              <th><%= t('magic.effect') %></th>
+            </thead>
+            <tbody>
+              <tr>
+                <td colspan="5" class="name"><%= army_magic_spell.name %></td>
+                <td rowspan="2" class="effect"><%= army_magic_spell.display_effect %></tr>
+              <tr>
+                <td>Mf</td>
+                <td class="casting_value text-center"><%= army_magic_spell.display_casting_value %></td>
+                <td class="range text-center"><%= army_magic_spell.display_range %></td>
+                <td class="type_target text-center"><%= army_magic_spell.display_type_target %></td>
+                <td class="duration text-center"><%= army_magic_spell.display_duration %></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      <% end %>      
+
       <% @army.army_organisations.each do |army_organisation| %>
-          <div>
-            <% if @army.army_organisations.count > 1 %>
-                <h2 class="text-center"><%= army_organisation.name %></h2>
-                <p><%= army_organisation.description %></p>
+        <div>
+          <h2 class="text-center"><%= army_organisation.name %></h2>
+          <p><%= army_organisation.description %></p>
+          <ul class="list-flex">
+            <% army_organisation.organisation_groups.each do |organisation_group| %>
+                <li>
+                  <%= image_tag(organisation_group.organisation.medium_logo_url, alt: organisation_group.organisation.name, size: "75x75") %>
+                  <p><%= organisation_group.organisation.name.gsub(/\(([\w,\ \+\.\(\)\-]*)\)/, '<span class="text-small">(\1)</span>').html_safe %></p>
+                  <% if organisation_group.NoLimit? || organisation_group.NotAllowed? %>
+                      <p><span class="text-small">(<%= organisation_group.display_type_target %>)</span></p>
+                  <% else %>
+                      <p>
+                      <span class="text-small">(<%= organisation_group.target %> <%= organisation_group.display_type_target %>
+                        )</span></p>
+                  <% end %>
+                </li>
             <% end %>
-            <ul class="list-flex">
-              <% army_organisation.organisation_groups.each do |organisation_group| %>
-                  <li>
-                    <%= image_tag(organisation_group.organisation.medium_logo_url, alt: organisation_group.organisation.name, size: "75x75") %>
-                    <p><%= organisation_group.organisation.name.gsub(/\(([\w,\ \+\.\(\)\-]*)\)/, '<span class="text-small">(\1)</span>').html_safe %></p>
-                    <% if organisation_group.NoLimit? || organisation_group.NotAllowed? %>
-                        <p><span class="text-small">(<%= organisation_group.display_type_target %>)</span></p>
-                    <% else %>
-                        <p>
-                        <span class="text-small">(<%= organisation_group.target %> <%= organisation_group.display_type_target %>
-                          )</span></p>
-                    <% end %>
-                  </li>
-              <% end %>
-            </ul>
-          </div>
+          </ul>
+        </div>
       <% end %>
   <% end %>
 

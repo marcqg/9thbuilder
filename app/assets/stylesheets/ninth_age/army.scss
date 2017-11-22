@@ -7,3 +7,46 @@
     }
   }
 }
+
+.army_magic_spell {
+
+  table {
+  	border: 0;
+    border-bottom: 1px solid gray;
+
+	thead {
+      color: gray;
+      font-style: italic;
+
+	  border: 0;
+	  border-bottom: 1px solid gray;
+    }
+
+    th, td {
+    	width: 12%;
+    }
+
+    th:first-child, td:first-child {
+	  width:5%;
+      font-style: italic;
+      font-weight: bold;
+	}
+
+	tbody {
+
+	  &:tr:first-child td:first-child {
+	    font-size:25px;	
+	  }
+
+	  .casting_value, .range {
+	  	span {
+	  	  display: block;
+	  	}
+	  }
+	}
+
+    th:last-child, tbody tr:first-child td:last-child {
+	  width:50%;
+	}
+  }
+}

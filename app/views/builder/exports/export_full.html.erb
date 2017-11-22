@@ -5,6 +5,34 @@
 <% end %>
 
 <div class="army_list_value_points">
+  <% @army_list.army.army_magic_spells.each do |army_magic_spell| %>
+    <div class="army_magic_spell">
+      <h2 class="text-center">Racial Trait Spell</h2>
+      <%= army_magic_spell.display_description %>
+      <table>
+        <thead>
+          <th></th>
+          <th class="text-center"><%= t('magic.casting') %></th>
+          <th class="text-center"><%= t('magic.range') %></th>
+          <th class="text-center"><%= t('magic.type') %></th>
+          <th class="text-center"><%= t('magic.duration') %></th>
+          <th><%= t('magic.effect') %></th>
+        </thead>
+        <tbody>
+          <tr>
+            <td colspan="5" class="name"><%= army_magic_spell.name %></td>
+            <td rowspan="2" class="effect"><%= army_magic_spell.display_effect %></tr>
+          <tr>
+            <td>Mf</td>
+            <td class="casting_value text-center"><%= army_magic_spell.display_casting_value %></td>
+            <td class="range text-center"><%= army_magic_spell.display_range %></td>
+            <td class="type_target text-center"><%= army_magic_spell.display_type_target %></td>
+            <td class="duration text-center"><%= army_magic_spell.display_duration %></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  <% end %>  
   <ul>
     <% @army_list.army_organisation.organisation_groups.each do |organisation_group| %>
         <% army_list_organisation = @army_list.army_list_organisations.find_by(:organisation_id => organisation_group.organisation_id) %>

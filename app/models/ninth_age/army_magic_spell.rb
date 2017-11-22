@@ -27,6 +27,10 @@ class NinthAge::ArmyMagicSpell < ApplicationRecord
     return nil
   end
 
+  def display_description
+    highlight(description).html_safe
+  end
+
   def display_type_target
     names = []
     type_target.each do |tt|
