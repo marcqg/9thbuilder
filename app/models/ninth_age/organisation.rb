@@ -17,6 +17,8 @@ class NinthAge::Organisation < ApplicationRecord
   has_many :new_organisations, foreign_key: :new_organisation_id, class_name: 'NinthAge::OrganisationChange'
   #has_many :news, through: :new_organisations, source: :new_organisation
 
+  has_many :unit_options
+
   translates :name
   globalize_accessors
   accepts_nested_attributes_for :translations, allow_destroy: true

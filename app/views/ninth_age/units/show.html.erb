@@ -95,9 +95,11 @@
               <td>Adv</td>
               <td>Mar</td>
               <td>Dis</td>
+              <td colspan="2">
               <% unless @unit.carac_evoked.nil? %>
-                  <td colspan="2">Evoked</td>
+                  Evoked
               <% end %>
+              </td>
               <td>Model Rules</td>
             </tr>
             </thead>
@@ -107,9 +109,11 @@
               <td><%= @unit.carac_ground_adv %>"</td>
               <td><%= @unit.carac_ground_mar %>"</td>
               <td><%= @unit.carac_dis %></td>
+              <td colspan="2">
               <% unless @unit.carac_evoked.nil? %>
-                  <td colspan="2"><%= @unit.carac_evoked %></td>
+                  <%= @unit.carac_evoked %>
               <% end %>
+              </td>
               <td></td>
             </tr>
             <% unless @unit.carac_fly_adv.nil? %>
