@@ -63,6 +63,7 @@ Rails.application.routes.draw do
 
       scope '/army-:army_id' do
         resources :army_organisations,  only: [:index]
+        resources :units,               only: [:index]
       end
 
       scope '/units-:unit_id' do

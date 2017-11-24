@@ -1,0 +1,1 @@
+json.array! @units, partial: 'ninth_age/units/unit', as: :ninth_age_unit

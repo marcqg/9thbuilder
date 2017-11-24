@@ -2,6 +2,15 @@ module NinthAge
   class UnitsController < ApplicationController
     before_action :set_unit, only: [:show]
 
+    # GET /army_organisations.json
+    def index
+      @units = NinthAge::Unit.where(:army_id => params[:army_id])
+
+      respond_to do |format|
+        format.json
+      end
+    end
+
     # GET /units/1
     # GET /units/1.json
     def show
