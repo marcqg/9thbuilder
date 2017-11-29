@@ -47,6 +47,7 @@ Rails.application.routes.draw do
       resources :versions,              only: [:index, :show]
 
       resources :domain_magics,         only: [:show]
+      resources :domain_magic_spells,   only: [:show]
       resources :armies,                only: [:show]
       resources :army_organisations,    only: [:show]
       resources :organisations,         only: [:show]
@@ -64,6 +65,10 @@ Rails.application.routes.draw do
       scope '/army-:army_id' do
         resources :army_organisations,  only: [:index]
         resources :units,               only: [:index]
+      end
+
+      scope '/domain-magic-:domain_magic_id' do
+        resources :domain_magic_spells, only: [:index]
       end
 
       scope '/units-:unit_id' do

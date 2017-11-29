@@ -1,0 +1,1 @@
+json.array! @domain_magic_spells, partial: 'ninth_age/domain_magic_spells/domain_magic_spell', as: :domain_magic_spell

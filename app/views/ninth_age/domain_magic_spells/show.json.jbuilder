@@ -1,0 +1,1 @@
+json.partial! 'ninth_age/domain_magic_spells/domain_magic_spell', domain_magic_spell: @domain_magic_spell

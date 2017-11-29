@@ -1,1 +1,1 @@
-json.extract! magic_spell, :name, :casting_value, :range, :display_type_target, :display_duration, :display_effect
+json.extract! domain_magic_spell, :id, :domain_magic_id, :name, :casting_value, :range, :type_lvl, :type_target, :duration, :effect
