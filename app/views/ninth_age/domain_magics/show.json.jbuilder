@@ -1,4 +1,1 @@
-json.extract! @magic, :id, :name, :medium_logo_url
-json.version do
-	json.extract! @magic.version, :id, :name
-end 
+json.partial! 'ninth_age/domain_magics/magic', domain_magic_spell: @magic

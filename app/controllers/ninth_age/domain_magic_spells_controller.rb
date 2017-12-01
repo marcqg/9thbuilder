@@ -5,6 +5,7 @@ module NinthAge
     # GET /domain_magic_spells.json
     def index
       @domain_magic_spells = NinthAge::DomainMagicSpell.where(:domain_magic_id => params[:domain_magic_id])
+                                                       .includes(:translations)
 
       respond_to do |format|
         format.json
@@ -24,6 +25,7 @@ module NinthAge
 
     def set_unit
       @domain_magic_spell = NinthAge::DomainMagicSpell.find(params[:id])
+                                                      .includes(:translations)
     end
   end
 end
