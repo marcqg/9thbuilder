@@ -55,7 +55,7 @@ Rails.application.routes.draw do
       resources :units,                 only: [:show]
       resources :troops,                only: [:show]
       resources :troop_types,           only: [:index, :show]
-      resources :unit_types,           only: [:index, :show]
+      resources :unit_types,            only: [:index, :show]
       resources :special_rules,         only: [:show]
       resources :equipments,            only: [:show]
 
