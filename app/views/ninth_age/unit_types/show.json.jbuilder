@@ -1,0 +1,1 @@
+json.partial! "ninth_age/unit_types/unit_type", ninth_age_unit_type: @unit_type

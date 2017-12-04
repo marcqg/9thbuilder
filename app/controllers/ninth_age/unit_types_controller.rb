@@ -1,18 +1,18 @@
 module NinthAge
-  class TroopTypesController < ApplicationController
+  class UnitTypesController < ApplicationController
     before_action :set_troop_type, only: [:show]
 
-    # GET /troop_types.json
+    # GET /unit_types.json
     def index
-      @troop_types = NinthAge::TroopType.all
+      @unit_types = NinthAge::UnitType.all
 
       respond_to do |format|
         format.json
       end
     end
 
-    # GET /troop_types/1
-    # GET /troop_types/1.json
+    # GET /unit_types/1
+    # GET /unit_types/1.json
     def show
       respond_to do |format|
         #format.html
@@ -25,7 +25,7 @@ module NinthAge
     # -- Utilities
 
     def set_troop_type
-      @troop_type = NinthAge::TroopType.find(params[:id])
+      @troop_type = NinthAge::UnitType.find(params[:id])
     end
   end
 end

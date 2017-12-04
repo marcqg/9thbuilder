@@ -1,1 +1,1 @@
-json.extract! ninth_age_troop, :id, :unit_id, :troop_type_id, :name, :M, :WS, :BS, :S, :T, :W, :I, :A, :LD, :E, :value_points; :position, :min_size, :type_carac, :carac_att, :carac_of, :carac_str, :carac_ap, :carac_agi
+json.extract! ninth_age_troop, :id, :unit_id, :troop_type_id, :name, :M, :WS, :BS, :S, :T, :W, :I, :A, :LD, :E, :value_points, :position, :min_size, :type_carac, :carac_att, :carac_of, :carac_str, :carac_ap, :carac_agi
