@@ -28,14 +28,22 @@ class NinthAge::MagicItem < ApplicationRecord
   end
 
   scope :available_for, lambda { |army, version, value_points_limit|
-    if value_points_limit.nil?
-      includes(:translations).where('(army_id = :army_id OR (army_id IS NULL AND ninth_age_magic_items.id NOT IN (SELECT override_id FROM ninth_age_magic_items WHERE army_id = :army_id AND override_id IS NOT NULL))) AND version_id = :version_id', army_id: army, version_id: version)
-          .order('value_points DESC', 'ninth_age_magic_item_translations.name')
-    else
-      includes(:translations).where('(army_id = :army_id OR (army_id IS NULL AND ninth_age_magic_items.id NOT IN (SELECT override_id FROM ninth_age_magic_items WHERE army_id = :army_id AND override_id IS NOT NULL))) AND version_id = :version_id', army_id: army, version_id: version)
-          .where('value_points <= ?', value_points_limit)
-          .order('value_points DESC', 'ninth_age_magic_item_translations.name')
+
+    magic_items = includes(:translations)
+                  .order('value_points DESC', 'ninth_age_magic_item_translations.name')
+
+    magic_items = 
+      if army.has_default_magic_items 
+        magic_items.where('(army_id = :army_id OR (army_id IS NULL AND ninth_age_magic_items.id NOT IN (SELECT override_id FROM ninth_age_magic_items WHERE army_id = :army_id AND override_id IS NOT NULL))) AND version_id = :version_id', army_id: army, version_id: version)
+      else
+        magic_items.where({army_id: army, version_id: version})
+      end
+
+    unless value_points_limit.nil?
+      magic_items = magic_items.where('value_points <= ?', value_points_limit)
     end
+
+    return magic_items
   }
 
   def display_type_target
