@@ -117,3 +117,26 @@
     height: 54px;
   }
 }
+
+
+.army-list-point {
+  font-weight: bold;
+  font-size: 2em;
+  text-align: center;
+}
+
+.army_list_unit_new {
+  clear: right;
+  display: block;
+  padding-top: 45px;
+  padding-right: 10px;
+  width: 180px;
+  height: 70px;
+  font-size: 14px;
+  font-weight: bold;
+  text-align: right;
+  text-decoration: none;
+  background: image-url("bt_new_army_list_unit.png") no-repeat;
+  color: #000;
+  margin: 25px auto 0 auto;
+}

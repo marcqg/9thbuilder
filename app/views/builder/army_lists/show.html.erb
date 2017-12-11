@@ -18,7 +18,7 @@
 
 <div class="row" id="app-army-list">
 
-  <div class="col-md-9">
+  <div class="col-md-8">
     <%if @army_list.army.army_organisations.size > 1 %>
       <h4 class="text-center"><%= @army_list.army_organisation.name %></h4>
     <%end%>
@@ -40,7 +40,7 @@
     </ul>
   </div>
 
-  <div class="col-md-3 col-sm-12 army-list-zone-action">
+  <div class="col-md-4 col-sm-12 army-list-zone-action">
     <% if @army_list.notes? %>
         <div class="army_list_notes">
           <h3><%= t 'army_list.show.notes' %></h3>
@@ -51,6 +51,12 @@
           </ul>
         </div>
     <% end %>
+
+    <%if @army_list.value_points < @army_list.max %>
+      <p class="army-list-point"><span><%= @army_list.value_points %></span> / <%= @army_list.max %> points</p>
+    <%else%>
+      <p class="army-list-point"><span class="highlight-red"><%= @army_list.value_points %></span> / <%= @army_list.max %> points</p>
+    <%end%>
 
     <a href="<%= new_builder_army_list_army_list_unit_path @army_list %>" class="army_list_unit_new" data-popin="true"><%= t('army_list.show.add_unit') %></a>
 
