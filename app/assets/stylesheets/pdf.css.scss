@@ -369,3 +369,79 @@ a {
 .highlight-blue {
   color: blue !important;
 }
+
+.text-italic{
+  font-style: italic;
+}
+
+.army_list_magic {
+  border: 1px solid black;
+  margin-top: 25px;
+
+  h2 {
+    margin-top: 0;
+  }
+
+  table.army_magic_spell {
+    margin: 0 5px;
+
+    thead {
+      color: gray;
+      font-style: italic;
+    }
+
+    th, td {
+      width: 12%;
+    }
+
+    tr {
+      &:nth-child(2n){
+        border: 0;
+        border-bottom: 1px solid gray;
+      }
+    }
+
+    th:first-child, td:first-child {
+      width:5%;
+      font-style: italic;
+      font-weight: bold;
+    }
+
+    tbody {
+
+      &:tr:first-child td:first-child {
+        font-size:25px; 
+      }
+
+      .casting_value, .range {
+        span {
+          display: block;
+        }
+      }
+    }
+
+    th:last-child, tbody tr:first-child td:last-child {
+      width:50%;
+    }
+  }
+}
+
+
+.section {
+  border: 1px solid gray;
+  margin: 20px 0;
+  padding: 0 5px;
+  
+  &> h2 {
+    font-weight: bold;
+    text-align: center;
+  }
+
+  .army_list_special_rule, .army_list_magic_item {
+    h4 {
+      font-weight: bold;
+      text-decoration: underline;
+    }
+  }
+}
+
