@@ -1,3 +1,6 @@
+@import "common/global";
+@import "bootstrap-sprockets";
+
 #army_list_unit_all_options {
 	min-width:950px;
 
@@ -115,5 +118,48 @@
     right: -7px;
     width: 97px;
     height: 54px;
+  }
+}
+
+
+.army-list-point {
+  font-weight: bold;
+  font-size: 2em;
+  text-align: center;
+}
+
+.army_list_unit_new {
+  clear: right;
+  display: block;
+  padding-top: 45px;
+  padding-right: 10px;
+  width: 180px;
+  height: 70px;
+  font-size: 14px;
+  font-weight: bold;
+  text-align: right;
+  text-decoration: none;
+  background: image-url("bt_new_army_list_unit.png") no-repeat;
+  color: #000;
+  margin: 25px auto;
+}
+
+.army_list_value_points, .army_list_notes {
+  clear: right;
+  margin: 0 auto;
+  padding: 10px 5px;
+  width: 180px;
+  background: image-url("bg_army_list_value_points.png") no-repeat;
+  min-height: 150px;
+
+  h3 {
+    font: 20px "godofwarregular";
+    line-height: 14px;
+    text-align: center;
+    margin: 5px auto 25px auto;
+
+    @media #{$portrait} {
+      margin: 0;
+    }
   }
 }

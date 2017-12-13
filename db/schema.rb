@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171117130910) do
+ActiveRecord::Schema.define(version: 20171211133232) do
 
   create_table "active_admin_comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.integer  "resource_id",                 null: false
@@ -116,6 +116,7 @@ ActiveRecord::Schema.define(version: 20171117130910) do
     t.string   "logo_large_content_type"
     t.integer  "logo_large_file_size"
     t.datetime "logo_large_updated_at"
+    t.boolean  "has_default_magic_items", default: true, null: false
     t.index ["version_id"], name: "index_ninth_age_armies_on_version_id", using: :btree
   end
 

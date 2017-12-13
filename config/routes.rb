@@ -89,6 +89,7 @@ Rails.application.routes.draw do
         get '/ninth-age-equipments/page-:page',       to: 'equipments#index'
         get '/ninth-age-extra-items/page-:page',      to: 'extra_items#index'
         get '/ninth-age-magic-items/page-:page',      to: 'magic_items#index'
+        get '/magic_items/all',                       to: 'magic_items#all'
         get '/ninth-age-magic-standards/page-:page',  to: 'magic_standards#index'
       end
     end

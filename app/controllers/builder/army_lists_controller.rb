@@ -44,6 +44,7 @@ module Builder
     # GET /army_lists/new.xml
     def new
       @army_list = Builder::ArmyList.new
+      @army_list.max = 2500
       @army_list.army_id = params[:army_id] || current_user.favorite_army.try(:id)
 
       respond_to do |format|
@@ -174,7 +175,7 @@ module Builder
     end
 
     def army_list_params
-      params.require(:builder_army_list).permit(:army_id, :army_organisation_id, :name, :notes)
+      params.require(:builder_army_list).permit(:army_id, :army_organisation_id, :name, :notes, :max)
     end
   end
 end
