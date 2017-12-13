@@ -164,7 +164,7 @@ module Builder
     private
 
     def load_armies
-      if !current_user.has_role?(:Administrator)
+      if !current_user.has_role?(:Administrator) or !current_user.has_role?(:Administrator)
         @armies = NinthAge::Army.includes([:translations, :version])
                       .where('ninth_age_versions.public = ?', true)
                       .order(:name)

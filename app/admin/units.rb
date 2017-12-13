@@ -1,7 +1,7 @@
 ActiveAdmin.register NinthAge::Unit do
   menu parent: 'Ninth Age Army', priority: 7
 
-  permit_params :army_id, :locale, :value_points, :pts_add_figurine, :min_size, :max_size, :magic, :notes, :max, :max_model, :order, :type_figurine, :base, translations_attributes: [:id, :name, :locale, :_destroy]
+  permit_params :army_id, :locale, :value_points, :min_size, :max_size, :magic, :notes, :max, :max_model, :order, :unit_type, :base, translations_attributes: [:id, :name, :locale, :_destroy]
 
   controller do
     def create
@@ -38,7 +38,7 @@ ActiveAdmin.register NinthAge::Unit do
     column :value_points
     column :max
     column :max_model
-    column :type_figurine
+    column :unit_type
     column :base
     column :is_mount
     actions
@@ -46,36 +46,41 @@ ActiveAdmin.register NinthAge::Unit do
 
   form do |f|
     f.inputs do
-      f.input :army, collection: NinthAge::Army.order(:name)
-      f.input :organisation_ids, as: :select, collection: NinthAge::Organisation.includes(:army).collect { |o| [o.army.name + ' - ' + o.name, o.id] }, multiple: true
-      f.input :unit_type, collection: NinthAge::UnitType.order(:name)
-      f.input :value_points
-      f.input :pts_add_figurine
-      f.input :min_size
-      f.input :max_size
-      f.input :magic
-      f.input :notes
-      f.input :max
-      f.input :max_model
-      f.input :order
-      f.input :type_figurine
-      f.input :base
-      f.input :is_mount
-      f.input :size
-      f.input :type_carac
-      f.input :carac_ground_adv
-      f.input :carac_ground_mar
-      f.input :carac_fly_adv
-      f.input :carac_fly_mar
-      f.input :carac_dis
-      f.input :carac_evoked
-      f.input :carac_hp
-      f.input :carac_def
-      f.input :carac_res
-      f.input :carac_as
-      f.input :carac_spe
+      f.input :army, collection: NinthAge::Army.includes(:translations).order(:name)
+      f.input :organisation_ids, as: :select, collection: NinthAge::Organisation.includes(:translations).includes(:army).collect { |o| [o.army.name + ' - ' + o.name, o.id] }, multiple: true
       f.translate_inputs do |t|
         t.input :name
+      end
+      f.input :unit_type, collection: NinthAge::UnitType.includes(:translations).order(:name)
+      f.input :value_points
+      f.input :min_size
+      f.input :max_size
+      f.input :max
+      f.input :max_model
+      f.input :magic
+      f.input :notes
+      f.input :order
+      f.input :unit_type, collection: NinthAge::UnitType.includes(:translations).order(:name)
+      f.input :base, as: :select, collection: NinthAge::Unit.bases
+      f.input :size, as: :select, collection: NinthAge::Unit.sizes
+      f.input :is_mount
+      f.input :type_carac
+      panel 'Carac V2' do
+        div class: 'unit_carac_v2_details' do
+          ol do 
+            f.input :carac_ground_adv
+            f.input :carac_ground_mar
+            f.input :carac_fly_adv
+            f.input :carac_fly_mar
+            f.input :carac_dis
+            f.input :carac_evoked
+            f.input :carac_hp
+            f.input :carac_def
+            f.input :carac_res
+            f.input :carac_as
+            f.input :carac_spe
+          end
+        end
       end
     end
     f.actions
@@ -92,28 +97,31 @@ ActiveAdmin.register NinthAge::Unit do
       row :min_size
       row :max_size
       row :value_points
-      row :pts_add_figurine
       row :magic
       row :notes
       row :max
       row :max_model
       row :order
-      row :type_figurine
+      row :unit_type
       row :base
       row :is_mount
       row :size
       row :type_carac
-      row :carac_ground_adv
-      row :carac_ground_mar
-      row :carac_fly_adv
-      row :carac_fly_mar
-      row :carac_dis
-      row :carac_evoked
-      row :carac_hp
-      row :carac_def
-      row :carac_res
-      row :carac_as
-      row :carac_spe
+      panel 'Carac V2' do
+        div class: 'unit_carac_v2_details' do
+          row :carac_ground_adv
+          row :carac_ground_mar
+          row :carac_fly_adv
+          row :carac_fly_mar
+          row :carac_dis
+          row :carac_evoked
+          row :carac_hp
+          row :carac_def
+          row :carac_res
+          row :carac_as
+          row :carac_spe
+        end
+      end
     end
     panel 'Translations' do
       translate_attributes_table_for model do

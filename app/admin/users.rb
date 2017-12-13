@@ -1,5 +1,13 @@
 ActiveAdmin.register User do
-  menu priority: 9
+  menu priority: 9, :if => proc{ current_user.has_role? :administrator }
+
+  controller do
+    before_filter :administrator_filter
+
+    def administrator_filter
+      raise ActionController::RoutingError.new('Not Found') unless current_user.has_role? :administrator
+    end
+  end
 
   filter :email
   filter :name

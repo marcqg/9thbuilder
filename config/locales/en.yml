@@ -28,6 +28,13 @@ en:
   per_model: "/mod."
   up_to: "up to"
 
+  active_admin:
+    translate:
+      pl: "Polish"
+      ko: "Korean"
+  admin: 
+    dashboard: "Administration"
+
   menu:
     label: "Main menu"
     army_lists: "My army lists"

@@ -48,6 +48,9 @@
                   <li><%= link_to t('menu.army_lists'), builder_army_lists_path("q[army_id_eq]" => "") %></li>
                   <li><%= link_to t('menu.preferences'), edit_user_registration_path %></li>
                   <li><a href="mailto:support@9thbuilder.com"><%=t 'menu.help' %></a></li>
+                  <%if current_user.has_role? :administrator or current_user.has_role? :moderator%>
+                  <li><%= link_to t('admin.dashboard'), admin_dashboard_path %></li>
+                  <%end%>
                   <li><%= link_to t('menu.signout'), destroy_user_session_path %></li>
                 </ul>
               </li>

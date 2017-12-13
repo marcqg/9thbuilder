@@ -7,17 +7,17 @@ class ApplicationController < ActionController::Base
 
   layout -> (controller) { controller.request.xhr? ? false : 'application' }
 
-  def after_sign_in_path_for(resource)
-    if current_user.has_role? :administrator
-      admin_dashboard_path
-    else
-      super
-    end
-  end
+ # def after_sign_in_path_for(resource)
+ #   if current_user.has_role? :administrator
+ #     admin_dashboard_path
+ #   else
+ #     super
+ #   end
+ # end
 
   def authenticate_active_admin_user!
     authenticate_user!
-    unless current_user.has_role? :administrator
+    unless (current_user.has_role? :moderator or current_user.has_role? :administrator)
       flash[:alert] = 'Unauthorized Access!'
       redirect_to root_path
     end
