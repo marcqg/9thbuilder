@@ -1,7 +1,7 @@
 ActiveAdmin.register NinthAge::ArmyMagicSpell do
-  menu parent: 'Ninth Age Army Magic', priority: 2
+  menu parent: 'Ninth Age Army', priority: 2
 
-  permit_params :name, :locale, translations_attributes: [:id, :name, :locale, :_destroy]
+  permit_params :name, :type_target, :duration, :locale, translations_attributes: [:id, :name, :description, :range, :casting_value, :effect, :locale, :_destroy]
 
   #config.sort_order = 'name_asc'
 
@@ -30,9 +30,14 @@ ActiveAdmin.register NinthAge::ArmyMagicSpell do
   form do |f|
     f.inputs do
       f.input :army, collection: NinthAge::Army.order(:name)
+      f.input :type_target
+      f.input :duration
       f.translate_inputs do |t|
         t.input :name
         t.input :description
+        t.input :range
+        t.input :casting_value
+        t.input :effect
       end
     end
 
@@ -42,11 +47,16 @@ ActiveAdmin.register NinthAge::ArmyMagicSpell do
   show do |model|
     attributes_table do
       row :army
+      rox :type_target
+      rox :duration
     end
     panel 'Translations' do
       translate_attributes_table_for model do
         row :name
         row :description
+        row :range
+        row :casting_value
+        row :effect
       end
     end
   end

@@ -1,7 +1,7 @@
 ActiveAdmin.register NinthAge::Unit do
   menu parent: 'Ninth Age Army', priority: 7
 
-  permit_params :army_id, :locale, :value_points, :min_size, :max_size, :magic, :notes, :max, :max_model, :order, :unit_type, :base, translations_attributes: [:id, :name, :locale, :_destroy]
+  permit_params :army_id, :locale, :value_points, :min_size, :max_size, :magic, :notes, :max, :max_model, :order, :unit_type, :base, :organisation_ids, :unit_type_id, :size, :is_mount, :type_carac, :carac_ground_adv, :carac_ground_mar, :carac_fly_adv, :carac_fly_mar, :carac_dis, :carac_evoked, :carac_hp, :carac_def, :carac_res, :carac_as, :carac_spe, translations_attributes: [:id, :name, :locale, :_destroy]
 
   controller do
     def create
@@ -46,8 +46,8 @@ ActiveAdmin.register NinthAge::Unit do
 
   form do |f|
     f.inputs do
-      f.input :army, collection: NinthAge::Army.includes(:translations).order(:name)
-      f.input :organisation_ids, as: :select, collection: NinthAge::Organisation.includes(:translations).includes(:army).collect { |o| [o.army.name + ' - ' + o.name, o.id] }, multiple: true
+      f.input :army, collection: NinthAge::Army.includes(:translations).order(:name).collect { |o| [o.name + ' - ' + o.version.name, o.id] }, :prompt => true
+      f.input :organisation_ids, as: :select,  :input_html => {'data-option-dependent' => true, 'data-option-url' => '/ninth_age/army-:ninth_age_unit_army_id/organisations', 'data-option-observed' => 'ninth_age_unit_army_id'}, :collection => (resource.army ? resource.army.organisations.collect {|organisation| [organisation.name, organisation.id]} : [])
       f.translate_inputs do |t|
         t.input :name
       end
@@ -61,8 +61,8 @@ ActiveAdmin.register NinthAge::Unit do
       f.input :notes
       f.input :order
       f.input :unit_type, collection: NinthAge::UnitType.includes(:translations).order(:name)
-      f.input :base, as: :select, collection: NinthAge::Unit.bases
-      f.input :size, as: :select, collection: NinthAge::Unit.sizes
+      f.input :base, as: :select, collection: NinthAge::Unit.bases.keys.collect { |base| [I18n.t("unit.base.#{base}", default: base.titleize), base] }, include_blank: false, include_hidden: false
+      f.input :size, as: :select, collection: NinthAge::Unit.sizes.keys.collect { |size| [I18n.t("unit.size.#{size}", default: size.titleize), size] }, include_blank: false, include_hidden: false
       f.input :is_mount
       f.input :type_carac
       panel 'Carac V2' do
@@ -107,21 +107,17 @@ ActiveAdmin.register NinthAge::Unit do
       row :is_mount
       row :size
       row :type_carac
-      panel 'Carac V2' do
-        div class: 'unit_carac_v2_details' do
-          row :carac_ground_adv
-          row :carac_ground_mar
-          row :carac_fly_adv
-          row :carac_fly_mar
-          row :carac_dis
-          row :carac_evoked
-          row :carac_hp
-          row :carac_def
-          row :carac_res
-          row :carac_as
-          row :carac_spe
-        end
-      end
+      row :carac_ground_adv
+      row :carac_ground_mar
+      row :carac_fly_adv
+      row :carac_fly_mar
+      row :carac_dis
+      row :carac_evoked
+      row :carac_hp
+      row :carac_def
+      row :carac_res
+      row :carac_as
+      row :carac_spe
     end
     panel 'Translations' do
       translate_attributes_table_for model do
@@ -162,6 +158,9 @@ ActiveAdmin.register NinthAge::Unit do
           end
           column do |troop|
             link_to 'Voir', admin_ninth_age_troop_path(troop)
+          end
+          column do |troop|
+            link_to 'Edit', edit_admin_ninth_age_troop_path(troop)
           end
         end
       end
@@ -233,6 +232,9 @@ ActiveAdmin.register NinthAge::Unit do
           end
           column do |unit_option|
             link_to 'Voir', admin_ninth_age_unit_option_path(unit_option)
+          end
+          column do |unit_option|
+            link_to 'Edit', edit_admin_ninth_age_unit_option_path(unit_option)
           end
         end
       end

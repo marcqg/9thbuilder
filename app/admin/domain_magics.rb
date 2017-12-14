@@ -1,5 +1,5 @@
 ActiveAdmin.register NinthAge::DomainMagic do
-  menu parent: 'Ninth Age Domain Magic', priority: 1
+  menu parent: 'Ninth Age Magic', priority: 1
 
   permit_params :name, :version_id, :logo, :locale, translations_attributes: [:id, :name, :locale, :_destroy]
 
