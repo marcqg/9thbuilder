@@ -30,6 +30,8 @@ ActiveAdmin.register NinthAge::DomainMagicSpell do
   form do |f|
     f.inputs do
       f.input :domain_magic, collection: NinthAge::DomainMagic.order(:name)
+      f.input :type_target, as: :check_boxes, collection: NinthAge::DomainMagicSpell.values_for_type_target.collect { |type_target| [I18n.t("magic_spell.type_target.#{type_target}", default: type_target), type_target] }
+      f.input :duration, as: :check_boxes, collection: NinthAge::DomainMagicSpell.values_for_duration.collect { |duration| [I18n.t("magic_spell.duration.#{duration}", default: duration), duration] }
       f.translate_inputs do |t|
         t.input :name
         t.input :range
@@ -44,6 +46,8 @@ ActiveAdmin.register NinthAge::DomainMagicSpell do
   show do |model|
     attributes_table do
       row :domain_magic
+      row :type_target
+      row :duration
     end
     panel 'Translations' do
       translate_attributes_table_for model do
