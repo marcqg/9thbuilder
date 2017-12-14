@@ -20,7 +20,7 @@ module NinthAge
     def show
 
       @version = NinthAge::Version.find(params[:id])
-      if !@version.public && (!user_signed_in? || (!current_user.has_role?(:Administrator) or !current_user.has_role?(:Moderator))
+      if !@version.public && (!user_signed_in? || (!current_user.has_role?(:Administrator) or !current_user.has_role?(:Moderator)))
         raise ActionController::RoutingError.new('Not Found')
       end
 
