@@ -41,8 +41,8 @@ ActiveAdmin.register NinthAge::MagicItem do
       f.input :value_points
       f.input :is_multiple
       f.input :type_figurine
-      f.input :type_target
-      f.input :type_duration
+      f.input :type_target, as: :check_boxes, collection: NinthAge::MagicItem.values_for_type_target.collect { |type_target| [I18n.t("magic_spell.type_target.#{type_target}", default: type_target), type_target] }
+      f.input :duration, as: :check_boxes, collection: NinthAge::MagicItem.values_for_duration.collect { |duration| [I18n.t("magic_spell.duration.#{duration}", default: duration), duration] }
       f.input :max
     end
     f.actions

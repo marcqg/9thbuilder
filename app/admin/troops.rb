@@ -55,7 +55,7 @@ ActiveAdmin.register NinthAge::Troop do
 
   form do |f|
     f.inputs do
-      f.input :army_filter, as: :select, collection: NinthAge::Army.includes(:translations).order(:name), disabled: NinthAge::Army.disabled.pluck(:id), label: 'Army FILTER'
+      f.input :army_filter, as: :select, collection: NinthAge::Army.includes(:translations).order(:name).collect { |o| [o.name + ' - ' + o.version.name, o.id] }, disabled: NinthAge::Army.disabled.pluck(:id), label: 'Army FILTER'
       f.input :unit, collection: NinthAge::Unit.includes(:translations).includes(:army).collect { |u| [u.army.name + ' - ' + u.name, u.id] }
 #      f.input :unit_option, collection: NinthAge::UnitOption.includes(unit: [:army]).includes(:translations).collect { |uo| [uo.unit.army.name + ' - ' + uo.unit.name + ' - ' + uo.name, uo.id] }
       f.input :troop_type, collection: NinthAge::TroopType.includes(:translations).order(:name)

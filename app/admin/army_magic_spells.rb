@@ -29,7 +29,7 @@ ActiveAdmin.register NinthAge::ArmyMagicSpell do
 
   form do |f|
     f.inputs do
-      f.input :army, collection: NinthAge::Army.order(:name)
+      f.input :army, collection: NinthAge::Army.includes(:translations).order(:name).collect { |o| [o.name + ' - ' + o.version.name, o.id] }, :prompt => true
       f.input :type_target, as: :check_boxes, collection: NinthAge::ArmyMagicSpell.values_for_type_target.collect { |type_target| [I18n.t("magic_spell.type_target.#{type_target}", default: type_target), type_target] }
       f.input :duration, as: :check_boxes, collection: NinthAge::ArmyMagicSpell.values_for_duration.collect { |duration| [I18n.t("magic_spell.duration.#{duration}", default: duration), duration] }
       f.translate_inputs do |t|
