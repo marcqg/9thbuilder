@@ -40,10 +40,10 @@ ActiveAdmin.register NinthAge::SpecialRuleUnitTroop do
 
   form do |f|
     f.inputs do
-      f.input :army_filter, as: :select, collection: NinthAge::Army.order(:name), disabled: NinthAge::Army.disabled.pluck(:id), label: 'Army FILTER'
-      f.input :special_rule, collection: NinthAge::SpecialRule.all
-      f.input :unit, collection: NinthAge::Unit.includes(:army).collect { |u| [u.army.name + ' - ' + u.name, u.id] }
-      f.input :troop, collection: NinthAge::Troop.includes(unit: [:army]).collect { |t| [t.unit.army.name + ' - ' + t.unit.name + ' - ' + t.name, t.id] }
+      f.input :army_filter, as: :select, collection: NinthAge::Army.includes(:translations).includes(:version).order(:name).collect { |o| [o.name + ' - ' + o.version.name, o.id] }, disabled: NinthAge::Army.disabled.pluck(:id), label: 'Army FILTER'
+      f.input :special_rule, collection: NinthAge::SpecialRule.all.includes(:translations)
+      f.input :unit, collection: NinthAge::Unit.includes(:army).includes(:translations).collect { |u| [u.army.name + ' - ' + u.name, u.id] }
+      f.input :troop, collection: NinthAge::Troop.includes(unit: [:army]).includes(:translations).collect { |t| [t.unit.army.name + ' - ' + t.unit.name + ' - ' + t.name, t.id] }
       f.input :position
     end
     f.actions

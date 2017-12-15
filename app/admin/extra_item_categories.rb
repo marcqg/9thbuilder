@@ -29,7 +29,7 @@ ActiveAdmin.register NinthAge::ExtraItemCategory do
 
   form do |f|
     f.inputs do
-      f.input :army, collection: NinthAge::Army.order(:name)
+      f.input :army, collection: NinthAge::Army.includes(:translations).includes(:version).order(:name).collect { |o| [o.name + ' - ' + o.version.name, o.id] }
       f.translate_inputs do |t|
         t.input :name
       end

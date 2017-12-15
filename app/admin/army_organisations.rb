@@ -30,7 +30,7 @@ ActiveAdmin.register NinthAge::ArmyOrganisation do
 
   form do |f|
     f.inputs do
-      f.input :army, collection: NinthAge::Army.includes(:translations).order(:name).collect { |o| [o.name + ' - ' + o.version.name, o.id] }, :prompt => true
+      f.input :army, collection: NinthAge::Army.includes(:translations).includes(:version).order(:name).collect { |o| [o.name + ' - ' + o.version.name, o.id] }, :prompt => true
       f.translate_inputs do |t|
         t.input :name
         t.input :description

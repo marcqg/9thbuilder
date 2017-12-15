@@ -50,10 +50,10 @@ ActiveAdmin.register NinthAge::UnitOption do
 
   form do |f|
     f.inputs do
-      f.input :army_filter, as: :select, collection: NinthAge::Army.order(:name).collect { |o| [o.name + ' - ' + o.version.name, o.id] }, disabled: NinthAge::Army.disabled.pluck(:id), label: 'Army FILTER'
-      f.input :unit, collection: NinthAge::Unit.includes(:army).collect { |u| [u.army.name + ' - ' + u.name, u.id] }
-      f.input :parent, collection: NinthAge::UnitOption.includes(unit: [:army]).collect { |uo| [uo.unit.army.name + ' - ' + uo.unit.name + ' - ' + uo.name, uo.id] }
-      f.input :mount, collection: NinthAge::Unit.includes(:army).mount_category.collect { |u| [u.army.name + ' - ' + u.name, u.id] }
+      f.input :army_filter, as: :select, collection: NinthAge::Army.includes(:translations).includes(:version).order(:name).collect { |o| [o.name + ' - ' + o.version.name, o.id] }, disabled: NinthAge::Army.disabled.pluck(:id), label: 'Army FILTER'
+      f.input :unit, collection: NinthAge::Unit.includes(:army).includes(:translations).collect { |u| [u.army.name + ' - ' + u.name, u.id] }
+      f.input :parent, collection: NinthAge::UnitOption.includes(unit: [:army]).includes(:translations).collect { |uo| [uo.unit.army.name + ' - ' + uo.unit.name + ' - ' + uo.name, uo.id] }
+      f.input :mount, collection: NinthAge::Unit.includes(:army).includes(:translations).mount_category.collect { |u| [u.army.name + ' - ' + u.name, u.id] }
       f.input :value_points
       f.input :position
       f.input :is_per_model
@@ -61,8 +61,8 @@ ActiveAdmin.register NinthAge::UnitOption do
       f.input :is_required
       f.input :is_magic
       f.input :is_upgratable
-      f.input :magic, collection: NinthAge::Magic.collect { |u| [u.name, u.id] }
-      f.input :organisation, collection: NinthAge::Organisation.collect { |u| [u.name, u.id] }
+      f.input :magic, collection: NinthAge::Magic.includes(:translations).collect { |u| [u.name, u.id] }
+      f.input :organisation, collection: NinthAge::Organisation.includes(:translations).collect { |u| [u.name, u.id] }
       f.input :value_points_upgrade
       f.input :upgrade_target
       f.input :max

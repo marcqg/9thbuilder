@@ -1,7 +1,7 @@
 ActiveAdmin.register NinthAge::MagicItem do
   menu parent: 'Ninth Age Magic', priority: 4
 
-  permit_params :army_id, :magic_item_category_id, :override_id, :locale, :value_points, :is_multiple, :type_figurine, :type_target, :type_duration, :max, translations_attributes: [:id, :name, :locale, :_destroy]
+  permit_params :army_id, :magic_item_category_id, :override_id, :locale, :value_points, :is_multiple, :type_figurine, {:type_target => []}, {:duration => []}, :max, translations_attributes: [:id, :name, :locale, :_destroy]
 
   controller do
     def create
@@ -31,9 +31,9 @@ ActiveAdmin.register NinthAge::MagicItem do
 
   form do |f|
     f.inputs do
-      f.input :army, collection: NinthAge::Army.order(:name)
-      f.input :magic_item_category, collection: NinthAge::MagicItemCategory.order(:name)
-      f.input :override, collection: NinthAge::MagicItem.where(army_id: nil).order(:name)
+      f.input :army, collection: NinthAge::Army.includes(:translations).includes(:version).order(:name).collect { |o| [o.name + ' - ' + o.version.name, o.id] }
+      f.input :magic_item_category, collection: NinthAge::MagicItemCategory.includes(:translations).order(:name)
+      f.input :override, collection: NinthAge::MagicItem.includes(:translations).where(army_id: nil).order(:name)
       f.translate_inputs do |t|
         t.input :name
         t.input :description

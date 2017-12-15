@@ -46,7 +46,7 @@ ActiveAdmin.register NinthAge::Unit do
 
   form do |f|
     f.inputs do
-      f.input :army, collection: NinthAge::Army.includes(:translations).order(:name).collect { |o| [o.name + ' - ' + o.version.name, o.id] }, :prompt => true
+      f.input :army, collection: NinthAge::Army.includes(:translations).includes(:version).order(:name).collect { |o| [o.name + ' - ' + o.version.name, o.id] }, :prompt => true
       f.input :organisation_ids, as: :select,  :input_html => {'data-option-dependent' => true, 'data-option-url' => '/ninth_age/army-:ninth_age_unit_army_id/organisations', 'data-option-observed' => 'ninth_age_unit_army_id'}, :collection => (resource.army ? resource.army.organisations.collect {|organisation| [organisation.name, organisation.id]} : [])
       f.translate_inputs do |t|
         t.input :name

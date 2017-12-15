@@ -29,8 +29,8 @@ ActiveAdmin.register NinthAge::MagicStandard do
 
   form do |f|
     f.inputs do
-      f.input :army, collection: NinthAge::Army.order(:name)
-      f.input :override, collection: NinthAge::MagicStandard.where(army_id: nil).order(:name)
+      f.input :army, collection: NinthAge::Army.includes(:translations).includes(:version).order(:name).collect { |o| [o.name + ' - ' + o.version.name, o.id] }
+      f.input :override, collection: NinthAge::MagicStandard.includes(:translations).where(army_id: nil).order(:name)
       f.translate_inputs do |t|
         t.input :name
         t.input :description

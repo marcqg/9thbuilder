@@ -1,7 +1,7 @@
 ActiveAdmin.register NinthAge::ArmyMagicSpell do
   menu parent: 'Ninth Age Army', priority: 2
 
-  permit_params :name, :type_target, :duration, :locale, translations_attributes: [:id, :name, :description, :range, :casting_value, :effect, :locale, :_destroy]
+  permit_params :name, :army_id, {:type_target => []}, {:duration => []}, :locale, translations_attributes: [:id, :name, :description, :range, :casting_value, :effect, :locale, :_destroy]
 
   #config.sort_order = 'name_asc'
 
@@ -29,7 +29,7 @@ ActiveAdmin.register NinthAge::ArmyMagicSpell do
 
   form do |f|
     f.inputs do
-      f.input :army, collection: NinthAge::Army.includes(:translations).order(:name).collect { |o| [o.name + ' - ' + o.version.name, o.id] }, :prompt => true
+      f.input :army, collection: NinthAge::Army.includes(:translations).includes(:version).includes(:version => [:translations]).order(:name).collect { |o| [o.name + ' - ' + o.version.name, o.id] }, :prompt => true
       f.input :type_target, as: :check_boxes, collection: NinthAge::ArmyMagicSpell.values_for_type_target.collect { |type_target| [I18n.t("magic_spell.type_target.#{type_target}", default: type_target), type_target] }
       f.input :duration, as: :check_boxes, collection: NinthAge::ArmyMagicSpell.values_for_duration.collect { |duration| [I18n.t("magic_spell.duration.#{duration}", default: duration), duration] }
       f.translate_inputs do |t|
