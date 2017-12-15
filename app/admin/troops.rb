@@ -1,7 +1,7 @@
 ActiveAdmin.register NinthAge::Troop do
   menu parent: 'Ninth Age Army', priority: 9
 
-  permit_params :unit_id, :unit_option_id, :troop_type_id, :M, :WS, :BS, :S, :T, :W, :I, :A, :LD, :type_carac, :carac_att, :carac_of, :carac_str, :carac_ap, :carac_agi :value_points, :min_size, :position, :locale, translations_attributes: [:id, :name, :locale, :_destroy]
+  permit_params :unit_id, :unit_option_id, :troop_type_id, :M, :WS, :BS, :S, :T, :W, :I, :A, :LD, :type_carac, :carac_att, :carac_of, :carac_str, :carac_ap, :carac_agi, :value_points, :min_size, :position, :locale, translations_attributes: [:id, :name, :locale, :_destroy]
 
   controller do
     def create
