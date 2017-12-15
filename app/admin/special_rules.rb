@@ -1,7 +1,7 @@
 ActiveAdmin.register NinthAge::SpecialRule do
   menu parent: 'Ninth Age Unit Specialisations', priority: 5
 
-  permit_params :locale, :position, translations_attributes: [:id, :name, :description, :locale, :_destroy]
+  permit_params :locale, :version_id, :army_id, :type_lvl, :position, translations_attributes: [:id, :name, :description, :locale, :_destroy]
 
   #config.sort_order = 'name_asc'
 
@@ -29,6 +29,9 @@ ActiveAdmin.register NinthAge::SpecialRule do
 
   form do |f|
     f.inputs do
+      f.input :version, collection: NinthAge::Version.includes(:translations).order(:name)
+      f.input :army, as: :select,  :input_html => {'data-option-dependent' => true, 'data-option-url' => '/ninth_age/version-:ninth_age_special_rule_version_id/armies', 'data-option-observed' => 'ninth_age_special_rule_version_id'}, :collection => (resource.army ? resource.version.armies.collect {|army| [army.name, army.id]} : [])
+      f.input :type_lvl, as: :select, collection: NinthAge::SpecialRule.type_lvls.collect { |type_lvl| [I18n.t("special_rule.type_lvl.#{type_lvl}", default: type_lvl), type_lvl] }, include_blank: false, include_hidden: false
       f.translate_inputs do |t|
         t.input :name
         t.input :description
@@ -39,6 +42,11 @@ ActiveAdmin.register NinthAge::SpecialRule do
   end
 
   show do |model|
+    attributes_table do
+      row :version
+      row :army
+      row :type_lvl
+    end
     panel 'Translations' do
       translate_attributes_table_for model do
         row :name
