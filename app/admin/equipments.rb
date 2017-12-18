@@ -29,6 +29,8 @@ ActiveAdmin.register NinthAge::Equipment do
 
   form do |f|
     f.inputs do
+      f.input :version, collection: NinthAge::Version.includes(:translations).order(:name), include_blank: false, include_hidden: false
+      f.input :type_lvl, as: :select, collection: NinthAge::Equipment.type_lvls.keys.collect { |type_lvl| [I18n.t("special_rule.type_lvl.#{type_lvl}", default: type_lvl), type_lvl] }, include_blank: false, include_hidden: false
       f.translate_inputs do |t|
         t.input :name
         t.input :description
@@ -39,6 +41,10 @@ ActiveAdmin.register NinthAge::Equipment do
   end
 
   show do |model|
+    attributes_table do
+      row :version
+      row :type_lvl
+    end
     panel 'Translations' do
       translate_attributes_table_for model do
         row :name
