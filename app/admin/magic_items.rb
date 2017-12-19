@@ -8,7 +8,7 @@ ActiveAdmin.register NinthAge::MagicItem do
       NinthAge::MagicItem.includes(:version)
     end
     def create
-      create! { new_admin_magic_item_url }
+      create! { new_admin_ninth_age_magic_item_url }
     end
   end 
 
