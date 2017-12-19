@@ -5,7 +5,8 @@ ActiveAdmin.register NinthAge::Equipment do
 
   #config.sort_order = 'name_asc'
 
-  filter :name
+  #filter :name
+  #filter :version, label: "Version", as: :select, collection: -> { NinthAge::Version.includes(:translations).distinct.pluck :name, :id }
 
   before_action only: [:create, :update] do
     params[:ninth_age_equipment][:translations_attributes].each do |k, v|
@@ -22,8 +23,9 @@ ActiveAdmin.register NinthAge::Equipment do
   index do
     selectable_column
     id_column
-    column :name
+    column :name, sortable: true
     column :description
+    column :version, sortable: :version_id
     actions
   end
 
