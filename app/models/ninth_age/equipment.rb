@@ -1,6 +1,6 @@
 class NinthAge::Equipment < ApplicationRecord
 
-  belongs_to :version
+  belongs_to :version, class_name: "NinthAge::Version"
 
   has_many :equipment_unit_troops, dependent: :destroy
 

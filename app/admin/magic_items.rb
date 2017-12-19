@@ -3,6 +3,10 @@ ActiveAdmin.register NinthAge::MagicItem do
 
   permit_params :version_id, :army_id, :magic_item_category_id, :override_id, :locale, :value_points, :is_multiple, :type_figurine, {:type_target => []}, {:duration => []}, :max, translations_attributes: [:id, :name, :locale, :_destroy]
 
+  filter :version, as: :select, collection: -> { NinthAge::Version.includes(:translations).map { |version| [ version.name, version.id ] } } 
+  filter :army, as: :select, collection: -> { NinthAge::Army.includes(:translations).map { |army| [ army.name + ' ' + army.version.name, army.id ] } } 
+  filter :name
+  
   controller do
     def scoped_collection
       NinthAge::MagicItem.includes(:version)

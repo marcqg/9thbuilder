@@ -1,6 +1,6 @@
 class NinthAge::Army < ApplicationRecord
 
-  belongs_to :version
+  belongs_to :version, class_name: "NinthAge::Version"
 
   has_many :army_organisations
   has_many :organisation_groups, through: :army_organisations

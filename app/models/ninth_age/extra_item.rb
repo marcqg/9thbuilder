@@ -1,6 +1,6 @@
 class NinthAge::ExtraItem < ApplicationRecord
 
-  belongs_to :version
+  belongs_to :version, class_name: "NinthAge::Version"
 
   belongs_to :extra_item_category
   has_many :army_list_unit_extra_items, dependent: :destroy

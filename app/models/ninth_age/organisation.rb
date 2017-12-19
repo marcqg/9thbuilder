@@ -1,7 +1,7 @@
 class NinthAge::Organisation < ApplicationRecord
   # default_scope { includes(:translations) }
 
-  belongs_to :army
+  belongs_to :army, class_name: "NinthAge::Army"
 
   has_and_belongs_to_many  :units
 

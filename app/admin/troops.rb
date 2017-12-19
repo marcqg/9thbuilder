@@ -88,12 +88,15 @@ ActiveAdmin.register NinthAge::Troop do
   end
 
   show do |model|
+    h3 model.name
     attributes_table do
       row :unit
       row :troop_type
       row :unit_option
       row :value_points
-      panel 'Translations' do
+    end
+    panel 'Carac V1' do
+      attributes_table do
         row :type_carac
         row :M
         row :WS
@@ -104,8 +107,10 @@ ActiveAdmin.register NinthAge::Troop do
         row :I
         row :A
         row :LD
-      end 
-      panel 'Translations' do
+      end
+    end 
+    panel 'Carac V2' do
+        attributes_table do
         row :carac_att
         row :carac_of
         row :carac_str

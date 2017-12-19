@@ -1,8 +1,8 @@
 class NinthAge::MagicStandard < ApplicationRecord
 
-  belongs_to :version
+  belongs_to :version, class_name: "NinthAge::Version"
 
-  belongs_to :army
+  belongs_to :army, class_name: "NinthAge::Army"
   has_many :army_list_unit_magic_standards, dependent: :destroy
   has_many :army_list_units, through: :army_list_unit_magic_standards
   has_one :override, class_name: 'MagicStandard', foreign_key: 'override_id'
