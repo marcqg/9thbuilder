@@ -36,7 +36,7 @@ ActiveAdmin.register NinthAge::MagicItem do
   form do |f|
     f.inputs do
       f.input :version, collection: NinthAge::Version.includes(:translations).order(:name)
-      f.input :army, as: :select,  :input_html => {'data-option-dependent' => true, 'data-option-url' => '/ninth_age/version-:ninth_age_special_rule_version_id/armies', 'data-option-observed' => 'ninth_age_special_rule_version_id'}, :collection => (resource.army ? resource.version.armies.collect {|army| [army.name, army.id]} : []), include_blank: true
+      f.input :army, as: :select,  :input_html => {'data-option-dependent' => true, 'data-option-url' => '/ninth_age/version-:ninth_age_magic_item_version_id/armies', 'data-option-observed' => 'ninth_age_magic_item_version_id'}, :collection => (resource.army ? resource.version.armies.collect {|army| [army.name, army.id]} : []), include_blank: true
       f.input :magic_item_category, collection: NinthAge::MagicItemCategory.includes(:translations).order(:name)
       f.input :override, collection: NinthAge::MagicItem.includes(:translations).where(army_id: nil).order(:name)
       f.translate_inputs do |t|
@@ -45,7 +45,7 @@ ActiveAdmin.register NinthAge::MagicItem do
       end
       f.input :value_points
       f.input :is_multiple
-      f.input :type_figurine, as: :select, collection: NinthAge::MagicItem.type_figurines.keys.collect { |type_figurine| [I18n.t("magic_item.type_figurine.#{type_figurine}", type_figurine: type_figurine), type_figurine] }, include_blank: false, include_hidden: false
+      f.input :type_figurine, as: :select, collection: NinthAge::MagicItem.type_figurines.keys.collect { |type_figurine| [I18n.t("magic_items.type_figurine.#{type_figurine}", type_figurine: type_figurine), type_figurine] }, include_blank: false, include_hidden: false
       f.input :type_target, as: :check_boxes, collection: NinthAge::MagicItem.values_for_type_target.collect { |type_target| [I18n.t("magic_spell.type_target.#{type_target}", default: type_target), type_target] }
       f.input :type_duration, as: :check_boxes, collection: NinthAge::MagicItem.values_for_type_duration.collect { |duration| [I18n.t("magic_spell.duration.#{duration}", default: duration), duration] }
       f.input :max

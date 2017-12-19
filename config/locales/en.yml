@@ -240,6 +240,7 @@ en:
       Universal: Universal
       Universal_g: "{Universal}"
     type_figurine:
+      All: All
       Infantry: Infantry 
       Monster: Monster
       NoLargeTarget: No large target
