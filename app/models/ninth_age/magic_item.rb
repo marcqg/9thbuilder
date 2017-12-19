@@ -3,7 +3,7 @@ class NinthAge::MagicItem < ApplicationRecord
   belongs_to :version, class_name: "NinthAge::Version"
 
   belongs_to :army, class_name: "NinthAge::Army"
-  belongs_to :magic_item_category
+  belongs_to :magic_item_category, class_name: "NinthAge::MagicItemCategory"
   has_many :army_list_unit_magic_items, dependent: :destroy, :class_name => 'Builder::ArmyListUnitMagicItem'
   has_many :army_list_units, through: :army_list_unit_magic_items, :class_name => 'Builder::ArmyListUnit'
   has_one :override, class_name: 'NinthAge::MagicItem', foreign_key: 'override_id'

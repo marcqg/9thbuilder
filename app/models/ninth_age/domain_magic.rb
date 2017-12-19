@@ -1,9 +1,9 @@
 class NinthAge::DomainMagic < ApplicationRecord
 
   belongs_to :version, class_name: "NinthAge::Version"
-  has_many :domain_magic_spells
+  has_many :domain_magic_spells, class_name: "NinthAge::DomainMagicSpell"
 
-  has_many :unit_options
+  has_many :unit_options, class_name: "NinthAge::UnitOption"
 
   translates :name, :description
   globalize_accessors

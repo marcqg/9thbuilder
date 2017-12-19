@@ -3,9 +3,9 @@ class NinthAge::Organisation < ApplicationRecord
 
   belongs_to :army, class_name: "NinthAge::Army"
 
-  has_and_belongs_to_many  :units
+  has_and_belongs_to_many  :units, class_name: "NinthAge::Unit"
 
-  has_many :organisation_groups
+  has_many :organisation_groups, class_name: "NinthAge::OrganisationGroup"
 
   has_many :army_lists
 
@@ -17,7 +17,7 @@ class NinthAge::Organisation < ApplicationRecord
   has_many :new_organisations, foreign_key: :new_organisation_id, class_name: 'NinthAge::OrganisationChange'
   #has_many :news, through: :new_organisations, source: :new_organisation
 
-  has_many :unit_options
+  has_many :unit_options, class_name: "NinthAge::UnitOption"
 
   translates :name
   globalize_accessors

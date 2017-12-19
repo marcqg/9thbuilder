@@ -1,11 +1,11 @@
 class NinthAge::UnitOption < ApplicationRecord
-  belongs_to :unit
+  belongs_to :unit, class_name: "NinthAge::Unit"
   belongs_to :parent, class_name: 'NinthAge::UnitOption'
   belongs_to :mount, class_name: 'NinthAge::Unit'
-  belongs_to :domain_magic
-  belongs_to :organisation
+  belongs_to :domain_magic, class_name: "NinthAge::DomainMagic"
+  belongs_to :organisation, class_name: "NinthAge::Organisation"
   has_many :children, -> { order 'position' }, class_name: 'NinthAge::UnitOption', foreign_key: 'parent_id', dependent: :nullify
-  has_one :troop, dependent: :nullify
+  has_one :troop, dependent: :nullify, class_name: "NinthAge::Troop"
   has_many :army_list_unit_unit_options, dependent: :destroy
   has_many :army_list_units, through: :army_list_unit_unit_options
 

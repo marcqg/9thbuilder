@@ -1,6 +1,6 @@
 class NinthAge::DomainMagicSpell < ApplicationRecord
 
-  belongs_to :domain_magic
+  belongs_to :domain_magic, class_name: "NinthAge::DomainMagic"
 
   enum type_lvl: { Zero: 0, One: 1, Two: 2, Three: 3, Four: 4, Five: 5, Six: 6, A: 7, T: 8}
 

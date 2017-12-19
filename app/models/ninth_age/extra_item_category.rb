@@ -1,6 +1,6 @@
 class NinthAge::ExtraItemCategory < ApplicationRecord
   belongs_to :army, class_name: "NinthAge::Army"
-  has_many :extra_items, dependent: :destroy
+  has_many :extra_items, dependent: :destroy, class_name: "NinthAge::ExtraItem"
 
   translates :name
   globalize_accessors

@@ -2,19 +2,19 @@ class NinthAge::Army < ApplicationRecord
 
   belongs_to :version, class_name: "NinthAge::Version"
 
-  has_many :army_organisations
-  has_many :organisation_groups, through: :army_organisations
+  has_many :army_organisations, class_name: "NinthAge::ArmyOrganisation"
+  has_many :organisation_groups, through: :army_organisations, class_name: "NinthAge::OrganisationGroup"
 
-  has_many :organisations
+  has_many :organisations, class_name: "NinthAge::Organisation"
 
-  has_many :special_rules
+  has_many :special_rules, class_name: "NinthAge::Organisation"
 
-  has_many :army_magic_spells
+  has_many :army_magic_spells, class_name: "NinthAge::ArmyMagicSpell"
 
   has_many :army_lists, dependent: :destroy
-  has_many :magic_items, dependent: :destroy
-  has_many :magic_standards, dependent: :destroy
-  has_many :extra_item_categories, dependent: :destroy
+  has_many :magic_items, dependent: :destroy, class_name: "NinthAge::MagicItem"
+  has_many :magic_standards, dependent: :destroy, class_name: "NinthAge::MagicStandard"
+  has_many :extra_item_categories, dependent: :destroy, class_name: "NinthAge::ExtraItemCategory"
   has_many :units, -> { includes(:translations).order(:name) }, :class_name => 'NinthAge::Unit', dependent: :destroy
   has_many :favorite_users, class_name: 'User', foreign_key: 'favorite_army_id', dependent: :nullify
 

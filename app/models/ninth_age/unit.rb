@@ -3,17 +3,17 @@ class NinthAge::Unit < ApplicationRecord
 
   belongs_to :army, class_name: "NinthAge::Army"
 
-  belongs_to :unit_type
+  belongs_to :unit_type, class_name: "NinthAge::UnitType"
   
-  has_and_belongs_to_many :organisations
+  has_and_belongs_to_many :organisations, class_name: "NinthAge::Organisation"
 
   has_many :army_list_units, dependent: :destroy
-  has_many :equipment_unit_troops, -> { order :position }, dependent: :destroy
-  has_many :special_rule_unit_troops, -> { order :position }, dependent: :destroy
-  has_many :troops, -> { order :position }, dependent: :destroy
-  has_many :unit_options, -> { order %w(parent_id position) }, dependent: :destroy
+  has_many :equipment_unit_troops, -> { order :position }, dependent: :destroy, class_name: "NinthAge::EquipmentUnitTroop"
+  has_many :special_rule_unit_troops, -> { order :position }, dependent: :destroy, class_name: "NinthAge::SpecialRuleUnitTroop"
+  has_many :troops, -> { order :position }, dependent: :destroy, class_name: "NinthAge::Troop"
+  has_many :unit_options, -> { order %w(parent_id position) }, dependent: :destroy, class_name: "NinthAge::UnitOption"
   has_many :mount_options, class_name: 'NinthAge::UnitOption', foreign_key: 'mount_id', dependent: :nullify
-  has_many :organisation_changes, dependent: :destroy
+  has_many :organisation_changes, dependent: :destroy, class_name: "NinthAge::OrganisationChange"
 
   enum type_carac: {V1: 0, V2: 1}
   enum size: {Standard: 0, Large: 1, Gigantic: 2}

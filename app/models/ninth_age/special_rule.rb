@@ -3,7 +3,7 @@ class NinthAge::SpecialRule < ApplicationRecord
   belongs_to :version, class_name: "NinthAge::Version"
   belongs_to :army, class_name: "NinthAge::Army"
 
-  has_many :special_rule_unit_troops, dependent: :destroy
+  has_many :special_rule_unit_troops, dependent: :destroy, class_name: "NinthAge::SpecialRuleUnitTroop"
 
   translates :name, :description
   globalize_accessors

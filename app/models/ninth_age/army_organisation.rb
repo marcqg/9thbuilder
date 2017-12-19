@@ -2,8 +2,8 @@ class NinthAge::ArmyOrganisation < ApplicationRecord
   # default_scope { includes(:translations) }
 
   belongs_to :army, class_name: "NinthAge::Army"
-  has_many :organisation_groups
-  has_many :organisations, through: :organisation_groups
+  has_many :organisation_groups, class_name: "NinthAge::OrganisationGroup"
+  has_many :organisations, through: :organisation_groups, class_name: "NinthAge::Organisation"
 
   translates :name, :description
   globalize_accessors

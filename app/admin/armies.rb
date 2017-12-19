@@ -35,6 +35,7 @@ ActiveAdmin.register NinthAge::Army do
     selectable_column
     id_column
     column :name
+    column :version, sortable: :version_id
     actions
   end
 

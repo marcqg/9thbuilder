@@ -1,5 +1,5 @@
 class NinthAge::TroopType < ApplicationRecord
-  has_many :troops, dependent: :destroy
+  has_many :troops, dependent: :destroy, class_name: "NinthAge::Troop"
 
   translates :name
   globalize_accessors

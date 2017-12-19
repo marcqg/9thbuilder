@@ -1,5 +1,5 @@
 class NinthAge::MagicItemCategory < ApplicationRecord
-  has_many :magic_items, dependent: :destroy
+  has_many :magic_items, dependent: :destroy, class_name: "NinthAge::MagicItem"
 
   translates :name
   globalize_accessors

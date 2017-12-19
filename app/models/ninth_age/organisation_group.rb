@@ -1,7 +1,7 @@
 class NinthAge::OrganisationGroup < ApplicationRecord
-  belongs_to :army_organisation
+  belongs_to :army_organisation, class_name: "NinthAge::ArmyOrganisation"
 
-  belongs_to :organisation
+  belongs_to :organisation, class_name: "NinthAge::Organisation"
 
   enum type_target: { NoLimit: 0, Max: 1, Least: 2, NotAllowed: 3 }
 

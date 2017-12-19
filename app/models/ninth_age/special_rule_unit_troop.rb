@@ -1,8 +1,8 @@
 class NinthAge::SpecialRuleUnitTroop < ApplicationRecord
 
-  belongs_to :special_rule
-  belongs_to :unit
-  belongs_to :troop
+  belongs_to :special_rule, class_name: "NinthAge::SpecialRule"
+  belongs_to :unit, class_name: "NinthAge::Unit"
+  belongs_to :troop, class_name: "NinthAge::Troop"
 
   validates :position, numericality: { greater_than_or_equal_to: 1, only_integer: true, allow_nil: true }
 

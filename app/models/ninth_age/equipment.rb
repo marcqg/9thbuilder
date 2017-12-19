@@ -2,7 +2,7 @@ class NinthAge::Equipment < ApplicationRecord
 
   belongs_to :version, class_name: "NinthAge::Version"
 
-  has_many :equipment_unit_troops, dependent: :destroy
+  has_many :equipment_unit_troops, dependent: :destroy, class_name: "NinthAge::EquipmentUnitTroop"
 
   translates :name, :description
   globalize_accessors
