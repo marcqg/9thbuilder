@@ -39,15 +39,6 @@ ActiveAdmin.register NinthAge::Troop do
     column :name
     column :unit_option, sortable: :unit_option_id
     column :value_points
-    # column :M
-    # column :WS
-    # column :BS
-    # column :S
-    # column :T
-    # column :W
-    # column :I
-    # column :A
-    # column :LD
     column :min_size
     column :position
     actions
@@ -55,14 +46,12 @@ ActiveAdmin.register NinthAge::Troop do
 
   form do |f|
     f.inputs do
-      f.input :army_filter, as: :select, collection: NinthAge::Army.includes(:translations).includes(:version).order(:name).collect { |o| [o.name + ' - ' + o.version.name, o.id] }, disabled: NinthAge::Army.disabled.pluck(:id), label: 'Army FILTER'
-      f.input :unit, collection: NinthAge::Unit.includes(:translations).includes(:army).collect { |u| [u.army.name + ' - ' + u.name, u.id] }
-#      f.input :unit_option, collection: NinthAge::UnitOption.includes(unit: [:army]).includes(:translations).collect { |uo| [uo.unit.army.name + ' - ' + uo.unit.name + ' - ' + uo.name, uo.id] }
-      f.input :troop_type, collection: NinthAge::TroopType.includes(:translations).order(:name)
+      f.input :unit, collection: NinthAge::Unit.includes(:translations).includes(army: [:translations]).collect { |u| [u.army.name + ' - ' + u.army.version.name + ' - ' + u.name, u.id] }
       f.input :type_carac
       panel 'Carac V1' do
         div class: 'unit_carac_v1_details' do
           ol do 
+            f.input :troop_type, collection: NinthAge::TroopType.includes(:translations).order(:name)
             f.input :M
             f.input :WS
             f.input :BS
@@ -104,23 +93,27 @@ ActiveAdmin.register NinthAge::Troop do
       row :troop_type
       row :unit_option
       row :value_points
-      row :type_carac
-      row :M
-      row :WS
-      row :BS
-      row :S
-      row :T
-      row :W
-      row :I
-      row :A
-      row :LD
-      row :carac_att
-      row :carac_of
-      row :carac_str
-      row :carac_ap
-      row :carac_agi
-      row :min_size
-      row :position
+      panel 'Translations' do
+        row :type_carac
+        row :M
+        row :WS
+        row :BS
+        row :S
+        row :T
+        row :W
+        row :I
+        row :A
+        row :LD
+      end 
+      panel 'Translations' do
+        row :carac_att
+        row :carac_of
+        row :carac_str
+        row :carac_ap
+        row :carac_agi
+        row :min_size
+        row :position
+      end
     end
     panel 'Translations' do
       translate_attributes_table_for model do
