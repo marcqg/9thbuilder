@@ -5,7 +5,7 @@ ActiveAdmin.register NinthAge::Organisation do
 
   #config.sort_order = 'name_asc'
 
-  filter :army
+  filter :army, as: :select, collection: -> { NinthAge::Army.includes(:translations).map { |army| [ army.name + ' ' + army.version.name, army.id ] } } 
   filter :name
 
   before_action only: [:create, :update] do

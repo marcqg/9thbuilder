@@ -6,7 +6,8 @@ ActiveAdmin.register NinthAge::Army do
   #config.sort_order = 'name_asc'
 
   filter :name
-
+  filter :version, as: :select, collection: -> { NinthAge::Version.includes(:translations).map { |version| [ version.name, version.id ] } } 
+  
   before_action only: [:create, :update] do
     params[:ninth_age_army][:translations_attributes].each do |k,v|
       if v.except('id', 'locale').all? { |_,v| v.blank? }

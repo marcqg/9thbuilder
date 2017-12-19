@@ -4,6 +4,9 @@ ActiveAdmin.register NinthAge::MagicStandard do
   permit_params :army_id, :override_id, :locale, :value_points, translations_attributes: [:id, :name, :locale, :_destroy]
 
   # config.sort_order = 'name_asc'
+  
+  filter :army, as: :select, collection: -> { NinthAge::Army.includes(:translations).map { |army| [ army.name + ' ' + army.version.name, army.id ] } } 
+  filter :name
 
   controller do
     def create

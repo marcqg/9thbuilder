@@ -1,5 +1,5 @@
 class NinthAge::ExtraItemCategory < ApplicationRecord
-  belongs_to :army
+  belongs_to :army, class_name: "NinthAge::Army"
   has_many :extra_items, dependent: :destroy
 
   translates :name

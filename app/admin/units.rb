@@ -24,9 +24,8 @@ ActiveAdmin.register NinthAge::Unit do
     link_to 'Duplicate Unit', duplicate_admin_ninth_age_unit_path(ninth_age_unit), method: :post
   end
 
-  filter :army
-  #filter :unit_category
-  filter :value_points
+  filter :army, as: :select, collection: -> { NinthAge::Army.includes(:translations).map { |army| [ army.name + ' ' + army.version.name, army.id ] } } 
+  filter :name
 
   index do
     selectable_column

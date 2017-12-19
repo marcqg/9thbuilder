@@ -1,6 +1,6 @@
 class NinthAge::ArmyMagicSpell < ApplicationRecord
 
-  belongs_to :army
+  belongs_to :army, class_name: "NinthAge::Army"
 
   translates :name, :description, :range, :casting_value, :effect
   globalize_accessors
