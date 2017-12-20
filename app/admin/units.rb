@@ -223,8 +223,9 @@ ActiveAdmin.register NinthAge::Unit do
 
     panel 'Options Details' do
       div class: 'unit_unit_options_details' do
-        table_for model.unit_options do
+        table_for model.unit_options.order(:parent_id, position: :asc) do
           column :id
+          column :parent_id
           column :name
           column :value_points
           column :is_per_model
