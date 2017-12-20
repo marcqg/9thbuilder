@@ -24,6 +24,18 @@ ActiveAdmin.register NinthAge::Unit do
     link_to 'Duplicate Unit', duplicate_admin_ninth_age_unit_path(ninth_age_unit), method: :post
   end
 
+  action_item :new_unit_option, only: :show do
+    link_to 'New Unit Option', new_admin_ninth_age_unit_option_path('ninth_age_unit_option[unit_id]' => ninth_age_unit.id)
+  end
+
+  action_item :new_equipment, only: :show do
+    link_to 'New Equipment', new_admin_ninth_age_equipment_unit_troop_path('ninth_age_equipment_unit_troop[unit_id]' => ninth_age_unit.id)
+  end
+
+  action_item :new_special_rule, only: :show do
+    link_to 'New Special Rule', new_admin_ninth_age_special_rule_unit_troop_path('ninth_age_special_rule_unit_troop[unit_id]' => ninth_age_unit.id)
+  end
+
   filter :army, as: :select, collection: -> { NinthAge::Army.includes(:translations).map { |army| [ army.name + ' ' + army.version.name, army.id ] } } 
   filter :name
 

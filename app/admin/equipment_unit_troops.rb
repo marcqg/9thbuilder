@@ -40,10 +40,10 @@ ActiveAdmin.register NinthAge::EquipmentUnitTroop do
 
   form do |f|
     f.inputs do
-      f.input :army_filter, as: :select, collection: NinthAge::Army.includes(:translations).includes(:version).order(:name).collect { |o| [o.name + ' - ' + o.version.name, o.id] }, disabled: NinthAge::Army.disabled.pluck(:id), label: 'Army FILTER'
-      f.input :equipment, collection: NinthAge::Equipment.all
-      f.input :unit, collection: NinthAge::Unit.includes(:army).collect { |u| [u.army.name + ' - ' + u.name, u.id] }
-      f.input :troop, collection: NinthAge::Troop.includes(unit: [:army]).collect { |t| [t.unit.army.name + ' - ' + t.unit.name + ' - ' + t.name, t.id] }
+      f.input :army_filter, as: :select, collection: NinthAge::Army.includes(:translations).includes(version: [:translations]).order(:name).collect { |o| [o.name + ' - ' + o.version.name, o.id] }, disabled: NinthAge::Army.disabled.pluck(:id), label: 'Army FILTER'
+      f.input :unit, as: :select, :input_html => {'data-option-dependent' => true, 'data-option-url' => '/ninth_age/army-:ninth_age_equipment_unit_troop_army_filter/units', 'data-option-observed' => 'ninth_age_equipment_unit_troop_army_filter'}, :collection => (resource.army ? resource.army.units.collect {|unit| [unit.name, unit.id]} : [])
+      f.input :troop, as: :select, :input_html => {'data-option-dependent' => true, 'data-option-url' => '/ninth_age/army-:ninth_age_equipment_unit_troop_unit/units', 'data-option-observed' => 'ninth_age_equipment_unit_troop_unit'}, :collection => (resource.unit ? resource.unit.troops.collect {|troop| [troop.name, troop.id]} : [])
+      f.input :equipment, collection: NinthAge::Equipment.includes(:translations).includes(version: [:translations]).collect { |o| [o.name + ' - ' + o.version.name, o.id] }
       f.input :position
     end
     f.actions

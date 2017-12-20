@@ -1,5 +1,7 @@
 class NinthAge::UnitOption < ApplicationRecord
   belongs_to :unit, class_name: "NinthAge::Unit"
+  delegate :army, :to => :unit, :allow_nil => true
+
   belongs_to :parent, class_name: 'NinthAge::UnitOption'
   belongs_to :mount, class_name: 'NinthAge::Unit'
   belongs_to :domain_magic, class_name: "NinthAge::DomainMagic"

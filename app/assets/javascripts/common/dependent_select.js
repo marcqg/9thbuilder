@@ -41,6 +41,8 @@ jQuery(document).ready(function() {
 				dom_id = submask.substring(1, submask.length);
 				return $("select#"+ dom_id).val();
 			});
+
+			var current = observer.val();
 			
 			observer.empty().append(prompt);
 			
@@ -50,6 +52,9 @@ jQuery(document).ready(function() {
 					observer.attr('disabled', false);
 				});
 				
+				if(current){
+					observer.val(current);
+				}
 			});
 		});
 	});

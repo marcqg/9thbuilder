@@ -2,6 +2,7 @@ class NinthAge::EquipmentUnitTroop < ApplicationRecord
 
   belongs_to :equipment, class_name: "NinthAge::Equipment"
   belongs_to :unit, class_name: "NinthAge::Unit"
+  delegate :army, :to => :unit, :allow_nil => true
   belongs_to :troop, class_name: "NinthAge::Troop"
 
   validates :position, numericality: { greater_than_or_equal_to: 1, only_integer: true, allow_nil: true }

@@ -74,7 +74,11 @@ Rails.application.routes.draw do
       end
 
       scope '/units-:unit_id' do
-        resources :troops,  only: [:index]
+        resources :troops,              only: [:index]
+      end
+
+      scope '/unit-:unit_id' do
+        resources :unit_options,        only: [:index]
       end
 
       scope '/version-:version_id' do

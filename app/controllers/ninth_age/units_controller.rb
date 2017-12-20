@@ -5,6 +5,7 @@ module NinthAge
     # GET /army_organisations.json
     def index
       @units = NinthAge::Unit.where(:army_id => params[:army_id])
+                              .includes(:translations)
                               .order(:order)
 
       respond_to do |format|
