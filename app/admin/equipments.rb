@@ -1,7 +1,7 @@
 ActiveAdmin.register NinthAge::Equipment do
   menu parent: 'Ninth Age Unit Specialisations', priority: 1
 
-  permit_params :name, :locale, :position, translations_attributes: [:id, :name, :description, :locale, :_destroy]
+  permit_params :name, :locale, :version_id, :type_lvl, :position, translations_attributes: [:id, :name, :description, :locale, :_destroy]
 
   #config.sort_order = 'name_asc'
 
