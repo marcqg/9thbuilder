@@ -62,7 +62,6 @@ ActiveAdmin.register NinthAge::Unit do
       f.translate_inputs do |t|
         t.input :name
       end
-      f.input :unit_type, collection: NinthAge::UnitType.includes(:translations).order(:name)
       f.input :value_points
       f.input :min_size
       f.input :max_size

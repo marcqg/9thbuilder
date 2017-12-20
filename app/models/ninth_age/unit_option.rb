@@ -8,8 +8,8 @@ class NinthAge::UnitOption < ApplicationRecord
   belongs_to :organisation, class_name: "NinthAge::Organisation"
   has_many :children, -> { order 'position' }, class_name: 'NinthAge::UnitOption', foreign_key: 'parent_id', dependent: :nullify
   has_one :troop, dependent: :nullify, class_name: "NinthAge::Troop"
-  has_many :army_list_unit_unit_options, dependent: :destroy
-  has_many :army_list_units, through: :army_list_unit_unit_options
+  has_many :army_list_unit_unit_options, dependent: :destroy, class_name: 'Builder::ArmyListUnitUnitOption'
+  has_many :army_list_units, through: :army_list_unit_unit_options, class_name: 'Builder::ArmyListUnit'
 
   translates :name, :description, :name_upgrade
   globalize_accessors

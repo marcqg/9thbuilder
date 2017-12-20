@@ -7,9 +7,9 @@ class NinthAge::Organisation < ApplicationRecord
 
   has_many :organisation_groups, class_name: "NinthAge::OrganisationGroup"
 
-  has_many :army_lists
+  has_many :army_lists, class_name: 'Builder::ArmyList'
 
-  has_many :army_list_organisations
+  has_many :army_list_organisations, class_name: 'Builder::ArmyListOrganisation'
 
   has_many :default_organisations, foreign_key: :default_organisation_id, class_name: 'NinthAge::OrganisationChange'
   #has_many :defaults, through: :default_organisations, source: :default_organisation
