@@ -33,19 +33,19 @@ ActiveAdmin.register NinthAge::Unit do
   end
 
   action_item :duplicate, only: :show do
-    link_to 'Duplicate Unit', duplicate_admin_ninth_age_unit_path(ninth_age_unit), method: :post
+    link_to 'Duplicate Unit', duplicate_admin_ninth_age_unit_path(ninth_age_unit), :target => "_blank", method: :post
   end
 
   action_item :new_unit_option, only: :show do
-    link_to 'New Unit Option', new_admin_ninth_age_unit_option_path('ninth_age_unit_option[unit_id]' => ninth_age_unit.id)
+    link_to 'New Unit Option', new_admin_ninth_age_unit_option_path('ninth_age_unit_option[unit_id]' => ninth_age_unit.id), :target => "_blank"
   end
 
   action_item :new_equipment, only: :show do
-    link_to 'New Equipment', new_admin_ninth_age_equipment_unit_troop_path('ninth_age_equipment_unit_troop[unit_id]' => ninth_age_unit.id)
+    link_to 'New Equipment', new_admin_ninth_age_equipment_unit_troop_path('ninth_age_equipment_unit_troop[unit_id]' => ninth_age_unit.id), :target => "_blank"
   end
 
   action_item :new_special_rule, only: :show do
-    link_to 'New Special Rule', new_admin_ninth_age_special_rule_unit_troop_path('ninth_age_special_rule_unit_troop[unit_id]' => ninth_age_unit.id)
+    link_to 'New Special Rule', new_admin_ninth_age_special_rule_unit_troop_path('ninth_age_special_rule_unit_troop[unit_id]' => ninth_age_unit.id), :target => "_blank"
   end
 
   filter :army, as: :select, collection: -> { NinthAge::Army.includes(:translations).map { |army| [ army.name + ' ' + army.version.name, army.id ] } } 
@@ -179,10 +179,10 @@ ActiveAdmin.register NinthAge::Unit do
             link_to 'Desc.', move_lower_admin_ninth_age_troop_path(troop), method: :post unless troop.last?
           end
           column do |troop|
-            link_to 'Voir', admin_ninth_age_troop_path(troop)
+            link_to 'Voir', admin_ninth_age_troop_path(troop), :target => "_blank"
           end
           column do |troop|
-            link_to 'Edit', edit_admin_ninth_age_troop_path(troop)
+            link_to 'Edit', edit_admin_ninth_age_troop_path(troop), :target => "_blank"
           end
         end
       end
@@ -204,7 +204,10 @@ ActiveAdmin.register NinthAge::Unit do
             link_to 'Desc.', move_lower_admin_ninth_age_equipment_unit_troop_path(equipment_unit_troop), method: :post unless equipment_unit_troop.last?
           end
           column do |equipment_unit_troop|
-            link_to 'Voir', admin_ninth_age_equipment_path(equipment_unit_troop)
+            link_to 'Voir', admin_ninth_age_equipment_path(equipment_unit_troop), :target => "_blank"
+          end
+          column do |equipment_unit_troop|
+            link_to 'Edit', edit_admin_ninth_age_equipment_path(equipment_unit_troop), :target => "_blank"
           end
         end
       end
@@ -226,7 +229,10 @@ ActiveAdmin.register NinthAge::Unit do
             link_to 'Desc.', move_lower_admin_ninth_age_special_rule_unit_troop_path(special_rule_unit_troop), method: :post unless special_rule_unit_troop.last?
           end
           column do |special_rule_unit_troop|
-            link_to 'Voir', admin_ninth_age_special_rule_path(special_rule_unit_troop.special_rule)
+            link_to 'Voir', admin_ninth_age_special_rule_path(special_rule_unit_troop.special_rule), :target => "_blank"
+          end
+          column do |special_rule_unit_troop|
+            link_to 'Edit', edit_admin_ninth_age_special_rule_path(special_rule_unit_troop), :target => "_blank"
           end
         end
       end
@@ -254,10 +260,10 @@ ActiveAdmin.register NinthAge::Unit do
             link_to 'Desc.', move_lower_admin_ninth_age_unit_option_path(unit_option), method: :post unless unit_option.last?
           end
           column do |unit_option|
-            link_to 'Voir', admin_ninth_age_unit_option_path(unit_option)
+            link_to 'Voir', admin_ninth_age_unit_option_path(unit_option), :target => "_blank"
           end
           column do |unit_option|
-            link_to 'Edit', edit_admin_ninth_age_unit_option_path(unit_option)
+            link_to 'Edit', edit_admin_ninth_age_unit_option_path(unit_option), :target => "_blank"
           end
         end
       end
