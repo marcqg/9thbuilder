@@ -14,6 +14,18 @@ ActiveAdmin.register NinthAge::MagicStandard do
     end
   end
 
+  before_action only: [:create, :update] do
+    params[:ninth_age_magic_standard][:translations_attributes].each do |k, v|
+      if v.except('id', 'locale').all? { |_, v| v.blank? }
+        v.merge!(_destroy: '1')
+        params[:ninth_age_magic_standard][:translations_attributes][k] = v
+        v.each do |p|
+          puts p
+        end
+      end
+    end
+  end
+
   action_item :new, only: :show do
     link_to 'New Magic Standard', new_admin_ninth_age_magic_standard_url
   end

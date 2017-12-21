@@ -9,6 +9,18 @@ ActiveAdmin.register NinthAge::Unit do
     end
   end
 
+  before_action only: [:create, :update] do
+    params[:ninth_age_unit][:translations_attributes].each do |k, v|
+      if v.except('id', 'locale').all? { |_, v| v.blank? }
+        v.merge!(_destroy: '1')
+        params[:ninth_age_unit][:translations_attributes][k] = v
+        v.each do |p|
+          puts p
+        end
+      end
+    end
+  end
+
   member_action :duplicate, method: :post do
     new_unit = resource.duplicate
     new_unit.save

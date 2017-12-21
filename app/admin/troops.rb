@@ -9,6 +9,18 @@ ActiveAdmin.register NinthAge::Troop do
     end
   end
 
+  before_action only: [:create, :update] do
+    params[:ninth_age_troop][:translations_attributes].each do |k, v|
+      if v.except('id', 'locale').all? { |_, v| v.blank? }
+        v.merge!(_destroy: '1')
+        params[:ninth_age_troop][:translations_attributes][k] = v
+        v.each do |p|
+          puts p
+        end
+      end
+    end
+  end
+
   member_action :move_higher, method: :post do
     resource.move_higher
     resource.save
