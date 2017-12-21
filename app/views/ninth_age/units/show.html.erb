@@ -12,7 +12,7 @@
         <% if @unit.V2? %>
             <div class="pull-right">
               <p>Size: <%= @unit.display_size %></p>
-              <p>Type: <%= @unit.unit_type.name %></p>
+              <%unless @unit.unit_type.nil? %><p>Type: <%= @unit.unit_type.name %></p><% end %>
               <p>Base: <%= @unit.display_base %></p>
             </div>
         <% end %>
@@ -114,7 +114,18 @@
                   <%= @unit.carac_evoked %>
               <% end %>
               </td>
-              <td></td>
+              <td>
+                <ul class="inline-list">
+                  <% @unit.special_rule_unit_troops
+                          .joins(:special_rule)
+                          .includes(special_rule: [:translations])
+                          .where({ninth_age_special_rules: {type_lvl: :Global}})
+                          .map(&:special_rule)
+                          .each do |special_rule| %>
+                    <li><%= link_to(special_rule.name, ninth_age_special_rule_path(special_rule.id)) %></li>
+                  <% end %>
+                </ul>
+              </td>
             </tr>
             <% unless @unit.carac_fly_adv.nil? %>
                 <tr>
@@ -148,7 +159,18 @@
               <td><%= @unit.carac_res %></td>
               <td><%= @unit.carac_as %></td>
               <td><%= @unit.carac_spe %></td>
-              <td></td>
+              <td>                
+                <ul class="inline-list">
+                  <% @unit.special_rule_unit_troops
+                          .joins(:special_rule)
+                          .includes(special_rule: [:translations])
+                          .where({ninth_age_special_rules: {type_lvl: :Defensive}})
+                          .map(&:special_rule)
+                          .each do |special_rule| %>
+                    <li><%= link_to(special_rule.name, ninth_age_special_rule_path(special_rule.id)) %></li>
+                  <% end %>
+                </ul>
+              </td>
             </tr>
             </tbody>
           </table>
@@ -173,83 +195,106 @@
                   <td><%= troop.carac_str %></td>
                   <td><%= troop.carac_ap %></td>
                   <td><%= troop.carac_agi %></td>
-                  <td></td>
+                  <td>                                
+                    <ul class="inline-list">
+                      <% @unit.special_rule_unit_troops
+                              .joins(:special_rule)
+                              .includes(special_rule: [:translations])
+                              .where({ninth_age_special_rules: {type_lvl: :Offensive}})
+                              .where(:troop => nil)
+                              .map(&:special_rule)
+                              .each do |special_rule| %>
+                        <li><%= link_to(special_rule.name, ninth_age_special_rule_path(special_rule.id)) %></li>
+                      <% end %>
+                      <% @unit.special_rule_unit_troops
+                              .joins(:special_rule)
+                              .includes(special_rule: [:translations])
+                              .where({ninth_age_special_rules: {type_lvl: :Offensive}})
+                              .where(:troop => troop.id)
+                              .map(&:special_rule)
+                              .each do |special_rule| %>
+                        <li><%= link_to(special_rule.name, ninth_age_special_rule_path(special_rule.id)) %></li>
+                      <% end %>
+                    </ul>
+                  </td>
                 </tr>
             <% end %>
             </tbody>
           </table>
       <% end %>
     </div>
-    <div class="col-md-3 unit-rules">
-      <% if @unit.special_rule_unit_troops.count > 0 %>
-          <% if @unit.special_rule_unit_troops.joins(:special_rule).where({ninth_age_special_rules: {army_id: @unit.army_id}}).count > 0 %>
-              <div>
-                <h4><%= @unit.army.name %> <%= t('army_list_unit.show.special_rules') %></h4>
-                <ul>
-                  <% @unit.special_rule_unit_troops.joins(:special_rule).where({:troop => nil, ninth_age_special_rules: {army_id: @unit.army_id}}).map(&:special_rule).each do |special_rule| %>
-                      <li><%= link_to(special_rule.name, ninth_age_special_rule_path(special_rule.id)) %></li>
-                  <% end %>
-                </ul>
-                <div class="troop-rules">
-                  <% @unit.troops.each do |troop| %>
-                      <% if troop.special_rule_unit_troops.joins(:special_rule).where({ninth_age_special_rules: {army_id: @unit.army_id}}).count > 0 %>
-                          <h5><%= troop.name %></h5>
-                          <ul>
-                            <% troop.special_rule_unit_troops.joins(:special_rule).where({ninth_age_special_rules: {army_id: @unit.army_id}}).map(&:special_rule).each do |special_rule| %>
-                                <li><%= link_to(special_rule.name, ninth_age_special_rule_path(special_rule.id)) %></li>
-                            <% end %>
-                          </ul>
-                      <% end %>
-                  <% end %>
+    <% if @unit.V1? %>
+      <div class="col-md-3 unit-rules">
+        <% if @unit.special_rule_unit_troops.count > 0 %>
+            <% if @unit.special_rule_unit_troops.joins(:special_rule).where({ninth_age_special_rules: {army_id: @unit.army_id}}).count > 0 %>
+                <div>
+                  <h4><%= @unit.army.name %> <%= t('army_list_unit.show.special_rules') %></h4>
+                  <ul>
+                    <% @unit.special_rule_unit_troops.joins(:special_rule).where({:troop => nil, ninth_age_special_rules: {army_id: @unit.army_id}}).map(&:special_rule).each do |special_rule| %>
+                        <li><%= link_to(special_rule.name, ninth_age_special_rule_path(special_rule.id)) %></li>
+                    <% end %>
+                  </ul>
+                  <div class="troop-rules">
+                    <% @unit.troops.each do |troop| %>
+                        <% if troop.special_rule_unit_troops.joins(:special_rule).where({ninth_age_special_rules: {army_id: @unit.army_id}}).count > 0 %>
+                            <h5><%= troop.name %></h5>
+                            <ul>
+                              <% troop.special_rule_unit_troops.joins(:special_rule).where({ninth_age_special_rules: {army_id: @unit.army_id}}).map(&:special_rule).each do |special_rule| %>
+                                  <li><%= link_to(special_rule.name, ninth_age_special_rule_path(special_rule.id)) %></li>
+                              <% end %>
+                            </ul>
+                        <% end %>
+                    <% end %>
+                  </div>
                 </div>
-              </div>
-          <% end %>
-          <% if @unit.special_rule_unit_troops.joins(:special_rule).where('army_id IS NULL OR army_id != ?', @unit.army_id).count > 0 %>
-              <div>
-                <h4><%= t('army_list_unit.show.special_rules') %></h4>
-                <ul>
-                  <% @unit.special_rule_unit_troops.joins(:special_rule).where({:troop => nil}).where('army_id IS NULL OR army_id != ?', @unit.army_id).map(&:special_rule).each do |special_rule| %>
-                      <li><%= link_to(special_rule.name, ninth_age_special_rule_path(special_rule.id)) %></li>
-                  <% end %>
-                </ul>
-                <div class="troop-rules">
-                  <% @unit.troops.each do |troop| %>
-                      <% if troop.special_rule_unit_troops.joins(:special_rule).where('army_id IS NULL OR army_id != ?', @unit.army_id).map(&:special_rule).count > 0 %>
-                          <h5><%= troop.name %></h5>
-                          <ul>
-                            <% troop.special_rule_unit_troops.joins(:special_rule).where('army_id IS NULL OR army_id != ?', @unit.army_id).map(&:special_rule).each do |special_rule| %>
-                                <li><%= link_to(special_rule.name, ninth_age_special_rule_path(special_rule.id)) %></li>
-                            <% end %>
-                          </ul>
-                      <% end %>
-                  <% end %>
+            <% end %>
+            <% if @unit.special_rule_unit_troops.joins(:special_rule).where('army_id IS NULL OR army_id != ?', @unit.army_id).count > 0 %>
+                <div>
+                  <h4><%= t('army_list_unit.show.special_rules') %></h4>
+                  <ul>
+                    <% @unit.special_rule_unit_troops.joins(:special_rule).where({:troop => nil}).where('army_id IS NULL OR army_id != ?', @unit.army_id).map(&:special_rule).each do |special_rule| %>
+                        <li><%= link_to(special_rule.name, ninth_age_special_rule_path(special_rule.id)) %></li>
+                    <% end %>
+                  </ul>
+                  <div class="troop-rules">
+                    <% @unit.troops.each do |troop| %>
+                        <% if troop.special_rule_unit_troops.joins(:special_rule).where('army_id IS NULL OR army_id != ?', @unit.army_id).map(&:special_rule).count > 0 %>
+                            <h5><%= troop.name %></h5>
+                            <ul>
+                              <% troop.special_rule_unit_troops.joins(:special_rule).where('army_id IS NULL OR army_id != ?', @unit.army_id).map(&:special_rule).each do |special_rule| %>
+                                  <li><%= link_to(special_rule.name, ninth_age_special_rule_path(special_rule.id)) %></li>
+                              <% end %>
+                            </ul>
+                        <% end %>
+                    <% end %>
+                  </div>
                 </div>
-              </div>
-          <% end %>
-      <% end %>
-    </div>
-    <div class="col-md-3 unit-equipments">
-      <% if @unit.equipment_unit_troops.count > 0 %>
-          <h4><%= t('army_list_unit.show.equipments') %></h4>
-          <ul>
-            <% @unit.equipment_unit_troops.where(:troop => nil).map(&:equipment).each do |equipment| %>
-                <li><%= link_to(equipment.name, ninth_age_equipment_path(equipment.id)) %></li>
             <% end %>
-          </ul>
-          <div class="troop-equipments">
-            <% @unit.troops.each do |troop| %>
-                <% if troop.equipment_unit_troops.map(&:equipment).count > 0 %>
-                    <h5><%= troop.name %></h5>
-                    <ul>
-                      <% troop.equipment_unit_troops.map(&:equipment).each do |equipment| %>
-                          <li><%= link_to(equipment.name, ninth_age_equipment_path(equipment.id)) %></li>
-                      <% end %>
-                    </ul>
-                <% end %>
-            <% end %>
-          </div>
-      <% end %>
-    </div>
+        <% end %>
+      </div>
+      <div class="col-md-3 unit-equipments">
+        <% if @unit.equipment_unit_troops.count > 0 %>
+            <h4><%= t('army_list_unit.show.equipments') %></h4>
+            <ul>
+              <% @unit.equipment_unit_troops.where(:troop => nil).map(&:equipment).each do |equipment| %>
+                  <li><%= link_to(equipment.name, ninth_age_equipment_path(equipment.id)) %></li>
+              <% end %>
+            </ul>
+            <div class="troop-equipments">
+              <% @unit.troops.each do |troop| %>
+                  <% if troop.equipment_unit_troops.map(&:equipment).count > 0 %>
+                      <h5><%= troop.name %></h5>
+                      <ul>
+                        <% troop.equipment_unit_troops.map(&:equipment).each do |equipment| %>
+                            <li><%= link_to(equipment.name, ninth_age_equipment_path(equipment.id)) %></li>
+                        <% end %>
+                      </ul>
+                  <% end %>
+              <% end %>
+            </div>
+        <% end %>
+      </div>
+    <% end %>
     <div class="col-md-6">
       <% if @unit.unit_options.count > 0 %>
           <h4><%= t('army_list_unit.show.unit_options') %></h4>

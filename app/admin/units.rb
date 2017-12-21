@@ -1,7 +1,7 @@
 ActiveAdmin.register NinthAge::Unit do
   menu parent: 'Ninth Age Army', priority: 7
 
-  permit_params :army_id, :locale, :value_points, :min_size, :max_size, :magic, :notes, :max, :max_model, :order, :unit_type, :base, :organisation_ids, :unit_type_id, :size, :is_mount, :type_carac, :carac_ground_adv, :carac_ground_mar, :carac_fly_adv, :carac_fly_mar, :carac_dis, :carac_evoked, :carac_hp, :carac_def, :carac_res, :carac_as, :carac_spe, translations_attributes: [:id, :name, :locale, :_destroy]
+  permit_params :army_id, :locale, :value_points, :min_size, :max_size, :magic, :notes, :max, :max_model, :order, :unit_type, :base, {:organisation_ids => []}, :unit_type_id, :size, :is_mount, :type_carac, :carac_ground_adv, :carac_ground_mar, :carac_fly_adv, :carac_fly_mar, :carac_dis, :carac_evoked, :carac_hp, :carac_def, :carac_res, :carac_as, :carac_spe, translations_attributes: [:id, :name, :locale, :_destroy]
 
   controller do
     def create
@@ -70,7 +70,7 @@ ActiveAdmin.register NinthAge::Unit do
   form do |f|
     f.inputs do
       f.input :army, collection: NinthAge::Army.includes(:translations).includes(:version).order(:name).collect { |o| [o.name + ' - ' + o.version.name, o.id] }, :prompt => true
-      f.input :organisation_ids, as: :select,  :input_html => {'data-option-dependent' => true, 'data-option-url' => '/ninth_age/army-:ninth_age_unit_army_id/organisations', 'data-option-observed' => 'ninth_age_unit_army_id'}, :collection => (resource.army ? resource.army.organisations.collect {|organisation| [organisation.name, organisation.id]} : [])
+      f.input :organisation_ids, as: :select, multiple: true,  :input_html => {'data-option-dependent' => true, 'data-option-url' => '/ninth_age/army-:ninth_age_unit_army_id/organisations', 'data-option-observed' => 'ninth_age_unit_army_id'}, :collection => (resource.army ? resource.army.organisations.collect {|organisation| [organisation.name, organisation.id]} : [])
       f.translate_inputs do |t|
         t.input :name
       end
@@ -229,10 +229,10 @@ ActiveAdmin.register NinthAge::Unit do
             link_to 'Desc.', move_lower_admin_ninth_age_special_rule_unit_troop_path(special_rule_unit_troop), method: :post unless special_rule_unit_troop.last?
           end
           column do |special_rule_unit_troop|
-            link_to 'Voir', admin_ninth_age_special_rule_path(special_rule_unit_troop.special_rule), :target => "_blank"
+            link_to 'Voir', admin_ninth_age_special_rule_unit_troop_path(special_rule_unit_troop), :target => "_blank"
           end
           column do |special_rule_unit_troop|
-            link_to 'Edit', edit_admin_ninth_age_special_rule_path(special_rule_unit_troop), :target => "_blank"
+            link_to 'Edit', edit_admin_ninth_age_special_rule_unit_troop_path(special_rule_unit_troop), :target => "_blank"
           end
         end
       end
@@ -264,6 +264,9 @@ ActiveAdmin.register NinthAge::Unit do
           end
           column do |unit_option|
             link_to 'Edit', edit_admin_ninth_age_unit_option_path(unit_option), :target => "_blank"
+          end
+          column do |unit_option|
+            link_to 'Delete', admin_ninth_age_unit_option_path(unit_option), :target => "_blank", method: :delete, data: { confirm: 'Are you sure?'}
           end
         end
       end
