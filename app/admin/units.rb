@@ -204,10 +204,10 @@ ActiveAdmin.register NinthAge::Unit do
             link_to 'Desc.', move_lower_admin_ninth_age_equipment_unit_troop_path(equipment_unit_troop), method: :post unless equipment_unit_troop.last?
           end
           column do |equipment_unit_troop|
-            link_to 'Voir', admin_ninth_age_equipment_path(equipment_unit_troop), :target => "_blank"
+            link_to 'Voir', admin_ninth_age_equipment_unit_troop_path(equipment_unit_troop), :target => "_blank"
           end
           column do |equipment_unit_troop|
-            link_to 'Edit', edit_admin_ninth_age_equipment_path(equipment_unit_troop), :target => "_blank"
+            link_to 'Edit', edit_admin_ninth_age_equipment_unit_troop_path(equipment_unit_troop), :target => "_blank"
           end
         end
       end
