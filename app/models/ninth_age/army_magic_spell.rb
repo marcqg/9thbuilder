@@ -28,6 +28,9 @@ class NinthAge::ArmyMagicSpell < ApplicationRecord
   end
 
   def display_description
+    if description.nil?
+      return nil
+    end
     highlight(description).html_safe
   end
 
@@ -50,18 +53,30 @@ class NinthAge::ArmyMagicSpell < ApplicationRecord
   end
 
   def display_type_lvl
+    if type_lvl.nil?
+      return nil
+    end
     I18n.t("magic_spell.type_lvl.#{type_lvl}", default: type_lvl.titleize)
   end
 
   def display_range
+    if range.nil?
+      return nil
+    end
     highlight(range).html_safe
   end
 
   def display_effect
+    if effect.nil?
+      return nil
+    end
     highlight(effect).html_safe
   end
 
   def display_casting_value
+    if casting_value.nil?
+      return nil
+    end
     highlight(casting_value).html_safe
   end
 end
