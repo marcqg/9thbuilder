@@ -108,3 +108,10 @@ table.content-stats {
 .text-italic {
   font-style: italic;
 }
+
+.content-stats ul li a, 
+.content-stats ul li a:visited, 
+.content-stats ul li a:focus, 
+.content-stats ul li a:hover{
+  color: black;
+}
