@@ -34,7 +34,7 @@ ActiveAdmin.register NinthAge::SpecialRule do
   form do |f|
     f.inputs do
       f.input :version, collection: NinthAge::Version.includes(:translations).order(:name)
-      f.input :army, as: :select,  :input_html => {'data-option-dependent' => true, 'data-option-url' => '/ninth_age/version-:ninth_age_special_rule_version_id/armies', 'data-option-observed' => 'ninth_age_special_rule_version_id'}, :collection => (resource.army ? resource.version.armies.collect {|army| [army.name, army.id]} : []), include_blank: true
+      f.input :army, as: :select,  :input_html => {'data-option-dependent' => true, 'data-option-url' => '/ninth_age/version-:ninth_age_special_rule_version_id/armies', 'data-option-observed' => 'ninth_age_special_rule_version_id'}, :collection => (resource.army ? resource.version.armies.collect {|army| [army.name, army.id]} : []), include_blank: 'No Army'
       f.input :type_lvl, as: :select, collection: NinthAge::SpecialRule.type_lvls.keys.collect { |type_lvl| [I18n.t("special_rule.type_lvl.#{type_lvl}", default: type_lvl), type_lvl] }, include_blank: false, include_hidden: false
       f.translate_inputs do |t|
         t.input :name

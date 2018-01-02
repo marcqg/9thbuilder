@@ -40,10 +40,11 @@ ActiveAdmin.register NinthAge::SpecialRuleUnitTroop do
 
   form do |f|
     f.inputs do
-      f.input :army_filter, as: :select, collection: NinthAge::Army.includes(:translations).includes(version: [:translations]).order(:name).collect { |o| [o.name + ' - ' + o.version.name, o.id] }, disabled: NinthAge::Army.disabled.pluck(:id), label: 'Army FILTER'
+      f.input :version_filter, as: :select, collection: NinthAge::Version.includes(:translations).order(:name).collect { |o| [o.name, o.id] }, label: 'Version FILTER'
+      f.input :army_filter, as: :select, :input_html => {'data-option-dependent' => true, 'data-option-url' => '/ninth_age/version-:ninth_age_special_rule_unit_troop_version_filter/armies', 'data-option-observed' => 'ninth_age_special_rule_unit_troop_version_filter'}, :collection => (resource.version ? resource.version.armies.collect {|army| [army.name, army.id]} : [])
       f.input :unit, as: :select, :input_html => {'data-option-dependent' => true, 'data-option-url' => '/ninth_age/army-:ninth_age_special_rule_unit_troop_army_filter/units', 'data-option-observed' => 'ninth_age_special_rule_unit_troop_army_filter'}, :collection => (resource.army ? resource.army.units.collect {|unit| [unit.name, unit.id]} : [])
       f.input :troop, as: :select, :input_html => {'data-option-dependent' => true, 'data-option-url' => '/ninth_age/army-:ninth_age_special_rule_unit_troop_unit/units', 'data-option-observed' => 'ninth_age_special_rule_unit_troop_unit'}, :collection => (resource.unit ? resource.unit.troops.collect {|troop| [troop.name, troop.id]} : [])
-      f.input :special_rule, collection: NinthAge::SpecialRule.includes(:translations).includes(version: [:translations]).collect { |o| [o.name + ' - ' + o.version.name, o.id] }
+      f.input :special_rule, as: :select, :input_html => {'data-option-dependent' => true, 'data-option-url' => '/ninth_age/version-:ninth_age_special_rule_unit_troop_version_filter/special_rules', 'data-option-observed' => 'ninth_age_special_rule_unit_troop_version_filter'}, :collection => (resource.version ? resource.version.special_rules.collect {|special_rule| [special_rule.name, special_rule.id]} : [])
       f.input :position
     end
     f.actions

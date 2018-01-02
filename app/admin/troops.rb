@@ -39,6 +39,9 @@ ActiveAdmin.register NinthAge::Troop do
     link_to 'New Troop', new_admin_ninth_age_troop_path('troop[unit_id]' => ninth_age_troop.unit)
   end
 
+  filter :id
+  #filter :by_version_in , :as => :select, :collection => NinthAge::Version.includes(:translations).collect { |r| [r.name, r.id] }
+  #filter :by_army_in , :as => :select, :collection => NinthAge::Army.includes(:translations).collect { |r| [r.name + ' - ' + r.version.name, r.id] }
   filter :unit
   filter :troop_type
   filter :value_points

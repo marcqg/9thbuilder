@@ -6,7 +6,9 @@ module NinthAge
     def index
       @version = NinthAge::Version.find(params[:version_id])
       page = params[:page].present? ? params[:page].to_i : 1
-      @ninth_age_special_rules = NinthAge::SpecialRule.with_translations.where(:version_id => params[:version_id]).paginate(:page => page)
+      @ninth_age_special_rules = NinthAge::SpecialRule.includes(:translations)
+                                                      .where(:version_id => params[:version_id])
+                                                      .paginate(:page => page)
 
       respond_to do |format|
         format.html
@@ -16,7 +18,8 @@ module NinthAge
 
     def all
       @version = NinthAge::Version.find(params[:version_id])
-      @ninth_age_special_rules = NinthAge::SpecialRule.with_translations.where(:version_id => params[:version_id])
+      @ninth_age_special_rules = NinthAge::SpecialRule.includes(:translations)
+                                                      .where(:version_id => params[:version_id])
 
       respond_to do |format|
         format.json
