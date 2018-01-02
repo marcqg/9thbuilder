@@ -67,6 +67,8 @@ Rails.application.routes.draw do
         resources :army_organisations,  only: [:index]
         resources :organisations,       only: [:index]
         resources :units,               only: [:index]
+        get '/special_rules/all',       to: 'special_rules#army_all'
+        get '/equipments/all',          to: 'equipments#army_all'
       end
 
       scope '/domain-magic-:domain_magic_id' do
@@ -91,7 +93,9 @@ Rails.application.routes.draw do
         resources :magic_standards,     only: [:index]
 
         get '/ninth-age-special-rules/page-:page',    to: 'special_rules#index'
+        get '/special_rules/all',                     to: 'special_rules#all'
         get '/ninth-age-equipments/page-:page',       to: 'equipments#index'
+        get '/equipments/all',                        to: 'equipments#all'
         get '/ninth-age-extra-items/page-:page',      to: 'extra_items#index'
         get '/ninth-age-magic-items/page-:page',      to: 'magic_items#index'
         get '/magic_items/all',                       to: 'magic_items#all'
