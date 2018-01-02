@@ -138,7 +138,7 @@ en:
         E: "Evoked"
         type: "Troop's type"
       magic_items: "Magic items"
-      magic_standards: "Magic standards"
+      magic_standards: "Magic banners"
       unit_options: "Options"
       equipments: "Equipments"
       special_rules: "Special rules"
@@ -151,7 +151,7 @@ en:
       options: "Options"
       magic_items: "Magic items"
       extra_items: "Special"
-      magic_standards: "Magic standards"
+      magic_standards: "Magic banners"
       form:
         magic: "Magic"
         notes: "Notes"
@@ -262,7 +262,7 @@ en:
 
   magic_standards:
     index:
-      title: Magic Standards
+      title: Magic banners
       show: Show
 
   special_rules:

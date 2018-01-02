@@ -1,9 +1,11 @@
 <h1><%= t('version.index.title') %></h1>
 <div>
   <% @versions.each do |version| %>
-      <article class="version-<%= version.id %> col-md-4 col-xs-12 col-sm-6 text-center">
-          <h4><%= version.name %></h4>
-          <%= link_to t('version.index.show'), ninth_age_version_path(version) %>
+	<%= link_to ninth_age_version_path(version), :class => 'col-md-4 col-xs-12 col-sm-6 text-center' do %>
+      <article class="version-<%= version.id %>">
+      	<%= image_tag('bt_lexicon.png', :size => '220x132') %>
+        <h4><%= version.name %></h4>
       </article>
+    <% end %>
   <% end %>
 </div>

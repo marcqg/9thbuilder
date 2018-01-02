@@ -2,8 +2,15 @@ article[class^="version-"] {
   padding: 10px;
   min-height: 150px;
   cursor: pointer;
+  position: relative;
 
-  > h1, > h4{
+  > h4{
+  	position: absolute;
+  	bottom: 3px;
+  	left: 60%;
+  	color: white;
+  	text-shadow: 2px 2px #2a2a2a;
+  	font-weight: bold;
     padding: 10px;
     margin: 0;
   }
