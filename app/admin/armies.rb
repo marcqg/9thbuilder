@@ -41,7 +41,7 @@ ActiveAdmin.register NinthAge::Army do
 
   form do |f|
     f.inputs do
-      f.input :version, collection: NinthAge::Version.includes(:Translations).order(:name)
+      f.input :version, collection: NinthAge::Version.includes(:translations).order(:name)
       f.inputs 'Portrait' do
         f.input :logo, as: :file
       end

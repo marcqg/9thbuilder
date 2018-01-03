@@ -22,6 +22,7 @@ class NinthAge::MagicStandard < ApplicationRecord
   end
 
   validates :value_points, numericality: { greater_than_or_equal_to: 0 }
+  validates :max, numericality: { greater_than_or_equal_to: 0 }
 
   scope :available_for, lambda { |army, version, value_points_limit|
     if value_points_limit.nil?
