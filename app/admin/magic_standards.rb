@@ -1,7 +1,7 @@
 ActiveAdmin.register NinthAge::MagicStandard do
   menu parent: 'Ninth Age Magic', priority: 5
 
-  permit_params :version_id, :army_id, :override_id, :locale, :value_points, :max, translations_attributes: [:id, :name, :locale, :_destroy]
+  permit_params :version_id, :army_id, :override_id, :locale, :value_points, :max, translations_attributes: [:id, :name, :description, :locale, :_destroy]
 
   # config.sort_order = 'name_asc'
   
