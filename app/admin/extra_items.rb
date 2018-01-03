@@ -1,7 +1,7 @@
 ActiveAdmin.register NinthAge::ExtraItem do
   menu parent: 'Ninth Age Unit Specialisations', priority: 4
 
-  permit_params :extra_item_category_id, :value_points, :locale, translations_attributes: [:id, :name, :locale, :_destroy]
+  permit_params :extra_item_category_id, :value_points, :locale, translations_attributes: [:id, :name, :description, :locale, :_destroy]
 
   # config.sort_order = 'name_asc'
 
@@ -28,6 +28,7 @@ ActiveAdmin.register NinthAge::ExtraItem do
   end
 
   filter :extra_item_category
+  filter :name
   filter :value_points
 
   index do
@@ -35,16 +36,18 @@ ActiveAdmin.register NinthAge::ExtraItem do
     id_column
     column :extra_item_category, sortable: :extra_item_category_id
     column :name
+    column :description
     column :value_points
     actions
   end
 
   form do |f|
     f.inputs do
-      f.input :extra_item_category, collection: NinthAge::ExtraItemCategory.includes(:translations).includes(:army).order(:name).collect { |ei| [ei.army.name + ' - ' + ei.name, ei.id] }
+      f.input :extra_item_category, collection: NinthAge::ExtraItemCategory.includes(:translations).includes(:army).order(:name).collect { |ei| [ei.army.name + ' - ' + ei.army.version.name + ' - ' + ei.name, ei.id] }
       f.input :value_points
       f.translate_inputs do |t|
         t.input :name
+        t.input :description
       end
     end
     f.actions
@@ -58,6 +61,7 @@ ActiveAdmin.register NinthAge::ExtraItem do
     panel 'Translations' do
       translate_attributes_table_for model do
         row :name
+        row :description
       end
     end
   end

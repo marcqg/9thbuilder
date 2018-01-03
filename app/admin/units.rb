@@ -41,11 +41,11 @@ ActiveAdmin.register NinthAge::Unit do
   end
 
   action_item :new_equipment, only: :show do
-    link_to 'New Equipment', new_admin_ninth_age_equipment_unit_troop_path('ninth_age_equipment_unit_troop[unit_id]' => ninth_age_unit.id), :target => "_blank"
+    link_to 'New Equipment', new_admin_ninth_age_equipment_unit_troop_path({'ninth_age_equipment_unit_troop[unit_id]' => ninth_age_unit.id, 'ninth_age_equipment_unit_troop[position]' => ninth_age_unit.equipment_unit_troops.size + 1}), :target => "_blank"
   end
 
   action_item :new_special_rule, only: :show do
-    link_to 'New Special Rule', new_admin_ninth_age_special_rule_unit_troop_path('ninth_age_special_rule_unit_troop[unit_id]' => ninth_age_unit.id), :target => "_blank"
+    link_to 'New Special Rule', new_admin_ninth_age_special_rule_unit_troop_path({'ninth_age_special_rule_unit_troop[unit_id]' => ninth_age_unit.id, 'ninth_age_special_rule_unit_troop[position]' => ninth_age_unit.special_rule_unit_troops.size + 1}), :target => "_blank"
   end
 
   filter :army, as: :select, collection: -> { NinthAge::Army.includes(:translations).map { |army| [ army.name + ' ' + army.version.name, army.id ] } } 
