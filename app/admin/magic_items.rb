@@ -85,6 +85,7 @@ ActiveAdmin.register NinthAge::MagicItem do
     panel 'Translations' do
       translate_attributes_table_for model do
         row :name
+        row :description
       end
     end
   end
