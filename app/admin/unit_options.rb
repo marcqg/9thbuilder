@@ -1,7 +1,7 @@
 ActiveAdmin.register NinthAge::UnitOption do
   menu parent: 'Ninth Age Army', priority: 10
 
-  permit_params :unit_id, :parent_id, :mount_id, :value_points, :position, :is_per_model, :is_multiple, :is_magic, :is_upgratable, :magic_id, :organisation_id, :value_points_upgrade, :upgrade_target, :max, :max_model, :min_model, :max_unit, :is_magic_items, :is_magic_standards, :is_extra_items, :is_unique_choice, :locale, translations_attributes: [:id, :name, :locale, :_destroy]
+  permit_params :unit_id, :parent_id, :mount_id, :value_points, :position, :is_per_model, :is_multiple, :is_magic, :is_upgratable, :domain_magic_id, :organisation_id, :value_points_upgrade, :upgrade_target, :max, :max_model, :min_model, :max_unit, :is_magic_items, :is_magic_standards, :is_extra_items, :is_unique_choice, :locale, translations_attributes: [:id, :name, :locale, :_destroy]
 
   controller do
     def create
@@ -103,10 +103,21 @@ ActiveAdmin.register NinthAge::UnitOption do
       row :position
       row :is_per_model
       row :is_multiple
+      row :is_required
+      row :is_magic
+      row :domain_magic
+      row :organisation
       row :is_magic_items
       row :is_magic_standards
       row :is_extra_items
       row :is_unique_choice
+      row :is_upgratable
+      row :value_points_upgrade
+      row :upgrade_target
+      row :max
+      row :max_model
+      row :min_model
+      row :max_unit
     end
     panel 'Translations' do
       translate_attributes_table_for model do

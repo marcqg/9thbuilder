@@ -253,6 +253,8 @@ ActiveAdmin.register NinthAge::Unit do
           column :is_extra_items
           column :is_unique_choice
           column :is_multiple
+          column :is_magic
+          column :domain_magic
           column :mount
           column :position
           column do |unit_option|
