@@ -1,1 +1,1 @@
-json.extract! ninth_age_equipment, :id, :name, :description
+json.extract! ninth_age_equipment, :id, :version_id, :name, :description, :type_lvl
