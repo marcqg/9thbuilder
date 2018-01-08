@@ -16,7 +16,6 @@ module NinthAge
     # GET /magics/1.json
     def show
       @magic = NinthAge::DomainMagic.find_by(:id => params[:id])
-                                    .includes(:translations)
       @spells = NinthAge::DomainMagicSpell.where(:domain_magic_id => params[:id])
                                           .includes(:translations)
 
