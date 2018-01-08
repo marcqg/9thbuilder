@@ -216,6 +216,7 @@ en:
       Ground: Ground
       Universal: Universal
       Universal_g: "{Universal}"
+      Caster: Caster
 
   extra_items:
     index:
@@ -259,6 +260,7 @@ en:
       Instant: Instant
       Permanent: Permanent
       RemainsInPlay: Remains in play
+    dominant: Dominant
 
   magic_standards:
     index:

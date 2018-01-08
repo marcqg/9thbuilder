@@ -1,7 +1,7 @@
 ActiveAdmin.register NinthAge::DomainMagic do
   menu parent: 'Ninth Age Magic', priority: 1
 
-  permit_params :name, :version_id, :logo, :locale, translations_attributes: [:id, :name, :locale, :_destroy]
+  permit_params :name, :version_id, :logo, :locale, translations_attributes: [:id, :name, :description, :locale, :_destroy]
 
   #config.sort_order = 'name_asc'
 
@@ -34,6 +34,7 @@ ActiveAdmin.register NinthAge::DomainMagic do
       end
       f.translate_inputs do |t|
         t.input :name
+        t.input :description
       end
     end
 
@@ -50,6 +51,7 @@ ActiveAdmin.register NinthAge::DomainMagic do
     panel 'Translations' do
       translate_attributes_table_for model do
         row :name
+        row :description
       end
     end
   end
