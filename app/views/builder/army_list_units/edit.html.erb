@@ -29,7 +29,7 @@
       <tr>
 
     <% if @available_unit_options.any? %>
-      <td><div id="army_list_unit_unit_options">
+      <td><div id="army_list_unit_unit_options" class="army_list_unit_add_element">
         <h3><%=t 'army_list_unit.edit.options' %><br /><span><%= value_points(@army_list_unit.unit_options_value_points) %></span> pts</h3>
         <ul>
           <!-- IGNORE MAGIC ITEMS/STANTARDS -->
@@ -39,14 +39,14 @@
     <% end %>
 
     <% if @magic_items_option %>
-      <td><div id="army_list_unit_magic_items" data-value-points-limit="<%= @magic_items_option.value_points %>">
+      <td><div id="army_list_unit_magic_items" class="army_list_unit_add_element" data-value-points-limit="<%= @magic_items_option.value_points %>">
         <h3><%=t 'army_list_unit.edit.magic_items' %><br /><span><%= value_points(@army_list_unit.magic_items_value_points + (@magic_items_option.is_extra_items? ? @army_list_unit.extra_items_value_points : 0)) %></span>/<%= value_points(@magic_items_option.value_points) %> pts</h3>
         <ul>
           <% NinthAge::MagicItemCategory.all.each_with_index do |magic_item_category, index| %>
           <%- magic_items = magic_item_category.magic_items.available_for(@army_list.army, @army_list.army.version, @magic_items_option.value_points).all %>
           <%- next if magic_items.empty? %>
           <li>
-            <strong><%= magic_item_category.name %></strong>
+            <strong class="<%= @army_list_unit.magic_items.where(:magic_item_category_id => magic_item_category.id).empty? ? 'empty' : '' %>"><%= magic_item_category.name %></strong>
             <ul style="<%= 'display:none' if index > 0 %>">
               <%= render :partial => 'builder/army_list_units_magic_items/edit', :collection => magic_items, :as => :magic_item, :locals => { :army_list => @army_list, :army_list_unit => @army_list_unit, :unit_option => @magic_items_option } %>
             </ul>
@@ -67,7 +67,7 @@
     <% end %>
 
     <% if @extra_items_option %>
-      <td><div id="army_list_unit_extra_items" data-value-points-limit="<%= @extra_items_option.value_points %>">
+      <td><div id="army_list_unit_extra_items" class="army_list_unit_add_element" data-value-points-limit="<%= @extra_items_option.value_points %>">
         <% if @army_list.army.extra_item_categories.length > 1 %>
         <h3><%=t 'army_list_unit.edit.extra_items' %><br /><span><%= value_points(@army_list_unit.extra_items_value_points) %></span><% unless @extra_items_option.value_points.nil? %>/<%= value_points(@extra_items_option.value_points) %><% end %> pts</h3>
         <ul>
@@ -90,7 +90,7 @@
     <% end %>
 
     <% if @magic_standards_option %>
-      <td><div id="army_list_unit_magic_standards">
+      <td><div id="army_list_unit_magic_standards" class="army_list_unit_add_element">
         <h3><%=t 'army_list_unit.edit.magic_standards' %><br /><span><%= value_points(@army_list_unit.magic_standards_value_points) %></span><% unless @magic_standards_option.value_points.nil? %>/<%= value_points(@magic_standards_option.value_points) %><% end %> pts</h3>
         <ul>
           <%= render :partial => 'builder/army_list_units_magic_standards/edit', :collection =>  NinthAge::MagicStandard.available_for(@army_list.army, @army_list.army.version, @magic_standards_option.value_points).all, :as => :magic_standard, :locals => { :army_list_unit => @army_list_unit, :unit_option => @magic_standards_option } %>
