@@ -1,7 +1,7 @@
 ActiveAdmin.register NinthAge::MagicItem do
   menu parent: 'Ninth Age Magic', priority: 4
 
-  permit_params :version_id, :army_id, :magic_item_category_id, :override_id, :locale, :value_points, :is_multiple, :type_figurine, {:type_target => []}, {:duration => []}, :max, translations_attributes: [:id, :name, :description, :locale, :_destroy]
+  permit_params :version_id, :army_id, :magic_item_category_id, :override_id, :is_dominant, :locale, :value_points, :is_multiple, :type_figurine, {:type_target => []}, {:duration => []}, :max, translations_attributes: [:id, :name, :description, :locale, :_destroy]
 
   filter :version, as: :select, collection: -> { NinthAge::Version.includes(:translations).map { |version| [ version.name, version.id ] } } 
   filter :army, as: :select, collection: -> { NinthAge::Army.includes(:translations).map { |army| [ army.name + ' ' + army.version.name, army.id ] } } 
@@ -46,6 +46,7 @@ ActiveAdmin.register NinthAge::MagicItem do
     column :magic_item_category, sortable: :magic_item_category_id
     column :value_points
     column :is_multiple
+    column :is_dominant
     actions
   end
 
@@ -61,6 +62,7 @@ ActiveAdmin.register NinthAge::MagicItem do
       end
       f.input :value_points
       f.input :is_multiple
+      f.input :is_dominant
       f.input :type_figurine, as: :select, collection: NinthAge::MagicItem.type_figurines.keys.collect { |type_figurine| [I18n.t("magic_items.type_figurine.#{type_figurine}", type_figurine: type_figurine), type_figurine] }, include_blank: false, include_hidden: false
       f.input :type_target, as: :check_boxes, collection: NinthAge::MagicItem.values_for_type_target.collect { |type_target| [I18n.t("magic_spell.type_target.#{type_target}", default: type_target), type_target] }
       f.input :type_duration, as: :check_boxes, collection: NinthAge::MagicItem.values_for_type_duration.collect { |duration| [I18n.t("magic_spell.duration.#{duration}", default: duration), duration] }
@@ -77,6 +79,7 @@ ActiveAdmin.register NinthAge::MagicItem do
       row :override
       row :value_points
       row :is_multiple
+      row :is_dominant
       row :type_figurine
       row :type_target
       row :type_duration

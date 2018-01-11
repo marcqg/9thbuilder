@@ -1,7 +1,7 @@
 ActiveAdmin.register NinthAge::MagicItemCategory do
   menu parent: 'Ninth Age Magic', priority: 3
 
-  permit_params :name, :locale, translations_attributes: [:id, :name, :locale, :_destroy]
+  permit_params :locale, :is_multiple, translations_attributes: [:id, :name, :locale, :_destroy]
 
   #config.sort_order = 'name_asc'
 
@@ -23,6 +23,7 @@ ActiveAdmin.register NinthAge::MagicItemCategory do
     selectable_column
     id_column
     column :name
+    column :is_multiple
     actions
   end
 
@@ -31,6 +32,7 @@ ActiveAdmin.register NinthAge::MagicItemCategory do
       f.translate_inputs do |t|
         t.input :name
       end
+      f.input :is_multiple
     end
 
     f.actions
@@ -41,6 +43,9 @@ ActiveAdmin.register NinthAge::MagicItemCategory do
       translate_attributes_table_for model do
         row :name
       end
+    end
+    attributes_table do
+      row :is_multiple
     end
   end
 end
