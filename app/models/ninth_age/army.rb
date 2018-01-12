@@ -34,11 +34,11 @@ class NinthAge::Army < ApplicationRecord
   end
 
   has_attached_file :logo,
-                    styles: { large:  '300x300>', medium: '200x200>', thumb: '100x100>' },
+                    styles: { facebook: '200x200<', large:  '300x300>', medium: '200x200>', thumb: '100x100>' },
                     default_url: ActionController::Base.helpers.image_path('army.jpg')
   validates_attachment_content_type :logo, content_type: /\Aimage\/.*\z/
   has_attached_file :logo_large,
-                    styles: { large:  '300x300>', medium: '200x200>', thumb: '100x100>' },
+                    styles: { facebook: '200x200<', large:  '300x300>', medium: '200x200>', thumb: '100x100>' },
                     default_url: ActionController::Base.helpers.image_path('army.jpg')
   validates_attachment_content_type :logo_large, content_type: /\Aimage\/.*\z/
 

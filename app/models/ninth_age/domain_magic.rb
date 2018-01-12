@@ -14,7 +14,7 @@ class NinthAge::DomainMagic < ApplicationRecord
   end
 
   has_attached_file :logo,
-                    styles: { large:  '300x300>', medium: '200x200>', thumb: '100x100>' },
+                    styles: { facebook: '200x200<', large:  '300x300>', medium: '200x200>', thumb: '100x100>' },
                     default_url: ActionController::Base.helpers.image_path('magic.jpg')
   validates_attachment_content_type :logo, content_type: /\Aimage\/.*\z/
 
