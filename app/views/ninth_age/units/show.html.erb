@@ -110,9 +110,9 @@
               <td><%= @unit.carac_ground_mar %>"</td>
               <td><%= @unit.carac_dis %></td>
               <td colspan="2">
-              <% unless @unit.carac_evoked.nil? %>
-                  <%= @unit.carac_evoked %>
-              <% end %>
+                <% unless @unit.carac_evoked.nil? %>
+                    <%= @unit.carac_evoked %>
+                <% end %>
               </td>
               <td>
                 <ul class="list-inline">
@@ -123,6 +123,14 @@
                           .map(&:special_rule)
                           .each do |special_rule| %>
                     <li><%= link_to(special_rule.name, ninth_age_special_rule_path(special_rule.id)) %>,</li>
+                  <% end %>
+                  <% @unit.equipment_unit_troops
+                          .joins(:equipment)
+                          .includes(equipment: [:translations])
+                          .where({ninth_age_equipments: {type_lvl: NinthAge::Equipment.type_lvls[:Global] }})
+                          .map(&:equipment)
+                          .each do |equipment| %>
+                    <li><%= link_to(equipment.name, ninth_age_equipment_path(equipment.id)) %>,</li>
                   <% end %>
                 </ul>
               </td>

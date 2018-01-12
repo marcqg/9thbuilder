@@ -14,9 +14,6 @@ ActiveAdmin.register NinthAge::Unit do
       if v.except('id', 'locale').all? { |_, v| v.blank? }
         v.merge!(_destroy: '1')
         params[:ninth_age_unit][:translations_attributes][k] = v
-        v.each do |p|
-          puts p
-        end
       end
     end
   end

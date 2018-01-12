@@ -8,7 +8,9 @@
   	<small>- <%= @ninth_age_magic_item.max %> per Army</small>
   <%end%>
 </h1>
-<p class="small-text"><%= @ninth_age_magic_item.army.name %></p>
+<% unless @ninth_age_magic_item.army_id.nil? %>
+  <p class="small-text"><%= @ninth_age_magic_item.army.name %></p>
+<% end %>
 <% if  @ninth_age_magic_item.type_target.length > 0 %>
   <div>
     <label><%= t('magic_item.duration') %> :</label>
