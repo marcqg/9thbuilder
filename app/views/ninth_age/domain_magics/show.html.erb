@@ -1,10 +1,10 @@
 <% content_for :title do %>Magic path <%= @magic.name %> (<%= @magic.version.name %>)<% end %>
 <% content_for :head do %>
     <meta property="og:site_name" content="9th Age Builder"/>
-    <meta property="og:title" content="Magic path <%= @magic.name %> (<%= @magic.version.name %>)" />
+    <meta property="og:title" content="<%= @magic.name %> (<%= @magic.version.name %>) magic path" />
     <meta property="og:url" content="<%= url_for(:only_path => false) %>"/>
     <meta property="og:image" content="<%=  request.scheme + '://' + request.host_with_port + @magic.logo.url(:facebook) %>"/>
-    <meta property="og:description" content="All spells of <%= @magic.name %>">
+    <meta property="og:description" content="All spells of <%= @magic.name %> magic path">
 <% end %>
 
 <div class="col-md-12 col-xs-12 col-sm-12 magic-<%= @magic.id %>">
