@@ -3,7 +3,7 @@
     <meta property="og:site_name" content="9th Age Builder"/>
     <meta property="og:title" content="Magic path <%= @magic.name %> (<%= @magic.version.name %>)" />
     <meta property="og:url" content="<%= url_for(:only_path => false) %>"/>
-    <meta property="og:image" content="<%= url_for(:only_path => true) %><%= @magic.logo.url(:large) %>"/>
+    <meta property="og:image" content="<%=  request.scheme + '://' + request.host_with_port + @magic.logo.url(:large) %>"/>
     <meta property="og:description" content="All spells of <%= @magic.name %>">
 <% end %>
 
