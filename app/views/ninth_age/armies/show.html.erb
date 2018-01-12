@@ -3,7 +3,7 @@
     <meta property="og:site_name" content="9th Age Builder"/>
     <meta property="og:title" content="Army <%= @army.name %> (<%= @army.version.name %>)" />
     <meta property="og:url" content="<%= url_for(:only_path => false) %>"/>
-    <meta property="og:image" content="<%= request.scheme + '://' + request.host_with_port + @army.logo_large.url(:large) %>"/>
+    <meta property="og:image" content="<%= request.scheme + '://' + request.host_with_port + @army.logo.url(:large) %>"/>
     <meta property="og:description" content="All units of <%= @army.name %> Army">
 <% end %>
 
