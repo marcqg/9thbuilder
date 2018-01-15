@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180108132010) do
+ActiveRecord::Schema.define(version: 20180115100055) do
 
   create_table "active_admin_comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.integer  "resource_id",                 null: false
@@ -578,6 +578,7 @@ ActiveRecord::Schema.define(version: 20180108132010) do
     t.string  "carac_as"
     t.string  "carac_spe"
     t.integer "unit_type_id"
+    t.string  "carac_arm"
     t.index ["army_id"], name: "index_ninth_age_units_on_army_id", using: :btree
     t.index ["unit_type_id"], name: "fk_rails_09d59f4e7e", using: :btree
   end

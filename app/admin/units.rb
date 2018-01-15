@@ -1,7 +1,7 @@
 ActiveAdmin.register NinthAge::Unit do
   menu parent: 'Ninth Age Army', priority: 7
 
-  permit_params :army_id, :locale, :value_points, :min_size, :max_size, :magic, :notes, :max, :max_model, :order, :unit_type, :base, {:organisation_ids => []}, :unit_type_id, :size, :is_mount, :type_carac, :carac_ground_adv, :carac_ground_mar, :carac_fly_adv, :carac_fly_mar, :carac_dis, :carac_evoked, :carac_hp, :carac_def, :carac_res, :carac_as, :carac_spe, translations_attributes: [:id, :name, :locale, :_destroy]
+  permit_params :army_id, :locale, :value_points, :min_size, :max_size, :magic, :notes, :max, :max_model, :order, :unit_type, :base, {:organisation_ids => []}, :unit_type_id, :size, :is_mount, :type_carac, :carac_ground_adv, :carac_ground_mar, :carac_fly_adv, :carac_fly_mar, :carac_dis, :carac_evoked, :carac_hp, :carac_def, :carac_res, :carac_arm, :carac_as, :carac_spe, translations_attributes: [:id, :name, :locale, :_destroy]
 
   controller do
     def create
@@ -96,6 +96,7 @@ ActiveAdmin.register NinthAge::Unit do
             f.input :carac_hp
             f.input :carac_def
             f.input :carac_res
+            f.input :carac_arm
             f.input :carac_as
             f.input :carac_spe
           end
@@ -137,6 +138,7 @@ ActiveAdmin.register NinthAge::Unit do
       row :carac_hp
       row :carac_def
       row :carac_res
+      row :carac_arm
       row :carac_as
       row :carac_spe
     end
@@ -232,6 +234,9 @@ ActiveAdmin.register NinthAge::Unit do
           end
           column do |special_rule_unit_troop|
             link_to 'Edit', edit_admin_ninth_age_special_rule_unit_troop_path(special_rule_unit_troop), :target => "_blank"
+          end
+          column do |special_rule_unit_troop|
+            link_to 'Delete', admin_ninth_age_special_rule_unit_troop_path(special_rule_unit_troop), :target => "_blank", method: :delete, data: { confirm: 'Are you sure?'}
           end
         end
       end
