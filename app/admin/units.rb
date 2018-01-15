@@ -33,6 +33,10 @@ ActiveAdmin.register NinthAge::Unit do
     link_to 'Duplicate Unit', duplicate_admin_ninth_age_unit_path(ninth_age_unit), :target => "_blank", method: :post
   end
 
+  action_item :new_trrop, only: :show do
+    link_to 'New Troop', new_admin_ninth_age_troop_path('ninth_age_troop[unit_id]' => ninth_age_unit.id), :target => "_blank"
+  end
+
   action_item :new_unit_option, only: :show do
     link_to 'New Unit Option', new_admin_ninth_age_unit_option_path('ninth_age_unit_option[unit_id]' => ninth_age_unit.id), :target => "_blank"
   end
@@ -185,6 +189,9 @@ ActiveAdmin.register NinthAge::Unit do
           column do |troop|
             link_to 'Edit', edit_admin_ninth_age_troop_path(troop), :target => "_blank"
           end
+          column do |troop|
+            link_to 'Delete', admin_ninth_age_troop_path(troop), :target => "_blank", method: :delete, data: { confirm: 'Are you sure?'}
+          end
         end
       end
     end
@@ -209,6 +216,9 @@ ActiveAdmin.register NinthAge::Unit do
           end
           column do |equipment_unit_troop|
             link_to 'Edit', edit_admin_ninth_age_equipment_unit_troop_path(equipment_unit_troop), :target => "_blank"
+          end
+          column do |equipment_unit_troop|
+            link_to 'Delete', admin_ninth_age_equipment_unit_troop_path(equipment_unit_troop), :target => "_blank", method: :delete, data: { confirm: 'Are you sure?'}
           end
         end
       end
