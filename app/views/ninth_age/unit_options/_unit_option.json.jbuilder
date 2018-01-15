@@ -1,1 +1,1 @@
-json.extract! ninth_age_unit_option, :id, :name
+json.extract! ninth_age_unit_option, :id, :name, :unit_id, :parent_id, :value_points, :position, :is_per_model, :is_magic_items, :is_magic_standards, :is_unique_choice, :is_extra_items, :mount_id, :is_multiple, :is_required, :is_magic, :is_upgratable, :domain_magic_id, :organisation_id, :max, :max_model, :min_model, :max_unit
