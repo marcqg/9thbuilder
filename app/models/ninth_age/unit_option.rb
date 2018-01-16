@@ -44,7 +44,7 @@ class NinthAge::UnitOption < ApplicationRecord
   attr_accessor :army_filter
 
   def is_magics_or_extra
-    return is_magic_items || is_magic_standards || is_extra_items
+    return is_magic_items || (is_magic_standards && value_points < 1) || is_extra_items
   end
 
   def army_filter
