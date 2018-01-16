@@ -66,6 +66,7 @@ gem 'rails-i18n', '~> 5.0.0'
 gem 'inherited_resources', '~> 1.7'
 gem 'activeadmin', github: 'activeadmin/activeadmin'
 gem 'activeadmin-translate', github: 'twintags/activeadmin-translate'
+gem "nilify_blanks"
 
 #autentification
 gem 'devise'

@@ -95,11 +95,12 @@
               <td>Adv</td>
               <td>Mar</td>
               <td>Dis</td>
-              <td colspan="2">
+              <td>
               <% unless @unit.carac_evoked.nil? %>
                   Rea
               <% end %>
               </td>
+              <td></td>
               <td>Model Rules</td>
             </tr>
             </thead>
@@ -109,11 +110,12 @@
               <td><%= @unit.carac_ground_adv %>"</td>
               <td><%= @unit.carac_ground_mar %>"</td>
               <td><%= @unit.carac_dis %></td>
-              <td colspan="2">
+              <td>
                 <% unless @unit.carac_evoked.nil? %>
                     <%= @unit.carac_evoked %>
                 <% end %>
               </td>
+              <td></td>
               <td>
                 <ul class="list-inline">
                   <% @unit.special_rule_unit_troops
@@ -140,6 +142,7 @@
                   <td></td>
                   <td><%= @unit.carac_fly_adv %>"</td>
                   <td><%= @unit.carac_fly_mar %>"</td>
+                  <td></td>
                   <td></td>
                   <td></td>
                   <td></td>

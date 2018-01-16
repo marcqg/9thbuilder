@@ -1,4 +1,5 @@
 class NinthAge::Unit < ApplicationRecord
+  nilify_blanks :types => [:text, :string]
   self.per_page = 18
 
   belongs_to :army, class_name: "NinthAge::Army"

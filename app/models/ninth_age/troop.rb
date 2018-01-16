@@ -1,4 +1,6 @@
 class NinthAge::Troop < ApplicationRecord
+  nilify_blanks :types => [:text, :string]
+  
   belongs_to :troop_type, class_name: "NinthAge::TroopType"
   belongs_to :unit, class_name: "NinthAge::Unit"
   delegate :army, :to => :unit, :allow_nil => true
