@@ -49,15 +49,16 @@ class NinthAge::Unit < ApplicationRecord
   end
 
   def self.for_select(army_list)
-    army_list_units = army_list.army_list_units.collect(&:unit)
-
+    army_list_units = army_list.army_list_units.collect(&:id).compact
+    unit_ids = ::Builder::ArmyListUnit.where(:id => army_list_units).map(&:unit_id)
+    
     army_list.army_organisation.organisations.map do |organisation|
       [
           organisation.name,
           organisation.units.includes(:translations)
               .order('max', 'ninth_age_unit_translations.name')
-              .reject { |u| u.in?(army_list_units) if u.max == 1 }
               .reject { |u| u.value_points == nil || u.value_points < 1}
+              .reject { |u| unit_ids.include?(u.id) if u.max == unit_ids.count{ |x| x == u.id } }
               .map { |u| [u.name, u.id] }
       ]
     end
