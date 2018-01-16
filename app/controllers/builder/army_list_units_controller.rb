@@ -44,6 +44,8 @@ module Builder
       @army_list_unit = @army_list.army_list_units.build(unit_id: @base_army_list_unit.unit_id,
                                                          value_points: @base_army_list_unit.value_points,
                                                          size: @base_army_list_unit.size)
+      @army_list_unit.save!
+
       @army_list_unit.army_list_unit_troops << @base_army_list_unit.army_list_unit_troops.collect do |alut|
         army_list_unit_troop = alut.dup
         army_list_unit_troop.army_list_unit = @army_list_unit
