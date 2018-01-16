@@ -46,11 +46,6 @@ module Builder
                                                          size: @base_army_list_unit.size)
       @army_list_unit.save!
 
-      @army_list_unit.army_list_unit_troops << @base_army_list_unit.army_list_unit_troops.collect do |alut|
-        army_list_unit_troop = alut.dup
-        army_list_unit_troop.army_list_unit = @army_list_unit
-        army_list_unit_troop
-      end
       @army_list_unit.army_list_unit_magic_items << @base_army_list_unit.army_list_unit_magic_items.collect do |alumi|
         army_list_unit_magic_item = alumi.dup
         army_list_unit_magic_item.army_list_unit = @army_list_unit
