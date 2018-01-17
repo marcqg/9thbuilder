@@ -9,7 +9,7 @@ Rails.application.routes.draw do
     # token auth routes available at /api/v1/auth
     namespace :api do
       namespace :v1 do
-        mount_devise_token_auth_for 'User', at: 'auth'
+        mount_devise_token_auth_for 'User', at: 'auth', skip: [:omniauth_callbacks, :registrations, :passwords]
 
         namespace :builder do
           resources :army_lists,  only: [:index]
