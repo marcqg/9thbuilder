@@ -33,8 +33,12 @@ ActiveAdmin.register NinthAge::Unit do
     link_to 'Duplicate Unit', duplicate_admin_ninth_age_unit_path(ninth_age_unit), :target => "_blank", method: :post
   end
 
-  action_item :new_trrop, only: :show do
+  action_item :new_troop, only: :show do
     link_to 'New Troop', new_admin_ninth_age_troop_path('ninth_age_troop[unit_id]' => ninth_age_unit.id), :target => "_blank"
+  end
+
+  action_item :new_organisation_change, only: :show do
+    link_to 'New Organisation change', new_admin_ninth_age_organisation_change_path({'ninth_age_organisation_change[unit_id]' => ninth_age_unit.id}), :target => "_blank"
   end
 
   action_item :new_unit_option, only: :show do
@@ -287,6 +291,27 @@ ActiveAdmin.register NinthAge::Unit do
           end
           column do |unit_option|
             link_to 'Delete', admin_ninth_age_unit_option_path(unit_option), :target => "_blank", method: :delete, data: { confirm: 'Are you sure?'}
+          end
+        end
+      end
+    end
+
+    panel 'Organisation change Details' do
+      div class: 'unit_organisation_change_details' do
+        table_for model.organisation_changes do
+          column :id
+          column :default_organisation
+          column :new_organisation
+          column :type_target
+          column :number
+          column do |organisation_change|
+            link_to 'Voir', admin_ninth_age_organisation_change_path(organisation_change), :target => "_blank"
+          end
+          column do |organisation_change|
+            link_to 'Edit', edit_admin_ninth_age_organisation_change_path(organisation_change), :target => "_blank"
+          end
+          column do |organisation_change|
+            link_to 'Delete', admin_ninth_age_organisation_change_path(organisation_change), :target => "_blank", method: :delete, data: { confirm: 'Are you sure?'}
           end
         end
       end

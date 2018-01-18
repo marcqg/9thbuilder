@@ -1,15 +1,25 @@
 module NinthAge
   class OrganisationsController < ApplicationController
 
-  	def index 
+    def index 
       @organisations = NinthAge::Organisation.where(:army_id => params[:army_id])
-      											.includes(:translations)
-                              					.order(:name)
+                            .includes(:translations)
+                                        .order(:name)
 
       respond_to do |format|
         format.json
       end
-  	end 
+    end 
+
+    def unit 
+
+      unit = NinthAge::Unit.find(params[:unit_id])
+      @organisations = unit.organisations
+
+      respond_to do |format|
+        format.json
+      end
+    end 
 
     # GET /organications/1.json
     def show
