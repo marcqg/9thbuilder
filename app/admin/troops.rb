@@ -62,8 +62,14 @@ ActiveAdmin.register NinthAge::Troop do
   form do |f|
     f.inputs do
       f.input :unit, collection: NinthAge::Unit.includes(:translations).includes(army: [:translations]).collect { |u| [u.army.name + ' - ' + u.army.version.name + ' - ' + u.name, u.id] }
+      f.translate_inputs do |t|
+        t.input :name
+      end
+      f.input :value_points
+      f.input :min_size
+      f.input :position
       f.input :type_carac
-      panel 'Carac V1' do
+      panel 'Carac V1', :id => 'ninth_age_troop_carac_v1'  do
         div class: 'unit_carac_v1_details' do
           ol do 
             f.input :troop_type, collection: NinthAge::TroopType.includes(:translations).order(:name)
@@ -79,7 +85,7 @@ ActiveAdmin.register NinthAge::Troop do
           end
         end
       end
-      panel 'Carac V2' do
+      panel 'Carac V2', :id => 'ninth_age_troop_carac_v2' do
         div class: 'unit_carac_v2_details' do
           ol do 
             f.input :carac_att
@@ -89,14 +95,6 @@ ActiveAdmin.register NinthAge::Troop do
             f.input :carac_agi
           end
         end
-      end
-
-      f.input :value_points
-      f.input :min_size
-      f.input :position
-
-      f.translate_inputs do |t|
-        t.input :name
       end
     end
     f.actions
@@ -109,10 +107,10 @@ ActiveAdmin.register NinthAge::Troop do
       row :troop_type
       row :unit_option
       row :value_points
+      row :type_carac
     end
-    panel 'Carac V1' do
+    panel 'Carac V1', :id => 'ninth_age_troop_carac_v1', :class => 'ninth_age_troop_carac' do
       attributes_table do
-        row :type_carac
         row :M
         row :WS
         row :BS
@@ -124,7 +122,7 @@ ActiveAdmin.register NinthAge::Troop do
         row :LD
       end
     end 
-    panel 'Carac V2' do
+    panel 'Carac V2', :id => 'ninth_age_troop_carac_v2', :class => 'ninth_age_troop_carac' do
         attributes_table do
         row :carac_att
         row :carac_of

@@ -1,4 +1,5 @@
 //= require_tree ./common
+//= require_tree ./admin
 
 jQuery(function($) {
   // UNIT OPTION - ARMY_FILTER

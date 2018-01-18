@@ -13,6 +13,17 @@ module NinthAge
       end
     end
 
+    # GET /mounts.json
+    def mounts
+      @units = NinthAge::Unit.where({:army_id => params[:army_id], is_mount: true})
+                              .includes(:translations)
+                              .order(:order)
+
+      respond_to do |format|
+        format.json
+      end
+    end
+
     # GET /units/1
     # GET /units/1.json
     def show

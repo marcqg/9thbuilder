@@ -62,33 +62,32 @@ ActiveAdmin.register NinthAge::UnitOption do
 
   form do |f|
     f.inputs do
-      f.input :army_filter, as: :select, collection: NinthAge::Army.includes(:translations).order(:name).collect { |o| [o.name + ' - ' + o.version.name, o.id] }, disabled: NinthAge::Army.disabled.pluck(:id)
+      f.input :army_filter, as: :select, collection: NinthAge::Army.includes(:translations).includes(version: [:translations]).order(:name).collect { |o| [o.name + ' - ' + o.version.name, o.id] }, disabled: NinthAge::Army.disabled.pluck(:id)
       f.input :unit, as: :select, :input_html => {'data-option-dependent' => true, 'data-option-url' => '/ninth_age/army-:ninth_age_unit_option_army_filter/units', 'data-option-observed' => 'ninth_age_unit_option_army_filter'}, :collection => (resource.army ? resource.army.units.collect {|unit| [unit.name, unit.id]} : [])
       f.input :parent, as: :select, :input_html => {'data-option-dependent' => true, 'data-option-url' => '/ninth_age/unit-:ninth_age_unit_option_unit_id/unit_options', 'data-option-observed' => 'ninth_age_unit_option_unit_id'}, :collection => (resource.unit ? resource.unit.unit_options.collect {|unit_option| [unit_option.name, unit_option.id]} : [])
-      f.input :mount, as: :select, :input_html => {'data-option-dependent' => true, 'data-option-url' => '/ninth_age/army-:ninth_age_unit_option_army_filter/units', 'data-option-observed' => 'ninth_age_unit_option_army_filter'}, :collection => (resource.army ? resource.army.units.collect {|unit| [unit.name, unit.id]} : [])
-      f.input :value_points
+      f.translate_inputs do |t|
+        t.input :name
+      end
       f.input :position
+      f.input :value_points
       f.input :is_per_model
       f.input :is_multiple
-      f.input :is_required
+      f.input :is_magic_items
+      f.input :is_magic_standards
+      f.input :is_extra_items
       f.input :is_magic
-      f.input :is_upgratable
-      f.input :domain_magic, collection: NinthAge::DomainMagic.includes(:translations).collect { |u| [u.name + ' - ' + u.version.name, u.id] }
+      f.input :domain_magic, collection: NinthAge::DomainMagic.includes(:translations).includes(version: [:translations]).collect { |u| [u.name + ' - ' + u.version.name, u.id] }
+      f.input :mount, as: :select, :input_html => {'data-option-dependent' => true, 'data-option-url' => '/ninth_age/army-:ninth_age_unit_option_army_filter/mounts', 'data-option-observed' => 'ninth_age_unit_option_army_filter'}, :collection => (resource.army ? resource.army.units.collect {|unit| [unit.name, unit.id]} : [])
       f.input :organisation, as: :select, :input_html => {'data-option-dependent' => true, 'data-option-url' => '/ninth_age/army-:ninth_age_unit_option_army_filter/organisations', 'data-option-observed' => 'ninth_age_unit_option_army_filter'}, :collection => (resource.army ? resource.army.organisations.collect {|organisation| [organisation.name, organisation.id]} : [])
+      f.input :is_upgratable
       f.input :value_points_upgrade
       f.input :upgrade_target
       f.input :max
       f.input :max_model
       f.input :min_model
       f.input :max_unit
-      f.input :is_magic_items
-      f.input :is_magic_standards
-      f.input :is_extra_items
+      f.input :is_required
       f.input :is_unique_choice
-
-      f.translate_inputs do |t|
-        t.input :name
-      end
     end
     f.actions
   end

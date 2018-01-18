@@ -88,7 +88,7 @@ ActiveAdmin.register NinthAge::Unit do
       f.input :size, as: :select, collection: NinthAge::Unit.sizes.keys.collect { |size| [I18n.t("unit.size.#{size}", default: size.titleize), size] }, include_blank: false, include_hidden: false
       f.input :is_mount
       f.input :type_carac
-      panel 'Carac V2' do
+      panel 'Carac V2', :id => 'ninth_age_unit_carac_v2'  do
         div class: 'unit_carac_v2_details' do
           ol do 
             f.input :carac_ground_adv
@@ -131,20 +131,24 @@ ActiveAdmin.register NinthAge::Unit do
       row :is_mount
       row :size
       row :type_carac
-      row :carac_ground_adv
-      row :carac_ground_mar
-      row :carac_fly_adv
-      row :carac_fly_mar
-      row :carac_dis
-      row 'CARAC REA' do 
-        model.carac_evoked
-      end 
-      row :carac_hp
-      row :carac_def
-      row :carac_res
-      row :carac_arm
-      row :carac_as
-      row :carac_spe
+    end 
+    panel 'Carac V2', :id => 'ninth_age_unit_carac_v2', :class => 'ninth_age_unit_carac' do
+      attributes_table do
+        row :carac_ground_adv
+        row :carac_ground_mar
+        row :carac_fly_adv
+        row :carac_fly_mar
+        row :carac_dis
+        row 'CARAC REA' do 
+          model.carac_evoked
+        end 
+        row :carac_hp
+        row :carac_def
+        row :carac_res
+        row :carac_arm
+        row :carac_as
+        row :carac_spe
+      end
     end
     panel 'Translations' do
       translate_attributes_table_for model do

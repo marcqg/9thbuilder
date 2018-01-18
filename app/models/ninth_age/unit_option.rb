@@ -21,7 +21,7 @@ class NinthAge::UnitOption < ApplicationRecord
 
   validates :unit_id, presence: true
   validates :value_points, numericality: { greater_than_or_equal_to: 0, allow_nil: true }
-  validates :position, numericality: { greater_than_or_equal_to: 1, only_integer: true, allow_nil: true }
+  validates :position, numericality: { greater_than: 0, only_integer: true, allow_nil: false }
   validates :is_per_model, inclusion: { in: [true, false] }
   validates :is_multiple, inclusion: { in: [true, false] }
   validates :is_magic_items, inclusion: { in: [true, false] }
@@ -30,6 +30,7 @@ class NinthAge::UnitOption < ApplicationRecord
   validates :is_unique_choice, inclusion: { in: [true, false] }
   validates :is_required, inclusion: { in: [true, false] }
   validates :is_magic, inclusion: { in: [true, false] }
+  validates :domain_magic, presence: true, if: ->(unit_option){unit_option.is_magic?}
 
   acts_as_list scope: 'unit_id = #{unit_id} AND COALESCE(parent_id, \'\') = \'#{parent_id}\''
 
