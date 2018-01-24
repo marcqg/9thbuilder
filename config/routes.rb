@@ -69,6 +69,8 @@ Rails.application.routes.draw do
         resources :units,               only: [:index]
         get '/mounts',                  to: 'units#mounts'
         get '/special_rules/all',       to: 'special_rules#army_all'
+        get '/equipments',              to: 'equipments#army_all'
+        get '/extra_items',              to: 'extra_items#army_all'
       end
 
       scope '/domain-magic-:domain_magic_id' do

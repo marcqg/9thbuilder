@@ -3,15 +3,18 @@ class NinthAge::UnitOption < ApplicationRecord
   delegate :army, :to => :unit, :allow_nil => true
 
   belongs_to :parent, class_name: 'NinthAge::UnitOption'
+  has_many :children, -> { order 'position' }, class_name: 'NinthAge::UnitOption', foreign_key: 'parent_id', dependent: :nullify
+  belongs_to :unit_option_activator, class_name: 'NinthAge::UnitOption'
+  has_many :unit_option_activated, -> { order 'position' }, class_name: 'NinthAge::UnitOption', foreign_key: 'unit_option_activator_id', dependent: :nullify
   belongs_to :mount, class_name: 'NinthAge::Unit'
   belongs_to :domain_magic, class_name: "NinthAge::DomainMagic"
   belongs_to :organisation, class_name: "NinthAge::Organisation"
-  has_many :children, -> { order 'position' }, class_name: 'NinthAge::UnitOption', foreign_key: 'parent_id', dependent: :nullify
+  belongs_to :extra_item, class_name: "NinthAge::ExtraItem"
   has_one :troop, dependent: :nullify, class_name: "NinthAge::Troop"
   has_many :army_list_unit_unit_options, dependent: :destroy, class_name: 'Builder::ArmyListUnitUnitOption'
   has_many :army_list_units, through: :army_list_unit_unit_options, class_name: 'Builder::ArmyListUnit'
 
-  translates :name, :description, :name_upgrade
+  translates :name, :description, :infos, :name_upgrade
   globalize_accessors
   accepts_nested_attributes_for :translations, allow_destroy: true
 

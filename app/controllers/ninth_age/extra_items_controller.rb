@@ -23,6 +23,18 @@ module NinthAge
       end
     end
 
+    def army_all
+      @army = NinthAge::Army.find(params[:army_id])
+      @ninth_age_extra_items = NinthAge::ExtraItem.joins(:extra_item_category)
+                                                  .includes(:translations)
+                                                  .where("(ninth_age_extra_item_categories.army_id = ? OR ninth_age_extra_item_categories.army_id IS NULL) AND version_id = ?", @army.id, @army.version_id)
+                                                  .order(:name)
+
+      respond_to do |format|
+        format.json
+      end
+    end
+
     # GET /ninth_age_magic_items/1
     # GET /ninth_age_magic_items/1.json
     def show

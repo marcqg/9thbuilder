@@ -7,7 +7,8 @@ class NinthAge::Army < ApplicationRecord
 
   has_many :organisations, class_name: "NinthAge::Organisation"
 
-  has_many :special_rules, class_name: "NinthAge::Organisation"
+  has_many :special_rules, class_name: "NinthAge::SpecialRule"
+  has_many :equipments, class_name: "NinthAge::Equipment"
 
   has_many :army_magic_spells, class_name: "NinthAge::ArmyMagicSpell"
 

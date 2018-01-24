@@ -26,8 +26,8 @@ ActiveAdmin.register NinthAge::SpecialRule do
     id_column
     column :name
     column :description
-    column :army
-    column :version
+    column :army, sortable: :army_id
+    column :version, sortable: :version_id
     actions
   end
 

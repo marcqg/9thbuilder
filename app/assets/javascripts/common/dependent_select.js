@@ -44,9 +44,10 @@ jQuery(document).ready(function() {
 
 			var current = observer.val();
 			
-			observer.empty().append(prompt);
-			
 			$.getJSON(url, function(data) {
+			
+				observer.empty().append(prompt);
+
 				$.each(data, function(i, object) {
 					observer.append($('<option>').attr('value', object[key_method]).text(object[value_method]));
 					observer.attr('disabled', false);

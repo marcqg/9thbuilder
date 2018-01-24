@@ -55,6 +55,7 @@ ActiveAdmin.register NinthAge::Unit do
 
   filter :army, as: :select, collection: -> { NinthAge::Army.includes(:translations).map { |army| [ army.name + ' ' + army.version.name, army.id ] } } 
   filter :name
+  filter :is_mount
 
   index do
     selectable_column
@@ -66,8 +67,6 @@ ActiveAdmin.register NinthAge::Unit do
     column :value_points
     column :max
     column :max_model
-    column :unit_type
-    column :base
     column :is_mount
     actions
   end
