@@ -6,4 +6,8 @@ module ApplicationHelper
   def transliterate(str)
     I18n.transliterate(str) unless str.nil?
   end
+
+  def lesc(text)
+    LatexToPdf.escape_latex(text)
+  end
 end

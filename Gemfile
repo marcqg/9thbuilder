@@ -105,5 +105,8 @@ gem 'will_paginate', '~> 3.1.0'
 #Export route in js file
 gem 'js-routes'
 
+#LaTeX
+gem 'rails-latex'
+
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

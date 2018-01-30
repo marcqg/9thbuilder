@@ -34,5 +34,11 @@ module Builder
         format.pdf { render template: "builder/exports/export_#{@verbosity}.html.erb", pdf: "9thbuilder_#{@verbosity}_#{params[:magics]}_#{@army_list.uuid}" }
       end
     end
+
+    def latex
+
+      LatexToPdf.config.merge! :command => 'lualatex', :arguments => ['-halt-on-error', '-file-line-error'], :parse_runs => 2, :runs => 2
+    end
+    
   end
 end
