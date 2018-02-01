@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180122120426) do
+ActiveRecord::Schema.define(version: 20180201111039) do
 
   create_table "active_admin_comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.integer  "resource_id",                 null: false
@@ -525,12 +525,14 @@ ActiveRecord::Schema.define(version: 20180122120426) do
     t.integer "max_unit"
     t.integer "extra_item_id"
     t.integer "unit_option_activator_id"
+    t.integer "unit_link_id"
     t.index ["domain_magic_id"], name: "index_ninth_age_options_on_magic_id", using: :btree
     t.index ["extra_item_id"], name: "index_ninth_age_unit_options_on_extra_item_id", using: :btree
     t.index ["mount_id"], name: "index_ninth_age_unit_options_on_mount_id", using: :btree
     t.index ["organisation_id"], name: "index_ninth_age_unit_options_on_organisation_id", using: :btree
     t.index ["parent_id"], name: "index_ninth_age_unit_options_on_parent_id", using: :btree
     t.index ["unit_id"], name: "index_ninth_age_unit_options_on_unit_id", using: :btree
+    t.index ["unit_link_id"], name: "index_ninth_age_unit_options_on_unit_link_id", using: :btree
     t.index ["unit_option_activator_id"], name: "index_ninth_age_unit_options_on_unit_option_activator_id", using: :btree
   end
 
@@ -734,6 +736,7 @@ ActiveRecord::Schema.define(version: 20180122120426) do
   add_foreign_key "ninth_age_unit_options", "ninth_age_unit_options", column: "unit_option_activator_id", on_delete: :cascade
   add_foreign_key "ninth_age_unit_options", "ninth_age_units", column: "mount_id", on_delete: :nullify
   add_foreign_key "ninth_age_unit_options", "ninth_age_units", column: "unit_id"
+  add_foreign_key "ninth_age_unit_options", "ninth_age_units", column: "unit_link_id", on_delete: :cascade
   add_foreign_key "ninth_age_unit_translations", "ninth_age_units", on_delete: :cascade
   add_foreign_key "ninth_age_unit_type_translations", "ninth_age_unit_types", on_delete: :cascade
   add_foreign_key "ninth_age_units", "ninth_age_armies", column: "army_id"

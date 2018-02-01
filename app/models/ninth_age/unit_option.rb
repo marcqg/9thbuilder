@@ -6,6 +6,7 @@ class NinthAge::UnitOption < ApplicationRecord
   has_many :children, -> { order 'position' }, class_name: 'NinthAge::UnitOption', foreign_key: 'parent_id', dependent: :nullify
   belongs_to :unit_option_activator, class_name: 'NinthAge::UnitOption'
   has_many :unit_option_activated, -> { order 'position' }, class_name: 'NinthAge::UnitOption', foreign_key: 'unit_option_activator_id', dependent: :nullify
+  belongs_to :unit_link, class_name: 'NinthAge::Unit'
   belongs_to :mount, class_name: 'NinthAge::Unit'
   belongs_to :domain_magic, class_name: "NinthAge::DomainMagic"
   belongs_to :organisation, class_name: "NinthAge::Organisation"
