@@ -1,3 +1,12 @@
+<% content_for :title do %>Version <%= @version.name %><% end %>
+<% content_for :head do %>
+    <meta property="og:site_name" content="9th Age Builder"/>
+    <meta property="og:title" content="Version <%= @version.name %>" />
+    <meta property="og:url" content="<%= url_for(:only_path => false) %>"/>
+    <meta property="og:image" content="<%= request.scheme + '://' + request.host_with_port + image_path('bt_lexicon.png') %>"/>
+    <meta property="og:description" content="All armies of Version <%= @version.name %>">
+<% end %>
+
 <div class="col-md-12 col-xs-12 col-sm-12 version-<%= @version.id %>">
   <h1 class="text-center"><%= @version.name %></h1>
 

@@ -1,3 +1,12 @@
+<% content_for :title do %>Rule <%= @ninth_age_special_rule.name %><% end %>
+<% content_for :head do %>
+    <meta property="og:site_name" content="9th Age Builder"/>
+    <meta property="og:title" content="Rule <%= @ninth_age_special_rule.name %>" />
+    <meta property="og:url" content="<%= url_for(:only_path => false) %>"/>
+    <meta property="og:image" content="<%= request.scheme + '://' + request.host_with_port + image_path('bt_lexicon.png') %>"/>
+    <meta property="og:description" content="<%= @ninth_age_special_rule.description %>">
+<% end %>
+
 <h1><%= @ninth_age_special_rule.name %></h1>
 <div>
   <p><%= @ninth_age_special_rule.description %></p>

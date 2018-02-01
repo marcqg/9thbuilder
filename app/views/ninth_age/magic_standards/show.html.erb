@@ -1,3 +1,12 @@
+<% content_for :title do %><%= @ninth_age_magic_standard.name %> - Magic banner<% end %>
+<% content_for :head do %>
+    <meta property="og:site_name" content="9th Age Builder"/>
+    <meta property="og:title" content="<%= @ninth_age_magic_standard.name %> - Magic banner" />
+    <meta property="og:url" content="<%= url_for(:only_path => false) %>"/>
+    <meta property="og:image" content="<%= request.scheme + '://' + request.host_with_port + image_path('bt_lexicon.png') %>"/>
+    <meta property="og:description" content="<%= @ninth_age_magic_standard.description %>">
+<% end %>
+
 <h1>
 	<strong><%= @ninth_age_magic_standard.name %></strong> (<%= @ninth_age_magic_standard.value_points %> <%= t('ninth_age.figurine.pts') %>) 
 	<% if !@ninth_age_magic_standard.All?  %>

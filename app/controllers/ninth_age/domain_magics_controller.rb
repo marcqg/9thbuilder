@@ -4,6 +4,7 @@ module NinthAge
     # GET /magics
     # GET /magics.json
     def index
+      @version = NinthAge::Version.find(params[:version_id])
       @magics = NinthAge::DomainMagic.where(:version_id => params[:version_id])
                                      .includes(:translations)
       respond_to do |format|

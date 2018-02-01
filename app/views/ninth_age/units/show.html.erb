@@ -1,3 +1,12 @@
+<% content_for :title do %><%= @unit.name %> - <%= @unit.army.name %> Army (<%= @unit.army.version.name %>)<% end %>
+<% content_for :head do %>
+    <meta property="og:site_name" content="9th Age Builder"/>
+    <meta property="og:title" content="<%= @unit.name %> - <%= @unit.army.name %> Army (<%= @unit.army.version.name %>)" />
+    <meta property="og:url" content="<%= url_for(:only_path => false) %>"/>
+    <meta property="og:image" content="<%= request.scheme + '://' + request.host_with_port + @unit.army.logo_large.url(:facebook) %>"/>
+    <meta property="og:description" content="<%= @unit.name %> unit of <%= @unit.army.name %> Army">
+<% end %>
+
 <div class="unit-<%= @unit.id %> col-md-12 col-xs-12 col-sm-12">
   <article style="margin-bottom:40px;">
     <div class="col-md-12">
@@ -47,7 +56,7 @@
     </div>
     <div class="col-md-12">
       <% if @unit.V1? %>
-          <table class="content-stats">
+          <table class="content-stats"> 
             <thead>
             <tr>
               <td><%= t('army_list_unit.show.troops.name') %></td>
