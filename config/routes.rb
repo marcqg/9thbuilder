@@ -67,10 +67,14 @@ Rails.application.routes.draw do
         resources :army_organisations,  only: [:index]
         resources :organisations,       only: [:index]
         resources :units,               only: [:index]
-        get '/mounts',                  to: 'units#mounts'          ,       as: :mounts_by_army
-        get '/special_rules/all',       to: 'special_rules#army_all',       as: :special_rules_by_army
-        get '/equipments',              to: 'equipments#army_all',          as: :equipments_by_army
-        get '/extra_items',              to: 'extra_items#army_all',        as: :extra_items_by_army
+        get '/mounts',                  to: 'units#mounts'          ,         as: :mounts_by_army
+        get '/special_rules/all',       to: 'special_rules#army_all',         as: :special_rules_by_army
+        get '/equipments',              to: 'equipments#army_all',            as: :equipments_by_army
+        get '/extra_items',             to: 'extra_items#army_all',           as: :extra_items_by_army
+      end
+
+      scope 'army-extra-item-category-:extra_item_category_id' do
+        get '/extra_items',             to: 'extra_items#by_army',            as: :extra_items_with_category_by_army
       end
 
       scope '/domain-magic-:domain_magic_id' do

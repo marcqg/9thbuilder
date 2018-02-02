@@ -1,7 +1,7 @@
 ActiveAdmin.register NinthAge::ExtraItemCategory do
   menu parent: 'Ninth Age Unit Specialisations', priority: 3
 
-  permit_params :name, :locale, :army_id, translations_attributes: [:id, :name, :locale, :_destroy]
+  permit_params :name, :locale, :army_id, :is_unique, translations_attributes: [:id, :name, :locale, :_destroy]
 
   #config.sort_order = 'name_asc'
 
@@ -31,6 +31,7 @@ ActiveAdmin.register NinthAge::ExtraItemCategory do
   form do |f|
     f.inputs do
       f.input :army, collection: NinthAge::Army.includes(:translations).includes(:version).order(:name).collect { |o| [o.name + ' - ' + o.version.name, o.id] }
+      f.input :is_unique
       f.translate_inputs do |t|
         t.input :name
       end
@@ -42,6 +43,7 @@ ActiveAdmin.register NinthAge::ExtraItemCategory do
   show do |model|
     attributes_table do
       row :army
+      row :is_unique
     end
     panel 'Translations' do
       translate_attributes_table_for model do

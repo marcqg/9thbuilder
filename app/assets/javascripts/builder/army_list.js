@@ -36,7 +36,7 @@ jQuery(function($) {
     });
 
 
-    $(document).on('change', '.army_list_unit_add_element ul li input[type=checkbox]', function(evt) {
+    $(document).on('change', '.army_list_unit_add_element ul li input[type=checkbox], .army_list_unit_add_element ul li input[type=radio]', function(evt) {
         var total = 0.0,
             $changed = $(this),
             $siblings = $changed.closest('ul').find('> li > label input[data-radio]').not($changed),
@@ -68,7 +68,12 @@ jQuery(function($) {
 
             self.closest('ul').prev('strong').removeClass('empty');
 
-            var value_points = parseFloat($parent.find('em > span').html().replace(',', '.'));
+            var $span_points = $parent.find('em > span');
+            if($span_points.length < 1){
+                return;
+            }
+
+            var value_points = parseFloat($span_points.html().replace(',', '.'));
 
             $parent.find('.magic-item-quantity').removeAttr('disabled');
             var $quantity = $parent.find('.magic-item-quantity');
@@ -203,7 +208,13 @@ function updateArmyListUnitValuePoints() {
             $div = $(this);
 
         $div.find('input:checked').each(function() {
-            var value_points = parseFloat($(this).parent('label').prev('em').find('span').html().replace(',', '.'));
+
+            var $span_points = $(this).parent('label').prev('em').find('span');
+            if($span_points.length < 1){
+                return;
+            }
+
+            var value_points = parseFloat($span_points.html().replace(',', '.'));
 
             var $quantity = $(this).parent('label').next('input[name$="[quantity]"]');
 

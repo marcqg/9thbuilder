@@ -1,5 +1,20 @@
 jQuery(function($) {
 
+    //create NinthAge::Troop
+    $('#new_ninth_age_troop #ninth_age_troop_type_carac').change(function() {
+        var self = $(this);
+
+        self.find("option").each(function() {
+            if ($(this).val() != self.val()) {
+                $('#ninth_age_troop_carac_' + $(this).val().toLowerCase()).hide();
+            }
+        });
+
+        $('#ninth_age_troop_carac_' + self.val().toLowerCase()).show();
+
+    });
+    $('#new_ninth_age_troop #ninth_age_troop_type_carac').change();
+
     //Edit NinthAge::Troop
     $('#edit_ninth_age_troop #ninth_age_troop_type_carac').change(function() {
         var self = $(this);

@@ -181,3 +181,15 @@
         }
     }
 }
+
+
+.list-inline > li {
+    padding: 0 !important;
+}
+
+#army_list_unit_unit_options, #army_list_unit_extra_items {
+    .disable {
+        color: gray;
+        text-decoration: line-through;
+    }
+}

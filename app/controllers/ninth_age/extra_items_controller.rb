@@ -29,7 +29,19 @@ module NinthAge
                                                   .includes(:translations)
                                                   .where("(ninth_age_extra_item_categories.army_id = ? OR ninth_age_extra_item_categories.army_id IS NULL) AND version_id = ?", @army.id, @army.version_id)
                                                   .order(:name)
-
+                                                  
+      respond_to do |format|
+        format.json
+      end
+    end
+    
+    def by_army
+      @extra_item_category = NinthAge::ExtraItemCategort.find(params[:extra_item_category_id])
+      @ninth_age_extra_items = NinthAge::ExtraItem.joins(:extra_item_category)
+                                                  .includes(:translations)
+                                                  .where("(ninth_age_extra_item_categories.army_id = ? OR ninth_age_extra_item_categories.army_id IS NULL) AND version_id = ?", @extra_item_category.army_id, @extra_item_category.army.version_id)
+                                                  .order(:name)
+                                                  
       respond_to do |format|
         format.json
       end

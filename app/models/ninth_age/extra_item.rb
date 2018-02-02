@@ -3,6 +3,8 @@ class NinthAge::ExtraItem < ApplicationRecord
   belongs_to :version, class_name: "NinthAge::Version"
 
   belongs_to :extra_item_category, class_name: "NinthAge::ExtraItemCategory"
+  belongs_to :extra_item_activator, foreign_key: 'extra_item_activator_id', dependent: :destroy, class_name: 'NinthAge::ExtraItem'
+
   has_many :army_list_unit_extra_items, dependent: :destroy, class_name: 'Builder::ArmyListUnitExtraItem'
   has_many :army_list_units, through: :army_list_unit_extra_items, class_name: 'Builder::ArmyListUnit'
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180201111039) do
+ActiveRecord::Schema.define(version: 20180202101117) do
 
   create_table "active_admin_comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.integer  "resource_id",                 null: false
@@ -250,7 +250,8 @@ ActiveRecord::Schema.define(version: 20180201111039) do
   end
 
   create_table "ninth_age_extra_item_categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
-    t.integer "army_id", null: false
+    t.integer "army_id",                   null: false
+    t.boolean "is_unique", default: false, null: false
     t.index ["army_id"], name: "index_ninth_age_extra_item_categories_on_army_id", using: :btree
   end
 
@@ -276,10 +277,12 @@ ActiveRecord::Schema.define(version: 20180201111039) do
   end
 
   create_table "ninth_age_extra_items", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
-    t.integer "extra_item_category_id",                                     null: false
-    t.decimal "value_points",           precision: 8, scale: 2,             null: false
-    t.integer "version_id",                                     default: 0, null: false
-    t.integer "max",                                            default: 0, null: false
+    t.integer "extra_item_category_id",                                      null: false
+    t.decimal "value_points",            precision: 8, scale: 2,             null: false
+    t.integer "version_id",                                      default: 0, null: false
+    t.integer "max",                                             default: 0, null: false
+    t.integer "extra_item_activator_id"
+    t.index ["extra_item_activator_id"], name: "index_ninth_age_extra_items_on_extra_item_activator_id", using: :btree
     t.index ["extra_item_category_id"], name: "index_ninth_age_extra_items_on_extra_item_category_id", using: :btree
     t.index ["version_id"], name: "index_ninth_age_extra_items_on_version_id", using: :btree
   end
@@ -698,6 +701,7 @@ ActiveRecord::Schema.define(version: 20180201111039) do
   add_foreign_key "ninth_age_extra_item_category_translations", "ninth_age_extra_item_categories", on_delete: :cascade
   add_foreign_key "ninth_age_extra_item_translations", "ninth_age_extra_items", on_delete: :cascade
   add_foreign_key "ninth_age_extra_items", "ninth_age_extra_item_categories", column: "extra_item_category_id"
+  add_foreign_key "ninth_age_extra_items", "ninth_age_extra_items", column: "extra_item_activator_id", on_delete: :cascade
   add_foreign_key "ninth_age_extra_items", "ninth_age_versions", column: "version_id", on_delete: :cascade
   add_foreign_key "ninth_age_magic_item_category_translations", "ninth_age_magic_item_categories", on_delete: :cascade
   add_foreign_key "ninth_age_magic_item_translations", "ninth_age_magic_items", on_delete: :cascade

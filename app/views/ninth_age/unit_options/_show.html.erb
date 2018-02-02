@@ -1,10 +1,13 @@
-<ul  class="option-children children-sub">
+<ul  class="option-children children-sub <% if unit_options.all? {|option| !option.domain_magic_id.nil?} %> list-inline text-center <% end %>">
   <% unit_options.order(:position).each do |unit_option| %>
     <% unless unit_option.domain_magic_id.nil? %>
-      <li><%= unit_option.domain_magic.name %></li>
+      <li>
+        <%= image_tag unit_option.domain_magic.logo.url(:thumb), alt: unit_option.domain_magic.name, height: 50,class: 'block-center' %>
+        <p><%= unit_option.domain_magic.name %></p>
+      </li>
     <% else %>
       <li><%= unit_option.name %>
-        <% if unit_option.value_points!= nil %>
+        <% unless unit_option.value_points.nil? %>
           <% if unit_option.value_points > 0 %>
             <span class="pull-right"><% if unit_option.is_magic_items %><%= t('up_to')%><% end %> <%= number_with_precision(unit_option.value_points, precision: 0) %> <%= t('ninth_age.figurine.pts') %> <% if unit_option.is_per_model %> <%=  t('per_model') %><% end %></span>
           <% else %>

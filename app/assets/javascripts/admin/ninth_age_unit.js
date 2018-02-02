@@ -24,4 +24,7 @@ jQuery(function($) {
     	$('.show.admin_ninth_age_units .ninth_age_unit_carac').hide();
     	$('.show.admin_ninth_age_units #ninth_age_unit_carac_' + type_carac).show();
     }
+
+    $(document).on('change', '#army_list_unit_extra_items ul input[type=checkbox]', function(evt) {
+    });
 });
