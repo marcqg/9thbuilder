@@ -20,27 +20,36 @@
 %>
 <li>
   <% if option.is_magic %>
+    
     <%= image_tag option.domain_magic.logo.url(:thumb), alt: option.domain_magic.name, height: 50,class: 'block-center' %>
     <p>
       <%= content_tag(:strong, {:class => ("disable" if disable)}) do %>
         <%= check_box_tag "builder_army_list_unit[army_list_unit_unit_options_attributes][#{option.id}][_destroy]", false, army_list_unit.unit_options.member?(option), :id => "builder_army_list_unit_unit_option_ids_#{option.id}", "data-depend" => depend.try(:id), "data-radio" => true %> <%= option.domain_magic.name %>
       <% end %>
     </p>
-  <% elsif option.value_points.nil? %>
-    <%= content_tag(:strong, option.name, {:class => ("disable" if disable), 'data-extra-item': option.extra_item_id }) %>
-  <% elsif option.is_magic_items || option.is_extra_items %>    
-    <%= content_tag(:strong, {:class => ("disable" if disable)}) do %>
+  
+  <% elsif option.value_points.nil? || option.is_magic_items || option.is_extra_items %>    
+    
+    <%= content_tag(:strong, {:class => ("disable" if disable), 'data-extra-item': option.extra_item_id }) do %>
       <%= option.name %>
+      <% unless option.infos.nil? %>
+        <%= content_tag(:span, option.infos, {:class => 'tooltiptext'}) %>
+      <% end %>
     <% end %>
     <% unless option.value_points.nil? %>(<em><span><%= value_points(value_points) %></span> pts</em>)<% end %>
+
   <% else %>
+    
     <%= hidden_field_tag "builder_army_list_unit[army_list_unit_unit_options_attributes][#{option.id}][_destroy]", 1 %>
     <em><%= content_tag(:span, value_points(value_points)) %> pts</em>
     <label>
       <% unless option.is_magics_or_extra%>
-        <%= check_box_tag "builder_army_list_unit[army_list_unit_unit_options_attributes][#{option.id}][_destroy]", false, army_list_unit.unit_options.member?(option), :id => "builder_army_list_unit_unit_option_ids_#{option.id}", "data-depend" => depend.try(:id), "data-radio" => option.is_unique_choice ? true : nil, "data-per-model" => option.is_per_model ? true : nil, "data-is-multiple" => option.is_multiple ? true : nil, "data-value-points" => option.value_points, "data-extra-item" => option.extra_item_id, "data-one-choise" => option.has_one_choise %>
+        <%= check_box_tag "builder_army_list_unit[army_list_unit_unit_options_attributes][#{option.id}][_destroy]", false, army_list_unit.unit_options.member?(option), :id => "builder_army_list_unit_unit_option_ids_#{option.id}", "data-depend" => depend.try(:id), "data-radio" => option.is_unique_choice ? true : nil, "data-per-model" => option.is_per_model ? true : nil, "data-is-multiple" => option.is_multiple ? true : nil, "data-value-points" => option.value_points, "data-extra-item" => option.extra_item_id %>
       <%end%>
       <%= option.name %>
+      <% unless option.infos.nil? %>
+        <%= content_tag(:span, option.infos, {:class => 'tooltiptext'}) %>
+      <% end %>
     </label>
 
     <% if option.is_multiple %>
@@ -54,13 +63,13 @@
   <% end %>
 
   <% if option.children.any? %>
-    <%= content_tag(:ul, {:class => ("list-inline text-center" if all_magics), :style => ("display: none;" if disable) }) do %>
+    <%= content_tag(:ul, {:class => ("list-inline text-center" if all_magics), "data-one-choise" => option.has_one_choise, :style => ("display: none;" if disable) }) do %>
       <%= render :partial => 'builder/army_list_units_unit_options/edit', :collection => option.children.all, :as => :option, :locals => {:army_list_unit => army_list_unit, :has_one_choise => option.has_one_choise} %>
     <% end %>
   <% end %>
 
   <% unless option.mount_id.nil? %>
-    <%= content_tag(:ul, {:style => ("display: none;" if disable) }) do %>
+    <%= content_tag(:ul, {:style => ("display: none;" if disable), "data-one-choise" => option.has_one_choise }) do %>
       <%= render :partial => 'builder/army_list_units_unit_options/edit', :collection => option.mount.unit_options.all, :as => :option, :locals => {:army_list_unit => army_list_unit} %>
     <% end %>
   <% end %>

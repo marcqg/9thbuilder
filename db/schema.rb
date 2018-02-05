@@ -272,6 +272,7 @@ ActiveRecord::Schema.define(version: 20180202101117) do
     t.datetime "updated_at",                            null: false
     t.string   "name"
     t.text     "description",             limit: 65535
+    t.text     "infos",                   limit: 65535
     t.index ["locale"], name: "index_ninth_age_extra_item_translations_on_locale", using: :btree
     t.index ["ninth_age_extra_item_id"], name: "index_a3691c2c997dc761d820ee9cc8ad386aec523816", using: :btree
   end
@@ -529,6 +530,7 @@ ActiveRecord::Schema.define(version: 20180202101117) do
     t.integer "extra_item_id"
     t.integer "unit_option_activator_id"
     t.integer "unit_link_id"
+    t.boolean "has_one_choise",                                   default: false, null: false
     t.index ["domain_magic_id"], name: "index_ninth_age_options_on_magic_id", using: :btree
     t.index ["extra_item_id"], name: "index_ninth_age_unit_options_on_extra_item_id", using: :btree
     t.index ["mount_id"], name: "index_ninth_age_unit_options_on_mount_id", using: :btree

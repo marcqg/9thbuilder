@@ -1,7 +1,7 @@
 jQuery(function($) {
 
     //Edit Extra item
-    $(document).on('change', '#army_list_unit_extra_items ul input[type=checkbox], #army_list_unit_extra_items ul input[type=radio]', function(evt) {
+    $(document).on('change', '#army_list_unit_extra_items ul input[type=checkbox]', function(evt) {
         var self = $(this);
 
         if(self.data('is-unique')){
@@ -36,8 +36,8 @@ jQuery(function($) {
         });
     });
 
-    //Edit Unit option
-    $(document).on('change', '#army_list_unit_extra_items ul input[type=checkbox], #army_list_unit_extra_items ul input[type=radio]', function(evt) {
+    //Edit Extra item => Unit option
+    $(document).on('change', '#army_list_unit_extra_items ul input[type=checkbox]', function(evt) {
         var self = $(this);
 
         var extra_item_id = self.val();
@@ -71,6 +71,27 @@ jQuery(function($) {
                     $(this).prop('checked', false);
                     $(this).change();
                 }
+            });
+        }
+    });
+
+    //Edit Unit option 
+    $(document).on('change', '#army_list_unit_unit_options ul input', function(evt) {
+        var self = $(this);
+        if(!self.prop('checked')){
+            return;
+        }
+
+        //one choise only
+        var one_choise = self.closest('ul[data-one-choise="true"]');
+        if(one_choise){
+            one_choise.find('input:checked')
+            .filter(function() {
+                return $(this).prop('id') != self.prop('id');
+            })
+            .each(function(){                
+                $(this).prop('checked', false);
+                $(this).change();
             });
         }
     });

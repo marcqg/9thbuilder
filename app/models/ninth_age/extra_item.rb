@@ -8,7 +8,7 @@ class NinthAge::ExtraItem < ApplicationRecord
   has_many :army_list_unit_extra_items, dependent: :destroy, class_name: 'Builder::ArmyListUnitExtraItem'
   has_many :army_list_units, through: :army_list_unit_extra_items, class_name: 'Builder::ArmyListUnit'
 
-  translates :name, :description
+  translates :name, :description, :infos
   globalize_accessors
   accepts_nested_attributes_for :translations, allow_destroy: true
 
