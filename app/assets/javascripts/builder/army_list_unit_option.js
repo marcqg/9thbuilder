@@ -87,7 +87,13 @@ jQuery(function($) {
         if(one_choise){
             one_choise.find('input:checked')
             .filter(function() {
-                return $(this).prop('id') != self.prop('id');
+                if($(this).prop('id') == self.prop('id')){
+                    return false;
+                }
+
+                var li = $(this).closest('li');
+
+                return li.find('#' + self.prop('id')).length == 0;
             })
             .each(function(){                
                 $(this).prop('checked', false);
