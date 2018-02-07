@@ -20,7 +20,18 @@ module Builder
       @army_list_unit = @army_list.army_list_units.includes({army_list_unit_troops: [:troop]}).find(params[:id])
 
       @available_unit_options = @army_list_unit.unit.unit_options.without_parent
-      @magic_items_option = @army_list_unit.unit.unit_options.only_magic_items.order('value_points DESC').first
+      option_magic_items = @army_list_unit.unit.unit_options.only_magic_items
+      magic_item = 0
+      @magic_items_option = nil
+      option_magic_items.each do |option_magic_item|
+        if option_magic_item.value_points > magic_item
+          if option_magic_item.unit_option_activator_id.nil? or (!option_magic_item.unit_option_activator_id.nil? && option_magic_item.unit_option_activator.in?(@army_list_unit.army_list_unit_unit_options.map(&:unit_option)))
+            @magic_items_option = option_magic_item
+            magic_item = option_magic_item.value_points
+          end
+        end
+      end 
+
       @extra_items_option = @army_list_unit.unit.unit_options.only_extra_items.order('value_points DESC').first
       @magic_standards_option = @army_list_unit.unit.unit_options.only_magic_standards.order('value_points DESC').first
     end
@@ -105,7 +116,19 @@ module Builder
           format.xml { head :ok }
         else
           @available_unit_options = @army_list_unit.unit.unit_options.without_parent.exclude_magics_and_extra
-          @magic_items_option = @army_list_unit.unit.unit_options.only_magic_items.first
+
+          option_magic_items = @army_list_unit.unit.unit_options.only_magic_items
+          magic_item = 0
+          @magic_items_option = nil
+          option_magic_items.each do |option_magic_item|
+            if option_magic_item.value_points > magic_item
+              if option_magic_items.unit_option_activator_id.nil? or (!option_magic_items.unit_option_activator_id.nil? && option_magic_items.unit_option_activator.in?(army_list_unit.army_list_unit_unit_options.map(&:unit_option)))
+                @magic_items_option = option_magic_items
+                magic_item = option_magic_item.value_points
+              end
+            end
+          end          
+
           @extra_items_option = @army_list_unit.unit.unit_options.only_extra_items.first
           @magic_standards_option = @army_list_unit.unit.unit_options.only_magic_standards.first
 

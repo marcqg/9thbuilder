@@ -229,7 +229,7 @@ function updateArmyListUnitValuePoints() {
             total += value_points;
         });
 
-        $div.find('h3 span').html(String(total).replace('.', ','));
+        $div.find('h3 span.points').html(String(total).replace('.', ','));
     });
 
     var total = 0.0,
@@ -254,7 +254,7 @@ function updateArmyListUnitValuePoints() {
     }
 
 
-    $('.army_list_unit_add_element h3 span').each(function(index, item) {
+    $('.army_list_unit_add_element h3 span.points').each(function(index, item) {
         var entry = $(item);
         if (entry.length) {
             total += parseFloat(entry.html().replace(',', '.'));

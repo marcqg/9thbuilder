@@ -78,27 +78,72 @@ jQuery(function($) {
     //Edit Unit option 
     $(document).on('change', '#army_list_unit_unit_options ul input', function(evt) {
         var self = $(this);
-        if(!self.prop('checked')){
-            return;
+        if(self.prop('checked')){
+            //one choise only
+            var one_choise = self.closest('ul[data-one-choise="true"]');
+            if(one_choise){
+                one_choise.find('input:checked')
+                .filter(function() {
+                    if($(this).prop('id') == self.prop('id')){
+                        return false;
+                    }
+
+                    var li = $(this).closest('li');
+
+                    return li.find('#' + self.prop('id')).length == 0;
+                })
+                .each(function(){                
+                    $(this).prop('checked', false);
+                    $(this).change();
+                });
+            }
         }
 
-        //one choise only
-        var one_choise = self.closest('ul[data-one-choise="true"]');
-        if(one_choise){
-            one_choise.find('input:checked')
-            .filter(function() {
-                if($(this).prop('id') == self.prop('id')){
-                    return false;
+        //activator
+        $('#army_list_unit_unit_options strong[data-unit-option-activator]')
+        .filter('[data-unit-option-activator!=""]')
+        .each(function(){
+            var $item = $(this);
+
+            var checked = $('#builder_army_list_unit_unit_option_ids_' + $item.data('unit-option-activator')).prop('checked');
+
+            if(checked){
+                $item.removeClass("disable");
+                $item.prop('disabled', false);
+            }
+            else {
+                $item.addClass("disable");
+                $item.prop('disabled', true);
+                if($item.prop('checked')){
+                    $item.prop('checked', false);
+                    $item.change();
                 }
+            }
+        });
 
-                var li = $(this).closest('li');
+        //max object magic 
+        var max_magic_items = $('#army_list_unit_unit_options strong[data-is-magic-item="true"]')
+                                .filter(function(){
+                                    return !$(this).hasClass('disable');
+                                })
+                                .map(function(){
+                                    return parseInt($(this).data('value-points'))
+                                });
+        var max_magic_item = Math.max(...max_magic_items);
 
-                return li.find('#' + self.prop('id')).length == 0;
-            })
-            .each(function(){                
-                $(this).prop('checked', false);
-                $(this).change();
-            });
+        var current_max_magic_items = parseInt($('#army_list_unit_magic_items').data('value-points-limit'));
+        if(current_max_magic_items != max_magic_item){
+
+            $('#army_list_unit_magic_items').data('value-points-limit', max_magic_item);
+            $('#army_list_unit_magic_items > h3 > span.max-points').html(max_magic_item);
+
+            if(current_max_magic_items > max_magic_item){
+                $('#army_list_unit_magic_items input:checked').each(function(){
+                    var $item = $(this);
+                    $item.prop('checked', false);
+                    $item.change();
+                });
+            }
         }
     });
 });

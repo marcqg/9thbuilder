@@ -43,7 +43,7 @@
 
       <% if @magic_items_option %>
         <div id="army_list_unit_magic_items" class="col-sm-12 col-md-12 army_list_unit_add_element" data-value-points-limit="<%= @magic_items_option.value_points %>">
-          <h3><%=t 'army_list_unit.edit.magic_items' %><br /><span><%= value_points(@army_list_unit.magic_items_value_points + (@magic_items_option.is_extra_items? ? @army_list_unit.extra_items_value_points : 0)) %></span>/<%= value_points(@magic_items_option.value_points) %> pts</h3>
+          <h3><%=t 'army_list_unit.edit.magic_items' %><br /><span class="points"><%= value_points(@army_list_unit.magic_items_value_points + (@magic_items_option.is_extra_items? ? @army_list_unit.extra_items_value_points : 0)) %></span>/<span class="max-points"><%= value_points(@magic_items_option.value_points) %></span> pts</h3>
           <ul>
             <% NinthAge::MagicItemCategory.all.each_with_index do |magic_item_category, index| %>
             <%- magic_items = magic_item_category.magic_items.available_for(@army_list.army, @army_list.army.version, @magic_items_option.value_points).all %>
@@ -72,7 +72,7 @@
       <% if @extra_items_option %>
         <div id="army_list_unit_extra_items" class="col-sm-12 col-md-12 army_list_unit_add_element" data-value-points-limit="<%= @extra_items_option.value_points %>">
           <% if @army_list.army.extra_item_categories.length > 1 %>
-          <h3><%=t 'army_list_unit.edit.extra_items' %><br /><span><%= value_points(@army_list_unit.extra_items_value_points) %></span><% unless @extra_items_option.value_points.nil? %>/<%= value_points(@extra_items_option.value_points) %><% end %> pts</h3>
+          <h3><%=t 'army_list_unit.edit.extra_items' %><br /><span class="points"><%= value_points(@army_list_unit.extra_items_value_points) %></span><% unless @extra_items_option.value_points.nil? %>/<span class="max-points"><%= value_points(@extra_items_option.value_points) %></span><% end %> pts</h3>
           <ul>
             <% @army_list.army.extra_item_categories.each_with_index do |extra_item_category, index| %>
             <%
@@ -97,7 +97,7 @@
 
       <% if @magic_standards_option %>
         <div id="army_list_unit_magic_standards" class="col-sm-12 col-md-12 army_list_unit_add_element">
-          <h3><%=t 'army_list_unit.edit.magic_standards' %><br /><span><%= value_points(@army_list_unit.magic_standards_value_points) %></span><% unless @magic_standards_option.value_points.nil? %>/<%= value_points(@magic_standards_option.value_points) %><% end %> pts</h3>
+          <h3><%=t 'army_list_unit.edit.magic_standards' %><br /><span class="points"><%= value_points(@army_list_unit.magic_standards_value_points) %></span><% unless @magic_standards_option.value_points.nil? %>/<span class="max-points"><%= value_points(@magic_standards_option.value_points) %></span><% end %> pts</h3>
           <ul>
             <%= render :partial => 'builder/army_list_units_magic_standards/edit', :collection =>  NinthAge::MagicStandard.available_for(@army_list.army, @army_list.army.version, @magic_standards_option.value_points).all, :as => :magic_standard, :locals => { :army_list_unit => @army_list_unit, :unit_option => @magic_standards_option } %>
           </ul>
