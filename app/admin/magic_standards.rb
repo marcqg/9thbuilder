@@ -1,7 +1,7 @@
 ActiveAdmin.register NinthAge::MagicStandard do
   menu parent: 'Ninth Age Magic', priority: 5
 
-  permit_params :version_id, :army_id, :override_id, :locale, :value_points, :max, translations_attributes: [:id, :name, :description, :locale, :_destroy]
+  permit_params :version_id, :army_id, :organisation_id, :override_id, :locale, :value_points, :max, translations_attributes: [:id, :name, :description, :infos, :locale, :_destroy]
 
   # config.sort_order = 'name_asc'
   
@@ -48,10 +48,12 @@ ActiveAdmin.register NinthAge::MagicStandard do
     f.inputs do
       f.input :version, collection: NinthAge::Version.includes(:translations).order(:name)
       f.input :army, as: :select, :input_html => {'data-option-dependent' => true, 'data-option-url' => '/ninth_age/version-:ninth_age_magic_standard_version_id/armies', 'data-option-observed' => 'ninth_age_magic_standard_version_id'}, :collection => (resource.version ? resource.version.armies.order(:name).collect {|army| [army.name, army.id]} : [])
+      f.input :organisation, as: :select, :input_html => {'data-option-dependent' => true, 'data-option-url' => '/ninth_age/army-:ninth_age_magic_standard_army_id/armies', 'data-option-observed' => 'ninth_age_magic_standard_army_id'}, :collection => (resource.army ? resource.army.organisations.order(:name).collect {|organisation| [organisation.name, organisation.id]} : [])
       f.input :override, collection: NinthAge::MagicStandard.includes(:translations).where(army_id: nil).order(:name)
       f.translate_inputs do |t|
         t.input :name
         t.input :description
+        t.input :infos
       end
       f.input :value_points
       f.input :max
@@ -63,6 +65,7 @@ ActiveAdmin.register NinthAge::MagicStandard do
     attributes_table do
       row :version
       row :army
+      row :organisation
       row :override
       row :value_points
       row :max
@@ -71,6 +74,7 @@ ActiveAdmin.register NinthAge::MagicStandard do
       translate_attributes_table_for model do
         row :name
         row :description
+        row :infos
       end
     end
   end

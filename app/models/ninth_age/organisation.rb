@@ -19,6 +19,8 @@ class NinthAge::Organisation < ApplicationRecord
 
   has_many :unit_options, class_name: "NinthAge::UnitOption"
 
+  has_many :magic_standards, class_name: "NinthAge::MagicStandard"
+
   translates :name
   globalize_accessors
   accepts_nested_attributes_for :translations, allow_destroy: true

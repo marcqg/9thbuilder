@@ -203,6 +203,15 @@ module Builder
             organisation_rate.save
           end
         end
+
+        #Sum by banners
+        army_list_unit.army_list_unit_magic_standards.each do |magic_standard|
+          unless magic_standard.magic_standard.organisation_id.nil?
+            organisation_rate = Builder::ArmyListOrganisation.find_or_create_by({organisation_id: magic_standard.magic_standard.organisation_id, army_list_id: @army_list.id})
+            organisation_rate.pts += army_list_unit.value_points
+            organisation_rate.save
+          end
+        end
       end
 
       pts = Builder::ArmyListOrganisation.where(army_list_id: @army_list.id).map(&:pts).reduce(0, :+)

@@ -1,7 +1,7 @@
 ActiveAdmin.register NinthAge::MagicItem do
   menu parent: 'Ninth Age Magic', priority: 4
 
-  permit_params :version_id, :army_id, :magic_item_category_id, :override_id, :is_dominant, :locale, :value_points, :is_multiple, :type_figurine, {:type_target => []}, {:duration => []}, :max, translations_attributes: [:id, :name, :description, :locale, :_destroy]
+  permit_params :version_id, :army_id, :magic_item_category_id, :override_id, :is_dominant, :locale, :value_points, :is_multiple, :type_figurine, {:type_target => []}, {:duration => []}, :max, translations_attributes: [:id, :name, :description, :infos, :locale, :_destroy]
 
   filter :version, as: :select, collection: -> { NinthAge::Version.includes(:translations).map { |version| [ version.name, version.id ] } } 
   filter :army, as: :select, collection: -> { NinthAge::Army.includes(:translations).map { |army| [ army.name + ' ' + army.version.name, army.id ] } } 
@@ -59,6 +59,7 @@ ActiveAdmin.register NinthAge::MagicItem do
       f.translate_inputs do |t|
         t.input :name
         t.input :description
+        t.input :infos
       end
       f.input :value_points
       f.input :is_multiple
@@ -89,6 +90,7 @@ ActiveAdmin.register NinthAge::MagicItem do
       translate_attributes_table_for model do
         row :name
         row :description
+        row :infos
       end
     end
   end

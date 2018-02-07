@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180202101117) do
+ActiveRecord::Schema.define(version: 20180207145003) do
 
   create_table "active_admin_comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.integer  "resource_id",                 null: false
@@ -344,12 +344,14 @@ ActiveRecord::Schema.define(version: 20180202101117) do
 
   create_table "ninth_age_magic_standards", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.integer "army_id"
-    t.integer "value_points",              null: false
+    t.integer "value_points",                null: false
     t.integer "override_id"
-    t.integer "version_id",    default: 0, null: false
-    t.integer "type_figurine", default: 0, null: false
-    t.integer "max",           default: 0, null: false
+    t.integer "version_id",      default: 0, null: false
+    t.integer "type_figurine",   default: 0, null: false
+    t.integer "max",             default: 0, null: false
+    t.integer "organisation_id"
     t.index ["army_id"], name: "index_ninth_age_magic_standards_on_army_id", using: :btree
+    t.index ["organisation_id"], name: "index_ninth_age_magic_standards_on_organisation_id", using: :btree
     t.index ["override_id"], name: "index_ninth_age_magic_standards_on_override_id", using: :btree
     t.index ["version_id"], name: "index_ninth_age_magic_standards_on_version_id", using: :btree
   end
@@ -714,6 +716,7 @@ ActiveRecord::Schema.define(version: 20180202101117) do
   add_foreign_key "ninth_age_magic_standard_translations", "ninth_age_magic_standards", on_delete: :cascade
   add_foreign_key "ninth_age_magic_standards", "ninth_age_armies", column: "army_id"
   add_foreign_key "ninth_age_magic_standards", "ninth_age_magic_standards", column: "override_id"
+  add_foreign_key "ninth_age_magic_standards", "ninth_age_organisations", column: "organisation_id", on_delete: :cascade
   add_foreign_key "ninth_age_magic_standards", "ninth_age_versions", column: "version_id", on_delete: :cascade
   add_foreign_key "ninth_age_organisation_changes", "ninth_age_organisations", column: "default_organisation_id"
   add_foreign_key "ninth_age_organisation_changes", "ninth_age_organisations", column: "new_organisation_id"

@@ -8,14 +8,21 @@ end
 
 disabled = !extra_item.extra_item_activator_id.nil? && !extra_item.extra_item_activator.in?(army_list_unit.extra_items)
 
+count = army_list_unit.extra_items.where(:id => extra_item.id).size
+max = extra_item.max
+disabled ||= (max != 0 && count == max && !army_list_unit.extra_items.member?(extra_item))
+
 %>
 <li>
   <em><span><%= value_points(extra_item.value_points) %></span> pts</em>
   <%= content_tag(:label, {:class => ("disable" if disabled)}) do %>
   	<%= check_box_tag "builder_army_list_unit[extra_item_ids][]", extra_item.id, army_list_unit.extra_items.member?(extra_item), :id => "builder_army_list_unit_extra_item_ids_#{extra_item.id}", "data-depend" => depend.try(:id), "data-value-points" => extra_item.value_points, "data-extra-item-activator" => extra_item.extra_item_activator_id, 'data-is-unique' => is_unique, 'disabled' => disabled %>
   	<%= extra_item.name %>
-      <% unless extra_item.infos.nil? %>
-        <small><%= content_tag(:span, extra_item.infos, {:class => 'tooltiptext'}) %></small>
-      <% end %>
+    <% if max != 0 %>
+      <small>(<span class="current" data-count="<%= count %>"><%= count %></span>/<span class="max" data-max="<%= max %>"><%= max %></span>)</small>
+    <% end %>
+    <% unless extra_item.infos.nil? %>
+      <small><%= content_tag(:span, extra_item.infos, {:class => 'tooltiptext'}) %></small>
+    <% end %>
   <% end %>
 </li>

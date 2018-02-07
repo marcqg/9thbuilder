@@ -1,13 +1,14 @@
 class NinthAge::MagicStandard < ApplicationRecord
 
   belongs_to :version, class_name: "NinthAge::Version"
-
   belongs_to :army, class_name: "NinthAge::Army"
+  belongs_to :organisation, class_name: "NinthAge::Organisation"
+
   has_many :army_list_unit_magic_standards, dependent: :destroy, class_name: 'Builder::ArmyListUnitMagicStandard'
   has_many :army_list_units, through: :army_list_unit_magic_standards, class_name: 'Builder::ArmyListUnit'
   has_one :override, class_name: 'MagicStandard', foreign_key: 'override_id'
 
-  translates :name, :description
+  translates :name, :description, :infos
   globalize_accessors
   accepts_nested_attributes_for :translations, allow_destroy: true
   
