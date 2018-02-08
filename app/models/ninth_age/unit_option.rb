@@ -11,7 +11,6 @@ class NinthAge::UnitOption < ApplicationRecord
   belongs_to :domain_magic, class_name: "NinthAge::DomainMagic"
   belongs_to :organisation, class_name: "NinthAge::Organisation"
   belongs_to :extra_item, class_name: "NinthAge::ExtraItem"
-  has_one :troop, dependent: :nullify, class_name: "NinthAge::Troop"
   has_many :army_list_unit_unit_options, dependent: :destroy, class_name: 'Builder::ArmyListUnitUnitOption'
   has_many :army_list_units, through: :army_list_unit_unit_options, class_name: 'Builder::ArmyListUnit'
 

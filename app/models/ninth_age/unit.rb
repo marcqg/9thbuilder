@@ -71,19 +71,20 @@ class NinthAge::Unit < ApplicationRecord
     new_unit_options = {}
 
     new_unit = dup
-    new_unit.name = "Copy of #{new_unit.name}"
     new_unit.troops << troops.collect { |troop| new_troops[troop.id] = troop.dup }
     new_unit.equipment_unit_troops << equipment_unit_troops.collect(&:dup)
     new_unit.special_rule_unit_troops << special_rule_unit_troops.collect(&:dup)
-    new_unit.unit_options << unit_options.collect { |unit_option| new_unit_options[unit_option.id] = unit_option.dup }
+    #new_unit.unit_options << unit_options.collect { |unit_option| new_unit_options[unit_option.id] = unit_option.dup }
+    new_unit.organisation_changes << organisation_changes.collect(&:dup)
+    new_unit.organisations << organisations.collect(&:dup)
 
-    new_unit.troops.map do |troop|
-      troop.unit_option = new_unit_options[troop.unit_option.id] unless troop.unit_option.nil?
-    end
+    #new_unit.troops.map do |troop|
+    #  troop.unit_option = new_unit_options[troop.unit_option.id] unless troop.unit_option.nil?
+    #end
 
-    new_unit.unit_options.map do |unit_option|
-      unit_option.parent = new_unit_options[unit_option.parent.id] unless unit_option.parent.nil?
-    end
+    #new_unit.unit_options.map do |unit_option|
+    #  unit_option.parent = new_unit_options[unit_option.parent.id] unless unit_option.parent.nil?
+    #end
 
     new_unit
   end

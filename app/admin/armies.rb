@@ -24,7 +24,7 @@ ActiveAdmin.register NinthAge::Army do
     new_army = resource.duplicate
     new_army.save
 
-    redirect_to edit_admin_ninth_age_army_url(new_army)
+    redirect_to admin_ninth_age_army_url(new_army)
   end
 
   action_item :duplicate, only: :show do
