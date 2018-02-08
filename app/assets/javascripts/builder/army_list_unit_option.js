@@ -1,41 +1,5 @@
 jQuery(function($) {
 
-    //Edit Extra item
-    $(document).on('change', '#army_list_unit_extra_items ul input[type=checkbox]', function(evt) {
-        var self = $(this);
-
-        if(self.data('is-unique')){
-            self.closest('ul')
-            .find('input')
-            .each(function(){
-                if($(this).prop("id") != self.prop("id")){
-                    $(this).prop('checked', false);
-                }
-            });
-        }
-
-        $('#army_list_unit_extra_items ul label input[data-extra-item-activator]')
-        .filter('[data-extra-item-activator!=""]')
-        .each(function(){
-            var $item = $(this);
-
-            var checked = $('#builder_army_list_unit_extra_item_ids_' + $item.data('extra-item-activator')).prop('checked');
-
-            if(checked){
-                $item.parent().removeClass("disable");
-                $item.prop('disabled', false);
-            }
-            else {
-                $item.parent().addClass("disable");
-                $item.prop('disabled', true);
-                if($item.prop('checked')){
-                    $item.prop('checked', false);
-                    $item.change();
-                }
-            }
-        });
-    });
-
     //Edit Extra item => Unit option
     $(document).on('change', '#army_list_unit_extra_items ul input[type=checkbox]', function(evt) {
         var self = $(this);

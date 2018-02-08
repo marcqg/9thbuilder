@@ -52,12 +52,18 @@ jQuery(function($) {
 
         var limite = parseFloat($div.data('value-points-limit'));
 
+        //Magic item dominant
         if($(this).data('dominant')){
-            $div.find('input:checkbox').each(function(){
+            $div.find('input:checkbox')
+            .filter(function(){
                 var self = $(this);
-                if(self.data('dominant') && self.attr("id") != $changed.attr("id")){
-                    self.prop('checked', false);
-                }
+                
+                return (self.data('dominant') && self.prop('checked') && self.attr("id") != $changed.attr("id"));
+            })
+            .each(function(){
+                var self = $(this);
+                self.prop('checked', false);
+                self.change();
             });
         }
 
@@ -68,32 +74,31 @@ jQuery(function($) {
 
             self.closest('ul').prev('strong').removeClass('empty');
 
-            var $span_points = $parent.find('em > span');
-            if($span_points.length < 1){
+            var value_points = parseInt(self.data('value-points'));
+            if(value_points < 1){
                 return;
             }
 
-            var value_points = parseFloat($span_points.html().replace(',', '.'));
-
-            $parent.find('.magic-item-quantity').removeAttr('disabled');
             var $quantity = $parent.find('.magic-item-quantity');
-
             if ($quantity.length) {
+                $quantity.removeAttr('disabled');
 
                 var max = Math.floor((limite - total) / value_points);
                 $quantity.attr('max', max);
 
                 value_points = value_points * parseInt($quantity.val());
-            } else {
-                $quantity.val(1);
-                value_points = value_points * 1;
             }
 
             total += value_points;
         });
 
 
-        $div.find('input:checkbox:not(:checked)').each(function() {
+        $div.find('input:checkbox:not(:checked)')
+        .filter(function(){
+
+            return $(this).closest('#army_list_unit_extra_items').length == 0;
+        })
+        .each(function() {
             var self = $(this);
 
             var $parent = self.closest('li');
@@ -111,8 +116,6 @@ jQuery(function($) {
                 if ($quantities.length) {
 
                     var max = Math.floor((limite - total) / points);
-                    console.log('max', max);
-
                     $quantities.attr('max', max);
                 }
             }

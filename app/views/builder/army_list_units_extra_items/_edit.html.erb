@@ -8,9 +8,12 @@ end
 
 disabled = !extra_item.extra_item_activator_id.nil? && !extra_item.extra_item_activator.in?(army_list_unit.extra_items)
 
-count = army_list_unit.extra_items.where(:id => extra_item.id).size
+count = army_list_unit.army_list.extra_items.where(:id => extra_item.id).size
 max = extra_item.max
 disabled ||= (max != 0 && count == max && !army_list_unit.extra_items.member?(extra_item))
+
+p extra_item.name
+p disabled
 
 %>
 <li>

@@ -6,7 +6,7 @@ while !depend.nil? and depend.value_points.nil? do
   depend = depend.parent
 end
 
-count = army_list_unit.magic_standards.where(:id => magic_standard.id).count
+count = army_list_unit.army_list.magic_standards.where(:id => magic_standard.id).count
 max = magic_standard.max
 disable = (max != 0 && count == max && !army_list_unit.magic_standards.member?(magic_standard))
 %>

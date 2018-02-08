@@ -309,6 +309,7 @@ ActiveRecord::Schema.define(version: 20180207145003) do
     t.datetime "updated_at",                            null: false
     t.string   "name"
     t.text     "description",             limit: 65535
+    t.text     "infos",                   limit: 65535
     t.index ["locale"], name: "index_ninth_age_magic_item_translations_on_locale", using: :btree
     t.index ["ninth_age_magic_item_id"], name: "index_df4d007c32d8556b64250547013147b2f38eb422", using: :btree
   end
@@ -338,6 +339,7 @@ ActiveRecord::Schema.define(version: 20180207145003) do
     t.datetime "updated_at",                                null: false
     t.string   "name"
     t.text     "description",                 limit: 65535
+    t.text     "infos",                       limit: 65535
     t.index ["locale"], name: "index_ninth_age_magic_standard_translations_on_locale", using: :btree
     t.index ["ninth_age_magic_standard_id"], name: "index_ddbd87e0b439bcbd0c784b45e90af2a8014a66e1", using: :btree
   end

@@ -20,7 +20,7 @@
           <td><%= troop_fields.number_field :size, :min => @army_list_unit.unit.min_size, :max => @army_list_unit.unit.max_size, :class => "army_list_unit_troop_size" %></td>
           <td><span class="army_list_unit_troop_size_value"><%= army_list_unit_troop.size %></span> * <%= value_points(army_list_unit_troop.troop.value_points || @army_list_unit.unit.value_points) %> pts<%=t :per_model %></td>
           <% end %>
-        </tr>
+        </tr>army_list_unit
         <% end %>
       </table>
     <% end %>
@@ -61,7 +61,7 @@
               <strong><%= extra_item_category.name %></strong>
               <ul style="display:none">
                 <%= render :partial => 'builder/army_list_units_extra_items/edit', :collection => NinthAge::ExtraItem.available_for(extra_item_category, @magic_items_option.value_points).all, :as => :extra_item, :locals => { :army_list_unit => @army_list_unit, :unit_option => @magic_items_option } %>
-              </ul>
+              </ul>d
             </li>
             <% end %>
             <% end %>
@@ -72,7 +72,8 @@
       <% if @extra_items_option %>
         <div id="army_list_unit_extra_items" class="col-sm-12 col-md-12 army_list_unit_add_element" data-value-points-limit="<%= @extra_items_option.value_points %>">
           <% if @army_list.army.extra_item_categories.length > 1 %>
-          <h3><%=t 'army_list_unit.edit.extra_items' %><br /><span class="points"><%= value_points(@army_list_unit.extra_items_value_points) %></span><% unless @extra_items_option.value_points.nil? %>/<span class="max-points"><%= value_points(@extra_items_option.value_points) %></span><% end %> pts</h3>
+          <h3><%=t 'army_list_unit.edit.extra_items' %><br />
+            <span class="points"><%= value_points(@army_list_unit.extra_items_value_points) %></span><% unless @extra_items_option.value_points.nil? %>/<span class="max-points"><%= value_points(@extra_items_option.value_points) %></span><% end %> pts</h3>
           <ul>
             <% @army_list.army.extra_item_categories.each_with_index do |extra_item_category, index| %>
             <%
@@ -87,7 +88,10 @@
             <% end %>
           </ul>
           <% else %>
-          <h3><%=transliterate @army_list.army.extra_item_categories.first.name %><br /><span><%= value_points(@army_list_unit.extra_items_value_points) %></span><% unless @extra_items_option.value_points.nil? %>/<%= value_points(@extra_items_option.value_points) %><% end %> pts</h3>
+          <h3>
+            <%=transliterate @army_list.army.extra_item_categories.first.name %><br />
+            <span class="points"><%= value_points(@army_list_unit.extra_items_value_points) %></span><% unless @extra_items_option.value_points.nil? %>/<span class="max-points"><%= value_points(@extra_items_option.value_points) %></span> %><% end %> pts
+          </h3>
           <ul>
             <%= render :partial => 'builder/army_list_units_extra_items/edit', :collection =>  NinthAge::ExtraItem.available_for(@army_list.army.extra_item_categories.first, @extra_items_option.value_points).all, :as => :extra_item, :locals => { :army_list_unit => @army_list_unit, :unit_option => @extra_items_option, :is_unique => @army_list.army.extra_item_categories.first.is_unique } %>
           </ul>

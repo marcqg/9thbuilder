@@ -8,15 +8,15 @@ end
 
 army_list_unit_magic_item = army_list_unit.army_list_unit_magic_items.detect { |alumi| alumi.magic_item == magic_item }
 
-count = army_list_unit.magic_items.where(:id => magic_item.id).map(&:quantity).sum
+count = army_list_unit.army_list.magic_items.where(:id => magic_item.id).count
 max = magic_item.max
-disable = (max != 0 && count == max && !army_list_unit.magic_items.member?(magic_item))
+disabled = (max != 0 && count == max && !army_list_unit.magic_items.member?(magic_item))
 %>
 <li>
   <%= hidden_field_tag "builder_army_list_unit[army_list_unit_magic_items_attributes][#{magic_item.id}][_destroy]", 1 %>
   <em><span><%= value_points(magic_item.value_points) %></span> pts</em>
-  <label>
-    <%= check_box_tag "builder_army_list_unit[army_list_unit_magic_items_attributes][#{magic_item.id}][_destroy]", false, army_list_unit.magic_items.member?(magic_item), :id => "army_list_unit_magic_item_ids_#{magic_item.id}", "data-depend" => depend.try(:id), "data-radio" => magic_item.magic_item_category.is_multiple ? true : false, "data-value-points" => magic_item.value_points, "data-dominant" => magic_item.is_dominant %>
+  <%= content_tag(:label, {:class => ("disable" if disabled)}) do %>
+    <%= check_box_tag "builder_army_list_unit[army_list_unit_magic_items_attributes][#{magic_item.id}][_destroy]", false, army_list_unit.magic_items.member?(magic_item), :id => "army_list_unit_magic_item_ids_#{magic_item.id}", "data-depend" => depend.try(:id), "data-radio" => magic_item.magic_item_category.is_multiple ? true : false, "data-value-points" => magic_item.value_points, "data-dominant" => magic_item.is_dominant, 'disabled' => disabled %>
     <%= magic_item.name %>
     <% if max != 0 %>
       <small>(<span class="current" data-count="<%= count %>"><%= count %></span>/<span class="max" data-max="<%= max %>"><%= max %></span>)</small>
@@ -24,10 +24,10 @@ disable = (max != 0 && count == max && !army_list_unit.magic_items.member?(magic
     <% if magic_item.is_dominant %>
       <small>(<%= t('magic_items.dominant') %>)</small>
     <% end %>
-  </label>
+  <% end %>
 
   <% if magic_item.is_multiple? && !magic_item.is_dominant %>
-    x <%= number_field_tag "builder_army_list_unit[army_list_unit_magic_items_attributes][#{magic_item.id}][quantity]", army_list_unit_magic_item.try(:quantity), :min => 1, :class => 'magic-item-quantity', :value => 1, :disabled => !army_list_unit.magic_items.member?(magic_item) %>
+    x <%= number_field_tag "builder_army_list_unit[army_list_unit_magic_items_attributes][#{magic_item.id}][quantity]", army_list_unit_magic_item.try(:quantity), :min => 1, :max => (max != 0 ? max : nil), :class => 'magic-item-quantity', :value => 1, :disabled => disabled %>
   <% else %>
     <%= hidden_field_tag "builder_army_list_unit[army_list_unit_magic_items_attributes][#{magic_item.id}][quantity]", 1 %>
   <% end %>

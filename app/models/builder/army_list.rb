@@ -4,6 +4,17 @@ class Builder::ArmyList < ApplicationRecord
 
   has_many :army_list_units, -> { order 'position' }, dependent: :destroy
 
+  has_many :army_list_unit_extra_items, :class_name => 'Builder::ArmyListUnitExtraItem', through: :army_list_units
+  has_many :extra_items, :class_name => 'NinthAge::ExtraItem', through: :army_list_unit_extra_items
+
+  has_many :army_list_unit_magic_items, :class_name => 'Builder::ArmyListUnitMagicItem', through: :army_list_units
+  has_many :magic_items, :class_name => 'NinthAge::MagicItem', through: :army_list_unit_magic_items
+
+
+  has_many :army_list_unit_magic_standards, :class_name => 'Builder::ArmyListUnitMagicStandard', through: :army_list_units
+  has_many :magic_standards, :class_name => 'NinthAge::MagicStandard', through: :army_list_unit_magic_standards
+
+
   belongs_to :army_organisation, :class_name => 'NinthAge::ArmyOrganisation'
   has_many :army_list_organisations, dependent: :destroy
 
