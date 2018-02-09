@@ -56,33 +56,54 @@
       <div class="army_list_unit_troops_v2">
         <table class="content-stats stats-global">
           <thead>
-          <tr>
-            <td>Global</td>
-            <td>Adv</td>
-            <td>Mar</td>
-            <td>Dis</td>
-            <td colspan="2">
-            <% unless army_list_unit.unit.carac_evoked.nil? %>
-                Evoked
-            <% end %>
-            </td>
-            <td>Model Rules</td>
-          </tr>
-          </thead>
+            <tr>
+              <td>Global</td>
+              <td>Adv</td>
+              <td>Mar</td>
+              <td>Dis</td>
+              <td>
+              <% unless army_list_unit.unit.carac_evoked.nil? %>
+                  Rea
+              <% end %>
+              </td>
+              <td></td>
+              <td>Model Rules</td>
+            </tr>
+            </thead>
           <tbody>
-          <tr>
-            <td></td>
-            <td><%= army_list_unit.unit.carac_ground_adv %>"</td>
-            <td><%= army_list_unit.unit.carac_ground_mar %>"</td>
-            <td><%= army_list_unit.unit.carac_dis %></td>
-            <td colspan="2">
-            <% unless army_list_unit.unit.carac_evoked.nil? %>
-                <%= army_list_unit.unit.carac_evoked %>
-            <% end %>
-            </td>
-            <td></td>
-          </tr>
-          <% unless army_list_unit.unit.carac_fly_adv.nil? %>
+            <tr>
+              <td></td>
+              <td><%= army_list_unit.unit.carac_ground_adv %>"</td>
+              <td><%= army_list_unit.unit.carac_ground_mar %>"</td>
+              <td><%= army_list_unit.unit.carac_dis %></td>
+              <td>
+                <% unless army_list_unit.unit.carac_evoked.nil? %>
+                  <%= army_list_unit.unit.carac_evoked %>
+                <% end %>
+              </td>
+              <td></td>
+              <td>
+                <ul class="list-inline">
+                  <% army_list_unit.unit.special_rule_unit_troops
+                          .joins(:special_rule)
+                          .includes(special_rule: [:translations])
+                          .where({ninth_age_special_rules: {type_lvl: NinthAge::SpecialRule.type_lvls[:Global] }})
+                          .map(&:special_rule)
+                          .each do |special_rule| %>
+                    <li><%= link_to(special_rule.name, ninth_age_special_rule_path(special_rule.id)) %>,</li>
+                  <% end %>
+                  <% army_list_unit.unit.equipment_unit_troops
+                          .joins(:equipment)
+                          .includes(equipment: [:translations])
+                          .where({ninth_age_equipments: {type_lvl: NinthAge::Equipment.type_lvls[:Global] }})
+                          .map(&:equipment)
+                          .each do |equipment| %>
+                    <li><%= link_to(equipment.name, ninth_age_equipment_path(equipment.id)) %>,</li>
+                  <% end %>
+                </ul>
+              </td>
+            </tr>
+            <% unless army_list_unit.unit.carac_fly_adv.nil? %>
               <tr>
                 <td></td>
                 <td><%= army_list_unit.unit.carac_fly_adv %>"</td>
@@ -90,8 +111,9 @@
                 <td></td>
                 <td></td>
                 <td></td>
+                <td></td>
               </tr>
-          <% end %>
+            <% end %>
           </tbody>
         </table>
         <table class="content-stats stats-defensive">
@@ -114,7 +136,26 @@
             <td><%= army_list_unit.unit.carac_res %></td>
             <td><%= army_list_unit.unit.carac_as %></td>
             <td><%= army_list_unit.unit.carac_spe %></td>
-            <td></td>
+            <td>                
+            <ul class="list-inline">
+              <% army_list_unit.unit.special_rule_unit_troops
+                      .joins(:special_rule)
+                      .includes(special_rule: [:translations])
+                      .where({ninth_age_special_rules: {type_lvl: NinthAge::SpecialRule.type_lvls[:Defensive]}})
+                      .map(&:special_rule)
+                      .each do |special_rule| %>
+                <li><%= link_to(special_rule.name, ninth_age_special_rule_path(special_rule.id)) %>,</li>
+              <% end %>
+              <% army_list_unit.unit.equipment_unit_troops
+                      .joins(:equipment)
+                      .includes(equipment: [:translations])
+                      .where({ninth_age_equipments: {type_lvl: NinthAge::Equipment.type_lvls[:Defensive]}})
+                      .map(&:equipment)
+                      .each do |equipment| %>
+                <li><%= link_to(equipment.name, ninth_age_equipment_path(equipment.id)) %>,</li>
+              <% end %>
+            </ul>
+          </td>
           </tr>
           </tbody>
         </table>
@@ -132,15 +173,54 @@
           </thead>
           <tbody>
           <% army_list_unit.unit.troops.order(:position).each do |troop| %>
-              <tr>
-                <td><%= troop.name %></td>
-                <td><%= troop.carac_att %></td>
-                <td><%= troop.carac_of %></td>
-                <td><%= troop.carac_str %></td>
-                <td><%= troop.carac_ap %></td>
-                <td><%= troop.carac_agi %></td>
-                <td></td>
-              </tr>
+            <tr>
+              <td><%= troop.name %></td>
+              <td><%= troop.carac_att %></td>
+              <td><%= troop.carac_of %></td>
+              <td><%= troop.carac_str %></td>
+              <td><%= troop.carac_ap %></td>
+              <td><%= troop.carac_agi %></td>
+              <td>                                
+                <ul class="list-inline">
+                  <% army_list_unit.unit.special_rule_unit_troops
+                          .joins(:special_rule)
+                          .includes(special_rule: [:translations])
+                          .where({ninth_age_special_rules: {type_lvl: NinthAge::SpecialRule.type_lvls[:Offensive]}})
+                          .where(:troop => nil)
+                          .map(&:special_rule)
+                          .each do |special_rule| %>
+                    <li><%= link_to(special_rule.name, ninth_age_special_rule_path(special_rule.id)) %>,</li>
+                  <% end %>
+                  <% army_list_unit.unit.special_rule_unit_troops
+                          .joins(:special_rule)
+                          .includes(special_rule: [:translations])
+                          .where({ninth_age_special_rules: {type_lvl: NinthAge::SpecialRule.type_lvls[:Offensive]}})
+                          .where(:troop => troop.id)
+                          .map(&:special_rule)
+                          .each do |special_rule| %>
+                    <li><%= link_to(special_rule.name, ninth_age_special_rule_path(special_rule.id)) %>,</li>
+                  <% end %>
+                  <% army_list_unit.unit.equipment_unit_troops
+                          .joins(:equipment)
+                          .includes(equipment: [:translations])
+                          .where({ninth_age_equipments: {type_lvl: NinthAge::Equipment.type_lvls[:Offensive]}})
+                          .where(:troop => nil)
+                          .map(&:equipment)
+                          .each do |equipment| %>
+                    <li><%= link_to(equipment.name, ninth_age_equipment_path(equipment.id)) %>,</li>
+                  <% end %>
+                  <% army_list_unit.unit.equipment_unit_troops
+                          .joins(:equipment)
+                          .includes(equipment: [:translations])
+                          .where({ninth_age_equipments: {type_lvl: NinthAge::Equipment.type_lvls[:Offensive]}})
+                          .where(:troop => troop.id)
+                          .map(&:equipment)
+                          .each do |equipment| %>
+                    <li><%= link_to(equipment.name, ninth_age_equipment_path(equipment.id)) %>,</li>
+                  <% end %>
+                </ul>
+              </td>
+            </tr>
           <% end %>
           </tbody>
         </table>
