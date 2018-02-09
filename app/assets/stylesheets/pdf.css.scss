@@ -50,8 +50,11 @@ a {
     font: 30px "godofwarregular";
     text-align: right;
 
+    small {
+      color: #470b03;
+    }
+
     strong {
-      margin-left: 10px;
       font-size: 40px;
     }
   }
