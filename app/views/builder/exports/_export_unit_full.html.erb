@@ -7,8 +7,12 @@
       </div>
 
       <strong><%= transliterate army_list_unit.name %></strong>
-      <%= army_list_unit.unit.max == 1 ? "<em>Unique</em>".html_safe : army_list_unit.unit.name %>
-      •
+      <p><%= army_list_unit.unit.name %>
+        <span class="text-bold">
+          <% if army_list_unit.unit.max == 1%> • <em>Unique</em><% end %>
+          <% if army_list_unit.size > 1 %> x<%= army_list_unit.size %><% end %>
+        </span>
+      </p>
     </th>
   </tr>
   <% if army_list_unit.unit.V1? %>

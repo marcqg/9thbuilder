@@ -402,6 +402,10 @@ a {
         border: 0;
         border-bottom: 1px solid gray;
       }
+
+      &:last-child{
+        border: 0 !important;
+      }
     }
 
     th:first-child, td:first-child {
@@ -500,4 +504,8 @@ a {
     width:50%;
   }
   }
+}
+
+.text-bold {
+  font-weight: bold;
 }
