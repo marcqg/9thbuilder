@@ -53,6 +53,10 @@ ActiveAdmin.register NinthAge::Unit do
     link_to 'New Special Rule', new_admin_ninth_age_special_rule_unit_troop_path({'ninth_age_special_rule_unit_troop[unit_id]' => ninth_age_unit.id, 'ninth_age_special_rule_unit_troop[position]' => ninth_age_unit.special_rule_unit_troops.size + 1}), :target => "_blank"
   end
 
+  action_item :show_unit, only: :show do
+    link_to 'Show', ninth_age_unit_path(ninth_age_unit), :target => "_blank"
+  end
+
   filter :army, as: :select, collection: -> { NinthAge::Army.includes(:translations).map { |army| [ army.name + ' ' + army.version.name, army.id ] } } 
   filter :name
   filter :is_mount

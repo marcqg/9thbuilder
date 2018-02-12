@@ -7,6 +7,14 @@
     <meta property="og:description" content="<%= @unit.name %> unit of <%= @unit.army.name %> Army">
 <% end %>
 
+<% if user_signed_in? and (current_user.has_role? :administrator or current_user.has_role? :moderator) %>
+  <div style="position: relative;">
+    <%= link_to(admin_ninth_age_unit_path(@unit.id), {:target => "_blank", :style => "position: absolute;top: 10px;right: 10px;z-index: 1000;"}) do %>
+      <i class="fa fa-4x fa-pencil-square-o"></i>
+    <% end %>
+  </div>
+<% end %>
+
 <div class="unit-<%= @unit.id %> col-md-12 col-xs-12 col-sm-12">
   <article style="margin-bottom:40px;">
     <div class="col-md-12">
@@ -17,7 +25,7 @@
             <% end %>
         <% end %>
       </div>
-      <div class=" col-md-8">
+      <div class="<%= (@unit.organisations.where(isSpecialRule: true).count > 0 ? "col-md-8" : "col-md-10") %>">
         <% if @unit.V2? %>
             <div class="pull-right">
               <p>Size: <%= @unit.display_size %></p>
@@ -46,13 +54,15 @@
           <% end %>
         </h3>
       </div>
-      <div class="text-right col-md-2">
-        <% @unit.organisations.where(isSpecialRule: true).each do |organisation| %>
-            <% unless organisation.logo.nil? %>
-                <%= image_tag organisation.medium_logo_url, size: '50x50', alt: organisation.name, border: 0 %>
-            <% end %>
-        <% end %>
-      </div>
+      <% if @unit.organisations.where(isSpecialRule: true).count > 0 %>
+        <div class="text-right col-md-2">
+          <% @unit.organisations.where(isSpecialRule: true).each do |organisation| %>
+              <% unless organisation.logo.nil? %>
+                  <%= image_tag organisation.medium_logo_url, size: '50x50', alt: organisation.name, border: 0 %>
+              <% end %>
+          <% end %>
+        </div>
+      <% end %>
     </div>
     <div class="col-md-12">
       <% if @unit.V1? %>
