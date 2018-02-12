@@ -4,7 +4,7 @@
   <div class="army_list_value_notes"><%= @army_list.notes %></div>
 <% end %>
 
-<div class="army_list_value_points">
+<div class="army_list_infos">
   <% @army_list.army.army_magic_spells.each do |army_magic_spell| %>
     <div class="army_magic_spell">
       <h2 class="text-center">Racial Trait Spell</h2>
@@ -33,20 +33,16 @@
       </table>
     </div>
   <% end %>  
-  <ul>
+  <ul id="army_list_organisations" class="list-inline text-center">
     <% @army_list.army_organisation.organisation_groups.each do |organisation_group| %>
         <% army_list_organisation = @army_list.army_list_organisations.find_by(:organisation_id => organisation_group.organisation_id) %>
-        <li class="
-        <% if army_list_organisation != nil && !army_list_organisation.good %>highlight-red
-        <% else %>highlight-green
-        <% end %>">
-          <% if army_list_organisation != nil %><em><%= army_list_organisation.pts %> pts <small>(<%= army_list_organisation.rate %> %)</small></em>
-          <% else %>
-          <% end %> <strong><%= organisation_group.organisation.name.gsub(/\(([\w,\ \+\.\(\)\-]*)\)/, '<span class="text-small">(\1)</span>').html_safe %></strong>
-          <% if !organisation_group.NoLimit? %>
-              <span class="small">(<%= organisation_group.target %> <%= organisation_group.type_target %>)</span>
+        <%= content_tag(:li, {:class => (army_list_organisation != nil && !army_list_organisation.good ? "highlight-red" : "highlight-green")}) do %>
+          <% if army_list_organisation != nil %>
+            <em><%= army_list_organisation.pts %> pts <small>(<%= army_list_organisation.rate %> %)</small></em>
           <% end %>
-        </li>
+          <strong><%= organisation_group.organisation.name.gsub(/\(([\w,\ \+\.\(\)\-]*)\)/, '<span class="text-small">(\1)</span>').html_safe %></strong>
+          <span class="small"><% unless organisation_group.NoLimit? %>(<%= organisation_group.target %> <%= organisation_group.type_target %>)<% end %></span>
+        <% end %>
     <% end %>
   </ul>
 </div>

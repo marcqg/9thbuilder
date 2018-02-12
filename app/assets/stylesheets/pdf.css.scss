@@ -46,12 +46,15 @@ a {
 
   h2 {
     margin-top: 8px;
-    width: 850px;
+    width: 950px;
     font: 30px "godofwarregular";
     text-align: right;
 
+    small {
+      color: #470b03;
+    }
+
     strong {
-      margin-left: 10px;
       font-size: 40px;
     }
   }
@@ -399,6 +402,10 @@ a {
         border: 0;
         border-bottom: 1px solid gray;
       }
+
+      &:last-child{
+        border: 0 !important;
+      }
     }
 
     th:first-child, td:first-child {
@@ -445,3 +452,60 @@ a {
   }
 }
 
+.army_magic_spell table tbody .casting_value span, 
+.army_magic_spell table tbody .range span {
+    display: block;
+}
+
+#army_list_organisations {
+  em, strong, span {
+    display:block;
+  }
+}
+
+.army_magic_spell {
+
+  table {
+    border: 0;
+    border-bottom: 1px solid gray;
+
+  thead {
+    color: gray;
+    font-style: italic;
+
+    border: 0;
+    border-bottom: 1px solid gray;
+  }
+
+  th, td {
+    width: 12%;
+  }
+
+  th:first-child, td:first-child {
+    width:5%;
+    font-style: italic;
+    font-weight: bold;
+  }
+
+  tbody {
+
+    &:tr:first-child td:first-child {
+      font-size:25px; 
+    }
+
+    .casting_value, .range {
+      span {
+        display: block;
+      }
+    }
+  }
+
+    th:last-child, tbody tr:first-child td:last-child {
+    width:50%;
+  }
+  }
+}
+
+.text-bold {
+  font-weight: bold;
+}
