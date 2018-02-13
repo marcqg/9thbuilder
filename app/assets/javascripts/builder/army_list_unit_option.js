@@ -42,6 +42,7 @@ jQuery(function($) {
     //Edit Unit option 
     $(document).on('change', '#army_list_unit_unit_options ul input', function(evt) {
         var self = $(this);
+
         if(self.prop('checked')){
             //one choise only
             var one_choise = self.closest('ul[data-one-choise="true"]');
@@ -84,7 +85,8 @@ jQuery(function($) {
                 }
             }
         });
-
+    
+        
         //max object magic 
         var max_magic_items = $('#army_list_unit_unit_options strong[data-is-magic-item="true"]')
                                 .filter(function(){
@@ -93,7 +95,10 @@ jQuery(function($) {
                                 .map(function(){
                                     return parseInt($(this).data('value-points'))
                                 });
-        var max_magic_item = Math.max(...max_magic_items);
+
+        var max_magic_item = max_magic_items.reduce(function(a,b) {
+                                                      return Math.max(a, b);
+                                                    });
 
         var current_max_magic_items = parseInt($('#army_list_unit_magic_items').data('value-points-limit'));
         if(current_max_magic_items != max_magic_item){
