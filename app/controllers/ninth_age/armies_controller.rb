@@ -21,7 +21,7 @@ module NinthAge
       @page = params[:page].present? ? params[:page].to_i : 1
       @units = NinthAge::Unit.where(army_id: params[:id])
                              .includes(:translations)
-                             .order(:order)
+                             .order(:position)
                              .paginate(:page => @page)
 
       respond_to do |format|

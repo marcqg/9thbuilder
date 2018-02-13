@@ -7,9 +7,24 @@
     <meta property="og:description" content="All armies of Version <%= @version.name %>">
 <% end %>
 
-<h1><%= t('army.index.all_armies') %> (<%= @version.name %>)</h1>
-<div class="armies">
-  <% @armies.each do |army| %>
+<h1><%= t('army.index.title') %> (<%= @version.name %>)</h1>
+<div class="armies armies-official">
+  <% @armies.where(:is_official => true).each do |army| %>
+      <article class="col-md-3 col-sm-4">
+        <div class="army-<%= army.id %> text-center">
+          <%= link_to (ninth_age_army_path(army.id)) do %>
+              <% unless army.logo.nil? %>
+                  <%= image_tag army.medium_logo_large_url, :class => 'img-responsive', alt: army.name, height: 150 %>
+              <% end %>
+              <h4><%= army.name %></h4>
+          <% end %>
+        </div>
+      </article>
+  <% end %>
+</div>
+<div class="armies armies-unofficial">
+  <h2 class="text-center"><%= t('army.index.unofficial') %></h2>
+  <% @armies.where(:is_official => false).each do |army| %>
       <article class="col-md-3 col-sm-4">
         <div class="army-<%= army.id %> text-center">
           <%= link_to (ninth_age_army_path(army.id)) do %>

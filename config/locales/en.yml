@@ -174,7 +174,8 @@ en:
       back: "Back"
   army:
     index:
-      title: "Armies"
+      title: "All armies"
+      unofficial: 'Unofficial armies'
       show: "Show"
     show:
       back: "Back"
