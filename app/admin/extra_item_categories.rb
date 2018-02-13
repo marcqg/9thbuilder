@@ -32,7 +32,7 @@ ActiveAdmin.register NinthAge::ExtraItemCategory do
   form do |f|
     f.inputs do
       f.input :version, collection: NinthAge::Version.includes(:translations).order(:name)
-      f.input :army, as: :select, :input_html => {'data-option-dependent' => true, 'data-option-url' => '/ninth_age/version-:ninth_age_extra_item_category_version/armies', 'data-option-observed' => 'ninth_age_extra_item_category_version'}, :collection => (resource.version ? resource.version.armies.collect {|army| [army.name, army.id]} : [])
+      f.input :army, as: :select, :input_html => {'data-option-dependent' => true, 'data-option-url' => '/ninth_age/version-:ninth_age_extra_item_category_version_id/armies', 'data-option-observed' => 'ninth_age_extra_item_category_version_id'}, :collection => (resource.version ? resource.version.armies.collect {|army| [army.name, army.id]} : [])
       f.input :is_unique
       f.translate_inputs do |t|
         t.input :name
