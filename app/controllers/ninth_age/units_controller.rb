@@ -6,7 +6,7 @@ module NinthAge
     def index
       @units = NinthAge::Unit.where(:army_id => params[:army_id])
                               .includes(:translations)
-                              .order(:order)
+                              .order(:position)
 
       respond_to do |format|
         format.json
@@ -17,7 +17,7 @@ module NinthAge
     def mounts
       @units = NinthAge::Unit.where({:army_id => params[:army_id], is_mount: true})
                               .includes(:translations)
-                              .order(:order)
+                              .order(:position)
 
       respond_to do |format|
         format.json

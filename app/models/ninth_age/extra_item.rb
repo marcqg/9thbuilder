@@ -1,7 +1,5 @@
 class NinthAge::ExtraItem < ApplicationRecord
 
-  belongs_to :version, class_name: "NinthAge::Version"
-
   belongs_to :extra_item_category, class_name: "NinthAge::ExtraItemCategory"
   belongs_to :extra_item_activator, foreign_key: 'extra_item_activator_id', dependent: :destroy, class_name: 'NinthAge::ExtraItem'
 
