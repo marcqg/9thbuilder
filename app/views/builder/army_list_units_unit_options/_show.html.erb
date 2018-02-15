@@ -1,7 +1,7 @@
 <% if unit_options.any? %>
   <h4><%=t 'army_list_unit.show.unit_options' %></h4>
   <% unit_options.each do |option| %>
-    <em><%= value_points(option.value_points) %> pts<%= t(:per_model) if option.is_per_model or option.is_multiple %></em>
-    • <%= option.name %><%= " x#{option.quantity}" if option.is_multiple %><br />
+  	<%= content_tag(:em) unless option.value_points.nil? do %><%= value_points(option.value_points) %> pts<%= t(:per_model) if option.is_per_model or option.is_multiple %><%end%>
+    • <%= option.name unless option.is_magic %><%= option.domain_magic.name if option.is_magic %><%= " x#{option.quantity}" if option.is_multiple %><br />
   <% end %>
 <% end %>
