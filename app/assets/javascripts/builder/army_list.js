@@ -92,7 +92,6 @@ jQuery(function($) {
             total += value_points;
         });
 
-
         $div.find('input:checkbox:not(:checked)')
         .filter(function(){
 
@@ -176,8 +175,6 @@ jQuery(function($) {
                 if ($quantities.length) {
 
                     var max = Math.floor((limite - total) / points);
-                    console.log('max', max);
-
                     $quantities.attr('max', max);
                 }
             }
@@ -210,19 +207,23 @@ function updateArmyListUnitValuePoints() {
         var total = 0.0,
             $div = $(this);
 
-        $div.find('input:checked').each(function() {
-
+        $div.find('input:checked')
+        .filter(function(){
             var $span_points = $(this).parent('label').prev('em').find('span');
-            if($span_points.length < 1){
-                return;
-            }
+            return ($span_points.length > 0);
+        })
+        .each(function() {
 
-            var value_points = parseFloat($span_points.html().replace(',', '.'));
+            var label = $(this).parent('label');
 
-            var $quantity = $(this).parent('label').next('input[name$="[quantity]"]');
+            var $span_points = label.prev('em').find('span');
+
+            var value_points = parseFloat($span_points.data('value-points'));
+
+            var $quantity = label.next('input[name$="[quantity]"]');
 
             if ($quantity.length) {
-                value_points = parseFloat($(this).data('value-points')) * parseInt($quantity.val());
+                value_points = parseFloat(value_points) * parseInt($quantity.val());
 
                 if (isNaN(value_points)) {
                     return true;
@@ -233,6 +234,7 @@ function updateArmyListUnitValuePoints() {
         });
 
         $div.find('h3 span.points').html(String(total).replace('.', ','));
+        $div.find('h3 span.points').data('value-points', total);
     });
 
     var total = 0.0,
@@ -260,9 +262,10 @@ function updateArmyListUnitValuePoints() {
     $('.army_list_unit_add_element h3 span.points').each(function(index, item) {
         var entry = $(item);
         if (entry.length) {
-            total += parseFloat(entry.html().replace(',', '.'));
+            total += parseFloat(entry.data('value-points'));
         }
     });
 
     $popin.find('h1 span').html(String(total).replace('.', ','));
+    $popin.find('h1 span').data('value-points', total);
 }

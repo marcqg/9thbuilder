@@ -96,9 +96,7 @@ jQuery(function($) {
                                     return parseInt($(this).data('value-points'))
                                 });
 
-        var max_magic_item = max_magic_items.reduce(function(a,b) {
-                                                      return Math.max(a, b);
-                                                    });
+        var max_magic_item = Math.max.apply(null, max_magic_items);
 
         var current_max_magic_items = parseInt($('#army_list_unit_magic_items').data('value-points-limit'));
         if(current_max_magic_items != max_magic_item){
