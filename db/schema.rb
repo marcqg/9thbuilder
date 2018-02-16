@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180212155618) do
+ActiveRecord::Schema.define(version: 20180216145852) do
 
   create_table "active_admin_comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.integer  "resource_id",                 null: false
@@ -132,6 +132,7 @@ ActiveRecord::Schema.define(version: 20180212155618) do
     t.text     "effect",                        limit: 65535
     t.text     "description",                   limit: 65535
     t.index ["locale"], name: "index_ninth_age_army_magic_spell_translations_on_locale", using: :btree
+    t.index ["ninth_age_army_magic_spell_id", "locale"], name: "unique_ninth_age_translations_army_magic_spell_id", unique: true, using: :btree
     t.index ["ninth_age_army_magic_spell_id"], name: "index_470d1e47675f2000858aa3595f707852fd2108a3", using: :btree
   end
 
@@ -152,6 +153,7 @@ ActiveRecord::Schema.define(version: 20180212155618) do
     t.string   "name"
     t.string   "description"
     t.index ["locale"], name: "index_ninth_age_army_organisation_translations_on_locale", using: :btree
+    t.index ["ninth_age_army_organisation_id", "locale"], name: "unique_ninth_age_translations_army_organisation_id", unique: true, using: :btree
     t.index ["ninth_age_army_organisation_id"], name: "index_cfb38c609844172d9baeb51542c668320535e89a", using: :btree
   end
 
@@ -169,6 +171,7 @@ ActiveRecord::Schema.define(version: 20180212155618) do
     t.datetime "updated_at",        null: false
     t.string   "name"
     t.index ["locale"], name: "index_ninth_age_army_translations_on_locale", using: :btree
+    t.index ["ninth_age_army_id", "locale"], name: "unique_ninth_age_translations_army_id", unique: true, using: :btree
     t.index ["ninth_age_army_id"], name: "index_ninth_age_army_translations_on_ninth_age_army_id", using: :btree
   end
 
@@ -182,6 +185,7 @@ ActiveRecord::Schema.define(version: 20180212155618) do
     t.string   "casting_value"
     t.text     "effect",                          limit: 65535
     t.index ["locale"], name: "index_ninth_age_domain_magic_spell_translations_on_locale", using: :btree
+    t.index ["ninth_age_domain_magic_spell_id", "locale"], name: "unique_ninth_age_translations_domain_magic_spell_id", unique: true, using: :btree
     t.index ["ninth_age_domain_magic_spell_id"], name: "index_ninth_age_domain_magic_translations_on_magic_id", using: :btree
   end
 
@@ -203,6 +207,7 @@ ActiveRecord::Schema.define(version: 20180212155618) do
     t.string   "name"
     t.text     "description",               limit: 65535
     t.index ["locale"], name: "index_ninth_age_domain_magic_translations_on_locale", using: :btree
+    t.index ["ninth_age_domain_magic_id", "locale"], name: "unique_ninth_age_translations_domain_magic_id", unique: true, using: :btree
     t.index ["ninth_age_domain_magic_id"], name: "index_ninth_age_domain_magic_translations_on_magic_id", using: :btree
   end
 
@@ -225,6 +230,7 @@ ActiveRecord::Schema.define(version: 20180212155618) do
     t.string   "name"
     t.text     "description",            limit: 65535
     t.index ["locale"], name: "index_ninth_age_equipment_translations_on_locale", using: :btree
+    t.index ["ninth_age_equipment_id", "locale"], name: "unique_ninth_age_translations_equipment_id", unique: true, using: :btree
     t.index ["ninth_age_equipment_id"], name: "index_988058a4c70faa82db616cf9fa0a90fa66d1b61f", using: :btree
   end
 
@@ -265,6 +271,7 @@ ActiveRecord::Schema.define(version: 20180212155618) do
     t.datetime "updated_at",                       null: false
     t.string   "name"
     t.index ["locale"], name: "index_ninth_age_extra_item_category_translations_on_locale", using: :btree
+    t.index ["ninth_age_extra_item_category_id", "locale"], name: "unique_ninth_age_translations_extra_item_category_id", unique: true, using: :btree
     t.index ["ninth_age_extra_item_category_id"], name: "index_dd6d9b5c45a9ea8b86c0516f4d17ba30cd6e7930", using: :btree
   end
 
@@ -277,6 +284,7 @@ ActiveRecord::Schema.define(version: 20180212155618) do
     t.text     "description",             limit: 65535
     t.text     "infos",                   limit: 65535
     t.index ["locale"], name: "index_ninth_age_extra_item_translations_on_locale", using: :btree
+    t.index ["ninth_age_extra_item_id", "locale"], name: "unique_ninth_age_translations_extra_item_id", unique: true, using: :btree
     t.index ["ninth_age_extra_item_id"], name: "index_a3691c2c997dc761d820ee9cc8ad386aec523816", using: :btree
   end
 
@@ -300,6 +308,7 @@ ActiveRecord::Schema.define(version: 20180212155618) do
     t.datetime "updated_at",                       null: false
     t.string   "name"
     t.index ["locale"], name: "index_ninth_age_magic_item_category_translations_on_locale", using: :btree
+    t.index ["ninth_age_magic_item_category_id", "locale"], name: "unique_ninth_age_translations_magic_item_category_id", unique: true, using: :btree
     t.index ["ninth_age_magic_item_category_id"], name: "index_ecc3fdfb7d5c304a55d1e97d2bdc8a570adace8a", using: :btree
   end
 
@@ -312,6 +321,7 @@ ActiveRecord::Schema.define(version: 20180212155618) do
     t.text     "description",             limit: 65535
     t.text     "infos",                   limit: 65535
     t.index ["locale"], name: "index_ninth_age_magic_item_translations_on_locale", using: :btree
+    t.index ["ninth_age_magic_item_id", "locale"], name: "unique_ninth_age_translations_magic_item_id", unique: true, using: :btree
     t.index ["ninth_age_magic_item_id"], name: "index_df4d007c32d8556b64250547013147b2f38eb422", using: :btree
   end
 
@@ -342,6 +352,7 @@ ActiveRecord::Schema.define(version: 20180212155618) do
     t.text     "description",                 limit: 65535
     t.text     "infos",                       limit: 65535
     t.index ["locale"], name: "index_ninth_age_magic_standard_translations_on_locale", using: :btree
+    t.index ["ninth_age_magic_standard_id", "locale"], name: "unique_ninth_age_translations_magic_standard_id", unique: true, using: :btree
     t.index ["ninth_age_magic_standard_id"], name: "index_ddbd87e0b439bcbd0c784b45e90af2a8014a66e1", using: :btree
   end
 
@@ -390,6 +401,7 @@ ActiveRecord::Schema.define(version: 20180212155618) do
     t.datetime "updated_at",                null: false
     t.string   "name"
     t.index ["locale"], name: "index_ninth_age_organisation_translations_on_locale", using: :btree
+    t.index ["ninth_age_organisation_id", "locale"], name: "unique_ninth_age_translations_organisation_id", unique: true, using: :btree
     t.index ["ninth_age_organisation_id"], name: "index_85a84f7711e02266cabe29a3c8de1c0c9318cccd", using: :btree
   end
 
@@ -420,6 +432,7 @@ ActiveRecord::Schema.define(version: 20180212155618) do
     t.string   "name"
     t.text     "description",               limit: 65535
     t.index ["locale"], name: "index_ninth_age_special_rule_translations_on_locale", using: :btree
+    t.index ["ninth_age_special_rule_id", "locale"], name: "unique_ninth_age_translations_special_rule_id", unique: true, using: :btree
     t.index ["ninth_age_special_rule_id"], name: "index_ed7d13913dad10860cc6f0c91dca13f4c632329a", using: :btree
   end
 
@@ -452,6 +465,7 @@ ActiveRecord::Schema.define(version: 20180212155618) do
     t.datetime "updated_at",         null: false
     t.string   "name"
     t.index ["locale"], name: "index_ninth_age_troop_translations_on_locale", using: :btree
+    t.index ["ninth_age_troop_id", "locale"], name: "unique_ninth_age_translations_troop_id", unique: true, using: :btree
     t.index ["ninth_age_troop_id"], name: "index_ninth_age_troop_translations_on_ninth_age_troop_id", using: :btree
   end
 
@@ -462,6 +476,7 @@ ActiveRecord::Schema.define(version: 20180212155618) do
     t.datetime "updated_at",              null: false
     t.string   "name"
     t.index ["locale"], name: "index_ninth_age_troop_type_translations_on_locale", using: :btree
+    t.index ["ninth_age_troop_type_id", "locale"], name: "unique_ninth_age_translations_troop_type_id", unique: true, using: :btree
     t.index ["ninth_age_troop_type_id"], name: "index_f413937ae6ce9a68a330a55a940c218532df2a9b", using: :btree
   end
 
@@ -506,6 +521,7 @@ ActiveRecord::Schema.define(version: 20180212155618) do
     t.text     "name_upgrade",             limit: 65535
     t.text     "infos",                    limit: 65535
     t.index ["locale"], name: "index_ninth_age_unit_option_translations_on_locale", using: :btree
+    t.index ["ninth_age_unit_option_id", "locale"], name: "unique_ninth_age_translations_unit_option_id", unique: true, using: :btree
     t.index ["ninth_age_unit_option_id"], name: "index_3eb812a99d96523232efee7c3e6a269e0424207a", using: :btree
   end
 
@@ -536,6 +552,7 @@ ActiveRecord::Schema.define(version: 20180212155618) do
     t.integer "unit_option_activator_id"
     t.integer "unit_link_id"
     t.boolean "has_one_choise",                                   default: false, null: false
+    t.integer "banner_limit",                                     default: 0,     null: false
     t.index ["domain_magic_id"], name: "index_ninth_age_options_on_magic_id", using: :btree
     t.index ["extra_item_id"], name: "index_ninth_age_unit_options_on_extra_item_id", using: :btree
     t.index ["mount_id"], name: "index_ninth_age_unit_options_on_mount_id", using: :btree
@@ -553,6 +570,7 @@ ActiveRecord::Schema.define(version: 20180212155618) do
     t.datetime "updated_at",        null: false
     t.string   "name"
     t.index ["locale"], name: "index_ninth_age_unit_translations_on_locale", using: :btree
+    t.index ["ninth_age_unit_id", "locale"], name: "unique_ninth_age_translations_unit_id", unique: true, using: :btree
     t.index ["ninth_age_unit_id"], name: "index_ninth_age_unit_translations_on_ninth_age_unit_id", using: :btree
   end
 
@@ -563,6 +581,7 @@ ActiveRecord::Schema.define(version: 20180212155618) do
     t.datetime "updated_at",             null: false
     t.string   "name"
     t.index ["locale"], name: "index_ninth_age_unit_type_translations_on_locale", using: :btree
+    t.index ["ninth_age_unit_type_id", "locale"], name: "unique_ninth_age_translations_unit_type_id", unique: true, using: :btree
     t.index ["ninth_age_unit_type_id"], name: "index_deefb4eb525c24946ac04ddd01ed6b8f6e5f99e2", using: :btree
   end
 
@@ -595,8 +614,6 @@ ActiveRecord::Schema.define(version: 20180212155618) do
     t.string  "carac_hp"
     t.string  "carac_def"
     t.string  "carac_res"
-    t.string  "carac_as"
-    t.string  "carac_spe"
     t.integer "unit_type_id"
     t.string  "carac_arm"
     t.index ["army_id"], name: "index_ninth_age_units_on_army_id", using: :btree
@@ -611,6 +628,7 @@ ActiveRecord::Schema.define(version: 20180212155618) do
     t.datetime "updated_at",           null: false
     t.string   "name"
     t.index ["locale"], name: "index_ninth_age_version_translations_on_locale", using: :btree
+    t.index ["ninth_age_version_id", "locale"], name: "unique_ninth_age_translations_version_id", unique: true, using: :btree
     t.index ["ninth_age_version_id"], name: "index_ninth_age_version_translations_on_ninth_age_version_id", using: :btree
     t.index ["ninth_age_version_id"], name: "index_ninth_age_versions_on_version_id", using: :btree
   end

@@ -34,6 +34,7 @@ class NinthAge::UnitOption < ApplicationRecord
   validates :is_required, inclusion: { in: [true, false] }
   validates :is_magic, inclusion: { in: [true, false] }
   validates :domain_magic, presence: true, if: ->(unit_option){unit_option.is_magic?}
+  validates :banner_limit, numericality: { greater_than: 0, allow_nil: false }, if: ->(unit_option){unit_option.is_magic_standards?}
 
   acts_as_list scope: 'unit_id = #{unit_id} AND COALESCE(parent_id, \'\') = \'#{parent_id}\''
 
@@ -43,7 +44,7 @@ class NinthAge::UnitOption < ApplicationRecord
   scope :only_magic_items, -> { where(is_magic_items: true, is_magic_standards: false) }
   scope :only_magic_standards, -> { where(is_magic_items: false, is_magic_standards: true, is_extra_items: false) }
   scope :only_extra_items, -> { where(is_magic_items: false, is_magic_standards: false, is_extra_items: true) }
-  scope :only_mounts, -> { where('mount_id IS NOT NULL') }
+  scope :only_mounts, -> { where(is_mount: true) }
 
   attr_accessor :army_filter
 
