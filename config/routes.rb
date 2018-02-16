@@ -67,6 +67,7 @@ Rails.application.routes.draw do
         resources :army_organisations,  only: [:index]
         resources :organisations,       only: [:index]
         resources :units,               only: [:index]
+        get '/units/all',               to: 'units#show_all',                 as: :units_by_army
         get '/mounts',                  to: 'units#mounts'          ,         as: :mounts_by_army
         get '/special_rules/all',       to: 'special_rules#army_all',         as: :special_rules_by_army
         get '/equipments',              to: 'equipments#army_all',            as: :equipments_by_army

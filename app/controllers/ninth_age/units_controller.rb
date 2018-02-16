@@ -33,6 +33,19 @@ module NinthAge
       end
     end
 
+    # GET /units/all
+    def show_all
+      @army = NinthAge::Army.find(params[:army_id])
+
+      @units = NinthAge::Unit.where(:army_id => params[:army_id])
+                              .includes(:translations)
+                              .order(:position)
+
+      respond_to do |format|
+        format.html
+      end
+    end
+
     private
 
     # -- Utilities

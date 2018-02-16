@@ -1,0 +1,16 @@
+<% content_for :title do %><%= @army.name %> Army (<%= @army.version.name %>)<% end %>
+<% content_for :head do %>
+    <meta property="og:site_name" content="9th Age Builder"/>
+    <meta property="og:title" content="<%= @army.name %> Army (<%= @army.version.name %>)" />
+    <meta property="og:url" content="<%= url_for(:only_path => false) %>"/>
+    <meta property="og:image" content="<%= request.scheme + '://' + request.host_with_port + @army.logo_large.url(:facebook) %>"/>
+    <meta property="og:description" content="All units of <%= @army.name %> Army">
+<% end %>
+
+<div>
+  <%= render :partial => 'ninth_age/units/show', :collection =>  @units, :as => :unit, :locals => { } %>
+</div>
+
+<div class="footer-back">
+  <%= link_to t('army.show.back'), ninth_age_army_path(@army.id), class: 'link-back' %>
+</div>
