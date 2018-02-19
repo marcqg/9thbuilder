@@ -10,6 +10,8 @@ class NinthAge::Equipment < ApplicationRecord
   accepts_nested_attributes_for :translations, allow_destroy: true
 
   enum type_lvl: { Global: 0, Defensive: 1, Offensive: 2}
+  
+  validates :type_lvl, presence: true
 
   def name_with_version
     "#{name} - #{version.name}"

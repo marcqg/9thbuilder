@@ -7,5 +7,10 @@ class NinthAge::OrganisationChange < ApplicationRecord
 
   enum type_target: { Min: 0, Max: 1 }
 
-  validates :default_organisation_id, :new_organisation_id, :unit_id, :type_target, :number, presence: true
+  validates :default_organisation_id, presence: true
+  validates :new_organisation_id, presence: true
+  validates :unit_id, presence: true
+  validates :type_target, presence: true
+  validates :number, presence: true
+  validates :type_target, presence: true
 end

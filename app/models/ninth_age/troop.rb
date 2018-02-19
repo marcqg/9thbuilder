@@ -15,13 +15,15 @@ class NinthAge::Troop < ApplicationRecord
 
   enum type_carac: {V1: 0, V2: 1}
 
-  def cache_key
-    super + '-ninth-age-' + Globalize.locale.to_s
-  end
-
+  validates :type_carac, presence: true
+  #validates :troop_type_id, presence: true, if: ->(troop){troop.V1?}
   validates :unit_id, presence: true
   validates :value_points, numericality: { greater_than_or_equal_to: 0, allow_nil: true }
   validates :position, numericality: { greater_than_or_equal_to: 1, only_integer: true, allow_nil: true }
+
+  def cache_key
+    super + '-ninth-age-' + Globalize.locale.to_s
+  end
 
   acts_as_list scope: :unit
 

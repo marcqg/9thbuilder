@@ -25,16 +25,16 @@ class NinthAge::Organisation < ApplicationRecord
   globalize_accessors
   accepts_nested_attributes_for :translations, allow_destroy: true
 
-  def cache_key
-    super + '-ninth-age-' + Globalize.locale.to_s
-  end
-
   has_attached_file :logo,
                     styles: { large:  '300x300>', medium: '200x200>', thumb: '100x100>' },
                     default_url: ActionController::Base.helpers.image_path('organisation.jpg')
   validates_attachment_content_type :logo, content_type: /\Aimage\/.*\z/
 
   validates :army_id, presence: true
+
+  def cache_key
+    super + '-ninth-age-' + Globalize.locale.to_s
+  end
 
   def logo_url
     self.logo.url

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180216145852) do
+ActiveRecord::Schema.define(version: 20180219101405) do
 
   create_table "active_admin_comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.integer  "resource_id",                 null: false
@@ -238,7 +238,7 @@ ActiveRecord::Schema.define(version: 20180216145852) do
     t.integer  "equipment_id", default: 0, null: false
     t.integer  "unit_id",      default: 0, null: false
     t.integer  "troop_id"
-    t.integer  "position",     default: 0, null: false
+    t.integer  "position",     default: 1, null: false
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
     t.index ["equipment_id", "unit_id", "troop_id"], name: "ninth_age_equipments_troops_rule_troop", unique: true, using: :btree
@@ -440,7 +440,7 @@ ActiveRecord::Schema.define(version: 20180216145852) do
     t.integer  "special_rule_id", default: 0, null: false
     t.integer  "unit_id",         default: 0, null: false
     t.integer  "troop_id"
-    t.integer  "position",        default: 0, null: false
+    t.integer  "position",        default: 1, null: false
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
     t.index ["special_rule_id", "unit_id", "troop_id"], name: "ninth_age_special_rules_troops_rule_troop", unique: true, using: :btree
@@ -591,20 +591,20 @@ ActiveRecord::Schema.define(version: 20180216145852) do
   end
 
   create_table "ninth_age_units", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
-    t.integer "army_id",                                                                null: false
-    t.integer "min_size",                                               default: 1,     null: false
-    t.integer "max_size"
-    t.decimal "value_points",                   precision: 8, scale: 2
+    t.integer "army_id",                                        null: false
+    t.integer "min_size",                       default: 1,     null: false
+    t.integer "max_size",                       default: 1,     null: false
+    t.integer "value_points",                   default: 0,     null: false
     t.string  "magic"
     t.text    "notes",            limit: 65535
-    t.boolean "is_mount",                                               default: false, null: false
-    t.integer "type_figurine",                                          default: 0,     null: false
-    t.integer "base",                                                   default: 0,     null: false
-    t.integer "max",                                                    default: 0
+    t.boolean "is_mount",                       default: false, null: false
+    t.integer "type_figurine",                  default: 0,     null: false
+    t.integer "base",                           default: 0,     null: false
+    t.integer "max",                            default: 0,     null: false
     t.integer "max_model"
-    t.integer "position",                                               default: 0,     null: false
-    t.integer "size",                                                   default: 0,     null: false
-    t.integer "type_carac",                                             default: 0,     null: false
+    t.integer "position",                       default: 0,     null: false
+    t.integer "size",                           default: 0,     null: false
+    t.integer "type_carac",                     default: 0,     null: false
     t.string  "carac_ground_adv"
     t.string  "carac_ground_mar"
     t.string  "carac_fly_adv"

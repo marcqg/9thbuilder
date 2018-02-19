@@ -25,12 +25,10 @@ class NinthAge::Unit < ApplicationRecord
   globalize_accessors
   accepts_nested_attributes_for :translations, allow_destroy: true
 
-  def cache_key
-    super + '-ninth-age-' + Globalize.locale.to_s
-  end
-
   normalize_attributes :magic, :notes
 
+  validates :type_carac, presence: true
+  validates :unit_type_id, presence: true, if: ->(unit){unit.V2?}
   validates :army_id, :min_size, presence: true
   validates :min_size, numericality: {greater_than: 0, only_integer: false}
   validates :max_size, numericality: {greater_than: 0, only_integer: true, allow_nil: false}
@@ -38,6 +36,10 @@ class NinthAge::Unit < ApplicationRecord
   validates :max_model, numericality: {greater_than_or_equal_to: 0, only_integer: true, allow_nil: true}
   validates :position, numericality: {greater_than: 0, only_integer: true, allow_nil: true}
   validates :value_points, presence: true, numericality: {greater_than_or_equal_to: 0, allow_nil: false}
+
+  def cache_key
+    super + '-ninth-age-' + Globalize.locale.to_s
+  end
 
   scope :mount_category, -> { where(is_mount: true) }
 

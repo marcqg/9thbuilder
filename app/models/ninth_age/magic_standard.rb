@@ -14,6 +14,10 @@ class NinthAge::MagicStandard < ApplicationRecord
   
   enum type_figurine: { All: 0, Infantry: 1, Monster: 2, NoLargeTarget: 3, AnimisteBestial: 4, MountedCharacter: 5 , Character: 6, ModelsOnFoot: 7 }
 
+  validates :value_points, numericality: { greater_than_or_equal_to: 0 }
+  validates :max, numericality: { greater_than_or_equal_to: 0 }
+  validates :type_figurine, presence: true
+
   def name_with_version
     "#{name} - #{version.name}"
   end
@@ -21,9 +25,6 @@ class NinthAge::MagicStandard < ApplicationRecord
   def cache_key
     super + '-ninth-age-' + Globalize.locale.to_s
   end
-
-  validates :value_points, numericality: { greater_than_or_equal_to: 0 }
-  validates :max, numericality: { greater_than_or_equal_to: 0 }
 
   scope :available_for, lambda { |army, version, value_points_limit|
     if value_points_limit.nil?

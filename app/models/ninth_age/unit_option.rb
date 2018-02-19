@@ -34,7 +34,7 @@ class NinthAge::UnitOption < ApplicationRecord
   validates :is_required, inclusion: { in: [true, false] }
   validates :is_magic, inclusion: { in: [true, false] }
   validates :domain_magic, presence: true, if: ->(unit_option){unit_option.is_magic?}
-  validates :banner_limit, numericality: { greater_than: 0, allow_nil: false }, if: ->(unit_option){unit_option.is_magic_standards?}
+  validates :banner_limit, numericality: { greater_than_or_equal_to: 0, allow_nil: false }, if: ->(unit_option){unit_option.is_magic_standards?}
 
   acts_as_list scope: 'unit_id = #{unit_id} AND COALESCE(parent_id, \'\') = \'#{parent_id}\''
 

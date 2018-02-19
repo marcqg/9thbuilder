@@ -7,6 +7,9 @@ class NinthAge::EquipmentUnitTroop < ApplicationRecord
   belongs_to :troop, class_name: "NinthAge::Troop"
 
   validates :position, numericality: { greater_than_or_equal_to: 1, only_integer: true, allow_nil: true }
+  validates :equipment_id, presence: true
+  validates :unit_id, presence: true
+
 
   acts_as_list scope: :unit
 

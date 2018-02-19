@@ -11,6 +11,9 @@ class NinthAge::SpecialRule < ApplicationRecord
 
   enum type_lvl: { Global: 0, Defensive: 1, Offensive: 2}
 
+  validates :version_id, presence: true
+  validates :type_lvl, presence: true
+
   def name_with_version
     "#{name} - #{version.name}"
   end
