@@ -69,9 +69,35 @@ ActiveAdmin.register NinthAge::Army do
         image_tag ad.medium_logo_large_url
       end
     end
+
     panel 'Translations' do
       translate_attributes_table_for model do
         row :name
+      end
+    end
+
+    panel 'Units' do
+      div class: 'units' do
+        table_for model.units do
+          column :id
+          column :name
+          column :position
+          column do |unit|
+            link_to 'Mont.', move_higher_admin_ninth_age_unit_path(unit), method: :post unless unit.first?
+          end
+          column do |unit|
+            link_to 'Desc.', move_lower_admin_ninth_age_unit_path(unit), method: :post unless unit.last?
+          end
+          column do |unit|
+            link_to 'Voir', admin_ninth_age_unit_path(unit), :target => "_blank"
+          end
+          column do |unit|
+            link_to 'Edit', edit_admin_ninth_age_unit_path(unit), :target => "_blank"
+          end
+          column do |unit|
+            link_to 'Delete', admin_ninth_age_unit_path(unit), :target => "_blank", method: :delete, data: { confirm: 'Are you sure?'}
+          end
+        end
       end
     end
   end

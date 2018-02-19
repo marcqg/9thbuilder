@@ -27,6 +27,8 @@ class NinthAge::Unit < ApplicationRecord
 
   normalize_attributes :magic, :notes
 
+  acts_as_list scope: :army
+
   validates :type_carac, presence: true
   validates :unit_type_id, presence: true, if: ->(unit){unit.V2?}
   validates :army_id, :min_size, presence: true

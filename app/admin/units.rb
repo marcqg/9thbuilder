@@ -57,6 +57,27 @@ ActiveAdmin.register NinthAge::Unit do
     link_to 'Show', ninth_age_unit_path(ninth_age_unit), :target => "_blank"
   end
 
+  member_action :move_higher, method: :post do
+    resource.move_higher
+    resource.save
+
+    redirect_to admin_ninth_age_army_url(resource.army)
+  end
+
+  member_action :move_lower, method: :post do
+    resource.move_lower
+    resource.save
+
+    redirect_to admin_ninth_age_army_url(resource.army)
+  end
+
+  collection_action :sort, method: :post do
+    params[:unit].each_with_index do |id, index|
+      NinthAge::Unit.update_all({position: index + 1}, army_id: params[:army_id], id: id)
+    end
+    render nothing: true
+  end
+
   filter :army, as: :select, collection: -> { NinthAge::Army.includes(:translations).map { |army| [ army.name + ' ' + army.version.name, army.id ] } } 
   filter :name
   filter :is_mount

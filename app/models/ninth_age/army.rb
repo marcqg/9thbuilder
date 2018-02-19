@@ -17,7 +17,7 @@ class NinthAge::Army < ApplicationRecord
   has_many :extra_item_categories, dependent: :destroy, class_name: "NinthAge::ExtraItemCategory"
   has_many :extra_items, through: :extra_item_categories, class_name: "NinthAge::ExtraItem"
 
-  has_many :units, -> { includes(:translations).order(:name) }, :class_name => 'NinthAge::Unit', dependent: :destroy
+  has_many :units, -> { includes(:translations).order(:position) }, :class_name => 'NinthAge::Unit', dependent: :destroy
 
   has_many :army_lists, dependent: :destroy
   has_many :favorite_users, class_name: 'User', foreign_key: 'favorite_army_id', dependent: :nullify
