@@ -33,7 +33,7 @@
 <script>
     $(document).on('change', '#builder_army_list_army_id', function (e) {
         $.ajax({
-            url: '/ninth_age/' + (document.documentElement.lang != "en" ? document.documentElement.lang + '/' : '' ) + 'army-' + $(this).val() + '/army_organisations',
+            url: '/' + (document.documentElement.lang != "en" ? document.documentElement.lang + '/' : '' ) + 'ninth_age/army-' + $(this).val() + '/army_organisations',
             dataType: 'json',
             cache: false,
             localCache: true,
