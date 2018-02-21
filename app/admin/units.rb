@@ -1,7 +1,7 @@
 ActiveAdmin.register NinthAge::Unit do
   menu parent: 'Ninth Age Army', priority: 7
 
-  permit_params :army_id, :locale, :value_points, :min_size, :max_size, :magic, :notes, :max, :max_model, :position, :unit_type, :base, {:organisation_ids => []}, :unit_type_id, :size, :is_mount, :type_carac, :carac_ground_adv, :carac_ground_mar, :carac_fly_adv, :carac_fly_mar, :carac_dis, :carac_evoked, :carac_hp, :carac_def, :carac_res, :carac_arm, translations_attributes: [:id, :name, :locale, :_destroy]
+  permit_params :army_id, :locale, :value_points, :min_size, :max_size, :magic, :notes, :max, :max_model, :position, :unit_type, :latex_key, :base, {:organisation_ids => []}, :unit_type_id, :size, :is_mount, :type_carac, :carac_ground_adv, :carac_ground_mar, :carac_fly_adv, :carac_fly_mar, :carac_dis, :carac_evoked, :carac_hp, :carac_def, :carac_res, :carac_arm, translations_attributes: [:id, :name, :locale, :_destroy]
 
   controller do
     def create
@@ -115,6 +115,7 @@ ActiveAdmin.register NinthAge::Unit do
       f.input :base, as: :select, collection: NinthAge::Unit.bases.keys.collect { |base| [I18n.t("unit.base.#{base}", default: base.titleize), base] }, include_blank: false, include_hidden: false
       f.input :size, as: :select, collection: NinthAge::Unit.sizes.keys.collect { |size| [I18n.t("unit.size.#{size}", default: size.titleize), size] }, include_blank: false, include_hidden: false
       f.input :is_mount
+      f.input :latex_key
       f.input :type_carac
       panel 'Carac V2', :id => 'ninth_age_unit_carac_v2'  do
         div class: 'unit_carac_v2_details' do
@@ -155,6 +156,7 @@ ActiveAdmin.register NinthAge::Unit do
       row :unit_type
       row :base
       row :is_mount
+      row :latex_key
       row :size
       row :type_carac
     end 

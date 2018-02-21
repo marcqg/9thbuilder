@@ -1,7 +1,7 @@
 ActiveAdmin.register NinthAge::Equipment do
   menu parent: 'Ninth Age Unit Specialisations', priority: 1
 
-  permit_params :name, :locale, :version_id, :army_id, :type_lvl, :position, translations_attributes: [:id, :name, :description, :locale, :_destroy]
+  permit_params :name, :locale, :version_id, :army_id, :type_lvl, :position, :latex_key, translations_attributes: [:id, :name, :description, :locale, :_destroy]
 
   #config.sort_order = 'name_asc'
 
@@ -40,6 +40,7 @@ ActiveAdmin.register NinthAge::Equipment do
         t.input :name
         t.input :description
       end
+      f.input :latex_key
     end
 
     f.actions
@@ -50,6 +51,7 @@ ActiveAdmin.register NinthAge::Equipment do
       row :version
       row :army
       row :type_lvl
+      row :latex_key
     end
     panel 'Translations' do
       translate_attributes_table_for model do

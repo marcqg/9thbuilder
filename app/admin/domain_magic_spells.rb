@@ -38,6 +38,7 @@ ActiveAdmin.register NinthAge::DomainMagicSpell do
         t.input :casting_value
         t.input :effect
       end
+      f.input :latex_key
     end
 
     f.actions
@@ -48,6 +49,7 @@ ActiveAdmin.register NinthAge::DomainMagicSpell do
       row :domain_magic
       row :type_target
       row :duration
+      row :latex_key
     end
     panel 'Translations' do
       translate_attributes_table_for model do

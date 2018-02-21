@@ -1,7 +1,7 @@
 ActiveAdmin.register NinthAge::MagicItem do
   menu parent: 'Ninth Age Magic', priority: 4
 
-  permit_params :version_id, :army_id, :magic_item_category_id, :override_id, :is_dominant, :locale, :value_points, :is_multiple, :type_figurine, {:type_target => []}, {:duration => []}, :max, translations_attributes: [:id, :name, :description, :infos, :locale, :_destroy]
+  permit_params :version_id, :army_id, :magic_item_category_id, :override_id, :is_dominant, :latex_key, :locale, :value_points, :is_multiple, :type_figurine, {:type_target => []}, {:duration => []}, :max, translations_attributes: [:id, :name, :description, :infos, :locale, :_destroy]
 
   filter :version, as: :select, collection: -> { NinthAge::Version.includes(:translations).map { |version| [ version.name, version.id ] } } 
   filter :army, as: :select, collection: -> { NinthAge::Army.includes(:translations).map { |army| [ army.name + ' ' + army.version.name, army.id ] } } 
@@ -68,6 +68,7 @@ ActiveAdmin.register NinthAge::MagicItem do
       f.input :type_target, as: :check_boxes, collection: NinthAge::MagicItem.values_for_type_target.collect { |type_target| [I18n.t("magic_spell.type_target.#{type_target}", default: type_target), type_target] }
       f.input :type_duration, as: :check_boxes, collection: NinthAge::MagicItem.values_for_type_duration.collect { |duration| [I18n.t("magic_spell.duration.#{duration}", default: duration), duration] }
       f.input :max
+      f.input :latex_key
     end
     f.actions
   end
@@ -85,6 +86,7 @@ ActiveAdmin.register NinthAge::MagicItem do
       row :type_target
       row :type_duration
       row :max
+      row :latex_key
     end
     panel 'Translations' do
       translate_attributes_table_for model do

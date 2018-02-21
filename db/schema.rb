@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180219101405) do
+ActiveRecord::Schema.define(version: 20180221084256) do
 
   create_table "active_admin_comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.integer  "resource_id",                 null: false
@@ -118,6 +118,8 @@ ActiveRecord::Schema.define(version: 20180219101405) do
     t.datetime "logo_large_updated_at"
     t.boolean  "has_default_magic_items", default: true,  null: false
     t.boolean  "is_official",             default: false, null: false
+    t.string   "latex_key"
+    t.index ["version_id", "latex_key"], name: "ninth_age_armies_version_latex_unique", unique: true, using: :btree
     t.index ["version_id"], name: "index_ninth_age_armies_on_version_id", using: :btree
   end
 
@@ -196,6 +198,8 @@ ActiveRecord::Schema.define(version: 20180219101405) do
     t.integer  "duration",        default: 0
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
+    t.string   "latex_key"
+    t.index ["domain_magic_id", "latex_key"], name: "ninth_age_domain_magic_spells_domain_magic_latex_unique", unique: true, using: :btree
     t.index ["domain_magic_id"], name: "index_ninth_age_domain_magic_spells_on_domain_magic_id", using: :btree
   end
 
@@ -219,6 +223,8 @@ ActiveRecord::Schema.define(version: 20180219101405) do
     t.string   "logo_content_type"
     t.integer  "logo_file_size"
     t.datetime "logo_updated_at"
+    t.string   "latex_key"
+    t.index ["version_id", "latex_key"], name: "ninth_age_domain_magics_version_latex_unique", unique: true, using: :btree
     t.index ["version_id"], name: "index_ninth_age_domain_magics_on_version_id", using: :btree
   end
 
@@ -252,7 +258,9 @@ ActiveRecord::Schema.define(version: 20180219101405) do
     t.datetime "updated_at",             null: false
     t.integer  "type_lvl",   default: 0, null: false
     t.integer  "army_id"
+    t.string   "latex_key"
     t.index ["army_id"], name: "index_ninth_age_equipments_on_army_id", using: :btree
+    t.index ["version_id", "latex_key"], name: "ninth_age_equipments_version_latex_unique", unique: true, using: :btree
     t.index ["version_id"], name: "index_ninth_age_equipments_on_version_id", using: :btree
   end
 
@@ -293,7 +301,9 @@ ActiveRecord::Schema.define(version: 20180219101405) do
     t.decimal "value_points",            precision: 8, scale: 2,             null: false
     t.integer "max",                                             default: 0, null: false
     t.integer "extra_item_activator_id"
+    t.string  "latex_key"
     t.index ["extra_item_activator_id"], name: "index_ninth_age_extra_items_on_extra_item_activator_id", using: :btree
+    t.index ["extra_item_category_id", "latex_key"], name: "ninth_age_extra_items_extra_item_category_latex_unique", unique: true, using: :btree
     t.index ["extra_item_category_id"], name: "index_ninth_age_extra_items_on_extra_item_category_id", using: :btree
   end
 
@@ -337,9 +347,11 @@ ActiveRecord::Schema.define(version: 20180219101405) do
     t.integer "type_duration"
     t.integer "max",                    default: 0,     null: false
     t.boolean "is_dominant",            default: false, null: false
+    t.string  "latex_key"
     t.index ["army_id"], name: "index_ninth_age_magic_items_on_army_id", using: :btree
     t.index ["magic_item_category_id"], name: "index_ninth_age_magic_items_on_magic_item_category_id", using: :btree
     t.index ["override_id"], name: "index_ninth_age_magic_items_on_override_id", using: :btree
+    t.index ["version_id", "latex_key"], name: "ninth_age_magic_items_version_latex_unique", unique: true, using: :btree
     t.index ["version_id"], name: "index_ninth_age_magic_items_on_version_id", using: :btree
   end
 
@@ -364,9 +376,11 @@ ActiveRecord::Schema.define(version: 20180219101405) do
     t.integer "type_figurine",   default: 0, null: false
     t.integer "max",             default: 0, null: false
     t.integer "organisation_id"
+    t.string  "latex_key"
     t.index ["army_id"], name: "index_ninth_age_magic_standards_on_army_id", using: :btree
     t.index ["organisation_id"], name: "index_ninth_age_magic_standards_on_organisation_id", using: :btree
     t.index ["override_id"], name: "index_ninth_age_magic_standards_on_override_id", using: :btree
+    t.index ["version_id", "latex_key"], name: "ninth_age_magic_standards_version_latex_unique", unique: true, using: :btree
     t.index ["version_id"], name: "index_ninth_age_magic_standards_on_version_id", using: :btree
   end
 
@@ -454,7 +468,9 @@ ActiveRecord::Schema.define(version: 20180219101405) do
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
     t.integer  "type_lvl",   default: 0, null: false
+    t.string   "latex_key"
     t.index ["army_id"], name: "index_ninth_age_special_rules_on_army_id", using: :btree
+    t.index ["version_id", "latex_key"], name: "ninth_age_special_rules_version_latex_unique", unique: true, using: :btree
     t.index ["version_id"], name: "index_ninth_age_special_rules_on_version_id", using: :btree
   end
 
@@ -506,7 +522,9 @@ ActiveRecord::Schema.define(version: 20180219101405) do
     t.string  "carac_str"
     t.string  "carac_ap"
     t.string  "carac_agi"
+    t.string  "latex_key"
     t.index ["troop_type_id"], name: "index_ninth_age_troops_on_troop_type_id", using: :btree
+    t.index ["unit_id", "latex_key"], name: "ninth_age_troops_unit_latex_unique", unique: true, using: :btree
     t.index ["unit_id"], name: "index_ninth_age_troops_on_unit_id", using: :btree
     t.index ["unit_option_id"], name: "index_ninth_age_troops_on_unit_option_id", using: :btree
   end
@@ -616,6 +634,8 @@ ActiveRecord::Schema.define(version: 20180219101405) do
     t.string  "carac_res"
     t.integer "unit_type_id"
     t.string  "carac_arm"
+    t.string  "latex_key"
+    t.index ["army_id", "latex_key"], name: "ninth_age_units_army_latex_unique", unique: true, using: :btree
     t.index ["army_id"], name: "index_ninth_age_units_on_army_id", using: :btree
     t.index ["unit_type_id"], name: "fk_rails_09d59f4e7e", using: :btree
     t.index ["unit_type_id"], name: "index_ninth_age_units_on_unit_type_id", using: :btree

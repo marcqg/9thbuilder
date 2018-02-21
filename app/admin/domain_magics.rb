@@ -1,7 +1,7 @@
 ActiveAdmin.register NinthAge::DomainMagic do
   menu parent: 'Ninth Age Magic', priority: 1
 
-  permit_params :name, :version_id, :logo, :locale, translations_attributes: [:id, :name, :description, :locale, :_destroy]
+  permit_params :name, :version_id, :logo, :locale, :latex_key, translations_attributes: [:id, :name, :description, :locale, :_destroy]
 
   #config.sort_order = 'name_asc'
 
@@ -36,6 +36,7 @@ ActiveAdmin.register NinthAge::DomainMagic do
         t.input :name
         t.input :description
       end
+      f.input :latex_key
     end
 
     f.actions
@@ -44,6 +45,7 @@ ActiveAdmin.register NinthAge::DomainMagic do
   show do |model|
     attributes_table do
       row :version
+      row :latex_key
       row :logo do |ad|
         image_tag ad.medium_logo_url
       end

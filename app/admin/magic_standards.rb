@@ -1,7 +1,7 @@
 ActiveAdmin.register NinthAge::MagicStandard do
   menu parent: 'Ninth Age Magic', priority: 5
 
-  permit_params :version_id, :army_id, :organisation_id, :override_id, :locale, :value_points, :max, translations_attributes: [:id, :name, :description, :infos, :locale, :_destroy]
+  permit_params :version_id, :army_id, :organisation_id, :override_id, :locale, :value_points, :latex_key, :max, translations_attributes: [:id, :name, :description, :infos, :locale, :_destroy]
 
   # config.sort_order = 'name_asc'
   
@@ -57,6 +57,7 @@ ActiveAdmin.register NinthAge::MagicStandard do
       end
       f.input :value_points
       f.input :max
+      f.input :latex_key
     end
     f.actions
   end
@@ -69,6 +70,7 @@ ActiveAdmin.register NinthAge::MagicStandard do
       row :override
       row :value_points
       row :max
+      row :latex_key
     end
     panel 'Translations' do
       translate_attributes_table_for model do

@@ -1,7 +1,7 @@
 ActiveAdmin.register NinthAge::ExtraItem do
   menu parent: 'Ninth Age Unit Specialisations', priority: 4
 
-  permit_params :extra_item_category_id, :value_points, :max, :extra_item_activator_id, :locale, translations_attributes: [:id, :name, :description, :infos, :locale, :_destroy]
+  permit_params :extra_item_category_id, :value_points, :max, :extra_item_activator_id, :latex_key, :locale, translations_attributes: [:id, :name, :description, :infos, :locale, :_destroy]
 
   # config.sort_order = 'name_asc'
 
@@ -52,6 +52,7 @@ ActiveAdmin.register NinthAge::ExtraItem do
         t.input :description
         t.input :infos
       end
+      f.input :latex_key
     end
     f.actions
   end
@@ -62,6 +63,7 @@ ActiveAdmin.register NinthAge::ExtraItem do
       row :value_points
       row :max
       row :extra_item_activator
+      row :latex_key
     end
     panel 'Translations' do
       translate_attributes_table_for model do
