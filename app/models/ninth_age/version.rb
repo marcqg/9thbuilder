@@ -1,4 +1,6 @@
 class NinthAge::Version < ApplicationRecord
+  nilify_blanks :types => [:text, :string]
+  
   has_many :armies, dependent: :destroy, class_name: "NinthAge::Army"
   has_many :domain_magics, dependent: :destroy, class_name: "NinthAge::DomainMagic"
   has_many :special_rules, dependent: :destroy, class_name: "NinthAge::SpecialRule"

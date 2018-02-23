@@ -1,4 +1,5 @@
 class NinthAge::DomainMagic < ApplicationRecord
+  nilify_blanks :types => [:text, :string]
 
   belongs_to :version, class_name: "NinthAge::Version"
   has_many :domain_magic_spells, class_name: "NinthAge::DomainMagicSpell"

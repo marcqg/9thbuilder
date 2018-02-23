@@ -1,4 +1,6 @@
 class NinthAge::TroopType < ApplicationRecord
+  nilify_blanks :types => [:text, :string]
+  
   has_many :troops, dependent: :destroy, class_name: "NinthAge::Troop"
 
   translates :name

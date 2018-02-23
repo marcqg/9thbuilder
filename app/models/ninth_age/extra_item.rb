@@ -1,4 +1,5 @@
 class NinthAge::ExtraItem < ApplicationRecord
+  nilify_blanks :types => [:text, :string]
 
   belongs_to :extra_item_category, class_name: "NinthAge::ExtraItemCategory"
   belongs_to :extra_item_activator, foreign_key: 'extra_item_activator_id', dependent: :destroy, class_name: 'NinthAge::ExtraItem'

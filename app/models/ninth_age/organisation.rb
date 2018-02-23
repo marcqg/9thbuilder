@@ -1,5 +1,5 @@
 class NinthAge::Organisation < ApplicationRecord
-  # default_scope { includes(:translations) }
+  nilify_blanks :types => [:text, :string]
 
   belongs_to :army, class_name: "NinthAge::Army"
 
