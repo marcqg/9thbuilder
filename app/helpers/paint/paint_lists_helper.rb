@@ -1,0 +1,2 @@
+module Paint::PaintListsHelper
+end

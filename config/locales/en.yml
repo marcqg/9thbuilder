@@ -76,6 +76,12 @@ en:
     index:
       show: "Army books"
 
+  paint_list:
+    index:
+      title: "My paint lists"
+      add: "Create new paint list"
+      search: "Submit"
+
   army_list:
     index:
       title: "My army lists"

@@ -9,6 +9,8 @@ class User < ApplicationRecord
   has_many :armies, -> { distinct }, through: :army_lists
   belongs_to :favorite_army, class_name: 'NinthAge::Army'
 
+  has_many :paint_lists, class_name: 'Paint::PaintList', dependent: :destroy
+
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable, :confirmable,

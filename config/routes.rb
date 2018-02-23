@@ -112,6 +112,12 @@ Rails.application.routes.draw do
       end
     end
 
+
+    namespace :paint do
+      resources :paint_lists
+      post '/convert/:army_list_id',                  to: 'paint_lists#convert',           as: :convert_paint_paint_list
+    end
+
     # You can have the root of your site routed with "root"
     root 'home#index'
   end

@@ -8,6 +8,7 @@ module Builder
     def index
 
       @army_lists = current_user.army_lists.includes(:army).order('value_points DESC')
+      @paint_lists = current_user.paint_lists.includes(:army).order(:name)
 
       unless params.include?(:q)
         params[:q] = {}

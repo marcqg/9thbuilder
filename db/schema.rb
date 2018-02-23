@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180221084256) do
+ActiveRecord::Schema.define(version: 20180221145951) do
 
   create_table "active_admin_comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.integer  "resource_id",                 null: false
@@ -662,6 +662,27 @@ ActiveRecord::Schema.define(version: 20180221084256) do
     t.datetime "updated_at",                 null: false
   end
 
+  create_table "paint_paint_list_units", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
+    t.integer  "paint_list_id"
+    t.integer  "unit_id"
+    t.integer  "position"
+    t.integer  "size"
+    t.integer  "step"
+    t.integer  "state"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.index ["paint_list_id"], name: "index_paint_paint_list_units_on_paint_list_id", using: :btree
+    t.index ["unit_id"], name: "index_paint_paint_list_units_on_unit_id", using: :btree
+  end
+
+  create_table "paint_paint_lists", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer "army_id", default: 0, null: false
+    t.integer "user_id", default: 0, null: false
+    t.string  "name",                null: false
+    t.index ["army_id"], name: "index_builder_army_lists_on_army_id", using: :btree
+    t.index ["user_id"], name: "index_builder_army_lists_on_user_id", using: :btree
+  end
+
   create_table "roles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
     t.string   "resource_type"
@@ -792,6 +813,10 @@ ActiveRecord::Schema.define(version: 20180221084256) do
   add_foreign_key "ninth_age_units", "ninth_age_armies", column: "army_id"
   add_foreign_key "ninth_age_units", "ninth_age_unit_types", column: "unit_type_id", on_delete: :cascade
   add_foreign_key "ninth_age_version_translations", "ninth_age_versions", on_delete: :cascade
+  add_foreign_key "paint_paint_list_units", "ninth_age_units", column: "unit_id"
+  add_foreign_key "paint_paint_list_units", "paint_paint_lists", column: "paint_list_id"
+  add_foreign_key "paint_paint_lists", "ninth_age_armies", column: "army_id"
+  add_foreign_key "paint_paint_lists", "users"
   add_foreign_key "users", "ninth_age_armies", column: "favorite_army_id", on_delete: :nullify
   add_foreign_key "users_roles", "roles"
   add_foreign_key "users_roles", "users"
