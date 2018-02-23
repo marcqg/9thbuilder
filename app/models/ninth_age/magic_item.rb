@@ -1,4 +1,5 @@
 class NinthAge::MagicItem < ApplicationRecord
+  nilify_blanks :types => [:text, :string]
 
   belongs_to :version, class_name: "NinthAge::Version"
 
