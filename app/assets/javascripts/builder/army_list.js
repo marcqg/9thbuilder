@@ -10,12 +10,14 @@ jQuery(function($) {
 
         //Update options when the size of the unit changes
         if (self.attr('id') == 'builder_army_list_unit_army_list_unit_troops_attributes_0_size') {
-            console.log('$(#army_list_unit_unit_options input[data-per-model])', $('#army_list_unit_unit_options input[data-per-model]').length);
-            $('#army_list_unit_unit_options input[data-per-model]').each(function() {
-                var value_points = size * parseFloat(self.data('value-points'));
+            $('#army_list_unit_unit_options input[data-per-model="true"]').each(function() {
+                var value_points = size * parseFloat($(this).data('value-points'));
 
-                self.parent('label').prev('em').find('span').html(String(value_points).replace('.', ','));
-                self.parent('label').next('input').val(size);
+                $span = $(this).parent('label').prev('em').find('span');
+                $span.html(String(value_points).replace('.', ','));
+                $span.data('value-points', value_points);
+
+                $(this).parent('label').next('input').val(size);
             });
         }
 
@@ -31,10 +33,14 @@ jQuery(function($) {
         var value_points = quantity * parseFloat(self.prev('label').find('input[data-is-multiple]').data('value-points'));
 
         self.prev('label').prev('em').find('span').html(String(value_points).replace('.', ','));
+        self.prev('label').prev('em').find('span').data('value-points', value_points);
 
         updateArmyListUnitValuePoints();
     });
 
+    $(document).on('change', '.army_list_unit_add_element ul li input.magic-item-quantity', function(evt) {
+        updateArmyListUnitValuePoints();
+    });
 
     $(document).on('change', '.army_list_unit_add_element ul li input[type=checkbox], .army_list_unit_add_element ul li input[type=radio]', function(evt) {
         var total = 0.0,
@@ -139,21 +145,9 @@ jQuery(function($) {
             var self = $(this);
 
             var $parent = self.closest('li');
-            var value_points = parseFloat($parent.find('em > span').html().replace(',', '.'));
+            var value_points = parseFloat($parent.find('em > span').data('value-points'));
 
             $parent.find('.magic-item-quantity').removeAttr('disabled');
-            var $quantity = $parent.find('.magic-item-quantity');
-
-            if ($quantity.length) {
-
-                var max = Math.floor((limite - total) / value_points);
-                $quantity.attr('max', max);
-
-                value_points = value_points * parseInt($quantity.val());
-            } else {
-                $quantity.val(1);
-                value_points = value_points * 1;
-            }
 
             total += value_points;
         });
@@ -219,16 +213,6 @@ function updateArmyListUnitValuePoints() {
             var $span_points = label.prev('em').find('span');
 
             var value_points = parseFloat($span_points.data('value-points'));
-
-            var $quantity = label.next('input[name$="[quantity]"]');
-
-            if ($quantity.length) {
-                value_points = parseFloat(value_points) * parseInt($quantity.val());
-
-                if (isNaN(value_points)) {
-                    return true;
-                }
-            }
 
             total += value_points;
         });

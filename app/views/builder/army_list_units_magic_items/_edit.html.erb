@@ -27,7 +27,7 @@ disabled = (max != 0 && count == max && !army_list_unit.magic_items.member?(magi
   <% end %>
 
   <% if magic_item.is_multiple? && !magic_item.is_dominant %>
-    x <%= number_field_tag "builder_army_list_unit[army_list_unit_magic_items_attributes][#{magic_item.id}][quantity]", army_list_unit_magic_item.try(:quantity), :min => 1, :max => (max != 0 ? max : nil), :class => 'magic-item-quantity', :value => 1, :disabled => disabled %>
+    x <%= number_field_tag "builder_army_list_unit[army_list_unit_magic_items_attributes][#{magic_item.id}][quantity]", army_list_unit_magic_item.try(:quantity), :min => 1, :max => (max != 0 ? max : nil), :class => 'magic-item-quantity', :value => 1, :disabled => (disabled || !army_list_unit.magic_items.member?(magic_item)) %>
   <% else %>
     <%= hidden_field_tag "builder_army_list_unit[army_list_unit_magic_items_attributes][#{magic_item.id}][quantity]", 1 %>
   <% end %>
