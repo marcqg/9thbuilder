@@ -669,6 +669,7 @@ ActiveRecord::Schema.define(version: 20180221145951) do
     t.integer  "size"
     t.integer  "step"
     t.integer  "state"
+    t.text     "comment",       limit: 65535
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["paint_list_id"], name: "index_paint_paint_list_units_on_paint_list_id", using: :btree

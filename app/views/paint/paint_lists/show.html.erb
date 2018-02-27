@@ -1,9 +1,63 @@
-<p id="notice"><%= notice %></p>
+<div class="show-paint-list">
+  <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @paint_list.name %>
-</p>
+  <h1><strong>Paint list:</strong> <%= @paint_list.name %></h1>
 
-<%= link_to 'Edit', edit_paint_paint_list_path(@paint_list) %> |
-<%= link_to 'Back', paint_paint_lists_path %>
+  <div class="pull-right">
+  	<i class="fa fa-3x fa-plus pull-right" data-paint-list-id="<%= @paint_list.id %>"></i>
+  	<%= select_tag(:unit_id, grouped_options_for_select(NinthAge::Unit.for_paint_select(@paint_list)), {class: 'form-control', style: 'width:80%;'}) %>
+  </div>
+
+  <div>
+    <table class="paint_list_units">
+    	<thead>
+    	  <tr>
+    	  	<th class="name">Unit</th>
+    	  	<th class="size">Size</th>
+    	  	<th class="step">Buy</th>
+    	  	<th class="step">Trimmed</th>
+    	  	<th class="step">Assembled</th>
+    	  	<th class="step">First color</th>
+    	  	<th class="step">Paint</th>
+    	  	<th class="step">Plinth</th>
+    	  	<th>Comment</th>
+        </tr>
+    	</thead>
+    	<tbody>
+    	  <% @paint_list.paint_list_units.each do |paint_list_unit|%>
+    	  <tr>
+    	  	<td><%= paint_list_unit.unit.name %></td>
+    	  	<td class="size">
+    	  		<span class="size" id="size-<%= paint_list_unit.id %>"><%= paint_list_unit.size %></span>
+    	  		<input type="text" name="size" class="edit-size hidden" id="edit-size-<%= paint_list_unit.id %>">
+    	  	</td>
+    	  	<% Paint::PaintListUnit.steps.each do |step| %>
+    	  	  <% next if step[1] == 0 %>
+    	  	  <% if paint_list_unit.step == step[0] %>
+    	  	  	<% p 'same step' %>
+    	  	  	<%= content_tag(:td, {class: "step #{paint_list_unit.state}", 'data-step-id': step[1], 'data-id': paint_list_unit.id, 'data-step': step[0], 'data-state': paint_list_unit.state }) do %><%= paint_list_unit.state %><% end %>
+    	  	  <% elsif Paint::PaintListUnit.steps[paint_list_unit.step] > step[1] %>
+    	  	  	<% p 'previous step' %>
+    	  	  	<%= content_tag(:td, {class: 'step done', 'data-step-id': step[1], 'data-id': paint_list_unit.id, 'data-step': step[0], 'data-state': 'done' }) do %>done<% end %>
+    	  	  <% else %>
+    	  	  	<% p 'else step' %>
+    	  	  	<%= content_tag(:td, {class: 'step', 'data-step-id': step[1], 'data-id': paint_list_unit.id, 'data-step': step[0], 'data-state': 'waiting' }) do %>-<% end %>
+    	  	  <% end %>
+    	  	<%end%>
+    	  	<td>
+    	  		<span class="comment" id="comment-<%= paint_list_unit.id %>"><%= paint_list_unit.comment %></span>
+    	  		<input type="text" name="comment" class="edit-comment hidden" id="edit-comment-<%= paint_list_unit.id %>">
+    	  		<i class="fa fa-edit fa-2x pull-right"></i>
+    	  		<i class="fa fa-save fa-2x pull-right hidden" data-comment-id="<%= paint_list_unit.id %>"></i>
+    	  	</td>
+    	  </tr>
+    	  <% end %>
+    	</tbody>
+    </table>
+  </div>
+
+  <div class="text-center">
+    <%= link_to 'Edit', edit_paint_paint_list_path(@paint_list) %> |
+    <%= link_to 'Back', paint_paint_lists_path %>
+  </div>
+</div>

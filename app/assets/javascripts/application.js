@@ -3,6 +3,7 @@
 //= require jquery-ui
 //= require_tree ./common
 //= require_tree ./builder
+//= require_tree ./paint
 
 //= require bootstrap
 

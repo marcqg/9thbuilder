@@ -19,6 +19,7 @@ class AddPaintList < ActiveRecord::Migration[5.0]
       t.integer  "size"
       t.integer  "step"
       t.integer  "state"
+      t.text     "comment"
       t.datetime "created_at"
       t.datetime "updated_at"
       t.index ["paint_list_id"], name: "index_paint_paint_list_units_on_paint_list_id", using: :btree

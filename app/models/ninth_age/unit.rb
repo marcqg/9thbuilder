@@ -70,6 +70,17 @@ class NinthAge::Unit < ApplicationRecord
     end
   end
 
+  def self.for_paint_select(paint_list)    
+    paint_list.army.organisations.includes(:translations).map do |organisation|
+      [
+          organisation.name,
+          organisation.units.includes(:translations)
+              .order('ninth_age_unit_translations.name')
+              .map { |u| [u.name, u.id] }
+      ]
+    end
+  end
+
   def duplicate
     new_troops = {}
     new_unit_options = {}

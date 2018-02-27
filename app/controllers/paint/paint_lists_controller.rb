@@ -61,7 +61,7 @@ module Paint
     def destroy
       @paint_list.destroy
       respond_to do |format|
-        format.html { redirect_to builder_army_lists_url, notice: 'Paint list was successfully destroyed.' }
+        format.html { redirect_to paint_paint_lists_url, notice: 'Paint list was successfully destroyed.' }
         format.json { head :no_content }
       end
     end
@@ -83,17 +83,18 @@ module Paint
         paint_list_unit.position = index + 1
         paint_list_unit.paint_list_id = @paint_list.id
 
-        paint_list_unit.save!
+        @paint_list.paint_list_units << paint_list_unit
       end
 
-      if @paint_list.save
+      respond_to do |format|
+        if @paint_list.save
           format.html { redirect_to @paint_list, notice: 'Paint list was successfully created.' }
           format.json { render :show, status: :created, location: @paint_list }
-      else
-          format.html { redirect_to @army_list }
+        else
+          format.html { render :new }
           format.json { render json: @paint_list.errors, status: :unprocessable_entity }
+        end
       end
-
     end
 
     private

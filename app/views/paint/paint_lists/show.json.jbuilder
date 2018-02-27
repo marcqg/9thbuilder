@@ -1,1 +1,1 @@
-json.partial! "paint_paint_lists/paint_paint_list", paint_paint_list: @paint_paint_list
+json.partial! "paint/paint_lists/paint_list", paint_list: @paint_list
