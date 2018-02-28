@@ -64,6 +64,25 @@ fr:
         on_platform: "Actuellement disponible sur :"
         google: "Obtenez la sur Google Play"
 
+  lexicon:
+    index:
+      show: "Livres d'armée"
+
+  paint_list:
+    index:
+      title: "Ma liste de peinture"
+      add: "Créer une liste de peinture"
+      search: "Valider"
+    unit: Unité
+    size: Taille
+    buy: Acheté
+    trimmed: Ebarbé
+    assembled: Monté
+    first_color: "Sous-chouché"
+    paint: Peint
+    plinth: Soclé
+    comment: Commentaire
+
   army_list:
     index:
       title: "Mes listes d'armée"

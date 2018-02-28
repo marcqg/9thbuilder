@@ -81,6 +81,15 @@ en:
       title: "My paint lists"
       add: "Create new paint list"
       search: "Submit"
+    unit: Unit
+    size: Size
+    buy: Buy 
+    trimmed: Trimmed
+    assembled: Assembled
+    first_color: "First color"
+    paint: Paint
+    plinth: Plinth
+    comment: Comment
 
   army_list:
     index:
