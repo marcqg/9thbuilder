@@ -17,7 +17,7 @@ class Paint::PaintListUnit < ApplicationRecord
 
   before_validation(on: :create) do
     self.step = :nothing
-    self.state = :wiating
+    self.state = :waiting
   end
 
 end

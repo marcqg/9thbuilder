@@ -7,6 +7,7 @@ module Paint
     # POST /paint/paint_lists.json
     def create
       @paint_list_unit = Paint::PaintListUnit.new(paint_list_unit_params)
+      @paint_list_unit.position = Paint::PaintListUnit.where(:paint_list_id => @paint_list_unit.paint_list_id).count + 1
 
       respond_to do |format|
         if @paint_list_unit.save
@@ -30,6 +31,21 @@ module Paint
           format.html { render :edit }
           format.json { render json: @paint_list.errors, status: :unprocessable_entity }
         end
+      end
+    end
+
+    # DELETE /paint/paint_list_units/1
+    # DELETE /paint/paint_list_units/1.json
+    def destroy
+      @paint_list_unit = current_user.paint_list_units.find(params[:id])
+
+      paint_list_id = @paint_list_unit.paint_list_id
+
+      @paint_list_unit.destroy
+
+      respond_to do |format|
+        format.html { redirect_to paint_paint_lists_url(paint_list_id) }
+        format.json { head :no_content }
       end
     end
 

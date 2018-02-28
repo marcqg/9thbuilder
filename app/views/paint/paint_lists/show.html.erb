@@ -29,7 +29,7 @@
     	  	<td><%= paint_list_unit.unit.name %></td>
     	  	<td class="size">
     	  		<span class="size" id="size-<%= paint_list_unit.id %>"><%= paint_list_unit.size %></span>
-    	  		<input type="text" name="size" class="edit-size hidden" id="edit-size-<%= paint_list_unit.id %>">
+    	  		<input type="number" min="1" name="size" class="edit-size hidden" id="edit-size-<%= paint_list_unit.id %>">
     	  	</td>
     	  	<% Paint::PaintListUnit.steps.each do |step| %>
     	  	  <% next if step[1] == 0 %>
@@ -47,7 +47,8 @@
     	  	<td>
     	  		<span class="comment" id="comment-<%= paint_list_unit.id %>"><%= paint_list_unit.comment %></span>
     	  		<input type="text" name="comment" class="edit-comment hidden" id="edit-comment-<%= paint_list_unit.id %>">
-    	  		<i class="fa fa-edit fa-2x pull-right"></i>
+    	  		<i class="fa fa-trash fa-2x pull-right" data-comment-id="<%= paint_list_unit.id %>"></i>
+    	  		<i class="fa fa-edit fa-2x pull-right" data-comment-id="<%= paint_list_unit.id %>"></i>
     	  		<i class="fa fa-save fa-2x pull-right hidden" data-comment-id="<%= paint_list_unit.id %>"></i>
     	  	</td>
     	  </tr>
@@ -58,6 +59,6 @@
 
   <div class="text-center">
     <%= link_to 'Edit', edit_paint_paint_list_path(@paint_list) %> |
-    <%= link_to 'Back', paint_paint_lists_path %>
+    <%= link_to 'Back', builder_army_lists_path %>
   </div>
 </div>

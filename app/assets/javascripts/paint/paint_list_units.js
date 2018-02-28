@@ -1,6 +1,6 @@
 jQuery(document).ready(function() {
 
-	$('.paint_list_units tbody tr td[class^="step"]').click(function(){
+	$(document).on('click', '.paint_list_units tbody tr td[class^="step"]', function(){
 		var self = $(this);
 
 		var state = self.data('state');
@@ -86,7 +86,7 @@ jQuery(document).ready(function() {
 
 	});
 
-	$('.paint_list_units tbody tr .fa-edit').click(function(){
+	$(document).on('click', '.paint_list_units tbody tr .fa-edit', function(){
 		var self = $(this);
 
 		self.addClass('hidden');
@@ -95,6 +95,7 @@ jQuery(document).ready(function() {
 		self.parent().find('.comment').addClass('hidden');
 		self.parent().find('.edit-comment').removeClass('hidden');
 		self.parent().find('.fa-save').removeClass('hidden');
+		self.parent().find('.fa-trash').addClass('hidden');
 
 		var text = self.parent().find('.comment').text();
 
@@ -105,7 +106,7 @@ jQuery(document).ready(function() {
 		self.parent().parent().find('input.edit-size').val(text);
 	});
 
-	$('.paint_list_units tbody tr .fa-save').click(function(){
+	$(document).on('click', '.paint_list_units tbody tr .fa-save', function(){
 		var self = $(this);
 
 		self.addClass('hidden');
@@ -114,6 +115,7 @@ jQuery(document).ready(function() {
 		self.parent().find('.edit-comment').addClass('hidden');
 		self.parent().find('.comment').removeClass('hidden');
 		self.parent().find('.fa-edit').removeClass('hidden');
+		self.parent().find('.fa-trash').removeClass('hidden');
 
 		var comment = self.parent().find('.edit-comment').val();
 
@@ -137,24 +139,55 @@ jQuery(document).ready(function() {
 		});
 	});
 
-	$('.show-paint-list .fa-plus').click(function(){
+	$(document).on('click', '.paint_list_units tbody tr .fa-trash', function(){
+		var self = $(this);
+
+		$.ajax({
+		    url: '/paint/paint_list_units/' + self.data('comment-id') + '.json',
+		    method: 'DELETE',
+		    dataType: "json",
+      		contentType: "application/json; charset=utf-8"
+		})
+		.done(function() {
+		    	console.log('delete');
+		        self.closest('tr').remove();
+		    })
+		.fail(function(request,msg,error) {
+		    	console.log('delete msg', msg);
+		    	console.log('delete error', error);
+		    });
+	});
+
+	$(document).on('click', '.show-paint-list .fa-plus', function(){
 		var self = $(this);
 
 		var unit_id = $('.show-paint-list #unit_id').val();
 		console.log('unit_id', unit_id);
+		var paint_list_id = self.data('paint-list-id');
 
 		$.ajax({
 		    url: '/paint/paint_list_units.json',
 		    method: 'POST',
 		    contentType: 'application/json',
-		    data: JSON.stringify({paint_paint_list_unit: { unit_id: unit_id }}),
+		    data: JSON.stringify({paint_paint_list_unit: { paint_list_id: paint_list_id, unit_id: unit_id, size: 1 }}),
 		    success: function(result) {
-		        // handle success
+		        var $tr = $('<tr/>');
+		        $('.paint_list_units tbody').append($tr);
+
+		        $tr.append('<td>' + $('.show-paint-list #unit_id option:selected').text() + '</td>');
+		        $tr.append('<td class="size"><span class="size" id="size-' + result.id + '">' + result.size + '</span><input type="number" min="1" name="size" class="edit-size hidden" id="edit-size-' + result.id + '"></td>');
+    	  	
+    	  		var steps = ['buy', 'trimmed', 'assembled', 'first_color', 'paint', 'plinth'];
+    	  		for(var i = 0; i < steps.length; i++){
+    	  			$tr.append('<td class="step" data-step-id="' + (i + 1) + '" data-id="' + result.id + '" data-step="' + steps[i] + '" data-state="waiting">-</td>');
+    	  		}
+
+    	  		$tr.append('<td><span class="comment" id="comment-' + result.id + '"></span><input type="text" name="comment" class="edit-comment hidden" id="edit-comment-' + result.id + '"><i class="fa fa-trash fa-2x pull-right"  data-comment-id="' + result.id + '"></i><i class="fa fa-edit fa-2x pull-right"  data-comment-id="' + result.id + '"></i><i class="fa fa-save fa-2x pull-right hidden" data-comment-id="' + result.id + '"></i></td>');
 		    },
 		    error: function(request,msg,error) {
 		        // handle failure
 		    }
 		});
-	})
+	});
 
 });

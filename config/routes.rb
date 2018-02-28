@@ -115,7 +115,7 @@ Rails.application.routes.draw do
 
     namespace :paint do
       resources :paint_lists
-      resources :paint_list_units,       only: [:create, :update]
+      resources :paint_list_units,       only: [:create, :update, :destroy]
       post '/convert/:army_list_id',                  to: 'paint_lists#convert',           as: :convert_paint_paint_list
     end
 
