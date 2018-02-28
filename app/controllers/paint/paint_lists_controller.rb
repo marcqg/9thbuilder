@@ -61,7 +61,7 @@ module Paint
     def destroy
       @paint_list.destroy
       respond_to do |format|
-        format.html { redirect_to paint_paint_lists_url, notice: 'Paint list was successfully destroyed.' }
+        format.html { redirect_to builder_army_lists_url, notice: 'Paint list was successfully destroyed.' }
         format.json { head :no_content }
       end
     end
