@@ -222,11 +222,13 @@ en:
       RemainsInPlay: Remains in play
     type_target:
       Hex: Hex
+      Hex_b: "[Hex]"
       Hex_r: "|Hex|"
       Missile: Missile
       Damage: Damage
       Augment: Augment
       Augment_b: "[Augment]"
+      Augment_r: "|Augment|"
       Focused: Focused
       Direct: Direct
       Ground: Ground

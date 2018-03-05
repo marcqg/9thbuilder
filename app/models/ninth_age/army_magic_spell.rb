@@ -11,7 +11,7 @@ class NinthAge::ArmyMagicSpell < ApplicationRecord
     super + '-ninth-age-' + Globalize.locale.to_s
   end
 
-  bitmask :type_target, :as => [:Hex, :Hex_r, :Missile, :Damage, :Augment, :Augment_b, :Focused, :Direct, :Ground, :Universal, :Universal_g], :null => false
+  bitmask :type_target, :as => [:Hex, :Hex_r, :Missile, :Damage, :Augment, :Augment_b, :Focused, :Direct, :Ground, :Universal, :Universal_g, :Augment_r, :Hex_b], :null => false
   bitmask :duration, :as => [:OneTurn, :Instant, :Permanent, :RemainsInPlay], :null => false
 
   validates :army_id, :duration, presence: true
