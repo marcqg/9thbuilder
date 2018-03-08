@@ -7,7 +7,15 @@
   <%= javascript_include_tag "application" %>
   <%= javascript_tag "BASE_URL = '#{root_path}';" %>
   <%= csrf_meta_tag %>
-  <%= yield(:head) %>
+  <% if content_for?(:head) %>
+    <%= yield(:head) %>
+  <% else %>
+    <meta property="og:site_name" content="<%= content_for?(:title) ? yield(:title) : t(:welcome) %> • 9th Age Builder"/>
+    <meta property="og:title" content="Compose your favorite armies !" />
+    <meta property="og:url" content="<%= url_for(:only_path => false) %>"/>
+    <meta property="og:image" content="<%= request.scheme + '://' + request.host_with_port + asset_path('9th_builder.jpg') %>"/>
+    <meta property="og:description" content="<%= t('home.whoarewe.description') %>">
+  <% end %>
 </head>
 <body>
 
