@@ -1,0 +1,205 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "API V1",
+    "version": "v1"
+  },
+  "paths": {
+    "/fr/ninth_age/versions": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list versions"
+      }
+    },
+    "/de/ninth_age/versions": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list versions"
+      }
+    },
+    "/ko/ninth_age/versions": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list versions"
+      }
+    },
+    "/pl/ninth_age/versions": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list versions"
+      }
+    },
+    "/es/ninth_age/versions": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list versions"
+      }
+    },
+    "/it/ninth_age/versions": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list versions"
+      }
+    },
+    "/ninth_age/versions": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list versions"
+      }
+    },
+    "/fr/ninth_age/versions/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show version"
+      }
+    },
+    "/de/ninth_age/versions/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show version"
+      }
+    },
+    "/ko/ninth_age/versions/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show version"
+      }
+    },
+    "/pl/ninth_age/versions/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show version"
+      }
+    },
+    "/es/ninth_age/versions/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show version"
+      }
+    },
+    "/it/ninth_age/versions/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show version"
+      }
+    },
+    "/ninth_age/versions/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show version"
+      }
+    }
+  }
+}
