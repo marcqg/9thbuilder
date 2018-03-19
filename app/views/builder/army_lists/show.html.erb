@@ -53,7 +53,7 @@
         </div>
     <% end %>
 
-    <%if @army_list.value_points < @army_list.max %>
+    <%if @army_list.value_points <= @army_list.max %>
       <p class="army-list-point"><span><%= @army_list.value_points %></span> / <%= @army_list.max %> points</p>
     <%else%>
       <p class="army-list-point"><span class="highlight-red"><%= @army_list.value_points %></span> / <%= @army_list.max %> points</p>

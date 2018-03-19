@@ -214,7 +214,7 @@ module Builder
         end
       end
 
-      pts = Builder::ArmyListOrganisation.where(army_list_id: @army_list.id).map(&:pts).reduce(0, :+)
+      pts = @army_list.army_list_units.map(&:value_points).reduce(0, :+)
       if pts != 0
         Builder::ArmyListOrganisation.where(army_list_id: @army_list.id).each do |organisation|
           organisation.rate = (organisation.pts * 100 / pts).round
@@ -225,19 +225,8 @@ module Builder
       army_organisation = NinthAge::ArmyOrganisation.find(@army_list.army_organisation_id)
       army_organisation.organisation_groups.each do |organisation_group|
 
-        puts organisation_group.id
-
-        organisation = Builder::ArmyListOrganisation.find_by(army_list_id: @army_list.id, organisation_id: organisation_group.organisation_id)
-        puts organisation != nil
-        puts organisation_group.type_target
-
-        if organisation == nil
-          organisation = Builder::ArmyListOrganisation.new
-          organisation.army_list_id = @army_list.id
-          organisation.organisation_id = organisation_group.organisation_id
-          organisation.save
-        end
-
+        organisation = Builder::ArmyListOrganisation.find_or_create_by(army_list_id: @army_list.id, organisation_id: organisation_group.organisation_id)
+        
         case organisation_group.type_target.to_sym
           when :NoLimit
             organisation.good = true
