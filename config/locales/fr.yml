@@ -27,6 +27,30 @@ fr:
   next: "Suivant"
   per_model: "/fig."
 
+  activerecord:
+    models:
+      'ninth_age/unit':
+        one: Unit
+        other: Units
+    attributes:
+      'ninth_age/unit':
+        carac_ground_adv: MS
+        carac_ground_mar: MF
+        carac_fly_adv: Vole MS
+        carac_fly_mar: Vole MF
+        carac_dis: Dis
+        carac_evoked: Rea
+        carac_hp: PV
+        carac_def: Déf
+        carac_res: Rés
+        carac_arm: Arm
+      'ninth_age/troop':
+        carac_att: Att
+        carac_of: 'Off'
+        carac_str: Fo
+        carac_ap: PA
+        carac_agi: Agi
+
   menu:
     label: "Menu principal"
     army_lists: "Mes listes d'armées"

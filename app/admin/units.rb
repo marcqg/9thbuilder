@@ -125,7 +125,7 @@ ActiveAdmin.register NinthAge::Unit do
             f.input :carac_fly_adv
             f.input :carac_fly_mar
             f.input :carac_dis
-            f.input :carac_evoked, label: 'Carac rea'
+            f.input :carac_evoked
             f.input :carac_hp
             f.input :carac_def
             f.input :carac_res
@@ -167,9 +167,7 @@ ActiveAdmin.register NinthAge::Unit do
         row :carac_fly_adv
         row :carac_fly_mar
         row :carac_dis
-        row 'CARAC REA' do 
-          model.carac_evoked
-        end 
+        row :carac_evoked
         row :carac_hp
         row :carac_def
         row :carac_res

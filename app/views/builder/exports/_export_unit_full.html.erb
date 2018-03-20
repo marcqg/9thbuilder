@@ -62,12 +62,12 @@
           <thead>
             <tr>
               <td>Global</td>
-              <td>Adv</td>
-              <td>Mar</td>
-              <td>Dis</td>
+              <td><%= NinthAge::Unit.human_attribute_name :carac_ground_adv %></td>
+              <td><%= NinthAge::Unit.human_attribute_name :carac_ground_mar %></td>
+              <td><%= NinthAge::Unit.human_attribute_name :carac_dis %></td>
               <td>
               <% unless army_list_unit.unit.carac_evoked.nil? %>
-                  Rea
+                  <%= NinthAge::Unit.human_attribute_name :carac_evoked %>
               <% end %>
               </td>
               <td></td>
@@ -124,10 +124,10 @@
           <thead>
           <tr>
             <td>Defensive</td>
-            <td>HP</td>
-            <td>Def</td>
-            <td>Res</td>
-            <td>Arm</td>
+              <td><%= NinthAge::Unit.human_attribute_name :carac_hp %></td>
+              <td><%= NinthAge::Unit.human_attribute_name :carac_def %></td>
+              <td><%= NinthAge::Unit.human_attribute_name :carac_res %></td>
+              <td><%= NinthAge::Unit.human_attribute_name :carac_arm %></td>
             <td></td>
             <td></td>
           </tr>
@@ -167,11 +167,11 @@
           <thead>
           <tr>
             <td>Offensive</td>
-            <td>Att</td>
-            <td>Off</td>
-            <td>Str</td>
-            <td>Ap</td>
-            <td>Agi</td>
+              <td><%= NinthAge::Troop.human_attribute_name :carac_att %></td>
+              <td><%= NinthAge::Troop.human_attribute_name :carac_of %></td>
+              <td><%= NinthAge::Troop.human_attribute_name :carac_str %></td>
+              <td><%= NinthAge::Troop.human_attribute_name :carac_ap %></td>
+              <td><%= NinthAge::Troop.human_attribute_name :carac_agi %></td>
             <td></td>
           </tr>
           </thead>

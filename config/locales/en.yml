@@ -35,6 +35,38 @@ en:
   admin: 
     dashboard: "Administration"
 
+  activerecord:
+    models:
+      'ninth_age/unit':
+        one: Unit
+        other: Units
+    attributes:
+      'ninth_age/unit':
+        carac_ground_adv: Adv
+        carac_ground_mar: Mar
+        carac_fly_adv: Fly adv
+        carac_fly_mar: Fly mar
+        carac_dis: Dis
+        carac_evoked: Rea
+        carac_hp: HP
+        carac_def: Def
+        carac_res: Res
+        carac_arm: Arm
+      'ninth_age/troop':
+        carac_att: Att
+        carac_of: 'Off'
+        carac_str: Str
+        carac_ap: Ap
+        carac_agi: Agi
+
+  ninth_age:
+    unit:
+      global: Global
+      rules: Model Rules
+      defensive: Defensive
+    troop:
+      offensive: Offensive
+
   menu:
     label: "Main menu"
     army_lists: "My army lists"
