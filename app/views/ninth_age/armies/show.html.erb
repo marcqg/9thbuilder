@@ -9,6 +9,7 @@
 
 <div class="col-md-12 col-xs-12 col-sm-12 army-<%= @army.id %>">
   <%= image_tag @army.logo_large.url(:large), alt: @army.name, class: 'block-center' %>
+  <%= link_to(t('army.armybook'), ninth_age_units_by_army_path(@army), class: 'block-center text-center') %>
   <h1 class="text-center"><%= @army.name %></h1>
 
   <% if @page == 1 %>

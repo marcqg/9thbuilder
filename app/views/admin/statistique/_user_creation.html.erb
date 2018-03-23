@@ -1,0 +1,92 @@
+<%= javascript_include_tag "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js" %>
+<%= javascript_include_tag "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js" %>
+<canvas id="myChart" width="400" height="250"></canvas>
+<script>
+
+window.chartColors = {
+    red: 'rgb(255, 99, 132)',
+    orange: 'rgb(255, 159, 64)',
+    yellow: 'rgb(255, 205, 86)',
+    green: 'rgb(75, 192, 192)',
+    blue: 'rgb(54, 162, 235)',
+    purple: 'rgb(153, 102, 255)',
+    grey: 'rgb(201, 203, 207)'
+};
+
+<%
+    users_by_day = User.group_by_day(:created_at, range: 1.month.ago.midnight..Time.now)
+                        .count
+    user_labels = users_by_day.map { |k, v| k }
+    user_creations = users_by_day.map { |k, v| v }
+
+    armylist_by_day = Builder::ArmyList.group_by_day(:created_at, range: 1.month.ago.midnight..Time.now)
+                        .count
+    armylist_creations = armylist_by_day.map { |k, v| v }
+
+    paintlist_by_day = Paint::PaintList.group_by_day(:created_at, range: 1.month.ago.midnight..Time.now)
+                        .count
+    paintlist_creations = paintlist_by_day.map { |k, v| v }
+%>
+
+var config = {
+    type: 'line',
+    data: {
+        labels: ["<%= user_labels.join('","').html_safe %>"],
+        datasets: [{
+            label: 'New users',
+            fill: false,
+            backgroundColor: window.chartColors.blue,
+            borderColor: window.chartColors.blue,
+            data: <%= user_creations %>,
+        },{
+            label: 'New army list',
+            fill: false,
+            backgroundColor: window.chartColors.red,
+            borderColor: window.chartColors.red,
+            data: <%= armylist_creations %>,
+        },{
+            label: 'New paint list',
+            fill: false,
+            backgroundColor: window.chartColors.orange,
+            borderColor: window.chartColors.orange,
+            data: <%= paintlist_creations %>,
+        }]
+    },
+     options: {
+        responsive: true,
+        title: {
+            display: true,
+            text: 'User evolution'
+        },
+        tooltips: {
+            mode: 'index',
+            intersect: false,
+        },
+        hover: {
+            mode: 'nearest',
+            intersect: true
+        },
+        scales: {
+            xAxes: [{
+                display: true,
+                scaleLabel: {
+                    display: true,
+                    labelString: 'Month'
+                }
+            }],
+            yAxes: [{
+                display: true,
+                scaleLabel: {
+                    display: true,
+                    labelString: 'Value'
+                }
+            }]
+        }
+    }
+};
+
+window.onload = function() {
+    var ctx = document.getElementById('myChart').getContext('2d');
+    window.myLine = new Chart(ctx, config);
+};
+</script>

@@ -31,6 +31,10 @@ ActiveAdmin.register NinthAge::Army do
     link_to 'Duplicate Ninth Age Army', duplicate_admin_ninth_age_army_path(ninth_age_army), method: :post
   end
 
+  action_item :show_unit, only: :show do
+    link_to 'Show', ninth_age_units_by_army_path(ninth_age_army), :target => "_blank"
+  end
+
   index do
     selectable_column
     id_column

@@ -32,8 +32,8 @@ en:
     translate:
       pl: "Polish"
       ko: "Korean"
-  admin: 
     dashboard: "Administration"
+    statistique: "Statistiques"
 
   activerecord:
     models:
@@ -220,6 +220,7 @@ en:
     show:
       back: "Back"
   army:
+    armybook: 'Army book'
     index:
       title: "All armies"
       unofficial: 'Unofficial armies'
