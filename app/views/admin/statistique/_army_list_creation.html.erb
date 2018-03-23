@@ -33,8 +33,8 @@ var config = {
 		}
 	};
 
-	window.onload = function() {
-		var ctx = document.getElementById('army_chart').getContext('2d');
-		window.myPie = new Chart(ctx, config);
-	};
+window.addEventListener("load",function(event) {
+	var ctx = document.getElementById('army_chart').getContext('2d');
+	window.myPie = new Chart(ctx, config);
+},false);
 </script>

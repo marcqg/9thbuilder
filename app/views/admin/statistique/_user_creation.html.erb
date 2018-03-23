@@ -1,6 +1,6 @@
 <%= javascript_include_tag "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js" %>
 <%= javascript_include_tag "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js" %>
-<canvas id="myChart" width="400" height="250"></canvas>
+<canvas id="userchart" width="400" height="250"></canvas>
 <script>
 
 window.chartColors = {
@@ -28,7 +28,7 @@ window.chartColors = {
     paintlist_creations = paintlist_by_day.map { |k, v| v }
 %>
 
-var config = {
+var userConfig = {
     type: 'line',
     data: {
         labels: ["<%= user_labels.join('","').html_safe %>"],
@@ -85,8 +85,8 @@ var config = {
     }
 };
 
-window.onload = function() {
-    var ctx = document.getElementById('myChart').getContext('2d');
-    window.myLine = new Chart(ctx, config);
-};
+window.addEventListener("load",function(event) {
+    var ctx = document.getElementById('userchart').getContext('2d');
+    window.myLine = new Chart(ctx, userConfig);
+},false);
 </script>
