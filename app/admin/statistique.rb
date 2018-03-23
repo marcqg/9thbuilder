@@ -19,7 +19,8 @@ ActiveAdmin.register_page 'statistique' do
       end # column
 
       column do
-        panel '' do
+        panel 'Army list by army' do
+          render partial:'army_list_creation'
         end # panel
       end # column
     end # columns

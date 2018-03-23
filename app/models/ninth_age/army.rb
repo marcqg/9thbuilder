@@ -20,7 +20,7 @@ class NinthAge::Army < ApplicationRecord
 
   has_many :units, -> { includes(:translations).order(:position) }, :class_name => 'NinthAge::Unit', dependent: :destroy
 
-  has_many :army_lists, dependent: :destroy
+  has_many :army_lists, dependent: :destroy, class_name: "Builder::ArmyList"
   has_many :favorite_users, class_name: 'User', foreign_key: 'favorite_army_id', dependent: :nullify
 
   translates :name
