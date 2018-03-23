@@ -6,6 +6,10 @@ ActiveAdmin.register_page 'Dashboard' do
       a.army_lists.size <=> b.army_lists.size
     end
 
+    @users_by_day = User.group_by_day(:created_at, range: 1.month.ago.midnight..Time.now)
+                        .count
+                        .map { |k, v| [k, v] }
+
     columns do
       column do
         panel 'How to create a full stack Unit' do
@@ -29,6 +33,9 @@ ActiveAdmin.register_page 'Dashboard' do
               user.army_lists.size.to_s
             end
           end
+        end # panel
+        panel 'Users create account' do
+            render partial:'user_creation'
         end # panel
       end # column
     end # columns
