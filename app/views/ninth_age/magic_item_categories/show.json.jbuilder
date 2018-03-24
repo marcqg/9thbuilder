@@ -1,0 +1,1 @@
+json.partial! 'ninth_age/magic_item_categories/magic_item_category', ninth_age_magic_item_category: @category

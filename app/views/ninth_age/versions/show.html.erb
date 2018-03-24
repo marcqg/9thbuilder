@@ -30,9 +30,9 @@
       <% end %>
     </article>
     <article class="version-<%= @version.id %> col-md-3 col-xs-12 col-sm-6 text-center">
-      <%= link_to (ninth_age_magic_items_path(@version.id)) do %>
-          <%= image_tag asset_path('bt_lexicon_entry.png'), :size => '220x132', alt: t('magic_items.index.title'), class: 'block-center' %>
-          <h4><%= t('magic_items.index.title') %></h4>
+      <%= link_to (ninth_age_magic_item_categories_path(@version.id)) do %>
+          <%= image_tag asset_path('bt_lexicon_entry.png'), :size => '220x132', alt: t('magic_item_categories.index.title'), class: 'block-center' %>
+          <h4><%= t('magic_item_categories.index.title') %></h4>
       <% end %>
     </article>
     <article class="version-<%= @version.id %> col-md-3 col-xs-12 col-sm-6 text-center">

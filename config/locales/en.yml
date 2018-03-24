@@ -274,6 +274,10 @@ en:
       title: Extra items
       show: Show
 
+  magic_item_categories:
+    index:
+      title: Magic item categories
+      show: Show
   magic_items:
     index:
       title: Magic items

@@ -1,0 +1,43 @@
+<% content_for :title do %>All magic item categories of Version <%= @version.name %><% end %>
+<% content_for :head do %>
+    <meta property="og:site_name" content="9th Age Builder"/>
+    <meta property="og:title" content="All magic item categories of Version <%= @version.name %>" />
+    <meta property="og:url" content="<%= url_for(:only_path => false) %>"/>
+    <meta property="og:image" content="<%= request.scheme + '://' + request.host_with_port + image_path('bt_lexicon.png') %>"/>
+    <meta property="og:description" content="All magic item categories of Version <%= @version.name %>">
+<% end %>
+
+<h1><%= t('magic_item_categories.index.title') %></h1>
+
+<div>
+  <% @magic_item_categories.each do |category| %>
+      <article class="magic-item-categories-<%= category.id %> col-md-3 col-sm-4 text-center">
+        <%= link_to (ninth_age_magic_items_by_category_index_path(category)) do %>
+          <%= image_tag asset_path('bt_lexicon_entry.png'), :size => '220x132', alt: t('magic_item_categories.index.title'), class: 'block-center' %>
+          <h4><%= category.name %></h4>
+      <% end %>
+      </article>
+  <% end %>
+</div>
+<div aria-label="Page navigation" class="apple_pagination">
+  <%= will_paginate @magic_item_categories, :container => false %>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $("div[class*=magic-item-categories-]").click(function () {
+            window.location = $(this).find("a").attr("href");
+            return false;
+        });
+
+        var highestBox = 0;
+
+        $("div[class*=magic-item-categories-]").each(function () {
+            if ($(this).height() > highestBox) {
+                highestBox = $(this).height();
+            }
+        })
+
+        $("div[class*=magic-item-categories-]").height(highestBox);
+    });
+</script>
