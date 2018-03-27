@@ -11,7 +11,7 @@
   <article style="margin-bottom:40px;">
     <div class="col-md-12">
       <div class="text-left col-md-2">
-        <% unit.organisations.where(isSpecialRule: false).each do |organisation| %>
+        <% unit.organisations.each do |organisation| %>
             <% unless organisation.logo.nil? %>
                 <%= image_tag organisation.medium_logo_url, size: '75x75', alt: organisation.name, border: 0 %>
             <% end %>
