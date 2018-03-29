@@ -27,7 +27,7 @@ ActiveAdmin.register NinthAge::ArmyMagicSpell do
     selectable_column
     id_column
     column :name
-    column :army
+    column :army, sortable: :army_id
     actions
   end
 

@@ -27,7 +27,7 @@ ActiveAdmin.register NinthAge::DomainMagicSpell do
     selectable_column
     id_column
     column :name
-    column :domain_magic
+    column :domain_magic, sortable: :domain_magic_id
     actions
   end
 

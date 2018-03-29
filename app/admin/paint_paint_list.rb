@@ -16,7 +16,7 @@ ActiveAdmin.register Paint::PaintList do
 
   index do
     id_column
-    column :user
+    column :user, sortable: :user_id
     column :name
   end
 end

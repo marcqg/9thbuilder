@@ -19,9 +19,9 @@ ActiveAdmin.register Builder::ArmyList do
 
   index do
     id_column
-    column :army
-    column :army_organisation
-    column :user
+    column :army, sortable: :army_id
+    column :army_organisation, sortable: :army_organisation_id
+    column :user, sortable: :user_id
     column :name
     column :value_points
     column :notes

@@ -27,8 +27,8 @@ ActiveAdmin.register NinthAge::ExtraItemCategory do
     selectable_column
     id_column
     column :name
-    column :army
-    column :version
+    column :army, sortable: :army_id
+    column :version, sortable: :version_id
     actions
   end
 
