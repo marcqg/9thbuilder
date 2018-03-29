@@ -2,6 +2,8 @@ ActiveAdmin.register NinthAge::Version do
   menu parent: 'Ninth Age Army', priority: 1
 
   permit_params :locale, :major, :minor, :fix, :public, translations_attributes: [:id, :name, :locale, :_destroy]
+  
+  filter :major
 
   before_action only: [:create, :update] do
     params[:ninth_age_version][:translations_attributes].each do |k, v|
