@@ -48,7 +48,16 @@ class NinthAge::MagicStandard < ApplicationRecord
 
   ransacker :army_null, formatter: proc {|value|
     results = NinthAge::MagicStandard.where(:army_id => nil).map(&:id) if value == "true"
-    results = NinthAge::MagicStandard.map(&:id) if value == "false"
+    results = NinthAge::MagicStandard.all.map(&:id) if value == "false"
+    results.present? ? results : nil
+  } do |parent|
+    parent.table[:id]
+  end
+
+  ransacker :search_label, formatter: proc {|value|
+    results = NinthAge::MagicStandard.with_translations.where("ninth_age_magic_standard_translations.name LIKE ?", "%#{value}%").map(&:id)
+    p '--------------'
+    p results
     results.present? ? results : nil
   } do |parent|
     parent.table[:id]

@@ -40,6 +40,7 @@ ActiveAdmin.register NinthAge::MagicStandard do
   filter :version, as: :select, collection: -> { NinthAge::Version.includes(:translations).map { |version| [ version.name, version.id ] } } 
   filter :army, as: :select, :input_html => {'data-option-dependent' => true, 'data-option-url' => '/ninth_age/version-:q_version_id/armies', 'data-option-observed' => 'q_version_id'}, collection: -> { NinthAge::Army.includes(:translations).where(:version_id => NinthAge::Version.last.id).order(:name).map { |army| [ army.name, army.id ] } } 
   filter :army_null, as: :check_boxes, collection: [['Without army', true]], label: ''
+  #filter :search_label_cont, label: 'Name search'
   filter :value_points
 
   index do

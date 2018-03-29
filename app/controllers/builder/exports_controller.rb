@@ -28,6 +28,7 @@ module Builder
       @magic_items = NinthAge::MagicItem.joins(:army_list_units)
                                         .where(builder_army_list_units: {army_list_id: @army_list.id})
                                         .order(:name)
+                                        .distinct
 
       respond_to do |format|
         format.html { render template: @verbosity.nil? ? 'builder/exports/export' : "builder/exports/export_#{@verbosity}", layout: @verbosity.nil? ? nil : 'pdf.html.erb' }

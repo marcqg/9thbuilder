@@ -233,6 +233,8 @@ en:
       show: "Show"
     show:
       back: "Back"
+  army_magic_spell:
+    name: Racial Trait Spell
   magic:
     range: Range
     type: Type

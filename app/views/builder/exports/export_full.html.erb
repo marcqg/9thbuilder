@@ -7,7 +7,7 @@
 <div class="army_list_infos">
   <% @army_list.army.army_magic_spells.each do |army_magic_spell| %>
     <div class="army_magic_spell">
-      <h2 class="text-center">Racial Trait Spell</h2>
+      <h2 class="text-center"><%= t('army_magic_spell.name') %></h2>
       <%= army_magic_spell.display_description %>
       <table>
         <thead>

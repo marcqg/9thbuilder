@@ -16,7 +16,7 @@
 
       <% @army.army_magic_spells.each do |army_magic_spell| %>
         <div class="army_magic_spell">
-          <h2 class="text-center">Racial Trait Spell</h2>
+          <h2 class="text-center"><%= t('army_magic_spell.name') %></h2>
           <% if army_magic_spell.effect.nil? %>
             <h3><%= army_magic_spell.name %></h3>
           <% end %>
