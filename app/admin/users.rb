@@ -1,6 +1,11 @@
 ActiveAdmin.register User do
   menu priority: 9, :if => proc{ current_user.has_role? :administrator }
 
+  permit_params :email, :password, :password_confirmation, role_ids: []
+
+  filter :email
+  filter :name
+
   controller do
     before_filter :administrator_filter
 
@@ -8,11 +13,6 @@ ActiveAdmin.register User do
       raise ActionController::RoutingError.new('Not Found') unless current_user.has_role? :administrator
     end
   end
-
-  filter :email
-  filter :name
-
-  permit_params :email, :password, :password_confirmation, role_ids: []
 
   index do
     selectable_column

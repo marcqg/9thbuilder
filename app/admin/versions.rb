@@ -3,10 +3,6 @@ ActiveAdmin.register NinthAge::Version do
 
   permit_params :locale, :major, :minor, :fix, :public, translations_attributes: [:id, :name, :locale, :_destroy]
 
-  #config.sort_order = 'name_asc'
-
-  filter :name
-
   before_action only: [:create, :update] do
     params[:ninth_age_version][:translations_attributes].each do |k, v|
       if v.except('id', 'locale').all? { |_, v| v.blank? }

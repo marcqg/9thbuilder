@@ -3,6 +3,11 @@ ActiveAdmin.register NinthAge::Troop do
 
   permit_params :unit_id, :unit_option_id, :troop_type_id, :M, :WS, :BS, :S, :T, :W, :I, :A, :LD, :latex_key, :type_carac, :carac_att, :carac_of, :carac_str, :carac_ap, :carac_agi, :value_points, :min_size, :position, :locale, translations_attributes: [:id, :name, :locale, :_destroy]
 
+  filter :id
+  filter :unit
+  filter :troop_type
+  filter :value_points
+
   controller do
     def create
       create! { new_admin_ninth_age_troop_url }
@@ -38,13 +43,6 @@ ActiveAdmin.register NinthAge::Troop do
   action_item :new, only: :show do
     link_to 'New Troop', new_admin_ninth_age_troop_path('troop[unit_id]' => ninth_age_troop.unit)
   end
-
-  filter :id
-  #filter :by_version_in , :as => :select, :collection => NinthAge::Version.includes(:translations).collect { |r| [r.name, r.id] }
-  #filter :by_army_in , :as => :select, :collection => NinthAge::Army.includes(:translations).collect { |r| [r.name + ' - ' + r.version.name, r.id] }
-  filter :unit
-  filter :troop_type
-  filter :value_points
 
   index do
     selectable_column

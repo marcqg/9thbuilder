@@ -3,10 +3,13 @@ ActiveAdmin.register NinthAge::Army do
 
   permit_params :version_id, :is_official, :logo, :logo_large, :latex_key, :locale, translations_attributes: [:id, :name, :locale, :_destroy]
 
-  #config.sort_order = 'name_asc'
-
-  filter :name
   filter :version, as: :select, collection: -> { NinthAge::Version.includes(:translations).map { |version| [ version.name, version.id ] } } 
+  
+  controller do
+    def scoped_collection
+      end_of_association_chain.includes(:translations).includes(version: [:translations])
+    end
+  end
   
   before_action only: [:create, :update] do
     params[:ninth_age_army][:translations_attributes].each do |k,v|

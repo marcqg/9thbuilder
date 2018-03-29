@@ -3,9 +3,13 @@ ActiveAdmin.register NinthAge::DomainMagicSpell do
 
   permit_params :domain_magic_id, {:type_target => []}, {:duration => []}, :locale, translations_attributes: [:id, :name, :range, :casting_value, :effect, :locale, :_destroy]
 
-  #config.sort_order = 'name_asc'
-
-  filter :name
+  filter :domain_magic, as: :select, collection: -> { NinthAge::DomainMagic.includes(:translations).map { |version| [ version.name, version.id ] } } 
+  
+  controller do
+    def scoped_collection
+      end_of_association_chain.includes(:translations).includes(domain_magic: [:translations])
+    end
+  end
 
   before_action only: [:create, :update] do
     params[:ninth_age_domain_magic_spell][:translations_attributes].each do |k, v|

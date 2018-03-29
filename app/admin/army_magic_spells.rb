@@ -3,10 +3,13 @@ ActiveAdmin.register NinthAge::ArmyMagicSpell do
 
   permit_params :name, :army_id, {:type_target => []}, {:duration => []}, :locale, translations_attributes: [:id, :name, :description, :range, :casting_value, :effect, :locale, :_destroy]
 
-  #config.sort_order = 'name_asc'
-
   filter :army, as: :select, collection: -> { NinthAge::Army.includes(:translations).map { |army| [ army.name + ' ' + army.version.name, army.id ] } } 
-  filter :name
+  
+  controller do
+    def scoped_collection
+      end_of_association_chain.includes(:translations).includes(army: [:translations])
+    end
+  end
 
   before_action only: [:create, :update] do
     params[:ninth_age_army_magic_spell][:translations_attributes].each do |k, v|

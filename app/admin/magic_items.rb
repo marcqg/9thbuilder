@@ -4,12 +4,14 @@ ActiveAdmin.register NinthAge::MagicItem do
   permit_params :version_id, :army_id, :magic_item_category_id, :override_id, :is_dominant, :latex_key, :locale, :value_points, :is_multiple, :type_figurine, {:type_target => []}, {:duration => []}, :max, translations_attributes: [:id, :name, :description, :infos, :locale, :_destroy]
 
   filter :version, as: :select, collection: -> { NinthAge::Version.includes(:translations).map { |version| [ version.name, version.id ] } } 
-  filter :army, as: :select, collection: -> { NinthAge::Army.includes(:translations).map { |army| [ army.name + ' ' + army.version.name, army.id ] } } 
-  filter :name
+  filter :army, as: :select, :input_html => {'data-option-dependent' => true, 'data-option-url' => '/ninth_age/version-:q_version_id/armies', 'data-option-observed' => 'q_version_id'}, collection: -> { NinthAge::Army.includes(:translations).where(:version_id => NinthAge::Version.last.id).order(:name).map { |army| [ army.name, army.id ] } } 
+  filter :magic_item_category, as: :select, collection: -> { NinthAge::MagicItemCategory.includes(:translations).map { |category| [ category.name, category.id ] } } 
+  filter :value_points
+  filter :is_multiple  
   
   controller do
     def scoped_collection
-      NinthAge::MagicItem.includes(:version)
+      end_of_association_chain.includes(:translations).includes(version: [:translations]).includes(army: [:translations])
     end
     def create
       create! { new_admin_ninth_age_magic_item_url }
@@ -31,11 +33,6 @@ ActiveAdmin.register NinthAge::MagicItem do
   action_item :new, only: :show do
     link_to 'New Magic Item', new_admin_ninth_age_magic_item_path
   end
-
-  filter :version_name
-  filter :magic_item_category
-  filter :value_points
-  filter :is_multiple
 
   index do
     selectable_column

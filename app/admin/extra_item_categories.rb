@@ -3,11 +3,14 @@ ActiveAdmin.register NinthAge::ExtraItemCategory do
 
   permit_params :name, :locale, :version_id, :army_id, :is_unique, translations_attributes: [:id, :name, :locale, :_destroy]
 
-  #config.sort_order = 'name_asc'
-
   filter :army, as: :select, collection: -> { NinthAge::Army.includes(:translations).map { |army| [ army.name + ' ' + army.version.name, army.id ] } } 
-  filter :name
-
+    
+  controller do
+    def scoped_collection
+      end_of_association_chain.includes(:translations).includes(version: [:translations]).includes(army: [:translations])
+    end
+  end
+  
   before_action only: [:create, :update] do
     params[:ninth_age_extra_item_category][:translations_attributes].each do |k, v|
       if v.except('id', 'locale').all? { |_, v| v.blank? }

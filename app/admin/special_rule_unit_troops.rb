@@ -3,6 +3,10 @@ ActiveAdmin.register NinthAge::SpecialRuleUnitTroop do
 
   permit_params :unit_id, :troop_id, :special_rule_id, :position
 
+  filter :unit
+  filter :special_rule
+  filter :name
+
   controller do
     def create
       create! do |format|
@@ -31,10 +35,6 @@ ActiveAdmin.register NinthAge::SpecialRuleUnitTroop do
     end
     render nothing: true
   end
-
-  filter :unit
-  filter :special_rule
-  filter :name
 
   index do
     selectable_column

@@ -2,10 +2,12 @@ ActiveAdmin.register NinthAge::DomainMagic do
   menu parent: 'Ninth Age Magic', priority: 1
 
   permit_params :name, :version_id, :logo, :locale, :latex_key, translations_attributes: [:id, :name, :description, :locale, :_destroy]
-
-  #config.sort_order = 'name_asc'
-
-  filter :name
+  
+  controller do
+    def scoped_collection
+      end_of_association_chain.includes(:translations).includes(version: [:translations])
+    end
+  end
 
   before_action only: [:create, :update] do
     params[:ninth_age_domain_magic][:translations_attributes].each do |k, v|

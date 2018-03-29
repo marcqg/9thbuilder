@@ -3,6 +3,9 @@ ActiveAdmin.register NinthAge::Unit do
 
   permit_params :army_id, :locale, :value_points, :min_size, :max_size, :magic, :notes, :max, :max_model, :position, :unit_type, :latex_key, :base, {:organisation_ids => []}, :unit_type_id, :size, :is_mount, :type_carac, :carac_ground_adv, :carac_ground_mar, :carac_fly_adv, :carac_fly_mar, :carac_dis, :carac_evoked, :carac_hp, :carac_def, :carac_res, :carac_arm, translations_attributes: [:id, :name, :locale, :_destroy]
 
+  filter :army, as: :select, collection: -> { NinthAge::Army.includes(:translations).map { |army| [ army.name + ' ' + army.version.name, army.id ] } } 
+  filter :is_mount
+
   controller do
     def create
       create! { new_admin_ninth_age_unit_url }
@@ -77,10 +80,6 @@ ActiveAdmin.register NinthAge::Unit do
     end
     render nothing: true
   end
-
-  filter :army, as: :select, collection: -> { NinthAge::Army.includes(:translations).map { |army| [ army.name + ' ' + army.version.name, army.id ] } } 
-  filter :name
-  filter :is_mount
 
   index do
     selectable_column

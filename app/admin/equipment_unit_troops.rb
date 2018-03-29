@@ -3,6 +3,9 @@ ActiveAdmin.register NinthAge::EquipmentUnitTroop do
 
   permit_params :unit_id, :troop_id, :equipment_id, :position
 
+  filter :unit
+  filter :equipment
+
   controller do
     def create
       create! do |format|
@@ -31,10 +34,6 @@ ActiveAdmin.register NinthAge::EquipmentUnitTroop do
     end
     render nothing: true
   end
-
-  filter :unit
-  filter :equipment
-  filter :name
 
   index do
     selectable_column

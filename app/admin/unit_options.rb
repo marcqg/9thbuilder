@@ -3,6 +3,9 @@ ActiveAdmin.register NinthAge::UnitOption do
 
   permit_params :unit_id, :parent_id, :unit_option_activator_id, :mount_id, :unit_link_id, :is_required, :value_points, :position, :has_one_choise, :is_per_model, :is_multiple, :is_magic, :is_upgratable, :domain_magic_id, :organisation_id, :extra_item_id, :value_points_upgrade, :upgrade_target, :max, :max_model, :min_model, :max_unit, :is_magic_items, :is_magic_standards, :banner_limit, :is_extra_items, :is_unique_choice, :locale, translations_attributes: [:id, :name, :infos, :locale, :_destroy]
 
+  filter :unit, collection: proc { NinthAge::Unit.includes(:army).collect { |r| [r.army.name + ' - ' + r.name, r.id] } }
+  filter :value_points
+
   controller do
     def create
       create! { new_admin_ninth_age_unit_option_url }
@@ -38,10 +41,6 @@ ActiveAdmin.register NinthAge::UnitOption do
   action_item :new, only: :show do
     link_to 'New Unit Option', new_admin_ninth_age_unit_option_path('unit_option[unit_id]' => ninth_age_unit_option.unit)
   end
-
-  filter :unit, collection: proc { NinthAge::Unit.includes(:army).collect { |r| [r.army.name + ' - ' + r.name, r.id] } }
-  # filter :parent, :collection => proc { UnitOption.includes(:unit).without_parent.collect { |r| [r.unit.name + ' - ' + r.name, r.id] } }
-  filter :value_points
 
   index do
     selectable_column
