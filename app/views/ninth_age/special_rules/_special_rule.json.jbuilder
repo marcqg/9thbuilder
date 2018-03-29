@@ -1,1 +1,1 @@
-json.extract! ninth_age_special_rule, :id, :name, :description
+json.extract! ninth_age_special_rule, :id, :army_id, :version_id, :name, :description

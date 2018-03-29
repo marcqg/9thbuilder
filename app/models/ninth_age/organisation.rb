@@ -19,7 +19,8 @@ class NinthAge::Organisation < ApplicationRecord
 
   has_many :unit_options, class_name: "NinthAge::UnitOption"
 
-  has_many :magic_standards, class_name: "NinthAge::MagicStandard"
+  has_many :add_from_magic_standards, foreign_key: :organisation_id, class_name: "NinthAge::MagicStandard"
+  has_and_belongs_to_many :magic_standards, dependent: :destroy, class_name: "NinthAge::MagicStandard"
 
   translates :name
   globalize_accessors

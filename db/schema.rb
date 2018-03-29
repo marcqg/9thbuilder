@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180323212137) do
+ActiveRecord::Schema.define(version: 20180329075528) do
 
   create_table "active_admin_comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.integer  "resource_id",                 null: false
@@ -382,6 +382,13 @@ ActiveRecord::Schema.define(version: 20180323212137) do
     t.index ["override_id"], name: "index_ninth_age_magic_standards_on_override_id", using: :btree
     t.index ["version_id", "latex_key"], name: "ninth_age_magic_standards_version_latex_unique", unique: true, using: :btree
     t.index ["version_id"], name: "index_ninth_age_magic_standards_on_version_id", using: :btree
+  end
+
+  create_table "ninth_age_magic_standards_organisations", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer "magic_standard_id", default: 0, null: false
+    t.integer "organisation_id",   default: 0, null: false
+    t.index ["magic_standard_id", "organisation_id"], name: "ninth_age_magic_standards_organisations_standard_org", unique: true, using: :btree
+    t.index ["organisation_id", "magic_standard_id"], name: "ninth_age_magic_standards_organisations_org_standard", unique: true, using: :btree
   end
 
   create_table "ninth_age_organisation_changes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

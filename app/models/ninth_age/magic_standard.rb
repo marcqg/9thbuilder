@@ -3,7 +3,9 @@ class NinthAge::MagicStandard < ApplicationRecord
 
   belongs_to :version, class_name: "NinthAge::Version"
   belongs_to :army, class_name: "NinthAge::Army"
-  belongs_to :organisation, class_name: "NinthAge::Organisation"
+
+  belongs_to :organisation, foreign_key: :organisation_id, class_name: "NinthAge::Organisation"
+  has_and_belongs_to_many :organisations, dependent: :destroy, class_name: "NinthAge::Organisation"
 
   has_many :army_list_unit_magic_standards, dependent: :destroy, class_name: 'Builder::ArmyListUnitMagicStandard'
   has_many :army_list_units, through: :army_list_unit_magic_standards, class_name: 'Builder::ArmyListUnit'
@@ -42,5 +44,13 @@ class NinthAge::MagicStandard < ApplicationRecord
 
   def display_type_figurine
     I18n.t("magic_item.type_figurine.#{type_figurine}", default: type_figurine.titleize)
+  end
+
+  ransacker :army_null, formatter: proc {|value|
+    results = NinthAge::MagicStandard.where(:army_id => nil).map(&:id) if value == "true"
+    results = NinthAge::MagicStandard.map(&:id) if value == "false"
+    results.present? ? results : nil
+  } do |parent|
+    parent.table[:id]
   end
 end

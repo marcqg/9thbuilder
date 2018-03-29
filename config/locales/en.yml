@@ -40,7 +40,13 @@ en:
       'ninth_age/unit':
         one: Unit
         other: Units
+      'ninth_age/magic_standard':
+        one: Magic banner
+        other: Magic banners
     attributes:
+      'ninth_age/magic_standard':
+        organisation: Add organisation to unit
+        organisation_ids: Forbidden organisation's units
       'ninth_age/unit':
         carac_ground_adv: Adv
         carac_ground_mar: Mar

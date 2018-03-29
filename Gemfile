@@ -82,7 +82,7 @@ gem 'seedbank'
 
 #Helper
 gem 'acts_as_list', '0.9.5' 			#list
-gem 'ransack' 				#search
+gem 'ransack', github: 'activerecord-hackery/ransack'
 gem 'wisepdf' 				#pdf export
 gem 'attribute_normalizer' 	#data integrity / params permit
 gem 'uuidtools' 			#UUID
