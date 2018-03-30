@@ -3,10 +3,13 @@ ActiveAdmin.register NinthAge::EquipmentUnitTroop do
 
   permit_params :unit_id, :troop_id, :equipment_id, :position
 
-  filter :unit
-  filter :equipment
+  config.filters = false
 
   controller do
+    def scoped_collection
+      end_of_association_chain.includes(troop: [:translations]).includes(equipment: [:translations]).includes(unit: [:translations])
+    end
+    
     def create
       create! do |format|
         format.html { redirect_to new_admin_ninth_age_equipment_unit_troop_path({'ninth_age_equipment_unit_troop[unit_id]': resource.unit_id, 'ninth_age_equipment_unit_troop[troop_id]': resource.troop_id, 'ninth_age_equipment_unit_troop[position]': resource.unit.equipment_unit_troops.size + 1}) }

@@ -3,11 +3,13 @@ ActiveAdmin.register NinthAge::SpecialRuleUnitTroop do
 
   permit_params :unit_id, :troop_id, :special_rule_id, :position
 
-  filter :unit
-  filter :special_rule
-  filter :name
+  config.filters = false
 
   controller do
+    def scoped_collection
+      end_of_association_chain.includes(troop: [:translations]).includes(special_rule: [:translations]).includes(unit: [:translations])
+    end
+    
     def create
       create! do |format|
         format.html { redirect_to new_admin_ninth_age_special_rule_unit_troop_path({'ninth_age_special_rule_unit_troop[unit_id]': resource.unit_id, 'ninth_age_special_rule_unit_troop[troop_id]': resource.troop_id, 'ninth_age_special_rule_unit_troop[position]': resource.unit.special_rule_unit_troops.size + 1}) }

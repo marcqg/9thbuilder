@@ -4,7 +4,7 @@ ActiveAdmin.register NinthAge::Equipment do
   permit_params :name, :locale, :version_id, :army_id, :type_lvl, :position, :latex_key, translations_attributes: [:id, :name, :description, :locale, :_destroy]
 
   filter :version, as: :select, collection: -> { NinthAge::Version.includes(:translations).map { |version| [ version.name, version.id ] } } 
-  filter :army, as: :select, :input_html => {'data-option-dependent' => true, 'data-option-url' => '/ninth_age/version-:q_version_id/armies', 'data-option-observed' => 'q_version_id'}, collection: -> { NinthAge::Army.includes(:translations).where(:version_id => NinthAge::Version.last.id).order(:name).map { |army| [ army.name, army.id ] } } 
+  filter :army, as: :select, :input_html => {'data-option-dependent' => true, 'data-option-url' => '/ninth_age/version-:q_version_id/armies', 'data-option-observed' => 'q_version_id'}, collection: -> { [] } 
   
   controller do
     def scoped_collection

@@ -3,7 +3,7 @@ ActiveAdmin.register NinthAge::Organisation do
 
   permit_params :army_id, :logo, :isSpecialRule, :locale, translations_attributes: [:id, :name, :locale, :_destroy]
 
-  filter :army, as: :select, collection: -> { NinthAge::Army.includes(:translations).map { |army| [ army.name + ' ' + army.version.name, army.id ] } }   
+  filter :army, as: :select, collection: -> { NinthAge::Army.includes(:translations).includes(version: [:translations]).map { |army| [ army.name + ' ' + army.version.name, army.id ] } }   
   
   controller do
     def scoped_collection

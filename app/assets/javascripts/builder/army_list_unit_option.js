@@ -65,7 +65,7 @@ jQuery(function($) {
         }
 
         //activator
-        $('#army_list_unit_unit_options strong[data-unit-option-activator]')
+        $('#army_list_unit_unit_options strong[data-unit-option-activator], #army_list_unit_unit_options label[data-unit-option-activator]')
         .filter('[data-unit-option-activator!=""]')
         .each(function(){
             var $item = $(this);

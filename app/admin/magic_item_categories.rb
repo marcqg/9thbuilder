@@ -3,6 +3,14 @@ ActiveAdmin.register NinthAge::MagicItemCategory do
 
   permit_params :locale, :is_multiple, translations_attributes: [:id, :name, :locale, :_destroy]
 
+  filter :is_multiple 
+
+  controller do
+    def scoped_collection
+      end_of_association_chain.includes(:translations)
+    end
+  end
+
   before_action only: [:create, :update] do
     params[:ninth_age_magic_item_category][:translations_attributes].each do |k, v|
       if v.except('id', 'locale').all? { |_, v| v.blank? }

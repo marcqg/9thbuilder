@@ -3,7 +3,7 @@ ActiveAdmin.register NinthAge::ArmyOrganisation do
 
   permit_params :army_id, :locale, translations_attributes: [:id, :name, :description, :locale, :_destroy]
 
-  filter :army, as: :select, collection: -> { NinthAge::Army.includes(:translations).map { |army| [ army.name + ' ' + army.version.name, army.id ] } } 
+  filter :army, as: :select, collection: -> { NinthAge::Army.includes(:translations).includes(:version => [:translations]).map { |army| [ army.name + ' ' + army.version.name, army.id ] } } 
   
   controller do
     def scoped_collection
@@ -33,7 +33,7 @@ ActiveAdmin.register NinthAge::ArmyOrganisation do
 
   form do |f|
     f.inputs do
-      f.input :army, collection: NinthAge::Army.includes(:translations).includes(:version).order(:name).collect { |o| [o.name + ' - ' + o.version.name, o.id] }, :prompt => true
+      f.input :army, collection: NinthAge::Army.includes(:translations).includes(:version => [:translations]).order(:name).collect { |o| [o.name + ' - ' + o.version.name, o.id] }, :prompt => true
       f.translate_inputs do |t|
         t.input :name
         t.input :description

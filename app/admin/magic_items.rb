@@ -11,7 +11,7 @@ ActiveAdmin.register NinthAge::MagicItem do
   
   controller do
     def scoped_collection
-      end_of_association_chain.includes(:translations).includes(version: [:translations]).includes(army: [:translations])
+      end_of_association_chain.includes(:translations).includes(version: [:translations]).includes(army: [:translations]).includes(magic_item_category: [:translations])
     end
     def create
       create! { new_admin_ninth_age_magic_item_url }

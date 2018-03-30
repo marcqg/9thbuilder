@@ -3,10 +3,14 @@ ActiveAdmin.register NinthAge::ExtraItem do
 
   permit_params :extra_item_category_id, :value_points, :max, :extra_item_activator_id, :latex_key, :locale, translations_attributes: [:id, :name, :description, :infos, :locale, :_destroy]
 
-  filter :extra_item_category, as: :select, collection: -> { NinthAge::ExtraItemCategory.includes(:translations).map { |category| [ "#{category.army.name}(#{category.army.version.name}) - #{category.name}", category.id ] } } 
+  filter :extra_item_category, as: :select, collection: -> { NinthAge::ExtraItemCategory.includes(:translations).includes(version: [:translations]).includes(army: [:translations]).map { |category| [ "#{category.army.name}(#{category.version.name}) - #{category.name}", category.id ] } } 
   filter :value_points
 
   controller do
+    def scoped_collection
+      end_of_association_chain.includes(:translations).includes(extra_item_category: [:translations])
+    end
+
     def create
       create! { new_admin_ninth_age_extra_item_url }
     end
@@ -33,7 +37,6 @@ ActiveAdmin.register NinthAge::ExtraItem do
     id_column
     column :extra_item_category, sortable: :extra_item_category_id
     column :name
-    column :description
     column :value_points
     actions
   end

@@ -3,9 +3,28 @@ ActiveAdmin.register NinthAge::OrganisationChange do
 
   permit_params :default_organisation_id, :new_organisation_id, :unit_id, :type_target, :number
 
-  filter :default_organisation
-  filter :new_organisation
-  filter :unit
+  filter :version_filter, as: :select, collection: -> { NinthAge::Version.includes(:translations).map { |version| [ version.name, version.id ] } } 
+  filter :army_filter, as: :select, :input_html => {'data-option-dependent' => true, 'data-option-url' => '/ninth_age/version-:q_version_filter/armies', 'data-option-observed' => 'q_version_filter'}, collection: -> { [] } 
+  filter :unit, as: :select, :input_html => {'data-option-dependent' => true, 'data-option-url' => '/ninth_age/unit-:q_army_filter/units/all', 'data-option-observed' => 'q_army_filter'}, collection: -> { [] } 
+  filter :default_organisation, as: :select, :input_html => {'data-option-dependent' => true, 'data-option-url' => '/ninth_age/army-:q_army_filter/organisations', 'data-option-observed' => 'q_army_filter'}, collection: -> { [] } 
+  filter :new_organisation, as: :select, :input_html => {'data-option-dependent' => true, 'data-option-url' => '/ninth_age/army-:q_army_filter/organisations', 'data-option-observed' => 'q_army_filter'}, collection: -> { [] } 
+
+  controller do
+    def scoped_collection
+      end_of_association_chain.includes(unit: [:translations]).includes(default_organisation: [:translations]).includes(new_organisation: [:translations])
+    end
+  end
+
+  index do
+    selectable_column
+    id_column
+    column :unit, sortable: :unit_id
+    column :default_organisation, sortable: :default_organisation_id
+    column :new_organisation, sortable: :new_organisation_id
+    column :type_target
+    column :number
+    actions
+  end
 
   form do |f|
     f.inputs do

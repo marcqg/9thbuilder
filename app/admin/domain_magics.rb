@@ -2,6 +2,8 @@ ActiveAdmin.register NinthAge::DomainMagic do
   menu parent: 'Ninth Age Magic', priority: 1
 
   permit_params :name, :version_id, :logo, :locale, :latex_key, translations_attributes: [:id, :name, :description, :locale, :_destroy]
+
+  filter :version, as: :select, collection: -> { NinthAge::Version.includes(:translations).map { |version| [ version.name, version.id ] } } 
   
   controller do
     def scoped_collection

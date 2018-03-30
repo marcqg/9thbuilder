@@ -3,7 +3,7 @@ ActiveAdmin.register Paint::PaintList do
 
   permit_params :name
 
-  filter :army, as: :select, collection: -> { NinthAge::Army.includes(:translations).map { |army| [ army.name + ' ' + army.version.name, army.id ] } } 
+  filter :army, as: :select, collection: -> { NinthAge::Army.includes(:translations).includes(version: [:translations]).map { |army| [ army.name + ' ' + army.version.name, army.id ] } } 
   filter :name
 
   controller do
