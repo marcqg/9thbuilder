@@ -1,5 +1,6 @@
 class NinthAge::UnitType < ApplicationRecord
   nilify_blanks :types => [:text, :string]
+  strip_attributes
   
   has_many :units, dependent: :destroy, class_name: "NinthAge::Unit"
 

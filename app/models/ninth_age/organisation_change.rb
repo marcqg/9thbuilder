@@ -1,5 +1,6 @@
 class NinthAge::OrganisationChange < ApplicationRecord
   nilify_blanks :types => [:text, :string]
+  strip_attributes
   
   belongs_to :default_organisation, foreign_key: 'default_organisation_id', class_name: 'NinthAge::Organisation'
   belongs_to :new_organisation, foreign_key: 'new_organisation_id', class_name: 'NinthAge::Organisation'

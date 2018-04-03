@@ -1,5 +1,6 @@
 class NinthAge::SpecialRuleUnitTroop < ApplicationRecord
   nilify_blanks :types => [:text, :string]
+  strip_attributes
 
   belongs_to :special_rule, class_name: "NinthAge::SpecialRule"
   belongs_to :unit, class_name: "NinthAge::Unit"

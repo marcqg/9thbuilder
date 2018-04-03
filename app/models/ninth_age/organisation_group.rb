@@ -1,5 +1,6 @@
 class NinthAge::OrganisationGroup < ApplicationRecord
   nilify_blanks :types => [:text, :string]
+  strip_attributes
   
   belongs_to :army_organisation, class_name: "NinthAge::ArmyOrganisation"
 

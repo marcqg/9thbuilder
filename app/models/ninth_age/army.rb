@@ -1,5 +1,6 @@
 class NinthAge::Army < ApplicationRecord
   nilify_blanks :types => [:text, :string]
+  strip_attributes
 
   belongs_to :version, class_name: "NinthAge::Version"
 

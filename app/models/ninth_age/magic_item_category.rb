@@ -1,5 +1,6 @@
 class NinthAge::MagicItemCategory < ApplicationRecord
   nilify_blanks :types => [:text, :string]
+  strip_attributes
   
   has_many :magic_items, dependent: :destroy, class_name: "NinthAge::MagicItem"
 

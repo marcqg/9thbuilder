@@ -1,5 +1,6 @@
 class NinthAge::UnitOption < ApplicationRecord
   nilify_blanks :types => [:text, :string]
+  strip_attributes
   
   belongs_to :unit, class_name: "NinthAge::Unit"
   delegate :army, :to => :unit, :allow_nil => true

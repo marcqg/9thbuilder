@@ -69,6 +69,7 @@ gem 'inherited_resources', '~> 1.7'
 gem 'activeadmin', github: 'activeadmin/activeadmin'
 gem 'activeadmin-translate', github: 'twintags/activeadmin-translate'
 gem "nilify_blanks"
+gem "strip_attributes"
 
 #autentification
 gem 'devise'

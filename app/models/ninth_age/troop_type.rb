@@ -1,5 +1,6 @@
 class NinthAge::TroopType < ApplicationRecord
   nilify_blanks :types => [:text, :string]
+  strip_attributes
   
   has_many :troops, dependent: :destroy, class_name: "NinthAge::Troop"
 
