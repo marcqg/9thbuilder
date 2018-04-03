@@ -276,6 +276,7 @@ en:
       Ground: Ground
       Universal: Universal
       Universal_g: "{Universal}"
+      Universal_b: "[Universal]"
       Caster: Caster
 
   extra_items:
