@@ -23,10 +23,10 @@ class NinthAge::DomainMagicSpell < ApplicationRecord
 
   def highlight(text)
     if text != nil
-      text = text.gsub(/<([\wàäâáæãåéèëêïîìíöôòóœøõùüûúÿýçñ",\ \+\.\(\)\-"']*)>/u, '<strong>\1</strong>').html_safe
-      text = text.gsub(/\{([\wàäâáæãåéèëêïîìíöôòóœøõùüûúÿýçñ",\ \+\.\(\)\-"']*)\}/u, '<span class="highlight-green">{\1}</span>').html_safe
-      text = text.gsub(/\[([\wàäâáæãåéèëêïîìíöôòóœøõùüûúÿýçñ",\ \+\.\(\)\-"']*)\]/u, '<span class="highlight-blue">[\1]</span>').html_safe
-      text = text.gsub(/\|([\wàäâáæãåéèëêïîìíöôòóœøõùüûúÿýçñ",\ \+\.\(\)\-"']*)\|/u, '<span class="highlight-red">\1</span>').html_safe
+      text = text.gsub(/<([\wàäâáæãåéèëêïîìíöôòóœøõùüûúÿýçñ",\ \+\.\(\)\-"'/]*)>/u, '<strong>\1</strong>').html_safe
+      text = text.gsub(/\{([\wàäâáæãåéèëêïîìíöôòóœøõùüûúÿýçñ",\ \+\.\(\)\-"'/]*)\}/u, '<span class="highlight-green">{\1}</span>').html_safe
+      text = text.gsub(/\[([\wàäâáæãåéèëêïîìíöôòóœøõùüûúÿýçñ",\ \+\.\(\)\-"'/]*)\]/u, '<span class="highlight-blue">[\1]</span>').html_safe
+      text = text.gsub(/\|([\wàäâáæãåéèëêïîìíöôòóœøõùüûúÿýçñ",\ \+\.\(\)\-"'/]*)\|/u, '<span class="highlight-red">\1</span>').html_safe
       return text
     end
 

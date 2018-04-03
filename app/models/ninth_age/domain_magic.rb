@@ -36,10 +36,10 @@ class NinthAge::DomainMagic < ApplicationRecord
 
   def highlight(text)
     if text != nil
-      text = text.gsub(/<([\w,\ \+\.\(\)\-"]*)>/, '<strong>\1</strong>').html_safe
-      text = text.gsub(/\{([\w,\ \+\.\(\)\-"]*)\}/, '<span class="highlight-green">{\1}</span>').html_safe
-      text = text.gsub(/\[([\w,\ \+\.\(\)\-"]*)\]/, '<span class="highlight-blue">[\1]</span>').html_safe
-      text = text.gsub(/\|([\w,\ \+\.\(\)\-"]*)\|/, '<span class="highlight-red">\1</span>').html_safe
+      text = text.gsub(/<([\w,\ \+\.\(\)\-"'/]*)>/, '<strong>\1</strong>').html_safe
+      text = text.gsub(/\{([\w,\ \+\.\(\)\-"'/]*)\}/, '<span class="highlight-green">{\1}</span>').html_safe
+      text = text.gsub(/\[([\w,\ \+\.\(\)\-"'/]*)\]/, '<span class="highlight-blue">[\1]</span>').html_safe
+      text = text.gsub(/\|([\w,\ \+\.\(\)\-"'/]*)\|/, '<span class="highlight-red">\1</span>').html_safe
       return text
     end
 
