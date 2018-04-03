@@ -30,8 +30,8 @@
 		<tbody>
 			<% magic.domain_magic_spells.each.with_index do |spell, index| %>
 				<tr>
-					<td colspan="5"><%= spell.name %></td>
-					<td rowspan="2"><%= spell.display_effect %></td>
+					<td colspan="5" class="magic-spell-name"><%= spell.name %></td>
+					<td rowspan="2" class="magic-spell-effect"><%= spell.display_effect %></td>
 				</tr>
 				<tr>
 					<td class="text-center">

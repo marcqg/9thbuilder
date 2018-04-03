@@ -22,12 +22,12 @@ module Builder
                                             .joins('INNER JOIN ninth_age_units u ON ninth_age_special_rule_unit_troops.unit_id = u.id')
                                             .joins('INNER JOIN builder_army_list_units ON u.id = builder_army_list_units.unit_id')
                                             .where(builder_army_list_units: {army_list_id: @army_list.id})
-                                            .order(:name)
+                                            .order(:id)
                                             .distinct
 
       @magic_items = NinthAge::MagicItem.joins(:army_list_units)
                                         .where(builder_army_list_units: {army_list_id: @army_list.id})
-                                        .order(:name)
+                                        .order(:id)
                                         .distinct
 
       respond_to do |format|

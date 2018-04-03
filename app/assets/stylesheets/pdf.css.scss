@@ -189,6 +189,10 @@ a {
   width: 100%;
   border-top: 2px solid #470b03;
 
+  p {
+    margin: 0 !important;
+  }
+
   tr {
     border-top: 1px solid #470b03;
     border-bottom: 1px solid #470b03;
@@ -297,7 +301,7 @@ a {
       border: 1px solid black;
       border-collapse: collapse;
       font-size: 100%;
-      padding: 5px 0;
+      padding: 0;
       min-width: 20px;
       min-height: 30px;
 
@@ -394,7 +398,11 @@ a {
     }
 
     th, td {
-      width: 12%;
+      width: 10%;
+    }
+
+    td.magic-spell-effect{
+      padding: 5px 1px;
     }
 
     tr {
@@ -428,7 +436,7 @@ a {
     }
 
     th:last-child, tbody tr:first-child td:last-child {
-      width:50%;
+      width:60%;
     }
   }
 }
