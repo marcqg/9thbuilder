@@ -37,7 +37,7 @@ ActiveAdmin.register NinthAge::DomainMagicSpell do
       f.input :domain_magic, collection: NinthAge::DomainMagic.includes(:translations).includes(:version => [:translations]).order(:name).collect { |o| [o.name + ' - ' + o.version.name, o.id] }, :prompt => true
       f.input :type_target, as: :check_boxes, collection: NinthAge::DomainMagicSpell.values_for_type_target.collect { |type_target| [I18n.t("magic_spell.type_target.#{type_target}", default: type_target), type_target] }
       f.input :duration, as: :check_boxes, collection: NinthAge::DomainMagicSpell.values_for_duration.collect { |duration| [I18n.t("magic_spell.duration.#{duration}", default: duration), duration] }
-      f.input :type_lvl, :as => :select, :collection =>  NinthAge::DomainMagicSpell.type_lvls, :include_blank => false
+      f.input :type_lvl, :as => :select, :collection =>  NinthAge::DomainMagicSpell.type_lvls.keys, :include_blank => false
       f.translate_inputs do |t|
         t.input :name
         t.input :range
