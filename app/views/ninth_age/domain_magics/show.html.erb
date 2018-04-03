@@ -6,8 +6,17 @@
     <meta property="og:image" content="<%=  request.scheme + '://' + request.host_with_port + @magic.logo.url(:facebook) %>"/>
     <meta property="og:description" content="All spells of <%= @magic.name %> magic path">
 <% end %>
-
-<div class="col-md-12 col-xs-12 col-sm-12 magic-<%= @magic.id %>">
+<%
+  access_admin = user_signed_in? and (current_user.has_role? :administrator or current_user.has_role? :moderator)
+%>
+<div class="col-md-12 col-xs-12 col-sm-12 magic-<%= @magic.id %>" style="position: relative; clear: both;">
+  <% if access_admin %>
+    <div style="position: relative;">
+      <%= link_to(admin_ninth_age_domain_magic_path(@magic.id), {:target => "_blank", :style => "position: absolute;top: 10px;right: 10px;z-index: 1000;"}) do %>
+        <i class="fa fa-4x fa-pencil-square-o"></i>
+      <% end %>
+    </div>
+  <% end %>
   <%= image_tag @magic.logo.url, alt: @magic.name, height: 99, class: 'block-center' %>
   <h1 class="text-center"><%= @magic.name %></h1>
 
@@ -18,6 +27,9 @@
   <div class="row">
     <% @spells.each.with_index do |spell, index| %>
         <div class="col-md-3 col-xs-4 col-sm-6 spell-<%= index %>">
+          <%= link_to(admin_ninth_age_domain_magic_spell_path(spell.id), {:target => "_blank", :style => "position: absolute;top: 10px;right: 10px;z-index: 1000;"}) do %>
+            <i class="fa fa-2x fa-pencil-square-o"></i>
+          <% end %>
           <h4 class="text-center"><span>(<%= spell.display_type_lvl %>)</span> <%= spell.name %></h4>
           <div class="info-magic">
             <% if spell.casting_value != nil %>

@@ -7,7 +7,7 @@ ActiveAdmin.register User do
   filter :name
 
   controller do
-    before_filter :administrator_filter
+    before_action :administrator_filter
 
     def administrator_filter
       raise ActionController::RoutingError.new('Not Found') unless current_user.has_role? :administrator

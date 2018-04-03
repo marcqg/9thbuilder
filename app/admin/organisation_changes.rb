@@ -4,7 +4,7 @@ ActiveAdmin.register NinthAge::OrganisationChange do
   permit_params :default_organisation_id, :new_organisation_id, :unit_id, :type_target, :number
 
   filter :version_filter, as: :select, collection: -> { NinthAge::Version.includes(:translations).map { |version| [ version.name, version.id ] } } 
-  filter :army_filter, as: :select, :input_html => {'data-option-dependent' => true, 'data-option-url' => '/ninth_age/version-:q_version_filter/armies', 'data-option-observed' => 'q_version_filter'}, collection: -> { [] } 
+  filter :army_filter, as: :select, :input_html => {'data-option-dependent' => true, 'data-option-url' => '/ninth_age/version-:q_version_filter/armies', 'data-option-observed' => 'q_version_filter'}, collection: -> { NinthAge::Army.where(:version_id => NinthAge::Version.last.id).includes(:translations).map { |army| [ army.name, army.id ] } } 
   filter :unit, as: :select, :input_html => {'data-option-dependent' => true, 'data-option-url' => '/ninth_age/unit-:q_army_filter/units/all', 'data-option-observed' => 'q_army_filter'}, collection: -> { [] } 
   filter :default_organisation, as: :select, :input_html => {'data-option-dependent' => true, 'data-option-url' => '/ninth_age/army-:q_army_filter/organisations', 'data-option-observed' => 'q_army_filter'}, collection: -> { [] } 
   filter :new_organisation, as: :select, :input_html => {'data-option-dependent' => true, 'data-option-url' => '/ninth_age/army-:q_army_filter/organisations', 'data-option-observed' => 'q_army_filter'}, collection: -> { [] } 

@@ -4,11 +4,14 @@ ActiveAdmin.register NinthAge::Troop do
   permit_params :unit_id, :unit_option_id, :troop_type_id, :M, :WS, :BS, :S, :T, :W, :I, :A, :LD, :latex_key, :type_carac, :carac_att, :carac_of, :carac_str, :carac_ap, :carac_agi, :value_points, :min_size, :position, :locale, translations_attributes: [:id, :name, :locale, :_destroy]
 
   filter :id
-  filter :unit
-  filter :troop_type
+  filter :troop_type, as: :select, collection: -> { NinthAge::TroopType.includes(:translations).map { |type| [ type.name, type.id ] } } 
   filter :value_points
 
   controller do
+    def scoped_collection
+      end_of_association_chain.includes(:translations).includes(unit: [:translations])
+    end
+
     def create
       create! { new_admin_ninth_age_troop_url }
     end

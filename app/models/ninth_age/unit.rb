@@ -3,6 +3,7 @@ class NinthAge::Unit < ApplicationRecord
   self.per_page = 18
 
   belongs_to :army, class_name: "NinthAge::Army"
+  delegate :version, :to => :army, :allow_nil => true
 
   belongs_to :unit_type, class_name: "NinthAge::UnitType"
   
@@ -102,5 +103,15 @@ class NinthAge::Unit < ApplicationRecord
     #end
 
     new_unit
+  end
+
+  ransacker :version, 
+    formatter: proc{ |v|
+      data = NinthAge::Unit.joins(:army)
+                            .where(ninth_age_armies: { version_id: v })
+                            .map(&:id)
+      data = data.present? ? data : nil
+    }, splat_params: true do |parent|
+    parent.table[:id]
   end
 end

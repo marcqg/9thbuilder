@@ -6,8 +6,19 @@
     <meta property="og:image" content="<%= request.scheme + '://' + request.host_with_port + image_path('bt_lexicon.png') %>"/>
     <meta property="og:description" content="<%= @ninth_age_equipment.description %>">
 <% end %>
-
-<h1><%= @ninth_age_equipment.name %></h1>
-<div>
-  <p><%= @ninth_age_equipment.description %></p>
+<%
+  access_admin = user_signed_in? and (current_user.has_role? :administrator or current_user.has_role? :moderator)
+%>
+<div style="position: relative; clear: both;">
+  <% if access_admin %>
+    <div style="position: relative;">
+      <%= link_to(admin_ninth_age_equipment_path(@ninth_age_equipment.id), {:target => "_blank", :style => "position: absolute;top: 10px;right: 10px;z-index: 1000;"}) do %>
+        <i class="fa fa-4x fa-pencil-square-o"></i>
+      <% end %>
+    </div>
+  <% end %>
+  <h1><%= @ninth_age_equipment.name %></h1>
+  <div>
+    <p><%= @ninth_age_equipment.description %></p>
+  </div>
 </div>

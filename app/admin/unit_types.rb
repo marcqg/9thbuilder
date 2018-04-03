@@ -3,6 +3,14 @@ ActiveAdmin.register NinthAge::UnitType do
 
   permit_params :name, :locale, translations_attributes: [:id, :name, :locale, :_destroy]
 
+  config.filters = false
+
+  controller do
+    def scoped_collection
+      end_of_association_chain.includes(:translations)
+    end
+  end
+
   before_action only: [:create, :update] do
     params[:ninth_age_unit_type][:translations_attributes].each do |k, v|
       if v.except('id', 'locale').all? { |_, v| v.blank? }

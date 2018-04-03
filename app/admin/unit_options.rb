@@ -3,10 +3,13 @@ ActiveAdmin.register NinthAge::UnitOption do
 
   permit_params :unit_id, :parent_id, :unit_option_activator_id, :mount_id, :unit_link_id, :is_required, :value_points, :position, :has_one_choise, :is_per_model, :is_multiple, :is_magic, :is_upgratable, :domain_magic_id, :organisation_id, :extra_item_id, :value_points_upgrade, :upgrade_target, :max, :max_model, :min_model, :max_unit, :is_magic_items, :is_magic_standards, :banner_limit, :is_extra_items, :is_unique_choice, :locale, translations_attributes: [:id, :name, :infos, :locale, :_destroy]
 
-  filter :unit, collection: proc { NinthAge::Unit.includes(:army).collect { |r| [r.army.name + ' - ' + r.name, r.id] } }
   filter :value_points
 
   controller do
+    def scoped_collection
+      end_of_association_chain.includes(:translations).includes(unit: [:translations]).includes(mount: [:translations])
+    end
+
     def create
       create! { new_admin_ninth_age_unit_option_url }
     end

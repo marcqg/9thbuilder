@@ -30,6 +30,13 @@ ActiveAdmin.register NinthAge::MagicItem do
     end
   end
 
+  before_action :only => [:index] do
+    if params['version_id'].blank? && params['q'].blank? && params[:scope].blank?
+       #country_contains or country_eq .. or depending of your filter type
+       params['q'] = {:version_id_eq => NinthAge::Version.last.id } 
+    end
+  end
+
   action_item :new, only: :show do
     link_to 'New Magic Item', new_admin_ninth_age_magic_item_path
   end

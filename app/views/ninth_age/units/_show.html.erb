@@ -1,5 +1,8 @@
+<%
+  access_admin = user_signed_in? and (current_user.has_role? :administrator or current_user.has_role? :moderator)
+%>
 <div style="position: relative; clear: both;">
-  <% if user_signed_in? and (current_user.has_role? :administrator or current_user.has_role? :moderator) %>
+  <% if access_admin %>
     <div style="position: relative;">
       <%= link_to(admin_ninth_age_unit_path(unit.id), {:target => "_blank", :style => "position: absolute;top: 10px;right: 10px;z-index: 1000;"}) do %>
         <i class="fa fa-4x fa-pencil-square-o"></i>
@@ -135,7 +138,14 @@
                           .where({ninth_age_special_rules: {type_lvl: NinthAge::SpecialRule.type_lvls[:Global] }})
                           .map(&:special_rule)
                           .each do |special_rule| %>
-                    <li><%= link_to(special_rule.name, ninth_age_special_rule_path(special_rule.id)) %>,</li>
+                    <li>
+                      <%= link_to(special_rule.name, ninth_age_special_rule_path(special_rule.id)) %>
+                      <% if access_admin %>
+                        <%= link_to(admin_ninth_age_special_rule_path(special_rule.id), {:target => "_blank"}) do %>
+                          <i class="fa fa-pencil-square-o"></i>
+                        <% end %>
+                      <% end %>,
+                    </li>
                   <% end %>
                   <% unit.equipment_unit_troops
                           .joins(:equipment)
@@ -143,7 +153,14 @@
                           .where({ninth_age_equipments: {type_lvl: NinthAge::Equipment.type_lvls[:Global] }})
                           .map(&:equipment)
                           .each do |equipment| %>
-                    <li><%= link_to(equipment.name, ninth_age_equipment_path(equipment.id)) %>,</li>
+                    <li>
+                      <%= link_to(equipment.name, ninth_age_equipment_path(equipment.id)) %>
+                      <% if access_admin %>
+                        <%= link_to(admin_ninth_age_equipment_path(equipment.id), {:target => "_blank"}) do %>
+                          <i class="fa fa-pencil-square-o"></i>
+                        <% end %>
+                      <% end %>,
+                    </li>
                   <% end %>
                 </ul>
               </td>
@@ -189,7 +206,13 @@
                           .where({ninth_age_special_rules: {type_lvl: NinthAge::SpecialRule.type_lvls[:Defensive]}})
                           .map(&:special_rule)
                           .each do |special_rule| %>
-                    <li><%= link_to(special_rule.name, ninth_age_special_rule_path(special_rule.id)) %>,</li>
+                    <li><%= link_to(special_rule.name, ninth_age_special_rule_path(special_rule.id)) %>
+                      <% if access_admin %>
+                        <%= link_to(admin_ninth_age_special_rule_path(special_rule.id), {:target => "_blank"}) do %>
+                          <i class="fa fa-pencil-square-o"></i>
+                        <% end %>
+                      <% end %>,
+                    </li>
                   <% end %>
                   <% unit.equipment_unit_troops
                           .joins(:equipment)
@@ -197,7 +220,14 @@
                           .where({ninth_age_equipments: {type_lvl: NinthAge::Equipment.type_lvls[:Defensive]}})
                           .map(&:equipment)
                           .each do |equipment| %>
-                    <li><%= link_to(equipment.name, ninth_age_equipment_path(equipment.id)) %>,</li>
+                    <li>
+                      <%= link_to(equipment.name, ninth_age_equipment_path(equipment.id)) %>
+                      <% if access_admin %>
+                        <%= link_to(admin_ninth_age_equipment_path(equipment.id), {:target => "_blank"}) do %>
+                          <i class="fa fa-pencil-square-o"></i>
+                        <% end %>
+                      <% end %>,
+                    </li>
                   <% end %>
                 </ul>
               </td>
@@ -234,7 +264,14 @@
                               .where(:troop => nil)
                               .map(&:special_rule)
                               .each do |special_rule| %>
-                        <li><%= link_to(special_rule.name, ninth_age_special_rule_path(special_rule.id)) %>,</li>
+                        <li>
+                          <%= link_to(special_rule.name, ninth_age_special_rule_path(special_rule.id)) %>
+                          <% if access_admin %>
+                            <%= link_to(admin_ninth_age_special_rule_path(special_rule.id), {:target => "_blank"}) do %>
+                              <i class="fa fa-pencil-square-o"></i>
+                            <% end %>
+                          <% end %>,
+                        </li>
                       <% end %>
                       <% unit.special_rule_unit_troops
                               .joins(:special_rule)
@@ -243,7 +280,14 @@
                               .where(:troop => troop.id)
                               .map(&:special_rule)
                               .each do |special_rule| %>
-                        <li><%= link_to(special_rule.name, ninth_age_special_rule_path(special_rule.id)) %>,</li>
+                        <li>
+                          <%= link_to(special_rule.name, ninth_age_special_rule_path(special_rule.id)) %>
+                          <% if access_admin %>
+                            <%= link_to(admin_ninth_age_special_rule_path(special_rule.id), {:target => "_blank"}) do %>
+                              <i class="fa fa-pencil-square-o"></i>
+                            <% end %>
+                          <% end %>,
+                        </li>
                       <% end %>
                       <% unit.equipment_unit_troops
                               .joins(:equipment)
@@ -252,7 +296,14 @@
                               .where(:troop => nil)
                               .map(&:equipment)
                               .each do |equipment| %>
-                        <li><%= link_to(equipment.name, ninth_age_equipment_path(equipment.id)) %>,</li>
+                        <li>
+                          <%= link_to(equipment.name, ninth_age_equipment_path(equipment.id)) %>
+                          <% if access_admin %>
+                            <%= link_to(admin_ninth_age_equipment_path(equipment.id), {:target => "_blank"}) do %>
+                              <i class="fa fa-pencil-square-o"></i>
+                            <% end %>
+                          <% end %>,
+                        </li>
                       <% end %>
                       <% unit.equipment_unit_troops
                               .joins(:equipment)
@@ -261,7 +312,14 @@
                               .where(:troop => troop.id)
                               .map(&:equipment)
                               .each do |equipment| %>
-                        <li><%= link_to(equipment.name, ninth_age_equipment_path(equipment.id)) %>,</li>
+                        <li>
+                          <%= link_to(equipment.name, ninth_age_equipment_path(equipment.id)) %>
+                          <% if access_admin %>
+                            <%= link_to(admin_ninth_age_equipment_path(equipment.id), {:target => "_blank"}) do %>
+                              <i class="fa fa-pencil-square-o"></i>
+                            <% end %>
+                          <% end %>,
+                        </li>
                       <% end %>
                     </ul>
                   </td>

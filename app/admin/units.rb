@@ -3,10 +3,15 @@ ActiveAdmin.register NinthAge::Unit do
 
   permit_params :army_id, :locale, :value_points, :min_size, :max_size, :magic, :notes, :max, :max_model, :position, :unit_type, :latex_key, :base, {:organisation_ids => []}, :unit_type_id, :size, :is_mount, :type_carac, :carac_ground_adv, :carac_ground_mar, :carac_fly_adv, :carac_fly_mar, :carac_dis, :carac_evoked, :carac_hp, :carac_def, :carac_res, :carac_arm, translations_attributes: [:id, :name, :locale, :_destroy]
 
-  filter :army, as: :select, collection: -> { NinthAge::Army.includes(:translations).map { |army| [ army.name + ' ' + army.version.name, army.id ] } } 
+  filter :version_in, as: :select, collection: -> { NinthAge::Version.includes(:translations).map { |version| [ version.name, version.id ] } } 
+  filter :army, as: :select, :input_html => {'data-option-dependent' => true, 'data-option-url' => '/ninth_age/version-:q_version_in/armies', 'data-option-observed' => 'q_version_in'}, collection: -> { NinthAge::Army.where(:version_id => NinthAge::Version.last.id).includes(:translations).map { |army| [ army.name, army.id ] } } 
   filter :is_mount
 
   controller do
+    def scoped_collection
+      end_of_association_chain.includes(:translations).includes(army: [:translations])
+    end
+
     def create
       create! { new_admin_ninth_age_unit_url }
     end
@@ -18,6 +23,13 @@ ActiveAdmin.register NinthAge::Unit do
         v.merge!(_destroy: '1')
         params[:ninth_age_unit][:translations_attributes][k] = v
       end
+    end
+  end
+
+  before_action :only => [:index] do
+    if params['version_in'].blank? && params['q'].blank? && params[:scope].blank?
+       #country_contains or country_eq .. or depending of your filter type
+       params['q'] = {:version_in => NinthAge::Version.last.id } 
     end
   end
 

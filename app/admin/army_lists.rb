@@ -8,7 +8,7 @@ ActiveAdmin.register Builder::ArmyList do
   filter :army_organisation, as: :select, :input_html => {'data-option-dependent' => true, 'data-option-url' => '/ninth_age/army-:q_army_id/army_organisations', 'data-option-observed' => 'q_army_id'}, :collection => []
 
   controller do
-    before_filter :administrator_filter
+    before_action :administrator_filter
 
     def administrator_filter
       raise ActionController::RoutingError.new('Not Found') unless current_user.has_role? :administrator

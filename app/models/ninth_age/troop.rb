@@ -36,13 +36,13 @@ class NinthAge::Troop < ApplicationRecord
     # some other code..
   end
 
-  ransacker :by_version, proc{ |v|
-    data = NinthAge::Troop.joins(:unit)
-                          .joins("INNER JOIN ninth_age_armies ON ninth_age_armies.id = ninth_age_units.army_id")
-                          .where(ninth_age_armies: { version_id: v })
-                          .map(&:id)
-    data = data.present? ? data : nil
-  } do |parent|
-    # some other code..
-  end
+  #ransacker :by_version, proc{ |v|
+  #  data = NinthAge::Troop.joins(:unit)
+  #                        .joins("INNER JOIN ninth_age_armies ON ninth_age_armies.id = ninth_age_units.army_id")
+  #                        .where(ninth_age_armies: { version_id: v })
+  #                        .map(&:id)
+  #  data = data.present? ? data : nil
+  #}, splat_params: true do |parent|
+  #  parent.table[:id]
+  #end
 end
