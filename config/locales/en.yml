@@ -267,12 +267,13 @@ en:
       Hex_r: "|Hex|"
       Missile: Missile
       Damage: Damage
+      Damage_r: "|Damage|"
       Augment: Augment
       Augment_b: "[Augment]"
       Augment_r: "|Augment|"
       Focused: Focused
-      Direct: Direct Damage
-      Direct_r: "|Direct Damage|"
+      Direct: Direct
+      Direct_r: "|Direct|"
       Ground: Ground
       Universal: Universal
       Universal_g: "{Universal}"

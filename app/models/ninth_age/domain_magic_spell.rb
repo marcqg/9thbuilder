@@ -13,7 +13,7 @@ class NinthAge::DomainMagicSpell < ApplicationRecord
     super + '-ninth-age-' + Globalize.locale.to_s
   end
 
-  bitmask :type_target, :as => [:Hex, :Hex_r, :Missile, :Damage, :Augment, :Augment_b, :Focused, :Direct, :Ground, :Universal, :Universal_g, :Caster, :Direct_r, :Universal_b], :null => false
+  bitmask :type_target, :as => [:Hex, :Hex_r, :Missile, :Damage, :Augment, :Augment_b, :Focused, :Direct, :Ground, :Universal, :Universal_g, :Caster, :Direct_r, :Universal_b, :Damage_r], :null => false
   bitmask :duration, :as => [:OneTurn, :Instant, :Permanent, :RemainsInPlay], :null => false
 
   validates :domain_magic_id, presence: true
