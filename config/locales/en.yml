@@ -271,7 +271,8 @@ en:
       Augment_b: "[Augment]"
       Augment_r: "|Augment|"
       Focused: Focused
-      Direct: Direct
+      Direct: Direct Damage
+      Direct_r: "|Direct Damage|"
       Ground: Ground
       Universal: Universal
       Universal_g: "{Universal}"
