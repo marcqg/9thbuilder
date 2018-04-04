@@ -49,10 +49,12 @@
 
 <%= render :partial => 'export_unit_full', :collection => @army_list.army_list_units, :as => :army_list_unit, :locals => {:include_magics => @include_magics } %>
 
+<% unless @magics.empty? %>
 <div class="section">
   <h2><%=t 'magic.index.title' %></h3>
   <%= render :partial => 'export_magic_full', :collection => @magics, :as => :magic %>
 </div>
+<% end %>
 
 <div class="section">
   <h2><%=t 'army_list_unit.edit.magic_items' %></h3>
