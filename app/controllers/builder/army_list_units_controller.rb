@@ -197,7 +197,7 @@ module Builder
         mount_option = army_list_unit.unit_options.where.not(:mount => nil).first
         if nil != mount_option
 
-          mount_option.mount.organisations.each do |mount_organisation|
+          mount_option.mount.organisations.where.not(:id => army_list_unit.unit.organisation_ids).each do |mount_organisation|
             organisation_rate = Builder::ArmyListOrganisation.find_or_create_by({organisation_id: mount_organisation.id, army_list_id: @army_list.id})
             organisation_rate.pts += mount_option.value_points
             organisation_rate.save!
