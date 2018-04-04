@@ -9,7 +9,8 @@
 	<table class="army_magic_spell">
 		<thead>				
 			<tr>
-				<th></th>
+				<th class="text-center text-italic"></th>
+				<th class="text-center text-italic"></th>
 				<th class="text-center text-italic">
 					<%= t('magic.casting') %>
 				</th>
@@ -30,14 +31,13 @@
 		<tbody>
 			<% magic.domain_magic_spells.each.with_index do |spell, index| %>
 				<tr>
-					<td colspan="5" class="magic-spell-name"><%= spell.name %></td>
-					<td rowspan="2" class="magic-spell-effect"><%= spell.display_effect %></td>
-				</tr>
-				<tr>
 					<td class="text-center">
 						<%unless spell.type_lvl.nil?%>
 							<%= spell.display_type_lvl %>
 						<%end%>
+					</td>
+					<td class="text-center">
+						<%= spell.name %>
 					</td>
 					<td class="text-center">
 						<%unless spell.casting_value.nil?%>
@@ -58,6 +58,9 @@
 						<%unless spell.duration.nil?%>
 							<%= spell.display_duration %>
 						<%end%>
+					</td>
+					<td class="magic-spell-effect">
+						<%= spell.display_effect %>
 					</td>
 				</tr>
 		    <% end %>	
