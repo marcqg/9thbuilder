@@ -3,10 +3,8 @@
   <p><%= @army_organisation.description %></p>
 
   <div class="row">
-    <% if @army_organisation.count > 1 %>
-        <h2 class="text-center"><%= @army_organisation.name %></h2>
-        <p><%= @army_organisation.description %></p>
-    <% end %>
+    <h2 class="text-center"><%= @army_organisation.name %></h2>
+    <p><%= @army_organisation.description %></p>
     <ul class="list-flex">
       <% @army_organisation.organisation_groups.each do |organisation_group| %>
           <li>

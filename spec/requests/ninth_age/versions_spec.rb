@@ -4,6 +4,7 @@ RSpec.describe 'ninth_age/versions', type: :request do
 
   path '/fr/ninth_age/versions' do
     get(summary: 'list versions') do
+      produces 'application/json'
       response(200, description: 'successful') do
         # You can add before/let blocks here to trigger the response code
       end
@@ -12,6 +13,7 @@ RSpec.describe 'ninth_age/versions', type: :request do
 
   path '/de/ninth_age/versions' do
     get(summary: 'list versions') do
+      produces 'application/json'
       response(200, description: 'successful') do
         # You can add before/let blocks here to trigger the response code
       end
@@ -20,6 +22,7 @@ RSpec.describe 'ninth_age/versions', type: :request do
 
   path '/ko/ninth_age/versions' do
     get(summary: 'list versions') do
+      produces 'application/json'
       response(200, description: 'successful') do
         # You can add before/let blocks here to trigger the response code
       end
@@ -28,6 +31,7 @@ RSpec.describe 'ninth_age/versions', type: :request do
 
   path '/pl/ninth_age/versions' do
     get(summary: 'list versions') do
+      produces 'application/json'
       response(200, description: 'successful') do
         # You can add before/let blocks here to trigger the response code
       end
@@ -36,6 +40,7 @@ RSpec.describe 'ninth_age/versions', type: :request do
 
   path '/es/ninth_age/versions' do
     get(summary: 'list versions') do
+      produces 'application/json'
       response(200, description: 'successful') do
         # You can add before/let blocks here to trigger the response code
       end
@@ -44,6 +49,7 @@ RSpec.describe 'ninth_age/versions', type: :request do
 
   path '/it/ninth_age/versions' do
     get(summary: 'list versions') do
+      produces 'application/json'
       response(200, description: 'successful') do
         # You can add before/let blocks here to trigger the response code
       end
@@ -52,6 +58,7 @@ RSpec.describe 'ninth_age/versions', type: :request do
 
   path '/ninth_age/versions' do
     get(summary: 'list versions') do
+      produces 'application/json'
       response(200, description: 'successful') do
         # You can add before/let blocks here to trigger the response code
       end
@@ -62,9 +69,10 @@ RSpec.describe 'ninth_age/versions', type: :request do
     # You'll want to customize the parameter types...
     parameter 'id', in: :path, type: :string
     # ...and values used to make the requests.
-    let(:id) { '1' }
+    let(:id) { '3' }
 
     get(summary: 'show version') do
+      produces 'application/json'
       response(200, description: 'successful') do
         # You can add before/let blocks here to trigger the response code
       end
@@ -75,9 +83,10 @@ RSpec.describe 'ninth_age/versions', type: :request do
     # You'll want to customize the parameter types...
     parameter 'id', in: :path, type: :string
     # ...and values used to make the requests.
-    let(:id) { '1' }
+    let(:id) { '3' }
 
     get(summary: 'show version') do
+      produces 'application/json'
       response(200, description: 'successful') do
         # You can add before/let blocks here to trigger the response code
       end
@@ -88,9 +97,10 @@ RSpec.describe 'ninth_age/versions', type: :request do
     # You'll want to customize the parameter types...
     parameter 'id', in: :path, type: :string
     # ...and values used to make the requests.
-    let(:id) { '1' }
+    let(:id) { '3' }
 
     get(summary: 'show version') do
+      produces 'application/json'
       response(200, description: 'successful') do
         # You can add before/let blocks here to trigger the response code
       end
@@ -101,9 +111,10 @@ RSpec.describe 'ninth_age/versions', type: :request do
     # You'll want to customize the parameter types...
     parameter 'id', in: :path, type: :string
     # ...and values used to make the requests.
-    let(:id) { '1' }
+    let(:id) { '3' }
 
     get(summary: 'show version') do
+      produces 'application/json'
       response(200, description: 'successful') do
         # You can add before/let blocks here to trigger the response code
       end
@@ -114,9 +125,10 @@ RSpec.describe 'ninth_age/versions', type: :request do
     # You'll want to customize the parameter types...
     parameter 'id', in: :path, type: :string
     # ...and values used to make the requests.
-    let(:id) { '1' }
+    let(:id) { '3' }
 
     get(summary: 'show version') do
+      produces 'application/json'
       response(200, description: 'successful') do
         # You can add before/let blocks here to trigger the response code
       end
@@ -127,9 +139,10 @@ RSpec.describe 'ninth_age/versions', type: :request do
     # You'll want to customize the parameter types...
     parameter 'id', in: :path, type: :string
     # ...and values used to make the requests.
-    let(:id) { '1' }
+    let(:id) { '3' }
 
     get(summary: 'show version') do
+      produces 'application/json'
       response(200, description: 'successful') do
         # You can add before/let blocks here to trigger the response code
       end
@@ -140,9 +153,10 @@ RSpec.describe 'ninth_age/versions', type: :request do
     # You'll want to customize the parameter types...
     parameter 'id', in: :path, type: :string
     # ...and values used to make the requests.
-    let(:id) { '1' }
+    let(:id) { '3' }
 
     get(summary: 'show version') do
+      produces 'application/json'
       response(200, description: 'successful') do
         # You can add before/let blocks here to trigger the response code
       end

@@ -9,7 +9,7 @@ module Builder
       @verbosity = params[:verbosity]
       @include_magics = params[:magics] == 'nomagics' ? false : true
 
-      @magics = NinthAge::DomainMagic.includes(:domain_magic_spells)
+      @magics = NinthAge::DomainMagic.includes(:domain_magic_spells => [:translations])
                                      .includes(:translations)
                                      .joins(:unit_options)
                                      .joins('INNER JOIN ninth_age_units u ON ninth_age_unit_options.unit_id = u.id')
@@ -29,7 +29,8 @@ module Builder
       @army_special_rules = NinthAge::SpecialRule.where(:army_id => @army_list.army_id).includes(:translations)
                                             .order(:id)
 
-      @magic_items = NinthAge::MagicItem.joins(:army_list_units)
+      @magic_items = NinthAge::MagicItem.includes(:translations)
+                                        .joins(:army_list_units)
                                         .where(builder_army_list_units: {army_list_id: @army_list.id})
                                         .order(:id)
                                         .distinct

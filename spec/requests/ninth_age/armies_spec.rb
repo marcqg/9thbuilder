@@ -6,9 +6,10 @@ RSpec.describe 'ninth_age/armies', type: :request do
     # You'll want to customize the parameter types...
     parameter 'id', in: :path, type: :string
     # ...and values used to make the requests.
-    let(:id) { '123' }
+    let(:id) { '1' }
 
     get(summary: 'show army') do
+      produces 'application/json'
       response(200, description: 'successful') do
         # You can add before/let blocks here to trigger the response code
       end
@@ -19,9 +20,10 @@ RSpec.describe 'ninth_age/armies', type: :request do
     # You'll want to customize the parameter types...
     parameter 'id', in: :path, type: :string
     # ...and values used to make the requests.
-    let(:id) { '123' }
+    let(:id) { '1' }
 
     get(summary: 'show army') do
+      produces 'application/json'
       response(200, description: 'successful') do
         # You can add before/let blocks here to trigger the response code
       end
@@ -32,9 +34,10 @@ RSpec.describe 'ninth_age/armies', type: :request do
     # You'll want to customize the parameter types...
     parameter 'id', in: :path, type: :string
     # ...and values used to make the requests.
-    let(:id) { '123' }
+    let(:id) { '1' }
 
     get(summary: 'show army') do
+      produces 'application/json'
       response(200, description: 'successful') do
         # You can add before/let blocks here to trigger the response code
       end
@@ -45,9 +48,10 @@ RSpec.describe 'ninth_age/armies', type: :request do
     # You'll want to customize the parameter types...
     parameter 'id', in: :path, type: :string
     # ...and values used to make the requests.
-    let(:id) { '123' }
+    let(:id) { '1' }
 
     get(summary: 'show army') do
+      produces 'application/json'
       response(200, description: 'successful') do
         # You can add before/let blocks here to trigger the response code
       end
@@ -58,9 +62,10 @@ RSpec.describe 'ninth_age/armies', type: :request do
     # You'll want to customize the parameter types...
     parameter 'id', in: :path, type: :string
     # ...and values used to make the requests.
-    let(:id) { '123' }
+    let(:id) { '1' }
 
     get(summary: 'show army') do
+      produces 'application/json'
       response(200, description: 'successful') do
         # You can add before/let blocks here to trigger the response code
       end
@@ -71,9 +76,10 @@ RSpec.describe 'ninth_age/armies', type: :request do
     # You'll want to customize the parameter types...
     parameter 'id', in: :path, type: :string
     # ...and values used to make the requests.
-    let(:id) { '123' }
+    let(:id) { '1' }
 
     get(summary: 'show army') do
+      produces 'application/json'
       response(200, description: 'successful') do
         # You can add before/let blocks here to trigger the response code
       end
@@ -84,9 +90,10 @@ RSpec.describe 'ninth_age/armies', type: :request do
     # You'll want to customize the parameter types...
     parameter 'id', in: :path, type: :string
     # ...and values used to make the requests.
-    let(:id) { '123' }
+    let(:id) { '1' }
 
     get(summary: 'show army') do
+      produces 'application/json'
       response(200, description: 'successful') do
         # You can add before/let blocks here to trigger the response code
       end
@@ -97,9 +104,10 @@ RSpec.describe 'ninth_age/armies', type: :request do
     # You'll want to customize the parameter types...
     parameter 'version_id', in: :path, type: :string
     # ...and values used to make the requests.
-    let(:version_id) { '123' }
+    let(:version_id) { '1' }
 
     get(summary: 'list armies') do
+      produces 'application/json'
       response(200, description: 'successful') do
         # You can add before/let blocks here to trigger the response code
       end
@@ -110,9 +118,10 @@ RSpec.describe 'ninth_age/armies', type: :request do
     # You'll want to customize the parameter types...
     parameter 'version_id', in: :path, type: :string
     # ...and values used to make the requests.
-    let(:version_id) { '123' }
+    let(:version_id) { '1' }
 
     get(summary: 'list armies') do
+      produces 'application/json'
       response(200, description: 'successful') do
         # You can add before/let blocks here to trigger the response code
       end
@@ -123,9 +132,10 @@ RSpec.describe 'ninth_age/armies', type: :request do
     # You'll want to customize the parameter types...
     parameter 'version_id', in: :path, type: :string
     # ...and values used to make the requests.
-    let(:version_id) { '123' }
+    let(:version_id) { '1' }
 
     get(summary: 'list armies') do
+      produces 'application/json'
       response(200, description: 'successful') do
         # You can add before/let blocks here to trigger the response code
       end
@@ -136,9 +146,10 @@ RSpec.describe 'ninth_age/armies', type: :request do
     # You'll want to customize the parameter types...
     parameter 'version_id', in: :path, type: :string
     # ...and values used to make the requests.
-    let(:version_id) { '123' }
+    let(:version_id) { '1' }
 
     get(summary: 'list armies') do
+      produces 'application/json'
       response(200, description: 'successful') do
         # You can add before/let blocks here to trigger the response code
       end
@@ -149,9 +160,10 @@ RSpec.describe 'ninth_age/armies', type: :request do
     # You'll want to customize the parameter types...
     parameter 'version_id', in: :path, type: :string
     # ...and values used to make the requests.
-    let(:version_id) { '123' }
+    let(:version_id) { '1' }
 
     get(summary: 'list armies') do
+      produces 'application/json'
       response(200, description: 'successful') do
         # You can add before/let blocks here to trigger the response code
       end
@@ -162,9 +174,10 @@ RSpec.describe 'ninth_age/armies', type: :request do
     # You'll want to customize the parameter types...
     parameter 'version_id', in: :path, type: :string
     # ...and values used to make the requests.
-    let(:version_id) { '123' }
+    let(:version_id) { '1' }
 
     get(summary: 'list armies') do
+      produces 'application/json'
       response(200, description: 'successful') do
         # You can add before/let blocks here to trigger the response code
       end
@@ -175,9 +188,10 @@ RSpec.describe 'ninth_age/armies', type: :request do
     # You'll want to customize the parameter types...
     parameter 'version_id', in: :path, type: :string
     # ...and values used to make the requests.
-    let(:version_id) { '123' }
+    let(:version_id) { '1' }
 
     get(summary: 'list armies') do
+      produces 'application/json'
       response(200, description: 'successful') do
         # You can add before/let blocks here to trigger the response code
       end

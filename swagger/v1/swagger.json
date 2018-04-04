@@ -5,6 +5,7251 @@
     "version": "v1"
   },
   "paths": {
+    "/fr/ninth_age/armies/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show army",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/de/ninth_age/armies/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show army",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/ko/ninth_age/armies/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show army",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/pl/ninth_age/armies/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show army",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/es/ninth_age/armies/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show army",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/it/ninth_age/armies/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show army",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/ninth_age/armies/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show army",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/fr/ninth_age/version-{version_id}/armies": {
+      "parameters": [
+        {
+          "name": "version_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list armies",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/de/ninth_age/version-{version_id}/armies": {
+      "parameters": [
+        {
+          "name": "version_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list armies",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/ko/ninth_age/version-{version_id}/armies": {
+      "parameters": [
+        {
+          "name": "version_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list armies",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/pl/ninth_age/version-{version_id}/armies": {
+      "parameters": [
+        {
+          "name": "version_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list armies",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/es/ninth_age/version-{version_id}/armies": {
+      "parameters": [
+        {
+          "name": "version_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list armies",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/it/ninth_age/version-{version_id}/armies": {
+      "parameters": [
+        {
+          "name": "version_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list armies",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/ninth_age/version-{version_id}/armies": {
+      "parameters": [
+        {
+          "name": "version_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list armies",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/fr/ninth_age/army_organisations/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show army_organisation",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/de/ninth_age/army_organisations/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show army_organisation",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/ko/ninth_age/army_organisations/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show army_organisation",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/pl/ninth_age/army_organisations/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show army_organisation",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/es/ninth_age/army_organisations/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show army_organisation",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/it/ninth_age/army_organisations/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show army_organisation",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/ninth_age/army_organisations/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show army_organisation",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/fr/ninth_age/army-{army_id}/army_organisations": {
+      "parameters": [
+        {
+          "name": "army_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list army_organisations",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/de/ninth_age/army-{army_id}/army_organisations": {
+      "parameters": [
+        {
+          "name": "army_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list army_organisations",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/ko/ninth_age/army-{army_id}/army_organisations": {
+      "parameters": [
+        {
+          "name": "army_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list army_organisations",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/pl/ninth_age/army-{army_id}/army_organisations": {
+      "parameters": [
+        {
+          "name": "army_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list army_organisations",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/es/ninth_age/army-{army_id}/army_organisations": {
+      "parameters": [
+        {
+          "name": "army_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list army_organisations",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/it/ninth_age/army-{army_id}/army_organisations": {
+      "parameters": [
+        {
+          "name": "army_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list army_organisations",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/ninth_age/army-{army_id}/army_organisations": {
+      "parameters": [
+        {
+          "name": "army_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list army_organisations",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/fr/ninth_age/domain_magic_spells/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show domain_magic_spell",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/de/ninth_age/domain_magic_spells/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show domain_magic_spell",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/ko/ninth_age/domain_magic_spells/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show domain_magic_spell",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/pl/ninth_age/domain_magic_spells/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show domain_magic_spell",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/es/ninth_age/domain_magic_spells/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show domain_magic_spell",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/it/ninth_age/domain_magic_spells/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show domain_magic_spell",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/ninth_age/domain_magic_spells/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show domain_magic_spell",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/fr/ninth_age/domain-magic-{domain_magic_id}/domain_magic_spells": {
+      "parameters": [
+        {
+          "name": "domain_magic_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list domain_magic_spells",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/de/ninth_age/domain-magic-{domain_magic_id}/domain_magic_spells": {
+      "parameters": [
+        {
+          "name": "domain_magic_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list domain_magic_spells",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/ko/ninth_age/domain-magic-{domain_magic_id}/domain_magic_spells": {
+      "parameters": [
+        {
+          "name": "domain_magic_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list domain_magic_spells",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/pl/ninth_age/domain-magic-{domain_magic_id}/domain_magic_spells": {
+      "parameters": [
+        {
+          "name": "domain_magic_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list domain_magic_spells",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/es/ninth_age/domain-magic-{domain_magic_id}/domain_magic_spells": {
+      "parameters": [
+        {
+          "name": "domain_magic_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list domain_magic_spells",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/it/ninth_age/domain-magic-{domain_magic_id}/domain_magic_spells": {
+      "parameters": [
+        {
+          "name": "domain_magic_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list domain_magic_spells",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/ninth_age/domain-magic-{domain_magic_id}/domain_magic_spells": {
+      "parameters": [
+        {
+          "name": "domain_magic_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list domain_magic_spells",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/fr/ninth_age/domain_magics/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show domain_magic",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/de/ninth_age/domain_magics/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show domain_magic",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/ko/ninth_age/domain_magics/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show domain_magic",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/pl/ninth_age/domain_magics/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show domain_magic",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/es/ninth_age/domain_magics/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show domain_magic",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/it/ninth_age/domain_magics/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show domain_magic",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/ninth_age/domain_magics/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show domain_magic",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/fr/ninth_age/version-{version_id}/domain_magics": {
+      "parameters": [
+        {
+          "name": "version_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list domain_magics",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/de/ninth_age/version-{version_id}/domain_magics": {
+      "parameters": [
+        {
+          "name": "version_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list domain_magics",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/ko/ninth_age/version-{version_id}/domain_magics": {
+      "parameters": [
+        {
+          "name": "version_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list domain_magics",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/pl/ninth_age/version-{version_id}/domain_magics": {
+      "parameters": [
+        {
+          "name": "version_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list domain_magics",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/es/ninth_age/version-{version_id}/domain_magics": {
+      "parameters": [
+        {
+          "name": "version_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list domain_magics",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/it/ninth_age/version-{version_id}/domain_magics": {
+      "parameters": [
+        {
+          "name": "version_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list domain_magics",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/ninth_age/version-{version_id}/domain_magics": {
+      "parameters": [
+        {
+          "name": "version_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list domain_magics",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/fr/ninth_age/equipments/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show equipment",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/de/ninth_age/equipments/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show equipment",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/ko/ninth_age/equipments/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show equipment",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/pl/ninth_age/equipments/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show equipment",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/es/ninth_age/equipments/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show equipment",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/it/ninth_age/equipments/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show equipment",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/ninth_age/equipments/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show equipment",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/fr/ninth_age/army-{army_id}/equipments": {
+      "parameters": [
+        {
+          "name": "army_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "army_all equipment",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/de/ninth_age/army-{army_id}/equipments": {
+      "parameters": [
+        {
+          "name": "army_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "army_all equipment",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/ko/ninth_age/army-{army_id}/equipments": {
+      "parameters": [
+        {
+          "name": "army_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "army_all equipment",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/pl/ninth_age/army-{army_id}/equipments": {
+      "parameters": [
+        {
+          "name": "army_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "army_all equipment",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/es/ninth_age/army-{army_id}/equipments": {
+      "parameters": [
+        {
+          "name": "army_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "army_all equipment",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/it/ninth_age/army-{army_id}/equipments": {
+      "parameters": [
+        {
+          "name": "army_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "army_all equipment",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/ninth_age/army-{army_id}/equipments": {
+      "parameters": [
+        {
+          "name": "army_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "army_all equipment",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/fr/ninth_age/version-{version_id}/equipments": {
+      "parameters": [
+        {
+          "name": "version_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list equipments",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/de/ninth_age/version-{version_id}/equipments": {
+      "parameters": [
+        {
+          "name": "version_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list equipments",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/ko/ninth_age/version-{version_id}/equipments": {
+      "parameters": [
+        {
+          "name": "version_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list equipments",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/pl/ninth_age/version-{version_id}/equipments": {
+      "parameters": [
+        {
+          "name": "version_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list equipments",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/es/ninth_age/version-{version_id}/equipments": {
+      "parameters": [
+        {
+          "name": "version_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list equipments",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/it/ninth_age/version-{version_id}/equipments": {
+      "parameters": [
+        {
+          "name": "version_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list equipments",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/ninth_age/version-{version_id}/equipments": {
+      "parameters": [
+        {
+          "name": "version_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list equipments",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/fr/ninth_age/version-{version_id}/ninth-age-equipments/page-{page}": {
+      "parameters": [
+        {
+          "name": "version_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "page",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list equipments",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/de/ninth_age/version-{version_id}/ninth-age-equipments/page-{page}": {
+      "parameters": [
+        {
+          "name": "version_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "page",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list equipments",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/ko/ninth_age/version-{version_id}/ninth-age-equipments/page-{page}": {
+      "parameters": [
+        {
+          "name": "version_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "page",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list equipments",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/pl/ninth_age/version-{version_id}/ninth-age-equipments/page-{page}": {
+      "parameters": [
+        {
+          "name": "version_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "page",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list equipments",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/es/ninth_age/version-{version_id}/ninth-age-equipments/page-{page}": {
+      "parameters": [
+        {
+          "name": "version_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "page",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list equipments",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/it/ninth_age/version-{version_id}/ninth-age-equipments/page-{page}": {
+      "parameters": [
+        {
+          "name": "version_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "page",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list equipments",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/ninth_age/version-{version_id}/ninth-age-equipments/page-{page}": {
+      "parameters": [
+        {
+          "name": "version_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "page",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list equipments",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/fr/ninth_age/version-{version_id}/equipments/all": {
+      "parameters": [
+        {
+          "name": "version_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "all equipment",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/de/ninth_age/version-{version_id}/equipments/all": {
+      "parameters": [
+        {
+          "name": "version_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "all equipment",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/ko/ninth_age/version-{version_id}/equipments/all": {
+      "parameters": [
+        {
+          "name": "version_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "all equipment",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/pl/ninth_age/version-{version_id}/equipments/all": {
+      "parameters": [
+        {
+          "name": "version_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "all equipment",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/es/ninth_age/version-{version_id}/equipments/all": {
+      "parameters": [
+        {
+          "name": "version_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "all equipment",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/it/ninth_age/version-{version_id}/equipments/all": {
+      "parameters": [
+        {
+          "name": "version_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "all equipment",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/ninth_age/version-{version_id}/equipments/all": {
+      "parameters": [
+        {
+          "name": "version_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "all equipment",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/fr/ninth_age/extra_items/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show extra_item",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/de/ninth_age/extra_items/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show extra_item",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/ko/ninth_age/extra_items/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show extra_item",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/pl/ninth_age/extra_items/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show extra_item",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/es/ninth_age/extra_items/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show extra_item",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/it/ninth_age/extra_items/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show extra_item",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/ninth_age/extra_items/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show extra_item",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/fr/ninth_age/army-{army_id}/extra_items": {
+      "parameters": [
+        {
+          "name": "army_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "army_all extra_item",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/de/ninth_age/army-{army_id}/extra_items": {
+      "parameters": [
+        {
+          "name": "army_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "army_all extra_item",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/ko/ninth_age/army-{army_id}/extra_items": {
+      "parameters": [
+        {
+          "name": "army_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "army_all extra_item",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/pl/ninth_age/army-{army_id}/extra_items": {
+      "parameters": [
+        {
+          "name": "army_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "army_all extra_item",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/es/ninth_age/army-{army_id}/extra_items": {
+      "parameters": [
+        {
+          "name": "army_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "army_all extra_item",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/it/ninth_age/army-{army_id}/extra_items": {
+      "parameters": [
+        {
+          "name": "army_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "army_all extra_item",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/ninth_age/army-{army_id}/extra_items": {
+      "parameters": [
+        {
+          "name": "army_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "army_all extra_item",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/fr/ninth_age/army-extra-item-category-{extra_item_category_id}/extra_items": {
+      "parameters": [
+        {
+          "name": "extra_item_category_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "by_army extra_item",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/de/ninth_age/army-extra-item-category-{extra_item_category_id}/extra_items": {
+      "parameters": [
+        {
+          "name": "extra_item_category_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "by_army extra_item",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/ko/ninth_age/army-extra-item-category-{extra_item_category_id}/extra_items": {
+      "parameters": [
+        {
+          "name": "extra_item_category_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "by_army extra_item",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/pl/ninth_age/army-extra-item-category-{extra_item_category_id}/extra_items": {
+      "parameters": [
+        {
+          "name": "extra_item_category_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "by_army extra_item",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/es/ninth_age/army-extra-item-category-{extra_item_category_id}/extra_items": {
+      "parameters": [
+        {
+          "name": "extra_item_category_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "by_army extra_item",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/it/ninth_age/army-extra-item-category-{extra_item_category_id}/extra_items": {
+      "parameters": [
+        {
+          "name": "extra_item_category_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "by_army extra_item",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/ninth_age/army-extra-item-category-{extra_item_category_id}/extra_items": {
+      "parameters": [
+        {
+          "name": "extra_item_category_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "by_army extra_item",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/fr/ninth_age/version-{version_id}/extra_items": {
+      "parameters": [
+        {
+          "name": "version_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list extra_items",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/de/ninth_age/version-{version_id}/extra_items": {
+      "parameters": [
+        {
+          "name": "version_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list extra_items",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/ko/ninth_age/version-{version_id}/extra_items": {
+      "parameters": [
+        {
+          "name": "version_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list extra_items",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/pl/ninth_age/version-{version_id}/extra_items": {
+      "parameters": [
+        {
+          "name": "version_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list extra_items",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/es/ninth_age/version-{version_id}/extra_items": {
+      "parameters": [
+        {
+          "name": "version_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list extra_items",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/it/ninth_age/version-{version_id}/extra_items": {
+      "parameters": [
+        {
+          "name": "version_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list extra_items",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/ninth_age/version-{version_id}/extra_items": {
+      "parameters": [
+        {
+          "name": "version_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list extra_items",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/fr/ninth_age/version-{version_id}/ninth-age-extra-items/page-{page}": {
+      "parameters": [
+        {
+          "name": "version_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "page",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list extra_items",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/de/ninth_age/version-{version_id}/ninth-age-extra-items/page-{page}": {
+      "parameters": [
+        {
+          "name": "version_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "page",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list extra_items",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/ko/ninth_age/version-{version_id}/ninth-age-extra-items/page-{page}": {
+      "parameters": [
+        {
+          "name": "version_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "page",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list extra_items",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/pl/ninth_age/version-{version_id}/ninth-age-extra-items/page-{page}": {
+      "parameters": [
+        {
+          "name": "version_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "page",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list extra_items",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/es/ninth_age/version-{version_id}/ninth-age-extra-items/page-{page}": {
+      "parameters": [
+        {
+          "name": "version_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "page",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list extra_items",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/it/ninth_age/version-{version_id}/ninth-age-extra-items/page-{page}": {
+      "parameters": [
+        {
+          "name": "version_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "page",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list extra_items",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/ninth_age/version-{version_id}/ninth-age-extra-items/page-{page}": {
+      "parameters": [
+        {
+          "name": "version_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "page",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list extra_items",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/fr/ninth_age/magic_item_categories/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show magic_item_category",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/de/ninth_age/magic_item_categories/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show magic_item_category",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/ko/ninth_age/magic_item_categories/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show magic_item_category",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/pl/ninth_age/magic_item_categories/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show magic_item_category",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/es/ninth_age/magic_item_categories/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show magic_item_category",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/it/ninth_age/magic_item_categories/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show magic_item_category",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/ninth_age/magic_item_categories/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show magic_item_category",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/fr/ninth_age/version-{version_id}/magic_item_categories": {
+      "parameters": [
+        {
+          "name": "version_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list magic_item_categories",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/de/ninth_age/version-{version_id}/magic_item_categories": {
+      "parameters": [
+        {
+          "name": "version_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list magic_item_categories",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/ko/ninth_age/version-{version_id}/magic_item_categories": {
+      "parameters": [
+        {
+          "name": "version_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list magic_item_categories",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/pl/ninth_age/version-{version_id}/magic_item_categories": {
+      "parameters": [
+        {
+          "name": "version_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list magic_item_categories",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/es/ninth_age/version-{version_id}/magic_item_categories": {
+      "parameters": [
+        {
+          "name": "version_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list magic_item_categories",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/it/ninth_age/version-{version_id}/magic_item_categories": {
+      "parameters": [
+        {
+          "name": "version_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list magic_item_categories",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/ninth_age/version-{version_id}/magic_item_categories": {
+      "parameters": [
+        {
+          "name": "version_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list magic_item_categories",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/fr/ninth_age/magic_items": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list magic_items",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/de/ninth_age/magic_items": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list magic_items",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/ko/ninth_age/magic_items": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list magic_items",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/pl/ninth_age/magic_items": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list magic_items",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/es/ninth_age/magic_items": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list magic_items",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/it/ninth_age/magic_items": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list magic_items",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/ninth_age/magic_items": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list magic_items",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/fr/ninth_age/magic_items/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show magic_item",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/de/ninth_age/magic_items/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show magic_item",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/ko/ninth_age/magic_items/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show magic_item",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/pl/ninth_age/magic_items/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show magic_item",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/es/ninth_age/magic_items/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show magic_item",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/it/ninth_age/magic_items/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show magic_item",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/ninth_age/magic_items/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show magic_item",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/fr/ninth_age/version-{version_id}/ninth-age-magic-items/page-{page}": {
+      "parameters": [
+        {
+          "name": "version_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "page",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list magic_items",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/de/ninth_age/version-{version_id}/ninth-age-magic-items/page-{page}": {
+      "parameters": [
+        {
+          "name": "version_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "page",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list magic_items",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/ko/ninth_age/version-{version_id}/ninth-age-magic-items/page-{page}": {
+      "parameters": [
+        {
+          "name": "version_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "page",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list magic_items",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/pl/ninth_age/version-{version_id}/ninth-age-magic-items/page-{page}": {
+      "parameters": [
+        {
+          "name": "version_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "page",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list magic_items",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/es/ninth_age/version-{version_id}/ninth-age-magic-items/page-{page}": {
+      "parameters": [
+        {
+          "name": "version_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "page",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list magic_items",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/it/ninth_age/version-{version_id}/ninth-age-magic-items/page-{page}": {
+      "parameters": [
+        {
+          "name": "version_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "page",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list magic_items",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/ninth_age/version-{version_id}/ninth-age-magic-items/page-{page}": {
+      "parameters": [
+        {
+          "name": "version_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "page",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list magic_items",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/fr/ninth_age/version-{version_id}/magic_items/all": {
+      "parameters": [
+        {
+          "name": "version_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "all magic_item",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/de/ninth_age/version-{version_id}/magic_items/all": {
+      "parameters": [
+        {
+          "name": "version_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "all magic_item",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/ko/ninth_age/version-{version_id}/magic_items/all": {
+      "parameters": [
+        {
+          "name": "version_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "all magic_item",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/pl/ninth_age/version-{version_id}/magic_items/all": {
+      "parameters": [
+        {
+          "name": "version_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "all magic_item",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/es/ninth_age/version-{version_id}/magic_items/all": {
+      "parameters": [
+        {
+          "name": "version_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "all magic_item",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/it/ninth_age/version-{version_id}/magic_items/all": {
+      "parameters": [
+        {
+          "name": "version_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "all magic_item",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/ninth_age/version-{version_id}/magic_items/all": {
+      "parameters": [
+        {
+          "name": "version_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "all magic_item",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/fr/ninth_age/magic-item-category-{category_id}/magic_items": {
+      "parameters": [
+        {
+          "name": "category_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list magic_items",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/de/ninth_age/magic-item-category-{category_id}/magic_items": {
+      "parameters": [
+        {
+          "name": "category_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list magic_items",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/ko/ninth_age/magic-item-category-{category_id}/magic_items": {
+      "parameters": [
+        {
+          "name": "category_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list magic_items",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/pl/ninth_age/magic-item-category-{category_id}/magic_items": {
+      "parameters": [
+        {
+          "name": "category_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list magic_items",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/es/ninth_age/magic-item-category-{category_id}/magic_items": {
+      "parameters": [
+        {
+          "name": "category_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list magic_items",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/it/ninth_age/magic-item-category-{category_id}/magic_items": {
+      "parameters": [
+        {
+          "name": "category_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list magic_items",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/ninth_age/magic-item-category-{category_id}/magic_items": {
+      "parameters": [
+        {
+          "name": "category_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list magic_items",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/fr/ninth_age/magic_standards/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show magic_standard",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/de/ninth_age/magic_standards/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show magic_standard",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/ko/ninth_age/magic_standards/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show magic_standard",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/pl/ninth_age/magic_standards/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show magic_standard",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/es/ninth_age/magic_standards/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show magic_standard",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/it/ninth_age/magic_standards/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show magic_standard",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/ninth_age/magic_standards/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show magic_standard",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/fr/ninth_age/version-{version_id}/magic_standards": {
+      "parameters": [
+        {
+          "name": "version_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list magic_standards",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/de/ninth_age/version-{version_id}/magic_standards": {
+      "parameters": [
+        {
+          "name": "version_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list magic_standards",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/ko/ninth_age/version-{version_id}/magic_standards": {
+      "parameters": [
+        {
+          "name": "version_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list magic_standards",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/pl/ninth_age/version-{version_id}/magic_standards": {
+      "parameters": [
+        {
+          "name": "version_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list magic_standards",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/es/ninth_age/version-{version_id}/magic_standards": {
+      "parameters": [
+        {
+          "name": "version_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list magic_standards",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/it/ninth_age/version-{version_id}/magic_standards": {
+      "parameters": [
+        {
+          "name": "version_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list magic_standards",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/ninth_age/version-{version_id}/magic_standards": {
+      "parameters": [
+        {
+          "name": "version_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list magic_standards",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/fr/ninth_age/version-{version_id}/ninth-age-magic-standards/page-{page}": {
+      "parameters": [
+        {
+          "name": "version_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "page",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list magic_standards",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/de/ninth_age/version-{version_id}/ninth-age-magic-standards/page-{page}": {
+      "parameters": [
+        {
+          "name": "version_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "page",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list magic_standards",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/ko/ninth_age/version-{version_id}/ninth-age-magic-standards/page-{page}": {
+      "parameters": [
+        {
+          "name": "version_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "page",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list magic_standards",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/pl/ninth_age/version-{version_id}/ninth-age-magic-standards/page-{page}": {
+      "parameters": [
+        {
+          "name": "version_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "page",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list magic_standards",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/es/ninth_age/version-{version_id}/ninth-age-magic-standards/page-{page}": {
+      "parameters": [
+        {
+          "name": "version_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "page",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list magic_standards",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/it/ninth_age/version-{version_id}/ninth-age-magic-standards/page-{page}": {
+      "parameters": [
+        {
+          "name": "version_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "page",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list magic_standards",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/ninth_age/version-{version_id}/ninth-age-magic-standards/page-{page}": {
+      "parameters": [
+        {
+          "name": "version_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "page",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list magic_standards",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/fr/ninth_age/organisation_groups/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show organisation_group",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/de/ninth_age/organisation_groups/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show organisation_group",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/ko/ninth_age/organisation_groups/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show organisation_group",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/pl/ninth_age/organisation_groups/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show organisation_group",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/es/ninth_age/organisation_groups/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show organisation_group",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/it/ninth_age/organisation_groups/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show organisation_group",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/ninth_age/organisation_groups/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show organisation_group",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/fr/ninth_age/organisations/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show organisation",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/de/ninth_age/organisations/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show organisation",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/ko/ninth_age/organisations/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show organisation",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/pl/ninth_age/organisations/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show organisation",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/es/ninth_age/organisations/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show organisation",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/it/ninth_age/organisations/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show organisation",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/ninth_age/organisations/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show organisation",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/fr/ninth_age/army-{army_id}/organisations": {
+      "parameters": [
+        {
+          "name": "army_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list organisations",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/de/ninth_age/army-{army_id}/organisations": {
+      "parameters": [
+        {
+          "name": "army_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list organisations",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/ko/ninth_age/army-{army_id}/organisations": {
+      "parameters": [
+        {
+          "name": "army_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list organisations",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/pl/ninth_age/army-{army_id}/organisations": {
+      "parameters": [
+        {
+          "name": "army_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list organisations",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/es/ninth_age/army-{army_id}/organisations": {
+      "parameters": [
+        {
+          "name": "army_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list organisations",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/it/ninth_age/army-{army_id}/organisations": {
+      "parameters": [
+        {
+          "name": "army_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list organisations",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/ninth_age/army-{army_id}/organisations": {
+      "parameters": [
+        {
+          "name": "army_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list organisations",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/fr/ninth_age/unit-{unit_id}/organisations": {
+      "parameters": [
+        {
+          "name": "unit_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "unit organisation",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/de/ninth_age/unit-{unit_id}/organisations": {
+      "parameters": [
+        {
+          "name": "unit_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "unit organisation",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/ko/ninth_age/unit-{unit_id}/organisations": {
+      "parameters": [
+        {
+          "name": "unit_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "unit organisation",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/pl/ninth_age/unit-{unit_id}/organisations": {
+      "parameters": [
+        {
+          "name": "unit_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "unit organisation",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/es/ninth_age/unit-{unit_id}/organisations": {
+      "parameters": [
+        {
+          "name": "unit_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "unit organisation",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/it/ninth_age/unit-{unit_id}/organisations": {
+      "parameters": [
+        {
+          "name": "unit_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "unit organisation",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/ninth_age/unit-{unit_id}/organisations": {
+      "parameters": [
+        {
+          "name": "unit_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "unit organisation",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/fr/ninth_age/special_rules/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show special_rule",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/de/ninth_age/special_rules/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show special_rule",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/ko/ninth_age/special_rules/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show special_rule",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/pl/ninth_age/special_rules/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show special_rule",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/es/ninth_age/special_rules/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show special_rule",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/it/ninth_age/special_rules/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show special_rule",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/ninth_age/special_rules/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show special_rule",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/fr/ninth_age/army-{army_id}/special_rules/all": {
+      "parameters": [
+        {
+          "name": "army_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "army_all special_rule",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/de/ninth_age/army-{army_id}/special_rules/all": {
+      "parameters": [
+        {
+          "name": "army_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "army_all special_rule",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/ko/ninth_age/army-{army_id}/special_rules/all": {
+      "parameters": [
+        {
+          "name": "army_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "army_all special_rule",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/pl/ninth_age/army-{army_id}/special_rules/all": {
+      "parameters": [
+        {
+          "name": "army_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "army_all special_rule",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/es/ninth_age/army-{army_id}/special_rules/all": {
+      "parameters": [
+        {
+          "name": "army_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "army_all special_rule",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/it/ninth_age/army-{army_id}/special_rules/all": {
+      "parameters": [
+        {
+          "name": "army_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "army_all special_rule",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/ninth_age/army-{army_id}/special_rules/all": {
+      "parameters": [
+        {
+          "name": "army_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "army_all special_rule",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/fr/ninth_age/version-{version_id}/special_rules": {
+      "parameters": [
+        {
+          "name": "version_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list special_rules",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/de/ninth_age/version-{version_id}/special_rules": {
+      "parameters": [
+        {
+          "name": "version_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list special_rules",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/ko/ninth_age/version-{version_id}/special_rules": {
+      "parameters": [
+        {
+          "name": "version_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list special_rules",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/pl/ninth_age/version-{version_id}/special_rules": {
+      "parameters": [
+        {
+          "name": "version_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list special_rules",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/es/ninth_age/version-{version_id}/special_rules": {
+      "parameters": [
+        {
+          "name": "version_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list special_rules",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/it/ninth_age/version-{version_id}/special_rules": {
+      "parameters": [
+        {
+          "name": "version_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list special_rules",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/ninth_age/version-{version_id}/special_rules": {
+      "parameters": [
+        {
+          "name": "version_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list special_rules",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/fr/ninth_age/version-{version_id}/ninth-age-special-rules/page-{page}": {
+      "parameters": [
+        {
+          "name": "version_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "page",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list special_rules",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/de/ninth_age/version-{version_id}/ninth-age-special-rules/page-{page}": {
+      "parameters": [
+        {
+          "name": "version_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "page",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list special_rules",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/ko/ninth_age/version-{version_id}/ninth-age-special-rules/page-{page}": {
+      "parameters": [
+        {
+          "name": "version_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "page",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list special_rules",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/pl/ninth_age/version-{version_id}/ninth-age-special-rules/page-{page}": {
+      "parameters": [
+        {
+          "name": "version_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "page",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list special_rules",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/es/ninth_age/version-{version_id}/ninth-age-special-rules/page-{page}": {
+      "parameters": [
+        {
+          "name": "version_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "page",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list special_rules",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/it/ninth_age/version-{version_id}/ninth-age-special-rules/page-{page}": {
+      "parameters": [
+        {
+          "name": "version_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "page",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list special_rules",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/ninth_age/version-{version_id}/ninth-age-special-rules/page-{page}": {
+      "parameters": [
+        {
+          "name": "version_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "page",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list special_rules",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/fr/ninth_age/version-{version_id}/special_rules/all": {
+      "parameters": [
+        {
+          "name": "version_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "all special_rule",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/de/ninth_age/version-{version_id}/special_rules/all": {
+      "parameters": [
+        {
+          "name": "version_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "all special_rule",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/ko/ninth_age/version-{version_id}/special_rules/all": {
+      "parameters": [
+        {
+          "name": "version_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "all special_rule",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/pl/ninth_age/version-{version_id}/special_rules/all": {
+      "parameters": [
+        {
+          "name": "version_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "all special_rule",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/es/ninth_age/version-{version_id}/special_rules/all": {
+      "parameters": [
+        {
+          "name": "version_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "all special_rule",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/it/ninth_age/version-{version_id}/special_rules/all": {
+      "parameters": [
+        {
+          "name": "version_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "all special_rule",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/ninth_age/version-{version_id}/special_rules/all": {
+      "parameters": [
+        {
+          "name": "version_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "all special_rule",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/fr/ninth_age/troop_types": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list troop_types",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/de/ninth_age/troop_types": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list troop_types",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/ko/ninth_age/troop_types": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list troop_types",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/pl/ninth_age/troop_types": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list troop_types",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/es/ninth_age/troop_types": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list troop_types",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/it/ninth_age/troop_types": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list troop_types",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/ninth_age/troop_types": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list troop_types",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/fr/ninth_age/troop_types/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show troop_type",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/de/ninth_age/troop_types/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show troop_type",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/ko/ninth_age/troop_types/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show troop_type",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/pl/ninth_age/troop_types/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show troop_type",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/es/ninth_age/troop_types/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show troop_type",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/it/ninth_age/troop_types/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show troop_type",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/ninth_age/troop_types/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show troop_type",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/fr/ninth_age/troops/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show troop",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/de/ninth_age/troops/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show troop",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/ko/ninth_age/troops/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show troop",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/pl/ninth_age/troops/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show troop",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/es/ninth_age/troops/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show troop",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/it/ninth_age/troops/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show troop",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/ninth_age/troops/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show troop",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/fr/ninth_age/units-{unit_id}/troops": {
+      "parameters": [
+        {
+          "name": "unit_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list troops",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/de/ninth_age/units-{unit_id}/troops": {
+      "parameters": [
+        {
+          "name": "unit_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list troops",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/ko/ninth_age/units-{unit_id}/troops": {
+      "parameters": [
+        {
+          "name": "unit_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list troops",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/pl/ninth_age/units-{unit_id}/troops": {
+      "parameters": [
+        {
+          "name": "unit_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list troops",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/es/ninth_age/units-{unit_id}/troops": {
+      "parameters": [
+        {
+          "name": "unit_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list troops",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/it/ninth_age/units-{unit_id}/troops": {
+      "parameters": [
+        {
+          "name": "unit_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list troops",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/ninth_age/units-{unit_id}/troops": {
+      "parameters": [
+        {
+          "name": "unit_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list troops",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/fr/ninth_age/unit-{unit_id}/troops": {
+      "parameters": [
+        {
+          "name": "unit_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list troops",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/de/ninth_age/unit-{unit_id}/troops": {
+      "parameters": [
+        {
+          "name": "unit_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list troops",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/ko/ninth_age/unit-{unit_id}/troops": {
+      "parameters": [
+        {
+          "name": "unit_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list troops",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/pl/ninth_age/unit-{unit_id}/troops": {
+      "parameters": [
+        {
+          "name": "unit_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list troops",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/es/ninth_age/unit-{unit_id}/troops": {
+      "parameters": [
+        {
+          "name": "unit_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list troops",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/it/ninth_age/unit-{unit_id}/troops": {
+      "parameters": [
+        {
+          "name": "unit_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list troops",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/ninth_age/unit-{unit_id}/troops": {
+      "parameters": [
+        {
+          "name": "unit_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list troops",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/fr/ninth_age/unit-{unit_id}/unit_options": {
+      "parameters": [
+        {
+          "name": "unit_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list unit_options",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/de/ninth_age/unit-{unit_id}/unit_options": {
+      "parameters": [
+        {
+          "name": "unit_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list unit_options",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/ko/ninth_age/unit-{unit_id}/unit_options": {
+      "parameters": [
+        {
+          "name": "unit_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list unit_options",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/pl/ninth_age/unit-{unit_id}/unit_options": {
+      "parameters": [
+        {
+          "name": "unit_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list unit_options",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/es/ninth_age/unit-{unit_id}/unit_options": {
+      "parameters": [
+        {
+          "name": "unit_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list unit_options",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/it/ninth_age/unit-{unit_id}/unit_options": {
+      "parameters": [
+        {
+          "name": "unit_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list unit_options",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/ninth_age/unit-{unit_id}/unit_options": {
+      "parameters": [
+        {
+          "name": "unit_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list unit_options",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/fr/ninth_age/unit_types": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list unit_types",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/de/ninth_age/unit_types": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list unit_types",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/ko/ninth_age/unit_types": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list unit_types",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/pl/ninth_age/unit_types": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list unit_types",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/es/ninth_age/unit_types": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list unit_types",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/it/ninth_age/unit_types": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list unit_types",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/ninth_age/unit_types": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list unit_types",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/fr/ninth_age/unit_types/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show unit_type",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/de/ninth_age/unit_types/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show unit_type",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/ko/ninth_age/unit_types/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show unit_type",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/pl/ninth_age/unit_types/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show unit_type",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/es/ninth_age/unit_types/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show unit_type",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/it/ninth_age/unit_types/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show unit_type",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/ninth_age/unit_types/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show unit_type",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/fr/ninth_age/units/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show unit",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/de/ninth_age/units/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show unit",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/ko/ninth_age/units/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show unit",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/pl/ninth_age/units/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show unit",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/es/ninth_age/units/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show unit",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/it/ninth_age/units/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show unit",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/ninth_age/units/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show unit",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/fr/ninth_age/army-{army_id}/units": {
+      "parameters": [
+        {
+          "name": "army_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list units",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/de/ninth_age/army-{army_id}/units": {
+      "parameters": [
+        {
+          "name": "army_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list units",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/ko/ninth_age/army-{army_id}/units": {
+      "parameters": [
+        {
+          "name": "army_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list units",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/pl/ninth_age/army-{army_id}/units": {
+      "parameters": [
+        {
+          "name": "army_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list units",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/es/ninth_age/army-{army_id}/units": {
+      "parameters": [
+        {
+          "name": "army_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list units",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/it/ninth_age/army-{army_id}/units": {
+      "parameters": [
+        {
+          "name": "army_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list units",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/ninth_age/army-{army_id}/units": {
+      "parameters": [
+        {
+          "name": "army_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "list units",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/fr/ninth_age/army-{army_id}/units/all": {
+      "parameters": [
+        {
+          "name": "army_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show_all unit",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/de/ninth_age/army-{army_id}/units/all": {
+      "parameters": [
+        {
+          "name": "army_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show_all unit",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/ko/ninth_age/army-{army_id}/units/all": {
+      "parameters": [
+        {
+          "name": "army_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show_all unit",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/pl/ninth_age/army-{army_id}/units/all": {
+      "parameters": [
+        {
+          "name": "army_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show_all unit",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/es/ninth_age/army-{army_id}/units/all": {
+      "parameters": [
+        {
+          "name": "army_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show_all unit",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/it/ninth_age/army-{army_id}/units/all": {
+      "parameters": [
+        {
+          "name": "army_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show_all unit",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/ninth_age/army-{army_id}/units/all": {
+      "parameters": [
+        {
+          "name": "army_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "show_all unit",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/fr/ninth_age/army-{army_id}/mounts": {
+      "parameters": [
+        {
+          "name": "army_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "mounts unit",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/de/ninth_age/army-{army_id}/mounts": {
+      "parameters": [
+        {
+          "name": "army_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "mounts unit",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/ko/ninth_age/army-{army_id}/mounts": {
+      "parameters": [
+        {
+          "name": "army_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "mounts unit",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/pl/ninth_age/army-{army_id}/mounts": {
+      "parameters": [
+        {
+          "name": "army_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "mounts unit",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/es/ninth_age/army-{army_id}/mounts": {
+      "parameters": [
+        {
+          "name": "army_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "mounts unit",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/it/ninth_age/army-{army_id}/mounts": {
+      "parameters": [
+        {
+          "name": "army_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "mounts unit",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/ninth_age/army-{army_id}/mounts": {
+      "parameters": [
+        {
+          "name": "army_id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        },
+        "summary": "mounts unit",
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
     "/fr/ninth_age/versions": {
       "get": {
         "responses": {
@@ -12,7 +7257,10 @@
             "description": "successful"
           }
         },
-        "summary": "list versions"
+        "summary": "list versions",
+        "produces": [
+          "application/json"
+        ]
       }
     },
     "/de/ninth_age/versions": {
@@ -22,7 +7270,10 @@
             "description": "successful"
           }
         },
-        "summary": "list versions"
+        "summary": "list versions",
+        "produces": [
+          "application/json"
+        ]
       }
     },
     "/ko/ninth_age/versions": {
@@ -32,7 +7283,10 @@
             "description": "successful"
           }
         },
-        "summary": "list versions"
+        "summary": "list versions",
+        "produces": [
+          "application/json"
+        ]
       }
     },
     "/pl/ninth_age/versions": {
@@ -42,7 +7296,10 @@
             "description": "successful"
           }
         },
-        "summary": "list versions"
+        "summary": "list versions",
+        "produces": [
+          "application/json"
+        ]
       }
     },
     "/es/ninth_age/versions": {
@@ -52,7 +7309,10 @@
             "description": "successful"
           }
         },
-        "summary": "list versions"
+        "summary": "list versions",
+        "produces": [
+          "application/json"
+        ]
       }
     },
     "/it/ninth_age/versions": {
@@ -62,7 +7322,10 @@
             "description": "successful"
           }
         },
-        "summary": "list versions"
+        "summary": "list versions",
+        "produces": [
+          "application/json"
+        ]
       }
     },
     "/ninth_age/versions": {
@@ -72,7 +7335,10 @@
             "description": "successful"
           }
         },
-        "summary": "list versions"
+        "summary": "list versions",
+        "produces": [
+          "application/json"
+        ]
       }
     },
     "/fr/ninth_age/versions/{id}": {
@@ -90,7 +7356,10 @@
             "description": "successful"
           }
         },
-        "summary": "show version"
+        "summary": "show version",
+        "produces": [
+          "application/json"
+        ]
       }
     },
     "/de/ninth_age/versions/{id}": {
@@ -108,7 +7377,10 @@
             "description": "successful"
           }
         },
-        "summary": "show version"
+        "summary": "show version",
+        "produces": [
+          "application/json"
+        ]
       }
     },
     "/ko/ninth_age/versions/{id}": {
@@ -126,7 +7398,10 @@
             "description": "successful"
           }
         },
-        "summary": "show version"
+        "summary": "show version",
+        "produces": [
+          "application/json"
+        ]
       }
     },
     "/pl/ninth_age/versions/{id}": {
@@ -144,7 +7419,10 @@
             "description": "successful"
           }
         },
-        "summary": "show version"
+        "summary": "show version",
+        "produces": [
+          "application/json"
+        ]
       }
     },
     "/es/ninth_age/versions/{id}": {
@@ -162,7 +7440,10 @@
             "description": "successful"
           }
         },
-        "summary": "show version"
+        "summary": "show version",
+        "produces": [
+          "application/json"
+        ]
       }
     },
     "/it/ninth_age/versions/{id}": {
@@ -180,7 +7461,10 @@
             "description": "successful"
           }
         },
-        "summary": "show version"
+        "summary": "show version",
+        "produces": [
+          "application/json"
+        ]
       }
     },
     "/ninth_age/versions/{id}": {
@@ -198,7 +7482,10 @@
             "description": "successful"
           }
         },
-        "summary": "show version"
+        "summary": "show version",
+        "produces": [
+          "application/json"
+        ]
       }
     }
   }
