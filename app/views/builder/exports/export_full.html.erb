@@ -56,10 +56,12 @@
 </div>
 <% end %>
 
+<% unless @magic_items.empty? %>
 <div class="section">
   <h2><%=t 'army_list_unit.edit.magic_items' %></h3>
   <%= render :partial => 'export_magic_item_full', :collection => @magic_items, :as => :magic_item %>
 </div>
+<% end %>
 
 <div class="section">
   <h2><%=t 'army_list_unit.show.special_rules' %></h3>

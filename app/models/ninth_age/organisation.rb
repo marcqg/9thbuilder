@@ -45,4 +45,8 @@ class NinthAge::Organisation < ApplicationRecord
   def medium_logo_url
     self.logo.url(:medium)
   end
+
+  def thumb_logo_url
+    self.logo.url(:thumb)
+  end
 end

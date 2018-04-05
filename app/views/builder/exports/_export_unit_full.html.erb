@@ -6,13 +6,22 @@
         <small>points</small>
       </div>
 
-      <strong><%= transliterate army_list_unit.name %></strong>
-      <p><%= army_list_unit.unit.name %>
-        <span class="text-bold">
-          <% if army_list_unit.unit.max == 1%> • <em>Unique</em><% end %>
-          <% if army_list_unit.size > 1 %> x<%= army_list_unit.size %><% end %>
-        </span>
-      </p>
+      <div class="unit-organisation-logo">
+        <% army_list_unit.unit.organisations.each do |organisation| %>
+          <% unless organisation.logo.nil? %>
+            <%= image_tag organisation.thumb_logo_url, size: '40x40', alt: organisation.name, border: 0 %>
+          <% end %>
+        <% end %>
+      </div>
+      <div>
+        <strong><%= transliterate army_list_unit.name %></strong>
+        <p><%= army_list_unit.unit.name %>
+          <span class="text-bold">
+            <% if army_list_unit.unit.max == 1%> • <em>Unique</em><% end %>
+            <% if army_list_unit.size > 1 %> x<%= army_list_unit.size %><% end %>
+          </span>
+        </p>
+      </div>
     </th>
   </tr>
   <% if army_list_unit.unit.V1? %>

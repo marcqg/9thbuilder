@@ -367,6 +367,7 @@ en:
       HundredHundred: "100x100mm"
       HundredFifty: "100x50mm"
       TwentyFiveRound: "25mm round"
+    mount: Mount
     show:
       size: "<strong>%{min_size}</strong> models, may add up to <strong>%{max_size}</strong> models <strong>%{pts}</strong> pts/mod."
       change: "%{name} units of %{number} models count towards %{new_name}"
