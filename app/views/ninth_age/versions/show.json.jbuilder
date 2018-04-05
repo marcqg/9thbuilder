@@ -1,1 +1,1 @@
-json.partial! "ninth_age/versions/version", ninth_age_version: @ninth_age_version
+json.partial! "ninth_age/versions/version", ninth_age_version: @version

@@ -18,7 +18,12 @@ module NinthAge
 
     def all
       @version = NinthAge::Version.find(params[:version_id])
-      @ninth_age_magic_items = NinthAge::MagicItem.with_translations.where(:version_id => params[:version_id])
+      @ninth_age_magic_items = NinthAge::MagicItem.includes(:translations)
+                                                    .where(:version_id => params[:version_id])
+
+      if params[:page].present?
+        @ninth_age_magic_items = @ninth_age_magic_items.paginate(:page => params[:page].to_i)
+      end
 
       respond_to do |format|
         format.json

@@ -6,7 +6,7 @@ RSpec.describe 'ninth_age/magic_item_categories', type: :request do
     # You'll want to customize the parameter types...
     parameter 'id', in: :path, type: :string
     # ...and values used to make the requests.
-    let(:id) { '1' }
+    let(:id) { '29' }
 
     get(summary: 'show magic_item_category') do
       produces 'application/json'
@@ -20,7 +20,7 @@ RSpec.describe 'ninth_age/magic_item_categories', type: :request do
     # You'll want to customize the parameter types...
     parameter 'id', in: :path, type: :string
     # ...and values used to make the requests.
-    let(:id) { '1' }
+    let(:id) { '29' }
 
     get(summary: 'show magic_item_category') do
       produces 'application/json'
@@ -34,7 +34,7 @@ RSpec.describe 'ninth_age/magic_item_categories', type: :request do
     # You'll want to customize the parameter types...
     parameter 'id', in: :path, type: :string
     # ...and values used to make the requests.
-    let(:id) { '1' }
+    let(:id) { '29' }
 
     get(summary: 'show magic_item_category') do
       produces 'application/json'
@@ -48,7 +48,7 @@ RSpec.describe 'ninth_age/magic_item_categories', type: :request do
     # You'll want to customize the parameter types...
     parameter 'id', in: :path, type: :string
     # ...and values used to make the requests.
-    let(:id) { '1' }
+    let(:id) { '29' }
 
     get(summary: 'show magic_item_category') do
       produces 'application/json'
@@ -62,7 +62,7 @@ RSpec.describe 'ninth_age/magic_item_categories', type: :request do
     # You'll want to customize the parameter types...
     parameter 'id', in: :path, type: :string
     # ...and values used to make the requests.
-    let(:id) { '1' }
+    let(:id) { '29' }
 
     get(summary: 'show magic_item_category') do
       produces 'application/json'
@@ -76,7 +76,7 @@ RSpec.describe 'ninth_age/magic_item_categories', type: :request do
     # You'll want to customize the parameter types...
     parameter 'id', in: :path, type: :string
     # ...and values used to make the requests.
-    let(:id) { '1' }
+    let(:id) { '29' }
 
     get(summary: 'show magic_item_category') do
       produces 'application/json'
@@ -90,7 +90,7 @@ RSpec.describe 'ninth_age/magic_item_categories', type: :request do
     # You'll want to customize the parameter types...
     parameter 'id', in: :path, type: :string
     # ...and values used to make the requests.
-    let(:id) { '1' }
+    let(:id) { '29' }
 
     get(summary: 'show magic_item_category') do
       produces 'application/json'
@@ -104,7 +104,7 @@ RSpec.describe 'ninth_age/magic_item_categories', type: :request do
     # You'll want to customize the parameter types...
     parameter 'version_id', in: :path, type: :string
     # ...and values used to make the requests.
-    let(:version_id) { '1' }
+    let(:version_id) { '3' }
 
     get(summary: 'list magic_item_categories') do
       produces 'application/json'
@@ -118,7 +118,7 @@ RSpec.describe 'ninth_age/magic_item_categories', type: :request do
     # You'll want to customize the parameter types...
     parameter 'version_id', in: :path, type: :string
     # ...and values used to make the requests.
-    let(:version_id) { '1' }
+    let(:version_id) { '3' }
 
     get(summary: 'list magic_item_categories') do
       produces 'application/json'
@@ -132,7 +132,7 @@ RSpec.describe 'ninth_age/magic_item_categories', type: :request do
     # You'll want to customize the parameter types...
     parameter 'version_id', in: :path, type: :string
     # ...and values used to make the requests.
-    let(:version_id) { '1' }
+    let(:version_id) { '3' }
 
     get(summary: 'list magic_item_categories') do
       produces 'application/json'
@@ -146,7 +146,7 @@ RSpec.describe 'ninth_age/magic_item_categories', type: :request do
     # You'll want to customize the parameter types...
     parameter 'version_id', in: :path, type: :string
     # ...and values used to make the requests.
-    let(:version_id) { '1' }
+    let(:version_id) { '3' }
 
     get(summary: 'list magic_item_categories') do
       produces 'application/json'
@@ -160,7 +160,7 @@ RSpec.describe 'ninth_age/magic_item_categories', type: :request do
     # You'll want to customize the parameter types...
     parameter 'version_id', in: :path, type: :string
     # ...and values used to make the requests.
-    let(:version_id) { '1' }
+    let(:version_id) { '3' }
 
     get(summary: 'list magic_item_categories') do
       produces 'application/json'
@@ -174,7 +174,7 @@ RSpec.describe 'ninth_age/magic_item_categories', type: :request do
     # You'll want to customize the parameter types...
     parameter 'version_id', in: :path, type: :string
     # ...and values used to make the requests.
-    let(:version_id) { '1' }
+    let(:version_id) { '3' }
 
     get(summary: 'list magic_item_categories') do
       produces 'application/json'
@@ -188,7 +188,7 @@ RSpec.describe 'ninth_age/magic_item_categories', type: :request do
     # You'll want to customize the parameter types...
     parameter 'version_id', in: :path, type: :string
     # ...and values used to make the requests.
-    let(:version_id) { '1' }
+    let(:version_id) { '3' }
 
     get(summary: 'list magic_item_categories') do
       produces 'application/json'

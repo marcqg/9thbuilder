@@ -2252,7 +2252,7 @@
         ]
       }
     },
-    "/fr/ninth_age/army-extra-item-category-{extra_item_category_id}/extra_items": {
+    "/fr/ninth_age/extra-item-category-{extra_item_category_id}/army-extra_items": {
       "parameters": [
         {
           "name": "extra_item_category_id",
@@ -2273,7 +2273,7 @@
         ]
       }
     },
-    "/de/ninth_age/army-extra-item-category-{extra_item_category_id}/extra_items": {
+    "/de/ninth_age/extra-item-category-{extra_item_category_id}/army-extra_items": {
       "parameters": [
         {
           "name": "extra_item_category_id",
@@ -2294,7 +2294,7 @@
         ]
       }
     },
-    "/ko/ninth_age/army-extra-item-category-{extra_item_category_id}/extra_items": {
+    "/ko/ninth_age/extra-item-category-{extra_item_category_id}/army-extra_items": {
       "parameters": [
         {
           "name": "extra_item_category_id",
@@ -2315,7 +2315,7 @@
         ]
       }
     },
-    "/pl/ninth_age/army-extra-item-category-{extra_item_category_id}/extra_items": {
+    "/pl/ninth_age/extra-item-category-{extra_item_category_id}/army-extra_items": {
       "parameters": [
         {
           "name": "extra_item_category_id",
@@ -2336,7 +2336,7 @@
         ]
       }
     },
-    "/es/ninth_age/army-extra-item-category-{extra_item_category_id}/extra_items": {
+    "/es/ninth_age/extra-item-category-{extra_item_category_id}/army-extra_items": {
       "parameters": [
         {
           "name": "extra_item_category_id",
@@ -2357,7 +2357,7 @@
         ]
       }
     },
-    "/it/ninth_age/army-extra-item-category-{extra_item_category_id}/extra_items": {
+    "/it/ninth_age/extra-item-category-{extra_item_category_id}/army-extra_items": {
       "parameters": [
         {
           "name": "extra_item_category_id",
@@ -2378,7 +2378,7 @@
         ]
       }
     },
-    "/ninth_age/army-extra-item-category-{extra_item_category_id}/extra_items": {
+    "/ninth_age/extra-item-category-{extra_item_category_id}/army-extra_items": {
       "parameters": [
         {
           "name": "extra_item_category_id",
@@ -3024,97 +3024,6 @@
           }
         },
         "summary": "list magic_item_categories",
-        "produces": [
-          "application/json"
-        ]
-      }
-    },
-    "/fr/ninth_age/magic_items": {
-      "get": {
-        "responses": {
-          "200": {
-            "description": "successful"
-          }
-        },
-        "summary": "list magic_items",
-        "produces": [
-          "application/json"
-        ]
-      }
-    },
-    "/de/ninth_age/magic_items": {
-      "get": {
-        "responses": {
-          "200": {
-            "description": "successful"
-          }
-        },
-        "summary": "list magic_items",
-        "produces": [
-          "application/json"
-        ]
-      }
-    },
-    "/ko/ninth_age/magic_items": {
-      "get": {
-        "responses": {
-          "200": {
-            "description": "successful"
-          }
-        },
-        "summary": "list magic_items",
-        "produces": [
-          "application/json"
-        ]
-      }
-    },
-    "/pl/ninth_age/magic_items": {
-      "get": {
-        "responses": {
-          "200": {
-            "description": "successful"
-          }
-        },
-        "summary": "list magic_items",
-        "produces": [
-          "application/json"
-        ]
-      }
-    },
-    "/es/ninth_age/magic_items": {
-      "get": {
-        "responses": {
-          "200": {
-            "description": "successful"
-          }
-        },
-        "summary": "list magic_items",
-        "produces": [
-          "application/json"
-        ]
-      }
-    },
-    "/it/ninth_age/magic_items": {
-      "get": {
-        "responses": {
-          "200": {
-            "description": "successful"
-          }
-        },
-        "summary": "list magic_items",
-        "produces": [
-          "application/json"
-        ]
-      }
-    },
-    "/ninth_age/magic_items": {
-      "get": {
-        "responses": {
-          "200": {
-            "description": "successful"
-          }
-        },
-        "summary": "list magic_items",
         "produces": [
           "application/json"
         ]

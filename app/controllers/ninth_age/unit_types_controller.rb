@@ -25,7 +25,7 @@ module NinthAge
     # -- Utilities
 
     def set_troop_type
-      @troop_type = NinthAge::UnitType.find(params[:id])
+      @unit_type = NinthAge::UnitType.find(params[:id])
     end
   end
 end

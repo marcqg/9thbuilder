@@ -41,7 +41,7 @@ module NinthAge
     end
     
     def by_army
-      @extra_item_category = NinthAge::ExtraItemCategort.find(params[:extra_item_category_id])
+      @extra_item_category = NinthAge::ExtraItemCategory.find(params[:extra_item_category_id])
       @ninth_age_extra_items = NinthAge::ExtraItem.joins(:extra_item_category)
                                                   .includes(:translations)
                                                   .where("(ninth_age_extra_item_categories.army_id = ? OR ninth_age_extra_item_categories.army_id IS NULL) AND ninth_age_extra_item_categories.version_id = ?", @extra_item_category.army_id, @extra_item_category.army.version_id)

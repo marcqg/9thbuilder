@@ -10,7 +10,6 @@ module NinthAge
                                                           .includes(:translations)
                                                           .where(:ninth_age_magic_items => {:version_id => params[:version_id]})
                                                           .distinct
-                                                          .order(:name)
                                                           .paginate(:page => page)
       respond_to do |format|
         format.html

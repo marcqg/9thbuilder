@@ -25,7 +25,6 @@ module NinthAge
 
     def set_unit
       @domain_magic_spell = NinthAge::DomainMagicSpell.find(params[:id])
-                                                      .includes(:translations)
     end
   end
 end
