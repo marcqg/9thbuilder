@@ -23,6 +23,8 @@ class NinthAge::ExtraItem < ApplicationRecord
     super + '-ninth-age-' + Globalize.locale.to_s
   end
 
+  scope :ordered, -> { order("ninth_age_extra_item_translations.name ASC") }
+
   scope :available_for, lambda { |extra_item_category, value_points_limit|
     if value_points_limit.nil?
       includes(:translations)

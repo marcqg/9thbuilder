@@ -162,6 +162,12 @@ module Builder
       end
     end
 
+    def search
+      respond_to do |format|
+        format.html
+      end
+    end
+
     private
 
     def load_armies

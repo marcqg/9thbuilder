@@ -1,0 +1,16 @@
+<div>
+  <ul class="nav nav-tabs" id="tab-versions" role="tablist">
+  <% @versions.each_with_index do |version,index| %>
+  	<%= content_tag(:li, :class => 'nav-item') do %>
+      <%= link_to(version.name, '#', { :class => ['nav-link', ("active" if index == 0 )], :id => "tab-version-#{version.id}", 'data-toggle' => 'tab', :href => "#tab-#{version.id}", :role => 'tab', 'aria-controls' => "Version #{version.name}", 'aria-selected' => (index == 0) }) %>
+    <% end %>
+  <% end %>
+  </ul>
+  <div class="tab-content" id="tab-versions-content">
+  	<% @versions.each_with_index do |version,index| %>
+  	  <%= content_tag(:div, {:class => ["tab-pane fade show", ("active" if index == 0 )], :id => "tab-#{version.id}", :role => "tabpanel", 'aria-labelledby' => "tab-version-#{version.id}"}) do %>
+  	    ...
+  	  <% end %>
+	<% end %>
+  </div>
+</div>

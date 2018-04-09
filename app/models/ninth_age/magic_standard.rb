@@ -47,6 +47,8 @@ class NinthAge::MagicStandard < ApplicationRecord
     I18n.t("magic_item.type_figurine.#{type_figurine}", default: type_figurine.titleize)
   end
 
+  scope :ordered, -> { order("ninth_age_magic_standard_translations.name ASC") }
+
   ransacker :army_null, formatter: proc {|value|
     results = NinthAge::MagicStandard.where(:army_id => nil).map(&:id) if value == "true"
     results = NinthAge::MagicStandard.all.map(&:id) if value == "false"

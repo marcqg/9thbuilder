@@ -50,4 +50,6 @@ class NinthAge::DomainMagic < ApplicationRecord
   def display_description
     highlight(description)
   end
+
+  scope :ordered, -> { order("ninth_age_domain_magic_translations.name ASC") }
 end

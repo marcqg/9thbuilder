@@ -11,7 +11,7 @@
 </div>
 
 <div class="menu-army-list">
-    <div class="col-md-3 col-md-offset-1">
+    <div class="col-md-3">
       <div class="army_list_row">
         <p>
           <a href="<%= new_builder_army_list_path(:army_id => @search.army_id_eq) %>" data-popin="true"><%= image_tag "bt_new_army_list.png", :size => "220x132" %></a>
@@ -38,6 +38,14 @@
       </div>
     </div>
 
+    <div class="col-md-3">
+      <div class="army_list_row">
+        <p>
+          <%= link_to(image_tag('bt_lexicon.png', :size => '220x132'), builder_searchs_path) %>
+        </p>
+        <p><%= t 'army_list.index.search_list' %></p>
+      </div>
+    </div>
 </div>
 
 <div class="clearboth">

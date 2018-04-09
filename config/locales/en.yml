@@ -34,6 +34,7 @@ en:
       ko: "Korean"
     dashboard: "Administration"
     statistique: "Statistiques"
+    tournament: "Tournaments"
 
   activerecord:
     models:
@@ -118,6 +119,7 @@ en:
     index:
       title: "My paint lists"
       add: "Create new paint list"
+      search_list: "Search an army list"
       search: "Submit"
     unit: Unit
     size: Size

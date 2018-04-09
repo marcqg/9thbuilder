@@ -27,7 +27,8 @@ Rails.application.routes.draw do
       get 'army_lists/:uuid.pdf', to: redirect('/army_lists/%{id}/export-full-magics.pdf'), as: :export_full_army_list
       get 'army_lists/:uuid/export-:verbosity-:magics' => 'exports#export', as: :export_army_list
 
-      resources :army_lists,          only: [:index]
+      resources :army_lists,            only: [:index]
+      resources :searchs,            only: [:index]
 
       resources :army_lists, param: :uuid do
         get 'delete', on: :member

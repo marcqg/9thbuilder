@@ -11,4 +11,6 @@ class NinthAge::MagicItemCategory < ApplicationRecord
   def cache_key
     super + '-ninth-age-' + Globalize.locale.to_s
   end
+
+  scope :ordered, -> { order("ninth_age_magic_item_category_translations.name ASC") }
 end

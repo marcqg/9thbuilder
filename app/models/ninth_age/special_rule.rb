@@ -16,6 +16,8 @@ class NinthAge::SpecialRule < ApplicationRecord
   validates :version_id, presence: true
   validates :type_lvl, presence: true
 
+  scope :ordered, -> { order("ninth_age_special_rule_translations.name ASC") }
+
   def name_with_version
     "#{name} - #{version.name}"
   end

@@ -9,6 +9,8 @@ module NinthAge
       @magic_item_categories = NinthAge::MagicItemCategory.joins(:magic_items)
                                                           .includes(:translations)
                                                           .where(:ninth_age_magic_items => {:version_id => params[:version_id]})
+                                                          .with_locales(I18n.locale)
+                                                          .ordered
                                                           .distinct
                                                           .paginate(:page => page)
       respond_to do |format|

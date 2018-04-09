@@ -8,6 +8,8 @@ module NinthAge
       page = params[:page].present? ? params[:page].to_i : 1
       @ninth_age_equipments = NinthAge::Equipment.includes(:translations)
                                                   .where(:version_id => params[:version_id])
+                                                  .with_locales(I18n.locale)
+                                                  .ordered
                                                   .paginate(:page => page)
 
       respond_to do |format|

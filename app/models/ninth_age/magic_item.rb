@@ -29,6 +29,8 @@ class NinthAge::MagicItem < ApplicationRecord
     super + '-ninth-age-' + Globalize.locale.to_s
   end
 
+  scope :ordered, -> { order("ninth_age_magic_item_translations.name ASC") }
+
   scope :available_for, lambda { |army, version, value_points_limit|
 
     magic_items = includes(:translations)

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180329075528) do
+ActiveRecord::Schema.define(version: 20180409095014) do
 
   create_table "active_admin_comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.integer  "resource_id",                 null: false
@@ -702,6 +702,20 @@ ActiveRecord::Schema.define(version: 20180329075528) do
     t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id", using: :btree
     t.index ["name"], name: "index_roles_on_name", using: :btree
     t.index ["resource_type", "resource_id"], name: "index_roles_on_resource_type_and_resource_id", using: :btree
+  end
+
+  create_table "tournament_tournaments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "creator_id",                          default: 0, null: false
+    t.string   "name",                                            null: false
+    t.string   "address",                                         null: false
+    t.decimal  "latitude",   precision: 10, scale: 5,             null: false
+    t.decimal  "longitude",  precision: 10, scale: 5,             null: false
+    t.datetime "start_date",                                      null: false
+    t.datetime "end_date",                                        null: false
+    t.decimal  "fees",       precision: 10, scale: 2
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.index ["creator_id"], name: "index_tournament_tournaments_on_creator_id", using: :btree
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|

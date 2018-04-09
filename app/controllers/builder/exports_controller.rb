@@ -10,13 +10,14 @@ module Builder
       @include_magics = params[:magics] == 'nomagics' ? false : true
 
       @magics = NinthAge::DomainMagic.includes(:domain_magic_spells => [:translations])
-                                     .includes(:translations)
-                                     .joins(:unit_options)
-                                     .joins('INNER JOIN builder_army_list_unit_unit_options ON builder_army_list_unit_unit_options.unit_option_id = ninth_age_unit_options.id')
-                                     .joins('INNER JOIN builder_army_list_units ON builder_army_list_units.id = builder_army_list_unit_unit_options.army_list_unit_id')
-                                     .where(builder_army_list_units: {army_list_id: @army_list.id})
-                                     .order(:id)
-                                     .distinct
+                                      .includes(:translations)
+                                      .joins(:unit_options)
+                                      .joins('INNER JOIN builder_army_list_unit_unit_options ON builder_army_list_unit_unit_options.unit_option_id = ninth_age_unit_options.id')
+                                      .joins('INNER JOIN builder_army_list_units ON builder_army_list_units.id = builder_army_list_unit_unit_options.army_list_unit_id')
+                                      .where(builder_army_list_units: {army_list_id: @army_list.id})
+                                      .with_locales(I18n.locale)
+                                      .ordered
+                                      .distinct
 
       @special_rules = NinthAge::SpecialRule.includes(:translations)
                                             .joins(:special_rule_unit_troops)
@@ -24,16 +25,21 @@ module Builder
                                             .joins('INNER JOIN builder_army_list_units ON u.id = builder_army_list_units.unit_id')
                                             .where(builder_army_list_units: {army_list_id: @army_list.id})
                                             .where.not(:army_id => @army_list.army_id).includes(:translations)
-                                            .order(:id)
+                                            .with_locales(I18n.locale)
+                                            .ordered
                                             .distinct
 
-      @army_special_rules = NinthAge::SpecialRule.where(:army_id => @army_list.army_id).includes(:translations)
-                                            .order(:id)
+      @army_special_rules = NinthAge::SpecialRule.where(:army_id => @army_list.army_id)
+                                        .includes(:translations)
+                                        .with_locales(I18n.locale)
+                                        .ordered
+                                        .distinct
 
       @magic_items = NinthAge::MagicItem.includes(:translations)
                                         .joins(:army_list_units)
                                         .where(builder_army_list_units: {army_list_id: @army_list.id})
-                                        .order(:id)
+                                        .with_locales(I18n.locale)
+                                        .ordered
                                         .distinct
 
       respond_to do |format|
