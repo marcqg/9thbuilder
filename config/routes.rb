@@ -28,7 +28,12 @@ Rails.application.routes.draw do
       get 'army_lists/:uuid/export-:verbosity-:magics' => 'exports#export', as: :export_army_list
 
       resources :army_lists,            only: [:index]
-      resources :searchs,            only: [:index]
+
+      scope :searchs do
+        get '/',                                  to: 'searchs#index',                 as: :searchs
+        post '/',                                 to: 'searchs#create',                as: :searchs
+        get '/results-:army_id-:min-:max-:page',  to: 'searchs#show',                  as: :search_results
+      end
 
       resources :army_lists, param: :uuid do
         get 'delete', on: :member

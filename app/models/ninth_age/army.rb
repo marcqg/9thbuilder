@@ -34,6 +34,7 @@ class NinthAge::Army < ApplicationRecord
 
   scope :disabled, -> { where('id NOT IN (SELECT DISTINCT army_id FROM ninth_age_units)') }
   scope :disabled_or_obsolete, -> { where('id NOT IN (SELECT DISTINCT army_id FROM ninth_age_units)') }
+  scope :ordered, -> { order("ninth_age_army_translations.name ASC") }
 
   def obsolete?
     name =~ /obsolète/i

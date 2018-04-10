@@ -131,6 +131,23 @@ en:
     plinth: Plinth
     comment: Comment
 
+  builder:
+    searchs:
+      index:
+        title: Search an Army list
+        select_version: Choise the version of 9Th Age
+        select_army: Choise the army
+        select_points_range: Number of point
+        search: Search
+        between: between
+        and: and
+        points: points
+      show: 
+        title: "Army list found"
+        between: between
+        and: and
+        points: points
+
   army_list:
     index:
       title: "My army lists"
