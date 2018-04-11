@@ -137,6 +137,7 @@ en:
         title: Search an Army list
         select_version: Choise the version of 9Th Age
         select_army: Choise the army
+        search_army_select_error: 'You must select one army'
         select_points_range: Number of point
         search: Search
         between: between

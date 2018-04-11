@@ -24,6 +24,7 @@
             </li>
           <% end %>
         </ul>
+        <p class="army-select-errror alert alert-danger" style="display: none;"><%= t '.search_army_select_error' %></p>
   	  <% end %>
   	<% end %>
     </div>
@@ -36,7 +37,7 @@
         max = query.max
       %>
       <h3><%= t '.select_points_range' %></h3>
-      <%= t '.between' %> <%= number_field_tag('min', min, {:min => min, :max => max}) %> <%= t '.and' %> <%= number_field_tag('max', max, {:min => min, :max => max}) %><%= t '.points' %>
+      <%= t '.between' %> <%= number_field_tag('min', min, {:min => min, :max => max - 1}) %> <%= t '.and' %> <%= number_field_tag('max', max, {:min => min + 1, :max => max}) %><%= t '.points' %>
     </div>
 
     <%= submit_tag(t('.search'), :class => 'btn btn-lg btn-age') %>
