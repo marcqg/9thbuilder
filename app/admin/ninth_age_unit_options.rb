@@ -1,7 +1,7 @@
 ActiveAdmin.register NinthAge::UnitOption do
   menu parent: 'Ninth Age Army', priority: 10
 
-  permit_params :unit_id, :parent_id, :unit_option_activator_id, :mount_id, :unit_link_id, :is_required, :value_points, :position, :has_one_choise, :is_per_model, :is_multiple, :is_magic, :is_upgratable, :domain_magic_id, :organisation_id, :extra_item_id, :value_points_upgrade, :upgrade_target, :max, :max_model, :min_model, :max_unit, :is_magic_items, :is_magic_standards, :banner_limit, :is_extra_items, :is_unique_choice, :locale, translations_attributes: [:id, :name, :infos, :locale, :_destroy]
+  permit_params :unit_id, :parent_id, :unit_option_activator_id, :mount_id, :category, :unit_link_id, :is_required, :value_points, :position, :has_one_choise, :is_per_model, :is_multiple, :is_magic, :is_upgratable, :domain_magic_id, :organisation_id, :extra_item_id, :value_points_upgrade, :upgrade_target, :max, :max_model, :min_model, :max_unit, :is_magic_items, :is_magic_standards, :banner_limit, :is_extra_items, :is_unique_choice, :locale, translations_attributes: [:id, :name, :infos, :locale, :_destroy]
 
   filter :value_points
 
@@ -66,6 +66,7 @@ ActiveAdmin.register NinthAge::UnitOption do
     f.inputs do
       f.input :army_filter, as: :select, collection: NinthAge::Army.includes(:translations).includes(version: [:translations]).order(:name).collect { |o| [o.name + ' - ' + o.version.name, o.id] }, disabled: NinthAge::Army.disabled.pluck(:id)
       f.input :unit, as: :select, :input_html => {'data-option-dependent' => true, 'data-option-url' => '/ninth_age/army-:ninth_age_unit_option_army_filter/units', 'data-option-observed' => 'ninth_age_unit_option_army_filter'}, :collection => (resource.army ? resource.army.units.collect {|unit| [unit.name, unit.id]} : [])
+      f.input :category
       f.input :parent, as: :select, :input_html => {'data-option-dependent' => true, 'data-option-url' => '/ninth_age/unit-:ninth_age_unit_option_unit_id/unit_options', 'data-option-observed' => 'ninth_age_unit_option_unit_id'}, :collection => (resource.unit ? resource.unit.unit_options.collect {|unit_option| [unit_option.name, unit_option.id]} : [])
       f.input :unit_option_activator, as: :select, :input_html => {'data-option-dependent' => true, 'data-option-url' => '/ninth_age/unit-:ninth_age_unit_option_unit_id/unit_options', 'data-option-observed' => 'ninth_age_unit_option_unit_id'}, :collection => (resource.unit ? resource.unit.unit_options.collect {|unit_option| [unit_option.name, unit_option.id]} : [])
       f.translate_inputs do |t|
@@ -104,6 +105,7 @@ ActiveAdmin.register NinthAge::UnitOption do
     attributes_table do
       row :army
       row :unit
+      row :category
       row :parent
       row :unit_option_activator
       row :mount

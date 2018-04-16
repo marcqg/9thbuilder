@@ -47,5 +47,11 @@ module Builder
         format.pdf { render template: "builder/exports/export_#{@verbosity}.html.erb", pdf: "9thbuilder_#{@verbosity}_#{params[:magics]}_#{@army_list.uuid}" }
       end
     end
+
+    # GET /army_lists/1/export_txt
+    def export_txt
+      @army_list = ArmyList.find_by_uuid!(params[:uuid])
+    end
+
   end
 end

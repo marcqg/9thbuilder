@@ -20,19 +20,20 @@ Rails.application.routes.draw do
     ActiveAdmin.routes(self)
     devise_for :users
 
-    get 'army_lists/:uuid.pdf', to: redirect('/buildder/army_lists/%{id}/export-full-magics.pdf')
+    get 'army_lists/:uuid.pdf',                   to: redirect('/buildder/army_lists/%{id}/export-full-magics.pdf')
     get 'army_lists/:uuid/export-:verbosity-:magics', to: redirect('/buildder/army_lists/%{id}/export-%{verbosity}-%{magics}')
 
     namespace :builder do
-      get 'army_lists/:uuid.pdf', to: redirect('/army_lists/%{id}/export-full-magics.pdf'), as: :export_full_army_list
-      get 'army_lists/:uuid/export-:verbosity-:magics' => 'exports#export', as: :export_army_list
+      get 'army_lists/:uuid.pdf',                 to: redirect('/army_lists/%{id}/export-full-magics.pdf'), as: :export_full_army_list
+      get 'army_lists/:uuid/export-:verbosity-:magics' => 'exports#export',             as: :export_army_list
+      get 'army_lists/:uuid/export-txt',          to: 'exports#export_txt',             as: :export_txt_army_list
 
       resources :army_lists,            only: [:index]
 
       scope :searchs do
-        get '/',                                  to: 'searchs#index',                 as: :searchs
-        post '/',                                 to: 'searchs#create',                as: :searchs
-        get '/results-:army_id-:min-:max-:page',  to: 'searchs#show',                  as: :search_results
+        get '/',                                  to: 'searchs#index',                  as: :searchs
+        post '/',                                 to: 'searchs#create',                 as: :searchs
+        get '/results-:army_id-:min-:max-:page',  to: 'searchs#show',                   as: :search_results
       end
 
       resources :army_lists, param: :uuid do

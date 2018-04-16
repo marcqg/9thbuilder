@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180409095014) do
+ActiveRecord::Schema.define(version: 20180412094710) do
 
   create_table "active_admin_comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.integer  "resource_id",                 null: false
@@ -578,6 +578,7 @@ ActiveRecord::Schema.define(version: 20180409095014) do
     t.integer "unit_link_id"
     t.boolean "has_one_choise",                                   default: false, null: false
     t.integer "banner_limit",                                     default: 0,     null: false
+    t.integer "category",                                         default: 0,     null: false
     t.index ["domain_magic_id"], name: "index_ninth_age_options_on_magic_id", using: :btree
     t.index ["extra_item_id"], name: "index_ninth_age_unit_options_on_extra_item_id", using: :btree
     t.index ["mount_id"], name: "index_ninth_age_unit_options_on_mount_id", using: :btree

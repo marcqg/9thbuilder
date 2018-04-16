@@ -17,6 +17,8 @@ class NinthAge::UnitOption < ApplicationRecord
   has_many :army_list_unit_unit_options, dependent: :destroy, class_name: 'Builder::ArmyListUnitUnitOption'
   has_many :army_list_units, through: :army_list_unit_unit_options, class_name: 'Builder::ArmyListUnit'
 
+  enum category: { NoUse: 0, General: 1, BSB: 2, Marks: 3, Spells: 4, Mount: 5, Equipment: 6, MagicEquipment: 7, MagicOrLine: 8, MagicPath: 9, M: 10, S: 11, C: 12, MagicBanner: 13 }
+
   translates :name, :description, :infos, :name_upgrade
   globalize_accessors
   accepts_nested_attributes_for :translations, allow_destroy: true

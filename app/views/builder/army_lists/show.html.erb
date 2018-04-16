@@ -15,6 +15,7 @@
   <%= link_to '<i class="fa fa-pencil-square-o fa-2x pull-right" aria-hidden="true"></i>'.html_safe, edit_builder_army_list_path(@army_list), {'data-popin' => true} %>
   <%= link_to '<i class="fa fa-paint-brush fa-2x pull-right" aria-hidden="true"></i>'.html_safe, paint_convert_paint_paint_list_path(@army_list.id), method: :post %>
   <%= link_to '<i class="fa fa-print fa-2x" aria-hidden="true"></i>'.html_safe, builder_export_army_list_path(@army_list, :verbosity => 'full', :format => 'pdf', :magics => 'magics'), {'target' => '_blank', 'class' => 'left'} %>
+  <%= link_to '<i class="fa fa-file fa-2x" aria-hidden="true"></i>'.html_safe, builder_export_txt_army_list_path(@army_list), {'data-popin' => true, 'class' => 'left'} %>
 </div>
 
 <div class="row" id="app-army-list">
