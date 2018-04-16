@@ -21,6 +21,17 @@
 @import "font-awesome";
 @import "home";
 
+.navbar-header{
+  iframe {
+    margin-top: 10px;
+    margin-left: 15px;
+
+    span {
+      color: white !important;
+    }
+  }
+}
+
 #army_list_search {
   label {
     position: relative;
