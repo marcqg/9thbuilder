@@ -93,7 +93,10 @@ class NinthAge::Unit < ApplicationRecord
     new_unit.special_rule_unit_troops << special_rule_unit_troops.collect(&:dup)
     #new_unit.unit_options << unit_options.collect { |unit_option| new_unit_options[unit_option.id] = unit_option.dup }
     new_unit.organisation_changes << organisation_changes.collect(&:dup)
-    new_unit.organisations << organisations.collect(&:dup)
+
+    organisations.each do |organisation|
+      new_unit.organisations << organisation
+    end
 
     #new_unit.troops.map do |troop|
     #  troop.unit_option = new_unit_options[troop.unit_option.id] unless troop.unit_option.nil?
