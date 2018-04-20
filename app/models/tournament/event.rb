@@ -1,4 +1,4 @@
-class Tournament::Tournament < ApplicationRecord
+class Tournament::Event < ApplicationRecord
   nilify_blanks :types => [:text, :string]
   strip_attributes
 

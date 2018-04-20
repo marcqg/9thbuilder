@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   localized do
     #filter :locale, exclude: %r{^/admin}
 
+    resources :legals,              only: [:index]
+
     # token auth routes available at /api/v1/auth
     namespace :api do
       namespace :v1 do
@@ -127,8 +129,14 @@ Rails.application.routes.draw do
 
     namespace :paint do
       resources :paint_lists
-      resources :paint_list_units,       only: [:create, :update, :destroy]
+      resources :paint_list_units,                only: [:create, :update, :destroy]
       post '/convert/:army_list_id',                  to: 'paint_lists#convert',           as: :convert_paint_paint_list
+    end
+
+
+    namespace :tournament do
+      resources :events
+      resources :organisations,                   only: [:index]
     end
 
     # You can have the root of your site routed with "root"

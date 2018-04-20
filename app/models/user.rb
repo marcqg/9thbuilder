@@ -12,6 +12,10 @@ class User < ApplicationRecord
   has_many :paint_lists, class_name: 'Paint::PaintList', dependent: :destroy
   has_many :paint_list_units, through: :paint_lists, class_name: 'Paint::PaintListUnit'
 
+  has_many :tournaments, class_name: 'Tournament::Tournament', dependent: :destroy
+  has_many :user_applies, class_name: 'Tournament::UserApply', dependent: :destroy
+
+
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable, :confirmable,

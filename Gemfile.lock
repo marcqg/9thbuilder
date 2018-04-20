@@ -1,4 +1,11 @@
 GIT
+  remote: git://github.com/Nerian/bootstrap-datepicker-rails.git
+  revision: 981ad1d67e5725494e8a569136f0fd730baaedc5
+  specs:
+    bootstrap-datepicker-rails (1.8.0.1)
+      railties (>= 3.0)
+
+GIT
   remote: git://github.com/activeadmin/activeadmin.git
   revision: f28a4e0fb315c5a6a3fb78f423b19562246160a0
   specs:
@@ -358,6 +365,7 @@ DEPENDENCIES
   better_errors
   binding_of_caller
   bitmask_attributes
+  bootstrap-datepicker-rails!
   bootstrap-sass
   byebug
   coffee-rails (~> 4.1.0)

@@ -21,6 +21,12 @@
 
 en:
   welcome: "Welcome"
+
+  site: 
+    use_cookie: 'This site uses cookies to offer you the best service. By continuing your navigation, you use the use of cookies.'
+    accept: 'I accept'
+    more: 'Learn more'
+
   help: "help"
   close: "Close"
   save: "Save"
@@ -391,6 +397,18 @@ en:
     show:
       size: "<strong>%{min_size}</strong> models, may add up to <strong>%{max_size}</strong> models <strong>%{pts}</strong> pts/mod."
       change: "%{name} units of %{number} models count towards %{new_name}"
+
+  tournament:
+    event:
+      new:
+        title: "Create a tournament"
+      form:
+        name: Name
+        address: Address
+        start_date: Start
+        end_date: End
+        fees: fees
+        submit: Save
 
   signin:
     title: "Sign in"

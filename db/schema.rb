@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180412094710) do
+ActiveRecord::Schema.define(version: 20180419091129) do
 
   create_table "active_admin_comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.integer  "resource_id",                 null: false
@@ -705,7 +705,17 @@ ActiveRecord::Schema.define(version: 20180412094710) do
     t.index ["resource_type", "resource_id"], name: "index_roles_on_resource_type_and_resource_id", using: :btree
   end
 
-  create_table "tournament_tournaments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "tournament_army_list_applies", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "event_id",     default: 0, null: false
+    t.integer  "army_list_id", default: 0, null: false
+    t.integer  "state",        default: 0, null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.index ["army_list_id"], name: "index_tournament_applies_on_army_list_id", using: :btree
+    t.index ["event_id"], name: "index_tournament_applies_on_event_id", using: :btree
+  end
+
+  create_table "tournament_events", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "creator_id",                          default: 0, null: false
     t.string   "name",                                            null: false
     t.string   "address",                                         null: false
@@ -714,18 +724,29 @@ ActiveRecord::Schema.define(version: 20180412094710) do
     t.datetime "start_date",                                      null: false
     t.datetime "end_date",                                        null: false
     t.decimal  "fees",       precision: 10, scale: 2
+    t.string   "source"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["creator_id"], name: "index_tournament_tournaments_on_creator_id", using: :btree
   end
 
+  create_table "tournament_user_applies", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "event_id",   default: 0, null: false
+    t.integer  "user_id",    default: 0, null: false
+    t.integer  "state",      default: 0, null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.index ["event_id"], name: "index_tournament_applies_on_event_id", using: :btree
+    t.index ["user_id"], name: "index_tournament_applies_on_user_id", using: :btree
+  end
+
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
-    t.string   "email",                                default: "",      null: false
-    t.string   "encrypted_password",     limit: 128,   default: "",      null: false
+    t.string   "email",                                                         default: "",      null: false
+    t.string   "encrypted_password",     limit: 128,                            default: "",      null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",                        default: 0
+    t.integer  "sign_in_count",                                                 default: 0
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
@@ -737,9 +758,11 @@ ActiveRecord::Schema.define(version: 20180412094710) do
     t.datetime "updated_at"
     t.string   "name"
     t.integer  "favorite_army_id"
-    t.string   "provider",                             default: "email", null: false
-    t.string   "uid",                                  default: "",      null: false
+    t.string   "provider",                                                      default: "email", null: false
+    t.string   "uid",                                                           default: "",      null: false
     t.text     "tokens",                 limit: 65535
+    t.decimal  "latitude",                             precision: 11, scale: 8
+    t.decimal  "longitude",                            precision: 11, scale: 8
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["favorite_army_id"], name: "index_users_on_favorite_army_id", using: :btree
@@ -842,6 +865,11 @@ ActiveRecord::Schema.define(version: 20180412094710) do
   add_foreign_key "paint_paint_list_units", "paint_paint_lists", column: "paint_list_id"
   add_foreign_key "paint_paint_lists", "ninth_age_armies", column: "army_id"
   add_foreign_key "paint_paint_lists", "users"
+  add_foreign_key "tournament_army_list_applies", "builder_army_lists", column: "army_list_id"
+  add_foreign_key "tournament_army_list_applies", "tournament_events", column: "event_id"
+  add_foreign_key "tournament_events", "users", column: "creator_id"
+  add_foreign_key "tournament_user_applies", "tournament_events", column: "event_id"
+  add_foreign_key "tournament_user_applies", "users"
   add_foreign_key "users", "ninth_age_armies", column: "favorite_army_id", on_delete: :nullify
   add_foreign_key "users_roles", "roles"
   add_foreign_key "users_roles", "users"

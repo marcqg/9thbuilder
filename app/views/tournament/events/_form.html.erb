@@ -1,0 +1,32 @@
+<%= form_for @event, :validate => @event.persisted? do |f| %>
+  <%= render "shared/form_errors", :object => @event %>
+
+  <div class="form-group">
+    <%= f.label :name %>
+    <%= f.text_field :name, :placeholder => t('tournament.event.form.name'), class: "form-control" %>
+  </div>
+  
+  <div class="form-group">
+    <%= f.label :address %>
+    <%= f.text_field :address, :placeholder => t('tournament.event.form.address'), class: "form-control" %>
+    <%= f.hidden_field :latitude %>
+    <%= f.hidden_field :longitude %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :start_date %>
+    <%= f.text_field :start_date, :placeholder => t('tournament.event.form.start_date'), class: "form-control", data:{ provide:'datetimepicker' } %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :end_date %>
+    <%= f.text_field :end_date, :placeholder => t('tournament.event.form.end_date'), class: "form-control", data:{ provide:'datetimepicker' } %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :fees %>
+    <%= f.text_field :fees, :placeholder => t('tournament.event.form.fees'), class: "form-control" %>
+  </div>
+
+  <%= f.submit t('tournament.event.form.submit'), class: 'btn btn-age center-btn' %>
+<% end %>

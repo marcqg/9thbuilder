@@ -4,8 +4,11 @@
 //= require_tree ./common
 //= require_tree ./builder
 //= require_tree ./paint
+//= require_tree ./tournament
 
 //= require bootstrap
+//= require moment
+//= require bootstrap-datetimepicker
 
 //= require js-routes
 
@@ -74,6 +77,7 @@ jQuery(function($) {
         $(this).next('ul').slideToggle('fast', function() { $.colorbox.resize(); });
     });
 
+    $("input[data-provide='datetimepicker']").datetimepicker();
 });
 
 function popinHandler(evt) {
@@ -122,4 +126,5 @@ function popin(url) {
             $('#cboxClose').css('opacity', 0);
         }
     });
+
 }

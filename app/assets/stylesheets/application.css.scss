@@ -14,10 +14,12 @@
  *= require_tree ./ninth_age
  *= require_tree ./builder
  *= require_tree ./paint
+ *= require_tree ./tournament
  */
 @import "common/global";
 @import "bootstrap-sprockets";
 @import "bootstrap";
+@import 'bootstrap-datetimepicker';
 @import "font-awesome";
 @import "home";
 
@@ -386,4 +388,9 @@
 
 .hidden {
   display: none;
+}
+
+.center-btn {
+  display: block;
+  margin: auto;
 }

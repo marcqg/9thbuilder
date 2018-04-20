@@ -23,6 +23,14 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def authenticate_organisation_user!
+    authenticate_user!
+    unless (current_user.has_role? :organisator or current_user.has_role? :administrator)
+      flash[:alert] = 'Unauthorized Access!'
+      redirect_to root_path
+    end
+  end
+
   rescue_from ActiveRecord::RecordNotFound, with: :not_found
   # rescue_from Exception, with: :error
   rescue_from ActionController::RoutingError, with: :not_found
