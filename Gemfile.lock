@@ -1,11 +1,4 @@
 GIT
-  remote: git://github.com/Nerian/bootstrap-datepicker-rails.git
-  revision: 981ad1d67e5725494e8a569136f0fd730baaedc5
-  specs:
-    bootstrap-datepicker-rails (1.8.0.1)
-      railties (>= 3.0)
-
-GIT
   remote: git://github.com/activeadmin/activeadmin.git
   revision: f28a4e0fb315c5a6a3fb78f423b19562246160a0
   specs:
@@ -121,6 +114,8 @@ GEM
     bootstrap-sass (3.3.7)
       autoprefixer-rails (>= 5.2.1)
       sass (>= 3.3.4)
+    bootstrap3-datetimepicker-rails (4.17.47)
+      momentjs-rails (>= 2.8.1)
     builder (3.2.3)
     byebug (9.1.0)
     climate_control (0.2.0)
@@ -210,6 +205,8 @@ GEM
     mimemagic (0.3.2)
     mini_portile2 (2.3.0)
     minitest (5.10.3)
+    momentjs-rails (2.20.1)
+      railties (>= 3.1)
     multi_json (1.12.2)
     mysql2 (0.3.21)
     mysql2 (0.3.21-x64-mingw32)
@@ -365,8 +362,8 @@ DEPENDENCIES
   better_errors
   binding_of_caller
   bitmask_attributes
-  bootstrap-datepicker-rails!
   bootstrap-sass
+  bootstrap3-datetimepicker-rails (~> 4.17.47)
   byebug
   coffee-rails (~> 4.1.0)
   devise
