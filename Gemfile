@@ -98,6 +98,7 @@ gem 'paperclip', '~> 5.1.0'
 gem 'bootstrap-sass'
 gem 'autoprefixer-rails'
 gem 'font-awesome-rails'
+gem 'momentjs-rails'
 gem 'bootstrap3-datetimepicker-rails', '~> 4.17.47'
 
 #User a bitmack for enum (multi values)
