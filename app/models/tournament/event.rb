@@ -3,4 +3,6 @@ class Tournament::Event < ApplicationRecord
   strip_attributes
 
   belongs_to :creator, class_name: "User"
+
+  has_many :user_applies, -> { order 'position' }, dependent: :destroy
 end

@@ -1,0 +1,23 @@
+<div class="new-user-apply">
+  <h1 class="text-center"><%== t('tournament.user_apply.new.title') %></h1>
+
+  <div class="add-username">
+    <%= hidden_field(:tournament, :event, :value => @event.id) %>
+    <div class="form-group">
+      <label>Name:</label>
+      <%= text_area :name, :placeholder => t('tournament.user_apply.form.name'), class: "form-control" %>
+      <small>You can add somes users (1 user by line).</small>
+    </div>
+
+    <button class="btn btn-age center-btn"><%= t('tournament.user_apply.form.submit') %></button>
+  </div>
+
+  <div class="list-user">
+    <% @event.user_applies.each do |apply| %>
+      <div>
+        <%= apply.name %>
+        <i class="fa fa-2x fa-trash"></i>
+      </div>
+    <% end %>
+  </div>
+</div>

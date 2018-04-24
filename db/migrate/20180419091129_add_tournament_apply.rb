@@ -19,12 +19,13 @@ class AddTournamentApply < ActiveRecord::Migration[5.0]
     end
 
   	create_table :tournament_user_applies, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-	    t.integer "event_id", 			default: 0,     null: false
-	    t.integer "user_id", 					default: nil,     null: true
-      t.integer "army_id",       default: 0,     null: false
-      t.integer "army_list_id",       default: nil,     null: true
-	    t.integer  "state", 					default: 0,     null: false
-      t.string    "name",           null: true
+	    t.integer "event_id", 		 default: 0,     null: false
+	    t.integer "user_id", 			 default: nil,   null: true
+      t.integer "army_id",       default: nil,   null: true
+      t.integer "army_list_id",  default: nil,   null: true
+	    t.integer "state", 				 default: 0,     null: false
+      t.string  "name",                          null: true
+      t.integer "position",      default: 0,     null: false
       t.datetime "created_at"
       t.datetime "updated_at"
       t.index ["event_id"], name: "index_tournament_user_applies_on_event_id", using: :btree

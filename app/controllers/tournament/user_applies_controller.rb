@@ -4,6 +4,10 @@ module Tournament
     before_action :set_user_apply, only: [:edit, :update, :destroy]
     before_action :authenticate_organisation_user!, only: [:new, :create, :edit, :update, :destroy]
 
+    # GET /tournament/event-{event_id}/user_apply/add
+    def add 
+    end
+
     # GET /tournament/event-{event_id}/user_apply/new
     def new
       @user_apply = Tournament::UserApply.new
@@ -16,32 +20,16 @@ module Tournament
 
     # POST /tournament/event-{event_id}/user_apply/
     def create
-
-      name = user_apply_params[:name]
-      names = (name || "").split("\n")
-      					  .map { |r| r.strip }
-
-      saves = true
-      applies = []
-      names.each do |n|
-
-      	apply = Tournament::UserApply.new({name: n, event = @event})
-      	saves &= apply.save
-
-      	applies << apply
-      end
-
-      unless saves
-      	applies.each do |apply|
-      		apply.destroy!
-      	end
-      end
+      @user_apply = Tournament::UserApply.new(user_apply_params)
+      @user_apply.event = @event
 
       respond_to do |format|
-        if saves
+        if @user_apply.save
           format.html { redirect_to tournament_event_url(@event), notice: 'user apply was successfully created.' }
+          format.json { render :show, status: :created, location: @event }
         else
           format.html { render :new }
+          format.json { render json: @user_apply.errors, status: :unprocessable_entity }
         end
       end
     end

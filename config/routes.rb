@@ -126,13 +126,11 @@ Rails.application.routes.draw do
       end
     end
 
-
     namespace :paint do
       resources :paint_lists
       resources :paint_list_units,                only: [:create, :update, :destroy]
       post '/convert/:army_list_id',                  to: 'paint_lists#convert',           as: :convert_paint_paint_list
     end
-
 
     namespace :tournament do
       resources :events
@@ -141,6 +139,7 @@ Rails.application.routes.draw do
 
       scope '/event-:event_id' do
         resources :user_applies
+        get '/add',                               to: 'user_applies#add',               as: :add_apply
       end
     end
 

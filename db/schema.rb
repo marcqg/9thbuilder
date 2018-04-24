@@ -723,10 +723,11 @@ ActiveRecord::Schema.define(version: 20180419091129) do
   create_table "tournament_user_applies", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "event_id",     default: 0, null: false
     t.integer  "user_id"
-    t.integer  "army_id",      default: 0, null: false
+    t.integer  "army_id"
     t.integer  "army_list_id"
     t.integer  "state",        default: 0, null: false
     t.string   "name"
+    t.integer  "position",     default: 0, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["army_id"], name: "index_tournament_user_applies_on_army_id", using: :btree

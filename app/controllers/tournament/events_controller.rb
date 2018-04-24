@@ -33,7 +33,7 @@ module Tournament
 
       respond_to do |format|
         if @event.save
-          format.html { redirect_to tournament_organisations_url, notice: 'event was successfully created.' }
+          format.html { redirect_to tournament_event_url(@event), notice: 'event was successfully created.' }
           format.json { render :show, status: :created, location: @event }
         else
           format.html { render :new }
@@ -47,7 +47,7 @@ module Tournament
     def update
       respond_to do |format|
         if @event.update(tournament_params)
-          format.html { redirect_to tournament_organisations_url, notice: 'event was successfully updated.' }
+          format.html { redirect_to tournament_event_url(@event), notice: 'event was successfully updated.' }
           format.json { render :show, status: :ok, location: @event }
         else
           format.html { render :edit }
