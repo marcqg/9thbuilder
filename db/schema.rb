@@ -705,16 +705,6 @@ ActiveRecord::Schema.define(version: 20180419091129) do
     t.index ["resource_type", "resource_id"], name: "index_roles_on_resource_type_and_resource_id", using: :btree
   end
 
-  create_table "tournament_army_list_applies", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "event_id",     default: 0, null: false
-    t.integer  "army_list_id", default: 0, null: false
-    t.integer  "state",        default: 0, null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.index ["army_list_id"], name: "index_tournament_applies_on_army_list_id", using: :btree
-    t.index ["event_id"], name: "index_tournament_applies_on_event_id", using: :btree
-  end
-
   create_table "tournament_events", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "creator_id",                          default: 0, null: false
     t.string   "name",                                            null: false
@@ -731,13 +721,18 @@ ActiveRecord::Schema.define(version: 20180419091129) do
   end
 
   create_table "tournament_user_applies", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "event_id",   default: 0, null: false
-    t.integer  "user_id",    default: 0, null: false
-    t.integer  "state",      default: 0, null: false
+    t.integer  "event_id",     default: 0, null: false
+    t.integer  "user_id"
+    t.integer  "army_id",      default: 0, null: false
+    t.integer  "army_list_id"
+    t.integer  "state",        default: 0, null: false
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.index ["event_id"], name: "index_tournament_applies_on_event_id", using: :btree
-    t.index ["user_id"], name: "index_tournament_applies_on_user_id", using: :btree
+    t.index ["army_id"], name: "index_tournament_user_applies_on_army_id", using: :btree
+    t.index ["army_list_id"], name: "index_tournament_user_applies_on_army_list_id", using: :btree
+    t.index ["event_id"], name: "index_tournament_user_applies_on_event_id", using: :btree
+    t.index ["user_id"], name: "index_tournament_user_applies_on_user_id", using: :btree
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
@@ -865,9 +860,9 @@ ActiveRecord::Schema.define(version: 20180419091129) do
   add_foreign_key "paint_paint_list_units", "paint_paint_lists", column: "paint_list_id"
   add_foreign_key "paint_paint_lists", "ninth_age_armies", column: "army_id"
   add_foreign_key "paint_paint_lists", "users"
-  add_foreign_key "tournament_army_list_applies", "builder_army_lists", column: "army_list_id"
-  add_foreign_key "tournament_army_list_applies", "tournament_events", column: "event_id"
   add_foreign_key "tournament_events", "users", column: "creator_id"
+  add_foreign_key "tournament_user_applies", "builder_army_lists", column: "army_list_id"
+  add_foreign_key "tournament_user_applies", "ninth_age_armies", column: "army_id"
   add_foreign_key "tournament_user_applies", "tournament_events", column: "event_id"
   add_foreign_key "tournament_user_applies", "users"
   add_foreign_key "users", "ninth_age_armies", column: "favorite_army_id", on_delete: :nullify

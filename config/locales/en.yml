@@ -409,6 +409,14 @@ en:
         end_date: End
         fees: fees
         submit: Save
+    user_apply:
+      new:
+        title: Add a user
+      form:
+        name: Name
+        or: or
+        user: User
+        submit: Add
 
   signin:
     title: "Sign in"
@@ -482,3 +490,8 @@ en:
       information: "You are not satisfied? <a href=\"mailto:support@9thbuilder.com\">Contact us</a> or"
       link: "immediately destroy your account"
     back: "Previous page"
+
+  picker:
+    datetime:
+      js: 'YYYY.MM.DD HH:mm'
+      rb: '%Y.%m.%d %H:%M'

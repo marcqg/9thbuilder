@@ -5,7 +5,8 @@ ActiveAdmin.register NinthAge::SpecialRule do
 
   filter :version, as: :select, collection: -> { NinthAge::Version.includes(:translations).map { |version| [ version.name, version.id ] } } 
   filter :army, as: :select, :input_html => {'data-option-dependent' => true, 'data-option-url' => '/ninth_age/version-:q_version_id/armies', 'data-option-observed' => 'q_version_id'}, collection: -> { NinthAge::Army.where(:version_id => NinthAge::Version.last.id).includes(:translations).map { |army| [ army.name, army.id ] } } 
-
+  filter :army_null, as: :check_boxes, collection: [['Without army', true]], label: ''
+  
   controller do
     def scoped_collection
       end_of_association_chain.includes(:translations).includes(version: [:translations]).includes(army: [:translations])

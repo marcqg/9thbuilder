@@ -20,30 +20,24 @@ class AddTournamentApply < ActiveRecord::Migration[5.0]
 
   	create_table :tournament_user_applies, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
 	    t.integer "event_id", 			default: 0,     null: false
-	    t.integer "user_id", 					default: 0,     null: false
+	    t.integer "user_id", 					default: nil,     null: true
+      t.integer "army_id",       default: 0,     null: false
+      t.integer "army_list_id",       default: nil,     null: true
 	    t.integer  "state", 					default: 0,     null: false
+      t.string    "name",           null: true
       t.datetime "created_at"
       t.datetime "updated_at"
-      t.index ["event_id"], name: "index_tournament_applies_on_event_id", using: :btree
-      t.index ["user_id"], name: "index_tournament_applies_on_user_id", using: :btree
+      t.index ["event_id"], name: "index_tournament_user_applies_on_event_id", using: :btree
+      t.index ["user_id"], name: "index_tournament_user_applies_on_user_id", using: :btree
+      t.index ["army_id"], name: "index_tournament_user_applies_on_army_id", using: :btree
+      t.index ["army_list_id"], name: "index_tournament_user_applies_on_army_list_id", using: :btree
 	  end
 
    	add_foreign_key :tournament_events, :users, column: "creator_id"
-   	add_foreign_key :tournament_user_applies, :users, column: "user_id"
-   	add_foreign_key :tournament_user_applies, :tournament_events, column: "event_id"
-
-   	create_table :tournament_army_list_applies, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-	    t.integer "event_id", 			default: 0,     null: false
-	    t.integer "army_list_id", 			default: 0,     null: false
-	    t.integer  "state", 					default: 0,     null: false
-      t.datetime "created_at"
-      t.datetime "updated_at"
-      t.index ["event_id"], name: "index_tournament_applies_on_event_id", using: :btree
-      t.index ["army_list_id"], name: "index_tournament_applies_on_army_list_id", using: :btree
-	end
-
-   	add_foreign_key :tournament_army_list_applies, :builder_army_lists, column: "army_list_id"
-   	add_foreign_key :tournament_army_list_applies, :tournament_events, column: "event_id"
+    add_foreign_key :tournament_user_applies, :tournament_events, column: "event_id"
+    add_foreign_key :tournament_user_applies, :users, column: "user_id"
+    add_foreign_key :tournament_user_applies, :ninth_age_armies, column: "army_id"
+   	add_foreign_key :tournament_user_applies, :builder_army_lists, column: "army_list_id"
 
 
   	add_column :users, :latitude, :decimal, precision: 11, scale: 8, null: true

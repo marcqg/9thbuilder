@@ -12,7 +12,7 @@ class User < ApplicationRecord
   has_many :paint_lists, class_name: 'Paint::PaintList', dependent: :destroy
   has_many :paint_list_units, through: :paint_lists, class_name: 'Paint::PaintListUnit'
 
-  has_many :tournaments, class_name: 'Tournament::Tournament', dependent: :destroy
+  has_many :events, class_name: 'Tournament::Event', dependent: :destroy, foreign_key: 'creator_id'
   has_many :user_applies, class_name: 'Tournament::UserApply', dependent: :destroy
 
 

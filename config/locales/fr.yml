@@ -317,3 +317,8 @@ fr:
       information: "Vous n'êtes pas satisfait ? <a href=\"mailto:support@9thbuilder.com\">Écrivez nous</a> ou"
       link: "supprimer votre compte directement"
     back: "Page précédente"
+
+  picker:
+    datetime:
+      js: 'DD.MM.YYYY HH:mm'
+      rb: '%d.%m.%Y %H:%M'

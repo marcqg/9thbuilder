@@ -25,4 +25,12 @@ class NinthAge::SpecialRule < ApplicationRecord
   def cache_key
     super + '-ninth-age-' + Globalize.locale.to_s
   end
+
+  ransacker :army_null, formatter: proc {|value|
+    results = NinthAge::SpecialRule.where(:army_id => nil).map(&:id) if value == "true"
+    results = NinthAge::SpecialRule.all.map(&:id) if value == "false"
+    results.present? ? results : nil
+  } do |parent|
+    parent.table[:id]
+  end 
 end

@@ -77,7 +77,7 @@ jQuery(function($) {
         $(this).next('ul').slideToggle('fast', function() { $.colorbox.resize(); });
     });
 
-    $("input[data-provide='datetimepicker']").datetimepicker();
+    $("div[data-provide='datetimepicker']").datetimepicker();
 });
 
 function popinHandler(evt) {

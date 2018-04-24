@@ -23,5 +23,13 @@ class NinthAge::Equipment < ApplicationRecord
     super + '-ninth-age-' + Globalize.locale.to_s
   end
 
+  ransacker :army_null, formatter: proc {|value|
+    results = NinthAge::Equipment.where(:army_id => nil).map(&:id) if value == "true"
+    results = NinthAge::Equipment.all.map(&:id) if value == "false"
+    results.present? ? results : nil
+  } do |parent|
+    parent.table[:id]
+  end 
+
   scope :ordered, -> { order("ninth_age_equipment_translations.name ASC") }
 end

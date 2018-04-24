@@ -4,7 +4,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
   <title><%= content_for?(:title) ? yield(:title) : t(:welcome) %> • 9th Age Builder</title>
   <%= stylesheet_link_tag "application", media: 'all' %>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDrD-88cDgY6e-yxhiKEvi1JGr-w-6ICPg&libraries=places" async defer></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDrD-88cDgY6e-yxhiKEvi1JGr-w-6ICPg&libraries=places" type="text/javascript"></script>
   <%= javascript_include_tag "application" %>
   <%= javascript_tag "BASE_URL = '#{root_path}';" %>
   <%= csrf_meta_tag %>

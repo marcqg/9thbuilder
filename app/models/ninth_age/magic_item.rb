@@ -70,5 +70,13 @@ class NinthAge::MagicItem < ApplicationRecord
       names << display_name
     end
     names.join(', ').html_safe
-  end  
+  end 
+
+  ransacker :army_null, formatter: proc {|value|
+    results = NinthAge::MagicItem.where(:army_id => nil).map(&:id) if value == "true"
+    results = NinthAge::MagicItem.all.map(&:id) if value == "false"
+    results.present? ? results : nil
+  } do |parent|
+    parent.table[:id]
+  end 
 end

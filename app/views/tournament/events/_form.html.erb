@@ -15,12 +15,22 @@
 
   <div class="form-group">
     <%= f.label :start_date %>
-    <%= f.text_field :start_date, :placeholder => t('tournament.event.form.start_date'), class: "form-control", data:{ provide:'datetimepicker' } %>
+    <%= content_tag(:div, { class: 'input-group date', data:{ provide:'datetimepicker' } }) do %>
+      <%= f.text_field :start_date, :value => (@event.start_date.blank? ? '' : @event.end_date.strftime(t('picker.datetime.rb'))), data: { date_format: t('picker.datetime.js') }, :placeholder => t('tournament.event.form.start_date'), class: "form-control" %>
+      <span class="input-group-addon">
+        <span class="glyphicon glyphicon-calendar"></span>
+      </span>
+    <% end %>   
   </div>
 
   <div class="form-group">
     <%= f.label :end_date %>
-    <%= f.text_field :end_date, :placeholder => t('tournament.event.form.end_date'), class: "form-control", data:{ provide:'datetimepicker' } %>
+    <%= content_tag(:div, { class: 'input-group date', data:{ provide:'datetimepicker' } }) do %>
+      <%= f.text_field :end_date, :value => (@event.end_date.blank? ? '' : @event.end_date.strftime(t('picker.datetime.rb'))), data: { date_format: t('picker.datetime.js') }, :placeholder => t('tournament.event.form.end_date'), class: "form-control" %>
+      <span class="input-group-addon">
+        <span class="glyphicon glyphicon-calendar"></span>
+      </span>
+    <% end %>
   </div>
 
   <div class="form-group">

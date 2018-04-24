@@ -4,7 +4,7 @@ module Tournament
 
     # GET /tournament/organisations
     def index
-        
+        @events = current_user.events
     end
   end
 end

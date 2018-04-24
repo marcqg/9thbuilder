@@ -1,5 +1,5 @@
 ActiveAdmin.register Tournament::Event do
-  menu parent: proc { I18n.t('active_admin.tournament') }, priority: 1, :if => proc{ current_user.has_role? :administrator }
+  menu parent: 'Tournament', priority: 1, :if => proc{ current_user.has_role? :administrator }
 
   permit_params :name
 

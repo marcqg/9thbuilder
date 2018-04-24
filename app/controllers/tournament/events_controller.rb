@@ -33,7 +33,7 @@ module Tournament
 
       respond_to do |format|
         if @event.save
-          format.html { redirect_to @event, notice: 'event was successfully created.' }
+          format.html { redirect_to tournament_organisations_url, notice: 'event was successfully created.' }
           format.json { render :show, status: :created, location: @event }
         else
           format.html { render :new }
@@ -47,7 +47,7 @@ module Tournament
     def update
       respond_to do |format|
         if @event.update(tournament_params)
-          format.html { redirect_to @event, notice: 'event was successfully updated.' }
+          format.html { redirect_to tournament_organisations_url, notice: 'event was successfully updated.' }
           format.json { render :show, status: :ok, location: @event }
         else
           format.html { render :edit }
@@ -61,7 +61,7 @@ module Tournament
     def destroy
       @event.destroy
       respond_to do |format|
-        format.html { redirect_to tournament_tournaments_url, notice: 'event was successfully destroyed.' }
+        format.html { redirect_to tournament_organisations_url, notice: 'event was successfully destroyed.' }
         format.json { head :no_content }
       end
     end
@@ -70,7 +70,7 @@ module Tournament
 
       # Use callbacks to share common setup or constraints between actions.
       def set_event
-        @event = current_user.tournaments.find(params[:id])
+        @event = current_user.events.find(params[:id])
       end
 
       # Never trust parameters from the scary internet, only allow the white list through.

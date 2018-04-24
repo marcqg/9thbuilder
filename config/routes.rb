@@ -137,6 +137,11 @@ Rails.application.routes.draw do
     namespace :tournament do
       resources :events
       resources :organisations,                   only: [:index]
+      
+
+      scope '/event-:event_id' do
+        resources :user_applies
+      end
     end
 
     # You can have the root of your site routed with "root"
