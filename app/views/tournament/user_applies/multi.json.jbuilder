@@ -1,0 +1,1 @@
+json.array! @user_applies, partial: 'tournament/user_applies/user_apply', as: :user_apply

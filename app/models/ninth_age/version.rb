@@ -9,6 +9,7 @@ class NinthAge::Version < ApplicationRecord
   has_many :extra_items, dependent: :destroy, class_name: "NinthAge::ExtraItem"
   has_many :magic_items, dependent: :destroy, class_name: "NinthAge::MagicItem"
   has_many :magic_standards, dependent: :destroy, class_name: "NinthAge::MagicStandard"
+  has_many :events, dependent: :destroy, class_name: "Tournament::Event"
 
   translates :name
   globalize_accessors

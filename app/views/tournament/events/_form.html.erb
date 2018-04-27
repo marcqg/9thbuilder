@@ -5,6 +5,11 @@
     <%= f.label :name %>
     <%= f.text_field :name, :placeholder => t('tournament.event.form.name'), class: "form-control" %>
   </div>
+
+  <div class="form-group">
+    <%= f.label :version %>
+    <%= f.collection_select :version_id, NinthAge::Version.includes(:translations).order(:name), :id, :name, {include_blank: false}, {class: 'form-control'} %>
+  </div>
   
   <div class="form-group">
     <%= f.label :address %>

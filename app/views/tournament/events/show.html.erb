@@ -1,7 +1,32 @@
 <div class="show-tournament">
-  <p id="notice"><%= notice %></p>
-  <%= link_to('Add user', tournament_add_apply_path(@event), {:class => 'btn btn-age pull-right'})%>
+  <%= link_to(tournament_add_user_apply_path(@event), {:class => 'btn btn-age pull-right'}) do %> <i class="fa fa-plus"></i> Add user <% end %>
+  <%= link_to("", {:class => 'btn btn-age pull-right', :id => "add-round", data: {event_id: @event.id} }) do %> <i class="fa fa-plus"></i> Add round <% end %>
 
   <h1 class="event-name"><strong>Tournament:</strong> <%= @event.name %></h1>
   <p class="event-date"><small>(<%= @event.start_date.strftime(t('picker.datetime.rb')) %> to <%= @event.end_date.strftime(t('picker.datetime.rb')) %>)</small></p>
+
+  <table class="list-user-points col-md-12 col-sm-12">
+  	<thead>
+  		<tr>
+  			<th>User</th>
+  			<th>PWL</th>
+  			<% @event.rounds.each do |round| %>
+  				<th><%= link_to("Round #{round.position}", tournament_round_path(@event, round)) %></th>
+  			<% end %>
+  			<th>Total</th>
+  		</tr>
+  	</thead>
+  	<tbody>
+  		<% @event.user_applies.each do |apply| %>
+  		<tr>
+  			<td><%= apply.name %></td>
+  			<td>0</td>
+  			<% @event.rounds.each do |round| %>
+  				<td>0</td>
+  			<% end %>
+  			<td>0</td>
+  		</tr>
+  		<% end %>
+  	</tbody>
+  </table>
 </div>

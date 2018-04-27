@@ -138,8 +138,13 @@ Rails.application.routes.draw do
       
 
       scope '/event-:event_id' do
-        resources :user_applies
-        get '/add',                               to: 'user_applies#add',               as: :add_apply
+        scope '/user_applies' do
+          post '/multi',                          to: 'user_applies#multi',               as: :multi_user_apply
+          post '/sort',                           to: 'user_applies#sort',                as: :sort_user_apply
+          get '/add',                             to: 'user_applies#add',                 as: :add_user_apply
+        end
+        resources :user_applies,                  only: [:new, :edit, :create, :update, :destroy]
+        resources :rounds,                        only: [:show, :create]
       end
     end
 

@@ -407,7 +407,9 @@ en:
         address: Address
         start_date: Start
         end_date: End
-        fees: fees
+        fees: Fees
+        version: Version
+        round_count: Rounds
         submit: Save
     user_apply:
       new:

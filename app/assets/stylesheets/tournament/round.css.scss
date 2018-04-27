@@ -1,0 +1,66 @@
+.show-round{
+    position: relative;
+    padding: 0;
+    margin-top: 10px;
+
+    .matches {
+
+    	.match {
+	    	clear: both;
+
+		    .round_match {
+		    	float: left;
+		        height: 75px;
+		        width:33%;
+		        position: relative;
+		        padding: 6px 0;
+		        list-style: none;
+		        margin-bottom: 5px;
+		        background: image-url("bg_army_list_unit_overview_content.png") repeat-x;
+
+		        &:not(:first-child) {
+		        	margin-left : 50px;
+		        }
+			
+				&::before,
+	    	    &::after {
+	    	        content: "";
+	    	        width: 16px;
+	    	        height: 55px;
+	    	        display: block;
+	    	        position: absolute;
+	    	        top: 0;
+	    	    }
+	
+	    	    &::before {
+	    	        background: image-url('bg_army_list_unit_overview_left.png') no-repeat;
+	    	        left: 0;
+	    	    }
+	
+	        	&::after {
+	        	    background: image-url('bg_army_list_unit_overview_right.png') no-repeat;
+	        	    right: 0;
+	        	}
+	
+				.user_apply_overview {
+		
+					.army {
+						position: absolute;
+						left: -20px;
+						top: 5px;
+					}
+
+					.name {
+						margin-left: 30px;
+					}
+
+					.points {
+    				    float: right;
+    				    margin-right: 16px;
+    					margin-top: 9px;
+    				}
+				}
+			}
+		}
+	}
+}

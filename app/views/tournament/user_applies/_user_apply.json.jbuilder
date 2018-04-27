@@ -1,1 +1,1 @@
-json.extract! user_apply, :id, :name, :army_id, :army_list_id, :event_id
+json.extract! user_apply, :id, :name, :army_id, :army_list_id, :event_id, :position

@@ -1,7 +1,13 @@
-.tournament-organisation{
-	margin-top: 10px;
+.show-tournament {
+	h1.event-name {
+		margin-bottom: 0;
+	}
 
-	table.events-list {
+	.event-date {
+		margin-left: 15px;
+	}
+
+	table.list-user-points {
 		width: 100%;
 		clear: both;
 
@@ -25,6 +31,10 @@
 
 			td {
 				padding: 2px 5px;
+
+				&:not(:first-child) {
+					text-align: center;
+				}
 
 				i {
 					color: #56251a;

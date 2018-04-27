@@ -75,7 +75,7 @@ module Tournament
 
       # Never trust parameters from the scary internet, only allow the white list through.
       def tournament_params
-        params.require(:tournament_event).permit(:name, :address, :latitude, :longitude, :start_date, :end_date, :fees)
+        params.require(:tournament_event).permit(:name, :address, :latitude, :longitude, :start_date, :end_date, :fees, :version_id, :rounds)
       end
   end
 end

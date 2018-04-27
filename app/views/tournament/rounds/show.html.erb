@@ -1,0 +1,39 @@
+<div class="show-round">
+  <%= link_to('Back to tournament', tournament_event_path(@event.id), {:class => 'btn btn-age pull-right'})%>
+
+  <h1 class="event-name"><strong>Tournament:</strong> <%= @event.name %> - Round <%= @round.position %></h1>
+ 
+  <div>
+    <% 
+      matches = @event.user_applies.in_groups_of(2)
+                      .select { |hash| !hash[0].nil? && !hash[1].nil? }
+
+      p matches
+    %>
+    <div class="matches">
+    <% matches.each_with_index do |match, index| %>
+      <div class="match">
+        <h2>Table <%= index + 1 %></h2>
+      <% match.each do |user_apply| %>
+        <div class="round_match" id="round_match_<%= index + 1 %>" data-match-id="<%= index + 1 %>">
+          <div class="user_apply_overview">
+            <div class="army">
+              <% unless user_apply.army.nil? and user_apply.army.logo.nil? %>
+                  <%= image_tag user_apply.army.logo.url(:thumb), alt: user_apply.army.name, height: 45 %>
+              <% end %>
+            </div>
+            <div class="points">
+              <input type="number" min="0" />
+            </div>
+            <div class="name">
+              <strong><%= transliterate user_apply.name %></strong>
+            </div>
+            <div class="clearboth"></div>
+          </div>
+        </div>
+      <% end %>      
+      </div>
+    <% end %>
+    </div>
+  </div>
+</div>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180419091129) do
+ActiveRecord::Schema.define(version: 20180424160613) do
 
   create_table "active_admin_comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.integer  "resource_id",                 null: false
@@ -717,7 +717,17 @@ ActiveRecord::Schema.define(version: 20180419091129) do
     t.string   "source"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "version_id",                          default: 0, null: false
     t.index ["creator_id"], name: "index_tournament_tournaments_on_creator_id", using: :btree
+    t.index ["version_id"], name: "tournament_events_version_id", using: :btree
+  end
+
+  create_table "tournament_rounds", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "event_id",   default: 0, null: false
+    t.integer  "position",   default: 0, null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.index ["event_id"], name: "index_tournament_user_applies_on_event_id", using: :btree
   end
 
   create_table "tournament_user_applies", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -861,7 +871,9 @@ ActiveRecord::Schema.define(version: 20180419091129) do
   add_foreign_key "paint_paint_list_units", "paint_paint_lists", column: "paint_list_id"
   add_foreign_key "paint_paint_lists", "ninth_age_armies", column: "army_id"
   add_foreign_key "paint_paint_lists", "users"
+  add_foreign_key "tournament_events", "ninth_age_versions", column: "version_id"
   add_foreign_key "tournament_events", "users", column: "creator_id"
+  add_foreign_key "tournament_rounds", "tournament_events", column: "event_id"
   add_foreign_key "tournament_user_applies", "builder_army_lists", column: "army_list_id"
   add_foreign_key "tournament_user_applies", "ninth_age_armies", column: "army_id"
   add_foreign_key "tournament_user_applies", "tournament_events", column: "event_id"

@@ -4,11 +4,11 @@ module Tournament
     before_action :set_user_apply, only: [:edit, :update, :destroy]
     before_action :authenticate_organisation_user!, only: [:new, :create, :edit, :update, :destroy]
 
-    # GET /tournament/event-{event_id}/user_apply/add
+    # GET /tournament/event-{event_id}/user_applies/add
     def add 
     end
 
-    # GET /tournament/event-{event_id}/user_apply/new
+    # GET /tournament/event-{event_id}/user_applies/new
     def new
       @user_apply = Tournament::UserApply.new
       @user_apply.event = @event
@@ -18,7 +18,26 @@ module Tournament
     def edit
     end
 
-    # POST /tournament/event-{event_id}/user_apply/
+    # POST /tournament/event-{event_id}/user_applies/multi
+    def multi
+
+      @user_applies = []
+
+      names = params[:names]
+      names.each do |name|
+        user_apply = Tournament::UserApply.new({name: name, event_id: @event.id})
+        user_apply.save!
+
+        @user_applies << user_apply
+      end
+
+      respond_to do |format|
+        format.html { redirect_to tournament_event_url(@event), notice: 'user apply was successfully created.' }
+        format.json
+      end
+    end
+
+    # POST /tournament/event-{event_id}/user_applies/
     def create
       @user_apply = Tournament::UserApply.new(user_apply_params)
       @user_apply.event = @event
@@ -34,7 +53,7 @@ module Tournament
       end
     end
 
-    # PATCH/PUT /tournament/event-{event_id}/user_apply/1
+    # PATCH/PUT /tournament/event-{event_id}/user_applies/1
     def update
       respond_to do |format|
         if @user_apply.update(user_apply_params)
@@ -47,13 +66,21 @@ module Tournament
       end
     end
 
-    # DELETE /tournament/event-{event_id}/user_apply/1
+    # DELETE /tournament/event-{event_id}/user_applies/1
     def destroy
       @user_apply.destroy
       respond_to do |format|
         format.html { redirect_to tournament_event_url(@event), notice: 'user apply was successfully destroyed.' }
         format.json { head :no_content }
       end
+    end
+
+    # POST /tournament/event-{event_id}/user_applies/sort
+    def sort
+      params[:user_apply].each_with_index do |id, index|
+        Tournament::UserApply.where(event_id: @event.id, id: id).update_all(position: index + 1)
+      end
+      render nothing: true
     end
 
     private
@@ -69,7 +96,7 @@ module Tournament
 
       # Never trust parameters from the scary internet, only allow the white list through.
       def user_apply_params
-        params.require(:tournament_user_apply).permit(:name, :state)
+        params.require(:tournament_user_apply).permit(:name, :army_id, :state)
       end
   end
 end
