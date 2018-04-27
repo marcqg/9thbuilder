@@ -12,7 +12,7 @@ jQuery.fn.swapWith = function(to) {
 	options = { revert: true };
 
     $("div.round_match").draggable(options);
-    $('#wrapper').droppable({
+    $('div.matches').droppable({
         drop: function(event, ui) {
         window.setTimeout(function(){
             $('#one').swapWith($('#two'));
