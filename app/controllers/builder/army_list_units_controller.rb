@@ -171,7 +171,7 @@ module Builder
     private
 
     def army_list_unit_params
-      params.require(:builder_army_list_unit).permit(:unit_id, :name, :notes, extra_item_ids: [], magic_standard_ids: [], army_list_unit_troops_attributes: [:id, :army_list_unit_id, :troop_id, :size], army_list_unit_unit_options_attributes: [:id, :army_list_unit_id, :unit_option_id, :quantity, :_destroy], army_list_unit_magic_items_attributes: [:id, :army_list_unit_id, :magic_item_id, :quantity, :_destroy])
+      params.require(:builder_army_list_unit).permit(:unit_id, :name, :notes, extra_item_ids: [], army_list_unit_troops_attributes: [:id, :army_list_unit_id, :troop_id, :size], army_list_unit_unit_options_attributes: [:id, :army_list_unit_id, :unit_option_id, :quantity, :_destroy], army_list_unit_magic_items_attributes: [:id, :army_list_unit_id, :magic_item_id, :quantity, :_destroy], army_list_unit_magic_standards_attributes: [:id, :army_list_unit_id, :magic_standard_id, :_destroy])
     end
 
     def update_organisations
