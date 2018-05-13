@@ -1,0 +1,1 @@
+json.partial! 'tournament/matches/match', match: @match

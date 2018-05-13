@@ -14,8 +14,15 @@
             <span class="pull-right">free</span>
           <% end %>
         <% end %>
+        <% if access_admin %>
+          <div style="position: relative;">
+            <%= link_to(admin_ninth_age_unit_option_path(unit_option.id), {:target => "_blank"}) do %>
+              <i class="fa fa-pencil-square-o"></i>
+            <% end %>
+          </div>
+        <% end %>
       </li>
-      <%= render :partial => 'ninth_age/unit_options/show', :locals => { :unit_options => unit_option.children} %> 
+      <%= render :partial => 'ninth_age/unit_options/show', :locals => { :unit_options => unit_option.children, :access_admin => access_admin} %> 
     <% end %>
   <% end %>
 </ul>
