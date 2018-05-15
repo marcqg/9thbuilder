@@ -14,26 +14,33 @@
     <% matches.each_with_index do |match, index| %>
       <div class="match">
         <h2>Table <%= index + 1 %></h2>
-      <% match.each do |user_apply| %>
-        <div class="round_match" id="round_match_<%= index + 1 %>" data-match-id="<%= index + 1 %>">
-          <div class="user_apply_overview">
-            <div class="army">
-              <% unless user_apply.army.nil? and user_apply.army.logo.nil? %>
-                  <%= image_tag user_apply.army.logo.url(:thumb), alt: user_apply.army.name, height: 45 %>
-              <% end %>
+        <ul id="match_<%= index %>" class="match-players" data-match-id="<%= index %>">
+        <% match.each_with_index do |user_apply, i| %>
+          <li class="match-place">
+            <div class="round_match" id="round_match_<%= "#{index}_#{i}" %>">
+              <div class="user_apply_overview">
+                <div class="army">
+                  <% unless user_apply.army.nil? and user_apply.army.logo.nil? %>
+                      <%= image_tag user_apply.army.logo.url(:thumb), alt: user_apply.army.name, height: 45 %>
+                  <% end %>
+                </div>
+                <div class="name">
+                  <strong><%= transliterate user_apply.name %></strong>
+                </div>
+                <div class="points">
+                  <input type="number" min="0" />
+                </div>
+                <div class="clearboth"></div>
+              </div>
             </div>
-            <div class="points">
-              <input type="number" min="0" />
-            </div>
-            <div class="name">
-              <strong><%= transliterate user_apply.name %></strong>
-            </div>
-            <div class="clearboth"></div>
-          </div>
-        </div>
-      <% end %>      
+          </li>
+        <% end %> 
+        </ul>     
       </div>
     <% end %>
     </div>
   </div>
+
+  <%= link_to('Back to tournament', tournament_event_path(@event.id), {:class => 'btn btn-age pull-right'})%>
+  
 </div>

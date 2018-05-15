@@ -6,14 +6,15 @@ class Builder::ArmyListUnit < ApplicationRecord
   has_many :army_list_unit_magic_standards, dependent: :destroy
   has_many :army_list_unit_extra_items, dependent: :destroy
   has_many :army_list_unit_unit_options, dependent: :destroy
-  has_many :magic_items, -> { select 'ninth_age_magic_items.*, builder_army_list_unit_magic_items.quantity' }, :class_name => 'NinthAge::MagicItem', through: :army_list_unit_magic_items
-  has_many :magic_standards, :class_name => 'NinthAge::MagicStandard', through: :army_list_unit_magic_standards
-  has_many :extra_items, :class_name => 'NinthAge::ExtraItem', through: :army_list_unit_extra_items
-  has_many :unit_options, -> { select 'ninth_age_unit_options.*, builder_army_list_unit_unit_options.quantity' }, :class_name => 'NinthAge::UnitOption', through: :army_list_unit_unit_options
+  has_many :magic_items, -> { select 'ninth_age_magic_items.*, builder_army_list_unit_magic_items.quantity' }, :class_name => 'NinthAge::MagicItem', through: :army_list_unit_magic_items, dependent: :destroy
+  has_many :magic_standards, :class_name => 'NinthAge::MagicStandard', through: :army_list_unit_magic_standards, dependent: :destroy
+  has_many :extra_items, :class_name => 'NinthAge::ExtraItem', through: :army_list_unit_extra_items, dependent: :destroy
+  has_many :unit_options, -> { select 'ninth_age_unit_options.*, builder_army_list_unit_unit_options.quantity' }, :class_name => 'NinthAge::UnitOption', through: :army_list_unit_unit_options, dependent: :destroy
 
   accepts_nested_attributes_for :army_list_unit_troops
   accepts_nested_attributes_for :army_list_unit_magic_items, allow_destroy: true
   accepts_nested_attributes_for :army_list_unit_unit_options, allow_destroy: true
+  accepts_nested_attributes_for :army_list_unit_magic_standards, allow_destroy: true
 
   normalize_attributes :name, :notes
 
@@ -54,12 +55,12 @@ class Builder::ArmyListUnit < ApplicationRecord
       self.value_points = value_points + army_list_unit_magic_item.magic_item.value_points * army_list_unit_magic_item.quantity
     end
 
-    extra_items.each do |extra_item|
-      self.value_points = value_points + extra_item.value_points
+    army_list_unit_magic_standards.each do |army_list_unit_magic_standard|
+      self.value_points = value_points + army_list_unit_magic_standard.magic_standard.value_points
     end
 
-    magic_standards.each do |magic_standard|
-      self.value_points = value_points + magic_standard.value_points
+    extra_items.each do |extra_item|
+      self.value_points = value_points + extra_item.value_points
     end
 
     if unit.value_points

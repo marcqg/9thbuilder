@@ -19,7 +19,7 @@ jQuery(document).ready(function() {
 				$('.list-user-points').find('thead')
 										.find('tr')
 										.each(function(){
-					$(this).find('th').eq(length - 2).after('<th>Round ' + result.position + '</th>');
+					$(this).find('th').eq(length - 2).after('<th><a href="../event-' + self.data('event-id') + '/rounds/' + result.id + '">Round ' + result.position + '</a></th>');
 				});
 
 				$('.list-user-points').find('tbody')
