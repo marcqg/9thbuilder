@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180424160613) do
+ActiveRecord::Schema.define(version: 20180515100732) do
 
   create_table "active_admin_comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.integer  "resource_id",                 null: false
@@ -309,6 +309,8 @@ ActiveRecord::Schema.define(version: 20180424160613) do
 
   create_table "ninth_age_magic_item_categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.boolean "is_multiple", default: false, null: false
+    t.string  "latex_key"
+    t.index ["latex_key"], name: "ninth_age_magic_item_categories_version_latex_unique", unique: true, using: :btree
   end
 
   create_table "ninth_age_magic_item_category_translations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
