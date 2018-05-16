@@ -1,1 +1,1 @@
-json.extract! round, :id, :round_id, :position, :user_apply_one_id, :user_apply_two_id, :user_apply_one_points, :user_apply_two_points
+json.extract! match, :id, :round_id, :table, :user_apply_id, :points

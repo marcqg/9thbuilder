@@ -145,6 +145,7 @@ Rails.application.routes.draw do
         end
         resources :user_applies,                  only: [:new, :edit, :create, :update, :destroy]
         resources :rounds,                        only: [:show, :create]
+        resources :custom_points,                 only: [:index, :update]
 
         scope '/round-:round_id' do
           resources :matches,                     only: [:update]

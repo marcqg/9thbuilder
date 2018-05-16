@@ -10,11 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 20180515100732) do
-=======
-ActiveRecord::Schema.define(version: 20180506104931) do
->>>>>>> 3ecf1e4896319a9eedd2031adcb8215b2ebc3fbd
+ActiveRecord::Schema.define(version: 20180516113144) do
 
   create_table "active_admin_comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.integer  "resource_id",                 null: false
@@ -711,6 +707,18 @@ ActiveRecord::Schema.define(version: 20180506104931) do
     t.index ["resource_type", "resource_id"], name: "index_roles_on_resource_type_and_resource_id", using: :btree
   end
 
+  create_table "tournament_custom_points", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "event_id",       default: 0, null: false
+    t.integer  "user_apply_id",  default: 0, null: false
+    t.integer  "paint_points",   default: 0, null: false
+    t.integer  "wysiwyg_points", default: 0, null: false
+    t.integer  "list_points",    default: 0, null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.index ["event_id"], name: "index_tournament_pwls_on_round_id", using: :btree
+    t.index ["user_apply_id"], name: "index_tournament_pwls_on_user_apply_one_id", using: :btree
+  end
+
   create_table "tournament_events", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "creator_id",                          default: 0, null: false
     t.string   "name",                                            null: false
@@ -728,27 +736,24 @@ ActiveRecord::Schema.define(version: 20180506104931) do
     t.index ["version_id"], name: "tournament_events_version_id", using: :btree
   end
 
-  create_table "tournament_matchs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "round_id",              default: 0, null: false
-    t.integer  "table",                 default: 0, null: false
-    t.integer  "user_apply_one_id",     default: 0, null: false
-    t.integer  "user_apply_two_id",     default: 0, null: false
-    t.integer  "user_apply_one_points", default: 0, null: false
-    t.integer  "user_apply_two_points", default: 0, null: false
-    t.integer  "position",              default: 0, null: false
+  create_table "tournament_matches", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "round_id",      default: 0, null: false
+    t.integer  "table",         default: 0, null: false
+    t.integer  "user_apply_id", default: 0, null: false
+    t.integer  "points",        default: 0, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["round_id"], name: "index_tournament_user_applies_on_round_id", using: :btree
-    t.index ["table"], name: "index_tournament_user_applies_on_table", using: :btree
-    t.index ["user_apply_one_id"], name: "index_tournament_user_applies_on_user_apply_one_id", using: :btree
-    t.index ["user_apply_two_id"], name: "index_tournament_user_applies_on_user_apply_two_id", using: :btree
+    t.index ["table"], name: "index_tournament_user_applies_on_position", using: :btree
+    t.index ["user_apply_id"], name: "index_tournament_user_applies_on_user_apply_one_id", using: :btree
   end
 
   create_table "tournament_rounds", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "event_id",   default: 0, null: false
-    t.integer  "position",   default: 0, null: false
+    t.integer  "event_id",   default: 0,     null: false
+    t.integer  "position",   default: 0,     null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "finish",     default: false, null: false
     t.index ["event_id"], name: "index_tournament_user_applies_on_event_id", using: :btree
   end
 
@@ -893,11 +898,12 @@ ActiveRecord::Schema.define(version: 20180506104931) do
   add_foreign_key "paint_paint_list_units", "paint_paint_lists", column: "paint_list_id"
   add_foreign_key "paint_paint_lists", "ninth_age_armies", column: "army_id"
   add_foreign_key "paint_paint_lists", "users"
+  add_foreign_key "tournament_custom_points", "tournament_events", column: "event_id"
+  add_foreign_key "tournament_custom_points", "tournament_user_applies", column: "user_apply_id"
   add_foreign_key "tournament_events", "ninth_age_versions", column: "version_id"
   add_foreign_key "tournament_events", "users", column: "creator_id"
-  add_foreign_key "tournament_matchs", "tournament_events", column: "round_id"
-  add_foreign_key "tournament_matchs", "tournament_user_applies", column: "user_apply_one_id"
-  add_foreign_key "tournament_matchs", "tournament_user_applies", column: "user_apply_two_id"
+  add_foreign_key "tournament_matches", "tournament_rounds", column: "round_id"
+  add_foreign_key "tournament_matches", "tournament_user_applies", column: "user_apply_id"
   add_foreign_key "tournament_rounds", "tournament_events", column: "event_id"
   add_foreign_key "tournament_user_applies", "builder_army_lists", column: "army_list_id"
   add_foreign_key "tournament_user_applies", "ninth_age_armies", column: "army_id"

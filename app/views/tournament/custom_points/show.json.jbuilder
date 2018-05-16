@@ -1,0 +1,1 @@
+json.partial! 'tournament/custom_points/custom_point', custom_point: @custom_point

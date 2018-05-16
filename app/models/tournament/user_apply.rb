@@ -10,6 +10,10 @@ class Tournament::UserApply < ApplicationRecord
   belongs_to :army_list, class_name: "Builder::ArmyList"
 
   belongs_to :event
+  has_many :matches, dependent: :destroy
+  has_many :custom_points, dependent: :destroy
+
+  has_many :children, -> { order 'position' }, class_name: 'NinthAge::UnitOption', foreign_key: 'parent_id', dependent: :nullify  
 
   enum state: { pending: 0, cancel: 1, refused: 2, listValidation: 3, ListRefused: 4, validated: 5 }
 

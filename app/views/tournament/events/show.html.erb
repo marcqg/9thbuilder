@@ -1,4 +1,5 @@
 <div class="show-tournament">
+  <%= link_to(tournament_organisations_path(), {:class => 'btn btn-age pull-right'}) do %> Back to events<% end %>
   <%= link_to(tournament_add_user_apply_path(@event), {:class => 'btn btn-age pull-right'}) do %> <i class="fa fa-plus"></i> Add user <% end %>
   <%= link_to("", {:class => 'btn btn-age pull-right', :id => "add-round", data: {event_id: @event.id} }) do %> <i class="fa fa-plus"></i> Add round <% end %>
 
@@ -9,9 +10,9 @@
   	<thead>
   		<tr>
   			<th>User</th>
-  			<th>PWL</th>
+          <th><%= link_to(tournament_custom_points_path(@event)) do %> PWL <i class="fa fa-edit"></i><%end%></th>
   			<% @event.rounds.each do |round| %>
-  				<th><%= link_to("Round #{round.position}", tournament_round_path(@event, round)) %></th>
+  				<th><%= link_to(tournament_round_path(@event, round)) do %> Round <%= round.position %> <i class="fa fa-edit"></i><%end%></th>
   			<% end %>
   			<th>Total</th>
   		</tr>
@@ -20,11 +21,28 @@
   		<% @event.user_applies.each do |apply| %>
   		<tr>
   			<td><%= apply.name %></td>
-  			<td>0</td>
+        <%
+          custom_point = @event.custom_points.find_by({ :user_apply_id => apply.id })
+          pwl_points = custom_point.total_points unless custom_point.nil?
+        %>
+  			<td><%= pwl_points %></td>
   			<% @event.rounds.each do |round| %>
-  				<td>0</td>
+          <%
+            match = round.matches.find_by({ :user_apply_id => apply.id })
+            points = 0
+            unless match.nil?
+              points = match.points
+            end
+          %>
+        <td><%= points %></td>
   			<% end %>
-  			<td>0</td>
+        <%
+          total = @event.matches
+                        .where({ :user_apply_id => apply.id })
+                        .map(&:points)
+                        .sum
+        %>
+        <td><%= total + pwl_points %></td>
   		</tr>
   		<% end %>
   	</tbody>

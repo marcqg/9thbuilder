@@ -4,7 +4,7 @@ class Tournament::Round < ApplicationRecord
 
   belongs_to :event
 
-  has_many :matches, -> { order 'position' }, dependent: :destroy
+  has_many :matches, -> { order '`table`' }, dependent: :destroy
 
 
   acts_as_list scope: :event
