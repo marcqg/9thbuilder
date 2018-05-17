@@ -8,6 +8,10 @@ class NinthAge::SpecialRuleUnitTroop < ApplicationRecord
   delegate :version, :to => :army, :allow_nil => true
   belongs_to :troop, class_name: "NinthAge::Troop"
 
+  translates :info
+  globalize_accessors
+  accepts_nested_attributes_for :translations, allow_destroy: true
+
   validates :position, numericality: { greater_than_or_equal_to: 1, only_integer: true, allow_nil: false }
   validates :special_rule_id, presence: true
   validates :unit_id, presence: true

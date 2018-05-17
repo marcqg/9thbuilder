@@ -3,7 +3,7 @@
     <th><%=t 'army_list_unit.show.special_rules' %> <%= "(#{troop.name})" unless troop.nil? %></th>
     <td colspan="10">
       <% special_rules.each_with_index do |special_rule, index| %>
-        <%= "•" if index > 0 %> <%= special_rule.special_rule.name %>
+        <%= "•" if index > 0 %> <%= special_rule.special_rule.name %> <%if !special_rule.info.nil? || !special_rule.jet.nil?%>(<%= special_rule.jet %><%= ", " unless special_rule.jet.nil? %><%= special_rule.info unless special_rule.info.nil? %>) <%end%>
       <% end %>
     </td>
   </tr>

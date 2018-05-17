@@ -1,7 +1,7 @@
 ActiveAdmin.register NinthAge::EquipmentUnitTroop do
   menu parent: 'Ninth Age Unit Specialisations', priority: 2
 
-  permit_params :unit_id, :troop_id, :equipment_id, :position, :locale, translations_attributes: [:id, :info, :locale, :_destroy]
+  permit_params :unit_id, :troop_id, :equipment_id, :position, :jet, :locale, translations_attributes: [:id, :info, :locale, :_destroy]
 
   config.filters = false
 
@@ -13,6 +13,18 @@ ActiveAdmin.register NinthAge::EquipmentUnitTroop do
     def create
       create! do |format|
         format.html { redirect_to new_admin_ninth_age_equipment_unit_troop_path({'ninth_age_equipment_unit_troop[unit_id]': resource.unit_id, 'ninth_age_equipment_unit_troop[troop_id]': resource.troop_id, 'ninth_age_equipment_unit_troop[position]': resource.unit.equipment_unit_troops.size + 1}) }
+      end
+    end
+  end
+  
+  before_action only: [:create, :update] do
+    params[:ninth_age_equipment_unit_troop][:translations_attributes].each do |k,v|
+      if v.except('id', 'locale').all? { |_,v| v.blank? }
+        v.merge!(_destroy: '1')
+        params[:ninth_age_equipment_unit_troop][:translations_attributes][k] = v
+        v.each do |p|
+          puts p
+        end
       end
     end
   end
@@ -80,7 +92,7 @@ ActiveAdmin.register NinthAge::EquipmentUnitTroop do
                                                   .collect {|troop| [troop.name, troop.id]} : [])
 
       f.input :position
-
+      
       f.input :equipment, as: :select, 
               :input_html => {'data-option-dependent' => true, 'data-option-url' => '/ninth_age/version-:ninth_age_equipment_unit_troop_version_filter/equipments/all', 'data-option-observed' => 'ninth_age_equipment_unit_troop_version_filter'}, 
               :collection => (resource.version ? resource.version
@@ -89,6 +101,8 @@ ActiveAdmin.register NinthAge::EquipmentUnitTroop do
                                                   .with_locales(I18n.locale)
                                                   .ordered
                                                   .collect {|equipment| [equipment.name, equipment.id]} : [])
+
+      f.input :jet
 
       f.translate_inputs do |t|
         t.input :info
@@ -105,6 +119,7 @@ ActiveAdmin.register NinthAge::EquipmentUnitTroop do
       row :troop
       row :position
       row :equipment
+      row :jet
     end
 
     panel 'Translations' do

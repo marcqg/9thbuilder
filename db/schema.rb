@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180517085022) do
+ActiveRecord::Schema.define(version: 20180517144947) do
 
   create_table "active_admin_comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.integer  "resource_id",                 null: false
@@ -257,6 +257,7 @@ ActiveRecord::Schema.define(version: 20180517085022) do
     t.integer  "position",     default: 1, null: false
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
+    t.string   "jet"
     t.index ["equipment_id", "unit_id", "troop_id"], name: "ninth_age_equipments_troops_rule_troop", unique: true, using: :btree
     t.index ["troop_id"], name: "fk_rails_dccb795808", using: :btree
     t.index ["unit_id"], name: "fk_rails_fc56c1191a", using: :btree
@@ -469,6 +470,16 @@ ActiveRecord::Schema.define(version: 20180517085022) do
     t.index ["ninth_age_special_rule_id"], name: "index_ed7d13913dad10860cc6f0c91dca13f4c632329a", using: :btree
   end
 
+  create_table "ninth_age_special_rule_unit_troop_translations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "ninth_age_special_rule_unit_troop_id", null: false
+    t.string   "locale",                               null: false
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+    t.string   "info"
+    t.index ["locale"], name: "index_ninth_age_special_rule_unit_troop_translations_on_locale", using: :btree
+    t.index ["ninth_age_special_rule_unit_troop_id"], name: "index_9dfa544cb1b10dd6ca1daf1c975ad16021e73c84", using: :btree
+  end
+
   create_table "ninth_age_special_rule_unit_troops", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "special_rule_id", default: 0, null: false
     t.integer  "unit_id",         default: 0, null: false
@@ -476,6 +487,7 @@ ActiveRecord::Schema.define(version: 20180517085022) do
     t.integer  "position",        default: 1, null: false
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
+    t.string   "jet"
     t.index ["special_rule_id", "unit_id", "troop_id"], name: "ninth_age_special_rules_troops_rule_troop", unique: true, using: :btree
     t.index ["troop_id"], name: "fk_rails_c9f69daf3b", using: :btree
     t.index ["unit_id"], name: "fk_rails_2a74b899ae", using: :btree
@@ -723,9 +735,9 @@ ActiveRecord::Schema.define(version: 20180517085022) do
     t.integer  "paint_points",   default: 0, null: false
     t.integer  "wysiwyg_points", default: 0, null: false
     t.integer  "list_points",    default: 0, null: false
+    t.integer  "total_points",   default: 0, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "total_points",   default: 0, null: false
     t.index ["event_id"], name: "index_tournament_pwls_on_round_id", using: :btree
     t.index ["user_apply_id"], name: "index_tournament_pwls_on_user_apply_one_id", using: :btree
   end
@@ -755,7 +767,7 @@ ActiveRecord::Schema.define(version: 20180517085022) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["round_id"], name: "index_tournament_user_applies_on_round_id", using: :btree
-    t.index ["table"], name: "index_tournament_user_applies_on_position", using: :btree
+    t.index ["table"], name: "index_tournament_user_applies_on_table", using: :btree
     t.index ["user_apply_id"], name: "index_tournament_user_applies_on_user_apply_one_id", using: :btree
   end
 
@@ -883,6 +895,7 @@ ActiveRecord::Schema.define(version: 20180517085022) do
   add_foreign_key "ninth_age_organisations_units", "ninth_age_organisations", column: "organisation_id"
   add_foreign_key "ninth_age_organisations_units", "ninth_age_units", column: "unit_id"
   add_foreign_key "ninth_age_special_rule_translations", "ninth_age_special_rules", on_delete: :cascade
+  add_foreign_key "ninth_age_special_rule_unit_troop_translations", "ninth_age_special_rule_unit_troops"
   add_foreign_key "ninth_age_special_rule_unit_troops", "ninth_age_special_rules", column: "special_rule_id"
   add_foreign_key "ninth_age_special_rule_unit_troops", "ninth_age_troops", column: "troop_id"
   add_foreign_key "ninth_age_special_rule_unit_troops", "ninth_age_units", column: "unit_id"
