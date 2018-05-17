@@ -23,6 +23,7 @@
   			<td><%= apply.name %></td>
         <%
           custom_point = @event.custom_points.find_by({ :user_apply_id => apply.id })
+          pwl_points = 0
           pwl_points = custom_point.total_points unless custom_point.nil?
         %>
   			<td><%= pwl_points %></td>
@@ -37,6 +38,7 @@
         <td><%= points %></td>
   			<% end %>
         <%
+          total = 0
           total = @event.matches
                         .where({ :user_apply_id => apply.id })
                         .map(&:points)

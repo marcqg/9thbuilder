@@ -101,14 +101,20 @@ body {
   border-color: #2F0900; 
 } 
  
+.btn-age:link,
 .btn-age:hover, 
 .btn-age:focus, 
 .btn-age:active, 
+.btn-age:visited, 
 .btn-age.active, 
 .open .dropdown-toggle.btn-age { 
-  color: #ffffff; 
+  color: #ffffff !important; 
   background-color: #360A00; 
   border-color: #2F0900; 
+} 
+  
+.btn-age:hover { 
+  color: #eeeeee !important; 
 } 
  
 .btn-age:active, 
