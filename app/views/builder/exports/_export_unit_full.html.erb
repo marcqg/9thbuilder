@@ -110,9 +110,8 @@
                             .joins(:equipment)
                             .includes(equipment: [:translations])
                             .where({ninth_age_equipments: {type_lvl: NinthAge::Equipment.type_lvls[:Global] }})
-                            .map(&:equipment)
                             .each do |equipment| %>
-                      <li><%= link_to(equipment.name, ninth_age_equipment_path(equipment.id)) %>,</li>
+                      <li><%= link_to(ninth_age_equipment_path(equipment.equipment_id)) do %><%= equipment.equipment.name %> <%= "(#{equipment.info})" unless equipment.info.nil? %><%end%>,</li>
                     <% end %>
                   </ul>
                 </td>
@@ -164,9 +163,8 @@
                         .joins(:equipment)
                         .includes(equipment: [:translations])
                         .where({ninth_age_equipments: {type_lvl: NinthAge::Equipment.type_lvls[:Defensive]}})
-                        .map(&:equipment)
                         .each do |equipment| %>
-                  <li><%= link_to(equipment.name, ninth_age_equipment_path(equipment.id)) %>,</li>
+                  <li><%= link_to(ninth_age_equipment_path(equipment.equipment_id)) do %><%= equipment.equipment.name %> <%= "(#{equipment.info})" unless equipment.info.nil? %><%end%>,</li>
                 <% end %>
               </ul>
             </td>
@@ -219,18 +217,16 @@
                             .includes(equipment: [:translations])
                             .where({ninth_age_equipments: {type_lvl: NinthAge::Equipment.type_lvls[:Offensive]}})
                             .where(:troop => nil)
-                            .map(&:equipment)
                             .each do |equipment| %>
-                      <li><%= link_to(equipment.name, ninth_age_equipment_path(equipment.id)) %>,</li>
+                      <li><%= link_to(ninth_age_equipment_path(equipment.equipment_id)) do %><%= equipment.equipment.name %> <%= "(#{equipment.info})" unless equipment.info.nil? %><%end%>,</li>
                     <% end %>
                     <% army_list_unit.unit.equipment_unit_troops
                             .joins(:equipment)
                             .includes(equipment: [:translations])
                             .where({ninth_age_equipments: {type_lvl: NinthAge::Equipment.type_lvls[:Offensive]}})
                             .where(:troop => troop.id)
-                            .map(&:equipment)
                             .each do |equipment| %>
-                      <li><%= link_to(equipment.name, ninth_age_equipment_path(equipment.id)) %>,</li>
+                      <li><%= link_to(ninth_age_equipment_path(equipment.equipment_id)) do %><%= equipment.equipment.name %> <%= "(#{equipment.info})" unless equipment.info.nil? %><%end%>,</li>
                     <% end %>
                   </ul>
                 </td>

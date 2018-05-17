@@ -175,7 +175,7 @@
         <% end %>
 
         <!-- EQUIPMENTS -->
-        <%= render :partial => 'ninth_age/equipments/show', :locals => {:equipments => army_list_unit.unit.equipment_unit_troops.where(troop_id: nil).map(&:equipment), :troop => nil} %>
+        <%= render :partial => 'ninth_age/equipment_unit_troops/show', :locals => {:equipments => army_list_unit.unit.equipment_unit_troops.where(troop_id: nil), :troop => nil} %>
 
         <% army_list_unit.unit.troops.select { |t| t.unit_option.nil? or army_list_unit.unit_options.include?(t.unit_option) }.each do |troop| %>
             <%= render :partial => 'ninth_age/equipments/show', :locals => {:equipments => troop.equipment_unit_troops.map(&:equipment), :troop => troop} %>

@@ -22,7 +22,8 @@ module NinthAge
       @version = NinthAge::Version.find(params[:version_id])
       @ninth_age_equipments = NinthAge::Equipment.includes(:translations)
                                                   .where(:version_id => params[:version_id])
-                                                  .order(:name)
+                                                  .with_locales(I18n.locale)
+                                                  .ordered
 
       respond_to do |format|
         format.json
@@ -31,9 +32,10 @@ module NinthAge
 
     def army_all
       @army = NinthAge::Army.find(params[:army_id])
-      @ninth_age_special_rules = NinthAge::Equipment.includes(:translations)
+      @equipments = NinthAge::Equipment.includes(:translations)
                                                       .where("(army_id = ? OR army_id IS NULL) AND version_id = ?", @army.id, @army.version_id)
-                                                      .order(:name)
+                                                      .with_locales(I18n.locale)
+                                                      .ordered
 
       respond_to do |format|
         format.json

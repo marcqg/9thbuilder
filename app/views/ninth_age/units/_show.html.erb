@@ -151,12 +151,11 @@
                           .joins(:equipment)
                           .includes(equipment: [:translations])
                           .where({ninth_age_equipments: {type_lvl: NinthAge::Equipment.type_lvls[:Global] }})
-                          .map(&:equipment)
                           .each do |equipment| %>
                     <li>
-                      <%= link_to(equipment.name, ninth_age_equipment_path(equipment.id)) %>
+                      <%= link_to(ninth_age_equipment_path(equipment.equipment_id)) do %><%= equipment.equipment.name %> <%= "(#{equipment.info})" unless equipment.info.nil? %><%end%>
                       <% if access_admin %>
-                        <%= link_to(admin_ninth_age_equipment_path(equipment.id), {:target => "_blank"}) do %>
+                        <%= link_to(admin_ninth_age_equipment_path(equipment.equipment_id), {:target => "_blank"}) do %>
                           <i class="fa fa-pencil-square-o"></i>
                         <% end %>
                       <% end %>,
@@ -218,12 +217,11 @@
                           .joins(:equipment)
                           .includes(equipment: [:translations])
                           .where({ninth_age_equipments: {type_lvl: NinthAge::Equipment.type_lvls[:Defensive]}})
-                          .map(&:equipment)
                           .each do |equipment| %>
                     <li>
-                      <%= link_to(equipment.name, ninth_age_equipment_path(equipment.id)) %>
+                      <%= link_to(ninth_age_equipment_path(equipment.equipment_id)) do %><%= equipment.equipment.name %> <%= "(#{equipment.info})" unless equipment.info.nil? %><%end%>
                       <% if access_admin %>
-                        <%= link_to(admin_ninth_age_equipment_path(equipment.id), {:target => "_blank"}) do %>
+                        <%= link_to(admin_ninth_age_equipment_path(equipment.equipment_id), {:target => "_blank"}) do %>
                           <i class="fa fa-pencil-square-o"></i>
                         <% end %>
                       <% end %>,
@@ -294,12 +292,11 @@
                               .includes(equipment: [:translations])
                               .where({ninth_age_equipments: {type_lvl: NinthAge::Equipment.type_lvls[:Offensive]}})
                               .where(:troop => nil)
-                              .map(&:equipment)
                               .each do |equipment| %>
                         <li>
-                          <%= link_to(equipment.name, ninth_age_equipment_path(equipment.id)) %>
+                          <%= link_to(ninth_age_equipment_path(equipment.equipment_id)) do %><%= equipment.equipment.name %> <%= "(#{equipment.info})" unless equipment.info.nil? %><%end%>
                           <% if access_admin %>
-                            <%= link_to(admin_ninth_age_equipment_path(equipment.id), {:target => "_blank"}) do %>
+                            <%= link_to(admin_ninth_age_equipment_path(equipment.equipment_id), {:target => "_blank"}) do %>
                               <i class="fa fa-pencil-square-o"></i>
                             <% end %>
                           <% end %>,
@@ -310,12 +307,11 @@
                               .includes(equipment: [:translations])
                               .where({ninth_age_equipments: {type_lvl: NinthAge::Equipment.type_lvls[:Offensive]}})
                               .where(:troop => troop.id)
-                              .map(&:equipment)
                               .each do |equipment| %>
                         <li>
-                          <%= link_to(equipment.name, ninth_age_equipment_path(equipment.id)) %>
+                          <%= link_to(ninth_age_equipment_path(equipment.equipment_id)) do %><%= equipment.equipment.name %> <%= "(#{equipment.info})" unless equipment.info.nil? %><%end%>
                           <% if access_admin %>
-                            <%= link_to(admin_ninth_age_equipment_path(equipment.id), {:target => "_blank"}) do %>
+                            <%= link_to(admin_ninth_age_equipment_path(equipment.equipment_id), {:target => "_blank"}) do %>
                               <i class="fa fa-pencil-square-o"></i>
                             <% end %>
                           <% end %>,

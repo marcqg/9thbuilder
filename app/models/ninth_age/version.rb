@@ -18,4 +18,6 @@ class NinthAge::Version < ApplicationRecord
   def cache_key
     super + '-ninth-age-' + Globalize.locale.to_s
   end
+
+  scope :ordered, -> { order("ninth_age_version_translations.name ASC") }
 end

@@ -1,6 +1,6 @@
 <% if equipments.any? %>
   <h4><%=t 'army_list_unit.show.equipments' %> <%= "(#{troop.name})" unless troop.nil? %></h4>
   <% equipments.each do |equipment| %>
-    • <%= equipment.name %> <br />
+    • <%= link_to(ninth_age_equipment_path(equipment.equipment_id)) do %><%= equipment.equipment.name %> <%= "(#{equipment.info})" unless equipment.info.nil? %><%end%> <br />
   <% end %>
 <% end %>

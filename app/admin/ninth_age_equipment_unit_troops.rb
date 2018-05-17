@@ -1,7 +1,7 @@
 ActiveAdmin.register NinthAge::EquipmentUnitTroop do
   menu parent: 'Ninth Age Unit Specialisations', priority: 2
 
-  permit_params :unit_id, :troop_id, :equipment_id, :position
+  permit_params :unit_id, :troop_id, :equipment_id, :position, :locale, translations_attributes: [:id, :info, :locale, :_destroy]
 
   config.filters = false
 
@@ -50,13 +50,67 @@ ActiveAdmin.register NinthAge::EquipmentUnitTroop do
 
   form do |f|
     f.inputs do
-      f.input :version_filter, as: :select, collection: NinthAge::Version.includes(:translations).order(:name).collect { |o| [o.name, o.id] }, label: 'Version FILTER'
-      f.input :army_filter, as: :select, :input_html => {'data-option-dependent' => true, 'data-option-url' => '/ninth_age/version-:ninth_age_equipment_unit_troop_version_filter/armies', 'data-option-observed' => 'ninth_age_equipment_unit_troop_version_filter'}, :collection => (resource.version ? resource.version.armies.order(:name).collect {|army| [army.name, army.id]} : [])
-      f.input :unit, as: :select, :input_html => {'data-option-dependent' => true, 'data-option-url' => '/ninth_age/army-:ninth_age_equipment_unit_troop_army_filter/units', 'data-option-observed' => 'ninth_age_equipment_unit_troop_army_filter'}, :collection => (resource.army ? resource.army.units.order(:name).collect {|unit| [unit.name, unit.id]} : [])
-      f.input :troop, as: :select, :input_html => {'data-option-dependent' => true, 'data-option-url' => '/ninth_age/army-:ninth_age_equipment_unit_troop_unit/units', 'data-option-observed' => 'ninth_age_equipment_unit_troop_unit'}, :collection => (resource.unit ? resource.unit.troops.order(:name).collect {|troop| [troop.name, troop.id]} : [])
-      f.input :equipment, as: :select, :input_html => {'data-option-dependent' => true, 'data-option-url' => '/ninth_age/version-:ninth_age_equipment_unit_troop_version_filter/equipments', 'data-option-observed' => 'ninth_age_equipment_unit_troop_version_filter'}, :collection => (resource.version ? resource.version.equipments.order(:name).collect {|equipment| [equipment.name, equipment.id]} : [])
+      f.input :version_filter, as: :select, label: 'Version FILTER', 
+              collection: NinthAge::Version.includes(:translations)
+                                                  .order(:name)
+                                                  .collect { |o| [o.name, o.id] }
+      f.input :army_filter, as: :select, 
+              :input_html => {'data-option-dependent' => true, 'data-option-url' => '/ninth_age/version-:ninth_age_equipment_unit_troop_version_filter/armies', 'data-option-observed' => 'ninth_age_equipment_unit_troop_version_filter'}, 
+              :collection => (resource.version ? resource.version
+                                                  .armies
+                                                  .includes(:translations)
+                                                  .with_locales(I18n.locale)
+                                                  .ordered
+                                                  .collect {|army| [army.name, army.id]} : [])
+      f.input :unit, as: :select, 
+              :input_html => {'data-option-dependent' => true, 'data-option-url' => '/ninth_age/army-:ninth_age_equipment_unit_troop_army_filter/units', 'data-option-observed' => 'ninth_age_equipment_unit_troop_army_filter'}, 
+              :collection => (resource.army ? resource.army
+                                                  .units
+                                                  .includes(:translations)
+                                                  .with_locales(I18n.locale)
+                                                  .ordered
+                                                  .collect {|unit| [unit.name, unit.id]} : [])
+      f.input :troop, as: :select, 
+              :input_html => {'data-option-dependent' => true, 'data-option-url' => '/ninth_age/army-:ninth_age_equipment_unit_troop_unit/units', 'data-option-observed' => 'ninth_age_equipment_unit_troop_unit'}, 
+              :collection => (resource.unit ? resource.unit
+                                                  .troops
+                                                  .includes(:translations)
+                                                  .with_locales(I18n.locale)
+                                                  .ordered
+                                                  .collect {|troop| [troop.name, troop.id]} : [])
+
       f.input :position
+
+      f.input :equipment, as: :select, 
+              :input_html => {'data-option-dependent' => true, 'data-option-url' => '/ninth_age/version-:ninth_age_equipment_unit_troop_version_filter/equipments/all', 'data-option-observed' => 'ninth_age_equipment_unit_troop_version_filter'}, 
+              :collection => (resource.version ? resource.version
+                                                  .equipments
+                                                  .includes(:translations)
+                                                  .with_locales(I18n.locale)
+                                                  .ordered
+                                                  .collect {|equipment| [equipment.name, equipment.id]} : [])
+
+      f.translate_inputs do |t|
+        t.input :info
+      end
     end
     f.actions
+  end
+
+  show do |model|
+    attributes_table do
+      row :version_filter
+      row :army_filter
+      row :unit
+      row :troop
+      row :position
+      row :equipment
+    end
+
+    panel 'Translations' do
+      translate_attributes_table_for model do
+        row :info
+      end
+    end
   end
 end

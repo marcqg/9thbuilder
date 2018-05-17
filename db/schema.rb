@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180516113144) do
+ActiveRecord::Schema.define(version: 20180517085022) do
 
   create_table "active_admin_comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.integer  "resource_id",                 null: false
@@ -238,6 +238,16 @@ ActiveRecord::Schema.define(version: 20180516113144) do
     t.index ["locale"], name: "index_ninth_age_equipment_translations_on_locale", using: :btree
     t.index ["ninth_age_equipment_id", "locale"], name: "unique_ninth_age_translations_equipment_id", unique: true, using: :btree
     t.index ["ninth_age_equipment_id"], name: "index_988058a4c70faa82db616cf9fa0a90fa66d1b61f", using: :btree
+  end
+
+  create_table "ninth_age_equipment_unit_troop_translations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "ninth_age_equipment_unit_troop_id", null: false
+    t.string   "locale",                            null: false
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
+    t.string   "info"
+    t.index ["locale"], name: "index_ninth_age_equipment_unit_troop_translations_on_locale", using: :btree
+    t.index ["ninth_age_equipment_unit_troop_id"], name: "index_2c255b43eccb6a60a004e76ef948820621cbbd45", using: :btree
   end
 
   create_table "ninth_age_equipment_unit_troops", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -715,6 +725,7 @@ ActiveRecord::Schema.define(version: 20180516113144) do
     t.integer  "list_points",    default: 0, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "total_points",   default: 0, null: false
     t.index ["event_id"], name: "index_tournament_pwls_on_round_id", using: :btree
     t.index ["user_apply_id"], name: "index_tournament_pwls_on_user_apply_one_id", using: :btree
   end
@@ -839,6 +850,7 @@ ActiveRecord::Schema.define(version: 20180516113144) do
   add_foreign_key "ninth_age_domain_magic_translations", "ninth_age_domain_magics", on_delete: :cascade
   add_foreign_key "ninth_age_domain_magics", "ninth_age_versions", column: "version_id"
   add_foreign_key "ninth_age_equipment_translations", "ninth_age_equipments", on_delete: :cascade
+  add_foreign_key "ninth_age_equipment_unit_troop_translations", "ninth_age_equipment_unit_troops"
   add_foreign_key "ninth_age_equipment_unit_troops", "ninth_age_equipments", column: "equipment_id"
   add_foreign_key "ninth_age_equipment_unit_troops", "ninth_age_troops", column: "troop_id"
   add_foreign_key "ninth_age_equipment_unit_troops", "ninth_age_units", column: "unit_id"

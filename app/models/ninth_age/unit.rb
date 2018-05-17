@@ -45,6 +45,8 @@ class NinthAge::Unit < ApplicationRecord
     super + '-ninth-age-' + Globalize.locale.to_s
   end
 
+  scope :ordered, -> { order("ninth_age_unit_translations.name ASC") }
+
   scope :mount_category, -> { where(is_mount: true) }
 
 

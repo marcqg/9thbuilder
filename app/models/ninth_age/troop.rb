@@ -26,6 +26,8 @@ class NinthAge::Troop < ApplicationRecord
     super + '-ninth-age-' + Globalize.locale.to_s
   end
 
+  scope :ordered, -> { order("ninth_age_troop_translations.name ASC") }
+
   acts_as_list scope: :unit
 
   ransacker :by_army, proc{ |v|
