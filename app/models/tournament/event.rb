@@ -14,6 +14,7 @@ class Tournament::Event < ApplicationRecord
   has_many :matches, through: :rounds
 
   validates :creator_id, :version_id, :address, :latitude, :longitude, :start_date, :end_date, presence: true
+  validates :user_max, numericality: { greater_than_or_equal_to: 0, allow_nil: false }
 
   after_save on: :create do
   	self.rounds << Tournament::Round.create!({:event => self})

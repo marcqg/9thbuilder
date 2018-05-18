@@ -1,6 +1,6 @@
 <div class="new-user-apply">
   <%= link_to('Back to tournament', tournament_event_path(@event.id), {:class => 'btn btn-age pull-right'})%>
-  <h1 class="text-center"><%== t('tournament.user_apply.new.title') %></h1>
+  <h1 class="text-center"><%== t('tournament.user_apply.new.title') %> (<span class="nb-user" data-user-max="<%= @event.user_max %>"><%= @event.user_applies.count %></span>/<%= @event.user_max %>)</h1>
 
   <div class="add-username">
     <%= hidden_field(:tournament, :event_id, :value => @event.id) %>
@@ -11,7 +11,10 @@
       <small>You can add somes users (1 user by line).</small>
     </div>
 
-    <button class="btn btn-age center-btn"><%= t('tournament.user_apply.form.submit') %></button>
+    <div class="text-center">
+      <button class="btn btn-age"><%= t('tournament.user_apply.form.submit') %></button>
+      <%= link_to('Finish', tournament_event_path(@event.id), {:class => 'btn btn-age'})%>
+    </div>
   </div>
 
   <%= content_tag(:ol, { class: "list-user col-md-12 col-sm-12", 'data-url': tournament_sort_user_apply_path(@event) }) do %>

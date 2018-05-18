@@ -6,7 +6,7 @@ module Tournament
 
     # GET /tournament/event-{event_id}/rounds/{id}
     def show
-      if @round.matches.count < (@event.user_applies.count / 2)
+      if @round.matches.count < @event.user_max
         p "create match"
 
         # All users already in this round

@@ -408,12 +408,13 @@ en:
         start_date: Start
         end_date: End
         fees: Fees
+        user_max: Max user
         version: Version
         round_count: Rounds
         submit: Save
     user_apply:
       new:
-        title: Add a user
+        title: Add users
       form:
         name: Name
         or: or

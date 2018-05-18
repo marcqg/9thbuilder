@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180517144947) do
+ActiveRecord::Schema.define(version: 20180518075521) do
 
   create_table "active_admin_comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.integer  "resource_id",                 null: false
@@ -755,6 +755,7 @@ ActiveRecord::Schema.define(version: 20180517144947) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "version_id",                          default: 0, null: false
+    t.integer  "user_max",                            default: 0, null: false
     t.index ["creator_id"], name: "index_tournament_tournaments_on_creator_id", using: :btree
     t.index ["version_id"], name: "tournament_events_version_id", using: :btree
   end

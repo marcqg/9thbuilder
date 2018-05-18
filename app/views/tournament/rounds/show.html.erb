@@ -12,7 +12,8 @@
           <%matches.each do |match| %>
             <li class="match-place" data-match-id="<%= match.id %>">
               <div class="round_match" id="round_match_<%= "#{match.id}_0" %>">
-                <div class="user_apply_overview">
+                <div class="current">
+                  <div class="user_apply_overview">
                   <div class="army">
                     <% unless match.user_apply.army.nil? %>
                       <%= image_tag match.user_apply.army.logo.url(:thumb), alt: match.user_apply.army.name, height: 45 %>
@@ -27,7 +28,38 @@
                     <input type="number" min="0" step="1" value="<%= match.points %>" data-match-id="<%= match.id %>" data-round-id="<%= @round.id %>" data-event-id="<%= @event.id %>" />
                   </div>
                   <div class="clearboth"></div>
+                  </div>
                 </div>
+                <div class="old-matches">
+                <% @event.matches
+                          .where("round_id < ?", @round.id)
+                          .where(:user_apply_id => match.user_apply_id)
+                          .reorder(:round_id => :asc)
+                          .each do |old_match| %>
+                  <%
+                    opponent = @event.matches
+                                      .where.not(:user_apply_id => match.user_apply_id)
+                                      .find_by({:round_id => old_match.round_id, :table => old_match.table})
+                  %>
+                <div class="old-match">
+                  <div class="user_apply_overview">
+                    <div class="army">
+                      <% unless opponent.user_apply.army.nil? %>
+                        <%= image_tag opponent.user_apply.army.logo.url(:thumb), alt: opponent.user_apply.army.name, height: 45 %>
+                      <% else %>
+                        <%= image_tag asset_path('army.jpg'), alt: opponent.user_apply.name, height: 45 %>
+                      <% end %>
+                    </div>
+                    <div class="name">
+                      <strong><%= transliterate opponent.user_apply.name %> <small>(Round <%= old_match.round.position %>)</small></strong>
+                      <p><%= old_match.points %> Vs <%= opponent.points %></p>
+                    </div>
+                  </div>
+                  </div>
+
+                <%end%>
+                </div>
+
               </div>
             </li>
           <%end%>

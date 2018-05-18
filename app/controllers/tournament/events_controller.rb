@@ -33,7 +33,7 @@ module Tournament
 
       respond_to do |format|
         if @event.save
-          format.html { redirect_to tournament_event_url(@event), notice: 'event was successfully created.' }
+          format.html { redirect_to tournament_add_user_apply_url(@event), notice: 'event was successfully created.' }
           format.json { render :show, status: :created, location: @event }
         else
           format.html { render :new }
@@ -75,7 +75,7 @@ module Tournament
 
       # Never trust parameters from the scary internet, only allow the white list through.
       def tournament_params
-        params.require(:tournament_event).permit(:name, :address, :latitude, :longitude, :start_date, :end_date, :fees, :version_id, :rounds)
+        params.require(:tournament_event).permit(:name, :address, :latitude, :longitude, :start_date, :end_date, :fees, :version_id, :rounds, :user_max)
       end
   end
 end

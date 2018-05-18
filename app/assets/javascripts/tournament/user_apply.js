@@ -12,6 +12,14 @@ jQuery(document).ready(function() {
 			    return x == true; // returns val to array if not null
 			  });
 
+			var users = parseInt($('.new-user-apply h1 .nb-user').text());
+			var userMax = parseInt($('.new-user-apply h1 .nb-user').data('user-max'));
+
+			if((lines.length + users) > userMax){
+				alert('You can add more than ' + userMax + ' users.');
+				return;
+			}
+
 			var eventId = $('.new-user-apply .add-username #tournament_event_id').val();
 			var versionId = $('.new-user-apply .add-username #tournament_version_id').val();
 
@@ -45,6 +53,10 @@ jQuery(document).ready(function() {
 								$('.new-user-apply .list-user').append(line);
 							});		
 		
+					    	//Add users to counter
+							var users = parseInt($('.new-user-apply h1 .nb-user').text());
+							$('.new-user-apply h1 .nb-user').text((users + result.length));
+
 							$('.new-user-apply .add-username textarea').val('');
 						},
 						error: function(request,msg,error) {
@@ -71,6 +83,9 @@ jQuery(document).ready(function() {
 			success: function(result) {
 
 				self.closest('li').remove();
+
+				var users = parseInt($('.new-user-apply h1 .nb-user').text());
+				$('.new-user-apply h1 .nb-user').text((users - 1));
 			},
 		    error: function(request,msg,error) {
 		        // handle failure
