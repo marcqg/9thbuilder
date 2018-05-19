@@ -1,6 +1,5 @@
 <div class="show-tournament">
   <%= link_to(tournament_organisations_path(), {:class => 'btn btn-age pull-right'}) do %> Back to events<% end %>
-  <%= link_to(tournament_add_user_apply_path(@event), {:class => 'btn btn-age pull-right'}) do %> <i class="fa fa-plus"></i> Add user <% end %>
   <%= link_to("", {:class => 'btn btn-age pull-right', :id => "add-round", data: {event_id: @event.id} }) do %> <i class="fa fa-plus"></i> Add round <% end %>
 
   <h1 class="event-name"><strong>Tournament:</strong> <%= @event.name %></h1>

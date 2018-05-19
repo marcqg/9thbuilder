@@ -25,12 +25,17 @@ jQuery(document).ready(function() {
 
     $('.round_match').draggable({
         placeholder: 'placeholder',
+        //helper: 'clone',
         zIndex: 1000,
-        containment: 'table',
+        //containment: 'table',
+        revert: function(is_valid_drop){
+          $(this).show();
+        },
+        scope: "items",
         helper: function(evt) {
-            var that = $(this).clone().get(0);
-            $(this).hide();
-            return that;
+          var that = $(this).clone().get(0);
+          $(this).hide();
+          return that;
         },
         start: function(evt, ui) {
             dragLastPlace = $(this).parent();
@@ -43,7 +48,16 @@ jQuery(document).ready(function() {
 
     $('.match-place').droppable({
         hoverClass: 'placeholder',
+        scope: "items",
         drop: function(evt, ui) {
+            console.log('drop');
+            //if($('.ui-state-hover').size() > 0) {return false;}
+            //if($('.placeholder').length == 0) { return false;}
+
+            if(!dragLastPlace){
+              return;
+            }
+
             var draggable = ui.draggable;
             var droppable = this;
 

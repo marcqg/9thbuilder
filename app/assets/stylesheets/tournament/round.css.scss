@@ -13,7 +13,6 @@
 						background-color: rgba(240, 240, 240, 0.4);
 					}
 					.round_match {
-						display: inline-flex;
 						.current {
 							display: inline-flex;
 							height: 75px;
@@ -69,7 +68,7 @@
 							.old-match {
 								display: inline-flex;
 								height: 75px;
-								width: 150px;
+								width: 175px;
 								position: relative;
 								padding: 6px 0;
 								list-style: none;

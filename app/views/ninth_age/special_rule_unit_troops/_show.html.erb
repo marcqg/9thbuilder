@@ -1,10 +1,12 @@
-<% if special_rules.any? %>
-  <h4><%=t 'army_list_unit.show.special_rules' %> <%= "(#{troop.name})" unless troop.nil? %></h4>
-  <% special_rules.each do |special_rule| %>
-    • <%= link_to(ninth_age_special_rule_path(special_rule.special_rule_id), {:target => "_blank"}) do %><%= special_rule.special_rule.name %> 
-        <%if !special_rule.info.nil? || !special_rule.jet.nil?%>
-          (<%= special_rule.jet %><%= ", " unless special_rule.jet.nil? %><%= special_rule.info unless special_rule.info.nil? %>)
-        <%end%>
-      <%end%><br />
-  <% end %>
-<% end %>
+<li>
+  <%= link_to(ninth_age_special_rule_path(special_rule.special_rule_id), {:target => "_blank"}) do %><%= special_rule.special_rule.name %> 
+    <%if !special_rule.info.nil? || !special_rule.jet.nil?%>
+      (<%= special_rule.jet %><%= ", #{special_rule.info}" unless special_rule.info.nil? && !special_rule.jet.nil? %>)
+    <%end%>
+  <%end%>
+  <% if access_admin %>
+    <%= link_to(admin_ninth_age_special_rule_unit_troop_path(special_rule.id), {:target => "_blank"}) do %>
+      <i class="fa fa-pencil-square-o"></i>
+    <% end %>
+  <% end %>,
+</li>

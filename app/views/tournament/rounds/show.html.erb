@@ -8,9 +8,9 @@
     <% @round.matches.group_by { |match| match.table }.each do |(position,matches)| %>
       <div class="match">
         <h2>Table <%= position %></h2>
-        <ul id="match_<%= position %>" class="match-players" data-table-id="<%= position %>" data-round-id="<%= @round.id %>" data-event-id="<%= @event.id %>">
+        <div id="match_<%= position %>" class="match-players" data-table-id="<%= position %>" data-round-id="<%= @round.id %>" data-event-id="<%= @event.id %>">
           <%matches.each do |match| %>
-            <li class="match-place" data-match-id="<%= match.id %>">
+            <div class="match-place" data-match-id="<%= match.id %>">
               <div class="round_match" id="round_match_<%= "#{match.id}_0" %>">
                 <div class="current">
                   <div class="user_apply_overview">
@@ -40,6 +40,10 @@
                     opponent = @event.matches
                                       .where.not(:user_apply_id => match.user_apply_id)
                                       .find_by({:round_id => old_match.round_id, :table => old_match.table})
+
+                    if opponent.nil?
+                      next
+                    end
                   %>
                 <div class="old-match">
                   <div class="user_apply_overview">
@@ -61,9 +65,9 @@
                 </div>
 
               </div>
-            </li>
+            </div>
           <%end%>
-        </ul>     
+        </div>     
       </div>
     <% end %>
     </div>
