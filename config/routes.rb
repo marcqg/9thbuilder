@@ -70,6 +70,7 @@ Rails.application.routes.draw do
 
       resources :magic_item_categories, only: [:show]
       resources :magic_items,           only: [:show]
+      resources :extra_item_categories, only: [:show]
       resources :extra_items,           only: [:show]
       resources :magic_standards,       only: [:show]
 
@@ -107,6 +108,7 @@ Rails.application.routes.draw do
         resources :armies,              only: [:index]
         resources :special_rules,       only: [:index]
         resources :equipments,          only: [:index]
+        resources :extra_item_categories, only: [:index]
         resources :extra_items,         only: [:index]
         resources :magic_item_categories, only: [:index]
         resources :magic_standards,     only: [:index]
@@ -116,9 +118,11 @@ Rails.application.routes.draw do
         get '/ninth-age-equipments/page-:page',       to: 'equipments#index'
         get '/equipments/all',                        to: 'equipments#all'
         get '/ninth-age-extra-items/page-:page',      to: 'extra_items#index'
+        get '/extra_items/all',                       to: 'extra_items#all'
         get '/ninth-age-magic-items/page-:page',      to: 'magic_items#all'
         get '/magic_items/all',                       to: 'magic_items#all'
         get '/ninth-age-magic-standards/page-:page',  to: 'magic_standards#index'
+        get '/magic_standards/all',                   to: 'magic_standards#all'
       end
 
       scope '/magic-item-category-:category_id' do

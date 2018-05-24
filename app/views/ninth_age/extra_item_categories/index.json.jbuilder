@@ -1,0 +1,1 @@
+json.array! @extra_item_categories, partial: 'ninth_age/extra_item_categories/extra_item_category', as: :ninth_age_extra_item_category
