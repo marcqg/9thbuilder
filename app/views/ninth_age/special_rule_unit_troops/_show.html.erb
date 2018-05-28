@@ -1,7 +1,7 @@
 <li>
   <%= link_to(ninth_age_special_rule_path(special_rule.special_rule_id), {:target => "_blank"}) do %><%= special_rule.special_rule.name %> 
     <%if !special_rule.info.nil? || !special_rule.jet.nil?%>
-      (<%= special_rule.jet %><%= ", " unless special_rule.jet.nil? && special_rule.info.nil? %><%= special_rule.info%>)
+      (<%= special_rule.jet %><%= ", " if !special_rule.jet.nil? && !special_rule.info.nil? %><%= special_rule.info%>)
     <%end%>
   <%end%>
   <% if access_admin %>
