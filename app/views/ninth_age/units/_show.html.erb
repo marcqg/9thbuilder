@@ -23,35 +23,47 @@
       <div class="<%= (unit.organisations.where(isSpecialRule: true).count > 0 ? "col-md-8" : "col-md-10") %>">
         <% if unit.V2? %>
             <div class="pull-right">
-              <p>Size: <%= unit.display_size %></p>
-              <%unless unit.unit_type.nil? %><p>Type: <%= unit.unit_type.name %></p><% end %>
-              <p>Base: <%= unit.display_base %></p>
+              <p><span class="text-italic">Size:</span> <%= unit.display_size %></p>
+              <%unless unit.unit_type.nil? %><p><span class="text-italic">Type:</span> <%= unit.unit_type.name %></p><% end %>
+              <p><span class="text-italic">Base:</span> <%= unit.display_base %></p>
             </div>
         <% end %>
         <h3 class="text-left"><strong><%= t('ninth_age.figurine.mount') if unit.value_points == 0 %> <%= unit.name %></strong></h3>
-        <p>
+        <div>
+          <div class="col-md-4">
           <% if unit.value_points != 0 %><strong><%= number_with_precision(unit.value_points, precision: 0) %></strong> <%= t('ninth_age.figurine.pts') %><% end %>
           <% if unit.max_size > 1 %>
-            <%= raw t('unit.show.size', {:min_size => unit.min_size, :max_size => unit.max_size - unit.min_size, :pts => number_with_precision(unit.troops.order(:position).first.value_points, precision: 0)}) %>
+              <%= raw t('unit.show.add_model', {:pts => number_with_precision(unit.troops.order(:position).first.value_points, precision: 0)}) %>
+            </div>
+            <div class="col-md-3">
+              <%= raw t('unit.show.size', {:min_size => unit.min_size, :max_size => (unit.max_size - unit.min_size)}) %>
+            </div>
+            <div class="col-md-3">
             <% if unit.max > 0 %>
                 <strong>0-<%= unit.max %></strong> Units/Army
             <% end %>
             <% if unit.max_model != nil %>
                 <strong>0-<%= unit.max_model %></strong> Models/Army
             <% end %>
+            </div>
             <% unit.organisation_changes.each do |organisation_change| %>
-                <br/><span class="text-italic"><%= raw t('unit.show.change', {:name => unit.name, :number => organisation_change.number, :new_name => organisation_change.new_organisation.name}) %></span>
+                <p class="text-italic"><%= raw t('unit.show.change', {:name => unit.name, :number => organisation_change.number, :new_name => organisation_change.new_organisation.name}) %></p>
             <% end %>
           <% else %>
-            single model
-            <% if unit.max > 0 %>
+            </div>
+            <div class="col-md-3">
+              single model
+            </div>
+            <div class="col-md-3">
+              <% if unit.max > 0 %>
                 <strong>0-<%= unit.max %></strong> Units/Army
-            <% end %>
-            <% if unit.max_model != nil %>
+              <% end %>
+              <% if unit.max_model != nil %>
                 <strong>0-<%= unit.max_model %></strong> Models/Army
-            <% end %>
+              <% end %>
+            </div>
           <% end %>
-        </p>
+        </div>
       </div>
       <% if unit.organisations.where(isSpecialRule: true).count > 0 %>
         <div class="text-right col-md-2">
@@ -139,6 +151,10 @@
                   <%= render :partial => 'ninth_age/special_rule_unit_troops/show', :collection => unit.special_rule_unit_troops.joins(:special_rule).includes(special_rule: [:translations]).where({ninth_age_special_rules: {type_lvl: NinthAge::SpecialRule.type_lvls[:Global] }}), :as => :special_rule, :locals => {:access_admin => access_admin} %>
                   <%= render :partial => 'ninth_age/equipment_unit_troops/show', :collection => unit.equipment_unit_troops.joins(:equipment).includes(equipment: [:translations]).where({ninth_age_equipments: {type_lvl: NinthAge::Equipment.type_lvls[:Global] }}), :as => :equipment, :locals => {:access_admin => access_admin} %>
                 </ul>
+                <% if access_admin %>
+                  <%= link_to(new_admin_ninth_age_equipment_unit_troop_path({'ninth_age_equipment_unit_troop[unit_id]' => unit.id, 'ninth_age_equipment_unit_troop[position]' => unit.equipment_unit_troops.size + 1}), {:target => "_blank"}) do %>Add Equipment<% end %>
+                  <%= link_to(new_admin_ninth_age_special_rule_unit_troop_path({'ninth_age_special_rule_unit_troop[unit_id]' => unit.id, 'ninth_age_special_rule_unit_troop[position]' => unit.special_rule_unit_troops.size + 1}), {:target => "_blank"}) do %>Add rule<% end %>
+                <% end %>
               </td>
             </tr>
             <% unless unit.carac_fly_adv.nil? %>
@@ -227,6 +243,10 @@
                                   .where({ninth_age_equipments: {type_lvl: NinthAge::Equipment.type_lvls[:Offensive]}})
                                   .where(:troop => troop.id), :as => :equipment, :locals => {:access_admin => access_admin} %>
                     </ul>
+                    <% if access_admin %>
+                      <%= link_to(new_admin_ninth_age_equipment_unit_troop_path({'ninth_age_equipment_unit_troop[unit_id]' => unit.id, 'ninth_age_equipment_unit_troop[troop_id]' => troop.id, 'ninth_age_equipment_unit_troop[position]' => unit.equipment_unit_troops.size + 1}), {:target => "_blank"}) do %>Add Equipment<% end %>
+                      <%= link_to(new_admin_ninth_age_special_rule_unit_troop_path({'ninth_age_special_rule_unit_troop[unit_id]' => unit.id, 'ninth_age_special_rule_unit_troop[troop_id]' => troop.id, 'ninth_age_special_rule_unit_troop[position]' => unit.special_rule_unit_troops.size + 1}), {:target => "_blank"}) do %>Add rule<% end %>
+                    <% end %>
                   </td>
                 </tr>
             <% end %>

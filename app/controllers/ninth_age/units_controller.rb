@@ -39,6 +39,14 @@ module NinthAge
 
       @units = NinthAge::Unit.where(:army_id => params[:army_id])
                               .includes(:translations)
+                              .includes(:unit_options)
+                              .includes(:unit_options => [:translations])
+                              .includes(:troops)
+                              .includes(:troops => [:translations])
+                              .includes(:equipment_unit_troops)
+                              .includes(:equipment_unit_troops => [:equipment, :translations])
+                              .includes(:special_rule_unit_troops)
+                              .includes(:special_rule_unit_troops => [:special_rule, :translations])
                               .order(:position)
 
       respond_to do |format|

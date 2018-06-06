@@ -397,7 +397,8 @@ en:
       TwentyFiveRound: "25mm round"
     mount: Mount
     show:
-      size: " + <strong>%{pts}</strong> pts/extra  model <strong>%{min_size}-%{max_size}</strong> models"
+      add_model: " + <strong>%{pts}</strong> pts/extra model"
+      size: "<strong>%{min_size}-%{max_size}</strong> models"
       change: "%{name} units of %{number} models count towards %{new_name}"
 
   tournament:

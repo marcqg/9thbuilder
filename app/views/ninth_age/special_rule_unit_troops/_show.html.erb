@@ -8,5 +8,5 @@
     <%= link_to(admin_ninth_age_special_rule_unit_troop_path(special_rule.id), {:target => "_blank"}) do %>
       <i class="fa fa-pencil-square-o"></i>
     <% end %>
-  <% end %>,
+  <% end %><%= ", " unless special_rule.last? %>
 </li>
