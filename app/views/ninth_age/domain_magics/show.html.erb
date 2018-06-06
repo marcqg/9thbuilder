@@ -21,7 +21,7 @@
   <h1 class="text-center"><%= @magic.name %></h1>
 
   <div>
-    <p><%= @magic.display_description %></p>
+    <p><%= raw @magic.display_description.gsub(/(?:\n\r?|\r\n?)/, '<br/>') %></p>
   </div>
 
   <div class="row">
@@ -58,7 +58,7 @@
           <div class="info-magic">
             <% unless spell.effect.nil? %>
                 <label><%= t('magic.effect') %> :</label>
-                <p><%= spell.display_effect %></p>
+                <p><%= raw spell.display_effect.gsub(/(?:\n\r?|\r\n?)/, '<br/>') %></p>
             <% end %>
           </div>
         </div>

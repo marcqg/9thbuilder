@@ -19,6 +19,6 @@
   <% end %>
   <h1><%= @ninth_age_equipment.name %></h1>
   <div>
-    <p><%= @ninth_age_equipment.description %></p>
+    <p><%= raw @ninth_age_equipment.description.gsub(/(?:\n\r?|\r\n?)/, '<br/>') %></p>
   </div>
 </div>

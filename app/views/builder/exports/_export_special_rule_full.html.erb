@@ -1,3 +1,3 @@
 <div class="army_list_special_rule">
-	<p><strong><%= special_rule.name %>:</strong> <%= special_rule.description %></p>
+	<p><strong><%= special_rule.name %>:</strong> <%= raw special_rule.description.gsub(/(?:\n\r?|\r\n?)/, '<br/>') %></p>
 </div>
