@@ -98,6 +98,7 @@ ActiveAdmin.register NinthAge::SpecialRuleUnitTroop do
               :input_html => {'data-option-dependent' => true, 'data-option-url' => '/ninth_age/army-:ninth_age_special_rule_unit_troop_army_filter/special_rules/all', 'data-option-observed' => 'ninth_age_special_rule_unit_troop_army_filter'}, 
               :collection => (resource.version ? resource.version
                                                   .special_rules
+                                                  .where("army_id = ? or army_id is null", resource.army)     
                                                   .includes(:translations)
                                                   .with_locales(I18n.locale)
                                                   .ordered

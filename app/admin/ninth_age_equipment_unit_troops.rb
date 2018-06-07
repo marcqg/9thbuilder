@@ -95,8 +95,9 @@ ActiveAdmin.register NinthAge::EquipmentUnitTroop do
       
       f.input :equipment, as: :select, 
               :input_html => {'data-option-dependent' => true, 'data-option-url' => '/ninth_age/version-:ninth_age_equipment_unit_troop_version_filter/equipments/all', 'data-option-observed' => 'ninth_age_equipment_unit_troop_version_filter'}, 
-              :collection => (resource.version ? resource.version
-                                                  .equipments
+              :collection => (resource.army ? resource.version
+                                                  .equipments   
+                                                  .where("army_id = ? or army_id is null", resource.army)                                               
                                                   .includes(:translations)
                                                   .with_locales(I18n.locale)
                                                   .ordered
