@@ -1,8 +1,23 @@
+<%
+def clean_description(str)
+	unless str.nil?
+		str.gsub!(/(May|May\ take|May\ become\ the\ )/, '')
+	end
+
+	str
+end
+%>
 <div class="popin">
 	<h1>Export of the army list in TXT format</h1>
 	<h2 style="color:red;">Work in progress</h2>
 	<div id="export-txt-army-list">
 		<p>“<%= @army_list.user.name %>” - <%= @army_list.army.name %> <%= "- #{@army_list.army_organisation.name}" if @army_list.army.army_organisations.size > 1 %></p>
+		
+		<% @army_list.army_organisation.organisation_groups.each do |organisation_group| %>
+			<% army_list_organisation = @army_list.army_list_organisations.find_by(:organisation_id => organisation_group.organisation_id) %>
+			<p>--- <%= raw organisation_group.organisation.name %>: <% if army_list_organisation != nil %><%= army_list_organisation.rate %>% (<%= army_list_organisation.pts %> pts)<%else%>0%<%end%> ---</p>
+		<% end %>
+		
 		<% @army_list.army_list_units.each do |army_list_unit| %>
 			<p>
 				<%= value_points army_list_unit.value_points %> - <%= "#{army_list_unit.size}x" if army_list_unit.size > 1 %> <strong><%= army_list_unit.unit.name %></strong>
@@ -15,8 +30,8 @@
 				<% unless army_list_unit.magic_items.empty? %>
 				  , <%= army_list_unit.magic_items.map(&:name).join(', ') %>
 				<% end %>
-				<% unless army_list_unit.unit_options.where(:domain_magic_id => nil).where(:mount_id => nil).empty? %>
-				  , <%= army_list_unit.unit_options.where(:domain_magic_id => nil).where(:mount_id => nil).map(&:name).join(', ') %>
+				<% unless army_list_unit.unit_options.where.not(:category => [:M, :S, :C]).where(:domain_magic_id => nil).where(:mount_id => nil).empty? %>
+				  , <%= clean_description(army_list_unit.unit_options.where.not(:category => [:M, :S, :C]).where(:domain_magic_id => nil).where(:mount_id => nil).map(&:name).join(', ')) %>
 				<% end %>
 				<% unless army_list_unit.unit_options.where.not(:domain_magic_id => nil).map(&:domain_magic).empty? %>
 				  , <%= army_list_unit.unit_options.where.not(:domain_magic_id => nil).map(&:domain_magic).map(&:name).join(', ') %>
