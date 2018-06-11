@@ -3,7 +3,7 @@
     <th><%=t 'army_list_unit.show.equipments' %> <%= "(#{troop.name})" unless troop.nil? %></th>
     <td colspan="10">
       <% equipments.each_with_index do |equipment, index| %>
-        <%= "•" if index > 0 %> <%= equipment.equipment.name %> <%if !equipment.info.nil? || !equipment.jet.nil?%>(<%= equipment.jet %><%= ", " unless equipment.jet.nil? %><%= equipment.info unless equipment.info.nil? %>) <%end%>
+        <%= "•" if index > 0 %> <%= equipment.equipment.name %><%if !equipment.info.nil? || !equipment.jet.nil?%>(<%= equipment.jet %><%= ", " if !equipment.jet.nil? && !equipment.info.nil? %><%= equipment.info%>)<%end%>
       <% end %>
     </td>
   </tr>
