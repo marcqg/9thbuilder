@@ -23,43 +23,43 @@
       <div class="<%= (unit.organisations.where(isSpecialRule: true).count > 0 ? "col-md-8" : "col-md-10") %>">
         <% if unit.V2? %>
             <div class="pull-right">
-              <p><span class="text-italic">Size:</span> <%= unit.display_size %></p>
-              <%unless unit.unit_type.nil? %><p><span class="text-italic">Type:</span> <%= unit.unit_type.name %></p><% end %>
-              <p><span class="text-italic">Base:</span> <%= unit.display_base %></p>
+              <p><span class="text-italic"><%= t 'unit.size.label' %>:</span> <%= unit.display_size %></p>
+              <%unless unit.unit_type.nil? %><p><span class="text-italic"><%= t 'unit.type.label' %>:</span> <%= unit.unit_type.name %></p><% end %>
+              <p><span class="text-italic"><%= t 'unit.base.label' %>:</span> <%= unit.display_base %></p>
             </div>
         <% end %>
         <h3 class="text-left"><strong><%= t('ninth_age.figurine.mount') if unit.value_points == 0 %> <%= unit.name %></strong></h3>
         <div>
-          <div class="col-md-4">
+          <div class="col-md-3">
           <% if unit.value_points != 0 %><strong><%= number_with_precision(unit.value_points, precision: 0) %></strong> <%= t('ninth_age.figurine.pts') %><% end %>
           <% if unit.max_size > 1 %>
               <%= raw t('unit.show.add_model', {:pts => number_with_precision(unit.troops.order(:position).first.value_points, precision: 0)}) %>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-4">
               <%= raw t('unit.show.size', {:min_size => unit.min_size, :max_size => (unit.max_size - unit.min_size)}) %>
             </div>
             <div class="col-md-3">
             <% if unit.max > 0 %>
-                <strong>0-<%= unit.max %></strong> Units/Army
+                <strong>0-<%= unit.max %></strong> <%= t 'unit.limit.unit'%>
             <% end %>
             <% if unit.max_model != nil %>
-                <strong>0-<%= unit.max_model %></strong> Models/Army
+                <strong>0-<%= unit.max_model %></strong> <%= t 'unit.limit.army'%>
             <% end %>
             </div>
             <% unit.organisation_changes.each do |organisation_change| %>
-                <p class="text-italic"><%= raw t('unit.show.change', {:name => unit.name, :number => organisation_change.number, :new_name => organisation_change.new_organisation.name}) %></p>
+                <p class="text-italic clearboth"><%= raw t('unit.show.change', {:name => unit.name, :number => organisation_change.number, :new_name => organisation_change.new_organisation.name}) %></p>
             <% end %>
           <% else %>
             </div>
             <div class="col-md-3">
-              single model
+              <% t 'unit.limit.single'%>
             </div>
             <div class="col-md-3">
               <% if unit.max > 0 %>
-                <strong>0-<%= unit.max %></strong> Units/Army
+                <strong>0-<%= unit.max %></strong> <%= t 'unit.limit.unit'%>
               <% end %>
               <% if unit.max_model != nil %>
-                <strong>0-<%= unit.max_model %></strong> Models/Army
+                <strong>0-<%= unit.max_model %></strong> <%= t 'unit.limit.army'%>
               <% end %>
             </div>
           <% end %>
