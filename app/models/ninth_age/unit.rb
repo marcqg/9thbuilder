@@ -12,7 +12,9 @@ class NinthAge::Unit < ApplicationRecord
 
   has_many :army_list_units, dependent: :destroy, class_name: 'Builder::ArmyListUnit'
   has_many :equipment_unit_troops, -> { order :position }, dependent: :destroy, class_name: "NinthAge::EquipmentUnitTroop"
+  has_many :equipments, through: :equipment_unit_troops, class_name: "NinthAge::Equipment"
   has_many :special_rule_unit_troops, -> { order :position }, dependent: :destroy, class_name: "NinthAge::SpecialRuleUnitTroop"
+  has_many :special_rules, through: :special_rule_unit_troops, class_name: "NinthAge::SpecialRule"
   has_many :troops, -> { order :position }, dependent: :destroy, class_name: "NinthAge::Troop"
   has_many :unit_options, -> { order %w(parent_id position) }, dependent: :destroy, class_name: "NinthAge::UnitOption"
   has_many :mount_options, foreign_key: 'mount_id', dependent: :nullify, class_name: 'NinthAge::UnitOption'

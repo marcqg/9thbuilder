@@ -1,7 +1,7 @@
 <%
 def clean_description(str)
 	unless str.nil?
-		str.gsub!(/(May|May\ take|May\ become\ the\ )/, '')
+		str.gsub!(/(May\ become\ the\ |May\ take|May)/, '')
 	end
 
 	str
@@ -9,7 +9,6 @@ end
 %>
 <div class="popin">
 	<h1>Export of the army list in TXT format</h1>
-	<h2 style="color:red;">Work in progress</h2>
 	<div id="export-txt-army-list">
 		<p>“<%= @army_list.user.name %>” - <%= @army_list.army.name %> <%= "- #{@army_list.army_organisation.name}" if @army_list.army.army_organisations.size > 1 %></p>
 		
@@ -39,8 +38,16 @@ end
 					<% unless army_list_unit.magic_items.empty? %>
 						, <%= army_list_unit.magic_items.map(&:name).join(', ') %>
 					<% end %>
-					<% unless army_list_unit.unit_options.where.not(:category => [:M, :S, :C]).where(:domain_magic_id => nil).where(:mount_id => nil).empty? %>
-						, <%= clean_description(army_list_unit.unit_options.where.not(:category => [:M, :S, :C]).where(:domain_magic_id => nil).where(:mount_id => nil).map(&:name).join(', ')) %>
+					<% unless army_list_unit.unit_options.where.not(:category => [:M, :S, :C, :MagicOrLine]).where(:domain_magic_id => nil).where(:mount_id => nil).empty? %>
+						, <%= clean_description(army_list_unit.unit_options.where.not(:category => [:M, :S, :C, :MagicOrLine]).where(:domain_magic_id => nil).where(:mount_id => nil).map(&:name).join(', ')) %>
+					<% end %>
+
+					<% unless army_list_unit.unit_options.where(:category => :MagicOrLine).empty? %>
+						, <%= army_list_unit.unit_options.where(:category => :MagicOrLine).map(&:name).join(', ') %>
+					<% else %>
+						<% unless army_list_unit.unit.special_rules.where(:effect => :Magic).empty? %>
+							, <%= army_list_unit.unit.special_rules.where(:effect => :Magic).map(&:name).join(', ') %>
+						<% end %>
 					<% end %>
 					<% unless army_list_unit.unit_options.where.not(:domain_magic_id => nil).map(&:domain_magic).empty? %>
 						, <%= army_list_unit.unit_options.where.not(:domain_magic_id => nil).map(&:domain_magic).map(&:name).join(', ') %>

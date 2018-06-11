@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180518075521) do
+ActiveRecord::Schema.define(version: 20180611130623) do
 
   create_table "active_admin_comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.integer  "resource_id",                 null: false
@@ -500,6 +500,7 @@ ActiveRecord::Schema.define(version: 20180518075521) do
     t.datetime "updated_at",             null: false
     t.integer  "type_lvl",   default: 0, null: false
     t.string   "latex_key"
+    t.integer  "effect",     default: 0, null: false
     t.index ["army_id"], name: "index_ninth_age_special_rules_on_army_id", using: :btree
     t.index ["version_id", "latex_key"], name: "ninth_age_special_rules_version_latex_unique", unique: true, using: :btree
     t.index ["version_id"], name: "index_ninth_age_special_rules_on_version_id", using: :btree
