@@ -15,34 +15,44 @@ end
 		
 		<% @army_list.army_organisation.organisation_groups.each do |organisation_group| %>
 			<% army_list_organisation = @army_list.army_list_organisations.find_by(:organisation_id => organisation_group.organisation_id) %>
-			<p>--- <%= raw organisation_group.organisation.name %>: <% if army_list_organisation != nil %><%= army_list_organisation.rate %>% (<%= army_list_organisation.pts %> pts)<%else%>0%<%end%> ---</p>
-		<% end %>
+			<p>--- <%= raw organisation_group.organisation.name %>: 
+				<% if army_list_organisation != nil %><%= army_list_organisation.rate %>% 
+					<% if !organisation_group.NoLimit? %>
+					  / <%= organisation_group.target %>% <%= organisation_group.type_target %>
+					<% end %> 
+					(<%= army_list_organisation.pts %>pts<% if !organisation_group.NoLimit? %>/<%= (organisation_group.target.to_i * @army_list.max.to_i / 100.0).to_i %>pts<% end %>)
+				<%else%>0%<%end%> 
+			---</p>
 		
-		<% @army_list.army_list_units.each do |army_list_unit| %>
-			<p>
-				<%= value_points army_list_unit.value_points %> - <%= "#{army_list_unit.size}x" if army_list_unit.size > 1 %> <strong><%= army_list_unit.unit.name %></strong>
-				<% unless army_list_unit.extra_items.empty? %>
-				  , <%= army_list_unit.extra_items.map(&:name).join(', ') %>
-				<% end %>
-				<% unless army_list_unit.unit_options.where.not(:mount_id => nil).empty? %>
-				  , <%= army_list_unit.unit_options.where.not(:mount_id => nil).map(&:mount).map(&:name).join(', ') %>
-				<% end %>
-				<% unless army_list_unit.magic_items.empty? %>
-				  , <%= army_list_unit.magic_items.map(&:name).join(', ') %>
-				<% end %>
-				<% unless army_list_unit.unit_options.where.not(:category => [:M, :S, :C]).where(:domain_magic_id => nil).where(:mount_id => nil).empty? %>
-				  , <%= clean_description(army_list_unit.unit_options.where.not(:category => [:M, :S, :C]).where(:domain_magic_id => nil).where(:mount_id => nil).map(&:name).join(', ')) %>
-				<% end %>
-				<% unless army_list_unit.unit_options.where.not(:domain_magic_id => nil).map(&:domain_magic).empty? %>
-				  , <%= army_list_unit.unit_options.where.not(:domain_magic_id => nil).map(&:domain_magic).map(&:name).join(', ') %>
-				<% end %>
-				<% unless army_list_unit.unit_options.where(:category => [:M, :S, :C]).empty? %>
-				  , <%= army_list_unit.unit_options.where(:category => [:M, :S, :C]).map(&:category).join(', ') %>
-				<% end %>
-				<% unless army_list_unit.magic_standards.empty? %>
-				  , <%= army_list_unit.magic_standards.map(&:name).join(', ') %>
-				<% end %>
-			</p>
+			<% @army_list.army_list_units.each do |army_list_unit| %>
+				<% if army_list_unit.unit.organisation_ids.first != organisation_group.organisation_id
+					next
+				end%>
+				<p>
+					<%= value_points army_list_unit.value_points %> - <%= "#{army_list_unit.size}x" if army_list_unit.size > 1 %> <strong><%= army_list_unit.unit.name %></strong>
+					<% unless army_list_unit.extra_items.empty? %>
+						, <%= army_list_unit.extra_items.map(&:name).join(', ') %>
+					<% end %>
+					<% unless army_list_unit.unit_options.where.not(:mount_id => nil).empty? %>
+						, <%= army_list_unit.unit_options.where.not(:mount_id => nil).map(&:mount).map(&:name).join(', ') %>
+					<% end %>
+					<% unless army_list_unit.magic_items.empty? %>
+						, <%= army_list_unit.magic_items.map(&:name).join(', ') %>
+					<% end %>
+					<% unless army_list_unit.unit_options.where.not(:category => [:M, :S, :C]).where(:domain_magic_id => nil).where(:mount_id => nil).empty? %>
+						, <%= clean_description(army_list_unit.unit_options.where.not(:category => [:M, :S, :C]).where(:domain_magic_id => nil).where(:mount_id => nil).map(&:name).join(', ')) %>
+					<% end %>
+					<% unless army_list_unit.unit_options.where.not(:domain_magic_id => nil).map(&:domain_magic).empty? %>
+						, <%= army_list_unit.unit_options.where.not(:domain_magic_id => nil).map(&:domain_magic).map(&:name).join(', ') %>
+					<% end %>
+					<% unless army_list_unit.unit_options.where(:category => [:M, :S, :C]).empty? %>
+						, <%= army_list_unit.unit_options.where(:category => [:M, :S, :C]).map(&:category).join(', ') %>
+					<% end %>
+					<% unless army_list_unit.magic_standards.empty? %>
+						, <%= army_list_unit.magic_standards.map(&:name).join(', ') %>
+					<% end %>
+				</p>
+			<% end %>
 		<% end %>
 		<p><%= value_points @army_list.value_points %></p>
 	</div>
