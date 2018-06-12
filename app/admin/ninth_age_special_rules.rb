@@ -1,7 +1,7 @@
 ActiveAdmin.register NinthAge::SpecialRule do
   menu parent: 'Ninth Age Unit Specialisations', priority: 5
 
-  permit_params :locale, :version_id, :army_id, :type_lvl, :effect, :position, :latex_key, translations_attributes: [:id, :name, :description, :locale, :_destroy]
+  permit_params :locale, :version_id, :army_id, :type_lvl, :position, :latex_key, translations_attributes: [:id, :name, :description, :locale, :_destroy]
 
   filter :version, as: :select, collection: -> { NinthAge::Version.includes(:translations).map { |version| [ version.name, version.id ] } } 
   filter :army, as: :select, :input_html => {'data-option-dependent' => true, 'data-option-url' => '/ninth_age/version-:q_version_id/armies', 'data-option-observed' => 'q_version_id'}, collection: -> { NinthAge::Army.where(:version_id => NinthAge::Version.last.id).includes(:translations).map { |army| [ army.name, army.id ] } } 
@@ -47,7 +47,6 @@ ActiveAdmin.register NinthAge::SpecialRule do
       f.input :version, collection: NinthAge::Version.includes(:translations).order(:name)
       f.input :army, as: :select,  :input_html => {'data-option-dependent' => true, 'data-option-url' => '/ninth_age/version-:ninth_age_special_rule_version_id/armies', 'data-option-observed' => 'ninth_age_special_rule_version_id'}, :collection => (resource.army ? resource.version.armies.collect {|army| [army.name, army.id]} : []), include_blank: 'No Army'
       f.input :type_lvl, as: :select, collection: NinthAge::SpecialRule.type_lvls.keys.collect { |type_lvl| [I18n.t("special_rule.type_lvl.#{type_lvl}", default: type_lvl), type_lvl] }, include_blank: false, include_hidden: false
-      f.input :effect, as: :select, collection: NinthAge::SpecialRule.effects.keys.collect { |effect| [I18n.t("special_rule.effect.#{effect}", default: effect), effect] }, include_blank: false, include_hidden: false
       f.translate_inputs do |t|
         t.input :name
         t.input :description
@@ -63,7 +62,6 @@ ActiveAdmin.register NinthAge::SpecialRule do
       row :version
       row :army
       row :type_lvl
-      row :effect
       row :latex_key
     end
     panel 'Translations' do

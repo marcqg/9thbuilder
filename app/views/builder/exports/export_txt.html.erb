@@ -41,13 +41,8 @@ end
 					<% unless army_list_unit.unit_options.where.not(:category => [:M, :S, :C, :MagicOrLine]).where(:domain_magic_id => nil).where(:mount_id => nil).empty? %>
 						, <%= clean_description(army_list_unit.unit_options.where.not(:category => [:M, :S, :C, :MagicOrLine]).where(:domain_magic_id => nil).where(:mount_id => nil).map(&:name).join(', ')) %>
 					<% end %>
-
 					<% unless army_list_unit.unit_options.where(:category => :MagicOrLine).empty? %>
 						, <%= army_list_unit.unit_options.where(:category => :MagicOrLine).map(&:name).join(', ') %>
-					<% else %>
-						<% unless army_list_unit.unit.special_rules.where(:effect => :Magic).empty? %>
-							, <%= army_list_unit.unit.special_rules.where(:effect => :Magic).map(&:name).join(', ') %>
-						<% end %>
 					<% end %>
 					<% unless army_list_unit.unit_options.where.not(:domain_magic_id => nil).map(&:domain_magic).empty? %>
 						, <%= army_list_unit.unit_options.where.not(:domain_magic_id => nil).map(&:domain_magic).map(&:name).join(', ') %>

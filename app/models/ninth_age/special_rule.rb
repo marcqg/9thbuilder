@@ -13,11 +13,8 @@ class NinthAge::SpecialRule < ApplicationRecord
 
   enum type_lvl: { Global: 0, Defensive: 1, Offensive: 2}
 
-  enum effect: { Default: 0, Magic: 1, Weapon: 2}
-
   validates :version_id, presence: true
   validates :type_lvl, presence: true
-  validates :effect, presence: true
 
   scope :ordered, -> { order("ninth_age_special_rule_translations.name ASC") }
 
