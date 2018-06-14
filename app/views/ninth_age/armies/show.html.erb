@@ -20,7 +20,7 @@
           <% if army_magic_spell.effect.nil? %>
             <h3><%= army_magic_spell.name %></h3>
           <% end %>
-          <p><%= raw army_magic_spell.description.to_highlight unless @magic.description.nil? %></p>
+          <p><%= raw army_magic_spell.description.to_highlight unless army_magic_spell.description.nil? %></p>
           <% unless army_magic_spell.effect.nil? %>
             <table>
               <thead>
