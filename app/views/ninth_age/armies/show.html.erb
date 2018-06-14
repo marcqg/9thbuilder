@@ -20,7 +20,7 @@
           <% if army_magic_spell.effect.nil? %>
             <h3><%= army_magic_spell.name %></h3>
           <% end %>
-          <%= army_magic_spell.display_description %>
+          <p><%= raw army_magic_spell.description.to_highlight unless @magic.description.nil? %></p>
           <% unless army_magic_spell.effect.nil? %>
             <table>
               <thead>
@@ -34,11 +34,11 @@
               <tbody>
                 <tr>
                   <td colspan="5" class="name"><%= army_magic_spell.name %></td>
-                  <td rowspan="2" class="effect"><%= army_magic_spell.display_effect %></tr>
+                  <td rowspan="2" class="effect"><%= army_magic_spell.effect.to_highlight unless army_magic_spell.effect.nil? %></tr>
                 <tr>
                   <td>Mf</td>
-                  <td class="casting_value text-center"><%= army_magic_spell.display_casting_value %></td>
-                  <td class="range text-center"><%= army_magic_spell.display_range %></td>
+                  <td class="casting_value text-center"><%= army_magic_spell.casting_value.to_highlight unless army_magic_spell.casting_value.nil? %></td>
+                  <td class="range text-center"><%= army_magic_spell.range.to_highlight unless army_magic_spell.casting_value.nil? %></td>
                   <td class="type_target text-center"><%= army_magic_spell.display_type_target %></td>
                   <td class="duration text-center"><%= army_magic_spell.display_duration %></td>
                 </tr>

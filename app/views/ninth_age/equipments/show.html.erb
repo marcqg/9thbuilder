@@ -19,6 +19,6 @@
   <% end %>
   <h1><%= @ninth_age_equipment.name %></h1>
   <div>
-    <p><%= raw @ninth_age_equipment.description.gsub(/(?:\n\r?|\r\n?)/, '<br/>') %></p>
+    <p><%= raw @ninth_age_equipment.description.to_highlight unless @ninth_age_equipment.description.nil? %></p>
   </div>
 </div>

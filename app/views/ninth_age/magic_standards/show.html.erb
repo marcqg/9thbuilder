@@ -15,5 +15,5 @@
 </h1>
 <p class="small-text"><%= @ninth_age_magic_standard.army.name %></p>
 <div>
-  <p><%= raw @ninth_age_magic_standard.description.gsub(/(?:\n\r?|\r\n?)/, '<br/>') %></p>
+  <p><%= raw @ninth_age_magic_standard.description.to_highlight unless @ninth_age_magic_standard.description.nil? %></p>
 </div>

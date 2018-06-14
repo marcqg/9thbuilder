@@ -8,4 +8,4 @@
 
 #ActiveRecord::Base.logger = Logger.new(STDOUT)
 
-Dir[File.join(Rails.root, 'db', 'seeds', '*.rb')].sort.each { |seed| load seed }
+Dir[File.join(Rails.root, 'db', 'seeds', '*bbcode.rb')].sort.each { |seed| load seed }

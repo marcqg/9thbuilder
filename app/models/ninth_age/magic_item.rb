@@ -53,8 +53,7 @@ class NinthAge::MagicItem < ApplicationRecord
   def display_type_target
     names = []
     type_target.each do |tt|
-      display_name = highlight(I18n.t("magic_item.type_target.#{tt}", default: tt))
-      names << display_name
+      names << I18n.t("magic_item.type_target.#{tt}", default: tt).to_highlight
     end
     names.join(', ').html_safe
   end
@@ -66,8 +65,7 @@ class NinthAge::MagicItem < ApplicationRecord
   def display_type_duration
     names = []
     type_duration.each do |tt|
-      display_name = highlight(I18n.t("magic_item.type_duration.#{tt}", default: tt))
-      names << display_name
+      names << I18n.t("magic_item.type_duration.#{tt}", default: tt).to_highlight
     end
     names.join(', ').html_safe
   end 

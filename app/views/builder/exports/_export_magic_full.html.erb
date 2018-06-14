@@ -4,7 +4,7 @@
 		<h4><%= magic.name %></h4>
 	</div>
 	<div class="text-center">
-		<p><%= magic.display_description %></p>
+		<p><%= magic.description.to_highlight unless magic.description.nil? %></p>
 	</div>
 	<table class="army_magic_spell">
 		<thead>				
@@ -41,12 +41,12 @@
 					</td>
 					<td class="text-center">
 						<%unless spell.casting_value.nil?%>
-							<%= spell.display_casting_value %>
+							<%= spell.casting_value.to_highlight unless spell.casting_value.nil? %>
 						<%end%>
 					</td>
 					<td class="text-center">
 						<%unless spell.range.nil?%>
-							<%= spell.display_range %>
+							<%= spell.range.to_highlight unless spell.range.nil? %>
 						<%end%>
 					</td>
 					<td class="text-center">
@@ -60,7 +60,7 @@
 						<%end%>
 					</td>
 					<td class="magic-spell-effect">
-						<%= spell.display_effect %>
+						<%= spell.effect.to_highlight unless spell.effect.nil? %>
 					</td>
 				</tr>
 		    <% end %>	

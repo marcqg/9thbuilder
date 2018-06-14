@@ -1,3 +1,3 @@
 <div class="army_list_magic_item">
-	<p><strong><%= magic_item.name %>:</strong> <%= raw magic_item.description.gsub(/(?:\n\r?|\r\n?)/, '<br/>') unless magic_item.description.nil? %></p>
+	<p><strong><%= magic_item.name %>:</strong> <%= raw magic_item.description.to_highlight unless magic_item.description.nil? %></p>
 </div>

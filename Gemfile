@@ -87,6 +87,7 @@ gem 'ransack', github: 'activerecord-hackery/ransack'
 gem 'wisepdf' 				#pdf export
 gem 'attribute_normalizer' 	#data integrity / params permit
 gem 'uuidtools' 			#UUID
+gem 'rubb', github: 'petejkim/rubb' #BBcode
 
 #Avatar
 gem 'gravtastic'

@@ -21,7 +21,7 @@
   <h1 class="text-center"><%= @magic.name %></h1>
 
   <div>
-    <p><%= raw @magic.display_description.gsub(/(?:\n\r?|\r\n?)/, '<br/>') %></p>
+    <p><%= raw @magic.description.to_highlight unless @magic.description.nil? %></p>
   </div>
 
   <div class="row">
@@ -34,19 +34,19 @@
           <div class="info-magic">
             <% unless spell.casting_value.nil? %>
                 <label><%= t('magic.casting') %> :</label>
-                <p><%= spell.display_casting_value %></p>
+                <p><%= raw spell.casting_value.to_highlight %></p>
             <% end %>
           </div>
           <div class="info-magic">
             <% unless spell.range.nil? %>
                 <label><%= t('magic.range') %> :</label>
-                <p><%= spell.display_range %></p>
+                <p><%= raw spell.range.to_highlight %></p>
             <% end %>
           </div>
           <div class="info-magic">
             <% unless spell.type_target.empty? %>
                 <label><%= t('magic.type') %> :</label>
-                <p><%= spell.display_type_target %></p>
+                <p><%= raw spell.display_type_target %></p>
             <% end %>
           </div>
           <div class="info-magic">
@@ -58,7 +58,7 @@
           <div class="info-magic">
             <% unless spell.effect.nil? %>
                 <label><%= t('magic.effect') %> :</label>
-                <p><%= raw spell.display_effect.gsub(/(?:\n\r?|\r\n?)/, '<br/>') %></p>
+                <p><%= raw spell.effect.to_highlight %></p>
             <% end %>
           </div>
         </div>

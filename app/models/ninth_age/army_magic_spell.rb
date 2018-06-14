@@ -17,29 +17,10 @@ class NinthAge::ArmyMagicSpell < ApplicationRecord
 
   validates :army_id, :duration, presence: true
 
-  def highlight(text)
-    if text != nil
-      text = text.gsub(/<([\wàäâáæãåéèëêïîìíöôòóœøõùüûúÿýçñ,\ \+\.\(\)\-"”]*)>/u, '<strong>\1</strong>').html_safe
-      text = text.gsub(/\{([\wàäâáæãåéèëêïîìíöôòóœøõùüûúÿýçñ,\ \+\.\(\)\-"”]*)\}/u, '<span class="highlight-green">{\1}</span>').html_safe
-      text = text.gsub(/\[([\wàäâáæãåéèëêïîìíöôòóœøõùüûúÿýçñ,\ \+\.\(\)\-"”]*)\]/u, '<span class="highlight-blue">[\1]</span>').html_safe
-      text = text.gsub(/\|([\wàäâáæãåéèëêïîìíöôòóœøõùüûúÿýçñ,\ \+\.\(\)\-"”]*)\|/u, '<span class="highlight-red">\1</span>').html_safe
-      return text
-    end
-
-    return nil
-  end
-
-  def display_description
-    if description.nil?
-      return nil
-    end
-    highlight(description).html_safe
-  end
-
   def display_type_target
     names = []
     type_target.each do |tt|
-      display_name = highlight(I18n.t("magic_spell.type_target.#{tt}", default: tt))
+      display_name = I18n.t("magic_spell.type_target.#{tt}", default: tt).to_highlight
       names << display_name
     end
     names.join(', ').html_safe
@@ -48,7 +29,7 @@ class NinthAge::ArmyMagicSpell < ApplicationRecord
   def display_duration
     names = []
     duration.each do |tt|
-      display_name = highlight(I18n.t("magic_spell.duration.#{tt}", default: tt))
+      display_name = I18n.t("magic_spell.duration.#{tt}", default: tt).to_highlight
       names << display_name
     end
     names.join(', ').html_safe
@@ -59,26 +40,5 @@ class NinthAge::ArmyMagicSpell < ApplicationRecord
       return nil
     end
     I18n.t("magic_spell.type_lvl.#{type_lvl}", default: type_lvl.titleize)
-  end
-
-  def display_range
-    if range.nil?
-      return nil
-    end
-    highlight(range).html_safe
-  end
-
-  def display_effect
-    if effect.nil?
-      return nil
-    end
-    highlight(effect).html_safe
-  end
-
-  def display_casting_value
-    if casting_value.nil?
-      return nil
-    end
-    highlight(casting_value).html_safe
   end
 end
