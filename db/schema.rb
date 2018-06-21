@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180611130623) do
+ActiveRecord::Schema.define(version: 20180620100319) do
 
   create_table "active_admin_comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.integer  "resource_id",                 null: false
@@ -448,6 +448,8 @@ ActiveRecord::Schema.define(version: 20180611130623) do
     t.string   "logo_content_type"
     t.integer  "logo_file_size"
     t.datetime "logo_updated_at"
+    t.string   "latex_key"
+    t.index ["army_id", "latex_key"], name: "ninth_age_organisations_army_latex_unique", unique: true, using: :btree
     t.index ["army_id"], name: "fk_rails_aa1632086c", using: :btree
   end
 

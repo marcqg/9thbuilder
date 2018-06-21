@@ -17,6 +17,9 @@
               <i class="fa fa-pencil-square-o"></i>
             <% end %>
         <% end %>
+        <% unless unit_option.infos.nil? or unit_option.infos.empty? %>
+            <small>(<%= unit_option.infos %>)</small>
+        <% end %>
         <% unless unit_option.value_points.nil? %>
           <% if unit_option.value_points > 0 %>
             <span class="pull-right"><% if unit_option.is_magic_items %><%= t('up_to')%><% end %> <%= number_with_precision(unit_option.value_points, precision: 0) %> <%= t('ninth_age.figurine.pts') %> <% if unit_option.is_per_model %> <%=  t('per_model') %><% end %></span>

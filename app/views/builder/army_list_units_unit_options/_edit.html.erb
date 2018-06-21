@@ -49,7 +49,7 @@
         <%= option.name %>
       <% end %>
       <% unless option.infos.nil? %>
-        <small><%= content_tag(:span, option.infos, {:class => 'tooltiptext'}) %></small>
+        <small>(<%= content_tag(:span, option.infos, {:class => 'tooltiptext'}) %>)</small>
       <% end %>
     <% end %>
 
