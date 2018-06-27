@@ -190,6 +190,8 @@ en:
       pdf_lite: "Lite PDF"
       html_full: "Full HTML"
       html_lite: "Lite HTML"
+      txt:
+        general: General
     duplicate:
       title: "Duplicate<br />list"
       information: "Are you sure to duplicate list:"
@@ -221,6 +223,7 @@ en:
       magic_items: "Magic items"
       magic_standards: "Magic banners"
       unit_options: "Options"
+      mount_unit_options: "Mount Options"
       equipments: "Equipments"
       special_rules: "Special rules"
       magic: "Magic"
