@@ -1,7 +1,7 @@
 ActiveAdmin.register NinthAge::UnitOption do
   menu parent: 'Ninth Age Army', priority: 10
 
-  permit_params :unit_id, :parent_id, :unit_option_activator_id, :mount_id, :category, :unit_link_id, :is_required, :value_points, :position, :has_one_choise, :is_per_model, :is_multiple, :is_magic, :is_upgratable, :domain_magic_id, :organisation_id, :extra_item_id, :value_points_upgrade, :upgrade_target, :max, :max_model, :min_model, :max_unit, :is_magic_items, :is_magic_standards, :banner_limit, :is_extra_items, :is_unique_choice, :locale, translations_attributes: [:id, :name, :infos, :locale, :_destroy]
+  permit_params :unit_id, :parent_id, :unit_option_activator_id, :mount_id, :category, :unit_link_id, :is_required, :value_points, :position, :has_one_choise, :is_per_model, :is_multiple, :is_magic, :is_upgratable, :domain_magic_id, :organisation_id, :extra_item_id, :value_points_upgrade, :upgrade_target, :max, :max_model, :min_model, :max_unit, :is_magic_items, :is_magic_standards, :banner_limit, :is_extra_items, :is_unique_choice, {:extra_item_category_ids => []}, :locale, translations_attributes: [:id, :name, :infos, :locale, :_destroy]
 
   filter :value_points
 
@@ -20,9 +20,6 @@ ActiveAdmin.register NinthAge::UnitOption do
       if v.except('id', 'locale').all? { |_, v| v.blank? }
         v.merge!(_destroy: '1')
         params[:ninth_age_unit_option][:translations_attributes][k] = v
-        v.each do |p|
-          puts p
-        end
       end
     end
   end
@@ -82,6 +79,9 @@ ActiveAdmin.register NinthAge::UnitOption do
       f.input :is_magic_standards
       f.input :banner_limit
       f.input :is_extra_items
+      f.input :extra_item_category_ids, as: :select, multiple: true, include_blank: true,  
+              :input_html => {'data-option-dependent' => true, 'data-option-url' => '/ninth_age/army-:ninth_age_unit_option_army_filter/extra_item_categories/all', 'data-option-observed' => 'ninth_age_unit_option_army_filter'}, 
+              :collection => (resource.army ? resource.army.extra_item_categories.collect {|category| [category.name, category.id]} : [])
       f.input :is_magic
       f.input :domain_magic, collection: NinthAge::DomainMagic.includes(:translations).includes(version: [:translations]).collect { |u| [u.name + ' - ' + u.version.name, u.id] }
       f.input :mount, as: :select, :input_html => {'data-option-dependent' => true, 'data-option-url' => '/ninth_age/army-:ninth_age_unit_option_army_filter/mounts', 'data-option-observed' => 'ninth_age_unit_option_army_filter'}, :collection => (resource.army ? resource.army.units.collect {|unit| [unit.name, unit.id]} : [])
@@ -124,6 +124,9 @@ ActiveAdmin.register NinthAge::UnitOption do
       row :is_magic_standards
       row :banner_limit
       row :is_extra_items
+      row :extra_item_categories do |category|
+        category.name
+      end
       row :is_unique_choice
       row :is_upgratable
       row :value_points_upgrade

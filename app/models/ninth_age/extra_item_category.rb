@@ -7,6 +7,8 @@ class NinthAge::ExtraItemCategory < ApplicationRecord
   
   has_many :extra_items, dependent: :destroy, class_name: "NinthAge::ExtraItem"
 
+  has_and_belongs_to_many :unit_options, class_name: "NinthAge::unitOption"
+
   translates :name
   globalize_accessors
   accepts_nested_attributes_for :translations, allow_destroy: true

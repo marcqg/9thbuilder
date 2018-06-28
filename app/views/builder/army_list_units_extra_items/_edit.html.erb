@@ -11,10 +11,6 @@ disabled = !extra_item.extra_item_activator_id.nil? && !extra_item.extra_item_ac
 count = army_list_unit.army_list.extra_items.where(:id => extra_item.id).size
 max = extra_item.max
 disabled ||= (max != 0 && count == max && !army_list_unit.extra_items.member?(extra_item))
-
-p extra_item.name
-p disabled
-
 %>
 <li>
   <em><%= content_tag(:span, value_points(extra_item.value_points), { 'data-value-points' => value_points(extra_item.value_points)}) %> pts</em>
