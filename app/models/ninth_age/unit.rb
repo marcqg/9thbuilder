@@ -60,22 +60,6 @@ class NinthAge::Unit < ApplicationRecord
     I18n.t("unit.base.#{base}", default: base.titleize)
   end
 
-  def self.for_select(army_list)
-    army_list_units = army_list.army_list_units.collect(&:id).compact
-    unit_ids = ::Builder::ArmyListUnit.where(:id => army_list_units).map(&:unit_id)
-    
-    army_list.army_organisation.organisations.map do |organisation|
-      [
-          organisation.name,
-          organisation.units.includes(:translations)
-              .order('max', 'ninth_age_unit_translations.name')
-              .reject { |u| u.value_points == nil || u.value_points < 1}
-              .reject { |u| unit_ids.include?(u.id) if u.max == unit_ids.count{ |x| x == u.id } }
-              .map { |u| [u.name, u.id] }
-      ]
-    end
-  end
-
   def self.for_paint_select(paint_list)    
     paint_list.army.organisations.includes(:translations).map do |organisation|
       [
