@@ -1,4 +1,5 @@
 class Builder::ArmyList < ApplicationRecord
+  belongs_to :version, :class_name => 'NinthAge::Version'
   belongs_to :army, :class_name => 'NinthAge::Army'
   belongs_to :user
 

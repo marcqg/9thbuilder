@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180627155820) do
+ActiveRecord::Schema.define(version: 20180628122911) do
 
   create_table "active_admin_comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.integer  "resource_id",                 null: false
@@ -101,9 +101,11 @@ ActiveRecord::Schema.define(version: 20180627155820) do
     t.string   "uuid",                 limit: 36,                                        null: false
     t.integer  "army_organisation_id",                                       default: 0
     t.integer  "max",                                                        default: 0, null: false
+    t.integer  "version_id",                                                             null: false
     t.index ["army_id"], name: "index_builder_army_lists_on_army_id", using: :btree
     t.index ["army_organisation_id"], name: "index_builder_army_lists_on_army_organisation_id", using: :btree
     t.index ["user_id"], name: "index_builder_army_lists_on_user_id", using: :btree
+    t.index ["version_id"], name: "builder_army_lists_version", using: :btree
   end
 
   create_table "ninth_age_armies", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
@@ -861,6 +863,7 @@ ActiveRecord::Schema.define(version: 20180627155820) do
   add_foreign_key "builder_army_list_units", "ninth_age_units", column: "unit_id"
   add_foreign_key "builder_army_lists", "ninth_age_armies", column: "army_id"
   add_foreign_key "builder_army_lists", "ninth_age_army_organisations", column: "army_organisation_id", on_delete: :cascade
+  add_foreign_key "builder_army_lists", "ninth_age_versions", column: "version_id"
   add_foreign_key "builder_army_lists", "users"
   add_foreign_key "ninth_age_armies", "ninth_age_versions", column: "version_id", on_delete: :cascade
   add_foreign_key "ninth_age_army_magic_spell_translations", "ninth_age_army_magic_spells", on_delete: :cascade

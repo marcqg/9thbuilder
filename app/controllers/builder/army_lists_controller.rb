@@ -1,7 +1,6 @@
 module Builder
   class ArmyListsController < ApplicationController
     before_action :authenticate_user!
-    before_action :load_armies, only: [:new, :edit]
 
     # GET /army_lists
     # GET /army_lists.xml
@@ -45,8 +44,11 @@ module Builder
     # GET /army_lists/new.xml
     def new
       @army_list = Builder::ArmyList.new
+      @army_list.version = NinthAge::Version.last
       @army_list.max = 2500
       @army_list.army_id = params[:army_id] || current_user.favorite_army.try(:id)
+
+      load_armies(@army_list.version)
 
       respond_to do |format|
         format.html # new.html.erb
@@ -57,6 +59,8 @@ module Builder
     # GET /army_lists/1/edit
     def edit
       @army_list = current_user.army_lists.find_by_uuid!(params[:uuid])
+
+      load_armies(@army_list.version)
     end
 
     # GET /army_list/1/new_from
@@ -170,19 +174,24 @@ module Builder
 
     private
 
-    def load_armies
+    def load_armies(version)
+
+      @versions = NinthAge::Version.includes(:translations).all
+
       if !current_user.has_role?(:Administrator) or !current_user.has_role?(:Administrator)
         @armies = NinthAge::Army.includes([:translations, :version])
                       .where('ninth_age_versions.public = ?', true)
+                      .where(:version_id => version.id)
                       .order(:name)
       else
         @armies = NinthAge::Army.includes([:translations, :version])
+                      .where(:version_id => version.id)
                       .order(:name)
       end
     end
 
     def army_list_params
-      params.require(:builder_army_list).permit(:army_id, :army_organisation_id, :name, :notes, :max)
+      params.require(:builder_army_list).permit(:version_id, :army_id, :army_organisation_id, :name, :notes, :max)
     end
   end
 end
