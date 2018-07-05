@@ -34,6 +34,8 @@ class NinthAge::Organisation < ApplicationRecord
 
   validates :army_id, presence: true
 
+  scope :ordered, -> { order("ninth_age_organisation_translations.name ASC") }
+
   def cache_key
     super + '-ninth-age-' + Globalize.locale.to_s
   end

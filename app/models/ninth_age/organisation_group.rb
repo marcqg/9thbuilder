@@ -3,6 +3,8 @@ class NinthAge::OrganisationGroup < ApplicationRecord
   strip_attributes
   
   belongs_to :army_organisation, class_name: "NinthAge::ArmyOrganisation"
+  delegate :army, :to => :army_organisation, :allow_nil => true
+  delegate :version, :to => :army, :allow_nil => true
 
   belongs_to :organisation, class_name: "NinthAge::Organisation"
 
@@ -11,6 +13,20 @@ class NinthAge::OrganisationGroup < ApplicationRecord
   validates :army_organisation_id, presence: true
   validates :organisation_id, presence: true
   validates :type_target, presence: true
+  validates :target, presence: true, if: ->(group){ group.Max? or group.Least?}
+
+  attr_accessor :army_filter
+  attr_accessor :version_filter
+
+  def army_filter
+    @army_filter ||= army_organisation.try(:army).try(:id)
+    @army_filter ||= army_organisation.try(:organisation).try(:id)
+  end
+
+  def version_filter
+    @version_filter ||= army_organisation.try(:army).try(:version).try(:id)
+    @version_filter ||= army_organisation.try(:organisation).try(:version).try(:id)
+  end
 
   def display_type_target
     I18n.t("organisation_group.display_type_target.#{type_target}", default: type_target.titleize)

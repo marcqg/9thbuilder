@@ -10,6 +10,8 @@ class NinthAge::ArmyOrganisation < ApplicationRecord
   globalize_accessors
   accepts_nested_attributes_for :translations, allow_destroy: true
 
+  scope :ordered, -> { order("ninth_age_army_organisation_translations.name ASC") }
+
   def cache_key
     super + '-ninth-age-' + Globalize.locale.to_s
   end
