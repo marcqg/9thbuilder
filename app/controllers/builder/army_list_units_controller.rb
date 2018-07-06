@@ -19,7 +19,10 @@ module Builder
       @army_list = current_user.army_lists.find_by_uuid!(params[:army_list_uuid])
       @army_list_unit = @army_list.army_list_units.includes({army_list_unit_troops: [:troop]}).find(params[:id])
 
-      @available_unit_options = @army_list_unit.unit.unit_options.without_parent
+      @available_unit_options = @army_list_unit.unit.unit_options.only_parents
+      @available_mount_unit_options = @army_list_unit.unit.unit_options.only_mounts
+      @available_magic_unit_options = @army_list_unit.unit.unit_options.only_magics
+      
       option_magic_items = @army_list_unit.unit.unit_options.only_magic_items
       magic_item = 0
       @magic_items_option = nil
@@ -115,7 +118,9 @@ module Builder
           format.html { redirect_to @army_list }
           format.xml { head :ok }
         else
-          @available_unit_options = @army_list_unit.unit.unit_options.without_parent.exclude_magics_and_extra
+          @available_unit_options = @army_list_unit.unit.unit_options.only_parents.exclude_magics_and_extra
+          @available_mount_unit_options = @army_list_unit.unit.unit_options.only_mounts
+          @available_magic_unit_options = @army_list_unit.unit.unit_options.only_magics
 
           option_magic_items = @army_list_unit.unit.unit_options.only_magic_items
           magic_item = 0
