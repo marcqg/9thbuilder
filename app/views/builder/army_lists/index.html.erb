@@ -11,7 +11,7 @@
 </div>
 
 <div class="menu-army-list">
-    <div class="col-md-3">
+    <div class="col-md-3 col-12 col-sm-4">
       <div class="army_list_row">
         <p>
           <a href="<%= new_builder_army_list_path(:army_id => @search.army_id_eq) %>" data-popin="true"><%= image_tag "bt_new_army_list.png", :size => "220x132" %></a>
@@ -20,7 +20,7 @@
       </div>
     </div>
 
-    <div class="col-md-3">
+    <div class="col-md-3 col-12 col-sm-4">
       <div class="army_list_row">
         <p>
           <a href="<%= new_paint_paint_list_path() %>" data-popin="true"><%= image_tag "bt_new_paint_list.png", :size => "220x132" %></a>
@@ -29,7 +29,7 @@
       </div>
     </div>
 
-    <div class="col-md-3">
+    <div class="col-md-3 col-12 col-sm-4">
       <div class="army_list_row">
         <p>
           <%= link_to(image_tag('bt_lexicon.png', :size => '220x132'), ninth_age_versions_path) %>
@@ -38,7 +38,7 @@
       </div>
     </div>
 
-    <div class="col-md-3">
+    <div class="col-md-3 col-12 col-sm-4">
       <div class="army_list_row">
         <p>
           <%= link_to(image_tag('bt_search_army_list.png', :size => '220x132'), builder_searchs_path) %>
@@ -51,8 +51,8 @@
 <div class="clearboth">
   <h2 class="text-center"><%= t 'army_list.index.title' %></h2>
   <% @army_lists.each_with_index do |army_list, i| %>
-    <div class="col-md-3 <%= alternate_cell_class(i) %>">
-      <div class="army_list_row">
+    <div class="col-md-3 col-12 col-sm-4 <%= alternate_cell_class(i) %>">
+      <div class="army_list_row" style="min-height: 130px;">
         <p class="thumb"><a href="<%= builder_army_list_path(army_list) %>">
           <% unless army_list.army.logo.nil? %>
               <%= image_tag army_list.army.logo_large.url, alt: army_list.army.name, :size => "220x132" %>
@@ -69,9 +69,9 @@
 <div class="clearboth">
   <h2 class="text-center"><%= t 'paint_list.index.title' %></h2>
   <% @paint_lists.each_with_index do |paint_list, i| %>
-    <div class="col-md-3 <%= alternate_cell_class(i) %>">
+    <div class="col-md-3 col-12 col-sm-4 <%= alternate_cell_class(i) %>">
       <div class="paint_list_row">
-        <div class="picture">
+        <div class="picture" style="min-height: 130px;">
           <% unless paint_list.army.logo.nil? %>
             <%= image_tag paint_list.army.logo_large.url, alt: paint_list.army.name%>
           <% end %>
