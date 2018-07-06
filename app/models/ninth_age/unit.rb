@@ -10,6 +10,8 @@ class NinthAge::Unit < ApplicationRecord
   
   has_and_belongs_to_many :organisations, class_name: "NinthAge::Organisation"
 
+  has_many :paint_list_units, dependent: :destroy, class_name: 'Paint::PaintListUnit'
+
   has_many :army_list_units, dependent: :destroy, class_name: 'Builder::ArmyListUnit'
   has_many :equipment_unit_troops, -> { order :position }, dependent: :destroy, class_name: "NinthAge::EquipmentUnitTroop"
   has_many :equipments, through: :equipment_unit_troops, class_name: "NinthAge::Equipment"
