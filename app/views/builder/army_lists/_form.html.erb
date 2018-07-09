@@ -26,6 +26,13 @@
     <%= f.label :max %>
     <%= f.number_field :max, :placeholder => t('army_list.form.max'), class: "form-control" %>
   </div>
+
+  <div class="form-group rate_with_max">
+    <%= f.label :rate_with_max %>
+    <p><small><%= t('army_list.form.rate_with_max.detail') %></small></p>
+    <%= f.check_box :rate_with_max, class: "form-control" %>
+    <small class="error" style="display:none; color: red"><%= t('army_list.form.rate_with_max.error') %></small>
+  </div>  
     
   <div class="form-group">
     <%= f.label :notes %>

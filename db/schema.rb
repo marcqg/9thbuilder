@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180709083024) do
+ActiveRecord::Schema.define(version: 20180709143352) do
 
   create_table "active_admin_comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.integer  "resource_id",                 null: false
@@ -27,11 +27,11 @@ ActiveRecord::Schema.define(version: 20180709083024) do
   end
 
   create_table "builder_army_list_organisations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer "army_list_id",    default: 0,     null: false
-    t.integer "organisation_id", default: 0,     null: false
-    t.integer "pts",             default: 0,     null: false
-    t.integer "rate",            default: 0,     null: false
-    t.boolean "good",            default: false, null: false
+    t.integer "army_list_id",                            default: 0,     null: false
+    t.integer "organisation_id",                         default: 0,     null: false
+    t.integer "pts",                                     default: 0,     null: false
+    t.decimal "rate",            precision: 5, scale: 2, default: "0.0", null: false
+    t.boolean "good",                                    default: false, null: false
     t.index ["army_list_id", "organisation_id"], name: "builder_army_list_organisations_army_list_organisation", unique: true, using: :btree
     t.index ["organisation_id", "army_list_id"], name: "builder_army_list_organisations_organisation_army_list", unique: true, using: :btree
   end
@@ -91,17 +91,18 @@ ActiveRecord::Schema.define(version: 20180709083024) do
   end
 
   create_table "builder_army_lists", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
-    t.integer  "army_id",                                                                null: false
-    t.integer  "user_id",                                                                null: false
-    t.string   "name",                                                                   null: false
-    t.decimal  "value_points",                       precision: 8, scale: 2,             null: false
+    t.integer  "army_id",                                                                    null: false
+    t.integer  "user_id",                                                                    null: false
+    t.string   "name",                                                                       null: false
+    t.decimal  "value_points",                       precision: 8, scale: 2,                 null: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "notes",                limit: 65535
-    t.string   "uuid",                 limit: 36,                                        null: false
+    t.string   "uuid",                 limit: 36,                                            null: false
     t.integer  "army_organisation_id",                                       default: 0
-    t.integer  "max",                                                        default: 0, null: false
-    t.integer  "version_id",                                                             null: false
+    t.integer  "max",                                                        default: 0,     null: false
+    t.integer  "version_id",                                                                 null: false
+    t.boolean  "rate_with_max",                                              default: false, null: false
     t.index ["army_id"], name: "index_builder_army_lists_on_army_id", using: :btree
     t.index ["army_organisation_id"], name: "index_builder_army_lists_on_army_organisation_id", using: :btree
     t.index ["user_id"], name: "index_builder_army_lists_on_user_id", using: :btree

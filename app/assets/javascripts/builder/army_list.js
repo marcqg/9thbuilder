@@ -1,5 +1,39 @@
 jQuery(function($) {
 
+
+    $(document).on('click', '#new_builder_army_list input[type="submit"]', function(event){
+
+        if($('#new_builder_army_list #builder_army_list_rate_with_max:checked').length > 0){
+            if(!$('#new_builder_army_list #builder_army_list_max').val()){
+                event.preventDefault();
+                event.stopPropagation();
+                event.stopImmediatePropagation();
+                $('#new_builder_army_list .rate_with_max .error').show();
+                $(this).prop("disabled", false);
+               // return  false;
+            }
+            else{
+                $('#new_builder_army_list .rate_with_max .error').hide();
+            }
+        }
+    });
+    $(document).on('click', '.edit_builder_army_list input[type="submit"]', function(event){
+
+        if($('.edit_builder_army_list #builder_army_list_rate_with_max:checked').length > 0){
+            if(!$('.edit_builder_army_list #builder_army_list_max').val()){
+                event.preventDefault();
+                event.stopPropagation();
+                event.stopImmediatePropagation();
+                $('.edit_builder_army_list .rate_with_max .error').show();
+                $(this).prop("disabled", false);
+               // return  false;
+            }
+            else{
+                $('.edit_builder_army_list .rate_with_max .error').hide();
+            }
+        }
+    });
+
     /**
      * Update all value_points when the size of the unit change
      */

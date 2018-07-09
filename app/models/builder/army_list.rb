@@ -23,6 +23,7 @@ class Builder::ArmyList < ApplicationRecord
 
   validates :army_id, :user_id, :army_organisation_id, :uuid, :name, :value_points, presence: true
   validates :value_points, numericality: { greater_than_or_equal_to: 0 }
+  validates :max, numericality: { greater_than_or_equal_to: 1 }, if: ->(list){list.rate_with_max?}
 
   normalize_attributes :name, :notes
 

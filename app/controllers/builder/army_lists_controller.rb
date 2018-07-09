@@ -191,7 +191,7 @@ module Builder
     end
 
     def army_list_params
-      params.require(:builder_army_list).permit(:version_id, :army_id, :army_organisation_id, :name, :notes, :max)
+      params.require(:builder_army_list).permit(:version_id, :army_id, :army_organisation_id, :name, :notes, :max, :rate_with_max)
     end
   end
 end

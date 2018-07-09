@@ -198,6 +198,9 @@ en:
     form:
       name: "Name"
       max: "Max point"
+      rate_with_max: 
+        detail: 'You can calcul ratio with max instead of the total of armylist.'
+        error: 'If you want calcul ratio with max, you need to set the value.'
       notes: "Notes"
       submit: Save
 
