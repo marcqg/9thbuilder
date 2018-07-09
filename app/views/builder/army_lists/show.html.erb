@@ -32,7 +32,7 @@
             <%= image_tag(organisation_group.organisation.medium_logo_url, alt: organisation_group.organisation.name, size: '75x75') %>
             <p><%= raw organisation_group.organisation.name.gsub(/\((.*)\)/, '<span class="text-small">(\1)</span>') %></p>
             <p>
-              <span class="<%= (army_list_organisation != nil && army_list_organisation.good ? 'highlight-green' : 'highlight-red') %>"> <% if army_list_organisation != nil %><%= army_list_organisation.rate %>% <small>(<%= army_list_organisation.pts %> pts)</small><%else%>0%<%end%></span>
+              <span class="<%= (army_list_organisation != nil && army_list_organisation.good ? 'highlight-green' : 'highlight-red') %>"> <% if army_list_organisation != nil %><%= sprintf('%.2f', army_list_organisation.rate) %>% <small>(<%= army_list_organisation.pts %> pts)</small><%else%>0%<%end%></span>
               <% if !organisation_group.NoLimit? %>
                   <span class="text-small">(<%= organisation_group.target %>% <%= organisation_group.type_target %>)</span>
               <% end %>
