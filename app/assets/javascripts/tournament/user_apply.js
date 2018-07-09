@@ -20,6 +20,16 @@ jQuery(document).ready(function() {
 				return;
 			}
 
+			users = lines.map(function(line){
+
+				datas = line.split(',')
+							.map(function(val){ return val.trim(); });
+
+				return {name: datas[0], email: (datas.length > 1 ? datas[1] : null) };
+			});
+
+			console.log('users', users);
+
 			var eventId = $('.new-user-apply .add-username #tournament_event_id').val();
 			var versionId = $('.new-user-apply .add-username #tournament_version_id').val();
 
@@ -33,13 +43,13 @@ jQuery(document).ready(function() {
 					    url: '/tournament/event-' + eventId + '/user_applies/multi.json',
 					    method: 'POST',
 					    contentType: 'application/json',
-					    data: JSON.stringify({ names: lines }),
+					    data: JSON.stringify({ users: users }),
 					    success: function(result) {
 
 					    	$.each(result, function(i, item){
 
 					    		line = $('<li id="'+item.id+'" data-id="'+item.id+'"><div class="user_apply_overview"><div class="position">' + ("0" + item.position).slice(-2) + '</div>\
-					    			<div class="name"><strong>' + item.name.substring(0,32) + '</strong></div>\
+					    			<div class="name"><strong>' + item.name.substring(0,32) + '</strong><small>' + item.email + '</small></div>\
 					    			<div class="army"><select name="user_apply[army_id]" id="user_apply_army_id"><option value="">Select an army</option></select></div>\
 					    			<div class="actions pull-right"><i class="fa fa-2x fa-trash" data-url="/tournament/event-' + item.event_id + '/user_applies/' + item.id + '"></i></div>\
 					    			<div class="clearboth"></div></div></li>');

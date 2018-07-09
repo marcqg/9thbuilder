@@ -23,9 +23,9 @@ module Tournament
 
       @user_applies = []
 
-      names = params[:names]
-      names.each do |name|
-        user_apply = Tournament::UserApply.new({name: name, event_id: @event.id})
+      users = params[:users]
+      users.each do |user|
+        user_apply = Tournament::UserApply.new({name: user['name'], :email => user['email'], event_id: @event.id})
         user_apply.save!
 
         @user_applies << user_apply

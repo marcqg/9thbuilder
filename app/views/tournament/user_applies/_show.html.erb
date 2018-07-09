@@ -5,6 +5,9 @@
     </div>
     <div class="name">
       <strong><%= transliterate user_apply.name %></strong>
+      <% unless user_apply.email.nil? %>
+        <small><%= user_apply.email %></small>
+      <% end %>
     </div>
     <div class="army">
       <%= collection_select :user_apply, :army_id, NinthAge::Army.includes(:translations).with_locales(I18n.locale).where(:version_id => @event.version_id).ordered, :id, :name,{include_blank: 'Select an army', :selected => user_apply.army_id } %>

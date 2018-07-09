@@ -6,9 +6,9 @@
     <%= hidden_field(:tournament, :event_id, :value => @event.id) %>
     <%= hidden_field(:tournament, :version_id, :value => @event.version_id) %>
     <div class="form-group">
-      <label>Name:</label>
+      <label><%=  t('tournament.user_apply.form.name') %>:</label>
       <%= text_area :name, nil, :placeholder => t('tournament.user_apply.form.name'), class: "form-control" %>
-      <small>You can add somes users (1 user by line).</small>
+      <small><%= t('tournament.user_apply.form.name_detail') %></small>
     </div>
 
     <div class="text-center">

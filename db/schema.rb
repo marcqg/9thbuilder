@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180628122911) do
+ActiveRecord::Schema.define(version: 20180709083024) do
 
   create_table "active_admin_comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.integer  "resource_id",                 null: false
@@ -803,6 +803,7 @@ ActiveRecord::Schema.define(version: 20180628122911) do
     t.integer  "position",     default: 0, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "email"
     t.index ["army_id"], name: "index_tournament_user_applies_on_army_id", using: :btree
     t.index ["army_list_id"], name: "index_tournament_user_applies_on_army_list_id", using: :btree
     t.index ["event_id"], name: "index_tournament_user_applies_on_event_id", using: :btree

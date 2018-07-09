@@ -438,6 +438,7 @@ en:
         title: Add users
       form:
         name: Name
+        name_detail: You can add somes users (1 user by line) with email separated by a comma (name, email).
         or: or
         user: User
         submit: Add
