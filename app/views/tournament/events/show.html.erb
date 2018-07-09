@@ -17,6 +17,7 @@
   		</tr>
   	</thead>
   	<tbody>
+      <% results = [] %>
   		<% @event.user_applies.each do |apply| %>
   		<tr>
   			<td><%= apply.name %></td>
@@ -44,8 +45,67 @@
                         .sum
         %>
         <td><%= total + pwl_points %></td>
+        <% results << [apply.id, total + pwl_points]  %>
   		</tr>
   		<% end %>
   	</tbody>
   </table>
+
+  <div class="col-sm-12 col-md-12  zone-podium">
+    <div class="competition-podium well">
+    <%
+        results.sort!{|x,y| y[1] <=> x[1]}
+        totaux = results.map{ |k| k[0]}
+    %>
+      <div class="podium-block bronze">
+        <% if totaux.size >= 3 %>
+          <% apply =  @event.user_applies.find(totaux[2])  %>
+        <div class="name"><i class="fa fa-trophy fa-2x" style="color: #cd7f32"></i><%= apply.name %></div>
+        <% end %>
+        <div class="podium"><span>3<sup>ème</sup></span></div>
+      </div>
+      <div class="podium-block gold">	
+        <% if totaux.size >= 1 %>
+          <% apply =  @event.user_applies.find(totaux[0])  %>
+        <div class="name"><i class="fa fa-trophy fa-2x" style="color: gold"></i><%= apply.name %></div>
+        <% end %>
+        <div class="podium"><span>1<sup>er</sup></span></div>
+      </div>
+      <div class="podium-block silver">	
+        <% if totaux.size >= 2 %>
+          <% apply =  @event.user_applies.find(totaux[1])  %>
+        <div class="name"><i class="fa fa-trophy fa-2x" style="color: silver"></i><%= apply.name %></div>
+        <% end %>
+        <div class="podium"><span>2<sup>ème</sup></span></div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="col-md-6 col-sm-12 col-md-offset-3">
+    <table class="list-user-total-points">
+    	<thead>
+    		<tr>
+    			<th><%= t('tournament.user_apply.name') %></th>
+    			<th><%= t('tournament.event.total') %></th>
+    		</tr>
+    	</thead>
+    	<tbody>
+    		<% results.each_with_index do |result, index| %>
+    		<tr>
+    			<td><%= @event.user_applies.find(result[0]).name %></td>
+          <td><%= result[1] %>
+            <% if index == 0 %>
+              <i class="fa fa-trophy" style="color: gold"></i>
+            <% elsif index == 1 %>
+              <i class="fa fa-trophy" style="color: silver"></i>
+            <% elsif index == 2 %>
+              <i class="fa fa-trophy" style="color: #cd7f32"></i>
+            <% end %>
+    		</tr>
+    		<% end %>
+    	</tbody>
+    </table>
+  </div>
+
 </div>

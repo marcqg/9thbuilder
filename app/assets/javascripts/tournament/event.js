@@ -33,6 +33,18 @@ jQuery(document).ready(function() {
 			    // handle failure
 			}
 		});
-
 	});
+
+	$('.show-tournament .bronze .podium').animate({
+		"height": "62px"
+	}, 1500);
+	$('.show-tournament .gold .podium').animate({
+		"height": "165px"
+	}, 1500);
+	$('.show-tournament .silver .podium').animate({
+		"height": "106px"
+	}, 1500);
+	$('.show-tournament .competition-container .name').delay(1000).animate({
+		"opacity": "1"
+	}, 500);
 });
