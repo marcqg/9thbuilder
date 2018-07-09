@@ -47,16 +47,53 @@ module Tournament
 
         table = @round.matches.count / 2 + 1
 
-        user_in_matches.each_with_index do |user, index|
-          Tournament::Match.create!({ 
-            :round_id => @round.id, 
-            :table => table,
-            :user_apply_id => user })
+        users = Queue.new
+        user_in_matches.each do |user|
+          users << user
+        end
+        retry_user_ids = Queue.new
 
-          if (index % 2 == 1)
+        p "Add user to table => #{!users.empty? || !retry_user_ids.empty?}"
+        while !users.empty? || !retry_user_ids.empty? do
+        
+          user = (!users.empty? ? users.pop : retry_user_ids.pop)
+          p "user => #{user}"
+
+          matches = Tournament::Match.where({:round_id => @round.id , :table => table })
+          p "Add directly => #{matches.empty?} || #{users.empty?}"
+          if matches.empty? || users.empty?
+            Tournament::Match.create!({ 
+              :round_id => @round.id, 
+              :table => table,
+              :user_apply_id => user })
+
+          else
+            preview_matches = Tournament::Match.joins("INNER JOIN tournament_matches m2 ON tournament_matches.round_id = m2.round_id and tournament_matches.table = m2.table and tournament_matches.user_apply_id != m2.user_apply_id
+              INNER JOIN tournament_rounds r on r.id = tournament_matches.round_id")
+                              .where("r.event_id = ? and r.position < ? and m2.user_apply_id = ?", @round.event_id, @round.position, user)
+                              .where(:user_apply_id => matches.map(&:user_apply_id))
+                              .map { |m| m.user_apply_id }
+
+            p "preview_matches"
+            p preview_matches
+
+            if preview_matches.empty?
+              Tournament::Match.create!({ 
+                :round_id => @round.id, 
+                :table => table,
+                :user_apply_id => user })
+            else
+              retry_user_ids << user
+            end
+
+          end
+
+          if 2 == matches.count
             table = table + 1
           end
+        
         end
+
 
         @round.reload
 

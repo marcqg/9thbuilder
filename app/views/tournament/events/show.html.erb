@@ -1,19 +1,19 @@
 <div class="show-tournament">
-  <%= link_to(tournament_organisations_path(), {:class => 'btn btn-age pull-right'}) do %> Back to events<% end %>
-  <%= link_to("", {:class => 'btn btn-age pull-right', :id => "add-round", data: {event_id: @event.id} }) do %> <i class="fa fa-plus"></i> Add round <% end %>
+  <%= link_to(tournament_organisations_path(), {:class => 'btn btn-age pull-right'}) do %><%= t('tournament.event.back') %><% end %>
+  <%= link_to("", {:class => 'btn btn-age pull-right', :id => "add-round", data: {event_id: @event.id} }) do %> <i class="fa fa-plus"></i> <%= t('tournament.round.add') %> <% end %>
 
-  <h1 class="event-name"><strong>Tournament:</strong> <%= @event.name %></h1>
+  <h1 class="event-name"><strong><%= t('tournament.event.name') %>:</strong> <%= @event.name %></h1>
   <p class="event-date"><small>(<%= @event.start_date.strftime(t('picker.datetime.rb')) %> to <%= @event.end_date.strftime(t('picker.datetime.rb')) %>)</small></p>
 
   <table class="list-user-points col-md-12 col-sm-12">
   	<thead>
   		<tr>
-  			<th>User</th>
-          <th><%= link_to(tournament_custom_points_path(@event)) do %> PWL <i class="fa fa-edit"></i><%end%></th>
+  			<th><%= t('tournament.user_apply.name') %></th>
+          <th><%= link_to(tournament_custom_points_path(@event)) do %> <%= t('tournament.custom_point.name') %> <i class="fa fa-edit"></i><%end%></th>
   			<% @event.rounds.each do |round| %>
-  				<th><%= link_to(tournament_round_path(@event, round)) do %> Round <%= round.position %> <i class="fa fa-edit"></i><%end%></th>
+  				<th><%= link_to(tournament_round_path(@event, round)) do %> <%= t('tournament.round.name') %> <%= round.position %> <i class="fa fa-edit"></i><%end%></th>
   			<% end %>
-  			<th>Total</th>
+  			<th><%= t('tournament.event.total') %></th>
   		</tr>
   	</thead>
   	<tbody>

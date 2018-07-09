@@ -421,6 +421,9 @@ en:
 
   tournament:
     event:
+      name: Tournament
+      back: Back to events
+      total: Total
       new:
         title: "Create a tournament"
       form:
@@ -433,7 +436,11 @@ en:
         version: Version
         round_count: Rounds
         submit: Save
+    round:
+      name: Round
+      add: Add round
     user_apply:
+      name: User
       new:
         title: Add users
       form:
@@ -442,6 +449,8 @@ en:
         or: or
         user: User
         submit: Add
+    custom_point:
+      name: PWL
 
   signin:
     title: "Sign in"
