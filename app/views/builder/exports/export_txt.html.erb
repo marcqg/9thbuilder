@@ -51,7 +51,11 @@ end
 						, <%= army_list_unit.unit_options.where.not(:domain_magic_id => nil).map(&:domain_magic).map(&:name).join(', ') %>
 					<% end %>
 					<% unless army_list_unit.unit_options.where(:category => [:M, :S, :C]).empty? %>
-						, <%= army_list_unit.unit_options.where(:category => [:M, :S, :C]).map(&:category).join(', ') %>
+						, <%= army_list_unit.unit_options.where(:category => [:M, :S, :C])
+															.map(&:category)
+															.map{|c| c.to_s }
+															.map{|c| I18n.t("unit_options.category.#{c}", default: c.titleize) }
+															.join(', ') %>
 					<% end %>
 					<% unless army_list_unit.magic_standards.empty? %>
 						, <%= army_list_unit.magic_standards.map(&:name).join(', ') %>

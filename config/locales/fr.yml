@@ -245,6 +245,12 @@ fr:
       Universal: Universel
       Universal_g: "{Universel}"
 
+  unit_options:
+    category:
+      C: C
+      M: M
+      S: E
+
   signin:
     title: "Se connecter"
     form:
