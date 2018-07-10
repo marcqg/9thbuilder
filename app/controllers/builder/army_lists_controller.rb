@@ -127,6 +127,7 @@ module Builder
 
       @army_list = Builder::ArmyList.new
       @army_list.user_id = @base_army_list.user_id
+      @army_list.version_id = @base_army_list.version_id
       @army_list.army_id = @base_army_list.army_id
       @army_list.army_organisation_id = @base_army_list.army_organisation_id
       @army_list.name = "#{@base_army_list.name} copy"
@@ -137,6 +138,9 @@ module Builder
         army_list_unit = @army_list.army_list_units.build(unit_id: base_army_list_unit.unit_id,
                                                           value_points: base_army_list_unit.value_points,
                                                           size: base_army_list_unit.size)
+        army_list_unit.army_list = @army_list
+        army_list_unit.save!
+        
         army_list_unit.army_list_unit_troops << base_army_list_unit.army_list_unit_troops.collect do |alut|
           army_list_unit_troop = alut.dup
           army_list_unit_troop.army_list_unit = army_list_unit
@@ -152,6 +156,12 @@ module Builder
         army_list_unit.extra_items << base_army_list_unit.extra_items
       end
 
+      @base_army_list.army_list_organisations.each do |base_army_list_organisation|
+        army_list_organisation = base_army_list_organisation.dup
+        army_list_organisation.army_list = @army_list
+        army_list_organisation.save!
+      end
+
       respond_to do |format|
         if @army_list.save
           @army_list.reload
@@ -160,6 +170,9 @@ module Builder
           format.xml { render xml: @army_list, status: :created, location: @army_list }
           format.js { render action: 'create' }
         else
+          p "MESSAGE :"
+          p @army_list.errors.full_messages 
+
           format.html { render action: 'new_from' }
           format.xml { render xml: @army_list.errors, status: :unprocessable_entity }
         end
