@@ -228,7 +228,7 @@ module Builder
       pts = @army_list.army_list_units.map(&:value_points).reduce(0, :+)
       if pts != 0
         Builder::ArmyListOrganisation.where(army_list_id: @army_list.id).each do |organisation|
-          organisation.rate = (organisation.pts * 100 / pts).round
+          organisation.rate = organisation.pts * 100.0 / pts
           organisation.save!
         end
       end

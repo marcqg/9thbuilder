@@ -15,8 +15,8 @@ end
 		<% @army_list.army_organisation.organisation_groups.each do |organisation_group| %>
 			<% army_list_organisation = @army_list.army_list_organisations.find_by(:organisation_id => organisation_group.organisation_id) %>
 			<p>--- <%= raw organisation_group.organisation.name %>: 
-				<% if army_list_organisation != nil %><%= army_list_organisation.rate %>% 
-					<% if !organisation_group.NoLimit? %>
+				<% if army_list_organisation != nil %><%= sprintf('%.2f', army_list_organisation.rate) %>% 
+					<% unless organisation_group.NoLimit? %>
 					  / <%= organisation_group.target %>% <%= organisation_group.type_target %>
 					<% end %> 
 					(<%= army_list_organisation.pts %>pts<% if !organisation_group.NoLimit? %>/<%= (organisation_group.target.to_i * @army_list.max.to_i / 100.0).to_i %>pts<% end %>)

@@ -37,8 +37,8 @@
     <% @army_list.army_organisation.organisation_groups.each do |organisation_group| %>
         <% army_list_organisation = @army_list.army_list_organisations.find_by(:organisation_id => organisation_group.organisation_id) %>
         <%= content_tag(:li, {:class => (army_list_organisation != nil && !army_list_organisation.good ? "highlight-red" : "highlight-green")}) do %>
-          <% if army_list_organisation != nil %>
-            <em><%= army_list_organisation.pts %> pts <small>(<%= army_list_organisation.rate %> %)</small></em>
+          <% unless army_list_organisation.nil? %>
+            <em><%= army_list_organisation.pts %> pts <small>(<%= sprintf('%.2f', army_list_organisation.rate) %> %)</small></em>
           <% end %>
           <strong><%= organisation_group.organisation.name.gsub(/\(([\w,\ \+\.\(\)\-]*)\)/, '<span class="text-small">(\1)</span>').html_safe %></strong>
           <span class="small"><% unless organisation_group.NoLimit? %>(<%= organisation_group.target %> <%= organisation_group.type_target %>)<% end %></span>
