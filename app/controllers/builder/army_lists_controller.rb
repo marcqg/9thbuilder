@@ -89,6 +89,7 @@ module Builder
     # PUT /army_lists/1.xml
     def update
       @army_list = current_user.army_lists.find_by_uuid!(params[:uuid])
+      @army_list.update_organisations
 
       respond_to do |format|
         if @army_list.update(army_list_params)

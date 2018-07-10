@@ -92,7 +92,7 @@ module Builder
       respond_to do |format|
         if @army_list_unit.save
           @army_list.reload
-          update_organisations
+          @army_list.update_organisations
 
           format.html { redirect_to @army_list }
           format.xml { render xml: @army_list_unit, status: :created, location: @army_list_unit }
@@ -113,7 +113,7 @@ module Builder
       respond_to do |format|
         if @army_list_unit.update(army_list_unit_params)
           @army_list_unit.save
-          update_organisations
+          @army_list.update_organisations
 
           format.html { redirect_to @army_list }
           format.xml { head :ok }
@@ -156,7 +156,7 @@ module Builder
       @army_list_unit = @army_list.army_list_units.find(params[:id])
       @army_list_unit.destroy
 
-      update_organisations
+      @army_list.update_organisations
 
       respond_to do |format|
         format.html { redirect_to @army_list }
@@ -177,80 +177,6 @@ module Builder
 
     def army_list_unit_params
       params.require(:builder_army_list_unit).permit(:unit_id, :name, :notes, extra_item_ids: [], army_list_unit_troops_attributes: [:id, :army_list_unit_id, :troop_id, :size], army_list_unit_unit_options_attributes: [:id, :army_list_unit_id, :unit_option_id, :quantity, :_destroy], army_list_unit_magic_items_attributes: [:id, :army_list_unit_id, :magic_item_id, :quantity, :_destroy], army_list_unit_magic_standards_attributes: [:id, :army_list_unit_id, :magic_standard_id, :_destroy])
-    end
-
-    def update_organisations
-
-      Builder::ArmyListOrganisation.where(army_list_id: @army_list.id).update_all(pts: 0, rate: 0)
-
-      @army_list.army_list_units.each do |army_list_unit|
-
-        #Sum points for all figurines
-        army_list_unit.unit.organisations.each do |organisation|
-
-          organisation_change = NinthAge::OrganisationChange.find_by({unit_id: army_list_unit.unit_id, default_organisation_id: organisation.id})
-          isChange = nil != organisation_change && ((organisation_change.Min? && organisation_change.number <= army_list_unit.size) || (organisation_change.Max? && organisation_change.number >= army_list_unit.size))
-
-          org_id = (isChange ? organisation_change.new_organisation_id : organisation.id)
-
-          organisation_rate = Builder::ArmyListOrganisation.find_or_create_by({organisation_id: org_id, army_list_id: @army_list.id})
-          organisation_rate.pts += army_list_unit.value_points
-          organisation_rate.save!
-        end
-
-        #Sum points for mounts
-        mount_option = army_list_unit.unit_options.where.not(:mount => nil).first
-        if nil != mount_option
-
-          mount_option.mount.organisations.where.not(:id => army_list_unit.unit.organisation_ids).each do |mount_organisation|
-            organisation_rate = Builder::ArmyListOrganisation.find_or_create_by({organisation_id: mount_organisation.id, army_list_id: @army_list.id})
-            organisation_rate.pts += mount_option.value_points
-            organisation_rate.save!
-          end
-        end
-
-        army_list_unit.army_list_unit_unit_options.joins(:unit_option).where.not(:ninth_age_unit_options => {:organisation_id => nil}).each do |unit_option|
-          organisation_rate = Builder::ArmyListOrganisation.find_or_create_by({organisation_id: unit_option.unit_option.organisation_id, army_list_id: @army_list.id})
-          organisation_rate.pts += army_list_unit.value_points
-          organisation_rate.save!
-        end
-
-        #Sum by banners
-        army_list_unit.army_list_unit_magic_standards.each do |magic_standard|
-          unless magic_standard.magic_standard.organisation_id.nil?
-            organisation_rate = Builder::ArmyListOrganisation.find_or_create_by({organisation_id: magic_standard.magic_standard.organisation_id, army_list_id: @army_list.id})
-            organisation_rate.pts += army_list_unit.value_points
-            organisation_rate.save!
-          end
-        end
-      end
-
-      pts = @army_list.army_list_units.map(&:value_points).reduce(0, :+)
-      if pts != 0
-        Builder::ArmyListOrganisation.where(army_list_id: @army_list.id).each do |organisation|
-          organisation.rate = organisation.pts * 100.0 / pts
-          organisation.save!
-        end
-      end
-
-      army_organisation = NinthAge::ArmyOrganisation.find(@army_list.army_organisation_id)
-      army_organisation.organisation_groups.each do |organisation_group|
-
-        organisation = Builder::ArmyListOrganisation.find_or_create_by(army_list_id: @army_list.id, organisation_id: organisation_group.organisation_id)
-        
-        case organisation_group.type_target.to_sym
-          when :NoLimit
-            organisation.good = true
-          when :Max
-            organisation.good = organisation.rate <= organisation_group.target
-          when :Least
-            organisation.good = organisation.rate >= organisation_group.target
-          when :NotAllowed
-            organisation.good = organisation.rate == 0
-        end
-
-        organisation.save
-      end
     end
   end
 end
