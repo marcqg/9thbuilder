@@ -78,6 +78,7 @@ class NinthAge::Unit < ApplicationRecord
     new_unit_options = {}
 
     new_unit = dup
+    new_unit.latex_key = nil
     new_unit.troops << troops.collect { |troop| new_troops[troop.id] = troop.dup }
     new_unit.equipment_unit_troops << equipment_unit_troops.collect(&:dup)
     new_unit.special_rule_unit_troops << special_rule_unit_troops.collect(&:dup)
@@ -89,6 +90,7 @@ class NinthAge::Unit < ApplicationRecord
     end
 
     new_unit.troops.map do |troop|
+      troop.latex_key = nil
       troop.unit_option = new_unit_options[troop.unit_option.id] unless troop.unit_option.nil?
     end
 
