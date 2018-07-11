@@ -73,14 +73,17 @@ jQuery(document).ready(function() {
                 left: 0
             }).prependTo($(droppable)).show();
 
-            var eventId = $(droppable).closest('ul').data('event-id');
-            var roundId = $(droppable).closest('ul').data('round-id');
+            console.log('$(droppable)', $(droppable));
+            console.log('$(dragLastPlace)', $(dragLastPlace));
 
-            var matchDropId = $(droppable).closest('li').data('match-id');
-            var tableDropId = $(droppable).closest('ul').data('table-id');
+            var eventId = $(droppable).closest('.match-players').data('event-id');
+            var roundId = $(droppable).closest('.match-players').data('round-id');
 
-            var matchDragId = $(dragLastPlace).closest('li').data('match-id');
-            var tableDragId = $(dragLastPlace).closest('ul').data('table-id');
+            var matchDropId = $(droppable).data('match-id');
+            var tableDropId = $(droppable).closest('.match-players').data('table-id');
+
+            var matchDragId = $(dragLastPlace).data('match-id');
+            var tableDragId = $(dragLastPlace).closest('.match-players').data('table-id');
 
             updateMatch(eventId, roundId, matchDragId, tableDropId);
             updateMatch(eventId, roundId, matchDropId, tableDragId);
