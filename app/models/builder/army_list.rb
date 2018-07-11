@@ -61,13 +61,23 @@ class Builder::ArmyList < ApplicationRecord
       mount_option = army_list_unit.unit_options.where.not(:mount => nil).first
       if nil != mount_option
 
-        mount_option.mount.organisations.where.not(:id => army_list_unit.unit.organisation_ids).each do |mount_organisation|
+        orgs = mount_option.mount
+                            .organisations
+                            .where.not(:id => army_list_unit.unit.organisation_ids)
+
+        ogrs.each do |mount_organisation|
           organisation_rate = self.army_list_organisations.find_or_create_by({organisation_id: mount_organisation.id, army_list_id: self.id})
-          organisation_rate.pts += mount_option.value_points
+
+          unless mount_option.mount_and_carac_points
+            organisation_rate.pts += mount_option.value_points # Only mount in other organisation
+          else
+            organisation_rate.pts += army_list_unit.value_points # carac + mount in other organisation
+          end
           organisation_rate.save!
         end
       end
 
+      #Options with organisations
       army_list_unit.army_list_unit_unit_options.joins(:unit_option).where.not(:ninth_age_unit_options => {:organisation_id => nil}).each do |unit_option|
         organisation_rate = self.army_list_organisations.find_or_create_by({organisation_id: unit_option.unit_option.organisation_id, army_list_id: self.id})
         organisation_rate.pts += army_list_unit.value_points
