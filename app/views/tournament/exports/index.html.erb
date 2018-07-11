@@ -1,0 +1,97 @@
+<% title @event.name %>
+
+<%
+    points = @event.user_applies
+            .joins(:custom_points)
+            .group_by  {|h| h.id}
+            .map{|k,v| [k,v.map{ |m| m.custom_points.map{ |c| c.total_points }.sum }.sum] }
+
+    points = points + @event.matches
+            .group_by  {|h| h.user_apply_id}
+            .map{|k,v| [k,v.map{ |m| m.points }.sum] }
+
+    results = points.group_by  {|h| h[0]}
+                    .map{|k,v| [k,v.map{ |m| m[1] }.sum] }
+                    .sort{|x,y| y[1] <=> x[1]}
+    p results 
+    users = results.map{ |k| k[0]}
+    p users 
+
+%>
+
+<div class="col-sm-12 col-md-12  zone-podium">
+  <div class="competition-podium well">
+  <%
+      totaux = results.map{ |k| k[0]}
+  %>
+    <div class="podium-block bronze">
+      <% if totaux.size >= 3 %>
+        <% apply =  @event.user_applies.find(totaux[2])  %>
+      <div class="name"><i class="fa fa-trophy fa-2x" style="color: #cd7f32"></i><%= apply.name %></div>
+      <% end %>
+      <div class="podium" style="height:62px"><span>3<sup>ème</sup></span></div>
+    </div>
+    <div class="podium-block gold">	
+      <% if totaux.size >= 1 %>
+        <% apply =  @event.user_applies.find(totaux[0])  %>
+      <div class="name"><i class="fa fa-trophy fa-2x" style="color: gold"></i><%= apply.name %></div>
+      <% end %>
+      <div class="podium" style="height:165px"><span>1<sup>er</sup></span></div>
+    </div>
+    <div class="podium-block silver">	
+      <% if totaux.size >= 2 %>
+        <% apply =  @event.user_applies.find(totaux[1])  %>
+      <div class="name"><i class="fa fa-trophy fa-2x" style="color: silver"></i><%= apply.name %></div>
+      <% end %>
+      <div class="podium" style="height:106px"><span>2<sup>ème</sup></span></div>
+    </div>
+  </div>
+</div>
+
+<table class="list-user-points col-md-12 col-sm-12">
+	<thead>
+		<tr>
+			<th><%= t('tournament.user_apply.name') %></th>
+        <th><%= t('tournament.custom_point.name') %></th>
+			<% @event.rounds.each do |round| %>
+				<th><%= t('tournament.round.name') %> <%= round.position %></th>
+			<% end %>
+			<th><%= t('tournament.event.total') %></th>
+		</tr>
+	</thead>
+	<tbody>
+		<% users.each do |user| %>
+    <%
+      apply = @event.user_applies.find_by({:id => user})
+    %>
+		<tr>
+			<td><%= apply.name %></td>
+      <%
+        custom_point = @event.custom_points.find_by({ :user_apply_id => apply.id })
+        pwl_points = 0
+        pwl_points = custom_point.total_points unless custom_point.nil?
+      %>
+			<td><%= pwl_points %></td>
+			<% @event.rounds.each do |round| %>
+        <%
+          match = round.matches.find_by({ :user_apply_id => apply.id })
+          points = 0
+          unless match.nil?
+            points = match.points
+          end
+        %>
+      <td><%= points %></td>
+			<% end %>
+      <%
+        total = 0
+        total = @event.matches
+                      .where({ :user_apply_id => apply.id })
+                      .map(&:points)
+                      .sum
+      %>
+      <td><%= total + pwl_points %></td>
+		</tr>
+		<% end %>
+	</tbody>
+</table>
+

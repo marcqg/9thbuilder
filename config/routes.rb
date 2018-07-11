@@ -150,6 +150,7 @@ Rails.application.routes.draw do
         resources :user_applies,                  only: [:new, :edit, :create, :update, :destroy]
         resources :rounds,                        only: [:show, :create]
         resources :custom_points,                 only: [:index, :update]
+        resources :exports,                       only: [:index]
 
         scope '/round-:round_id' do
           resources :matches,                     only: [:update]

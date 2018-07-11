@@ -1,6 +1,9 @@
 @import "common/reset";
 @import "bootstrap-sprockets";
 @import "bootstrap";
+@import "font-awesome";
+
+@import "tournament/podium";
 
 @font-face {
   font-family: "godofwarregular";
@@ -534,4 +537,45 @@ a {
 
 .text-bold {
   font-weight: bold;
+}
+
+table.list-user-points, table.list-user-custom-points, table.list-user-total-points {
+  width: 100%;
+  clear: both;
+
+  thead {
+    background-color: #56251a;
+    color: white;
+    font-weight: bold;
+
+    th {
+      text-align: center;
+      padding: 2px 5px;
+
+      a{
+        color: white;
+        font-weight: bold;
+      }
+    }
+  }
+
+  tbody {
+    background-color: white;
+
+    tr {
+      border-bottom: 1px solid #56251a;
+    }
+
+    td {
+      padding: 2px 5px;
+
+      &:not(:first-child) {
+        text-align: center;
+      }
+
+      i {
+        color: #56251a;
+      }
+    }
+  }
 }
