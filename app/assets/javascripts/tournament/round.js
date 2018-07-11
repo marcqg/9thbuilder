@@ -34,6 +34,7 @@ jQuery(document).ready(function() {
         scope: "items",
         helper: function(evt) {
           var that = $(this).clone().get(0);
+          $(that).find('.old-matches').hide();
           $(this).hide();
           return that;
         },
