@@ -65,7 +65,7 @@ class Builder::ArmyList < ApplicationRecord
                             .organisations
                             .where.not(:id => army_list_unit.unit.organisation_ids)
 
-        ogrs.each do |mount_organisation|
+        orgs.each do |mount_organisation|
           organisation_rate = self.army_list_organisations.find_or_create_by({organisation_id: mount_organisation.id, army_list_id: self.id})
 
           unless mount_option.mount_and_carac_points
