@@ -133,6 +133,7 @@ module Builder
       @army_list.army_organisation_id = @base_army_list.army_organisation_id
       @army_list.name = "#{@base_army_list.name} copy"
       @army_list.notes = @base_army_list.notes
+      @army_list.max = @base_army_list.max
       @army_list.save
 
       @base_army_list.army_list_units.each do |base_army_list_unit|
