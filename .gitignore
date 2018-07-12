@@ -25,3 +25,5 @@ build/
 /public/assets
 /bin/wkhtmltopdf
 /vendor/bundle
+
+Gemfile.lock
