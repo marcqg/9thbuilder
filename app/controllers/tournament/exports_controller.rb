@@ -3,7 +3,7 @@ module Tournament
   
     # GET /trounaments/1/results
     def index
-        @event = Tournament::Event.find(params[:event_id])
+        @event = Tournament::Event.find_by_uuid!(params[:event_id])
 
         respond_to do |format|
           format.html { render template: "tournament/exports/index.html.erb", layout: 'pdf_event.html.erb' }

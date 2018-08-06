@@ -1,8 +1,8 @@
 module Tournament
   class EventsController < ApplicationController
     before_action :authenticate_user!
+    before_action :authenticate_organisation_user!
     before_action :set_event, only: [:show, :edit, :update, :destroy]
-    before_action :authenticate_organisation_user!, only: [:new, :create, :edit, :update, :destroy]
 
     # GET /tournament/events
     # GET /tournament/events.json
@@ -70,12 +70,12 @@ module Tournament
 
       # Use callbacks to share common setup or constraints between actions.
       def set_event
-        @event = current_user.events.find(params[:id])
+        @event = current_user.events.find_by_uuid!(params[:uuid])
       end
 
       # Never trust parameters from the scary internet, only allow the white list through.
       def tournament_params
-        params.require(:tournament_event).permit(:name, :address, :latitude, :longitude, :start_date, :end_date, :fees, :version_id, :rounds, :user_max)
+        params.require(:tournament_event).permit(:name, :address, :latitude, :longitude, :start_date, :end_date, :fees, :version_id, :rounds, :user_max, :team_max, :participation)
       end
   end
 end

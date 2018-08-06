@@ -87,7 +87,8 @@ en:
           S: Standard Bearer
           C: Champion
           MagicBanner: Banner Enchantment
-
+      'tournament/event':
+        participation: Participation
 
   ninth_age:
     unit:
@@ -98,6 +99,11 @@ en:
       offensive: Offensive
     figurine:
       pts: pts
+  tournament:
+    event:
+      participation:
+        individual: Individual
+        team: Team
 
   menu:
     label: "Main menu"
@@ -427,6 +433,7 @@ en:
       HundredHundred: "100x100mm"
       HundredFifty: "100x50mm"
       TwentyFiveRound: "25mm round"
+      SeventyFiveHundred: "75x100mm"
     mount: Mount
     limit: 
       single: single model

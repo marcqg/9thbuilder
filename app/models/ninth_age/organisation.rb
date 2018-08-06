@@ -4,7 +4,7 @@ class NinthAge::Organisation < ApplicationRecord
 
   belongs_to :army, class_name: "NinthAge::Army"
 
-  has_and_belongs_to_many  :units, class_name: "NinthAge::Unit"
+  has_and_belongs_to_many  :units, -> { includes(:translations).order(:position) }, class_name: "NinthAge::Unit"
 
   has_many :organisation_groups, class_name: "NinthAge::OrganisationGroup"
 

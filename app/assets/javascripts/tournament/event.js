@@ -47,4 +47,9 @@ jQuery(document).ready(function() {
 	$('.show-tournament .competition-container .name').delay(1000).animate({
 		"opacity": "1"
 	}, 500);
+
+
+	$('.input-team-max select').change(function(e){
+
+	});
 });

@@ -137,7 +137,7 @@ Rails.application.routes.draw do
     end
 
     namespace :tournament do
-      resources :events
+      resources :events, param: :uuid
       resources :organisations,                   only: [:index]
       
 
