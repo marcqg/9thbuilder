@@ -27,3 +27,4 @@ build/
 /vendor/bundle
 
 Gemfile.lock
+.rbenv-vars

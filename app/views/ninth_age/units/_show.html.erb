@@ -335,6 +335,10 @@
           <h4><%= t('army_list_unit.show.unit_options') %></h4>
           <%= render :partial => 'ninth_age/unit_options/show', :locals => {:unit_options => unit.unit_options.only_parents, :access_admin => access_admin} %>
       <% end %>
+      <% unless unit.unit_options.only_command_groups.empty? %>
+          <h4><%= t('army_list_unit.show.command_group_unit_options') %></h4>
+          <%= render :partial => 'ninth_age/unit_options/show', :locals => {:unit_options => unit.unit_options.only_command_groups, :access_admin => access_admin} %>
+      <% end %>
       <% unless unit.unit_options.only_mounts.empty? %>
           <h4><%= t('army_list_unit.show.mount_unit_options') %></h4>
           <%= render :partial => 'ninth_age/unit_options/show', :locals => {:unit_options => unit.unit_options.only_mounts, :access_admin => access_admin} %>

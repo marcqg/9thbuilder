@@ -30,7 +30,7 @@ end
 				<p>
 					<%= value_points army_list_unit.value_points %> - <%= "#{army_list_unit.size}x" if army_list_unit.size > 1 %> <strong><%= army_list_unit.unit.name %></strong>
 					<% unless army_list_unit.unit_options.where(:category => :General).empty? %>
-						, <%= t 'army_list.export.txt.general' %>
+						, <%= t "activerecord.attributes.ninth_age_unit_option.category.General" %>
 					<% end %>
 					<% unless army_list_unit.extra_items.empty? %>
 						, <%= army_list_unit.extra_items.map(&:name).join(', ') %>
@@ -41,20 +41,24 @@ end
 					<% unless army_list_unit.magic_items.empty? %>
 						, <%= army_list_unit.magic_items.map(&:name).join(', ') %>
 					<% end %>
-					<% unless army_list_unit.unit_options.where.not(:category => [:M, :S, :C, :MagicOrLine, :General]).where(:domain_magic_id => nil).where(:mount_id => nil).empty? %>
-						, <%= clean_description(army_list_unit.unit_options.where.not(:category => [:M, :S, :C, :MagicOrLine, :General]).where(:domain_magic_id => nil).where(:mount_id => nil).map(&:name).join(', ')) %>
+					<% unless army_list_unit.unit_options.where.not(:category => [:BSB, :M, :S, :C, :MagicLvl, :General]).where(:domain_magic_id => nil).where(:mount_id => nil).empty? %>
+						, <%= clean_description(army_list_unit.unit_options.where.not(:category => [:BSB, :M, :S, :C, :MagicLvl, :General])
+																			.where(:domain_magic_id => nil)
+																			.where(:mount_id => nil)
+																			.map(&:name)
+																			.join(', ')) %>
 					<% end %>
-					<% unless army_list_unit.unit_options.where(:category => :MagicOrLine).empty? %>
-						, <%= army_list_unit.unit_options.where(:category => :MagicOrLine).map(&:name).join(', ') %>
+					<% unless army_list_unit.unit_options.where(:category => :MagicLvl).empty? %>
+						, <%= army_list_unit.unit_options.where(:category => :MagicLvl).map(&:name).join(', ') %>
 					<% end %>
 					<% unless army_list_unit.unit_options.where.not(:domain_magic_id => nil).map(&:domain_magic).empty? %>
 						, <%= army_list_unit.unit_options.where.not(:domain_magic_id => nil).map(&:domain_magic).map(&:name).join(', ') %>
 					<% end %>
-					<% unless army_list_unit.unit_options.where(:category => [:M, :S, :C]).empty? %>
-						, <%= army_list_unit.unit_options.where(:category => [:M, :S, :C])
+					<% unless army_list_unit.unit_options.where(:category => [:BSB, :M, :S, :C]).empty? %>
+						, <%= army_list_unit.unit_options.where(:category => [:BSB, :M, :S, :C])
 															.map(&:category)
 															.map{|c| c.to_s }
-															.map{|c| I18n.t("unit_options.category.#{c}", default: c.titleize) }
+															.map{|c| I18n.t("activerecord.attributes.ninth_age_unit_option.category.#{c}", default: c.titleize) }
 															.join(', ') %>
 					<% end %>
 					<% unless army_list_unit.magic_standards.empty? %>

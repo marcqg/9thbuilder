@@ -42,13 +42,14 @@ class NinthAge::UnitOption < ApplicationRecord
 
   acts_as_list scope: 'unit_id = #{unit_id} AND COALESCE(parent_id, \'\') = \'#{parent_id}\''
 
-  scope :only_parents, -> { where(parent_id: nil).where.not(:category => [:ExtraSpells, :MagicLvl, :MagicPath, :Mount]) }
-  scope :only_magics, -> { where(parent_id: nil).where(:category => [:ExtraSpells, :MagicOrLine, :MagicPath]) }
+  scope :only_parents, -> { where(parent_id: nil).where.not(:category => [:ExtraSpells, :MagicLvl, :MagicPath, :Mount, :M, :S, :C]) }
+  scope :only_magics, -> { where(parent_id: nil).where(:category => [:ExtraSpells, :MagicLvl, :MagicPath]) }
   scope :without_parent, -> { where(parent_id: nil) }
   scope :exclude_magics_and_extra, -> { where.not(:category => [:ArmyAttribut]) }
   scope :only_magic_items, -> { where(:category => [:MagicEquipment]) }
   scope :only_magic_standards, -> { where(:category => [:MagicBanner, :BSB]) }
   scope :only_extra_items, -> { where(:category => [:ArmyAttribut]) }
+  scope :only_command_groups, -> { where(:category => [:M, :S, :C]) }
   scope :only_mounts, -> { where(:category => :Mount) }
 
   attr_accessor :army_filter
@@ -62,12 +63,12 @@ class NinthAge::UnitOption < ApplicationRecord
   end
 
   def display_name 
-    return case self.category 
+    return case self.category.to_sym
     when :General, :BSB, :M, :S, :C, :MagicBanner
-      I18n.t("unit_options.category.display.#{category}", default: category.titleize)
+      I18n.t("activerecord.attributes.ninth_age_unit_option.category.#{category}", default: category.titleize)
     when :MagicEquipment
       if name.nil?
-        I18n.t("unit_options.category.display.#{category}", default: category.titleize)
+        I18n.t("activerecord.attributes.ninth_age_unit_option.category.#{category}", default: category.titleize)
       else 
         name
       end

@@ -74,7 +74,7 @@ en:
       'ninth_age_unit_option':
         category:
           Generic: Generic
-          General: is General
+          General: Is the General
           BSB: Battle Standard Bearer
           ArmyAttribut: Extra items
           ExtraSpells: Spells
@@ -242,8 +242,9 @@ en:
         type: "Troop's type"
       magic_items: "Magic items"
       magic_standards: "Magic banners"
-      unit_options: "Options"
       magic_unit_options: "Magic Options"
+      unit_options: "Options"
+      command_group_unit_options: Command Group Options
       mount_unit_options: "Mount Options"
       equipments: "Equipments"
       special_rules: "Special rules"

@@ -22,7 +22,6 @@ class ConvertOptionToCategoryOption < ActiveRecord::Migration[5.0]
 
     remove_column :ninth_age_unit_option_translations, :name_upgrade
 
-    NinthAge::UnitOption.where(:category => [1, 2, 5, 9, 10, 11, 12, 13]).update_all(:name => :nil)
 
     ActiveRecord::Base.connection.execute("UPDATE ninth_age_unit_option_translations uot
                                             INNER join ninth_age_unit_options uo on uo.id = uot.ninth_age_unit_option_id
@@ -31,5 +30,22 @@ class ConvertOptionToCategoryOption < ActiveRecord::Migration[5.0]
 
     ActiveRecord::Base.connection.execute("DELETE FROM ninth_age_unit_option_translations
                                           WHERE name IS NULL AND description IS NULL and infos IS NULL;")
+
+    ActiveRecord::Base.connection.execute("UPDATE ninth_age_unit_options
+                                            SET parent_id = null
+                                            WHERE category in (10, 11, 12);")
+
+    NinthAge::UnitOption.joins(:translations)
+                        .where(:name => 'May upgrade one model to each of the following')
+                        .each do |option|
+      if option.children.size > 0
+        next 
+      end
+      
+      option.delete
+    end
+                                          
+                                         
+                                          
   end
 end

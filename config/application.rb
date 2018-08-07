@@ -6,6 +6,10 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
+Raven.configure do |config|
+  config.dsn = ENV['SENTRY_DSN']
+end
+
 module NineThBuilder
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.

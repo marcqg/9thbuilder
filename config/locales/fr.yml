@@ -56,7 +56,7 @@ fr:
         carac_str: Fo
         carac_ap: PA
         carac_agi: Agi
-      'ninth_age/unit_option':
+      'ninth_age_unit_option':
         category:
           NoUse: Generic
           General: is Général
