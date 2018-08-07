@@ -56,6 +56,23 @@ fr:
         carac_str: Fo
         carac_ap: PA
         carac_agi: Agi
+      'ninth_age/unit_option':
+        category:
+          NoUse: Generic
+          General: is Général
+          BSB: Porteur de la grande bannière
+          Marks: Marks
+          Spells: Sorts
+          Mount: Monture
+          Equipment: Equipment
+          MagicEquipment: Équipement spécial
+          MagicOrLine: MagicOrLine
+          MagicPath: Domaine de magie
+          M: Musicien
+          S: Porte-étendard
+          C: Champion
+          MagicBanner: Enchantement d’étendard
+          ArmyAttribut: Extra items
 
   menu:
     label: "Menu principal"

@@ -6,7 +6,7 @@ class NinthAge::UnitOption < ApplicationRecord
   delegate :army, :to => :unit, :allow_nil => true
 
   belongs_to :parent, class_name: 'NinthAge::UnitOption'
-  has_many :children, -> { order 'position' }, class_name: 'NinthAge::UnitOption', foreign_key: 'parent_id', dependent: :nullify
+  has_many :children, -> { order :position }, class_name: 'NinthAge::UnitOption', foreign_key: 'parent_id', dependent: :nullify
   belongs_to :unit_option_activator, class_name: 'NinthAge::UnitOption'
   has_many :unit_option_activated, -> { order 'position' }, class_name: 'NinthAge::UnitOption', foreign_key: 'unit_option_activator_id', dependent: :nullify
   belongs_to :unit_link, class_name: 'NinthAge::Unit'
@@ -19,9 +19,9 @@ class NinthAge::UnitOption < ApplicationRecord
   
   has_and_belongs_to_many :extra_item_categories, class_name: "NinthAge::ExtraItemCategory"
 
-  enum category: { NoUse: 0, General: 1, BSB: 2, Marks: 3, Spells: 4, Mount: 5, Equipment: 6, MagicEquipment: 7, MagicOrLine: 8, MagicPath: 9, M: 10, S: 11, C: 12, MagicBanner: 13 }
+  enum category: { Generic: 0, General: 1, BSB: 2, ArmyAttribut: 3, ExtraSpells: 4, Mount: 5, Equipment: 6, MagicEquipment: 7, MagicLvl: 8, MagicPath: 9, M: 10, S: 11, C: 12, MagicBanner: 13 }
 
-  translates :name, :description, :infos, :name_upgrade
+  translates :name, :description, :infos
   globalize_accessors
   accepts_nested_attributes_for :translations, allow_destroy: true
 
@@ -34,35 +34,50 @@ class NinthAge::UnitOption < ApplicationRecord
   validates :position, numericality: { greater_than: 0, only_integer: true, allow_nil: false }
   validates :is_per_model, inclusion: { in: [true, false] }
   validates :is_multiple, inclusion: { in: [true, false] }
-  validates :is_magic_items, inclusion: { in: [true, false] }
-  validates :is_magic_standards, inclusion: { in: [true, false] }
-  validates :is_extra_items, inclusion: { in: [true, false] }
   validates :is_unique_choice, inclusion: { in: [true, false] }
   validates :is_required, inclusion: { in: [true, false] }
-  validates :is_magic, inclusion: { in: [true, false] }
   validates :mount_and_carac_points, inclusion: { in: [true, false] }
-  validates :domain_magic, presence: true, if: ->(unit_option){unit_option.is_magic?}
-  validates :banner_limit, numericality: { greater_than_or_equal_to: 0, allow_nil: false }, if: ->(unit_option){unit_option.is_magic_standards?}
+  validates :domain_magic, presence: true, if: ->(unit_option){unit_option.MagicPath?}
+  validates :banner_limit, numericality: { greater_than_or_equal_to: 0, allow_nil: false }, if: ->(unit_option){unit_option.BSB? || unit_option.MagicBanner?}
 
   acts_as_list scope: 'unit_id = #{unit_id} AND COALESCE(parent_id, \'\') = \'#{parent_id}\''
 
-  scope :only_parents, -> { where(parent_id: nil).where.not(:category => [:Spells, :MagicOrLine, :MagicPath, :Mount]) }
-  scope :only_magics, -> { where(parent_id: nil).where(:category => [:Spells, :MagicOrLine, :MagicPath]) }
+  scope :only_parents, -> { where(parent_id: nil).where.not(:category => [:ExtraSpells, :MagicLvl, :MagicPath, :Mount]) }
+  scope :only_magics, -> { where(parent_id: nil).where(:category => [:ExtraSpells, :MagicOrLine, :MagicPath]) }
   scope :without_parent, -> { where(parent_id: nil) }
-  #scope :exclude_magics_and_extra, -> { where(is_magic_items: false, is_magic_standards: false, is_extra_items: false) }
-  scope :exclude_magics_and_extra, -> { where(is_magic_standards: false) }
-  scope :only_magic_items, -> { where(is_magic_items: true, is_magic_standards: false) }
-  scope :only_magic_standards, -> { where(is_magic_items: false, is_magic_standards: true, is_extra_items: false) }
-  scope :only_extra_items, -> { where(is_magic_items: false, is_magic_standards: false, is_extra_items: true) }
+  scope :exclude_magics_and_extra, -> { where.not(:category => [:ArmyAttribut]) }
+  scope :only_magic_items, -> { where(:category => [:MagicEquipment]) }
+  scope :only_magic_standards, -> { where(:category => [:MagicBanner, :BSB]) }
+  scope :only_extra_items, -> { where(:category => [:ArmyAttribut]) }
   scope :only_mounts, -> { where(:category => :Mount) }
 
   attr_accessor :army_filter
 
   def is_magics_or_extra
-    return is_magic_items || (is_magic_standards && value_points < 1) || is_extra_items
+    return self.MagicEquipment? || ((self.BSB? || self.MagicBanner?) && value_points < 1) || self.ArmyAttribut?
   end
 
   def army_filter
     @army_filter ||= unit.try(:army).try(:id)
   end
+
+  def display_name 
+    return case self.category 
+    when :General, :BSB, :M, :S, :C, :MagicBanner
+      I18n.t("unit_options.category.display.#{category}", default: category.titleize)
+    when :MagicEquipment
+      if name.nil?
+        I18n.t("unit_options.category.display.#{category}", default: category.titleize)
+      else 
+        name
+      end
+    when :MagicPath
+      self.domain_magic.name
+    when :Mount
+      self.mount.name
+    else
+      self.name
+    end
+  end
+  
 end

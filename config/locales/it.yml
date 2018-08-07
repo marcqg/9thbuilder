@@ -65,6 +65,23 @@ it:
         carac_str: For
         carac_ap: Pen
         carac_agi: Agi
+      'ninth_age/unit_option':
+        category:
+          NoUse: Generic
+          General: is Général
+          BSB: Alfiere da battaglia
+          Marks: Marks
+          Spells: Sorts
+          Mount: Mount
+          Equipment: Equipaggiamento
+          MagicEquipment: Equipaggiamento speciale
+          MagicOrLine: MagicOrLine
+          MagicPath: Magic path
+          M: Musico
+          S: Alfiere
+          C: Campione
+          MagicBanner: Pu prendere a Incanto di stendardo
+          ArmyAttribut: Extra items
 
   ninth_age:
     unit:

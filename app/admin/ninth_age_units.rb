@@ -296,15 +296,13 @@ ActiveAdmin.register NinthAge::Unit do
         table_for model.unit_options.order(:parent_id, position: :asc) do
           column :id
           column :parent_id
-          column :name
+          column :display_name
+          column :category
           column :value_points
           column :is_per_model
           column :is_magic_items
-          column :is_magic_standards
-          column :is_extra_items
           column :is_unique_choice
           column :is_multiple
-          column :is_magic
           column :domain_magic
           column :mount
           column :position

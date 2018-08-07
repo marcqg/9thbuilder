@@ -71,6 +71,23 @@ en:
         carac_str: Str
         carac_ap: Ap
         carac_agi: Agi
+      'ninth_age_unit_option':
+        category:
+          Generic: Generic
+          General: is General
+          BSB: Battle Standard Bearer
+          ArmyAttribut: Extra items
+          ExtraSpells: Spells
+          Mount: Mount
+          Equipment: Equipment
+          MagicEquipment: Special Equipment
+          MagicLvl: Magic LVL
+          MagicPath: Magic Path
+          M: Musician
+          S: Standard Bearer
+          C: Champion
+          MagicBanner: Banner Enchantment
+
 
   ninth_age:
     unit:

@@ -1,9 +1,9 @@
 <ul  class="option-children children-sub <% if unit_options.all? {|option| !option.domain_magic_id.nil?} %> list-inline text-center <% end %>">
   <% unit_options.order(:position).each do |unit_option| %>
-    <% unless unit_option.domain_magic_id.nil? %>
+    <% unless unit_option.MagicPath? %>
       <li>
         <%= image_tag unit_option.domain_magic.logo.url(:thumb), alt: unit_option.domain_magic.name, height: 50,class: 'block-center' %>
-        <p><%= unit_option.domain_magic.name %>
+        <p><%= unit_option.display_name %>
         <% if access_admin %>
             <%= link_to(admin_ninth_age_unit_option_path(unit_option.id), {:target => "_blank"}) do %>
               <i class="fa fa-pencil-square-o"></i>
@@ -11,7 +11,7 @@
         <% end %></p>
       </li>
     <% else %>
-      <li><%= unit_option.name %>
+      <li><%= unit_option.display_name %>
         <% if access_admin %>
             <%= link_to(admin_ninth_age_unit_option_path(unit_option.id), {:target => "_blank"}) do %>
               <i class="fa fa-pencil-square-o"></i>
