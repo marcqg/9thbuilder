@@ -20,6 +20,7 @@ module Builder
       @army_list_unit = @army_list.army_list_units.includes({army_list_unit_troops: [:troop]}).find(params[:id])
 
       @available_unit_options = @army_list_unit.unit.unit_options.only_parents
+      @available_command_group_unit_options = @army_list_unit.unit.unit_options.only_command_groups
       @available_mount_unit_options = @army_list_unit.unit.unit_options.only_mounts
       @available_magic_unit_options = @army_list_unit.unit.unit_options.only_magics
       
@@ -119,8 +120,9 @@ module Builder
           format.xml { head :ok }
         else
           @available_unit_options = @army_list_unit.unit.unit_options.only_parents.exclude_magics_and_extra
-          @available_mount_unit_options = @army_list_unit.unit.unit_options.only_mounts
           @available_magic_unit_options = @army_list_unit.unit.unit_options.only_magics
+          @available_command_group_unit_options = @army_list_unit.unit.unit_options.only_command_groups
+          @available_mount_unit_options = @army_list_unit.unit.unit_options.only_mounts
 
           option_magic_items = @army_list_unit.unit.unit_options.only_magic_items
           magic_item = 0

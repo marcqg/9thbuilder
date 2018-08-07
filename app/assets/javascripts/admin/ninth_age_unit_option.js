@@ -55,6 +55,8 @@ jQuery(function($) {
 
             case 'MagicPath':
                 $("#ninth_age_unit_option_domain_magic_input").show();
+                $("#ninth_age_unit_option_is_unique_choice_input").show();
+                $("#ninth_age_unit_option_is_unique_choice_input").prop('checked', true);
                 break;
 
             case 'Mount':

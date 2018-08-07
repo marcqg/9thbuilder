@@ -27,7 +27,7 @@
 
     <div id="army_list_unit_all_options">
 
-    <% if @available_unit_options.any? or @available_mount_unit_options.any? %>
+    <% if @available_unit_options.any? or @available_command_group_unit_options.any? or @available_mount_unit_options.any? %>
       <div id="army_list_unit_unit_options" class="col-sm-12 col-md-6 army_list_unit_add_element" style="padding: 0 !important;">
         <h3><%=t 'army_list_unit.show.unit_options' %><br /><span class="points"><%= value_points(@army_list_unit.unit_options_value_points) %></span> pts</h3>
         <ul class="">
@@ -36,6 +36,10 @@
           <% if @available_magic_unit_options.any? %>
             <li><h4><%=t 'army_list_unit.show.magic_unit_options' %></h4></li>
             <%= render :partial => 'builder/army_list_units_unit_options/edit', :collection => @available_magic_unit_options.all, :as => :option, :locals => { :army_list_unit => @army_list_unit } %>
+          <% end %>
+          <% if @available_command_group_unit_options.any? %>
+            <li><h4><%=t 'army_list_unit.show.command_group_unit_options' %></h4></li>
+            <%= render :partial => 'builder/army_list_units_unit_options/edit', :collection => @available_command_group_unit_options.all, :as => :option, :locals => { :army_list_unit => @army_list_unit } %>
           <% end %>
           <% if @available_mount_unit_options.any? %>
             <li><h4><%=t 'army_list_unit.show.mount_unit_options' %></h4></li>
