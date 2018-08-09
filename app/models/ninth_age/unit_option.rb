@@ -37,6 +37,7 @@ class NinthAge::UnitOption < ApplicationRecord
   validates :is_unique_choice, inclusion: { in: [true, false] }
   validates :is_required, inclusion: { in: [true, false] }
   validates :mount_and_carac_points, inclusion: { in: [true, false] }
+  validates :mount, presence: true, if: ->(unit_option){unit_option.Mount?}
   validates :domain_magic, presence: true, if: ->(unit_option){unit_option.MagicPath?}
   validates :banner_limit, numericality: { greater_than_or_equal_to: 0, allow_nil: false }, if: ->(unit_option){unit_option.BSB? || unit_option.MagicBanner?}
 
