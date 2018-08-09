@@ -20,7 +20,7 @@
   all_magics = option.children.all? {|option| !option.domain_magic_id.nil?}
 %>
 <li>
-  <% if option.value_points.nil? || option.MagicEquipment? || option.BSB? || option.MagicBanner? %>    
+  <% if option.value_points.nil? || option.MagicEquipment? || option.MagicBanner? %>    
     
     <%= content_tag(:strong, {:class => ("disable" if disable), 'data-extra-item': option.extra_item_id, "data-unit-option-activator" => option.unit_option_activator_id, 'data-is-magic-item' => option.MagicEquipment?, 'data-is-extra-item' => option.ArmyAttribut?, 'data-value-points' => option.value_points }) do %>
       <%= option.display_name %>

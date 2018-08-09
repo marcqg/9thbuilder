@@ -49,7 +49,7 @@ ActiveAdmin.register NinthAge::Unit do
   end
 
   action_item :new_troop, only: :show do
-    link_to 'New Troop', new_admin_ninth_age_troop_path('ninth_age_troop[unit_id]' => ninth_age_unit.id), :target => "_blank"
+    link_to 'New Troop', new_admin_ninth_age_troop_path({'ninth_age_troop[unit_id]' => ninth_age_unit.id, 'ninth_age_troop[position]' => ninth_age_unit.troops.size + 1}), :target => "_blank"
   end
 
   action_item :new_organisation_change, only: :show do
@@ -57,7 +57,7 @@ ActiveAdmin.register NinthAge::Unit do
   end
 
   action_item :new_unit_option, only: :show do
-    link_to 'New Unit Option', new_admin_ninth_age_unit_option_path('ninth_age_unit_option[unit_id]' => ninth_age_unit.id), :target => "_blank"
+    link_to 'New Unit Option', new_admin_ninth_age_unit_option_path({'ninth_age_unit_option[unit_id]' => ninth_age_unit.id, 'ninth_age_unit_option[position]' => ninth_age_unit.unit_options.size + 1}), :target => "_blank"
   end
 
   action_item :new_equipment, only: :show do
