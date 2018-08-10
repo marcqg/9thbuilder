@@ -57,6 +57,7 @@ jQuery(function($) {
                 $("#ninth_age_unit_option_domain_magic_input").show();
                 $("#ninth_age_unit_option_is_unique_choice_input").show();
                 $("#ninth_age_unit_option_is_unique_choice_input").prop('checked', true);
+                $("#ninth_age_unit_option_value_points_input input").val(0);
                 break;
 
             case 'Mount':

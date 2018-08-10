@@ -27,6 +27,42 @@ es:
   next: "Siguiente"
   per_model: "/mini."
 
+  activerecord:
+    attributes:
+      'ninth_age/unit':
+        carac_ground_adv: Av
+        carac_ground_mar: Mar
+        carac_fly_adv: Vuelo adv
+        carac_fly_mar: Vuelo mar
+        carac_dis: Dis
+        carac_evoked: Rea
+        carac_hp: PV
+        carac_def: Def
+        carac_res: Res
+        carac_arm: Arm
+      'ninth_age/troop':
+        carac_att: At
+        carac_of: 'Of'
+        carac_str: Fu
+        carac_ap: PA
+        carac_agi: Agi
+      'ninth_age_unit_option':
+        category:
+          Generic: Generic
+          General: Es el General
+          BSB: PortaEstandarte  de  Batalla
+          ArmyAttribut: Extra items
+          ExtraSpells: Spells
+          Mount: Mount
+          Equipment: Equipment
+          MagicEquipment: Equipo especial
+          MagicLvl: Magic LVL
+          MagicPath: Magic Path
+          M: Músico
+          S: Portaestandarte
+          C: Campeón
+          MagicBanner: Estandarte Encantamiento
+
   menu:
     label: "Menú principal"
     army_lists: "Mis listas de ejército"
@@ -221,6 +257,24 @@ es:
     index:
       title: Equipo
       show: Mostrar
+
+  unit:
+    type:
+      label: Tipo
+    size:
+      label: Tamaño
+      Standard: "Estandar"
+      Large: "Ampla"
+      Gigantic: "Grande"
+    mount: Montura
+    limit: 
+      single: Miniatura Individual
+      unit: "Unidades por Ejército"
+      army: "Modelos/Ejército"
+    show:
+      add_model: " + <strong>%{pts}</strong> pts/elo extra"
+      size: "<strong>%{min_size}-%{max_size}</strong> modelos"
+    
 
   signin:
     title: "Registrarte"

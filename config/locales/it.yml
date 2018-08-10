@@ -341,7 +341,7 @@ it:
       army: "Modelli/Esercito"
     show:
       add_model: " + <strong>%{pts}</strong> pti/modello extra"
-      size: "<strong>%{min_size}</strong>, può aggiungere fino a <strong>%{max_size}</strong> modelli"
+      size: "<strong>%{min_size}-%{max_size}</strong> modelli"
       change: Le unità %{name} di %{number} contano a %{new_name}
   signin:
     title: registrati
