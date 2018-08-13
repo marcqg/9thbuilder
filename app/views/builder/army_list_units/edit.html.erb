@@ -35,7 +35,18 @@
           <%= render :partial => 'builder/army_list_units_unit_options/edit', :collection => @available_unit_options.all, :as => :option, :locals => { :army_list_unit => @army_list_unit } %>
           <% if @available_magic_unit_options.any? %>
             <li><h4><%=t 'army_list_unit.show.magic_unit_options' %></h4></li>
-            <%= render :partial => 'builder/army_list_units_unit_options/edit', :collection => @available_magic_unit_options.all, :as => :option, :locals => { :army_list_unit => @army_list_unit } %>
+            <% if @available_magic_unit_options.only_magic_lvls.size > 0 %>
+              <li><%= t('army_list_unit.show.magic_lvl_unit_options') %></li>
+              <%= content_tag(:ul, {:class => "", "data-one-choise" => true}) do %>
+                <%= render :partial => 'builder/army_list_units_unit_options/edit', :collection => @available_magic_unit_options.only_magic_lvls, :as => :option, :locals => { :army_list_unit => @army_list_unit } %>
+              <% end %>
+            <% end %>
+            <% if @available_magic_unit_options.only_paths.size > 0 %>
+              <li><%= t('army_list_unit.show.path_unit_options') %></li>
+              <%= content_tag(:ul, {:class => "option-children children-sub list-inline text-center", "data-one-choise" => true}) do %>
+                <%= render :partial => 'builder/army_list_units_unit_options/edit', :collection => @available_magic_unit_options.only_paths, :as => :option, :locals => { :army_list_unit => @army_list_unit } %>
+              <% end %>
+            <% end %>
           <% end %>
           <% if @available_command_group_unit_options.any? %>
             <li><h4><%=t 'army_list_unit.show.command_group_unit_options' %></h4></li>

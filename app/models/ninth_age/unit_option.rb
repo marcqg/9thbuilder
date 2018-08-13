@@ -52,6 +52,8 @@ class NinthAge::UnitOption < ApplicationRecord
   scope :only_extra_items, -> { where(:category => [:ArmyAttribut]) }
   scope :only_command_groups, -> { where(:category => [:M, :S, :C]) }
   scope :only_mounts, -> { where(:category => :Mount) }
+  scope :only_magic_lvls, -> { where(:category => :MagicLvl) }
+  scope :only_paths, -> { where(:category => :MagicPath) }
 
   attr_accessor :army_filter
 

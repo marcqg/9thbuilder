@@ -33,7 +33,7 @@
   <% else %>
     
     <%= hidden_field_tag "builder_army_list_unit[army_list_unit_unit_options_attributes][#{option.id}][_destroy]", 1 %>
-    <em><%= content_tag(:span, value_points(value_points), { 'data-value-points' => value_points(value_points)}) %> pts</em>
+    <%= content_tag(:em, { :style => ("display:none;" if value_points.nil? or value_points < 1) }) do %><%= content_tag(:span, value_points(value_points), { 'data-value-points' => value_points(value_points)}) %> pts<%end%>
     <%= content_tag(:label, {:class => ("disable" if disable), 'data-extra-item': option.extra_item_id, "data-unit-option-activator" => option.unit_option_activator_id, 'data-value-points' => option.value_points}) do %>
 
       <% if option.MagicPath? %>

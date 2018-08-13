@@ -197,6 +197,9 @@ it:
         type: Tipo di truppa
       magic_items: Articoli magici
       magic_standards: Standard magici
+      magic_unit_options: "Opzioni magiche"
+      magic_lvl_unit_options: "Può diventare (una sola scelta)"
+      path_unit_options: "Deve generare incantesimi da (sceglierne uno)"
       unit_options: Opzioni
       equipments: apparecchiature
       special_rules: Regole speciali

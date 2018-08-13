@@ -329,7 +329,18 @@
     <div class="col-md-6">
       <% unless unit.unit_options.only_magics.empty? %>
           <h4><%= t('army_list_unit.show.magic_unit_options') %></h4>
-          <%= render :partial => 'ninth_age/unit_options/show', :locals => {:unit_options => unit.unit_options.only_magics, :access_admin => access_admin} %>
+          <% if unit.unit_options.only_magic_lvls.size > 0 %>
+          <ul class="option-children children-sub">
+            <li><%= t('army_list_unit.show.magic_lvl_unit_options') %></li>
+            <%= render :partial => 'ninth_age/unit_options/show', :locals => {:unit_options => unit.unit_options.only_magic_lvls, :access_admin => access_admin} %>
+          </ul>
+          <% end %>
+          <% if unit.unit_options.only_paths.size > 0 %>
+          <ul class="option-children children-sub">
+            <li><%= t('army_list_unit.show.path_unit_options') %></li>
+            <%= render :partial => 'ninth_age/unit_options/show', :locals => {:unit_options => unit.unit_options.only_paths, :access_admin => access_admin} %>
+          </ul>
+          <% end %>
       <% end %>
       <% unless unit.unit_options.only_parents.empty? %>
           <h4><%= t('army_list_unit.show.unit_options') %></h4>
