@@ -11,23 +11,18 @@
       <%= army_magic_spell.description.to_highlight unless army_magic_spell.description.nil? %>
       <table>
         <thead>
-          <th></th>
-          <th class="text-center"><%= t('magic.casting') %></th>
-          <th class="text-center"><%= t('magic.range') %></th>
-          <th class="text-center"><%= t('magic.type') %></th>
-          <th class="text-center"><%= t('magic.duration') %></th>
-          <th><%= t('magic.effect') %></th>
+          <th colspan="1" class="name"><%= army_magic_spell.name %></th>
+          <th class="text-center"><%= t('magic.effect') %></th>
         </thead>
         <tbody>
           <tr>
-            <td colspan="5" class="name"><%= army_magic_spell.name %></td>
-            <td rowspan="2" class="effect"><%= army_magic_spell.effect.to_highlight unless army_magic_spell.effect.nil? %></tr>
-          <tr>
-            <td>Mf</td>
-            <td class="casting_value text-center"><%= army_magic_spell.casting_value.to_highlight unless army_magic_spell.casting_value.nil? %></td>
-            <td class="range text-center"><%= army_magic_spell.range.to_highlight unless army_magic_spell.range.nil? %></td>
-            <td class="type_target text-center"><%= army_magic_spell.display_type_target %></td>
-            <td class="duration text-center"><%= army_magic_spell.display_duration %></td>
+            <td>
+              <strong><%= t('magic.casting') %>:</strong> <%= army_magic_spell.casting_value.to_highlight unless army_magic_spell.casting_value.nil? %><br/>
+              <strong><%= t('magic.range') %>:</strong> <%= army_magic_spell.range.to_highlight unless army_magic_spell.range.nil? %><br/>
+              <strong><%= t('magic.type') %>:</strong> <%= army_magic_spell.display_type_target %><br/>
+              <strong><%= t('magic.duration') %>:</strong> <%= army_magic_spell.display_duration %>
+            </td>
+            <td class="effect"><%= army_magic_spell.effect.to_highlight unless army_magic_spell.effect.nil? %></td>
           </tr>
         </tbody>
       </table>
