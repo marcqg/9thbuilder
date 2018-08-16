@@ -106,7 +106,7 @@
                       <li>
                           <%= link_to(ninth_age_special_rule_path(special_rule.special_rule_id), {:target => "_blank"}) do %><%= special_rule.special_rule.name %> 
                             <%if !special_rule.info.nil? || !special_rule.jet.nil? %>
-                              (<%= special_rule.jet %><%= ", " unless special_rule.jet.nil? %><%= special_rule.info unless special_rule.info.nil? %>)
+                              (<%= special_rule.jet %><%= ", " if !special_rule.info.nil? && !special_rule.jet.nil? %><%= special_rule.info unless special_rule.info.nil? %>)
                             <%end%>
                           <%end%>,</li>
                     <% end %>
@@ -118,7 +118,7 @@
                         <li>
                           <%= link_to(ninth_age_equipment_path(equipment.equipment_id), {:target => "_blank"}) do %><%= equipment.equipment.name %> 
                             <%if !equipment.info.nil? || !equipment.jet.nil? %>
-                              (<%= equipment.jet %><%= ", " unless equipment.jet.nil? %><%= equipment.info unless equipment.info.nil? %>)
+                              (<%= equipment.jet %><%= ", " if !equipment.info.nil? && !equipment.jet.nil? %><%= equipment.info unless equipment.info.nil? %>)
                             <%end%>
                           <%end%>,</li>
                     <% end %>
@@ -168,7 +168,7 @@
                   <li>
                     <%= link_to(ninth_age_special_rule_path(special_rule.special_rule_id), {:target => "_blank"}) do %><%= special_rule.special_rule.name %> 
                       <%if !special_rule.info.nil? || !special_rule.jet.nil? %>
-                        (<%= special_rule.jet %><%= ", " unless special_rule.jet.nil? %><%= special_rule.info unless special_rule.info.nil? %>)
+                        (<%= special_rule.jet %><%= ", " if !special_rule.info.nil? && !special_rule.jet.nil? %><%= special_rule.info unless special_rule.info.nil? %>)
                       <%end%>
                     <%end%>,</li>
                 <% end %>
@@ -180,7 +180,7 @@
                         <li>
                           <%= link_to(ninth_age_equipment_path(equipment.equipment_id), {:target => "_blank"}) do %><%= equipment.equipment.name %> 
                             <%if !equipment.info.nil? || !equipment.jet.nil? %>
-                              (<%= equipment.jet %><%= ", " unless equipment.jet.nil? %><%= equipment.info unless equipment.info.nil? %>)
+                              (<%= equipment.jet %><%= ", " if !equipment.info.nil? && !equipment.jet.nil? %><%= equipment.info unless equipment.info.nil? %>)
                             <%end%>
                           <%end%>,</li>
                 <% end %>
@@ -221,7 +221,7 @@
                   <li>
                     <%= link_to(ninth_age_special_rule_path(special_rule.special_rule_id), {:target => "_blank"}) do %><%= special_rule.special_rule.name %> 
                       <%if !special_rule.info.nil? || !special_rule.jet.nil? %>
-                        (<%= special_rule.jet %><%= ", " unless special_rule.jet.nil? %><%= special_rule.info unless special_rule.info.nil? %>)
+                        (<%= special_rule.jet %><%= ", " if !special_rule.info.nil? && !special_rule.jet.nil? %><%= special_rule.info unless special_rule.info.nil? %>)
                       <%end%>
                     <%end%>,</li>
                     <% end %>
@@ -234,7 +234,7 @@
                   <li>
                     <%= link_to(ninth_age_special_rule_path(special_rule.special_rule_id), {:target => "_blank"}) do %><%= special_rule.special_rule.name %> 
                       <%if !special_rule.info.nil? || !special_rule.jet.nil? %>
-                        (<%= special_rule.jet %><%= ", " unless special_rule.jet.nil? %><%= special_rule.info unless special_rule.info.nil? %>)
+                        (<%= special_rule.jet %><%= ", " if !special_rule.info.nil? && !special_rule.jet.nil? %><%= special_rule.info unless special_rule.info.nil? %>)
                       <%end%>
                     <%end%>,</li>
                     <% end %>
@@ -247,7 +247,7 @@
                         <li>
                           <%= link_to(ninth_age_equipment_path(equipment.equipment_id), {:target => "_blank"}) do %><%= equipment.equipment.name %> 
                             <%if !equipment.info.nil? || !equipment.jet.nil? %>
-                              (<%= equipment.jet %><%= ", " unless equipment.jet.nil? %><%= equipment.info unless equipment.info.nil? %>)
+                              (<%= equipment.jet %><%= ", " if !equipment.info.nil? && !equipment.jet.nil? %><%= equipment.info unless equipment.info.nil? %>)
                             <%end%>
                           <%end%>,</li>
                     <% end %>
@@ -260,7 +260,7 @@
                         <li>
                           <%= link_to(ninth_age_equipment_path(equipment.equipment_id), {:target => "_blank"}) do %><%= equipment.equipment.name %> 
                             <%if !equipment.info.nil? || !equipment.jet.nil? %>
-                              (<%= equipment.jet %><%= ", " unless equipment.jet.nil? %><%= equipment.info unless equipment.info.nil? %>)
+                              (<%= equipment.jet %><%= ", " if !equipment.info.nil? && !equipment.jet.nil? %><%= equipment.info unless equipment.info.nil? %>)
                             <%end%>
                           <%end%>,</li>
                     <% end %>

@@ -341,6 +341,7 @@ a {
 
         &:last-child {
           width: 50%;
+          text-align: left;
         }
       }
 
@@ -352,6 +353,12 @@ a {
       tbody {
         td {
           font-weight: bold;
+        }
+
+        ul {
+          li {
+            padding: 0 !important;
+          }
         }
       }
     }
