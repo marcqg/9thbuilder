@@ -49,7 +49,17 @@ jQuery(document).ready(function() {
 	}, 500);
 
 
-	$('.input-team-max select').change(function(e){
-
+	$('#tournament_event_participation').change(function(e){
+		console.log('team', $(this).val());
+		
+		switch($(this).val()){
+			case 'individual':
+				$('.input-team-max').hide();
+				break;
+			case 'team':
+				$('.input-team-max').show();
+				break;
+		}
 	});
+	$('#tournament_event_participation').change();
 });

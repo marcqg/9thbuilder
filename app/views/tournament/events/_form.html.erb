@@ -38,12 +38,12 @@
     <% end %>
   </div>
 
-  <div class="form-group input-team-max">
+  <div class="form-group">
     <%= f.label :participation %>
-    <%= f.select :participation, Tournament::Event.participation.keys.map {|key| [t("tournament.event.participation.#{key}"), key]}, class: "form-control" %>
+    <%= f.select :participation, Tournament::Event.participations.keys.map {|key| [t("tournament.event.participation.#{key}"), key]}, class: "form-control" %>
   </div>   
   
-  <div class="form-group">
+  <div class="form-group input-team-max">
     <%= f.label :team_max %>
     <%= f.number_field :team_max, :placeholder => t('tournament.event.form.team_max'), class: "form-control" %>
   </div>  
