@@ -1,5 +1,5 @@
 <div class="new-tournament">
-  <h1 class="text-center"><%== t('tournament.event.new.title') %></h1>
+  <h1 class="text-center"><%== t('tournament.team.new.title') %></h1>
 
-  <%= render 'form', event: @event %>
+  <%= render 'form', event: @event, team: @team, url: tournament_teams_path %>
 </div>

@@ -96,7 +96,7 @@ module Tournament
 
       # Never trust parameters from the scary internet, only allow the white list through.
       def user_apply_params
-        params.require(:tournament_user_apply).permit(:name, :army_id, :state)
+        params.require(:tournament_user_apply).permit(:name, :email, :user_id, :army_id, :state)
       end
   end
 end

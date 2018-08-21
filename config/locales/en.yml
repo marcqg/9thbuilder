@@ -42,6 +42,10 @@ en:
     statistique: "Statistiques"
     tournament: "Tournaments"
 
+  admin:
+    tournament: Tournament Org
+    dashboard: "Administration"
+
   activerecord:
     models:
       'ninth_age/unit':
@@ -463,13 +467,26 @@ en:
         start_date: Start
         end_date: End
         fees: Fees
-        user_max: Max user
+        team_max: Max teams
+        user_max: Max users
+        user_team_max: Max users by team
         version: Version
         round_count: Rounds
         submit: Save
     round:
       name: Round
       add: Add round
+    team:
+      name: Teams
+      leader: Tournament teams 
+      new:
+        title: Add teams
+      form:
+        name: Name
+        leader: 
+          name: Leader name
+          email: Leader email
+        submit: Add
     user_apply:
       name: User
       new:

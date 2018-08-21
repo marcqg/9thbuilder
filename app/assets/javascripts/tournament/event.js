@@ -55,9 +55,13 @@ jQuery(document).ready(function() {
 		switch($(this).val()){
 			case 'individual':
 				$('.input-team-max').hide();
+				$('.label-team-max').hide();
+				$('.label-user-max').show();
 				break;
 			case 'team':
 				$('.input-team-max').show();
+				$('.label-team-max').show();
+				$('.label-user-max').hide();
 				break;
 		}
 	});

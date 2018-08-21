@@ -10,6 +10,7 @@ class Tournament::UserApply < ApplicationRecord
   belongs_to :army_list, class_name: "Builder::ArmyList"
 
   belongs_to :event
+  belongs_to :team
   has_many :matches, dependent: :destroy
   has_many :custom_points, dependent: :destroy
 
@@ -24,6 +25,11 @@ class Tournament::UserApply < ApplicationRecord
   validates :name, :event_id, :state, presence: true
 
   before_create on: :create do
-    self.position = event.user_applies.count + 1
+    unless event.nil?
+      self.position = self.event.user_applies.count + 1
+    else 
+      self.event = self.team.event
+      self.position = self.event.user_applies.count + 1
+    end
   end
 end

@@ -1,0 +1,31 @@
+table.tournament-table {
+    width: 100%;
+    clear: both;
+
+    thead {
+        background-color: #56251a;
+        color: white;
+        font-weight: bold;
+
+        th {
+            text-align: center;
+            padding: 2px 5px;
+        }
+    }
+
+    tbody {
+        background-color: white;
+
+        tr {
+            border-bottom: 1px solid #56251a;
+        }
+
+        td {
+            padding: 2px 5px;
+
+            i {
+                color: #56251a;
+            }
+        }
+    }
+}

@@ -33,7 +33,15 @@ module Tournament
 
       respond_to do |format|
         if @event.save
-          format.html { redirect_to tournament_add_user_apply_url(@event), notice: 'event was successfully created.' }
+
+          url = 
+            if @event.individual? 
+              tournament_add_user_apply_url(@event)
+            else
+              tournament_teams_url(@event)
+            end
+
+          format.html { redirect_to url, notice: 'event was successfully created.' }
           format.json { render :show, status: :created, location: @event }
         else
           format.html { render :new }
