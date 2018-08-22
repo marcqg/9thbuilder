@@ -140,7 +140,7 @@ Rails.application.routes.draw do
       resources :events, param: :uuid
       resources :organisations,                   only: [:index]
       get '/searchs/users',                       to: 'searchs#users',                    as: :tournament_searchs_users
-      resources :myteams,                         only: [:index, :show]
+      resources :myteams,                         only: [:index, :show, :new]
       
       scope '/event-:uuid' do
         scope '/user_applies' do

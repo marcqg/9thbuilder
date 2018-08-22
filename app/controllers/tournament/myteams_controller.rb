@@ -12,6 +12,10 @@ module Tournament
       def show
       end
   
+      # GET /tournament/myteams/new
+      def new
+      end
+  
       private
   
       # Use callbacks to share common setup or constraints between actions.

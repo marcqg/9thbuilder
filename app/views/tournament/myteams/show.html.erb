@@ -1,0 +1,18 @@
+<div class="show-team">
+  <%= link_to(tournament_myteams_path, {:class => 'btn btn-age pull-right'}) do %><%= t('tournament.team.back') %><% end %>
+  <%= link_to(new_tournament_myteam_path, {:class => 'btn btn-age pull-right'}) do %><%= t('tournament.team.user_apply.add') %><% end %>
+  
+  <h1 class="team-name"><strong><%= @team.event.name %>:</strong><%= @team.name %></h1>
+  
+	<div class="rows">
+		<% @team.user_applies.each do |user_apply| %>
+			<div class="user_apply cursor-pointer col-md-2 col-12 col-sm-3">
+					<p><span class="user-name"><%= user_apply.name %></span>
+					<% if user_apply.team_leader? %>
+						<%= icon('fas', 'user-shield', class: 'fa-2x') %>
+					<%end%>
+					</p>
+			</div>
+		<%end%>
+	</div>
+</div>
