@@ -5,7 +5,27 @@
 <% end %>
 
 <div class="army_list_infos">
-  <% @army_list.army.army_magic_spells.each do |army_magic_spell| %>
+  <ul id="army_list_organisations" class="list-inline text-center">
+    <% @army_list.army_organisation.organisation_groups.each do |organisation_group| %>
+        <% army_list_organisation = @army_list.army_list_organisations.find_by(:organisation_id => organisation_group.organisation_id) %>
+        <%= content_tag(:li, {:class => (army_list_organisation != nil && !army_list_organisation.good ? "highlight-red" : "highlight-green")}) do %>
+          <% unless army_list_organisation.nil? %>
+            <em><%= army_list_organisation.pts %> pts <small>(<%= sprintf('%.2f', army_list_organisation.rate) %> %)</small></em>
+          <% end %>
+          <strong><%= organisation_group.organisation.name.gsub(/\(([\w,\ \+\.\(\)\-]*)\)/, '<span class="text-small">(\1)</span>').html_safe %></strong>
+          <span class="small"><% unless organisation_group.NoLimit? %>(<%= organisation_group.target %> <%= organisation_group.type_target %>)<%else%>&nbsp;<% end %></span>
+        <% end %>
+    <% end %>
+  </ul>
+</div>
+
+<%= render :partial => 'export_unit_full', :collection => @army_list.army_list_units, :as => :army_list_unit, :locals => {:include_magics => @include_magics } %>
+<p style='page-break-after:always;'></p>
+
+<div class="section">
+  <h2><%=t 'magic.index.title' %></h3>
+  <div class="army_list_infos">
+    <% @army_list.army.army_magic_spells.each do |army_magic_spell| %>
     <div class="army_magic_spell">
       <h2 class="text-center"><%= t('army_magic_spell.name') %></h2>
       <%= army_magic_spell.description.to_highlight unless army_magic_spell.description.nil? %>
@@ -27,29 +47,10 @@
         </tbody>
       </table>
     </div>
-  <% end %>  
-  <ul id="army_list_organisations" class="list-inline text-center">
-    <% @army_list.army_organisation.organisation_groups.each do |organisation_group| %>
-        <% army_list_organisation = @army_list.army_list_organisations.find_by(:organisation_id => organisation_group.organisation_id) %>
-        <%= content_tag(:li, {:class => (army_list_organisation != nil && !army_list_organisation.good ? "highlight-red" : "highlight-green")}) do %>
-          <% unless army_list_organisation.nil? %>
-            <em><%= army_list_organisation.pts %> pts <small>(<%= sprintf('%.2f', army_list_organisation.rate) %> %)</small></em>
-          <% end %>
-          <strong><%= organisation_group.organisation.name.gsub(/\(([\w,\ \+\.\(\)\-]*)\)/, '<span class="text-small">(\1)</span>').html_safe %></strong>
-          <span class="small"><% unless organisation_group.NoLimit? %>(<%= organisation_group.target %> <%= organisation_group.type_target %>)<%else%>&nbsp;<% end %></span>
-        <% end %>
-    <% end %>
-  </ul>
-</div>
-
-<%= render :partial => 'export_unit_full', :collection => @army_list.army_list_units, :as => :army_list_unit, :locals => {:include_magics => @include_magics } %>
-<p style='page-break-after:always;'></p>
-<% unless @magics.empty? %>
-<div class="section">
-  <h2><%=t 'magic.index.title' %></h3>
+    <% end %> 
+  </div> 
   <%= render :partial => 'export_magic_full', :collection => @magics, :as => :magic %>
 </div>
-<% end %>
 <p style='page-break-after:always;'></p>
 <% unless @magic_items.empty? %>
 <div class="section">
