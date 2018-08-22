@@ -1,0 +1,19 @@
+<div class="show-team">
+  
+  <h1 class="team-name"><strong><%= t('tournament.team.name') %></strong></h1>
+  
+	<div class="rows">
+		<% @teams.each do |team| %>
+			<div class="team cursor-pointer col-md-2 col-12 col-sm-3">
+                <%= link_to(tournament_myteams_path(team)) do %>
+				<p><span class="user-name"><%= team.event.name %>: <%= team.name %></span>
+				<% if @current_user.user_applies.find_by({:team_id => team.id}).team_leader? %>
+					<%= icon('fas', 'user-shield', class: 'fa-2x') %>
+				<%end%>
+				</p>
+                <%end%>
+			</div>
+		<%end%>
+	</div>
+
+</div>

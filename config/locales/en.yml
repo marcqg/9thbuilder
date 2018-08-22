@@ -478,7 +478,7 @@ en:
       add: Add round
     team:
       name: Teams
-      leader: Tournament teams 
+      my: Tournament teams 
       new:
         title: Add teams
       form:

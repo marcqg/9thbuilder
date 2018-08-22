@@ -4,7 +4,7 @@ module Tournament
       before_action :authenticate_organisation_user!
       before_action :set_event
       before_action :set_team, only: [:show, :edit, :update, :destroy]
-  
+
       # GET /tournament/event-:uuid/teams
       # GET /tournament/event-:uuid/teams
       def index
@@ -83,7 +83,7 @@ module Tournament
   
       # Never trust parameters from the scary internet, only allow the white list through.
       def tournament_params
-        params.require(:tournament_team).permit(:event_id, :name, user_applies_attributes: [:id, :name, :email, :team_leader, :user_id, :team_id, :event_id])
+        params.require(:tournament_team).permit(:event_id, :name, user_applies_attributes: [:id, :name, :email, :team_leader, :user_id, :team_id, :event_id, :_destroy])
       end
     end
   end
