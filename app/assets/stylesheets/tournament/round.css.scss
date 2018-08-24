@@ -1,0 +1,120 @@
+.show-round {
+	position: relative;
+	padding: 0;
+	margin-top: 10px;
+	.matches {
+		.match {
+			.match-players {
+				.match-place {
+					min-height: 80px;
+					width: 400px;
+					margin-left: 20px;
+
+					&.placeholder{
+						min-height: 160px;
+					}
+
+					&.over {
+						background-color: rgba(240, 240, 240, 0.4);
+					}
+					.round_match {
+						.current {
+							display: inline-flex;
+							height: 75px;
+							min-width: 380px;
+							position: relative;
+							padding: 6px 0;
+							list-style: none;
+							margin-bottom: 5px;
+							background: image-url("bg_army_list_unit_overview_content.png") repeat-x;
+							&:not(:first-child) {
+								margin-left: 50px;
+							}
+							&::before,
+							&::after {
+								content: "";
+								width: 16px;
+								height: 55px;
+								display: block;
+								position: absolute;
+								top: 0;
+							}
+							&::before {
+								background: image-url('bg_army_list_unit_overview_left.png') no-repeat;
+								left: 0;
+							}
+							&::after {
+								background: image-url('bg_army_list_unit_overview_right.png') no-repeat;
+								right: 0;
+							}
+							.user_apply_overview {
+								width: 100%;
+								.army {
+									position: absolute;
+									left: -20px;
+									top: 5px;
+								}
+								.name {
+									margin-left: 30px;
+								}
+								.points {
+									position: absolute;
+									top: 15px;
+									left: 170px;
+									i {
+										margin-left: 5px;
+									}
+								}
+							}
+						}
+						.old-matches {
+							display: inline-flex;
+							margin-left: 25px;
+							.old-match {
+								display: inline-flex;
+								height: 75px;
+								width: 200px;
+								position: relative;
+								padding: 6px 0;
+								list-style: none;
+								margin-bottom: 5px;
+								background: image-url("bg_army_list_unit_overview_content.png") repeat-x;
+								&:not(:first-child) {
+									margin-left: 50px;
+								}
+								&::before,
+								&::after {
+									content: "";
+									width: 16px;
+									height: 55px;
+									display: block;
+									position: absolute;
+									top: 0;
+								}
+								&::before {
+									background: image-url('bg_army_list_unit_overview_left.png') no-repeat;
+									left: 0;
+								}
+								&::after {
+									background: image-url('bg_army_list_unit_overview_right.png') no-repeat;
+									right: 0;
+								}
+								.user_apply_overview {
+									width: 100%;
+									.army {
+										position: absolute;
+										left: -20px;
+										top: 5px;
+									}
+									.name {
+										margin-left: 30px;
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

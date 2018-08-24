@@ -1,0 +1,24 @@
+<div class="new-user-apply">
+  <h1 class="text-center"><%== t('tournament.user_apply.new.title') %></h1>
+
+  <%= form_for @user_apply, :validate => @user_apply.persisted? do |f| %>
+  <%= render "shared/form_errors", :object => @user_apply %>
+
+  <div class="form-group">
+    <%= f.label :user %>
+    <%= f.text_field :user, :placeholder => t('tournament.user_apply.form.user'), class: "form-control" %>
+  </div>
+
+  <div>
+  	<%= t('tournament.user_apply.form.or') %>
+  </div>
+  
+  <div class="form-group">
+    <%= f.label :name %>
+    <%= f.text_area :name, :placeholder => t('tournament.user_apply.form.name'), class: "form-control" %>
+    <small>You can add somes users (1 user by line).</small>
+  </div>
+
+  <%= f.submit t('tournament.user_apply.form.submit'), class: 'btn btn-age center-btn' %>
+<% end %>
+</div>

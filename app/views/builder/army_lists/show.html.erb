@@ -13,7 +13,9 @@
   <%= link_to '<i class="fa fa-clone fa-2x pull-right" aria-hidden="true"></i>'.html_safe, new_from_builder_army_list_path(@army_list), {'data-popin' => true} %>
   <%= link_to '<i class="fa fa-download fa-2x pull-right" aria-hidden="true"></i>'.html_safe, builder_export_army_list_path(@army_list, 'full', 'magics'), {'data-popin' => true} %>
   <%= link_to '<i class="fa fa-pencil-square-o fa-2x pull-right" aria-hidden="true"></i>'.html_safe, edit_builder_army_list_path(@army_list), {'data-popin' => true} %>
+  <%= link_to '<i class="fa fa-paint-brush fa-2x pull-right" aria-hidden="true"></i>'.html_safe, paint_convert_paint_paint_list_path(@army_list.id), method: :post %>
   <%= link_to '<i class="fa fa-print fa-2x" aria-hidden="true"></i>'.html_safe, builder_export_army_list_path(@army_list, :verbosity => 'full', :format => 'pdf', :magics => 'magics'), {'target' => '_blank', 'class' => 'left'} %>
+  <%= link_to '<i class="fa fa-file fa-2x" aria-hidden="true"></i>'.html_safe, builder_export_txt_army_list_path(@army_list), {'data-popin' => true, 'class' => 'left'} %>
 </div>
 
 <div class="row" id="app-army-list">
@@ -30,7 +32,7 @@
             <%= image_tag(organisation_group.organisation.medium_logo_url, alt: organisation_group.organisation.name, size: '75x75') %>
             <p><%= raw organisation_group.organisation.name.gsub(/\((.*)\)/, '<span class="text-small">(\1)</span>') %></p>
             <p>
-              <span class="<%= (army_list_organisation != nil && army_list_organisation.good ? 'highlight-green' : 'highlight-red') %>"> <% if army_list_organisation != nil %><%= army_list_organisation.rate %>% <small>(<%= army_list_organisation.pts %> pts)</small><%else%>0%<%end%></span>
+              <span class="<%= (army_list_organisation != nil && army_list_organisation.good ? 'highlight-green' : 'highlight-red') %>"> <% if army_list_organisation != nil %><%= sprintf('%.2f', army_list_organisation.rate) %>% <small>(<%= army_list_organisation.pts %> pts)</small><%else%>0%<%end%></span>
               <% if !organisation_group.NoLimit? %>
                   <span class="text-small">(<%= organisation_group.target %>% <%= organisation_group.type_target %>)</span>
               <% end %>
@@ -52,7 +54,7 @@
         </div>
     <% end %>
 
-    <%if @army_list.value_points < @army_list.max %>
+    <%if @army_list.value_points <= @army_list.max %>
       <p class="army-list-point"><span><%= @army_list.value_points %></span> / <%= @army_list.max %> points</p>
     <%else%>
       <p class="army-list-point"><span class="highlight-red"><%= @army_list.value_points %></span> / <%= @army_list.max %> points</p>

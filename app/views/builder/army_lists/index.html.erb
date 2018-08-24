@@ -10,10 +10,49 @@
   <% end %>
 </div>
 
-<% @army_lists.each_with_index do |army_list, i| %>
-
-    <div class="col-md-3 <%= alternate_cell_class(i) %>">
+<div class="menu-army-list">
+    <div class="col-md-3 col-12 col-sm-4">
       <div class="army_list_row">
+        <p>
+          <a href="<%= new_builder_army_list_path(:army_id => @search.army_id_eq) %>" data-popin="true"><%= image_tag "bt_new_army_list.png", :size => "220x132" %></a>
+        </p>
+        <p><%= t 'army_list.index.add' %></p>
+      </div>
+    </div>
+
+    <div class="col-md-3 col-12 col-sm-4">
+      <div class="army_list_row">
+        <p>
+          <a href="<%= new_paint_paint_list_path() %>" data-popin="true"><%= image_tag "bt_new_paint_list.png", :size => "220x132" %></a>
+        </p>
+        <p><%= t 'paint_list.index.add' %></p>
+      </div>
+    </div>
+
+    <div class="col-md-3 col-12 col-sm-4">
+      <div class="army_list_row">
+        <p>
+          <%= link_to(image_tag('bt_lexicon.png', :size => '220x132'), ninth_age_versions_path) %>
+        </p>
+        <p><%= t 'lexicon.index.show' %></p>
+      </div>
+    </div>
+
+    <div class="col-md-3 col-12 col-sm-4">
+      <div class="army_list_row">
+        <p>
+          <%= link_to(image_tag('bt_search_army_list.png', :size => '220x132'), builder_searchs_path) %>
+        </p>
+        <p><%= t 'army_list.index.search_list' %></p>
+      </div>
+    </div>
+</div>
+
+<div class="clearboth">
+  <h2 class="text-center"><%= t 'army_list.index.title' %></h2>
+  <% @army_lists.each_with_index do |army_list, i| %>
+    <div class="col-md-3 col-12 col-sm-4 <%= alternate_cell_class(i) %>">
+      <div class="army_list_row" style="min-height: 130px;">
         <p class="thumb"><a href="<%= builder_army_list_path(army_list) %>">
           <% unless army_list.army.logo.nil? %>
               <%= image_tag army_list.army.logo_large.url, alt: army_list.army.name, :size => "220x132" %>
@@ -24,26 +63,32 @@
         <p><%= army_list.name.truncate(60) %></p>
       </div>
     </div>
+  <% end %>
+</div>
 
-<% end %>
-
-<% if @army.nil? || !@army.obsolete? %>
-
-    <div class="col-md-3 <%= @army_lists.any? ? alternate_cell_class(@army_lists.length) : "col-md-offset-3" %>">
-      <div class="army_list_row">
-        <p>
-          <a href="<%= new_builder_army_list_path(:army_id => @search.army_id_eq) %>" data-popin="true"><%= image_tag "bt_new_army_list.png", :size => "220x132" %></a>
-        </p>
-        <p><%= t 'army_list.index.add' %></p>
+<div class="clearboth">
+  <h2 class="text-center"><%= t 'paint_list.index.title' %></h2>
+  <% @paint_lists.each_with_index do |paint_list, i| %>
+    <div class="col-md-3 col-12 col-sm-4 <%= alternate_cell_class(i) %>">
+      <div class="paint_list_row">
+        <div class="picture" style="min-height: 130px;">
+          <% unless paint_list.army.logo.nil? %>
+            <%= image_tag paint_list.army.logo_large.url, alt: paint_list.army.name%>
+          <% end %>
+          <div class="actions">
+            <%= link_to paint_paint_list_path(paint_list) do %>
+              <i class="fa fa-2x fa-search"></i>
+            <% end %>
+            <%= link_to edit_paint_paint_list_path(paint_list) do %>
+              <i class="fa fa-2x fa-edit"></i>
+            <% end %>
+            <%= link_to paint_paint_list_path(paint_list), method: :delete, data: { confirm: 'Are you sure?'} do %>
+              <i class="fa fa-2x fa-trash"></i>
+            <% end %>
+          </div>
+        </div>
+        <p><%= paint_list.name.truncate(60) %></p>
       </div>
     </div>
-    <div class="col-md-3">
-      <div class="army_list_row">
-        <p>
-          <%= link_to(image_tag('bt_lexicon.png', :size => '220x132'), ninth_age_versions_path) %>
-        </p>
-        <p><%= t 'lexicon.index.show' %></p>
-      </div>
-    </div>
-
-<% end %>
+  <% end %>
+</div>

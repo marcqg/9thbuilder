@@ -1,0 +1,30 @@
+<div class="show-tournament">
+  <%= link_to(tournament_event_path(@event), {:class => 'btn btn-age pull-right'}) do %> Back to event<% end %>
+  <%= link_to(tournament_add_user_apply_path(@event), {:class => 'btn btn-age pull-right'}) do %> <i class="fa fa-plus"></i> Add user <% end %>
+
+  <h1 class="event-name"><strong>Tournament:</strong> <%= @event.name %></h1>
+  <p class="event-date"><small>(<%= @event.start_date.strftime(t('picker.datetime.rb')) %> to <%= @event.end_date.strftime(t('picker.datetime.rb')) %>)</small></p>
+
+  <table class="list-user-custom-points col-md-12 col-sm-12">
+  	<thead>
+  		<tr>
+  			<th>User</th>
+        <th>Peinture</th>
+        <th>Wysiwyg</th>
+        <th>Liste</th>
+  			<th>Total</th>
+  		</tr>
+  	</thead>
+  	<tbody>
+  		<% @event.custom_points.each do |custom| %>
+  		<tr data-event-id="<%= @event.id %>" data-custom-point-id="<%= custom.id %>">
+  			<td><%= custom.user_apply.name %></td>
+        <td><%= number_field_tag("paint_points", custom.paint_points, {min: 0, step: 1}) %></td>
+        <td><%= number_field_tag("wysiwyg_points", custom.wysiwyg_points, {min: 0, step: 1})  %></td>
+        <td><%= number_field_tag("list_points", custom.list_points, {min: 0, step: 1})  %></td>
+        <td><span class="total"><%= custom.total_points %></span></td>
+  		</tr>
+  		<% end %>
+  	</tbody>
+  </table>
+</div>

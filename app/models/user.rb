@@ -9,6 +9,13 @@ class User < ApplicationRecord
   has_many :armies, -> { distinct }, through: :army_lists
   belongs_to :favorite_army, class_name: 'NinthAge::Army'
 
+  has_many :paint_lists, class_name: 'Paint::PaintList', dependent: :destroy
+  has_many :paint_list_units, through: :paint_lists, class_name: 'Paint::PaintListUnit'
+
+  has_many :events, class_name: 'Tournament::Event', dependent: :destroy, foreign_key: 'creator_id'
+  has_many :user_applies, class_name: 'Tournament::UserApply', dependent: :destroy
+
+
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable, :confirmable,

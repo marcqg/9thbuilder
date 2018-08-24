@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Paint Paint Lists</h1>
+
+<div>
+<% @paint_lists.each_with_index do |paint_list, i| %>
+
+    <div class="col-md-3 <%= alternate_cell_class(i) %>">
+      <div class="paint_list_row">
+        <div class="picture">
+          <% unless paint_list.army.logo.nil? %>
+            <%= image_tag paint_list.army.logo_large.url, alt: paint_list.army.name%>
+          <% end %>
+          <div class="actions">
+            <%= link_to paint_paint_list_path(paint_list) do %>
+              <i class="fa fa-2x fa-search"></i>
+            <% end %>
+            <%= link_to edit_paint_paint_list_path(paint_list) do %>
+              <i class="fa fa-2x fa-edit"></i>
+            <% end %>
+            <%= link_to paint_paint_list_path(paint_list), method: :delete, data: { confirm: 'Are you sure?'} do %>
+              <i class="fa fa-2x fa-trash"></i>
+            <% end %>
+          </div>
+        </div>
+        <p><%= paint_list.name.truncate(60) %></p>
+      </div>
+    </div>
+
+<% end %>
+</div>
+
+<div class="clearboth">
+<%= link_to 'New Paint Paint List', new_paint_paint_list_path %>
+</div>

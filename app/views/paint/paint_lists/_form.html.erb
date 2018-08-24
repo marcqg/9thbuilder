@@ -1,0 +1,17 @@
+<%= form_for @paint_list, :validate => @paint_list.persisted? do |f| %>
+  <%= render "shared/form_errors", :object => @paint_list %>
+
+  <% unless @paint_list.persisted? %>
+    <div class="form-group">
+      <%= f.label :army_id %>
+      <%= f.collection_select :army_id, @armies, :id, :name_with_version, {include_blank: false}, {class: 'form-control'} %>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :name %>
+    <%= f.text_field :name, :placeholder => t('army_list.form.name'), class: "form-control" %>
+  </div>
+    
+  <%= f.submit t('army_list.form.submit'), class: 'btn btn-age' %>
+<% end %>

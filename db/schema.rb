@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171211133232) do
+ActiveRecord::Schema.define(version: 20180806132759) do
 
   create_table "active_admin_comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.integer  "resource_id",                 null: false
@@ -27,11 +27,11 @@ ActiveRecord::Schema.define(version: 20171211133232) do
   end
 
   create_table "builder_army_list_organisations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer "army_list_id",    default: 0,     null: false
-    t.integer "organisation_id", default: 0,     null: false
-    t.integer "pts",             default: 0,     null: false
-    t.integer "rate",            default: 0,     null: false
-    t.boolean "good",            default: false, null: false
+    t.integer "army_list_id",                            default: 0,     null: false
+    t.integer "organisation_id",                         default: 0,     null: false
+    t.integer "pts",                                     default: 0,     null: false
+    t.decimal "rate",            precision: 5, scale: 2, default: "0.0", null: false
+    t.boolean "good",                                    default: false, null: false
     t.index ["army_list_id", "organisation_id"], name: "builder_army_list_organisations_army_list_organisation", unique: true, using: :btree
     t.index ["organisation_id", "army_list_id"], name: "builder_army_list_organisations_organisation_army_list", unique: true, using: :btree
   end
@@ -91,19 +91,22 @@ ActiveRecord::Schema.define(version: 20171211133232) do
   end
 
   create_table "builder_army_lists", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
-    t.integer  "army_id",                                                                null: false
-    t.integer  "user_id",                                                                null: false
-    t.string   "name",                                                                   null: false
-    t.decimal  "value_points",                       precision: 8, scale: 2,             null: false
+    t.integer  "army_id",                                                                    null: false
+    t.integer  "user_id",                                                                    null: false
+    t.string   "name",                                                                       null: false
+    t.decimal  "value_points",                       precision: 8, scale: 2,                 null: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "notes",                limit: 65535
-    t.string   "uuid",                 limit: 36,                                        null: false
+    t.string   "uuid",                 limit: 36,                                            null: false
     t.integer  "army_organisation_id",                                       default: 0
-    t.integer  "max",                                                        default: 0, null: false
+    t.integer  "max",                                                        default: 0,     null: false
+    t.integer  "version_id",                                                                 null: false
+    t.boolean  "rate_with_max",                                              default: false, null: false
     t.index ["army_id"], name: "index_builder_army_lists_on_army_id", using: :btree
     t.index ["army_organisation_id"], name: "index_builder_army_lists_on_army_organisation_id", using: :btree
     t.index ["user_id"], name: "index_builder_army_lists_on_user_id", using: :btree
+    t.index ["version_id"], name: "builder_army_lists_version", using: :btree
   end
 
   create_table "ninth_age_armies", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
@@ -116,7 +119,10 @@ ActiveRecord::Schema.define(version: 20171211133232) do
     t.string   "logo_large_content_type"
     t.integer  "logo_large_file_size"
     t.datetime "logo_large_updated_at"
-    t.boolean  "has_default_magic_items", default: true, null: false
+    t.boolean  "has_default_magic_items", default: true,  null: false
+    t.boolean  "is_official",             default: false, null: false
+    t.string   "latex_key"
+    t.index ["version_id", "latex_key"], name: "ninth_age_armies_version_latex_unique", unique: true, using: :btree
     t.index ["version_id"], name: "index_ninth_age_armies_on_version_id", using: :btree
   end
 
@@ -131,6 +137,7 @@ ActiveRecord::Schema.define(version: 20171211133232) do
     t.text     "effect",                        limit: 65535
     t.text     "description",                   limit: 65535
     t.index ["locale"], name: "index_ninth_age_army_magic_spell_translations_on_locale", using: :btree
+    t.index ["ninth_age_army_magic_spell_id", "locale"], name: "unique_ninth_age_translations_army_magic_spell_id", unique: true, using: :btree
     t.index ["ninth_age_army_magic_spell_id"], name: "index_470d1e47675f2000858aa3595f707852fd2108a3", using: :btree
   end
 
@@ -151,6 +158,7 @@ ActiveRecord::Schema.define(version: 20171211133232) do
     t.string   "name"
     t.string   "description"
     t.index ["locale"], name: "index_ninth_age_army_organisation_translations_on_locale", using: :btree
+    t.index ["ninth_age_army_organisation_id", "locale"], name: "unique_ninth_age_translations_army_organisation_id", unique: true, using: :btree
     t.index ["ninth_age_army_organisation_id"], name: "index_cfb38c609844172d9baeb51542c668320535e89a", using: :btree
   end
 
@@ -168,6 +176,7 @@ ActiveRecord::Schema.define(version: 20171211133232) do
     t.datetime "updated_at",        null: false
     t.string   "name"
     t.index ["locale"], name: "index_ninth_age_army_translations_on_locale", using: :btree
+    t.index ["ninth_age_army_id", "locale"], name: "unique_ninth_age_translations_army_id", unique: true, using: :btree
     t.index ["ninth_age_army_id"], name: "index_ninth_age_army_translations_on_ninth_age_army_id", using: :btree
   end
 
@@ -181,6 +190,7 @@ ActiveRecord::Schema.define(version: 20171211133232) do
     t.string   "casting_value"
     t.text     "effect",                          limit: 65535
     t.index ["locale"], name: "index_ninth_age_domain_magic_spell_translations_on_locale", using: :btree
+    t.index ["ninth_age_domain_magic_spell_id", "locale"], name: "unique_ninth_age_translations_domain_magic_spell_id", unique: true, using: :btree
     t.index ["ninth_age_domain_magic_spell_id"], name: "index_ninth_age_domain_magic_translations_on_magic_id", using: :btree
   end
 
@@ -191,6 +201,8 @@ ActiveRecord::Schema.define(version: 20171211133232) do
     t.integer  "duration",        default: 0
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
+    t.string   "latex_key"
+    t.index ["domain_magic_id", "latex_key"], name: "ninth_age_domain_magic_spells_domain_magic_latex_unique", unique: true, using: :btree
     t.index ["domain_magic_id"], name: "index_ninth_age_domain_magic_spells_on_domain_magic_id", using: :btree
   end
 
@@ -202,6 +214,7 @@ ActiveRecord::Schema.define(version: 20171211133232) do
     t.string   "name"
     t.text     "description",               limit: 65535
     t.index ["locale"], name: "index_ninth_age_domain_magic_translations_on_locale", using: :btree
+    t.index ["ninth_age_domain_magic_id", "locale"], name: "unique_ninth_age_translations_domain_magic_id", unique: true, using: :btree
     t.index ["ninth_age_domain_magic_id"], name: "index_ninth_age_domain_magic_translations_on_magic_id", using: :btree
   end
 
@@ -213,6 +226,8 @@ ActiveRecord::Schema.define(version: 20171211133232) do
     t.string   "logo_content_type"
     t.integer  "logo_file_size"
     t.datetime "logo_updated_at"
+    t.string   "latex_key"
+    t.index ["version_id", "latex_key"], name: "ninth_age_domain_magics_version_latex_unique", unique: true, using: :btree
     t.index ["version_id"], name: "index_ninth_age_domain_magics_on_version_id", using: :btree
   end
 
@@ -224,16 +239,28 @@ ActiveRecord::Schema.define(version: 20171211133232) do
     t.string   "name"
     t.text     "description",            limit: 65535
     t.index ["locale"], name: "index_ninth_age_equipment_translations_on_locale", using: :btree
+    t.index ["ninth_age_equipment_id", "locale"], name: "unique_ninth_age_translations_equipment_id", unique: true, using: :btree
     t.index ["ninth_age_equipment_id"], name: "index_988058a4c70faa82db616cf9fa0a90fa66d1b61f", using: :btree
+  end
+
+  create_table "ninth_age_equipment_unit_troop_translations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "ninth_age_equipment_unit_troop_id", null: false
+    t.string   "locale",                            null: false
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
+    t.string   "info"
+    t.index ["locale"], name: "index_ninth_age_equipment_unit_troop_translations_on_locale", using: :btree
+    t.index ["ninth_age_equipment_unit_troop_id"], name: "index_2c255b43eccb6a60a004e76ef948820621cbbd45", using: :btree
   end
 
   create_table "ninth_age_equipment_unit_troops", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "equipment_id", default: 0, null: false
     t.integer  "unit_id",      default: 0, null: false
     t.integer  "troop_id"
-    t.integer  "position",     default: 0, null: false
+    t.integer  "position",     default: 1, null: false
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
+    t.string   "jet"
     t.index ["equipment_id", "unit_id", "troop_id"], name: "ninth_age_equipments_troops_rule_troop", unique: true, using: :btree
     t.index ["troop_id"], name: "fk_rails_dccb795808", using: :btree
     t.index ["unit_id"], name: "fk_rails_fc56c1191a", using: :btree
@@ -244,12 +271,26 @@ ActiveRecord::Schema.define(version: 20171211133232) do
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
     t.integer  "type_lvl",   default: 0, null: false
+    t.integer  "army_id"
+    t.string   "latex_key"
+    t.index ["army_id"], name: "index_ninth_age_equipments_on_army_id", using: :btree
+    t.index ["version_id", "latex_key"], name: "ninth_age_equipments_version_latex_unique", unique: true, using: :btree
     t.index ["version_id"], name: "index_ninth_age_equipments_on_version_id", using: :btree
   end
 
   create_table "ninth_age_extra_item_categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
-    t.integer "army_id", null: false
+    t.integer "army_id",                    null: false
+    t.boolean "is_unique",  default: false, null: false
+    t.integer "version_id",                 null: false
     t.index ["army_id"], name: "index_ninth_age_extra_item_categories_on_army_id", using: :btree
+    t.index ["version_id"], name: "index_ninth_age_extra_item_categories_on_version_id", using: :btree
+  end
+
+  create_table "ninth_age_extra_item_categories_unit_options", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer "unit_option_id",         default: 0, null: false
+    t.integer "extra_item_category_id", default: 0, null: false
+    t.index ["extra_item_category_id", "unit_option_id"], name: "ninth_age_units_organisations_extra_item_category_unit_option", unique: true, using: :btree
+    t.index ["unit_option_id", "extra_item_category_id"], name: "ninth_age_units_organisations_unit_option_extra_item_category", unique: true, using: :btree
   end
 
   create_table "ninth_age_extra_item_category_translations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -259,6 +300,7 @@ ActiveRecord::Schema.define(version: 20171211133232) do
     t.datetime "updated_at",                       null: false
     t.string   "name"
     t.index ["locale"], name: "index_ninth_age_extra_item_category_translations_on_locale", using: :btree
+    t.index ["ninth_age_extra_item_category_id", "locale"], name: "unique_ninth_age_translations_extra_item_category_id", unique: true, using: :btree
     t.index ["ninth_age_extra_item_category_id"], name: "index_dd6d9b5c45a9ea8b86c0516f4d17ba30cd6e7930", using: :btree
   end
 
@@ -269,20 +311,27 @@ ActiveRecord::Schema.define(version: 20171211133232) do
     t.datetime "updated_at",                            null: false
     t.string   "name"
     t.text     "description",             limit: 65535
+    t.text     "infos",                   limit: 65535
     t.index ["locale"], name: "index_ninth_age_extra_item_translations_on_locale", using: :btree
+    t.index ["ninth_age_extra_item_id", "locale"], name: "unique_ninth_age_translations_extra_item_id", unique: true, using: :btree
     t.index ["ninth_age_extra_item_id"], name: "index_a3691c2c997dc761d820ee9cc8ad386aec523816", using: :btree
   end
 
   create_table "ninth_age_extra_items", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
-    t.integer "extra_item_category_id",                                     null: false
-    t.decimal "value_points",           precision: 8, scale: 2,             null: false
-    t.integer "version_id",                                     default: 0, null: false
-    t.integer "max",                                            default: 0, null: false
+    t.integer "extra_item_category_id",                                      null: false
+    t.decimal "value_points",            precision: 8, scale: 2,             null: false
+    t.integer "max",                                             default: 0, null: false
+    t.integer "extra_item_activator_id"
+    t.string  "latex_key"
+    t.index ["extra_item_activator_id"], name: "index_ninth_age_extra_items_on_extra_item_activator_id", using: :btree
+    t.index ["extra_item_category_id", "latex_key"], name: "ninth_age_extra_items_extra_item_category_latex_unique", unique: true, using: :btree
     t.index ["extra_item_category_id"], name: "index_ninth_age_extra_items_on_extra_item_category_id", using: :btree
-    t.index ["version_id"], name: "index_ninth_age_extra_items_on_version_id", using: :btree
   end
 
   create_table "ninth_age_magic_item_categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
+    t.boolean "is_multiple", default: false, null: false
+    t.string  "latex_key"
+    t.index ["latex_key"], name: "ninth_age_magic_item_categories_version_latex_unique", unique: true, using: :btree
   end
 
   create_table "ninth_age_magic_item_category_translations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -292,6 +341,7 @@ ActiveRecord::Schema.define(version: 20171211133232) do
     t.datetime "updated_at",                       null: false
     t.string   "name"
     t.index ["locale"], name: "index_ninth_age_magic_item_category_translations_on_locale", using: :btree
+    t.index ["ninth_age_magic_item_category_id", "locale"], name: "unique_ninth_age_translations_magic_item_category_id", unique: true, using: :btree
     t.index ["ninth_age_magic_item_category_id"], name: "index_ecc3fdfb7d5c304a55d1e97d2bdc8a570adace8a", using: :btree
   end
 
@@ -302,7 +352,9 @@ ActiveRecord::Schema.define(version: 20171211133232) do
     t.datetime "updated_at",                            null: false
     t.string   "name"
     t.text     "description",             limit: 65535
+    t.text     "infos",                   limit: 65535
     t.index ["locale"], name: "index_ninth_age_magic_item_translations_on_locale", using: :btree
+    t.index ["ninth_age_magic_item_id", "locale"], name: "unique_ninth_age_translations_magic_item_id", unique: true, using: :btree
     t.index ["ninth_age_magic_item_id"], name: "index_df4d007c32d8556b64250547013147b2f38eb422", using: :btree
   end
 
@@ -317,9 +369,12 @@ ActiveRecord::Schema.define(version: 20171211133232) do
     t.integer "type_target"
     t.integer "type_duration"
     t.integer "max",                    default: 0,     null: false
+    t.boolean "is_dominant",            default: false, null: false
+    t.string  "latex_key"
     t.index ["army_id"], name: "index_ninth_age_magic_items_on_army_id", using: :btree
     t.index ["magic_item_category_id"], name: "index_ninth_age_magic_items_on_magic_item_category_id", using: :btree
     t.index ["override_id"], name: "index_ninth_age_magic_items_on_override_id", using: :btree
+    t.index ["version_id", "latex_key"], name: "ninth_age_magic_items_version_latex_unique", unique: true, using: :btree
     t.index ["version_id"], name: "index_ninth_age_magic_items_on_version_id", using: :btree
   end
 
@@ -330,19 +385,33 @@ ActiveRecord::Schema.define(version: 20171211133232) do
     t.datetime "updated_at",                                null: false
     t.string   "name"
     t.text     "description",                 limit: 65535
+    t.text     "infos",                       limit: 65535
     t.index ["locale"], name: "index_ninth_age_magic_standard_translations_on_locale", using: :btree
+    t.index ["ninth_age_magic_standard_id", "locale"], name: "unique_ninth_age_translations_magic_standard_id", unique: true, using: :btree
     t.index ["ninth_age_magic_standard_id"], name: "index_ddbd87e0b439bcbd0c784b45e90af2a8014a66e1", using: :btree
   end
 
   create_table "ninth_age_magic_standards", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.integer "army_id"
-    t.integer "value_points",              null: false
+    t.integer "value_points",                null: false
     t.integer "override_id"
-    t.integer "version_id",    default: 0, null: false
-    t.integer "type_figurine", default: 0, null: false
+    t.integer "version_id",      default: 0, null: false
+    t.integer "type_figurine",   default: 0, null: false
+    t.integer "max",             default: 0, null: false
+    t.integer "organisation_id"
+    t.string  "latex_key"
     t.index ["army_id"], name: "index_ninth_age_magic_standards_on_army_id", using: :btree
+    t.index ["organisation_id"], name: "index_ninth_age_magic_standards_on_organisation_id", using: :btree
     t.index ["override_id"], name: "index_ninth_age_magic_standards_on_override_id", using: :btree
+    t.index ["version_id", "latex_key"], name: "ninth_age_magic_standards_version_latex_unique", unique: true, using: :btree
     t.index ["version_id"], name: "index_ninth_age_magic_standards_on_version_id", using: :btree
+  end
+
+  create_table "ninth_age_magic_standards_organisations", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer "magic_standard_id", default: 0, null: false
+    t.integer "organisation_id",   default: 0, null: false
+    t.index ["magic_standard_id", "organisation_id"], name: "ninth_age_magic_standards_organisations_standard_org", unique: true, using: :btree
+    t.index ["organisation_id", "magic_standard_id"], name: "ninth_age_magic_standards_organisations_org_standard", unique: true, using: :btree
   end
 
   create_table "ninth_age_organisation_changes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -376,6 +445,7 @@ ActiveRecord::Schema.define(version: 20171211133232) do
     t.datetime "updated_at",                null: false
     t.string   "name"
     t.index ["locale"], name: "index_ninth_age_organisation_translations_on_locale", using: :btree
+    t.index ["ninth_age_organisation_id", "locale"], name: "unique_ninth_age_translations_organisation_id", unique: true, using: :btree
     t.index ["ninth_age_organisation_id"], name: "index_85a84f7711e02266cabe29a3c8de1c0c9318cccd", using: :btree
   end
 
@@ -388,6 +458,8 @@ ActiveRecord::Schema.define(version: 20171211133232) do
     t.string   "logo_content_type"
     t.integer  "logo_file_size"
     t.datetime "logo_updated_at"
+    t.string   "latex_key"
+    t.index ["army_id", "latex_key"], name: "ninth_age_organisations_army_latex_unique", unique: true, using: :btree
     t.index ["army_id"], name: "fk_rails_aa1632086c", using: :btree
   end
 
@@ -406,16 +478,28 @@ ActiveRecord::Schema.define(version: 20171211133232) do
     t.string   "name"
     t.text     "description",               limit: 65535
     t.index ["locale"], name: "index_ninth_age_special_rule_translations_on_locale", using: :btree
+    t.index ["ninth_age_special_rule_id", "locale"], name: "unique_ninth_age_translations_special_rule_id", unique: true, using: :btree
     t.index ["ninth_age_special_rule_id"], name: "index_ed7d13913dad10860cc6f0c91dca13f4c632329a", using: :btree
+  end
+
+  create_table "ninth_age_special_rule_unit_troop_translations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "ninth_age_special_rule_unit_troop_id", null: false
+    t.string   "locale",                               null: false
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+    t.string   "info"
+    t.index ["locale"], name: "index_ninth_age_special_rule_unit_troop_translations_on_locale", using: :btree
+    t.index ["ninth_age_special_rule_unit_troop_id"], name: "index_9dfa544cb1b10dd6ca1daf1c975ad16021e73c84", using: :btree
   end
 
   create_table "ninth_age_special_rule_unit_troops", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "special_rule_id", default: 0, null: false
     t.integer  "unit_id",         default: 0, null: false
     t.integer  "troop_id"
-    t.integer  "position",        default: 0, null: false
+    t.integer  "position",        default: 1, null: false
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
+    t.string   "jet"
     t.index ["special_rule_id", "unit_id", "troop_id"], name: "ninth_age_special_rules_troops_rule_troop", unique: true, using: :btree
     t.index ["troop_id"], name: "fk_rails_c9f69daf3b", using: :btree
     t.index ["unit_id"], name: "fk_rails_2a74b899ae", using: :btree
@@ -427,7 +511,10 @@ ActiveRecord::Schema.define(version: 20171211133232) do
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
     t.integer  "type_lvl",   default: 0, null: false
+    t.string   "latex_key"
+    t.integer  "effect",     default: 0, null: false
     t.index ["army_id"], name: "index_ninth_age_special_rules_on_army_id", using: :btree
+    t.index ["version_id", "latex_key"], name: "ninth_age_special_rules_version_latex_unique", unique: true, using: :btree
     t.index ["version_id"], name: "index_ninth_age_special_rules_on_version_id", using: :btree
   end
 
@@ -438,6 +525,7 @@ ActiveRecord::Schema.define(version: 20171211133232) do
     t.datetime "updated_at",         null: false
     t.string   "name"
     t.index ["locale"], name: "index_ninth_age_troop_translations_on_locale", using: :btree
+    t.index ["ninth_age_troop_id", "locale"], name: "unique_ninth_age_translations_troop_id", unique: true, using: :btree
     t.index ["ninth_age_troop_id"], name: "index_ninth_age_troop_translations_on_ninth_age_troop_id", using: :btree
   end
 
@@ -448,6 +536,7 @@ ActiveRecord::Schema.define(version: 20171211133232) do
     t.datetime "updated_at",              null: false
     t.string   "name"
     t.index ["locale"], name: "index_ninth_age_troop_type_translations_on_locale", using: :btree
+    t.index ["ninth_age_troop_type_id", "locale"], name: "unique_ninth_age_translations_troop_type_id", unique: true, using: :btree
     t.index ["ninth_age_troop_type_id"], name: "index_f413937ae6ce9a68a330a55a940c218532df2a9b", using: :btree
   end
 
@@ -477,7 +566,9 @@ ActiveRecord::Schema.define(version: 20171211133232) do
     t.string  "carac_str"
     t.string  "carac_ap"
     t.string  "carac_agi"
+    t.string  "latex_key"
     t.index ["troop_type_id"], name: "index_ninth_age_troops_on_troop_type_id", using: :btree
+    t.index ["unit_id", "latex_key"], name: "ninth_age_troops_unit_latex_unique", unique: true, using: :btree
     t.index ["unit_id"], name: "index_ninth_age_troops_on_unit_id", using: :btree
     t.index ["unit_option_id"], name: "index_ninth_age_troops_on_unit_option_id", using: :btree
   end
@@ -489,38 +580,43 @@ ActiveRecord::Schema.define(version: 20171211133232) do
     t.datetime "updated_at",                             null: false
     t.string   "name"
     t.text     "description",              limit: 65535
-    t.text     "name_upgrade",             limit: 65535
+    t.text     "infos",                    limit: 65535
     t.index ["locale"], name: "index_ninth_age_unit_option_translations_on_locale", using: :btree
+    t.index ["ninth_age_unit_option_id", "locale"], name: "unique_ninth_age_translations_unit_option_id", unique: true, using: :btree
     t.index ["ninth_age_unit_option_id"], name: "index_3eb812a99d96523232efee7c3e6a269e0424207a", using: :btree
   end
 
   create_table "ninth_age_unit_options", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
-    t.integer "unit_id",                                                      null: false
+    t.integer "unit_id",                                                          null: false
     t.integer "parent_id"
-    t.decimal "value_points",         precision: 8, scale: 2
-    t.integer "position",                                                     null: false
-    t.boolean "is_per_model",                                 default: false, null: false
-    t.boolean "is_magic_items",                               default: false, null: false
-    t.boolean "is_magic_standards",                           default: false, null: false
-    t.boolean "is_unique_choice",                             default: false, null: false
-    t.boolean "is_extra_items",                               default: false, null: false
+    t.decimal "value_points",             precision: 8, scale: 2
+    t.integer "position",                                                         null: false
+    t.boolean "is_per_model",                                     default: false, null: false
+    t.boolean "is_unique_choice",                                 default: false, null: false
     t.integer "mount_id"
-    t.boolean "is_multiple",                                  default: false, null: false
-    t.boolean "is_required",                                  default: false, null: false
-    t.boolean "is_magic",                                     default: false, null: false
-    t.boolean "is_upgratable",                                default: false, null: false
+    t.boolean "is_multiple",                                      default: false, null: false
+    t.boolean "is_required",                                      default: false, null: false
     t.integer "domain_magic_id"
     t.integer "organisation_id"
-    t.integer "value_points_upgrade"
-    t.integer "upgrade_target",                               default: 0,     null: false
     t.integer "max"
     t.integer "max_model"
     t.integer "min_model"
     t.integer "max_unit"
+    t.integer "extra_item_id"
+    t.integer "unit_option_activator_id"
+    t.integer "unit_link_id"
+    t.boolean "has_one_choise",                                   default: false, null: false
+    t.integer "banner_limit",                                     default: 0,     null: false
+    t.integer "category",                                         default: 0,     null: false
+    t.boolean "mount_and_carac_points",                           default: false, null: false
     t.index ["domain_magic_id"], name: "index_ninth_age_options_on_magic_id", using: :btree
+    t.index ["extra_item_id"], name: "index_ninth_age_unit_options_on_extra_item_id", using: :btree
     t.index ["mount_id"], name: "index_ninth_age_unit_options_on_mount_id", using: :btree
+    t.index ["organisation_id"], name: "index_ninth_age_unit_options_on_organisation_id", using: :btree
     t.index ["parent_id"], name: "index_ninth_age_unit_options_on_parent_id", using: :btree
     t.index ["unit_id"], name: "index_ninth_age_unit_options_on_unit_id", using: :btree
+    t.index ["unit_link_id"], name: "index_ninth_age_unit_options_on_unit_link_id", using: :btree
+    t.index ["unit_option_activator_id"], name: "index_ninth_age_unit_options_on_unit_option_activator_id", using: :btree
   end
 
   create_table "ninth_age_unit_translations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -530,6 +626,7 @@ ActiveRecord::Schema.define(version: 20171211133232) do
     t.datetime "updated_at",        null: false
     t.string   "name"
     t.index ["locale"], name: "index_ninth_age_unit_translations_on_locale", using: :btree
+    t.index ["ninth_age_unit_id", "locale"], name: "unique_ninth_age_translations_unit_id", unique: true, using: :btree
     t.index ["ninth_age_unit_id"], name: "index_ninth_age_unit_translations_on_ninth_age_unit_id", using: :btree
   end
 
@@ -540,6 +637,7 @@ ActiveRecord::Schema.define(version: 20171211133232) do
     t.datetime "updated_at",             null: false
     t.string   "name"
     t.index ["locale"], name: "index_ninth_age_unit_type_translations_on_locale", using: :btree
+    t.index ["ninth_age_unit_type_id", "locale"], name: "unique_ninth_age_translations_unit_type_id", unique: true, using: :btree
     t.index ["ninth_age_unit_type_id"], name: "index_deefb4eb525c24946ac04ddd01ed6b8f6e5f99e2", using: :btree
   end
 
@@ -549,20 +647,20 @@ ActiveRecord::Schema.define(version: 20171211133232) do
   end
 
   create_table "ninth_age_units", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
-    t.integer "army_id",                                                                null: false
-    t.integer "min_size",                                               default: 1,     null: false
-    t.integer "max_size"
-    t.decimal "value_points",                   precision: 8, scale: 2
+    t.integer "army_id",                                        null: false
+    t.integer "min_size",                       default: 1,     null: false
+    t.integer "max_size",                       default: 1,     null: false
+    t.integer "value_points",                   default: 0,     null: false
     t.string  "magic"
     t.text    "notes",            limit: 65535
-    t.boolean "is_mount",                                               default: false, null: false
-    t.integer "type_figurine",                                          default: 0,     null: false
-    t.integer "base",                                                   default: 0,     null: false
-    t.integer "max",                                                    default: 0
+    t.boolean "is_mount",                       default: false, null: false
+    t.integer "type_figurine",                  default: 0,     null: false
+    t.integer "base",                           default: 0,     null: false
+    t.integer "max",                            default: 0,     null: false
     t.integer "max_model"
-    t.integer "order",                                                  default: 0,     null: false
-    t.integer "size",                                                   default: 0,     null: false
-    t.integer "type_carac",                                             default: 0,     null: false
+    t.integer "position",                       default: 0,     null: false
+    t.integer "size",                           default: 0,     null: false
+    t.integer "type_carac",                     default: 0,     null: false
     t.string  "carac_ground_adv"
     t.string  "carac_ground_mar"
     t.string  "carac_fly_adv"
@@ -572,11 +670,13 @@ ActiveRecord::Schema.define(version: 20171211133232) do
     t.string  "carac_hp"
     t.string  "carac_def"
     t.string  "carac_res"
-    t.string  "carac_as"
-    t.string  "carac_spe"
     t.integer "unit_type_id"
+    t.string  "carac_arm"
+    t.string  "latex_key"
+    t.index ["army_id", "latex_key"], name: "ninth_age_units_army_latex_unique", unique: true, using: :btree
     t.index ["army_id"], name: "index_ninth_age_units_on_army_id", using: :btree
     t.index ["unit_type_id"], name: "fk_rails_09d59f4e7e", using: :btree
+    t.index ["unit_type_id"], name: "index_ninth_age_units_on_unit_type_id", using: :btree
   end
 
   create_table "ninth_age_version_translations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -586,7 +686,9 @@ ActiveRecord::Schema.define(version: 20171211133232) do
     t.datetime "updated_at",           null: false
     t.string   "name"
     t.index ["locale"], name: "index_ninth_age_version_translations_on_locale", using: :btree
+    t.index ["ninth_age_version_id", "locale"], name: "unique_ninth_age_translations_version_id", unique: true, using: :btree
     t.index ["ninth_age_version_id"], name: "index_ninth_age_version_translations_on_ninth_age_version_id", using: :btree
+    t.index ["ninth_age_version_id"], name: "index_ninth_age_versions_on_version_id", using: :btree
   end
 
   create_table "ninth_age_versions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -596,6 +698,30 @@ ActiveRecord::Schema.define(version: 20171211133232) do
     t.boolean  "public",     default: false, null: false
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
+  end
+
+  create_table "paint_paint_list_units", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
+    t.integer  "paint_list_id"
+    t.integer  "unit_id"
+    t.integer  "position"
+    t.integer  "size"
+    t.integer  "step"
+    t.integer  "state"
+    t.text     "comment",       limit: 65535
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.index ["paint_list_id"], name: "index_paint_paint_list_units_on_paint_list_id", using: :btree
+    t.index ["unit_id"], name: "index_paint_paint_list_units_on_unit_id", using: :btree
+  end
+
+  create_table "paint_paint_lists", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "army_id",    default: 0, null: false
+    t.integer  "user_id",    default: 0, null: false
+    t.string   "name",                   null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.index ["army_id"], name: "index_builder_army_lists_on_army_id", using: :btree
+    t.index ["user_id"], name: "index_builder_army_lists_on_user_id", using: :btree
   end
 
   create_table "roles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -609,13 +735,82 @@ ActiveRecord::Schema.define(version: 20171211133232) do
     t.index ["resource_type", "resource_id"], name: "index_roles_on_resource_type_and_resource_id", using: :btree
   end
 
+  create_table "tournament_custom_points", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "event_id",       default: 0, null: false
+    t.integer  "user_apply_id",  default: 0, null: false
+    t.integer  "paint_points",   default: 0, null: false
+    t.integer  "wysiwyg_points", default: 0, null: false
+    t.integer  "list_points",    default: 0, null: false
+    t.integer  "total_points",   default: 0, null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.index ["event_id"], name: "index_tournament_pwls_on_round_id", using: :btree
+    t.index ["user_apply_id"], name: "index_tournament_pwls_on_user_apply_one_id", using: :btree
+  end
+
+  create_table "tournament_events", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "creator_id",                          default: 0, null: false
+    t.string   "name",                                            null: false
+    t.string   "address",                                         null: false
+    t.decimal  "latitude",   precision: 10, scale: 5,             null: false
+    t.decimal  "longitude",  precision: 10, scale: 5,             null: false
+    t.datetime "start_date",                                      null: false
+    t.datetime "end_date",                                        null: false
+    t.decimal  "fees",       precision: 10, scale: 2
+    t.string   "source"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "version_id",                          default: 0, null: false
+    t.integer  "user_max",                            default: 0, null: false
+    t.index ["creator_id"], name: "index_tournament_tournaments_on_creator_id", using: :btree
+    t.index ["version_id"], name: "tournament_events_version_id", using: :btree
+  end
+
+  create_table "tournament_matches", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "round_id",      default: 0, null: false
+    t.integer  "table",         default: 0, null: false
+    t.integer  "user_apply_id", default: 0, null: false
+    t.integer  "points",        default: 0, null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.index ["round_id"], name: "index_tournament_user_applies_on_round_id", using: :btree
+    t.index ["table"], name: "index_tournament_user_applies_on_table", using: :btree
+    t.index ["user_apply_id"], name: "index_tournament_user_applies_on_user_apply_one_id", using: :btree
+  end
+
+  create_table "tournament_rounds", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "event_id",   default: 0,     null: false
+    t.integer  "position",   default: 0,     null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "finish",     default: false, null: false
+    t.index ["event_id"], name: "index_tournament_user_applies_on_event_id", using: :btree
+  end
+
+  create_table "tournament_user_applies", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "event_id",     default: 0, null: false
+    t.integer  "user_id"
+    t.integer  "army_id"
+    t.integer  "army_list_id"
+    t.integer  "state",        default: 0, null: false
+    t.string   "name"
+    t.integer  "position",     default: 0, null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "email"
+    t.index ["army_id"], name: "index_tournament_user_applies_on_army_id", using: :btree
+    t.index ["army_list_id"], name: "index_tournament_user_applies_on_army_list_id", using: :btree
+    t.index ["event_id"], name: "index_tournament_user_applies_on_event_id", using: :btree
+    t.index ["user_id"], name: "index_tournament_user_applies_on_user_id", using: :btree
+  end
+
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
-    t.string   "email",                                default: "",      null: false
-    t.string   "encrypted_password",     limit: 128,   default: "",      null: false
+    t.string   "email",                                                         default: "",      null: false
+    t.string   "encrypted_password",     limit: 128,                            default: "",      null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",                        default: 0
+    t.integer  "sign_in_count",                                                 default: 0
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
@@ -627,9 +822,11 @@ ActiveRecord::Schema.define(version: 20171211133232) do
     t.datetime "updated_at"
     t.string   "name"
     t.integer  "favorite_army_id"
-    t.string   "provider",                             default: "email", null: false
-    t.string   "uid",                                  default: "",      null: false
+    t.string   "provider",                                                      default: "email", null: false
+    t.string   "uid",                                                           default: "",      null: false
     t.text     "tokens",                 limit: 65535
+    t.decimal  "latitude",                             precision: 11, scale: 8
+    t.decimal  "longitude",                            precision: 11, scale: 8
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["favorite_army_id"], name: "index_users_on_favorite_army_id", using: :btree
@@ -661,6 +858,7 @@ ActiveRecord::Schema.define(version: 20171211133232) do
   add_foreign_key "builder_army_list_units", "ninth_age_units", column: "unit_id"
   add_foreign_key "builder_army_lists", "ninth_age_armies", column: "army_id"
   add_foreign_key "builder_army_lists", "ninth_age_army_organisations", column: "army_organisation_id", on_delete: :cascade
+  add_foreign_key "builder_army_lists", "ninth_age_versions", column: "version_id"
   add_foreign_key "builder_army_lists", "users"
   add_foreign_key "ninth_age_armies", "ninth_age_versions", column: "version_id", on_delete: :cascade
   add_foreign_key "ninth_age_army_magic_spell_translations", "ninth_age_army_magic_spells", on_delete: :cascade
@@ -673,21 +871,29 @@ ActiveRecord::Schema.define(version: 20171211133232) do
   add_foreign_key "ninth_age_domain_magic_translations", "ninth_age_domain_magics", on_delete: :cascade
   add_foreign_key "ninth_age_domain_magics", "ninth_age_versions", column: "version_id"
   add_foreign_key "ninth_age_equipment_translations", "ninth_age_equipments", on_delete: :cascade
+  add_foreign_key "ninth_age_equipment_unit_troop_translations", "ninth_age_equipment_unit_troops"
   add_foreign_key "ninth_age_equipment_unit_troops", "ninth_age_equipments", column: "equipment_id"
   add_foreign_key "ninth_age_equipment_unit_troops", "ninth_age_troops", column: "troop_id"
   add_foreign_key "ninth_age_equipment_unit_troops", "ninth_age_units", column: "unit_id"
+  add_foreign_key "ninth_age_equipments", "ninth_age_armies", column: "army_id", on_delete: :cascade
+  add_foreign_key "ninth_age_equipments", "ninth_age_versions", column: "version_id", on_delete: :cascade
   add_foreign_key "ninth_age_extra_item_categories", "ninth_age_armies", column: "army_id"
+  add_foreign_key "ninth_age_extra_item_categories", "ninth_age_versions", column: "version_id", on_delete: :cascade
   add_foreign_key "ninth_age_extra_item_category_translations", "ninth_age_extra_item_categories", on_delete: :cascade
   add_foreign_key "ninth_age_extra_item_translations", "ninth_age_extra_items", on_delete: :cascade
   add_foreign_key "ninth_age_extra_items", "ninth_age_extra_item_categories", column: "extra_item_category_id"
+  add_foreign_key "ninth_age_extra_items", "ninth_age_extra_items", column: "extra_item_activator_id", on_delete: :cascade
   add_foreign_key "ninth_age_magic_item_category_translations", "ninth_age_magic_item_categories", on_delete: :cascade
   add_foreign_key "ninth_age_magic_item_translations", "ninth_age_magic_items", on_delete: :cascade
   add_foreign_key "ninth_age_magic_items", "ninth_age_armies", column: "army_id"
   add_foreign_key "ninth_age_magic_items", "ninth_age_magic_item_categories", column: "magic_item_category_id"
   add_foreign_key "ninth_age_magic_items", "ninth_age_magic_items", column: "override_id"
+  add_foreign_key "ninth_age_magic_items", "ninth_age_versions", column: "version_id", on_delete: :cascade
   add_foreign_key "ninth_age_magic_standard_translations", "ninth_age_magic_standards", on_delete: :cascade
   add_foreign_key "ninth_age_magic_standards", "ninth_age_armies", column: "army_id"
   add_foreign_key "ninth_age_magic_standards", "ninth_age_magic_standards", column: "override_id"
+  add_foreign_key "ninth_age_magic_standards", "ninth_age_organisations", column: "organisation_id", on_delete: :cascade
+  add_foreign_key "ninth_age_magic_standards", "ninth_age_versions", column: "version_id", on_delete: :cascade
   add_foreign_key "ninth_age_organisation_changes", "ninth_age_organisations", column: "default_organisation_id"
   add_foreign_key "ninth_age_organisation_changes", "ninth_age_organisations", column: "new_organisation_id"
   add_foreign_key "ninth_age_organisation_changes", "ninth_age_units", column: "unit_id"
@@ -698,9 +904,11 @@ ActiveRecord::Schema.define(version: 20171211133232) do
   add_foreign_key "ninth_age_organisations_units", "ninth_age_organisations", column: "organisation_id"
   add_foreign_key "ninth_age_organisations_units", "ninth_age_units", column: "unit_id"
   add_foreign_key "ninth_age_special_rule_translations", "ninth_age_special_rules", on_delete: :cascade
+  add_foreign_key "ninth_age_special_rule_unit_troop_translations", "ninth_age_special_rule_unit_troops"
   add_foreign_key "ninth_age_special_rule_unit_troops", "ninth_age_special_rules", column: "special_rule_id"
   add_foreign_key "ninth_age_special_rule_unit_troops", "ninth_age_troops", column: "troop_id"
   add_foreign_key "ninth_age_special_rule_unit_troops", "ninth_age_units", column: "unit_id"
+  add_foreign_key "ninth_age_special_rules", "ninth_age_versions", column: "version_id", on_delete: :cascade
   add_foreign_key "ninth_age_troop_translations", "ninth_age_troops", on_delete: :cascade
   add_foreign_key "ninth_age_troop_type_translations", "ninth_age_troop_types", on_delete: :cascade
   add_foreign_key "ninth_age_troops", "ninth_age_troop_types", column: "troop_type_id"
@@ -708,13 +916,33 @@ ActiveRecord::Schema.define(version: 20171211133232) do
   add_foreign_key "ninth_age_troops", "ninth_age_units", column: "unit_id"
   add_foreign_key "ninth_age_unit_option_translations", "ninth_age_unit_options", on_delete: :cascade
   add_foreign_key "ninth_age_unit_options", "ninth_age_domain_magics", column: "domain_magic_id", on_delete: :cascade
+  add_foreign_key "ninth_age_unit_options", "ninth_age_extra_items", column: "extra_item_id", on_delete: :cascade
+  add_foreign_key "ninth_age_unit_options", "ninth_age_organisations", column: "organisation_id", on_delete: :cascade
   add_foreign_key "ninth_age_unit_options", "ninth_age_unit_options", column: "parent_id"
+  add_foreign_key "ninth_age_unit_options", "ninth_age_unit_options", column: "unit_option_activator_id", on_delete: :cascade
   add_foreign_key "ninth_age_unit_options", "ninth_age_units", column: "mount_id", on_delete: :nullify
   add_foreign_key "ninth_age_unit_options", "ninth_age_units", column: "unit_id"
+  add_foreign_key "ninth_age_unit_options", "ninth_age_units", column: "unit_link_id", on_delete: :cascade
   add_foreign_key "ninth_age_unit_translations", "ninth_age_units", on_delete: :cascade
   add_foreign_key "ninth_age_unit_type_translations", "ninth_age_unit_types", on_delete: :cascade
   add_foreign_key "ninth_age_units", "ninth_age_armies", column: "army_id"
   add_foreign_key "ninth_age_units", "ninth_age_unit_types", column: "unit_type_id", on_delete: :cascade
+  add_foreign_key "ninth_age_version_translations", "ninth_age_versions", on_delete: :cascade
+  add_foreign_key "paint_paint_list_units", "ninth_age_units", column: "unit_id"
+  add_foreign_key "paint_paint_list_units", "paint_paint_lists", column: "paint_list_id"
+  add_foreign_key "paint_paint_lists", "ninth_age_armies", column: "army_id"
+  add_foreign_key "paint_paint_lists", "users"
+  add_foreign_key "tournament_custom_points", "tournament_events", column: "event_id"
+  add_foreign_key "tournament_custom_points", "tournament_user_applies", column: "user_apply_id"
+  add_foreign_key "tournament_events", "ninth_age_versions", column: "version_id"
+  add_foreign_key "tournament_events", "users", column: "creator_id"
+  add_foreign_key "tournament_matches", "tournament_rounds", column: "round_id"
+  add_foreign_key "tournament_matches", "tournament_user_applies", column: "user_apply_id"
+  add_foreign_key "tournament_rounds", "tournament_events", column: "event_id"
+  add_foreign_key "tournament_user_applies", "builder_army_lists", column: "army_list_id"
+  add_foreign_key "tournament_user_applies", "ninth_age_armies", column: "army_id"
+  add_foreign_key "tournament_user_applies", "tournament_events", column: "event_id"
+  add_foreign_key "tournament_user_applies", "users"
   add_foreign_key "users", "ninth_age_armies", column: "favorite_army_id", on_delete: :nullify
   add_foreign_key "users_roles", "roles"
   add_foreign_key "users_roles", "users"

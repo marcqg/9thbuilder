@@ -4,65 +4,63 @@
   <div class="army_list_value_notes"><%= @army_list.notes %></div>
 <% end %>
 
-<div class="army_list_value_points">
-  <% @army_list.army.army_magic_spells.each do |army_magic_spell| %>
-    <div class="army_magic_spell">
-      <h2 class="text-center">Racial Trait Spell</h2>
-      <%= army_magic_spell.display_description %>
-      <table>
-        <thead>
-          <th></th>
-          <th class="text-center"><%= t('magic.casting') %></th>
-          <th class="text-center"><%= t('magic.range') %></th>
-          <th class="text-center"><%= t('magic.type') %></th>
-          <th class="text-center"><%= t('magic.duration') %></th>
-          <th><%= t('magic.effect') %></th>
-        </thead>
-        <tbody>
-          <tr>
-            <td colspan="5" class="name"><%= army_magic_spell.name %></td>
-            <td rowspan="2" class="effect"><%= army_magic_spell.display_effect %></tr>
-          <tr>
-            <td>Mf</td>
-            <td class="casting_value text-center"><%= army_magic_spell.display_casting_value %></td>
-            <td class="range text-center"><%= army_magic_spell.display_range %></td>
-            <td class="type_target text-center"><%= army_magic_spell.display_type_target %></td>
-            <td class="duration text-center"><%= army_magic_spell.display_duration %></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  <% end %>  
-  <ul>
+<div class="army_list_infos">
+  <ul id="army_list_organisations" class="list-inline text-center">
     <% @army_list.army_organisation.organisation_groups.each do |organisation_group| %>
         <% army_list_organisation = @army_list.army_list_organisations.find_by(:organisation_id => organisation_group.organisation_id) %>
-        <li class="
-        <% if army_list_organisation != nil && !army_list_organisation.good %>highlight-red
-        <% else %>highlight-green
-        <% end %>">
-          <% if army_list_organisation != nil %><em><%= army_list_organisation.pts %> pts <small>(<%= army_list_organisation.rate %> %)</small></em>
-          <% else %>
-          <% end %> <strong><%= organisation_group.organisation.name.gsub(/\(([\w,\ \+\.\(\)\-]*)\)/, '<span class="text-small">(\1)</span>').html_safe %></strong>
-          <% if !organisation_group.NoLimit? %>
-              <span class="small">(<%= organisation_group.target %> <%= organisation_group.type_target %>)</span>
+        <%= content_tag(:li, {:class => (army_list_organisation != nil && !army_list_organisation.good ? "highlight-red" : "highlight-green")}) do %>
+          <% unless army_list_organisation.nil? %>
+            <em><%= army_list_organisation.pts %> pts <small>(<%= sprintf('%.2f', army_list_organisation.rate) %> %)</small></em>
           <% end %>
-        </li>
+          <strong><%= organisation_group.organisation.name.gsub(/\(([\w,\ \+\.\(\)\-]*)\)/, '<span class="text-small">(\1)</span>').html_safe %></strong>
+          <span class="small"><% unless organisation_group.NoLimit? %>(<%= organisation_group.target %> <%= organisation_group.type_target %>)<%else%>&nbsp;<% end %></span>
+        <% end %>
     <% end %>
   </ul>
 </div>
 
 <%= render :partial => 'export_unit_full', :collection => @army_list.army_list_units, :as => :army_list_unit, :locals => {:include_magics => @include_magics } %>
+<p style='page-break-after:always;'></p>
 
-<div>
-<%= render :partial => 'export_magic_full', :collection => @magics, :as => :magic %>
+<div class="section">
+  <h2><%=t 'magic.index.title' %></h3>
+  <div class="army_list_infos">
+    <% @army_list.army.army_magic_spells.each do |army_magic_spell| %>
+    <div class="army_magic_spell">
+      <h2 class="text-center"><%= t('army_magic_spell.name') %></h2>
+      <%= army_magic_spell.description.to_highlight unless army_magic_spell.description.nil? %>
+      <table>
+        <thead>
+          <th colspan="1" class="name"><%= army_magic_spell.name %></th>
+          <th class="text-center"><%= t('magic.effect') %></th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <strong><%= t('magic.casting') %>:</strong> <%= army_magic_spell.casting_value.to_highlight unless army_magic_spell.casting_value.nil? %><br/>
+              <strong><%= t('magic.range') %>:</strong> <%= army_magic_spell.range.to_highlight unless army_magic_spell.range.nil? %><br/>
+              <strong><%= t('magic.type') %>:</strong> <%= army_magic_spell.display_type_target %><br/>
+              <strong><%= t('magic.duration') %>:</strong> <%= army_magic_spell.display_duration %>
+            </td>
+            <td class="effect"><%= army_magic_spell.effect.to_highlight unless army_magic_spell.effect.nil? %></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <% end %> 
+  </div> 
+  <%= render :partial => 'export_magic_full', :collection => @magics, :as => :magic %>
 </div>
-
+<p style='page-break-after:always;'></p>
+<% unless @magic_items.empty? %>
 <div class="section">
   <h2><%=t 'army_list_unit.edit.magic_items' %></h3>
   <%= render :partial => 'export_magic_item_full', :collection => @magic_items, :as => :magic_item %>
 </div>
-
+<% end %>
+<p style='page-break-after:always;'></p>
 <div class="section">
   <h2><%=t 'army_list_unit.show.special_rules' %></h3>
+  <%= render :partial => 'export_special_rule_full', :collection => @army_special_rules, :as => :special_rule %>
   <%= render :partial => 'export_special_rule_full', :collection => @special_rules, :as => :special_rule %>
 </div>

@@ -4,10 +4,19 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
   <title><%= content_for?(:title) ? yield(:title) : t(:welcome) %> • 9th Age Builder</title>
   <%= stylesheet_link_tag "application", media: 'all' %>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDrD-88cDgY6e-yxhiKEvi1JGr-w-6ICPg&libraries=places" type="text/javascript"></script>
   <%= javascript_include_tag "application" %>
   <%= javascript_tag "BASE_URL = '#{root_path}';" %>
   <%= csrf_meta_tag %>
-  <%= yield(:head) %>
+  <% if content_for?(:head) %>
+    <%= yield(:head) %>
+  <% else %>
+    <meta property="og:site_name" content="<%= content_for?(:title) ? yield(:title) : t(:welcome) %> • 9th Age Builder"/>
+    <meta property="og:title" content="Compose your favorite armies !" />
+    <meta property="og:url" content="<%= url_for(:only_path => false) %>"/>
+    <meta property="og:image" content="<%= request.scheme + '://' + request.host_with_port + asset_path('9th_builder.jpg') %>"/>
+    <meta property="og:description" content="<%= t('home.whoarewe.description') %>">
+  <% end %>
 </head>
 <body>
 
@@ -23,6 +32,8 @@
           <span class="icon-bar"></span>
         </button>
         <a class="navbar-brand" href="<%= root_path %>">The 9th Age<br/><em>Army Builder</em></a>
+
+        <iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fwww.facebook.com%2F9thbuilder%2F&width=144&layout=button_count&action=like&size=small&show_faces=false&share=true&height=46&appId=264383440410252" width="144" height="46" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
       </div>
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -48,6 +59,12 @@
                   <li><%= link_to t('menu.army_lists'), builder_army_lists_path("q[army_id_eq]" => "") %></li>
                   <li><%= link_to t('menu.preferences'), edit_user_registration_path %></li>
                   <li><a href="mailto:support@9thbuilder.com"><%=t 'menu.help' %></a></li>
+                  <%if current_user.has_role? :administrator or current_user.has_role? :moderator %>
+                  <li><%= link_to t('admin.dashboard'), admin_dashboard_path %></li>
+                  <%end%>
+                  <%if current_user.has_role? :administrator or current_user.has_role? :organisator %>
+                  <li><%= link_to t('admin.tournament'), tournament_organisations_path %></li>
+                  <%end%>
                   <li><%= link_to t('menu.signout'), destroy_user_session_path %></li>
                 </ul>
               </li>

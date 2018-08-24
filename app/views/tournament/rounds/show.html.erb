@@ -1,0 +1,75 @@
+<div class="show-round">
+  <%= link_to('Back to tournament', tournament_event_path(@event.id), {:class => 'btn btn-age pull-right'})%>
+
+  <h1 class="event-name"><strong>Tournament:</strong> <%= @event.name %> - Round <%= @round.position %></h1>
+ 
+  <div>
+    <div class="matches">
+    <% @round.matches.group_by { |match| match.table }.each do |(position,matches)| %>
+      <div class="match">
+        <h2>Table <%= position %></h2>
+        <div id="match_<%= position %>" class="match-players" data-table-id="<%= position %>" data-round-id="<%= @round.id %>" data-event-id="<%= @event.id %>">
+          <%matches.each do |match| %>
+            <div class="match-place" data-match-id="<%= match.id %>">
+              <div class="round_match" id="round_match_<%= "#{match.id}_0" %>">
+                <div class="current">
+                  <div class="user_apply_overview">
+                  <div class="army">
+                    <% unless match.user_apply.army.nil? %>
+                      <%= image_tag match.user_apply.army.logo.url(:thumb), alt: match.user_apply.army.name, height: 45 %>
+                    <% else %>
+                      <%= image_tag asset_path('army.jpg'), alt: match.user_apply.name, height: 45 %>
+                    <% end %>
+                  </div>
+                  <div class="name">
+                    <strong><%= transliterate match.user_apply.name %></strong>
+                  </div>
+                  <div class="points">
+                    <input type="number" min="0" step="1" value="<%= match.points %>" data-match-id="<%= match.id %>" data-round-id="<%= @round.id %>" data-event-id="<%= @event.id %>" />
+                  </div>
+                  <div class="clearboth"></div>
+                  </div>
+                </div>
+                <div class="old-matches">
+                <% @event.matches
+                          .where("round_id < ?", @round.id)
+                          .where(:user_apply_id => match.user_apply_id)
+                          .reorder(:round_id => :asc)
+                          .each do |old_match| %>
+                  <%
+                    opponent = @event.matches
+                                      .where.not(:user_apply_id => match.user_apply_id)
+                                      .find_by({:round_id => old_match.round_id, :table => old_match.table})
+
+                    if opponent.nil?
+                      next
+                    end
+                  %>
+                <div class="old-match">
+                  <div class="user_apply_overview">
+                    <div class="army">
+                      <% unless opponent.user_apply.army.nil? %>
+                        <%= image_tag opponent.user_apply.army.logo.url(:thumb), alt: opponent.user_apply.army.name, height: 45 %>
+                      <% else %>
+                        <%= image_tag asset_path('army.jpg'), alt: opponent.user_apply.name, height: 45 %>
+                      <% end %>
+                    </div>
+                    <div class="name">
+                      <strong><%= transliterate opponent.user_apply.name %> <small>(Round <%= old_match.round.position %> - Table <%= old_match.table %>)</small></strong>
+                      <p><%= old_match.points %> Vs <%= opponent.points %></p>
+                    </div>
+                  </div>
+                  </div>
+
+                <%end%>
+                </div>
+
+              </div>
+            </div>
+          <%end%>
+        </div>     
+      </div>
+    <% end %>
+    </div>
+  </div>  
+</div>

@@ -111,8 +111,8 @@
                 <td>HP</td>
                 <td>Def</td>
                 <td>Res</td>
-                <td>As</td>
-                <td>Spe</td>
+                <td>Arm</td>
+                <td></td>
                 <td></td>
               </tr>
               </thead>
@@ -122,8 +122,8 @@
                 <td><%= army_list_unit.unit.carac_hp %></td>
                 <td><%= army_list_unit.unit.carac_def %></td>
                 <td><%= army_list_unit.unit.carac_res %></td>
-                <td><%= army_list_unit.unit.carac_as %></td>
-                <td><%= army_list_unit.unit.carac_spe %></td>
+                <td><%= army_list_unit.unit.carac_arm %></td>
+                <td></td>
                 <td></td>
               </tr>
               </tbody>
@@ -175,25 +175,25 @@
         <% end %>
 
         <!-- EQUIPMENTS -->
-        <%= render :partial => 'ninth_age/equipments/show', :locals => {:equipments => army_list_unit.unit.equipment_unit_troops.where(troop_id: nil).map(&:equipment), :troop => nil} %>
+        <%= render :partial => 'ninth_age/equipment_unit_troops/index', :locals => {:equipments => army_list_unit.unit.equipment_unit_troops.where(troop_id: nil), :troop => nil} %>
 
         <% army_list_unit.unit.troops.select { |t| t.unit_option.nil? or army_list_unit.unit_options.include?(t.unit_option) }.each do |troop| %>
-            <%= render :partial => 'ninth_age/equipments/show', :locals => {:equipments => troop.equipment_unit_troops.map(&:equipment), :troop => troop} %>
+            <%= render :partial => 'ninth_age/equipment_unit_troops/index', :locals => {:equipments => troop.equipment_unit_troops, :troop => troop} %>
         <% end %>
 
         <% if army_list_unit.unit_options.include?(mounts_option) %>
-            <%= render :partial => 'ninth_age/equipments/show', :locals => {:equipments => mounts_option.mount.equipment_unit_troops.map(&:equipment), :troop => mounts_option.mount.troops.first} %>
+            <%= render :partial => 'ninth_age/equipment_unit_troops/index', :locals => {:equipments => mounts_option.mount.equipment_unit_troops, :troop => mounts_option.mount.troops.first} %>
         <% end %>
 
         <!-- SPECIAL RULES -->
-        <%= render :partial => 'ninth_age/special_rules/show', :locals => {:special_rules => army_list_unit.unit.special_rule_unit_troops.where(troop_id: nil).map(&:special_rule), :troop => nil} %>
+        <%= render :partial => 'ninth_age/special_rule_unit_troops/index', :locals => {:special_rules => army_list_unit.unit.special_rule_unit_troops.where(troop_id: nil), :troop => nil} %>
 
         <% army_list_unit.unit.troops.select { |t| t.unit_option.nil? or army_list_unit.unit_options.include?(t.unit_option) }.each do |troop| %>
-            <%= render :partial => 'ninth_age/special_rules/show', :locals => {:special_rules => troop.special_rule_unit_troops.map(&:special_rule), :troop => troop} %>
+            <%= render :partial => 'ninth_age/special_rule_unit_troops/index', :locals => {:special_rules => troop.special_rule_unit_troops, :troop => troop} %>
         <% end %>
 
         <% if army_list_unit.unit_options.include?(mounts_option) %>
-            <%= render :partial => 'ninth_age/special_rules/show', :locals => {:special_rules => mounts_option.mount.special_rule_unit_troops.map(&:special_rule), :troop => mounts_option.mount.troops.first} %>
+            <%= render :partial => 'ninth_age/special_rule_unit_troops/index', :locals => {:special_rules => mounts_option.mount.special_rule_unit_troops, :troop => mounts_option.mount.troops.first} %>
         <% end %>
 
         <!-- MAGIC -->

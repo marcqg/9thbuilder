@@ -1,0 +1,10 @@
+<% if special_rules.any? %>
+  <h4><%=t 'army_list_unit.show.special_rules' %> <%= "(#{troop.name})" unless troop.nil? %></h4>
+  <% special_rules.each do |special_rule| %>
+    • <%= link_to(ninth_age_special_rule_path(special_rule.special_rule_id), {:target => "_blank"}) do %><%= special_rule.special_rule.name %> 
+        <%if !special_rule.info.nil? || !special_rule.jet.nil?%>
+          (<%= special_rule.jet %><%= ", " if !special_rule.jet.nil? && !special_rule.info.nil? %><%= special_rule.info%>)
+        <%end%>
+      <%end%><br />
+  <% end %>
+<% end %>

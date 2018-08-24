@@ -1,0 +1,27 @@
+.paint_list_row {
+	text-align:center;
+
+	.picture {
+		position:relative;
+		width: 100%;
+
+		img {
+			width: 100%;
+		}
+
+		.actions {
+			position: absolute;
+			bottom: 10px;
+			right: 10px;
+
+			i {
+				color: white;
+				text-shadow: 2px 2px #000000;
+
+				&:visited, &:focused, &:hover {
+					color:white
+				}
+			}
+		}
+	}
+}

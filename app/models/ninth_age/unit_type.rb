@@ -1,5 +1,8 @@
 class NinthAge::UnitType < ApplicationRecord
-  has_many :units, dependent: :destroy
+  nilify_blanks :types => [:text, :string]
+  strip_attributes
+  
+  has_many :units, dependent: :destroy, class_name: "NinthAge::Unit"
 
   translates :name
   globalize_accessors

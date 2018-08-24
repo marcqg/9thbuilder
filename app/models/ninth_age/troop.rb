@@ -1,9 +1,14 @@
 class NinthAge::Troop < ApplicationRecord
-  belongs_to :troop_type
-  belongs_to :unit
-  belongs_to :unit_option
-  has_many :equipment_unit_troops, -> { order :position }, dependent: :destroy
-  has_many :special_rule_unit_troops, -> { order :position }, dependent: :destroy
+  nilify_blanks :types => [:text, :string]
+  strip_attributes
+  
+  belongs_to :troop_type, class_name: "NinthAge::TroopType"
+  belongs_to :unit, class_name: "NinthAge::Unit"
+  delegate :army, :to => :unit, :allow_nil => true
+  delegate :version, :to => :unit, :allow_nil => true
+  belongs_to :unit_option, class_name: "NinthAge::UnitOption"
+  has_many :equipment_unit_troops, -> { order :position }, dependent: :destroy, class_name: "NinthAge::EquipmentUnitTroop"
+  has_many :special_rule_unit_troops, -> { order :position }, dependent: :destroy, class_name: "NinthAge::SpecialRuleUnitTroop"
 
   translates :name
   globalize_accessors
@@ -11,19 +16,36 @@ class NinthAge::Troop < ApplicationRecord
 
   enum type_carac: {V1: 0, V2: 1}
 
-  def cache_key
-    super + '-ninth-age-' + Globalize.locale.to_s
-  end
-
+  validates :type_carac, presence: true
+  #validates :troop_type_id, presence: true, if: ->(troop){troop.V1?}
   validates :unit_id, presence: true
   validates :value_points, numericality: { greater_than_or_equal_to: 0, allow_nil: true }
   validates :position, numericality: { greater_than_or_equal_to: 1, only_integer: true, allow_nil: true }
 
+  def cache_key
+    super + '-ninth-age-' + Globalize.locale.to_s
+  end
+
+  scope :ordered, -> { order("ninth_age_troop_translations.name ASC") }
+
   acts_as_list scope: :unit
 
-  attr_accessor :army_filter
-
-  def army_filter
-    @army_filter ||= unit.try(:army).try(:id)
+  ransacker :by_army, proc{ |v|
+    data = NinthAge::Troop.joins(:unit)
+                          .where(ninth_age_units: {army_id: v})
+                          .map(&:id)
+    data = data.present? ? data : nil
+  } do |parent|
+    # some other code..
   end
+
+  #ransacker :by_version, proc{ |v|
+  #  data = NinthAge::Troop.joins(:unit)
+  #                        .joins("INNER JOIN ninth_age_armies ON ninth_age_armies.id = ninth_age_units.army_id")
+  #                        .where(ninth_age_armies: { version_id: v })
+  #                        .map(&:id)
+  #  data = data.present? ? data : nil
+  #}, splat_params: true do |parent|
+  #  parent.table[:id]
+  #end
 end

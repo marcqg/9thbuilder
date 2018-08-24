@@ -1,3 +1,12 @@
+<% content_for :title do %><%= @ninth_age_magic_item.name %> - Magic Item<% end %>
+<% content_for :head do %>
+    <meta property="og:site_name" content="9th Age Builder"/>
+    <meta property="og:title" content="<%= @ninth_age_magic_item.name %> - Magic item" />
+    <meta property="og:url" content="<%= url_for(:only_path => false) %>"/>
+    <meta property="og:image" content="<%= request.scheme + '://' + request.host_with_port + image_path('bt_lexicon.png') %>"/>
+    <meta property="og:description" content="<%= @ninth_age_magic_item.description %>">
+<% end %>
+
 <h1>
   <strong><%= @ninth_age_magic_item.name %></strong> (<%= @ninth_age_magic_item.value_points %> <%= t('ninth_age.figurine.pts') %>) 
   <small><%= @ninth_age_magic_item.magic_item_category.name %></small>
@@ -8,7 +17,9 @@
   	<small>- <%= @ninth_age_magic_item.max %> per Army</small>
   <%end%>
 </h1>
-<p class="small-text"><%= @ninth_age_magic_item.army.name %></p>
+<% unless @ninth_age_magic_item.army_id.nil? %>
+  <p class="small-text"><%= @ninth_age_magic_item.army.name %></p>
+<% end %>
 <% if  @ninth_age_magic_item.type_target.length > 0 %>
   <div>
     <label><%= t('magic_item.duration') %> :</label>
@@ -22,5 +33,5 @@
   </div>
 <%end%>
 <div>
-  <p><%= @ninth_age_magic_item.description %></p>
+  <p><%= raw @ninth_age_magic_item.description.to_highlight unless @ninth_age_magic_item.description.nil? %></p>
 </div>

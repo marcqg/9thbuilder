@@ -25,3 +25,6 @@ build/
 /public/assets
 /bin/wkhtmltopdf
 /vendor/bundle
+
+Gemfile.lock
+.rbenv-vars

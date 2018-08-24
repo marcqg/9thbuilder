@@ -1,0 +1,32 @@
+<% content_for :title do %><%= t('.title') %>: <%= @army.name %> <%= t('.between') %> <%= @min %> <%= t('.and') %> <%= @max %> <%= t '.points' %> <% end %>
+<% content_for :head do %>
+    <meta property="og:site_name" content="9th Age Builder"/>
+    <meta property="og:title" content="<%= t('.title') %>: <%= @army.name %> <%= t('.between') %> <%= @min %> <%= t('.and') %> <%= @max %> <%= t '.points' %> " />
+    <meta property="og:url" content="<%= url_for(:only_path => false) %>"/>
+    <meta property="og:image" content="<%= request.scheme + '://' + request.host_with_port + image_path('bt_lexicon.png') %>"/>
+    <meta property="og:description" content="<%= t('.title') %>: <%= @army.name %> <%= t('.between') %> <%= @min %> <%= t('.and') %> <%= @max %> <%= t '.points' %>">
+<% end %>
+
+<div>
+  <h1 class="text-center"><%= t('.title') %>: <%= @army.name %> <small>(<%= t('.between') %> <%= @min %> <%= t('.and') %> <%= @max %> <%= t '.points' %>)</small></h1>
+  <% @army_lists.each_with_index do |army_list, i| %>
+    <div class="col-md-3 <%= alternate_cell_class(i) %>">
+      <div class="army_list_row">
+        <p class="thumb">
+          <%= link_to(builder_export_army_list_path(army_list, :verbosity => 'full', :format => 'html', :magics => 'magics')) do %>
+            <% unless army_list.army.logo.nil? %>
+                <%= image_tag army_list.army.logo_large.url, alt: army_list.army.name, :size => "220x132" %>
+            <% end %>
+          <% end %>
+        </p>
+        <p class="value_points"><%= value_points army_list.value_points %><br/>
+          <small style="font-size:20px">points</small>
+        </p>
+        <p><%= army_list.name.truncate(60) %></p>
+      </div>
+    </div>
+  <% end %>
+</div>
+<div aria-label="Page navigation" class="apple_pagination">
+  <%= will_paginate @army_lists, :container => false %>
+</div>

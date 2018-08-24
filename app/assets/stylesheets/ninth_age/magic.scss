@@ -1,5 +1,4 @@
 article[class^="magic-"] {
-  border: 1px solid black;
   padding: 10px;
   min-height: 150px;
   cursor: pointer;
@@ -32,77 +31,78 @@ article[class^="magic-"] {
   }
 }
 
-.magic-1 {
+.magic-1, .magic-12 {
 
   > h1, > h4 {
     background-color: #ffe599;
   }
 }
 
-.magic-2, .magic-3 {
+.magic-2, .magic-3, .magic-23 {
 
   > h1, > h4 {
     background-color: #b7b7b7;
   }
 }
 
-.magic-4 {
+.magic-4, .magic-15 {
 
   > h1, > h4 {
     background-color: #cfe2f3;
   }
 }
 
-.magic-5 {
+.magic-5, .magic-16 {
 
   > h1, > h4 {
     background-color: #6aa84f;
   }
 }
 
-.magic-6 {
+.magic-6, .magic-17 {
 
   > h1, > h4 {
     background-color: #434343;
   }
 }
 
-.magic-7 {
+.magic-7, .magic-18 {
 
   > h1, > h4 {
     background-color: #073763;
   }
 }
 
-.magic-8 {
+.magic-8, .magic-19 {
 
   > h1, > h4 {
     background-color: #990000;
   }
 }
 
-.magic-9 {
+.magic-9, .magic-20 {
 
   > h1, > h4 {
     background-color: #3b4300;
   }
 }
 
-.magic-10 {
+.magic-10, .magic-21 {
 
   > h1, > h4 {
     background-color: #ff6060;
   }
 }
 
-.magic-11 {
+.magic-11, .magic-22 {
 
   > h1, > h4 {
     background-color: #741b47;
   }
 }
 
-.magic-5, .magic-6, .magic-7, .magic-8, .magic-9, .magic-10, .magic-11 {
+.magic-5, .magic-6, .magic-7, .magic-8, .magic-9, .magic-10, .magic-11,
+.magic-16, .magic-17, .magic-18, .magic-19, .magic-20, .magic-21, .magic-22 {
   > h1, > h4 {
     color: white;
   }

@@ -1,13 +1,13 @@
 module Builder
   class ArmyListsController < ApplicationController
     before_action :authenticate_user!
-    before_action :load_armies, only: [:new, :edit]
 
     # GET /army_lists
     # GET /army_lists.xml
     def index
 
       @army_lists = current_user.army_lists.includes(:army).order('value_points DESC')
+      @paint_lists = current_user.paint_lists.includes(:army).order(:name)
 
       unless params.include?(:q)
         params[:q] = {}
@@ -44,8 +44,11 @@ module Builder
     # GET /army_lists/new.xml
     def new
       @army_list = Builder::ArmyList.new
+      @army_list.version = NinthAge::Version.last
       @army_list.max = 2500
       @army_list.army_id = params[:army_id] || current_user.favorite_army.try(:id)
+
+      load_armies(@army_list.version)
 
       respond_to do |format|
         format.html # new.html.erb
@@ -56,6 +59,8 @@ module Builder
     # GET /army_lists/1/edit
     def edit
       @army_list = current_user.army_lists.find_by_uuid!(params[:uuid])
+
+      load_armies(@army_list.version)
     end
 
     # GET /army_list/1/new_from
@@ -84,6 +89,7 @@ module Builder
     # PUT /army_lists/1.xml
     def update
       @army_list = current_user.army_lists.find_by_uuid!(params[:uuid])
+      @army_list.update_organisations
 
       respond_to do |format|
         if @army_list.update(army_list_params)
@@ -122,16 +128,21 @@ module Builder
 
       @army_list = Builder::ArmyList.new
       @army_list.user_id = @base_army_list.user_id
+      @army_list.version_id = @base_army_list.version_id
       @army_list.army_id = @base_army_list.army_id
       @army_list.army_organisation_id = @base_army_list.army_organisation_id
       @army_list.name = "#{@base_army_list.name} copy"
       @army_list.notes = @base_army_list.notes
+      @army_list.max = @base_army_list.max
       @army_list.save
 
       @base_army_list.army_list_units.each do |base_army_list_unit|
         army_list_unit = @army_list.army_list_units.build(unit_id: base_army_list_unit.unit_id,
                                                           value_points: base_army_list_unit.value_points,
                                                           size: base_army_list_unit.size)
+        army_list_unit.army_list = @army_list
+        army_list_unit.save!
+        
         army_list_unit.army_list_unit_troops << base_army_list_unit.army_list_unit_troops.collect do |alut|
           army_list_unit_troop = alut.dup
           army_list_unit_troop.army_list_unit = army_list_unit
@@ -147,6 +158,12 @@ module Builder
         army_list_unit.extra_items << base_army_list_unit.extra_items
       end
 
+      @base_army_list.army_list_organisations.each do |base_army_list_organisation|
+        army_list_organisation = base_army_list_organisation.dup
+        army_list_organisation.army_list = @army_list
+        army_list_organisation.save!
+      end
+
       respond_to do |format|
         if @army_list.save
           @army_list.reload
@@ -155,27 +172,41 @@ module Builder
           format.xml { render xml: @army_list, status: :created, location: @army_list }
           format.js { render action: 'create' }
         else
+          p "MESSAGE :"
+          p @army_list.errors.full_messages 
+
           format.html { render action: 'new_from' }
           format.xml { render xml: @army_list.errors, status: :unprocessable_entity }
         end
       end
     end
 
+    def search
+      respond_to do |format|
+        format.html
+      end
+    end
+
     private
 
-    def load_armies
-      if !current_user.has_role?(:Administrator)
+    def load_armies(version)
+
+      @versions = NinthAge::Version.includes(:translations).all
+
+      if !current_user.has_role?(:Administrator) or !current_user.has_role?(:Administrator)
         @armies = NinthAge::Army.includes([:translations, :version])
                       .where('ninth_age_versions.public = ?', true)
+                      .where(:version_id => version.id)
                       .order(:name)
       else
         @armies = NinthAge::Army.includes([:translations, :version])
+                      .where(:version_id => version.id)
                       .order(:name)
       end
     end
 
     def army_list_params
-      params.require(:builder_army_list).permit(:army_id, :army_organisation_id, :name, :notes, :max)
+      params.require(:builder_army_list).permit(:version_id, :army_id, :army_organisation_id, :name, :notes, :max, :rate_with_max)
     end
   end
 end

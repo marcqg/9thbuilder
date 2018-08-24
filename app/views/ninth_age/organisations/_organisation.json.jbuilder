@@ -1,1 +1,1 @@
-json.extract! organisation, :id, :name, :medium_logo_url
+json.extract! organisation, :id, :name, :medium_logo_url, :army_id, :isSpecialRule

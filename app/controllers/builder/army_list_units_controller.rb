@@ -19,8 +19,23 @@ module Builder
       @army_list = current_user.army_lists.find_by_uuid!(params[:army_list_uuid])
       @army_list_unit = @army_list.army_list_units.includes({army_list_unit_troops: [:troop]}).find(params[:id])
 
-      @available_unit_options = @army_list_unit.unit.unit_options.without_parent
-      @magic_items_option = @army_list_unit.unit.unit_options.only_magic_items.order('value_points DESC').first
+      @available_unit_options = @army_list_unit.unit.unit_options.only_parents
+      @available_command_group_unit_options = @army_list_unit.unit.unit_options.only_command_groups
+      @available_mount_unit_options = @army_list_unit.unit.unit_options.only_mounts
+      @available_magic_unit_options = @army_list_unit.unit.unit_options.only_magics
+      
+      option_magic_items = @army_list_unit.unit.unit_options.only_magic_items
+      magic_item = 0
+      @magic_items_option = nil
+      option_magic_items.each do |option_magic_item|
+        if option_magic_item.value_points > magic_item
+          if option_magic_item.unit_option_activator_id.nil? or (!option_magic_item.unit_option_activator_id.nil? && option_magic_item.unit_option_activator.in?(@army_list_unit.army_list_unit_unit_options.map(&:unit_option)))
+            @magic_items_option = option_magic_item
+            magic_item = option_magic_item.value_points
+          end
+        end
+      end 
+
       @extra_items_option = @army_list_unit.unit.unit_options.only_extra_items.order('value_points DESC').first
       @magic_standards_option = @army_list_unit.unit.unit_options.only_magic_standards.order('value_points DESC').first
     end
@@ -44,11 +59,8 @@ module Builder
       @army_list_unit = @army_list.army_list_units.build(unit_id: @base_army_list_unit.unit_id,
                                                          value_points: @base_army_list_unit.value_points,
                                                          size: @base_army_list_unit.size)
-      @army_list_unit.army_list_unit_troops << @base_army_list_unit.army_list_unit_troops.collect do |alut|
-        army_list_unit_troop = alut.dup
-        army_list_unit_troop.army_list_unit = @army_list_unit
-        army_list_unit_troop
-      end
+      @army_list_unit.save!
+
       @army_list_unit.army_list_unit_magic_items << @base_army_list_unit.army_list_unit_magic_items.collect do |alumi|
         army_list_unit_magic_item = alumi.dup
         army_list_unit_magic_item.army_list_unit = @army_list_unit
@@ -81,7 +93,7 @@ module Builder
       respond_to do |format|
         if @army_list_unit.save
           @army_list.reload
-          update_organisations
+          @army_list.update_organisations
 
           format.html { redirect_to @army_list }
           format.xml { render xml: @army_list_unit, status: :created, location: @army_list_unit }
@@ -102,13 +114,28 @@ module Builder
       respond_to do |format|
         if @army_list_unit.update(army_list_unit_params)
           @army_list_unit.save
-          update_organisations
+          @army_list.update_organisations
 
           format.html { redirect_to @army_list }
           format.xml { head :ok }
         else
-          @available_unit_options = @army_list_unit.unit.unit_options.without_parent.exclude_magics_and_extra
-          @magic_items_option = @army_list_unit.unit.unit_options.only_magic_items.first
+          @available_unit_options = @army_list_unit.unit.unit_options.only_parents.exclude_magics_and_extra
+          @available_magic_unit_options = @army_list_unit.unit.unit_options.only_magics
+          @available_command_group_unit_options = @army_list_unit.unit.unit_options.only_command_groups
+          @available_mount_unit_options = @army_list_unit.unit.unit_options.only_mounts
+
+          option_magic_items = @army_list_unit.unit.unit_options.only_magic_items
+          magic_item = 0
+          @magic_items_option = nil
+          option_magic_items.each do |option_magic_item|
+            if option_magic_item.value_points > magic_item
+              if option_magic_items.unit_option_activator_id.nil? or (!option_magic_items.unit_option_activator_id.nil? && option_magic_items.unit_option_activator.in?(army_list_unit.army_list_unit_unit_options.map(&:unit_option)))
+                @magic_items_option = option_magic_items
+                magic_item = option_magic_item.value_points
+              end
+            end
+          end          
+
           @extra_items_option = @army_list_unit.unit.unit_options.only_extra_items.first
           @magic_standards_option = @army_list_unit.unit.unit_options.only_magic_standards.first
 
@@ -131,7 +158,7 @@ module Builder
       @army_list_unit = @army_list.army_list_units.find(params[:id])
       @army_list_unit.destroy
 
-      update_organisations
+      @army_list.update_organisations
 
       respond_to do |format|
         format.html { redirect_to @army_list }
@@ -151,77 +178,7 @@ module Builder
     private
 
     def army_list_unit_params
-      params.require(:builder_army_list_unit).permit(:unit_id, :name, :notes, extra_item_ids: [], magic_standard_ids: [], army_list_unit_troops_attributes: [:id, :army_list_unit_id, :troop_id, :size], army_list_unit_unit_options_attributes: [:id, :army_list_unit_id, :unit_option_id, :quantity, :_destroy], army_list_unit_magic_items_attributes: [:id, :army_list_unit_id, :magic_item_id, :quantity, :_destroy])
-    end
-
-    def update_organisations
-
-      Builder::ArmyListOrganisation.where(army_list_id: @army_list.id).update_all(pts: 0, rate: 0)
-
-      @army_list.army_list_units.each do |army_list_unit|
-
-        #Sum points for all figurines
-        army_list_unit.unit.organisations.each do |organisation|
-
-          organisation_change = NinthAge::OrganisationChange.find_by({unit_id: army_list_unit.unit_id, default_organisation_id: organisation.id})
-          isChange = nil != organisation_change && ((organisation_change.Min? && organisation_change.number <= army_list_unit.size) || (organisation_change.Max? && organisation_change.number >= army_list_unit.size))
-
-          org_id = (isChange ? organisation_change.new_organisation_id : organisation.id)
-
-          organisation_rate = Builder::ArmyListOrganisation.find_or_create_by({organisation_id: org_id, army_list_id: @army_list.id})
-          organisation_rate.pts += army_list_unit.value_points
-          organisation_rate.save
-        end
-
-        #Sum points for mounts
-        mount_option = army_list_unit.unit_options.where.not(:mount => nil).first
-        if nil != mount_option
-
-          mount_option.mount.organisations.each do |mount_organisation|
-            organisation_rate = Builder::ArmyListOrganisation.find_or_create_by({organisation_id: mount_organisation.id, army_list_id: @army_list.id})
-            organisation_rate.pts += mount_option.value_points
-            organisation_rate.save
-          end
-        end
-      end
-
-      pts = Builder::ArmyListOrganisation.where(army_list_id: @army_list.id).map(&:pts).reduce(0, :+)
-      if pts != 0
-        Builder::ArmyListOrganisation.where(army_list_id: @army_list.id).each do |organisation|
-          organisation.rate = (organisation.pts * 100 / pts).round
-          organisation.save
-        end
-      end
-
-      army_organisation = NinthAge::ArmyOrganisation.find(@army_list.army_organisation_id)
-      army_organisation.organisation_groups.each do |organisation_group|
-
-        puts organisation_group.id
-
-        organisation = Builder::ArmyListOrganisation.find_by(army_list_id: @army_list.id, organisation_id: organisation_group.organisation_id)
-        puts organisation != nil
-        puts organisation_group.type_target
-
-        if organisation == nil
-          organisation = Builder::ArmyListOrganisation.new
-          organisation.army_list_id = @army_list.id
-          organisation.organisation_id = organisation_group.organisation_id
-          organisation.save
-        end
-
-        case organisation_group.type_target.to_sym
-          when :NoLimit
-            organisation.good = true
-          when :Max
-            organisation.good = organisation.rate <= organisation_group.target
-          when :Least
-            organisation.good = organisation.rate >= organisation_group.target
-          when :NotAllowed
-            organisation.good = organisation.rate == 0
-        end
-
-        organisation.save
-      end
+      params.require(:builder_army_list_unit).permit(:unit_id, :name, :notes, extra_item_ids: [], army_list_unit_troops_attributes: [:id, :army_list_unit_id, :troop_id, :size], army_list_unit_unit_options_attributes: [:id, :army_list_unit_id, :unit_option_id, :quantity, :_destroy], army_list_unit_magic_items_attributes: [:id, :army_list_unit_id, :magic_item_id, :quantity, :_destroy], army_list_unit_magic_standards_attributes: [:id, :army_list_unit_id, :magic_standard_id, :_destroy])
     end
   end
 end

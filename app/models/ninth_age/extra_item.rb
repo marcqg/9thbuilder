@@ -1,14 +1,19 @@
 class NinthAge::ExtraItem < ApplicationRecord
+  nilify_blanks :types => [:text, :string]
+  strip_attributes
 
-  belongs_to :version
+  belongs_to :extra_item_category, class_name: "NinthAge::ExtraItemCategory"
+  belongs_to :extra_item_activator, foreign_key: 'extra_item_activator_id', dependent: :destroy, class_name: 'NinthAge::ExtraItem'
 
-  belongs_to :extra_item_category
-  has_many :army_list_unit_extra_items, dependent: :destroy
-  has_many :army_list_units, through: :army_list_unit_extra_items
+  has_many :army_list_unit_extra_items, dependent: :destroy, class_name: 'Builder::ArmyListUnitExtraItem'
+  has_many :army_list_units, through: :army_list_unit_extra_items, class_name: 'Builder::ArmyListUnit'
 
-  translates :name, :description
+  translates :name, :description, :infos
   globalize_accessors
   accepts_nested_attributes_for :translations, allow_destroy: true
+
+  validates :extra_item_category_id, :value_points, presence: true
+  validates :value_points, numericality: { greater_than_or_equal_to: 0 }
 
   def name_with_version
     "#{name} - #{version.name}"
@@ -18,8 +23,7 @@ class NinthAge::ExtraItem < ApplicationRecord
     super + '-ninth-age-' + Globalize.locale.to_s
   end
 
-  validates :extra_item_category_id, :value_points, presence: true
-  validates :value_points, numericality: { greater_than_or_equal_to: 0 }
+  scope :ordered, -> { order("ninth_age_extra_item_translations.name ASC") }
 
   scope :available_for, lambda { |extra_item_category, value_points_limit|
     if value_points_limit.nil?

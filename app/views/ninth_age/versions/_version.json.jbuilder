@@ -1,1 +1,1 @@
-json.extract! ninth_age_version, :id, :name
+json.extract! ninth_age_version, :id, :name, :major, :minor, :fix

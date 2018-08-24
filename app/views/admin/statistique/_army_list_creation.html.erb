@@ -1,0 +1,40 @@
+<canvas id="army_chart" width="400" height="250"></canvas>
+<script>
+<%
+	army_labels = []
+	army_lists = []
+	colors = []
+	NinthAge::Army.joins(:army_lists)
+					.where(:version_id => 3)
+					.group_by(&:id).each do |id, lists|
+
+		army_labels << NinthAge::Army.find(id).name
+		army_lists << lists.size
+
+		r = rand(255)
+		g = rand(255)
+		b = rand(255)
+		colors << "rgb(#{r}, #{g}, #{b})"
+	end	
+%>
+
+var config = {
+		type: 'pie',
+		data: {
+			datasets: [{
+				data: <%= army_lists %>,
+				label: 'army list by army',
+           		backgroundColor: ["<%= colors.join('","').html_safe %>"],
+			}],
+			labels: ["<%= army_labels.join('","').html_safe %>"]
+		},
+		options: {
+			responsive: true
+		}
+	};
+
+window.addEventListener("load",function(event) {
+	var ctx = document.getElementById('army_chart').getContext('2d');
+	window.myPie = new Chart(ctx, config);
+},false);
+</script>

@@ -1,0 +1,20 @@
+<li id="user_apply_<%= user_apply.id %>" data-id="<%= user_apply.id %>">
+  <div class="user_apply_overview">
+    <div class="position">
+      <%= "%02d" % user_apply.position %>
+    </div>
+    <div class="name">
+      <strong><%= transliterate user_apply.name %></strong>
+      <% unless user_apply.email.nil? %>
+        <small><%= user_apply.email %></small>
+      <% end %>
+    </div>
+    <div class="army">
+      <%= collection_select :user_apply, :army_id, NinthAge::Army.includes(:translations).with_locales(I18n.locale).where(:version_id => @event.version_id).ordered, :id, :name,{include_blank: 'Select an army', :selected => user_apply.army_id } %>
+    </div>
+    <div class="actions pull-right">
+      <%= content_tag(:i, nil, class: "fa fa-2x fa-trash", data: {url: tournament_user_apply_path(@event, user_apply)})%>
+    </div>
+    <div class="clearboth"></div>
+  </div>
+</li>

@@ -1,9 +1,11 @@
 class NinthAge::DomainMagic < ApplicationRecord
+  nilify_blanks :types => [:text, :string]
+  strip_attributes
 
-  belongs_to :version
-  has_many :domain_magic_spells
+  belongs_to :version, class_name: "NinthAge::Version"
+  has_many :domain_magic_spells, class_name: "NinthAge::DomainMagicSpell"
 
-  has_many :unit_options
+  has_many :unit_options, class_name: "NinthAge::UnitOption"
 
   translates :name, :description
   globalize_accessors
@@ -14,7 +16,7 @@ class NinthAge::DomainMagic < ApplicationRecord
   end
 
   has_attached_file :logo,
-                    styles: { large:  '300x300>', medium: '200x200>', thumb: '100x100>' },
+                    styles: { facebook: '200x200^', large:  '300x300>', medium: '200x200>', thumb: '100x100>' },
                     default_url: ActionController::Base.helpers.image_path('magic.jpg')
   validates_attachment_content_type :logo, content_type: /\Aimage\/.*\z/
 
@@ -32,19 +34,5 @@ class NinthAge::DomainMagic < ApplicationRecord
     self.logo.url(:medium)
   end
 
-  def highlight(text)
-    if text != nil
-      text = text.gsub(/<([\w,\ \+\.\(\)\-"]*)>/, '<strong>\1</strong>').html_safe
-      text = text.gsub(/\{([\w,\ \+\.\(\)\-"]*)\}/, '<span class="highlight-green">{\1}</span>').html_safe
-      text = text.gsub(/\[([\w,\ \+\.\(\)\-"]*)\]/, '<span class="highlight-blue">[\1]</span>').html_safe
-      text = text.gsub(/\|([\w,\ \+\.\(\)\-"]*)\|/, '<span class="highlight-red">\1</span>').html_safe
-      return text
-    end
-
-    return nil
-  end
-
-  def display_description
-    highlight(description)
-  end
+  scope :ordered, -> { order("ninth_age_domain_magic_translations.name ASC") }
 end

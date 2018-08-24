@@ -1,0 +1,1 @@
+json.array! @ninth_age_special_rules, partial: 'ninth_age/special_rules/special_rule', as: :ninth_age_special_rule

@@ -1,0 +1,59 @@
+.show-tournament {
+
+	.btn {
+		margin-left: 10px;
+	}
+
+	a i.fa-print {
+		color: black;
+	}
+
+	h1.event-name {
+		margin-bottom: 0;
+	}
+
+	.event-date {
+		margin-left: 15px;
+	}
+
+	table.list-user-points, table.list-user-custom-points, table.list-user-total-points {
+		width: 100%;
+		clear: both;
+
+		thead {
+			background-color: #56251a;
+			color: white;
+			font-weight: bold;
+
+			th {
+				text-align: center;
+				padding: 2px 5px;
+
+				a{
+					color: white;
+					font-weight: bold;
+				}
+			}
+		}
+
+		tbody {
+			background-color: white;
+
+			tr {
+				border-bottom: 1px solid #56251a;
+			}
+
+			td {
+				padding: 2px 5px;
+
+				&:not(:first-child) {
+					text-align: center;
+				}
+
+				i {
+					color: #56251a;
+				}
+			}
+		}
+	}
+}

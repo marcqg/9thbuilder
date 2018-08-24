@@ -1,6 +1,30 @@
-<h1><%= t('army.index.all_armies') %> (<%= @version.name %>)</h1>
-<div class="armies">
-  <% @armies.each do |army| %>
+<% content_for :title do %>All armies of Version <%= @version.name %><% end %>
+<% content_for :head do %>
+    <meta property="og:site_name" content="9th Age Builder"/>
+    <meta property="og:title" content="All armies of Version <%= @version.name %>" />
+    <meta property="og:url" content="<%= url_for(:only_path => false) %>"/>
+    <meta property="og:image" content="<%= request.scheme + '://' + request.host_with_port + image_path('bt_lexicon.png') %>"/>
+    <meta property="og:description" content="All armies of Version <%= @version.name %>">
+<% end %>
+
+<h1><%= t('army.index.title') %> (<%= @version.name %>)</h1>
+<div class="armies armies-official">
+  <% @armies.where(:is_official => true).each do |army| %>
+      <article class="col-md-3 col-sm-4">
+        <div class="army-<%= army.id %> text-center">
+          <%= link_to (ninth_age_army_path(army.id)) do %>
+              <% unless army.logo.nil? %>
+                  <%= image_tag army.medium_logo_large_url, :class => 'img-responsive', alt: army.name, height: 150 %>
+              <% end %>
+              <h4><%= army.name %></h4>
+          <% end %>
+        </div>
+      </article>
+  <% end %>
+</div>
+<div class="armies armies-unofficial">
+  <h2 class="text-center"><%= t('army.index.unofficial') %></h2>
+  <% @armies.where(:is_official => false).each do |army| %>
       <article class="col-md-3 col-sm-4">
         <div class="army-<%= army.id %> text-center">
           <%= link_to (ninth_age_army_path(army.id)) do %>

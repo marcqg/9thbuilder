@@ -1,1 +1,1 @@
-json.array! @army_lists, partial: 'army_list', as: :army_list
+json.array! @army_lists, partial: 'api/v1/builder/army_lists/army_list', as: :army_list

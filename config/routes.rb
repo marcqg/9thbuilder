@@ -6,10 +6,12 @@ Rails.application.routes.draw do
   localized do
     #filter :locale, exclude: %r{^/admin}
 
+    resources :legals,              only: [:index]
+
     # token auth routes available at /api/v1/auth
     namespace :api do
       namespace :v1 do
-        mount_devise_token_auth_for 'User', at: 'auth'
+        mount_devise_token_auth_for 'User', at: 'auth', skip: [:omniauth_callbacks, :registrations, :passwords, :confirmations, :unlocks, :token_validations]
 
         namespace :builder do
           resources :army_lists,  only: [:index]
@@ -20,14 +22,21 @@ Rails.application.routes.draw do
     ActiveAdmin.routes(self)
     devise_for :users
 
-    get 'army_lists/:uuid.pdf', to: redirect('/buildder/army_lists/%{id}/export-full-magics.pdf')
+    get 'army_lists/:uuid.pdf',                   to: redirect('/buildder/army_lists/%{id}/export-full-magics.pdf')
     get 'army_lists/:uuid/export-:verbosity-:magics', to: redirect('/buildder/army_lists/%{id}/export-%{verbosity}-%{magics}')
 
     namespace :builder do
-      get 'army_lists/:uuid.pdf', to: redirect('/army_lists/%{id}/export-full-magics.pdf'), as: :export_full_army_list
-      get 'army_lists/:uuid/export-:verbosity-:magics' => 'exports#export', as: :export_army_list
+      get 'army_lists/:uuid.pdf',                 to: redirect('/army_lists/%{id}/export-full-magics.pdf'), as: :export_full_army_list
+      get 'army_lists/:uuid/export-:verbosity-:magics' => 'exports#export',             as: :export_army_list
+      get 'army_lists/:uuid/export-txt',          to: 'exports#export_txt',             as: :export_txt_army_list
 
-      resources :army_lists,          only: [:index]
+      resources :army_lists,            only: [:index]
+
+      scope :searchs do
+        get '/',                                  to: 'searchs#index',                  as: :searchs
+        post '/',                                 to: 'searchs#create',                 as: :searchs
+        get '/results-:army_id-:min-:max-:page',  to: 'searchs#show',                   as: :search_results
+      end
 
       resources :army_lists, param: :uuid do
         get 'delete', on: :member
@@ -59,13 +68,25 @@ Rails.application.routes.draw do
       resources :special_rules,         only: [:show]
       resources :equipments,            only: [:show]
 
+      resources :magic_item_categories, only: [:show]
       resources :magic_items,           only: [:show]
+      resources :extra_item_categories, only: [:show]
       resources :extra_items,           only: [:show]
       resources :magic_standards,       only: [:show]
 
       scope '/army-:army_id' do
         resources :army_organisations,  only: [:index]
+        resources :organisations,       only: [:index]
         resources :units,               only: [:index]
+        get '/units/all',               to: 'units#show_all',                 as: :units_by_army
+        get '/mounts',                  to: 'units#mounts'          ,         as: :mounts_by_army
+        get '/special_rules/all',       to: 'special_rules#army_all',         as: :special_rules_by_army
+        get '/equipments',              to: 'equipments#army_all',            as: :equipments_by_army
+        get '/extra_items',             to: 'extra_items#army_all',           as: :extra_items_by_army
+      end
+
+      scope 'extra-item-category-:extra_item_category_id' do
+        get '/army-extra_items',             to: 'extra_items#by_army',            as: :extra_items_with_category_by_army
       end
 
       scope '/domain-magic-:domain_magic_id' do
@@ -73,7 +94,13 @@ Rails.application.routes.draw do
       end
 
       scope '/units-:unit_id' do
-        resources :troops,  only: [:index]
+        resources :troops,              only: [:index]
+      end
+
+      scope '/unit-:unit_id' do
+        resources :troops,              only: [:index]
+        resources :unit_options,        only: [:index]
+        get '/organisations',           to: 'organisations#unit'
       end
 
       scope '/version-:version_id' do
@@ -81,16 +108,53 @@ Rails.application.routes.draw do
         resources :armies,              only: [:index]
         resources :special_rules,       only: [:index]
         resources :equipments,          only: [:index]
+        resources :extra_item_categories, only: [:index]
         resources :extra_items,         only: [:index]
-        resources :magic_items,         only: [:index]
+        resources :magic_item_categories, only: [:index]
         resources :magic_standards,     only: [:index]
 
         get '/ninth-age-special-rules/page-:page',    to: 'special_rules#index'
+        get '/special_rules/all',                     to: 'special_rules#all'
         get '/ninth-age-equipments/page-:page',       to: 'equipments#index'
+        get '/equipments/all',                        to: 'equipments#all'
         get '/ninth-age-extra-items/page-:page',      to: 'extra_items#index'
-        get '/ninth-age-magic-items/page-:page',      to: 'magic_items#index'
+        get '/extra_items/all',                       to: 'extra_items#all'
+        get '/ninth-age-magic-items/page-:page',      to: 'magic_items#all'
         get '/magic_items/all',                       to: 'magic_items#all'
         get '/ninth-age-magic-standards/page-:page',  to: 'magic_standards#index'
+        get '/magic_standards/all',                   to: 'magic_standards#all'
+      end
+
+      scope '/magic-item-category-:category_id' do
+        resources :magic_items,         only: [:index],            as: :magic_items_by_category
+      end
+    end
+
+    namespace :paint do
+      resources :paint_lists
+      resources :paint_list_units,                only: [:create, :update, :destroy]
+      post '/convert/:army_list_id',                  to: 'paint_lists#convert',           as: :convert_paint_paint_list
+    end
+
+    namespace :tournament do
+      resources :events
+      resources :organisations,                   only: [:index]
+      
+
+      scope '/event-:event_id' do
+        scope '/user_applies' do
+          post '/multi',                          to: 'user_applies#multi',               as: :multi_user_apply
+          post '/sort',                           to: 'user_applies#sort',                as: :sort_user_apply
+          get '/add',                             to: 'user_applies#add',                 as: :add_user_apply
+        end
+        resources :user_applies,                  only: [:new, :edit, :create, :update, :destroy]
+        resources :rounds,                        only: [:show, :create]
+        resources :custom_points,                 only: [:index, :update]
+        resources :exports,                       only: [:index]
+
+        scope '/round-:round_id' do
+          resources :matches,                     only: [:update]
+        end
       end
     end
 

@@ -1,9 +1,19 @@
+<% content_for :title do %>All special attributs of Version <%= @version.name %><% end %>
+<% content_for :head do %>
+    <meta property="og:site_name" content="9th Age Builder"/>
+    <meta property="og:title" content="All special attributs of Version <%= @version.name %>" />
+    <meta property="og:url" content="<%= url_for(:only_path => false) %>"/>
+    <meta property="og:image" content="<%= request.scheme + '://' + request.host_with_port + image_path('bt_lexicon.png') %>"/>
+    <meta property="og:description" content="All special attributs of Version <%= @version.name %>">
+<% end %>
+
 <h1><%= t('extra_items.index.title') %></h1>
 
 <div>
   <% @ninth_age_extra_items.each do |ninth_age_extra_item| %>
       <article class="extra-items-<%= ninth_age_extra_item.id %> col-md-3 text-center">
         <h4><%= ninth_age_extra_item.name %></h4>
+        <p><small>(<%= ninth_age_extra_item.extra_item_category.name %>)</small></p>
         <%= link_to(t('extra_items.index.show'), ninth_age_extra_item_path(ninth_age_extra_item)) %>
       </article>
   <% end %>

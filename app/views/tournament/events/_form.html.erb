@@ -1,0 +1,52 @@
+<%= form_for @event, :validate => @event.persisted? do |f| %>
+  <%= render "shared/form_errors", :object => @event %>
+
+  <div class="form-group">
+    <%= f.label :name %>
+    <%= f.text_field :name, :placeholder => t('tournament.event.form.name'), class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :version %>
+    <%= f.collection_select :version_id, NinthAge::Version.includes(:translations).order(:name), :id, :name, {include_blank: false}, {class: 'form-control'} %>
+  </div>
+  
+  <div class="form-group">
+    <%= f.label :address %>
+    <%= f.text_field :address, :placeholder => t('tournament.event.form.address'), class: "form-control" %>
+    <%= f.hidden_field :latitude %>
+    <%= f.hidden_field :longitude %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :start_date %>
+    <%= content_tag(:div, { class: 'input-group date', data:{ provide:'datetimepicker' } }) do %>
+      <%= f.text_field :start_date, :value => (@event.start_date.blank? ? '' : @event.end_date.strftime(t('picker.datetime.rb'))), data: { date_format: t('picker.datetime.js') }, :placeholder => t('tournament.event.form.start_date'), class: "form-control" %>
+      <span class="input-group-addon">
+        <span class="glyphicon glyphicon-calendar"></span>
+      </span>
+    <% end %>   
+  </div>
+
+  <div class="form-group">
+    <%= f.label :end_date %>
+    <%= content_tag(:div, { class: 'input-group date', data:{ provide:'datetimepicker' } }) do %>
+      <%= f.text_field :end_date, :value => (@event.end_date.blank? ? '' : @event.end_date.strftime(t('picker.datetime.rb'))), data: { date_format: t('picker.datetime.js') }, :placeholder => t('tournament.event.form.end_date'), class: "form-control" %>
+      <span class="input-group-addon">
+        <span class="glyphicon glyphicon-calendar"></span>
+      </span>
+    <% end %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :user_max %>
+    <%= f.number_field :user_max, :placeholder => t('tournament.event.form.user_max'), class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :fees %>
+    <%= f.number_field :fees, :placeholder => t('tournament.event.form.fees'), class: "form-control" %>
+  </div>
+
+  <%= f.submit t('tournament.event.form.submit'), class: 'btn btn-age center-btn' %>
+<% end %>

@@ -1,35 +1,50 @@
+<% content_for :title do %><%= @army.name %> Army (<%= @army.version.name %>)<% end %>
+<% content_for :head do %>
+    <meta property="og:site_name" content="9th Age Builder"/>
+    <meta property="og:title" content="<%= @army.name %> Army (<%= @army.version.name %>)" />
+    <meta property="og:url" content="<%= url_for(:only_path => false) %>"/>
+    <meta property="og:image" content="<%= request.scheme + '://' + request.host_with_port + @army.logo_large.url(:facebook) %>"/>
+    <meta property="og:description" content="All units of <%= @army.name %> Army">
+<% end %>
+
 <div class="col-md-12 col-xs-12 col-sm-12 army-<%= @army.id %>">
   <%= image_tag @army.logo_large.url(:large), alt: @army.name, class: 'block-center' %>
+  <%= link_to(t('army.armybook'), ninth_age_units_by_army_path(@army), class: 'block-center text-center') %>
   <h1 class="text-center"><%= @army.name %></h1>
 
   <% if @page == 1 %>
 
       <% @army.army_magic_spells.each do |army_magic_spell| %>
         <div class="army_magic_spell">
-          <h2 class="text-center">Racial Trait Spell</h2>
-          <%= army_magic_spell.display_description %>
-          <table>
-            <thead>
-              <th></th>
-              <th class="text-center"><%= t('magic.casting') %></th>
-              <th class="text-center"><%= t('magic.range') %></th>
-              <th class="text-center"><%= t('magic.type') %></th>
-              <th class="text-center"><%= t('magic.duration') %></th>
-              <th><%= t('magic.effect') %></th>
-            </thead>
-            <tbody>
-              <tr>
-                <td colspan="5" class="name"><%= army_magic_spell.name %></td>
-                <td rowspan="2" class="effect"><%= army_magic_spell.display_effect %></tr>
-              <tr>
-                <td>Mf</td>
-                <td class="casting_value text-center"><%= army_magic_spell.display_casting_value %></td>
-                <td class="range text-center"><%= army_magic_spell.display_range %></td>
-                <td class="type_target text-center"><%= army_magic_spell.display_type_target %></td>
-                <td class="duration text-center"><%= army_magic_spell.display_duration %></td>
-              </tr>
-            </tbody>
-          </table>
+          <h2 class="text-center"><%= t('army_magic_spell.name') %></h2>
+          <% if army_magic_spell.effect.nil? %>
+            <h3><%= army_magic_spell.name %></h3>
+          <% end %>
+          <p><%= raw army_magic_spell.description.to_highlight unless army_magic_spell.description.nil? %></p>
+          <% unless army_magic_spell.effect.nil? %>
+            <table>
+              <thead>
+                <th></th>
+                <th class="text-center"><%= t('magic.casting') %></th>
+                <th class="text-center"><%= t('magic.range') %></th>
+                <th class="text-center"><%= t('magic.type') %></th>
+                <th class="text-center"><%= t('magic.duration') %></th>
+                <th><%= t('magic.effect') %></th>
+              </thead>
+              <tbody>
+                <tr>
+                  <td colspan="5" class="name"><%= army_magic_spell.name %></td>
+                  <td rowspan="2" class="effect"><%= army_magic_spell.effect.to_highlight unless army_magic_spell.effect.nil? %></tr>
+                <tr>
+                  <td>Mf</td>
+                  <td class="casting_value text-center"><%= army_magic_spell.casting_value.to_highlight unless army_magic_spell.casting_value.nil? %></td>
+                  <td class="range text-center"><%= army_magic_spell.range.to_highlight unless army_magic_spell.casting_value.nil? %></td>
+                  <td class="type_target text-center"><%= army_magic_spell.display_type_target %></td>
+                  <td class="duration text-center"><%= army_magic_spell.display_duration %></td>
+                </tr>
+              </tbody>
+            </table>
+          <% end %>  
         </div>
       <% end %>      
 
@@ -46,7 +61,7 @@
                       <p><span class="text-small">(<%= organisation_group.display_type_target %>)</span></p>
                   <% else %>
                       <p>
-                      <span class="text-small">(<%= organisation_group.target %> <%= organisation_group.display_type_target %>
+                      <span class="text-small">(<%= organisation_group.target %>% <%= organisation_group.display_type_target %>
                         )</span></p>
                   <% end %>
                 </li>

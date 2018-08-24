@@ -4,12 +4,13 @@
 		<h4><%= magic.name %></h4>
 	</div>
 	<div class="text-center">
-		<p><%= magic.display_description %></p>
+		<p><%= magic.description.to_highlight unless magic.description.nil? %></p>
 	</div>
 	<table class="army_magic_spell">
 		<thead>				
 			<tr>
-				<th></th>
+				<th class="text-center text-italic"></th>
+				<th class="text-center text-italic"></th>
 				<th class="text-center text-italic">
 					<%= t('magic.casting') %>
 				</th>
@@ -30,23 +31,22 @@
 		<tbody>
 			<% magic.domain_magic_spells.each.with_index do |spell, index| %>
 				<tr>
-					<td colspan="5"><%= spell.name %></td>
-					<td rowspan="2"><%= spell.display_effect %></td>
-				</tr>
-				<tr>
 					<td class="text-center">
 						<%unless spell.type_lvl.nil?%>
 							<%= spell.display_type_lvl %>
 						<%end%>
 					</td>
 					<td class="text-center">
+						<%= spell.name %>
+					</td>
+					<td class="text-center">
 						<%unless spell.casting_value.nil?%>
-							<%= spell.display_casting_value %>
+							<%= spell.casting_value.to_highlight unless spell.casting_value.nil? %>
 						<%end%>
 					</td>
 					<td class="text-center">
 						<%unless spell.range.nil?%>
-							<%= spell.display_range %>
+							<%= spell.range.to_highlight unless spell.range.nil? %>
 						<%end%>
 					</td>
 					<td class="text-center">
@@ -58,6 +58,9 @@
 						<%unless spell.duration.nil?%>
 							<%= spell.display_duration %>
 						<%end%>
+					</td>
+					<td class="magic-spell-effect">
+						<%= spell.effect.to_highlight unless spell.effect.nil? %>
 					</td>
 				</tr>
 		    <% end %>	

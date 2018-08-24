@@ -1,4 +1,14 @@
+<% content_for :title do %><%= @ninth_age_extra_item.name %> - Special attibut<% end %>
+<% content_for :head do %>
+    <meta property="og:site_name" content="9th Age Builder"/>
+    <meta property="og:title" content="<%= @ninth_age_extra_item.name %> - Magic item" />
+    <meta property="og:url" content="<%= url_for(:only_path => false) %>"/>
+    <meta property="og:image" content="<%= request.scheme + '://' + request.host_with_port + image_path('bt_lexicon.png') %>"/>
+    <meta property="og:description" content="<%= @ninth_age_extra_item.description %>">
+<% end %>
+
+
 <h1><%= @ninth_age_extra_item.name %></h1>
 <div>
-  <p><%= @ninth_age_extra_item.description %></p>
+  <p><%= raw @ninth_age_extra_item.description.to_highlight unless @ninth_age_extra_item.description.nil? %></p>
 </div>

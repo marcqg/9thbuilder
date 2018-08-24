@@ -1,14 +1,16 @@
 class NinthAge::MagicItem < ApplicationRecord
+  nilify_blanks :types => [:text, :string]
+  strip_attributes
 
-  belongs_to :version
+  belongs_to :version, class_name: "NinthAge::Version"
 
-  belongs_to :army
-  belongs_to :magic_item_category
+  belongs_to :army, class_name: "NinthAge::Army"
+  belongs_to :magic_item_category, class_name: "NinthAge::MagicItemCategory"
   has_many :army_list_unit_magic_items, dependent: :destroy, :class_name => 'Builder::ArmyListUnitMagicItem'
   has_many :army_list_units, through: :army_list_unit_magic_items, :class_name => 'Builder::ArmyListUnit'
   has_one :override, class_name: 'NinthAge::MagicItem', foreign_key: 'override_id'
 
-  translates :name, :description
+  translates :name, :description, :infos
   globalize_accessors
   accepts_nested_attributes_for :translations, allow_destroy: true
 
@@ -26,6 +28,8 @@ class NinthAge::MagicItem < ApplicationRecord
   def cache_key
     super + '-ninth-age-' + Globalize.locale.to_s
   end
+
+  scope :ordered, -> { order("ninth_age_magic_item_translations.name ASC") }
 
   scope :available_for, lambda { |army, version, value_points_limit|
 
@@ -49,8 +53,7 @@ class NinthAge::MagicItem < ApplicationRecord
   def display_type_target
     names = []
     type_target.each do |tt|
-      display_name = highlight(I18n.t("magic_item.type_target.#{tt}", default: tt))
-      names << display_name
+      names << I18n.t("magic_item.type_target.#{tt}", default: tt).to_highlight
     end
     names.join(', ').html_safe
   end
@@ -62,9 +65,16 @@ class NinthAge::MagicItem < ApplicationRecord
   def display_type_duration
     names = []
     type_duration.each do |tt|
-      display_name = highlight(I18n.t("magic_item.type_duration.#{tt}", default: tt))
-      names << display_name
+      names << I18n.t("magic_item.type_duration.#{tt}", default: tt).to_highlight
     end
     names.join(', ').html_safe
-  end  
+  end 
+
+  ransacker :army_null, formatter: proc {|value|
+    results = NinthAge::MagicItem.where(:army_id => nil).map(&:id) if value == "true"
+    results = NinthAge::MagicItem.all.map(&:id) if value == "false"
+    results.present? ? results : nil
+  } do |parent|
+    parent.table[:id]
+  end 
 end

@@ -1,3 +1,6 @@
+//= require_tree ./common
+//= require_tree ./admin
+
 jQuery(function($) {
   // UNIT OPTION - ARMY_FILTER
   $('#ninth_age_unit_option_unit_id').clone().attr('id', 'ninth_age_unit_option_unit_id_clone').hide().appendTo('body');

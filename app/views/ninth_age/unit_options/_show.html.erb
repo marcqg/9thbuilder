@@ -1,18 +1,34 @@
-<ul  class="option-children children-sub">
+<ul  class="option-children children-sub <% if unit_options.all? {|option| !option.domain_magic_id.nil?} %> list-inline text-center <% end %>">
   <% unit_options.order(:position).each do |unit_option| %>
-    <% unless unit_option.domain_magic_id.nil? %>
-      <li><%= unit_option.domain_magic.name %></li>
+    <% if unit_option.MagicPath? %>
+      <li>
+        <%= image_tag unit_option.domain_magic.logo.url(:thumb), alt: unit_option.domain_magic.name, height: 50,class: 'block-center' %>
+        <p><%= unit_option.display_name %>
+        <% if access_admin %>
+            <%= link_to(admin_ninth_age_unit_option_path(unit_option.id), {:target => "_blank"}) do %>
+              <i class="fa fa-pencil-square-o"></i>
+            <% end %>
+        <% end %></p>
+      </li>
     <% else %>
-      <li><%= unit_option.name %>
-        <% if unit_option.value_points!= nil %>
+      <li><%= unit_option.display_name %>
+        <% if access_admin %>
+            <%= link_to(admin_ninth_age_unit_option_path(unit_option.id), {:target => "_blank"}) do %>
+              <i class="fa fa-pencil-square-o"></i>
+            <% end %>
+        <% end %>
+        <% unless unit_option.infos.nil? or unit_option.infos.empty? %>
+            <small>(<%= unit_option.infos %>)</small>
+        <% end %>
+        <% unless unit_option.value_points.nil? %>
           <% if unit_option.value_points > 0 %>
-            <span class="pull-right"><% if unit_option.is_magic_items %><%= t('up_to')%><% end %> <%= number_with_precision(unit_option.value_points, precision: 0) %> <%= t('ninth_age.figurine.pts') %> <% if unit_option.is_per_model %> <%=  t('per_model') %><% end %></span>
+            <span class="pull-right"><%= t('up_to') if unit_option.MagicEquipment? %> <%= number_with_precision(unit_option.value_points, precision: 0) %> <%=  t('per_model')  if unit_option.is_per_model %></span>
           <% else %>
             <span class="pull-right">free</span>
           <% end %>
         <% end %>
       </li>
-      <%= render :partial => 'ninth_age/unit_options/show', :locals => { :unit_options => unit_option.children} %> 
+      <%= render :partial => 'ninth_age/unit_options/show', :locals => { :unit_options => unit_option.children, :access_admin => access_admin} %> 
     <% end %>
   <% end %>
 </ul>

@@ -1,0 +1,1 @@
+json.partial! 'ninth_age/extra_item_categories/extra_item_category', ninth_age_extra_item_category: @category

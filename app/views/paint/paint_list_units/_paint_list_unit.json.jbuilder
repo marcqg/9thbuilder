@@ -1,0 +1,1 @@
+json.extract! paint_list_unit, :id, :size, :comment, :state, :step, :created_at, :updated_at

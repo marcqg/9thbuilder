@@ -1,6 +1,16 @@
 <a href="https://www.facebook.com/9thbuilder" target="_blank">facebook.com/9thbuilder</a> <%= image_tag "pict_links.png", :size => "18x11" %>
 <a href="http://twitter.com/9thbuilder" target="_blank">twitter.com/9thbuilder</a> <%= image_tag "pict_links.png", :size => "18x11" %>
 <a href="mailto:support@9thbuilder.com"><%=t :help %></a> <%= image_tag "pict_links.png", :size => "18x11" %>
-<a href="http://waaagh-taverne.fr" target="_blank">waaagh taverne</a> <%= image_tag "pict_links.png", :size => "18x11" %>
 <a href="http://lesresistantsbattle.forumactif.org" target="_blank">résistants battle</a> <%= image_tag "pict_links.png", :size => "18x11" %>
 <a href="https://www.facebook.com/fantastique.bataillondejoinville/" target="_blank">fbj</a>
+
+<script>
+	document.addEventListener('DOMContentLoaded', function(event){
+		cookieChoices.showCookieConsentBar(
+			'<%= t 'site.use_cookie' %>',
+			'<%= t 'site.accept' %>',
+			'<%= t 'site.more' %>',
+			'https://www.9thbuilder.com/legales/'
+		);
+	});
+</script>

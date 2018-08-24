@@ -27,6 +27,72 @@ it:
   next: Il prossimo
   per_model: ''
   up_to: fino a
+
+  active_admin:
+    translate:
+      pl: "Polacco"
+      ko: "Coreano"
+    dashboard: "Amministrazione"
+    statistique: "Statistiques"
+    tournament: "Tornei"
+
+  activerecord:
+    models:
+      'ninth_age/unit':
+        one: Unità
+        other: Unità
+      'ninth_age/magic_standard':
+        one: Banner magico
+        other: Striscioni magici
+    attributes:
+      'ninth_age/magic_standard':
+        organisation: Aggiungi organizzazione all'unità
+        organisation_ids: Unità dell'organizzazione vietata
+      'ninth_age/unit':
+        carac_ground_adv: Ava
+        carac_ground_mar: Mar
+        carac_fly_adv: Fly ada
+        carac_fly_mar: Fly mar
+        carac_dis: Dis
+        carac_evoked: Rsr
+        carac_hp: Vit
+        carac_def: Dif
+        carac_res: Res
+        carac_arm: Arm
+      'ninth_age/troop':
+        carac_att: Att
+        carac_of: 'Off'
+        carac_str: For
+        carac_ap: Pen
+        carac_agi: Agi
+      'ninth_age_unit_option':
+        category:
+          NoUse: Generic
+          General: is Général
+          BSB: Alfiere da battaglia
+          Marks: Marks
+          Spells: Sorts
+          Mount: Mount
+          Equipment: Equipaggiamento
+          MagicEquipment: Equipaggiamento speciale
+          MagicOrLine: MagicOrLine
+          MagicPath: Magic path
+          M: Musico
+          S: Alfiere
+          C: Campione
+          MagicBanner: Pu prendere a Incanto di stendardo
+          ArmyAttribut: Extra items
+
+  ninth_age:
+    unit:
+      global: Globali
+      rules: Regole del modello
+      defensive: Difensive
+    troop:
+      offensive: Offensive
+    figurine:
+      pts: pti
+
   menu:
     label: Menu principale
     army_lists: I miei eserciti elenchi
@@ -131,6 +197,9 @@ it:
         type: Tipo di truppa
       magic_items: Articoli magici
       magic_standards: Standard magici
+      magic_unit_options: "Opzioni magiche"
+      magic_lvl_unit_options: "Può diventare (una sola scelta)"
+      path_unit_options: "Deve generare incantesimi da (sceglierne uno)"
       unit_options: Opzioni
       equipments: apparecchiature
       special_rules: Regole speciali
@@ -260,9 +329,23 @@ it:
       title: apparecchiature
       show: Mostrare
   unit:
+    type:
+      label: Tipo
+    size:
+      label: Taglia
+      Standard: "Normale"
+      Large: "Grande"
+      Gigantic: "Gigantesco"
+    base:
+      label: Base
+    limit: 
+      single: "mod. singolo"
+      unit: "Unità/Esercito"
+      army: "Modelli/Esercito"
     show:
-      size: "<Strong>% {min_size} <"
-      change: Le unità% {nome} di% {numero} contano a% {new_name}
+      add_model: " + <strong>%{pts}</strong> pti/modello extra"
+      size: "<strong>%{min_size}-%{max_size}</strong> modelli"
+      change: Le unità %{name} di %{number} contano a %{new_name}
   signin:
     title: registrati
     form:

@@ -1,3 +1,37 @@
+<%
+  army_list_units = @army_list.army_list_units.collect(&:id).compact
+  unit_ids = ::Builder::ArmyListUnit.where(:id => army_list_units)
+                                    .map(&:unit_id)
+  p "unit_ids"
+  p unit_ids
+
+  organisation_id_rejected = @army_list.army_organisation
+                              .organisation_groups
+                              .where(:type_target => :NotAllowed)
+                              .map(&:organisation_id)
+  p "organisation_id_rejected"
+  p organisation_id_rejected
+
+  organisations = @army_list.army_organisation
+                            .organisations
+                            .reject { |org| organisation_id_rejected.include? org.id }
+  p "organisations"
+  p organisations
+    
+  units = organisations.map do |organisation|
+      [
+          organisation.name,
+          organisation.units.includes(:translations)
+              .order('max', 'ninth_age_unit_translations.name')
+              .reject { |u| u.value_points == nil || u.value_points < 1}
+              .reject { |u| unit_ids.include?(u.id) if u.max == unit_ids.count{ |x| x == u.id } }
+              .map { |u| [u.name, u.id] }
+      ]
+      end
+  p "units"
+  p units
+%>
+
 <div class="popin">
 
   <h1><%== t('army_list_unit.new.title') %></h1>
@@ -6,7 +40,7 @@
     <%= render "shared/form_errors", :object => @army_list_unit %>
     <div class="form-group">
       <%= f.label :unit_id %>
-      <%= f.select :unit_id, grouped_options_for_select(NinthAge::Unit.for_select(@army_list), @army_list_unit.unit_id), {}, {class: 'form-control'} %>
+      <%= f.select :unit_id, grouped_options_for_select(units, @army_list_unit.unit_id), {}, {class: 'form-control'} %>
     </div>
     <div class="form-group">
       <%= f.label :name %>

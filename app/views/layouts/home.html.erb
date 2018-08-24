@@ -9,6 +9,11 @@
   <link rel="alternate" href="http://9thbuilder.com" hreflang="x-default"/>
   <link rel="alternate" href="http://9thbuilder.com/en" hreflang="en"/>
   <link rel="alternate" href="http://9thbuilder.com/fr" hreflang="fr"/>
+    <meta property="og:site_name" content="9th Age Builder"/>
+    <meta property="og:title" content="Compose your favorite armies !" />
+    <meta property="og:url" content="<%= url_for(:only_path => false) %>"/>
+    <meta property="og:image" content="<%= request.scheme + '://' + request.host_with_port + asset_path('9th_builder.jpg') %>"/>
+    <meta property="og:description" content="<%= t('home.whoarewe.description') %>">
 </head>
 <body>
 

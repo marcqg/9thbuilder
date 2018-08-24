@@ -1,46 +1,55 @@
+<% content_for :title do %>Version <%= @version.name %><% end %>
+<% content_for :head do %>
+    <meta property="og:site_name" content="9th Age Builder"/>
+    <meta property="og:title" content="Version <%= @version.name %>" />
+    <meta property="og:url" content="<%= url_for(:only_path => false) %>"/>
+    <meta property="og:image" content="<%= request.scheme + '://' + request.host_with_port + image_path('bt_lexicon.png') %>"/>
+    <meta property="og:description" content="All armies of Version <%= @version.name %>">
+<% end %>
+
 <div class="col-md-12 col-xs-12 col-sm-12 version-<%= @version.id %>">
   <h1 class="text-center"><%= @version.name %></h1>
 
   <div class="row">
     <article class="version-<%= @version.id %> col-md-3 col-xs-12 col-sm-6 text-center">
       <%= link_to (ninth_age_domain_magics_path(@version.id)) do %>
-          <%= image_tag asset_path('magic.jpg'), alt: t('magic.index.title'), height: 99, class: 'block-center' %>
+          <%= image_tag asset_path('bt_lexicon_entry.png'), :size => '220x132', alt: t('magic.index.title'), class: 'block-center' %>
           <h4><%= t('magic.index.title') %></h4>
       <% end %>
     </article>
     <article class="version-<%= @version.id %> col-md-3 col-xs-12 col-sm-6 text-center">
       <%= link_to (ninth_age_armies_path(@version.id)) do %>
-          <%= image_tag asset_path('army.jpg'), alt: t('army.index.title'), height: 99, class: 'block-center' %>
+          <%= image_tag asset_path('bt_lexicon_entry.png'), :size => '220x132', alt: t('army.index.title'), class: 'block-center' %>
           <h4><%= t('army.index.title') %></h4>
       <% end %>
     </article>
     <article class="version-<%= @version.id %> col-md-3 col-xs-12 col-sm-6 text-center">
       <%= link_to (ninth_age_extra_items_path(@version.id)) do %>
-          <%= image_tag asset_path('magic-item.jpg'), alt: t('extra_items.index.title'), height: 99, class: 'block-center' %>
+          <%= image_tag asset_path('bt_lexicon_entry.png'), :size => '220x132', alt: t('extra_items.index.title'), class: 'block-center' %>
           <h4><%= t('extra_items.index.title') %></h4>
       <% end %>
     </article>
     <article class="version-<%= @version.id %> col-md-3 col-xs-12 col-sm-6 text-center">
-      <%= link_to (ninth_age_magic_items_path(@version.id)) do %>
-          <%= image_tag asset_path('magic-item.jpg'), alt: t('magic_items.index.title'), height: 99, class: 'block-center' %>
-          <h4><%= t('magic_items.index.title') %></h4>
+      <%= link_to (ninth_age_magic_item_categories_path(@version.id)) do %>
+          <%= image_tag asset_path('bt_lexicon_entry.png'), :size => '220x132', alt: t('magic_item_categories.index.title'), class: 'block-center' %>
+          <h4><%= t('magic_item_categories.index.title') %></h4>
       <% end %>
     </article>
     <article class="version-<%= @version.id %> col-md-3 col-xs-12 col-sm-6 text-center">
       <%= link_to (ninth_age_magic_standards_path(@version.id)) do %>
-          <%= image_tag asset_path('magic-standard.jpg'), alt: t('magic_standards.index.title'), height: 99, class: 'block-center' %>
+          <%= image_tag asset_path('bt_lexicon_entry.png'), :size => '220x132', alt: t('magic_standards.index.title'), class: 'block-center' %>
           <h4><%= t('magic_standards.index.title') %></h4>
       <% end %>
     </article>
     <article class="version-<%= @version.id %> col-md-3 col-xs-12 col-sm-6 text-center">
       <%= link_to (ninth_age_special_rules_path(@version.id)) do %>
-          <%= image_tag asset_path('magic-item.jpg'), alt: t('special_rules.index.title'), height: 99, class: 'block-center' %>
+          <%= image_tag asset_path('bt_lexicon_entry.png'), :size => '220x132', alt: t('special_rules.index.title'), class: 'block-center' %>
           <h4><%= t('special_rules.index.title') %></h4>
       <% end %>
     </article>
     <article class="version-<%= @version.id %> col-md-3 col-xs-12 col-sm-6 text-center">
       <%= link_to (ninth_age_equipments_path(@version.id)) do %>
-          <%= image_tag asset_path('magic-standard.jpg'), alt: t('equipments.index.title'), height: 99, class: 'block-center' %>
+          <%= image_tag asset_path('bt_lexicon_entry.png'), :size => '220x132', alt: t('equipments.index.title'), class: 'block-center' %>
           <h4><%= t('equipments.index.title') %></h4>
       <% end %>
     </article>

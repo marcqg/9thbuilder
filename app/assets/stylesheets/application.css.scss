@@ -13,12 +13,28 @@
  *= require_tree ./common
  *= require_tree ./ninth_age
  *= require_tree ./builder
+ *= require_tree ./paint
+ *= require_tree ./tournament
  */
 @import "common/global";
 @import "bootstrap-sprockets";
 @import "bootstrap";
+@import 'bootstrap-datetimepicker';
 @import "font-awesome";
 @import "home";
+
+.navbar-header{
+  position: relative;
+  iframe {
+    position: absolute;
+    top: 10px;
+    left: 80px;
+
+    span {
+      color: white !important;
+    }
+  }
+}
 
 #army_list_search {
   label {
@@ -360,4 +376,31 @@
 
 #footer {
   position: inherit !important;
+}
+
+#cboxContent #cboxLoadedContent .container{
+  padding-top:50px !important;
+
+  #header{
+    h1{
+      margin-top: 20px;
+    }
+  }
+}
+
+.hidden {
+  display: none;
+}
+
+.center-btn {
+  display: block;
+  margin: auto;
+}
+
+form {
+  .form-group{
+    p {
+      margin: 0;
+    }
+  }
 }

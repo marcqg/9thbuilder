@@ -1,0 +1,491 @@
+\def\languageisenglish{}
+
+
+\documentclass[a4paper,10pt]{extarticle} % extarticle allows to use font size of 8pt.
+
+\usepackage[a4paper, top=2cm, bottom=2cm, left=2cm, right=2cm]{geometry} % Marge reduction.
+
+%% Font and typing packages
+\usepackage{fontspec}
+\setmainfont[
+	Ligatures=TeX,
+	]{Caladea} % default is Latin Modern
+\newfontfamily\titlefont[Ligatures=TeX]{Georgia} % font for front page title
+\usepackage{microtype}			% Greatly improves general appearance of the text.
+\usepackage{siunitx}			% Unit appearance.
+\sisetup{detect-all}				% Avoid using math font in a normal text.
+\usepackage{ulem}				% To cross words out. Use \sout{}.
+\usepackage{anyfontsize}  % Disable the warnings when a font size isn't available.
+\usepackage{unicode-math} % Math characters are copy pasted correctly
+\usepackage{accsupp}				% Allows to automatically replace some characters when copy-pasted
+
+\ifdefined\languageisfrench
+	%% Language specific package
+	\usepackage[french]{babel}
+	\frenchbsetup{StandardLists=true} % Necessary to use enumitem with babel/french.
+\fi
+\ifdefined\languageisenglish
+	%% Language specific package
+	\usepackage[super]{nth}
+\fi
+\ifdefined\languageisitalian
+	%% Language specific package
+	\usepackage[italian]{babel}
+\fi
+\ifdefined\languageisspanish
+	%% Language specific package
+	\usepackage[spanish]{babel}
+\fi
+\ifdefined\languageispolish
+	%% Language specific package
+	\usepackage[polish]{babel}
+\fi
+\ifdefined\languageisrussian
+	%% Language specific package
+	\usepackage[russian]{babel}
+\fi
+\ifdefined\languageisgerman
+	%% Language specific package
+	\usepackage[german]{babel}
+\fi
+
+%% Array utilities
+\usepackage{array}				% Additionnal options for arrays.
+\usepackage{colortbl}			% Additionnal options for coloring arrays.
+\usepackage[table]{xcolor}		% Auto alternate grey-white rows.
+\usepackage{multirow}		% make a row from multiple rows
+
+%% List utilities
+\usepackage[inline]{enumitem}   % Display inline lists.
+\usepackage{etoolbox}           % General utility. Good for lists for instance.
+\usepackage{xparse}             % List utilities.
+
+%% Page utilities
+\usepackage{graphicx}        % for the \includegraphics command
+\usepackage{parskip} 			% no paragraph indentation and spaces between paragraphs.
+\usepackage{multicol}			% Allows to divide a part of the page in multiple columns.
+\usepackage{fancyhdr}		% For custom headers and foot texts
+\usepackage{titlesec}			% title customization
+\pagestyle{fancy}
+\usepackage{framed}
+\usepackage{csquotes}		% automatic quotation marks adapted of the current language. can be summoned with \enquote{X}
+	
+%% Others
+\usepackage{calc}
+\usepackage{epstopdf}         % needed to use the .eps format in LuaTeX
+\usepackage{xstring}            % String parsing, cutting, etc.
+\definecolor{linkcolour}{RGB}{131,25,139}
+\usepackage{hyperref} % Links in PDF.
+\usepackage[ocgcolorlinks]{ocgx2}
+
+\makeatletter
+
+%%% Language specific stuff
+
+<%= render partial: "/shared/latex/language_specific_files" %>
+
+%%% Technical commands %%%
+
+% Necessary for language_specific
+\newcommand{\ifsubstring}[4]{%
+\protected@edef\split@temp{#1}%
+\protected@edef\split@tempbis{#2}%
+\saveexpandmode%
+\expandarg\IfSubStr{\split@temp}{\split@tempbis}{#3}{#4}%
+\restoreexpandmode%
+}
+
+\newcommand{\isitoneornot}[3]{%
+% First step is to remove spaces if there are some
+\def\numberwithoutspaces{\expandafter\removespaces\expandafter{#1}}%
+% Next step is getting rid of formatting if there are any (bold, color, ...)
+\pdfstringdef\cleannumber{\numberwithoutspaces}%
+%Defining 1 in \pdfstringdef terms (it will add \376\377\000 before usually - unicode identifier)
+\pdfstringdef\numberone{1}%
+% Now we can try if it is 1 or not
+\ifsubstring{\numberone}{\cleannumber}{#2}{#3}%
+}
+
+\newcommand{\isthereaplusornot}[3]{%
+\ifsubstring{#1}{+}{#2}{#3}%
+}
+
+\def\removespaces#1{\zap@space#1 \@empty}
+
+% Other
+\newcommand{\leftspecialbracket}{% angle bracket that get replaced by a < when copy pasted
+\BeginAccSupp{method=hex,unicode,ActualText=003C}%
+$\langle$%
+\EndAccSupp{}%
+}
+
+\newcommand{\rightspecialbracket}{% angle bracket that get replaced by a > when copy pasted
+\BeginAccSupp{method=hex,unicode,ActualText=003E}%
+$\rangle$%
+\EndAccSupp{}%
+}
+
+\newenvironment{hidewhenprinted}{\begin{ocg}[printocg=never]{HideWhenPrinted}{id1}{1}}{\end{ocg}}
+
+\newcommand{\boosted}[1]{\textbf{\textcolor{blue}{$\{$#1$\}$}}}
+\newcommand{\base}[1]{\textcolor{red}{\hspace*{-0.25ex}\leftspecialbracket{}#1\rightspecialbracket{}}}
+\newcommand{\secboosted}[1]{\textbf{\textcolor{green!50!black}{$\{$\hspace*{-0.6ex}$\{$#1$\}$\hspace*{-0.6ex}$\}$}}} % deprecated
+\newcommand{\specialboosted}[1]{\textbf{\textcolor{olive}{\hspace*{-0.25ex}\leftspecialbracket{}\hspace*{-0.4ex}\leftspecialbracket{}#1\rightspecialbracket{}\hspace*{-0.4ex}\rightspecialbracket{}}}}
+
+\newcommand{\newrule}{\textcolor{green!50!black}}
+\newcommand{\removedrule}[1]{\textcolor{green!50!black}{\sout{#1}}}
+\newcommand{\starsymbol}{$\star$}
+\newcommand{\refsymbol}{$^\star$}
+
+\DeclareSIUnit{\degree}{\SIUnitSymbolDegree}
+\DeclareSIUnit{\inch}{″}
+\DeclareSIUnit{\foot}{′}
+\newcommand{\range}[1] {\labels@range~#1\si{\inch}}
+\newcommand{\distance}[1] {#1\si{\inch}}
+\newcommand{\result}[1] {‘#1’}
+
+\newcommand{\verysmallfontsize}{\fontsize{4}{4.8}\selectfont}
+\newcommand{\smallfontsize}{\fontsize{6}{7.2}\selectfont}
+\newcommand{\normalfontsize}{\fontsize{8}{9.6}\selectfont}
+\newcommand{\largefontsize}{\fontsize{10}{12}\selectfont}
+\newcommand{\largerfontsize}{\fontsize{12}{14.4}\selectfont}
+\newcommand{\Largefontsize}{\fontsize{14}{16.8}\selectfont}
+\newcommand{\Largerfontsize}{\fontsize{15}{18}\selectfont}
+\newcommand{\hugefontsize}{\fontsize{18}{21.6}\selectfont}
+\newcommand{\Hugefontsize}{\fontsize{25}{30}\selectfont}
+
+%%% Table of Contents %%%
+
+\newcommand{\toctarget}[1]{%
+\phantomsection\label{#1}%
+\hypertarget{#1}%
+}
+
+\newcommand{\tocentry}[2]{%
+\noindent\hyperlink{#1}{#2}\hfill\pageref{#1}%
+}
+
+
+%%% Icons %%%
+
+\newcommand{\alchemyicon}{<%= File.join(Rails.root,'public/magics/Icon_alchemy.pdf') %>}
+\newcommand{\shamanismicon}{<%= File.join(Rails.root,'public/magics/Icon_shamanism.pdf') %>}
+\newcommand{\cosmologyicon}{<%= File.join(Rails.root,'public/magics/Icon_cosmology.pdf') %>}
+\newcommand{\divinationicon}{<%= File.join(Rails.root,'public/magics/Icon_divination.pdf') %>}
+\newcommand{\druidismicon}{<%= File.join(Rails.root,'public/magics/Icon_druidism.pdf') %>}
+\newcommand{\evocationicon}{<%= File.join(Rails.root,'public/magics/Icon_evocation.pdf') %>}
+\newcommand{\occultismicon}{<%= File.join(Rails.root,'public/magics/Icon_occultism.pdf') %>}
+\newcommand{\pyromancyicon}{<%= File.join(Rails.root,'public/magics/Icon_pyromancy.pdf') %>}
+\newcommand{\witchcrafticon}{<%= File.join(Rails.root,'public/magics/Icon_witchcraft.pdf') %>}
+\newcommand{\thaumaturgyicon}{<%= File.join(Rails.root,'public/magics/Icon_thaumaturgy.pdf') %>}
+
+\newcommand{\cosmologychaosicon}{<%= File.join(Rails.root,'public/magics/Icon_cosmology_chaos.pdf') %>}
+\newcommand{\cosmologycosmosicon}{<%= File.join(Rails.root,'public/magics/Icon_cosmology_cosmos.pdf') %>}
+
+%%% Headers %%%
+
+\renewcommand{\headrulewidth}{0pt}
+% Footers defined in the main .tex file to customize order
+
+\newcommand{\footerlogosize}{0.5cm}
+
+\setlength{\columnsep}{1cm}
+
+%%% Table parameters %%%
+
+\newcolumntype{M}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{P}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}p{#1}}
+
+\setlength{\tabcolsep}{0pt}
+\renewcommand{\arraystretch}{1.64} % old: 2.1
+
+\arrayrulecolor{black!50}
+\setlength{\arrayrulewidth}{0.5pt}
+
+\newcommand{\newpathlogo}[2]{\clearpage\begin{center}\toctarget{#2}{\includegraphics[height=1.8cm]{#1}}\end{center}}
+
+\newcommand{\starttable}[2]{%
+\begin{center}
+\begin{tabular}{m{0.53\linewidth}m{0.47\linewidth}}
+\rowcolor[RGB]{#1}\multicolumn{2}{p{\linewidth}}{%
+\rule{0pt}{0.7cm}% setting a minimum height
+\centering\hugefontsize\textbf{#2}}\tabularnewline%
+}
+
+\newcommand{\tablepassive}[2]{%
+\multicolumn{2}{p{\linewidth}}{%
+\textbf{#1}\spacebeforecolon{}: #2}\tabularnewline
+}
+
+\newcommand{\tablelabels}{%
+\hspace*{0.08\linewidth}\begin{tabular}{M{0.14\linewidth}M{0.24\linewidth}m{0.25\linewidth}m{0.29\linewidth}}
+\textit{\spellsCastingValue}&
+\textit{\spellsRange}&
+\textit{\spellsType}&
+\textit{\spellsDuration}\tabularnewline
+\end{tabular}&
+\textit{\spellsEffect}\tabularnewline
+\hline
+}
+
+\newcommand{\spelllabelandtitle}[2]{%
+\begin{tabular}{@{}M{0.08\linewidth}@{}m{0.92\linewidth}@{}}%
+{\Largefontsize\textbf{#1}}&%
+%\makebox[0.08\linewidth]{\Largefontsize\textbf{#1}}
+{\Largefontsize\textbf{#2}}\tabularnewline%
+\end{tabular}%
+}
+
+\newcommand{\replabel}{\newline\textit{\largefontsize\replicablespellnumber}}
+
+\newcommand{\tablespellcastingvalue}[1]{%
+\vspace*{-5pt}
+\hspace*{0.08\linewidth}\begin{tabular}{M{0.14\linewidth}M{0.24\linewidth}m{0.25\linewidth}m{0.29\linewidth}}
+\textbf{#1}&
+}
+
+\newcommand{\tablespellrange}[1]{%
+\textbf{#1}&
+}
+
+\newcommand{\tablespelltype}[1]{%
+#1 &
+}
+
+\newcommand{\tablespellduration}[1]{%
+#1\tabularnewline
+\end{tabular}
+&
+}
+
+\newcommand{\tablespelleffect}[1]{%
+#1\tabularnewline
+}
+
+\newcommand{\closetable}{%
+\end{tabular}
+\end{center}
+}
+
+\newcommand{\newcosmologylogo}{\clearpage\begin{center}\toctarget{cosmology}{\hspace*{0.3cm}\includegraphics[width=0.5cm]{\cosmologycosmosicon}\hspace*{4.35cm}\includegraphics[height=1.8cm]{\cosmologyicon}\hspace*{3.95cm}\includegraphics[width=0.8cm]{\cosmologychaosicon}}\end{center}}
+
+\newcommand{\starttablecosmology}{%
+\begin{center}%
+\begin{tabular}{M{0.05\linewidth}m{0.15\linewidth}M{0.18\linewidth}m{0.12\linewidth}M{0.15\linewidth}M{0.1\linewidth}m{0.25\linewidth}}%
+\rowcolor[RGB]{\colors@cosmology}\multicolumn{7}{p{\linewidth}}{%
+\rule{0pt}{0.7cm}% setting a minimum height
+\centering{%
+\begin{minipage}{\widthof{\textbf{\cosmos}}}\vspace*{-0.35cm}\textbf{\textcolor{white}{\cosmos}}\end{minipage}%
+\hspace*{3.5cm}%
+\begin{minipage}{\widthof{\hugefontsize\textbf{\cosmology}}}{\vspace*{-0.2cm}\hugefontsize\textbf{\textcolor{white}{\cosmology}}}\end{minipage}%
+\hspace*{3.5cm}%
+\begin{minipage}{\widthof{\textbf{\chaos}}}\vspace*{-0.35cm}\textbf{\textcolor{white}{\chaos}}\end{minipage}%
+}}\tabularnewline%
+}
+
+\newcommand{\tablepassivecosmology}[2]{%
+\multicolumn{7}{p{\linewidth}}{%
+\textbf{#1}\spacebeforecolon{}: #2}\tabularnewline
+}
+
+\newcommand{\tablelabelscosmology}{%
+\hline
+&\textit{\spellsType}&
+\textit{\spellsDuration}&&
+\textit{\spellsCastingValue}&
+\textit{\spellsRange}&
+\tabularnewline
+\hline
+}
+
+\newcommand{\spelllabelandtitlecosmology}[2]{%
+\Largefontsize\textbf{#1}&
+\multicolumn{3}{m{0.45\linewidth}}{\Largefontsize\textbf{#2}}&
+}
+
+\newcommand{\tablespellcastingvaluecosmology}[1]{%
+\textbf{#1}&
+}
+
+\newcommand{\tablespellrangecosmology}[1]{%
+\textbf{#1}&\tabularnewline
+}
+
+\newcommand{\tablecosmosicon}{\vspace*{-0.15cm}\includegraphics[width=0.4cm]{\cosmologycosmosicon}&}
+\newcommand{\tablechaosicon}{\vspace*{0.05cm}\includegraphics[width=0.5cm]{\cosmologychaosicon}&}
+
+\newcommand{\tablespelltextcosmology}[1]{\multicolumn{4}{m{0.62\linewidth}}{#1}\tabularnewline}
+
+
+
+
+\def\colors@alchemy{255,215,0}
+\def\colors@shamanism{114,56,16}
+\def\colors@cosmology{0,57,116}
+\def\colors@divination{47,191,226}
+\def\colors@druidism{127,223,90}
+\def\colors@evocation{94,29,101}
+\def\colors@occultism{222,0,100}
+\def\colors@pyromancy{204,0,0}
+\def\colors@witchcraft{135,139,166}
+\def\colors@thaumaturgy{0,84,34}
+
+
+% Titles
+
+\titleformat{\paragraph}{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
+\titlespacing*{\paragraph}{0pt}{2.5ex plus 1ex minus .2ex}{0.5ex plus .2ex}
+
+\newcommand{\basictitle}[2]{%
+\section*{}\vspace*{-20pt}\noindent\begin{center}\toctarget{#1}{\Largerfontsize\textbf{#2}}\end{center}\vspace*{10pt}
+}
+
+\newcommand{\basicsubtitle}[1]{%
+\noindent{\largerfontsize\textbf{#1}}
+}
+
+\newcommand{\basicsubsubtitle}[1]{%
+\noindent{\largefontsize\textbf{#1}}
+}
+
+
+\newcommand{\booktitle}{Paths of Magic}
+\newcommand{\preversion}{\nth{2} Edition, beta version }
+\newcommand{\version}{0.201.1}
+%\newcommand{\releasedate}{April 1, 2022} % uncomment if you want to set the date yourself, else it will be today's date
+%\newcommand{\translationversion}{PROOFREADING VERSION} % If you want to add a note below the version, for example a translation version
+
+\hypersetup{pdftitle={T9A - \booktitle{} - \version}}
+
+% Footer, you may change the order to follow the alphabetical order of your language
+
+\fancyfoot[L]{\strut\begin{hidewhenprinted}%
+\normalfontsize
+\hyperlink{tableofcontents}{\tableofcontentsInitials}\hspace*{1cm}
+\hyperlink{alchemy}{\includegraphics[height=\footerlogosize]{\alchemyicon}}\hspace*{0.3cm}
+\hyperlink{cosmology}{\includegraphics[height=\footerlogosize]{\cosmologyicon}}\hspace*{0.3cm}
+\hyperlink{divination}{\includegraphics[height=\footerlogosize]{\divinationicon}}\hspace*{0.3cm}
+\hyperlink{druidism}{\includegraphics[height=\footerlogosize]{\druidismicon}}\hspace*{0.3cm}
+\hyperlink{evocation}{\includegraphics[height=\footerlogosize]{\evocationicon}}
+\end{hidewhenprinted}}
+\fancyfoot[R]{\strut\begin{hidewhenprinted}%
+\normalfontsize
+\hyperlink{occultism}{\includegraphics[height=\footerlogosize]{\occultismicon}}\hspace*{0.3cm}
+\hyperlink{pyromancy}{\includegraphics[height=\footerlogosize]{\pyromancyicon}}\hspace*{0.3cm}
+\hyperlink{shamanism}{\includegraphics[height=\footerlogosize]{\shamanismicon}}\hspace*{0.3cm}
+\hyperlink{thaumaturgy}{\includegraphics[height=\footerlogosize]{\thaumaturgyicon}}\hspace*{0.3cm}
+\hyperlink{witchcraft}{\includegraphics[height=\footerlogosize]{\witchcrafticon}}\hspace*{1cm}
+\hyperlink{magicphasesummary}{\summariesInitials}
+\end{hidewhenprinted}}
+
+% Document Titles
+
+\newcommand{\howtousethisdoc}{How to Use this Document}
+\newcommand{\magicphasesummary}{Magic Phase Summary}
+\newcommand{\changelog}{Change Log}
+
+% Table Titles
+
+\newcommand{\spellsCastingValue}{Casting Value}
+\newcommand{\spellsRange}{Range}
+\newcommand{\spellsType}{Type}
+\newcommand{\spellsDuration}{Duration}
+\newcommand{\spellsEffect}{Effect}
+
+% Paths Table of Contents names
+
+\newcommand{\alchemyTOC}{Alchemy}
+\newcommand{\shamanismTOC}{Shamanism}
+\newcommand{\cosmologyTOC}{Cosmology}
+\newcommand{\divinationTOC}{Divination}
+\newcommand{\druidismTOC}{Druidism}
+\newcommand{\evocationTOC}{Evocation}
+\newcommand{\occultismTOC}{Occultism}
+\newcommand{\pyromancyTOC}{Pyromancy}
+\newcommand{\witchcraftTOC}{Witchcraft}
+\newcommand{\thaumaturgyTOC}{Thaumaturgy}
+
+% Titlepage, you may change the order to follow the alphabetical order of your language
+
+\newcommand{\titlepagelefticons}{%
+\includegraphics[height=\iconheight]{\alchemyicon}
+
+\vspace*{\spacebetweeniconrows}
+
+\includegraphics[height=\iconheight]{\divinationicon}
+
+\vspace*{\spacebetweeniconrows}
+
+\includegraphics[height=\iconheight]{\evocationicon}
+
+\vspace*{\spacebetweeniconrows}
+
+\includegraphics[height=\iconheight]{\pyromancyicon}
+
+\vspace*{\spacebetweeniconrows}
+
+\includegraphics[height=\iconheight]{\thaumaturgyicon}
+}
+
+\newcommand{\titlepagetoc}{%
+\tocentry{alchemy}{\alchemyTOC}
+
+\tocentry{cosmology}{\cosmologyTOC}
+
+\tocentry{divination}{\divinationTOC}
+
+\tocentry{druidism}{\druidismTOC}
+
+\tocentry{evocation}{\evocationTOC}
+
+\tocentry{occultism}{\occultismTOC}
+
+\tocentry{pyromancy}{\pyromancyTOC}
+
+\tocentry{shamanism}{\shamanismTOC}
+
+\tocentry{thaumaturgy}{\thaumaturgyTOC}
+
+\tocentry{witchcraft}{\witchcraftTOC}
+}
+
+\newcommand{\titlepagerighticons}{%
+\includegraphics[height=\iconheight]{\cosmologyicon}
+
+\vspace*{\spacebetweeniconrows}
+
+\includegraphics[height=\iconheight]{\druidismicon}
+
+\vspace*{\spacebetweeniconrows}
+
+\includegraphics[height=\iconheight]{\occultismicon}
+
+\vspace*{\spacebetweeniconrows}
+
+\includegraphics[height=\iconheight]{\shamanismicon}
+
+\vspace*{\spacebetweeniconrows}
+
+\includegraphics[height=\iconheight]{\witchcrafticon}
+}
+
+\def\thereisachangelog{} % comment if there is no change log, it will remove the changelog entry in the ToC
+
+% Footers name for ToC and Summaries
+
+\newcommand{\tableofcontentsInitials}{Contents}
+\newcommand{\summariesInitials}{Summary}
+
+\newcommand{\characteronly}{Character only}
+
+
+
+
+
+
+
+\begin{document}
+
+<%= yield %>
+
+\end{document}

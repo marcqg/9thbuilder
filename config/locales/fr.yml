@@ -21,11 +21,58 @@
 
 fr:
   welcome: "Bienvenue"
+
+  site: 
+    use_cookie: 'Ce site utilise des cookies pour vous offrir le meilleur service. En poursuivant votre navigation, vous acceptez l’utilisation des cookies.'
+    accept: 'J’accepte'
+    more: 'En savoir plus'
+    
   help: "aide"
   close: "Fermer"
   save: "Valider"
   next: "Suivant"
   per_model: "/fig."
+
+  activerecord:
+    models:
+      'ninth_age/unit':
+        one: Unit
+        other: Units
+    attributes:
+      'ninth_age/unit':
+        carac_ground_adv: MS
+        carac_ground_mar: MF
+        carac_fly_adv: Vole MS
+        carac_fly_mar: Vole MF
+        carac_dis: Dis
+        carac_evoked: Rea
+        carac_hp: PV
+        carac_def: Déf
+        carac_res: Rés
+        carac_arm: Arm
+      'ninth_age/troop':
+        carac_att: Att
+        carac_of: 'Off'
+        carac_str: Fo
+        carac_ap: PA
+        carac_agi: Agi
+      'ninth_age_unit_option':
+        category:
+          NoUse: Generic
+          General: is Général
+          BSB: Porteur de la grande bannière
+          Marks: Marks
+          Spells: Sorts
+          Mount: Monture
+          Equipment: Equipment
+          MagicEquipment: Équipement spécial
+          MagicOrLine: MagicOrLine
+          MagicPath: Domaine de magie
+          M: Musicien
+          S: Porte-étendard
+          C: Champion
+          MagicBanner: Enchantement d’étendard
+          ArmyAttribut: Extra items
 
   menu:
     label: "Menu principal"
@@ -63,6 +110,25 @@ fr:
       available:
         on_platform: "Actuellement disponible sur :"
         google: "Obtenez la sur Google Play"
+
+  lexicon:
+    index:
+      show: "Livres d'armée"
+
+  paint_list:
+    index:
+      title: "Ma liste de peinture"
+      add: "Créer une liste de peinture"
+      search: "Valider"
+    unit: Unité
+    size: Taille
+    buy: Acheté
+    trimmed: Ebarbé
+    assembled: Monté
+    first_color: "Sous-chouché"
+    paint: Peint
+    plinth: Soclé
+    comment: Commentaire
 
   army_list:
     index:
@@ -124,6 +190,9 @@ fr:
         type: "Type de troupe"
       magic_items: "Objets magiques"
       magic_standards: "Bannières magiques"
+      magic_unit_options: "Options magiques"
+      magic_lvl_unit_options: "Peut devenir (un seul choix)"
+      path_unit_options: "Doit générer des sorts à partir de (en choisir un)"
       unit_options: "Options"
       equipments: "Equipements"
       special_rules: "Règles spéciales"
@@ -195,6 +264,12 @@ fr:
       Ground: Sol
       Universal: Universel
       Universal_g: "{Universel}"
+
+  unit_options:
+    category:
+      C: C
+      M: M
+      S: E
 
   signin:
     title: "Se connecter"
@@ -268,3 +343,8 @@ fr:
       information: "Vous n'êtes pas satisfait ? <a href=\"mailto:support@9thbuilder.com\">Écrivez nous</a> ou"
       link: "supprimer votre compte directement"
     back: "Page précédente"
+
+  picker:
+    datetime:
+      js: 'DD.MM.YYYY HH:mm'
+      rb: '%d.%m.%Y %H:%M'

@@ -1,0 +1,1 @@
+json.extract! ninth_age_extra_item_category, :id, :name, :army_id, :is_unique, :version_id

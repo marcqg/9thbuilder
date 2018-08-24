@@ -1,1 +1,1 @@
-json.extract! ninth_age_extra_item, :id, :name, :description
+json.extract! ninth_age_extra_item, :id, :extra_item_category_id, :name, :description, :value_points, :max, :extra_item_activator_id
