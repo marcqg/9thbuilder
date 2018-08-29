@@ -76,9 +76,17 @@ class NinthAge::UnitOption < ApplicationRecord
         name
       end
     when :MagicPath
-      self.domain_magic.name
+      unless self.domain_magic.nil?
+        self.domain_magic.name
+      else
+        self.name
+      end
     when :Mount
-      self.mount.name
+      unless self.mount.nil?
+        self.mount.name
+      else
+        self.name
+      end
     else
       self.name
     end
