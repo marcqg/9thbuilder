@@ -248,6 +248,12 @@ function updateArmyListUnitValuePoints() {
 
             var value_points = parseFloat($span_points.data('value-points'));
 
+            var is_per_model = label.find('input[data-is-per-model="true"]').length > 0;
+            console.log(label.text() + ' - per model', is_per_model);
+            if(is_per_model){
+                value_points *= parseFloat($('#army_list_unit_troops .army_list_unit_troop_size').val());
+            }
+
             total += value_points;
         });
 

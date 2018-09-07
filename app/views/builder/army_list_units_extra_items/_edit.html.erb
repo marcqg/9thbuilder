@@ -15,7 +15,7 @@ disabled ||= (max != 0 && count == max && !army_list_unit.extra_items.member?(ex
 <li>
   <em><%= content_tag(:span, value_points(extra_item.value_points), { 'data-value-points' => value_points(extra_item.value_points)}) %> pts</em>
   <%= content_tag(:label, {:class => ("disable" if disabled)}) do %>
-  	<%= check_box_tag "builder_army_list_unit[extra_item_ids][]", extra_item.id, army_list_unit.extra_items.member?(extra_item), :id => "builder_army_list_unit_extra_item_ids_#{extra_item.id}", "data-depend" => depend.try(:id), "data-value-points" => extra_item.value_points, "data-extra-item-activator" => extra_item.extra_item_activator_id, 'data-is-unique' => is_unique, 'disabled' => disabled %>
+  	<%= check_box_tag "builder_army_list_unit[extra_item_ids][]", extra_item.id, army_list_unit.extra_items.member?(extra_item), :id => "builder_army_list_unit_extra_item_ids_#{extra_item.id}", "data-depend" => depend.try(:id), "data-value-points" => extra_item.value_points, "data-extra-item-activator" => extra_item.extra_item_activator_id, 'data-is-unique' => is_unique, "data-is-per-model" => is_per_model, 'disabled' => disabled %>
   	<%= extra_item.name %>
     <% if max != 0 %>
       <small>(<span class="current" data-count="<%= count %>"><%= count %></span>/<span class="max" data-max="<%= max %>"><%= max %></span>)</small>

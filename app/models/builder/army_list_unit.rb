@@ -48,19 +48,15 @@ class Builder::ArmyListUnit < ApplicationRecord
 
     army_list_unit_unit_options.each do |army_list_unit_unit_option|
       army_list_unit_unit_option.quantity = army_list_unit_troops.first.size.to_i if army_list_unit_unit_option.unit_option.is_per_model
-      self.value_points = value_points + army_list_unit_unit_option.unit_option.value_points * army_list_unit_unit_option.quantity
+      self.value_points += army_list_unit_unit_option.unit_option.value_points * army_list_unit_unit_option.quantity
     end
 
     army_list_unit_magic_items.each do |army_list_unit_magic_item|
-      self.value_points = value_points + army_list_unit_magic_item.magic_item.value_points * army_list_unit_magic_item.quantity
+      self.value_points += army_list_unit_magic_item.magic_item.value_points * army_list_unit_magic_item.quantity
     end
 
     army_list_unit_magic_standards.each do |army_list_unit_magic_standard|
-      self.value_points = value_points + army_list_unit_magic_standard.magic_standard.value_points
-    end
-
-    extra_items.each do |extra_item|
-      self.value_points = value_points + extra_item.value_points
+      self.value_points += army_list_unit_magic_standard.magic_standard.value_points
     end
 
     if unit.value_points
@@ -74,6 +70,19 @@ class Builder::ArmyListUnit < ApplicationRecord
       army_list_unit_troops.reject { |alut| alut.troop.value_points.nil? }.each do |army_list_unit_troop|
         self.size = army_list_unit_troop.size.to_i + size
         self.value_points = army_list_unit_troop.size.to_i * army_list_unit_troop.troop.value_points + value_points
+      end
+    end
+    
+    option_extra_items = unit.unit_options.where(:category => [:ArmyAttribut])
+    unless option_extra_items.empty?
+
+      factor = 1
+      unless option_extra_items.where(:is_per_model => true).empty?
+        factor = size
+      end
+      
+      extra_items.each do |extra_item|
+        self.value_points += extra_item.value_points * factor
       end
     end
   end
@@ -99,7 +108,17 @@ class Builder::ArmyListUnit < ApplicationRecord
   end
 
   def extra_items_value_points
-    extra_items.sum('value_points')
+    factor = 1
+    unless unit.unit_options.where(:category => [:ArmyAttribut]).where(:is_per_model => true).empty?
+      factor = size
+    end
+    
+    points = 0
+    extra_items.each do |extra_item|
+      points += extra_item.value_points * factor
+    end
+
+    points
   end
 
   def magic_standards_value_points
