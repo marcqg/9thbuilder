@@ -7,6 +7,17 @@
     <meta property="og:description" content="<%= @ninth_age_magic_standard.description %>">
 <% end %>
 
+<%
+  access_admin = user_signed_in? and (current_user.has_role? :administrator or current_user.has_role? :moderator)
+%>
+<div style="position: relative; clear: both;">
+  <% if access_admin %>
+    <div style="position: relative;">
+      <%= link_to(admin_ninth_age_magic_standard_path(@ninth_age_magic_standard.id), {:target => "_blank", :style => "position: absolute;top: 10px;right: 10px;z-index: 1000;"}) do %>
+        <i class="fa fa-4x fa-pencil-square-o"></i>
+      <% end %>
+    </div>
+  <% end %>
 <h1>
 	<strong><%= @ninth_age_magic_standard.name %></strong> (<%= @ninth_age_magic_standard.value_points %> <%= t('ninth_age.figurine.pts') %>) 
 	<% if !@ninth_age_magic_standard.All?  %>
@@ -17,3 +28,4 @@
 <div>
   <p><%= raw @ninth_age_magic_standard.description.to_highlight unless @ninth_age_magic_standard.description.nil? %></p>
 </div>
+<div>

@@ -33,7 +33,14 @@
           <div class="col-md-3">
           <% if unit.value_points != 0 %><strong><%= number_with_precision(unit.value_points, precision: 0) %></strong> <%= t('ninth_age.figurine.pts') %><% end %>
           <% if unit.max_size > 1 %>
-              <%= raw t('unit.show.add_model', {:pts => number_with_precision(unit.troops.order(:position).first.value_points, precision: 0)}) %>
+              <%
+               troop = unit.troops.order(:position).first
+               value_points = 0
+               unless troop.nil?
+                value_points = troop.value_points
+               end
+              %>
+              <%= raw t('unit.show.add_model', {:pts => number_with_precision(value_points, precision: 0)}) %>
             </div>
             <div class="col-md-4">
               <%= raw t('unit.show.size', {:min_size => unit.min_size, :max_size => unit.max_size}) %>
@@ -214,7 +221,11 @@
             <tbody>
             <% unit.troops.order(:position).each do |troop| %>
                 <tr>
-                  <td><%= troop.name %></td>
+                  <td><%= troop.name %>                 
+                    <% if access_admin %>
+                      <%= link_to(admin_ninth_age_troop_path(troop), {:target => "_blank"}) do %><i class="fa fa-pencil-square-o"></i><% end %>
+                    <% end %>
+                  </td>
                   <td><%= troop.carac_att %></td>
                   <td><%= troop.carac_of %></td>
                   <td><%= troop.carac_str %></td>
@@ -329,13 +340,13 @@
     <div class="col-md-6">
       <% unless unit.unit_options.only_magics.empty? %>
           <h4><%= t('army_list_unit.show.magic_unit_options') %></h4>
-          <% if unit.unit_options.only_magic_lvls.size > 0 %>
+          <% unless unit.unit_options.only_magic_lvls.empty? %>
           <ul class="option-children children-sub">
             <li><%= t('army_list_unit.show.magic_lvl_unit_options') %></li>
             <%= render :partial => 'ninth_age/unit_options/show', :locals => {:unit_options => unit.unit_options.only_magic_lvls, :access_admin => access_admin} %>
           </ul>
           <% end %>
-          <% if unit.unit_options.only_paths.size > 0 %>
+          <% unless unit.unit_options.only_paths.empty? %>
           <ul class="option-children children-sub">
             <li><%= t('army_list_unit.show.path_unit_options') %></li>
             <%= render :partial => 'ninth_age/unit_options/show', :locals => {:unit_options => unit.unit_options.only_paths, :access_admin => access_admin} %>

@@ -11,7 +11,15 @@
   unless army_list_unit_unit_option.nil?
     value_points = army_list_unit_unit_option.quantity * option.value_points
   else
-    value_points = option.is_per_model ? option.value_points * army_list_unit.size : option.value_points
+
+  option_points = 
+    unless option.value_points.nil?
+      option.value_points
+    else 
+      0
+    end
+    
+    value_points = option.is_per_model ? option_points * army_list_unit.size : option_points
   end
 
   #Disable option if extra item is not selected
@@ -27,6 +35,9 @@
       <% unless option.value_points.nil? %>(<em><span><%= value_points(value_points) %></span> pts</em>)<% end %>
       <% unless option.infos.nil? %>
         <small><%= content_tag(:span, option.infos, {:class => 'tooltiptext'}) %></small>
+      <% end %>
+      <% if option.is_per_model %>
+      (<em><%=t('per_model')%></em>)
       <% end %>
     <% end %>
 
