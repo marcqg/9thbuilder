@@ -58,7 +58,7 @@ class NinthAge::UnitOption < ApplicationRecord
   attr_accessor :army_filter
 
   def is_magics_or_extra
-    return self.MagicEquipment? || ((self.BSB? || self.MagicBanner?) && value_points < 1) || self.ArmyAttribut?
+    return self.MagicEquipment? || (self.MagicBanner? && value_points < 1) || self.ArmyAttribut?
   end
 
   def army_filter
