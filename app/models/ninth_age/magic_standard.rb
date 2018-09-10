@@ -33,7 +33,7 @@ class NinthAge::MagicStandard < ApplicationRecord
   scope :available_for, lambda { |army, version, value_points_limit, organisations|
 
     banners =  includes(:translations)
-                .where('(army_id = :army_id OR army_id IS NULL) AND ninth_age_magic_standards.id NOT IN (SELECT override_id FROM ninth_age_magic_standards WHERE army_id = :army_id AND override_id IS NOT NULL)', army_id: army)
+                .where('(ninth_age_magic_standards.army_id = :army_id OR ninth_age_magic_standards.army_id IS NULL) AND ninth_age_magic_standards.id NOT IN (SELECT override_id FROM ninth_age_magic_standards WHERE army_id = :army_id AND override_id IS NOT NULL)', army_id: army)
                 .where(:version_id => version)
     
     unless value_points_limit.nil?
@@ -42,7 +42,7 @@ class NinthAge::MagicStandard < ApplicationRecord
 
     unless organisations.nil?
       banners = banners.includes(:organisations)
-                        .where.not(organisations: organisations)
+                        .where("`ninth_age_magic_standards_organisations`.`organisation_id` NOT IN (?)",organisations.map(&:id))
     end
 
     banners.order('value_points DESC', 'ninth_age_magic_standard_translations.name')
