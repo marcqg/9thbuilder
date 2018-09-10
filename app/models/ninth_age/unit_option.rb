@@ -32,6 +32,7 @@ class NinthAge::UnitOption < ApplicationRecord
   validates :unit_id, presence: true
   validates :value_points, numericality: { greater_than_or_equal_to: -1, allow_nil: true }
   validates :position, numericality: { greater_than: 0, only_integer: true, allow_nil: false }
+  validates :magic_item_factor, numericality: { greater_than: 0, only_integer: true, allow_nil: false }
   validates :is_per_model, inclusion: { in: [true, false] }
   validates :is_multiple, inclusion: { in: [true, false] }
   validates :is_unique_choice, inclusion: { in: [true, false] }

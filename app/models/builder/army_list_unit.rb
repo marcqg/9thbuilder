@@ -51,8 +51,14 @@ class Builder::ArmyListUnit < ApplicationRecord
       self.value_points += army_list_unit_unit_option.unit_option.value_points * army_list_unit_unit_option.quantity
     end
 
+    factor = 1
+    magic_options = self.unit.unit_options.where({:category => :MagicEquipment}).where("magic_item_factor > 1")
+    unless magic_options.empty?
+      factor = magic_options.first.magic_item_factor
+    end
+
     army_list_unit_magic_items.each do |army_list_unit_magic_item|
-      self.value_points += army_list_unit_magic_item.magic_item.value_points * army_list_unit_magic_item.quantity
+      self.value_points += army_list_unit_magic_item.magic_item.value_points * army_list_unit_magic_item.quantity * factor
     end
 
     army_list_unit_magic_standards.each do |army_list_unit_magic_standard|

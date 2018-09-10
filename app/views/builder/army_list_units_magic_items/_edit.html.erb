@@ -11,12 +11,14 @@ army_list_unit_magic_item = army_list_unit.army_list_unit_magic_items.detect { |
 count = army_list_unit.army_list.magic_items.where(:id => magic_item.id).count
 max = magic_item.max
 disabled = (max != 0 && count == max && !army_list_unit.magic_items.member?(magic_item))
+
+value_points = magic_item.value_points * unit_option.magic_item_factor
 %>
 <li>
   <%= hidden_field_tag "builder_army_list_unit[army_list_unit_magic_items_attributes][#{magic_item.id}][_destroy]", 1 %>
-  <em><%= content_tag(:span, value_points(magic_item.value_points), { 'data-value-points' => value_points(magic_item.value_points)}) %> pts</em>
+  <em><%= content_tag(:span, value_points(value_points), { 'data-value-points' => value_points(value_points)}) %> pts</em>
   <%= content_tag(:label, {:class => ("disable" if disabled)}) do %>
-    <%= check_box_tag "builder_army_list_unit[army_list_unit_magic_items_attributes][#{magic_item.id}][_destroy]", false, army_list_unit.magic_items.member?(magic_item), :id => "army_list_unit_magic_item_ids_#{magic_item.id}", "data-depend" => depend.try(:id), "data-radio" => magic_item.magic_item_category.is_multiple ? true : false, "data-value-points" => magic_item.value_points, "data-dominant" => magic_item.is_dominant, 'disabled' => disabled %>
+    <%= check_box_tag "builder_army_list_unit[army_list_unit_magic_items_attributes][#{magic_item.id}][_destroy]", false, army_list_unit.magic_items.member?(magic_item), :id => "army_list_unit_magic_item_ids_#{magic_item.id}", "data-depend" => depend.try(:id), "data-radio" => magic_item.magic_item_category.is_multiple ? true : false, "data-value-points" => value_points, "data-dominant" => magic_item.is_dominant, 'disabled' => disabled %>
     <%= magic_item.name %>
     <% if max != 0 %>
       <small>(<span class="current" data-count="<%= count %>"><%= count %></span>/<span class="max" data-max="<%= max %>"><%= max %></span>)</small>

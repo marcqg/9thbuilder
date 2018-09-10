@@ -66,7 +66,7 @@
 
       <% if @magic_items_option %>
         <div id="army_list_unit_magic_items" class="col-sm-12 col-md-12 army_list_unit_add_element" data-value-points-limit="<%= @magic_items_option.value_points %>">
-          <h3><%=t 'army_list_unit.edit.magic_items' %><br /><span class="points"><%= value_points(@army_list_unit.magic_items_value_points + (@magic_items_option.ArmyAttribut? ? @army_list_unit.extra_items_value_points : 0)) %></span><%if @magic_items_option.value_points > 0 %>/<span class="max-points"><%= value_points(@magic_items_option.value_points) %></span><%end%> pts</h3>
+          <h3><%=t 'army_list_unit.edit.magic_items' %><br /><span class="points"><%= value_points((@army_list_unit.magic_items_value_points + (@magic_items_option.ArmyAttribut? ? @army_list_unit.extra_items_value_points : 0)) * @magic_items_option.magic_item_factor) %></span><%if @magic_items_option.value_points > 0 %>/<span class="max-points"><%= value_points(@magic_items_option.value_points) %></span><%end%> pts</h3>
           <ul>
             <% NinthAge::MagicItemCategory.all.each_with_index do |magic_item_category, index| %>
             <%- magic_items = magic_item_category.magic_items.available_for(@army_list.army, @army_list.army.version, (@magic_items_option.value_points > 0 ? @magic_items_option.value_points : nil)).all %>
