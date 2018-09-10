@@ -26,6 +26,10 @@
     position: relative;
     padding: 0;
 
+    @media #{$portrait} {
+        margin-top: 25px;
+    }
+
     > li {
         position: relative;
         padding: 6px 0;
@@ -143,6 +147,10 @@
     background: image-url("bt_new_army_list_unit.png") no-repeat;
     color: #000;
     margin: 25px auto;
+
+    @media #{$portrait} {
+        padding-top: 45px !important;
+    }
 }
 
 .army_list_value_points,
