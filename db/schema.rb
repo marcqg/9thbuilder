@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180806132759) do
+ActiveRecord::Schema.define(version: 20180910152242) do
 
   create_table "active_admin_comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.integer  "resource_id",                 null: false
@@ -609,6 +609,7 @@ ActiveRecord::Schema.define(version: 20180806132759) do
     t.integer "banner_limit",                                     default: 0,     null: false
     t.integer "category",                                         default: 0,     null: false
     t.boolean "mount_and_carac_points",                           default: false, null: false
+    t.integer "magic_item_factor",                                default: 1,     null: false
     t.index ["domain_magic_id"], name: "index_ninth_age_options_on_magic_id", using: :btree
     t.index ["extra_item_id"], name: "index_ninth_age_unit_options_on_extra_item_id", using: :btree
     t.index ["mount_id"], name: "index_ninth_age_unit_options_on_mount_id", using: :btree

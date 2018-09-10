@@ -1,7 +1,7 @@
 ActiveAdmin.register NinthAge::UnitOption do
   menu parent: 'Ninth Age Army', priority: 10
 
-  permit_params :unit_id, :parent_id, :unit_option_activator_id, :mount_id, :mount_and_carac_points, :category, :unit_link_id, :is_required, :value_points, :position, :has_one_choise, :is_per_model, :is_multiple, :domain_magic_id, :organisation_id, :extra_item_id, :max, :max_model, :min_model, :max_unit, :banner_limit, :is_unique_choice, {:extra_item_category_ids => []}, :locale, translations_attributes: [:id, :name, :infos, :locale, :_destroy]
+  permit_params :unit_id, :parent_id, :unit_option_activator_id, :mount_id, :mount_and_carac_points, :category, :magic_item_factor, :unit_link_id, :is_required, :value_points, :position, :has_one_choise, :is_per_model, :is_multiple, :domain_magic_id, :organisation_id, :extra_item_id, :max, :max_model, :min_model, :max_unit, :banner_limit, :is_unique_choice, {:extra_item_category_ids => []}, :locale, translations_attributes: [:id, :name, :infos, :locale, :_destroy]
 
   filter :value_points
 
@@ -74,6 +74,7 @@ ActiveAdmin.register NinthAge::UnitOption do
       f.input :has_one_choise
       f.input :is_per_model
       f.input :is_multiple
+      f.input :magic_item_factor
       f.input :banner_limit
       f.input :extra_item_category_ids, as: :select, multiple: true, include_blank: true,  
               :input_html => {'data-option-dependent' => true, 'data-option-url' => '/ninth_age/army-:ninth_age_unit_option_army_filter/extra_item_categories/all', 'data-option-observed' => 'ninth_age_unit_option_army_filter'}, 
@@ -110,6 +111,7 @@ ActiveAdmin.register NinthAge::UnitOption do
       row :is_per_model
       row :is_multiple
       row :is_required
+      row :magic_item_factor
       row :domain_magic
       row :organisation
       row :extra_item

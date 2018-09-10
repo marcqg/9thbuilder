@@ -18,6 +18,8 @@ jQuery(function($) {
         
         "#ninth_age_unit_option_mount_and_carac_points_input",
         "#ninth_age_unit_option_mount_input",
+
+        "#ninth_age_unit_option_magic_item_factor_input",
         
         "#ninth_age_unit_option_unit_link_input",
         "#ninth_age_unit_option_organisation_input",
@@ -44,6 +46,8 @@ jQuery(function($) {
 
             case 'MagicEquipment':
                 $("li[id$='_name_input']").show();
+                $("#ninth_age_unit_option_magic_item_factor_input").show();
+                $("#ninth_age_unit_option_magic_item_factor_input input").val(1);
                 break;
 
             case 'BSB':
