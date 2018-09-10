@@ -73,6 +73,10 @@ jQuery(function($) {
                 $("#ninth_age_unit_option_has_one_choise_input").show();
                 $("#ninth_age_unit_option_is_per_model_input").show();
                 $('#ninth_age_unit_option_is_multiple_input').show();
+                $('#ninth_age_unit_option_max_input').show();
+                $('#ninth_age_unit_option_max_model_input').show();
+                $('#ninth_age_unit_option_min_model_input').show();
+                $('#ninth_age_unit_option_max_unit_input').show();
                 break;
 
             case 'ArmyAttribut':
