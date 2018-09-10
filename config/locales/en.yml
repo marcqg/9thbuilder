@@ -53,7 +53,7 @@ en:
     attributes:
       'ninth_age/magic_standard':
         organisation: Add organisation to unit
-        organisation_ids: Forbidden organisation's units
+        organisation_ids: Only organisation's units
       'ninth_age/unit':
         carac_ground_adv: Adv
         carac_ground_mar: Mar

@@ -137,9 +137,14 @@
         <div id="army_list_unit_magic_standards" class="col-sm-12 col-md-12 army_list_unit_add_element">
           <h3><%=t 'army_list_unit.edit.magic_standards' %><br /><span class="points"><%= value_points(@army_list_unit.magic_standards_value_points) %></span><% unless @magic_standards_option.value_points.nil? %>
             <% unless @army_list_unit.unit.V2? %>/<span class="max-points"><%= value_points(@magic_standards_option.value_points) %></span><% end %>
-            <% end %> pts</h3>            
+            <% end %> pts</h3> 
+          <%
+            banners = NinthAge::MagicStandard.available_for(@army_list.army, @army_list.army.version, nil)
+                                              .all
+                                              .reject { |b| (!b.organisations.empty? and (b.organisations.map(&:id) & @army_list_unit.unit.organisations.map(&:id)).empty?)  }
+          %>           
           <ul>
-            <%= render :partial => 'builder/army_list_units_magic_standards/edit', :collection =>  NinthAge::MagicStandard.available_for(@army_list.army, @army_list.army.version, nil, @army_list_unit.unit.organisations).all, :as => :magic_standard, :locals => { :army_list_unit => @army_list_unit, :unit_option => @magic_standards_option } %>
+            <%= render :partial => 'builder/army_list_units_magic_standards/edit', :collection =>  banners, :as => :magic_standard, :locals => { :army_list_unit => @army_list_unit, :unit_option => @magic_standards_option } %>
           </ul>
         </div>
       <% end %>
