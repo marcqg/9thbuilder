@@ -23,6 +23,8 @@
         <% unless unit_option.value_points.nil? %>
           <% if unit_option.value_points > 0 %>
             <span class="pull-right"><%= t('up_to') if unit_option.MagicEquipment? %> <%= number_with_precision(unit_option.value_points, precision: 0) %> <%=  t('per_model')  if unit_option.is_per_model %></span>
+          <% elsif unit_option.value_points == -1 %>
+            <span class="pull-right">no limit</span>
           <% else %>
             <span class="pull-right">free</span>
           <% end %>

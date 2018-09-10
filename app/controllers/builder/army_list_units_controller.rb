@@ -25,7 +25,7 @@ module Builder
       @available_magic_unit_options = @army_list_unit.unit.unit_options.only_magics
       
       option_magic_items = @army_list_unit.unit.unit_options.only_magic_items
-      magic_item = 0
+      magic_item = -2
       @magic_items_option = nil
       option_magic_items.each do |option_magic_item|
         if option_magic_item.value_points > magic_item
