@@ -34,6 +34,9 @@ jQuery(function($) {
         
         switch (self.val()) {
             case 'General':
+                $("#ninth_age_unit_option_value_points_input input").val(0);
+                break;
+
             case 'M':
             case 'S':
             case 'C':
