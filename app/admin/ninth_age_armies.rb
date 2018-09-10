@@ -113,6 +113,9 @@ ActiveAdmin.register NinthAge::Army do
           column do |unit|
             link_to 'Delete', admin_ninth_age_unit_path(unit), :target => "_blank", method: :delete, data: { confirm: 'Are you sure?'}
           end
+          column do |unit|
+            link_to 'Voir unit', ninth_age_unit_path(unit), :target => "_blank"
+          end
         end
       end
     end
