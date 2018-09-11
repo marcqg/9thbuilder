@@ -56,8 +56,8 @@
       <%= image_tag option.domain_magic.logo.url(:thumb), alt: option.display_name, height: 50,class: 'block-center' %>
       <% end %>
 
-      <% unless option.is_magics_or_extra %>
-        <%= check_box_tag "builder_army_list_unit[army_list_unit_unit_options_attributes][#{option.id}][_destroy]", false, army_list_unit.unit_options.member?(option), :id => "builder_army_list_unit_unit_option_ids_#{option.id}", "data-depend" => depend.try(:id), "data-radio" => option.is_unique_choice ? true : nil, "data-per-model" => option.is_per_model ? true : nil, "data-is-multiple" => option.is_multiple ? true : nil, "data-value-points" => option.value_points, "data-extra-item" => option.extra_item_id, "data-unit-option-activator" => option.unit_option_activator_id %>
+      <% if !option.is_magics_or_extra || (option.ArmyAttribut? && option.value_points > 0) %>
+        <%= check_box_tag "builder_army_list_unit[army_list_unit_unit_options_attributes][#{option.id}][_destroy]", false, army_list_unit.unit_options.member?(option), :id => "builder_army_list_unit_unit_option_ids_#{option.id}", "data-depend" => depend.try(:id), "data-radio" => option.is_unique_choice ? true : nil, "data-per-model" => option.is_per_model ? true : nil, "data-is-multiple" => option.is_multiple ? true : nil, "data-value-points" => option.value_points, "data-extra-item" => option.extra_item_id, "data-unit-option-activator" => option.unit_option_activator_id, 'disabled' => disable %>
       <%end%>
       <%= option.display_name %>
       <% unless option.infos.nil? %>
