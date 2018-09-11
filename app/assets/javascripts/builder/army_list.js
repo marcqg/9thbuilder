@@ -17,6 +17,8 @@ jQuery(function($) {
             }
         }
     });
+
+
     $(document).on('click', '.edit_builder_army_list input[type="submit"]', function(event){
 
         if($('.edit_builder_army_list #builder_army_list_rate_with_max:checked').length > 0){
@@ -91,6 +93,7 @@ jQuery(function($) {
 
 
         var limite = parseFloat($div.data('value-points-limit'));
+        console.log('limite', limite);
 
         //Magic item dominant
         if($(this).data('dominant')){
@@ -123,8 +126,10 @@ jQuery(function($) {
             if ($quantity.length) {
                 $quantity.removeAttr('disabled');
 
-                var max = Math.floor((limite - total) / value_points);
-                $quantity.attr('max', max);
+                if(limite > 0){
+                    var max = Math.floor((limite - total) / value_points);
+                    $quantity.attr('max', max);
+                }
 
                 value_points = value_points * parseInt($quantity.val());
             }
@@ -144,7 +149,7 @@ jQuery(function($) {
 
             var points = self.data('value-points');
 
-            if (points + total > limite) {
+            if (limite > 0 && points + total > limite) {
                 self.prop('disabled', true);
                 $parent.find('.magic-item-quantity').prop('disabled', true);
             } else {
@@ -152,7 +157,7 @@ jQuery(function($) {
                 $parent.find('.magic-item-quantity').val(1);
 
                 $quantities = $parent.find('.magic-item-quantity');
-                if ($quantities.length) {
+                if (limite > 0 && $quantities.length) {
 
                     var max = Math.floor((limite - total) / points);
                     $quantities.attr('max', max);
