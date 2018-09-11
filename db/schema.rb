@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180910152242) do
+ActiveRecord::Schema.define(version: 20180911101756) do
 
   create_table "active_admin_comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.integer  "resource_id",                 null: false
@@ -359,18 +359,19 @@ ActiveRecord::Schema.define(version: 20180910152242) do
   end
 
   create_table "ninth_age_magic_items", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
-    t.integer "magic_item_category_id",                 null: false
+    t.integer "magic_item_category_id",                   null: false
     t.integer "army_id"
-    t.integer "value_points",                           null: false
+    t.integer "value_points",                             null: false
     t.integer "override_id"
-    t.boolean "is_multiple",            default: false, null: false
-    t.integer "version_id",             default: 0,     null: false
-    t.integer "type_figurine",          default: 0,     null: false
+    t.boolean "is_multiple",              default: false, null: false
+    t.integer "version_id",               default: 0,     null: false
+    t.integer "type_figurine",            default: 0,     null: false
     t.integer "type_target"
     t.integer "type_duration"
-    t.integer "max",                    default: 0,     null: false
-    t.boolean "is_dominant",            default: false, null: false
+    t.integer "max",                      default: 0,     null: false
+    t.boolean "is_dominant",              default: false, null: false
     t.string  "latex_key"
+    t.boolean "disable_magic_path_limit", default: false, null: false
     t.index ["army_id"], name: "index_ninth_age_magic_items_on_army_id", using: :btree
     t.index ["magic_item_category_id"], name: "index_ninth_age_magic_items_on_magic_item_category_id", using: :btree
     t.index ["override_id"], name: "index_ninth_age_magic_items_on_override_id", using: :btree

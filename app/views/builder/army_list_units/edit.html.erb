@@ -42,8 +42,12 @@
               <% end %>
             <% end %>
             <% if @available_magic_unit_options.only_paths.size > 0 %>
-              <li><%= t('army_list_unit.show.path_unit_options') %></li>
-              <%= content_tag(:ul, {:class => "option-children children-sub list-inline text-center", "data-one-choise" => true}) do %>
+              <%
+                has_magic_path_limit = @army_list.magic_items.where(:disable_magic_path_limit => true).empty?
+              %>
+              <li class="magic-path-limit" style="display:<%= (has_magic_path_limit ? "": "none") %>"><%= t('army_list_unit.show.path_unit_options_choose_one') %></li>
+              <li class="magic-path-no-limit" style="display:<%= (has_magic_path_limit ? "none": "") %>"><%= t('army_list_unit.show.path_unit_options') %></li>
+              <%= content_tag(:ul, {:class => "option-children children-sub list-inline text-center magic-path-choose", "data-one-choise" => has_magic_path_limit}) do %>
                 <%= render :partial => 'builder/army_list_units_unit_options/edit', :collection => @available_magic_unit_options.only_paths, :as => :option, :locals => { :army_list_unit => @army_list_unit } %>
               <% end %>
             <% end %>

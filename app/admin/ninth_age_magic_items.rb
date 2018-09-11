@@ -1,7 +1,7 @@
 ActiveAdmin.register NinthAge::MagicItem do
   menu parent: 'Ninth Age Magic', priority: 4
 
-  permit_params :version_id, :army_id, :magic_item_category_id, :override_id, :is_dominant, :latex_key, :locale, :value_points, :is_multiple, :type_figurine, {:type_target => []}, {:duration => []}, :max, translations_attributes: [:id, :name, :description, :infos, :locale, :_destroy]
+  permit_params :version_id, :army_id, :magic_item_category_id, :override_id, :is_dominant, :disable_magic_path_limit, :latex_key, :locale, :value_points, :is_multiple, :type_figurine, {:type_target => []}, {:duration => []}, :max, translations_attributes: [:id, :name, :description, :infos, :locale, :_destroy]
 
   filter :version, as: :select, collection: -> { NinthAge::Version.includes(:translations).map { |version| [ version.name, version.id ] } } 
   filter :army, as: :select, :input_html => {'data-option-dependent' => true, 'data-option-url' => '/ninth_age/version-:q_version_id/armies', 'data-option-observed' => 'q_version_id'}, collection: -> { NinthAge::Army.includes(:translations).where(:version_id => NinthAge::Version.last.id).order(:name).map { |army| [ army.name, army.id ] } } 
@@ -72,6 +72,7 @@ ActiveAdmin.register NinthAge::MagicItem do
       f.input :type_figurine, as: :select, collection: NinthAge::MagicItem.type_figurines.keys.collect { |type_figurine| [I18n.t("magic_items.type_figurine.#{type_figurine}", type_figurine: type_figurine), type_figurine] }, include_blank: false, include_hidden: false
       f.input :type_target, as: :check_boxes, collection: NinthAge::MagicItem.values_for_type_target.collect { |type_target| [I18n.t("magic_spell.type_target.#{type_target}", default: type_target), type_target] }
       f.input :type_duration, as: :check_boxes, collection: NinthAge::MagicItem.values_for_type_duration.collect { |duration| [I18n.t("magic_spell.duration.#{duration}", default: duration), duration] }
+      f.input :disable_magic_path_limit
       f.input :max
       f.input :latex_key
     end
@@ -90,6 +91,7 @@ ActiveAdmin.register NinthAge::MagicItem do
       row :type_figurine
       row :type_target
       row :type_duration
+      row :disable_magic_path_limit
       row :max
       row :latex_key
     end

@@ -34,6 +34,33 @@ jQuery(function($) {
 
         self.parent().find('label input').change();
     });
+
+    /**
+     * Magic path limit
+     */
+	$(document).on('change', '#army_list_unit_magic_items ul input[disable-magic-path-limit="true"]', function(evt) {
+        var self = $(this);
+
+        var label_limit = $('li.magic-path-limit');
+        var label_no_limit = $('li.magic-path-no-limit');
+        
+        var path = $('ul.magic-path-choose');
+
+        var checked = self.prop("checked");
+        console.log('disable-magic-path-limit', checked);
+        
+        path.attr('data-one-choise', !checked);
+        path.data('one-choise', !checked);
+
+        if(checked){
+            label_limit.hide();
+            label_no_limit.show();
+        }
+        else {
+            label_limit.show();
+            label_no_limit.hide();
+        }
+    });
 });
 
 

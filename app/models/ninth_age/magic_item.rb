@@ -20,6 +20,7 @@ class NinthAge::MagicItem < ApplicationRecord
 
   validates :version_id, :magic_item_category_id, :value_points, presence: true
   validates :value_points, numericality: { greater_than_or_equal_to: 0, only_integer: true }
+  validates :disable_magic_path_limit, inclusion: { in: [true, false] }
 
   def name_with_version
     "#{name} - #{version.name}"

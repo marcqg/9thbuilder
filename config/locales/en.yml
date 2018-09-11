@@ -244,7 +244,8 @@ en:
       magic_standards: "Magic banners"
       magic_unit_options: "Magic Options"
       magic_lvl_unit_options: "May become (one choice only)"
-      path_unit_options: "Must generate spells from (choose one)"
+      path_unit_options_choose_one: "Must generate spells from (choose one)"
+      path_unit_options: "Must generate spells from"
       unit_options: "Options"
       command_group_unit_options: Command Group Options
       mount_unit_options: "Mount Options"
