@@ -12,8 +12,8 @@ module Tournament
       def show
       end
   
-      # GET /tournament/myteams/new
-      def new
+      # GET /tournament/myteams/1/add
+      def add
       end
   
       private
