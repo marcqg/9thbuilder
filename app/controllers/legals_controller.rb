@@ -1,4 +1,4 @@
-class LegalController < ApplicationController
+class LegalsController < ApplicationController
   def index
   end
 end
