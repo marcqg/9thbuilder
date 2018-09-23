@@ -87,7 +87,7 @@ module Tournament
 
       # Use callbacks to share common setup or constraints between actions.
       def set_event
-        @event = current_user.events.find(params[:event_id])
+        @event = current_user.events.find_by_uuid!(params[:event_id])
       end
 
       def set_user_apply
@@ -96,7 +96,7 @@ module Tournament
 
       # Never trust parameters from the scary internet, only allow the white list through.
       def user_apply_params
-        params.require(:tournament_user_apply).permit(:name, :army_id, :state)
+        params.require(:tournament_user_apply).permit(:name, :email, :user_id, :army_id, :state)
       end
   end
 end

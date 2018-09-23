@@ -1,0 +1,32 @@
+<div class="index-team">
+  <%= link_to('Back to tournament', tournament_event_path(@event), {:class => 'btn btn-age pull-right'})%>
+  <%= link_to('Add team', new_tournament_team_path(@event), {:class => 'btn btn-age pull-right'})%>
+  <h1 class="text-center"><%== t('tournament.team.new.title') %> (<span class="nb-team" data-team-max="<%= @event.team_max %>"><%= @event.teams.count %></span>/<%= @event.team_max %>)</h1>
+
+  <table class="teams-list tournament-table">
+    <thead>
+      <tr>
+        <th>Name</th>
+  	    <th>Action</th>
+  	  </tr>
+  	</thead>
+  	<tbody>
+      <% @event.teams.each do |team| %>
+      <tr>
+        <td><%= team.name %></td>
+        <td class="text-center">
+          <%= link_to tournament_team_path(@event, team) do %>
+            <i class="fa fa-2x fa-search"></i>
+          <% end %>
+          <%= link_to edit_tournament_team_path(@event, team) do %>
+            <i class="fa fa-2x fa-edit"></i>
+          <% end %>
+          <%= link_to tournament_team_path(@event, team), method: :delete, data: { confirm: 'Are you sure?'} do %>
+            <i class="fa fa-2x fa-trash"></i>
+          <% end %>
+        </td>
+      </tr>
+      <% end %>
+  	<tbody>
+  </table>
+</div>

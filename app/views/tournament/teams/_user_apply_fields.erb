@@ -1,0 +1,21 @@
+<div class="team-user">
+      <%= f.hidden_field :event_id %>
+      <%= f.hidden_field :team_id %>
+      <%= f.hidden_field :user_id, class: "user_apply_user_id" %>
+      <div class="form-group">
+          <%= f.label :name %>
+          <%= f.text_field :name, :placeholder => t('tournament.team.form.name'), class: "form-control autocomplete-user-name" %>
+      </div>
+    
+      <div class="form-group">
+          <%= f.label :email %>
+          <%= f.text_field :email, :placeholder => t('tournament.team.form.email'), class: "form-control user_apply_email" %>
+      </div class="form-group">
+    
+      <div class="form-group">
+          <%= f.label :team_leader %>
+          <%= f.check_box :team_leader, class: "form-control" %>
+      </div>
+    
+      <%= link_to_remove_association "remove member", f %>
+    </div>

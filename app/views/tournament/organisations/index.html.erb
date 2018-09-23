@@ -1,7 +1,7 @@
 <div class="tournament-organisation">
   <%= link_to('Create a tournament', new_tournament_event_path, {:class => 'btn btn-age pull-right'})%>
 
-  <table class="events-list">
+  <table class="events-list tournament-table">
     <thead>
       <tr>
         <th>Name</th>
@@ -20,8 +20,14 @@
           <%= link_to tournament_event_path(event) do %>
             <i class="fa fa-2x fa-search"></i>
           <% end %>
-          <%= link_to tournament_add_user_apply_path(event) do %>
-            <i class="fa fa-2x fa-user-plus"></i>
+          <% if event.team? %>
+            <%= link_to tournament_teams_path(event) do %>
+              <i class="fa fa-2x fa-users-cog"></i>
+            <% end %>
+          <% else %>
+            <%= link_to tournament_add_user_apply_path(event) do %>
+              <i class="fa fa-2x fa-user-plus"></i>
+            <% end %>
           <% end %>
           <%= link_to edit_tournament_event_path(event) do %>
             <i class="fa fa-2x fa-edit"></i>

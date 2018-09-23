@@ -20,10 +20,7 @@
     results = points.group_by  {|h| h[0]}
                     .map{|k,v| [k,v.map{ |m| m[1] }.sum] }
                     .sort{|x,y| y[1] <=> x[1]}
-    p results 
     users = results.map{ |k| k[0]}
-    p users 
-
 %>
 
   <table class="list-user-points col-md-12 col-sm-12">

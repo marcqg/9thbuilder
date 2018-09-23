@@ -1,0 +1,119 @@
+.list-team {
+    position: relative;
+    padding: 0;
+    margin-top: 10px;
+
+    > li {
+        height: 55px;
+        position: relative;
+        padding: 6px 0;
+        list-style: none;
+        margin-bottom: 5px;
+        background: image-url("bg_army_list_unit_overview_content.png") repeat-x;
+
+        &::before,
+        &::after {
+            content: "";
+            width: 16px;
+            height: 55px;
+            display: block;
+            position: absolute;
+            top: 0;
+        }
+
+        &::before {
+            background: image-url('bg_army_list_unit_overview_left.png') no-repeat;
+            left: 0;
+        }
+
+        &::after {
+            background: image-url('bg_army_list_unit_overview_right.png') no-repeat;
+            right: 0;
+        }
+    }
+
+    .position {
+        position: relative;
+        z-index: 2;
+        top: 7px;
+        left: -10px;
+        background: white;
+        padding: 2px 3px;
+        border: 1px solid black;
+        width: 25px;
+        float: left;
+
+        &:hover {
+            cursor: move;
+        }
+    }
+
+    .name {
+        float: left;
+        width: 25%;
+        font-size: 14px;
+
+        &:hover {
+            cursor: pointer;
+        }
+
+        strong {
+            display: block;
+            font: 18px "godofwarregular";
+        }
+
+        em {
+            font-style: normal;
+            font-weight: bold;
+        }
+    }
+
+    .army {
+        float: left;
+        width: 33%;
+
+        select {
+            display: block;
+            margin: 10px auto;
+        }
+    }
+
+    .actions {
+        margin: 8px 20px 0 0;
+
+        a>i {
+            color: black;
+        }
+    }
+
+    .ribbon {
+        position: absolute;
+        top: -4px;
+        right: -7px;
+        width: 97px;
+        height: 54px;
+    }
+}
+
+.form-team-user {
+    .team-user {
+        margin: 0 5%;
+    }
+}
+
+.show-team {
+    .team-user {
+        img {
+            display: block;
+            margin: auto;
+        }
+
+        p {
+            text-align: center;
+            
+            span {
+                font-size: 2em;
+            }
+        }
+    }
+}

@@ -1,0 +1,21 @@
+<div class="show-team">
+  <%= link_to(tournament_teams_path(@event), {:class => 'btn btn-age pull-right'}) do %><%= t('tournament.team.back') %><% end %>
+  
+  <h1 class="team-name"><strong><%= t('tournament.team.name') %>:</strong> <%= @team.name %></h1>
+  
+	<div class="rows">
+		<% @team.user_applies.each do |user_apply| %>
+			<div class="team-user col-md-2 col-12 col-sm-3">
+				<% unless user_apply.user.nil? %>
+					<%= image_tag user_apply.user.gravatar_url(:secure => :true, :default => 'identicon'), class: 'gravatar-large' %>
+				<%end%>
+				<p><span class="user-name"><%= user_apply.name %></span>
+				<% if user_apply.team_leader? %>
+					<%= icon('fas', 'user-shield', class: 'fa-2x') %>
+				<%end%>
+				</p>
+			</div>
+		<%end%>
+	</div>
+
+</div>

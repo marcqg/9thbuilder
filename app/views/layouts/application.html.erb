@@ -65,6 +65,9 @@
                   <%if current_user.has_role? :administrator or current_user.has_role? :organisator %>
                   <li><%= link_to t('admin.tournament'), tournament_organisations_path %></li>
                   <%end%>
+                  <%unless current_user.teams.empty? %>
+                  <li><%= link_to t('tournament.team.my'), tournament_myteams_path %></li>
+                  <%end%>                  
                   <li><%= link_to t('menu.signout'), destroy_user_session_path %></li>
                 </ul>
               </li>

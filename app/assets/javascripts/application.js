@@ -6,6 +6,8 @@
 //= require_tree ./paint
 //= require_tree ./tournament
 
+//= require cocoon
+
 //= require bootstrap
 //= require moment
 //= require bootstrap-datetimepicker

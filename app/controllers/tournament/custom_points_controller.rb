@@ -42,7 +42,7 @@ module Tournament
 
       # Use callbacks to share common setup or constraints between actions.
       def set_event
-        @event = current_user.events.find(params[:event_id])
+        @event = current_user.events.find_by_uuid!(params[:event_id])
       end
 
       # Use callbacks to share common setup or constraints between actions.

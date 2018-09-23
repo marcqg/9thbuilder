@@ -47,4 +47,23 @@ jQuery(document).ready(function() {
 	$('.show-tournament .competition-container .name').delay(1000).animate({
 		"opacity": "1"
 	}, 500);
+
+
+	$('#tournament_event_participation').change(function(e){
+		console.log('team', $(this).val());
+		
+		switch($(this).val()){
+			case 'individual':
+				$('.input-team-max').hide();
+				$('.label-team-max').hide();
+				$('.label-user-max').show();
+				break;
+			case 'team':
+				$('.input-team-max').show();
+				$('.label-team-max').show();
+				$('.label-user-max').hide();
+				break;
+		}
+	});
+	$('#tournament_event_participation').change();
 });

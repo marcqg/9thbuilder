@@ -137,11 +137,16 @@ Rails.application.routes.draw do
     end
 
     namespace :tournament do
-      resources :events
+      resources :events, param: :uuid
       resources :organisations,                   only: [:index]
-      
+      get '/searchs/users',                       to: 'searchs#users',                    as: :tournament_searchs_users
 
-      scope '/event-:event_id' do
+      resources :myteams,                         only: [:index, :show]
+      scope '/myteam-:team_id' do
+        get '/add',                               to: 'myteams#add',                      as: :tournament_myteams_add
+      end
+      
+      scope '/event-:uuid' do
         scope '/user_applies' do
           post '/multi',                          to: 'user_applies#multi',               as: :multi_user_apply
           post '/sort',                           to: 'user_applies#sort',                as: :sort_user_apply
@@ -151,6 +156,7 @@ Rails.application.routes.draw do
         resources :rounds,                        only: [:show, :create]
         resources :custom_points,                 only: [:index, :update]
         resources :exports,                       only: [:index]
+        resources :teams
 
         scope '/round-:round_id' do
           resources :matches,                     only: [:update]

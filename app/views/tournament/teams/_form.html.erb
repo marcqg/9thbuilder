@@ -1,0 +1,20 @@
+<%= form_for [event, team], url: url, :validate => team.persisted? do |f| %>
+  <%= render "shared/form_errors", :object => team %>
+
+  <div class="form-group">
+    <%= f.label :name %>
+    <%= f.text_field :name, :placeholder => t('tournament.team.form.name'), class: "form-control" %>
+  </div>
+
+  <div class="form-team-user">
+    <label>Add a leader for the team</label>
+    <%= f.fields_for :user_applies do |user_apply| %>
+      <%= render 'user_apply_fields', f: user_apply %>
+    <% end %>
+    <div class="link">
+      <%= link_to_add_association 'add member', f, :user_applies %>
+    </div>
+  </div>
+
+  <%= f.submit t('tournament.team.form.submit'), class: 'btn btn-age center-btn' %>
+<% end %>

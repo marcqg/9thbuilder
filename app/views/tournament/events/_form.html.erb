@@ -39,7 +39,18 @@
   </div>
 
   <div class="form-group">
-    <%= f.label :user_max %>
+    <%= f.label :participation %>
+    <%= f.select :participation, Tournament::Event.participations.keys.map {|key| [t("tournament.event.participation.#{key}"), key]}, class: "form-control" %>
+  </div>   
+  
+  <div class="form-group input-team-max">
+    <%= f.label :team_max %>
+    <%= f.number_field :team_max, :placeholder => t('tournament.event.form.team_max'), class: "form-control" %>
+  </div>  
+
+  <div class="form-group">
+    <%= f.label :user_max, {class: 'label-user-max' }%>
+    <%= label_tag('tournament_event_user_max', t('tournament.event.form.user_team_max'), {class: 'label-team-max' }) %>
     <%= f.number_field :user_max, :placeholder => t('tournament.event.form.user_max'), class: "form-control" %>
   </div>
 

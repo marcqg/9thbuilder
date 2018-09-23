@@ -14,6 +14,7 @@ class User < ApplicationRecord
 
   has_many :events, class_name: 'Tournament::Event', dependent: :destroy, foreign_key: 'creator_id'
   has_many :user_applies, class_name: 'Tournament::UserApply', dependent: :destroy
+  has_many :teams, through: :user_applies, class_name: "Tournament::Team"
 
 
   # Include default devise modules. Others available are:

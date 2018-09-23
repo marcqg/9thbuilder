@@ -88,6 +88,7 @@ gem 'wisepdf' 				#pdf export
 gem 'attribute_normalizer' 	#data integrity / params permit
 gem 'uuidtools' 			#UUID
 gem 'rubb', github: 'petejkim/rubb' #BBcode
+gem "cocoon" #nested form
 
 #Avatar
 gem 'gravtastic'
@@ -98,7 +99,7 @@ gem 'paperclip', '~> 5.1.0'
 #CSS
 gem 'bootstrap-sass'
 gem 'autoprefixer-rails'
-gem 'font-awesome-rails'
+gem 'font-awesome-sass', '~> 5.2.0'
 gem 'momentjs-rails'
 gem 'bootstrap3-datetimepicker-rails', '~> 4.17.47'
 

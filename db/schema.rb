@@ -751,20 +751,24 @@ ActiveRecord::Schema.define(version: 20180911101756) do
   end
 
   create_table "tournament_events", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "creator_id",                          default: 0, null: false
-    t.string   "name",                                            null: false
-    t.string   "address",                                         null: false
-    t.decimal  "latitude",   precision: 10, scale: 5,             null: false
-    t.decimal  "longitude",  precision: 10, scale: 5,             null: false
-    t.datetime "start_date",                                      null: false
-    t.datetime "end_date",                                        null: false
-    t.decimal  "fees",       precision: 10, scale: 2
+    t.integer  "creator_id",                             default: 0, null: false
+    t.string   "name",                                               null: false
+    t.string   "address",                                            null: false
+    t.decimal  "latitude",      precision: 10, scale: 5,             null: false
+    t.decimal  "longitude",     precision: 10, scale: 5,             null: false
+    t.datetime "start_date",                                         null: false
+    t.datetime "end_date",                                           null: false
+    t.decimal  "fees",          precision: 10, scale: 2
     t.string   "source"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "version_id",                          default: 0, null: false
-    t.integer  "user_max",                            default: 0, null: false
+    t.integer  "version_id",                             default: 0, null: false
+    t.integer  "user_max",                               default: 0, null: false
+    t.integer  "team_max",                               default: 0, null: false
+    t.integer  "participation",                          default: 1, null: false
+    t.string   "uuid",                                               null: false
     t.index ["creator_id"], name: "index_tournament_tournaments_on_creator_id", using: :btree
+    t.index ["uuid"], name: "tournament_events_uuid_unique", unique: true, using: :btree
     t.index ["version_id"], name: "tournament_events_version_id", using: :btree
   end
 
@@ -789,6 +793,13 @@ ActiveRecord::Schema.define(version: 20180911101756) do
     t.index ["event_id"], name: "index_tournament_user_applies_on_event_id", using: :btree
   end
 
+  create_table "tournament_teams", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer "event_id", default: 0, null: false
+    t.string  "name",                 null: false
+    t.integer "position", default: 0, null: false
+    t.index ["event_id", "position"], name: "tournament_teams_event_position", unique: true, using: :btree
+  end
+
   create_table "tournament_user_applies", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "event_id",     default: 0, null: false
     t.integer  "user_id"
@@ -800,9 +811,12 @@ ActiveRecord::Schema.define(version: 20180911101756) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "email"
+    t.integer  "team_id"
+    t.boolean  "team_leader"
     t.index ["army_id"], name: "index_tournament_user_applies_on_army_id", using: :btree
     t.index ["army_list_id"], name: "index_tournament_user_applies_on_army_list_id", using: :btree
     t.index ["event_id"], name: "index_tournament_user_applies_on_event_id", using: :btree
+    t.index ["team_id"], name: "tournament_user_applies_team_id", using: :btree
     t.index ["user_id"], name: "index_tournament_user_applies_on_user_id", using: :btree
   end
 
@@ -941,9 +955,11 @@ ActiveRecord::Schema.define(version: 20180911101756) do
   add_foreign_key "tournament_matches", "tournament_rounds", column: "round_id"
   add_foreign_key "tournament_matches", "tournament_user_applies", column: "user_apply_id"
   add_foreign_key "tournament_rounds", "tournament_events", column: "event_id"
+  add_foreign_key "tournament_teams", "tournament_events", column: "event_id"
   add_foreign_key "tournament_user_applies", "builder_army_lists", column: "army_list_id"
   add_foreign_key "tournament_user_applies", "ninth_age_armies", column: "army_id"
   add_foreign_key "tournament_user_applies", "tournament_events", column: "event_id"
+  add_foreign_key "tournament_user_applies", "tournament_teams", column: "team_id"
   add_foreign_key "tournament_user_applies", "users"
   add_foreign_key "users", "ninth_age_armies", column: "favorite_army_id", on_delete: :nullify
   add_foreign_key "users_roles", "roles"
