@@ -31,11 +31,13 @@ module Tournament
       def create
         @team = Tournament::Team.new(tournament_params)
         @team.event = @event
-
-
   
         respond_to do |format|
           if @team.save
+        
+            # Tell the UserMailer to send a welcome email after save
+            TournamentMailer.create_team_leader(current_user).deliver_later
+
             format.html { redirect_to tournament_teams_url(@event), notice: 'Team was successfully created.' }
             format.json { render :show, status: :created, location: @event }
           else
