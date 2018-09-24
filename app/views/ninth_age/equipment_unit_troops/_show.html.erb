@@ -6,7 +6,7 @@
   <%end%>
   <% if access_admin %>
     <%= link_to(admin_ninth_age_equipment_unit_troop_path(equipment.id), {:target => "_blank"}) do %>
-      <i class="fa fa-pencil-square-o"></i>
+      <i class="fa fa-edit"></i>
     <% end %>
     <%= link_to(admin_ninth_age_equipment_unit_troop_path(equipment.id), {:target => "_blank", method: :delete, data: {confirm: 'Are you sure?'}}) do %>
       <i class="fa fa-trash"></i>

@@ -6,7 +6,7 @@
         <p><%= unit_option.display_name %>
         <% if access_admin %>
             <%= link_to(admin_ninth_age_unit_option_path(unit_option.id), {:target => "_blank"}) do %>
-              <i class="fa fa-pencil-square-o"></i>
+              <i class="fa fa-edit"></i>
             <% end %>
         <% end %></p>
       </li>
@@ -14,7 +14,7 @@
       <li><%= unit_option.display_name %>
         <% if access_admin %>
             <%= link_to(admin_ninth_age_unit_option_path(unit_option.id), {:target => "_blank"}) do %>
-              <i class="fa fa-pencil-square-o"></i>
+              <i class="fa fa-edit"></i>
             <% end %>
         <% end %>
         <% unless unit_option.infos.nil? or unit_option.infos.empty? %>
