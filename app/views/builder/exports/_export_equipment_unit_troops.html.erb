@@ -1,0 +1,8 @@
+<li>
+  <%= link_to(ninth_age_equipment_path(equipment.equipment_id), {:target => "_blank"}) do %><%= equipment.equipment.name %> 
+    <%if !equipment.info.nil? || !equipment.jet.nil?%>
+      (<%= equipment.jet %><%= ", " if !equipment.jet.nil? && !equipment.info.nil? %><%= equipment.info%>)
+    <%end%>
+  <%end%>
+<%= ", " unless equipment.last? %>
+</li>

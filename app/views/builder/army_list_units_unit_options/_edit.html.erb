@@ -66,7 +66,7 @@
     <% end %>
 
     <% if option.is_multiple %>
-      x <%= number_field_tag "builder_army_list_unit[army_list_unit_unit_options_attributes][#{option.id}][quantity]", army_list_unit_unit_option.try(:quantity), :min => 1, :disabled => !army_list_unit.unit_options.member?(option), "data-per-model" => option.is_per_model ? true : nil, :class => "army_list_unit_unit_option_quantity", :style => "position:relative; top:0; height:1.5em; width:20px; text-align:center;" %>
+      x <%= number_field_tag "builder_army_list_unit[army_list_unit_unit_options_attributes][#{option.id}][quantity]", army_list_unit_unit_option.try(:quantity) || 1, :min => 1, :disabled => !army_list_unit.unit_options.member?(option), "data-per-model" => option.is_per_model ? true : nil, :class => "army_list_unit_unit_option_quantity" %>
     <% else %>
       <%= hidden_field_tag "builder_army_list_unit[army_list_unit_unit_options_attributes][#{option.id}][quantity]", option.is_per_model ? army_list_unit.size : 1, :disabled => !army_list_unit.unit_options.member?(option) ? nil : true, "data-per-model" => option.is_per_model ? true : nil %>
     <% end %>

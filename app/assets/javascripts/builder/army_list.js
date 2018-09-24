@@ -78,6 +78,10 @@ jQuery(function($) {
         updateArmyListUnitValuePoints();
     });
 
+    $(document).on('change', '.army_list_unit_add_element ul li input.army_list_unit_unit_option_quantity', function(evt) {
+        updateArmyListUnitValuePoints();
+    });
+
     $(document).on('change', '.army_list_unit_add_element ul li input[type=checkbox], .army_list_unit_add_element ul li input[type=radio]', function(evt) {
         var total = 0.0,
             $changed = $(this),
@@ -85,6 +89,7 @@ jQuery(function($) {
             $div = $changed.closest('div');
 
         $div.find('.magic-item-quantity').prop('disabled', true);
+        $div.find('.army_list_unit_unit_option_quantity').prop('disabled', true);
 
         if ($div.attr('id') == 'army_list_unit_magic_items' ||
             $div.attr('id') == 'army_list_unit_extra_items') {
@@ -134,6 +139,13 @@ jQuery(function($) {
                 value_points = value_points * parseInt($quantity.val());
             }
 
+            var $quantity = $parent.find('.army_list_unit_unit_option_quantity');
+            if ($quantity.length) {
+                $quantity.removeAttr('disabled');
+
+                value_points = value_points * parseInt($quantity.val());
+            }
+
             total += value_points;
         });
 
@@ -152,9 +164,11 @@ jQuery(function($) {
             if (limite > 0 && points + total > limite) {
                 self.prop('disabled', true);
                 $parent.find('.magic-item-quantity').prop('disabled', true);
+                $parent.find('.army_list_unit_unit_option_quantity').prop('disabled', true);
             } else {
                 self.removeAttr('disabled');
                 $parent.find('.magic-item-quantity').val(1);
+                $parent.find('.army_list_unit_unit_option_quantity').val(1);
 
                 $quantities = $parent.find('.magic-item-quantity');
                 if (limite > 0 && $quantities.length) {
@@ -187,6 +201,7 @@ jQuery(function($) {
             var value_points = parseFloat($parent.find('em > span').data('value-points'));
 
             $parent.find('.magic-item-quantity').removeAttr('disabled');
+            $parent.find('.army_list_unit_unit_option_quantity').removeAttr('disabled');
 
             total += value_points;
         });
@@ -200,9 +215,11 @@ jQuery(function($) {
             if (points + total > limite) {
                 self.prop('disabled', true);
                 $parent.find('.magic-item-quantity').prop('disabled', true);
+                $parent.find('.army_list_unit_unit_option_quantity').prop('disabled', true);
             } else {
                 self.removeAttr('disabled');
                 $parent.find('.magic-item-quantity').val(1);
+                $parent.find('.army_list_unit_unit_option_quantity').val(1);
 
                 $quantities = $parent.find('.magic-item-quantity');
                 if ($quantities.length) {
