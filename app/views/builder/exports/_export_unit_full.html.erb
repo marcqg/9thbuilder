@@ -98,30 +98,8 @@
                 <td></td>
                 <td>
                   <ul class="list-inline">
-                    <% army_list_unit.unit.special_rule_unit_troops
-                            .joins(:special_rule)
-                            .includes(special_rule: [:translations])
-                            .where({ninth_age_special_rules: {type_lvl: NinthAge::SpecialRule.type_lvls[:Global] }})
-                            .each_with_index do |special_rule, index| %>
-                      <li>
-                          <%= link_to(ninth_age_special_rule_path(special_rule.special_rule_id), {:target => "_blank"}) do %><%= special_rule.special_rule.name %> 
-                            <%if !special_rule.info.nil? || !special_rule.jet.nil? %>
-                              (<%= special_rule.jet %><%= ", " if !special_rule.info.nil? && !special_rule.jet.nil? %><%= special_rule.info unless special_rule.info.nil? %>)
-                            <%end%>
-                          <%end%>,</li>
-                    <% end %>
-                    <% army_list_unit.unit.equipment_unit_troops
-                            .joins(:equipment)
-                            .includes(equipment: [:translations])
-                            .where({ninth_age_equipments: {type_lvl: NinthAge::Equipment.type_lvls[:Global] }})
-                              .each_with_index do |equipment, index| %>
-                        <li>
-                          <%= link_to(ninth_age_equipment_path(equipment.equipment_id), {:target => "_blank"}) do %><%= equipment.equipment.name %> 
-                            <%if !equipment.info.nil? || !equipment.jet.nil? %>
-                              (<%= equipment.jet %><%= ", " if !equipment.info.nil? && !equipment.jet.nil? %><%= equipment.info unless equipment.info.nil? %>)
-                            <%end%>
-                          <%end%>,</li>
-                    <% end %>
+                    <%= render :partial => 'ninth_age/special_rule_unit_troops/show', :collection => army_list_unit.unit.special_rule_unit_troops.joins(:special_rule).includes(special_rule: [:translations]).where({ninth_age_special_rules: {type_lvl: NinthAge::SpecialRule.type_lvls[:Global] }}), :as => :special_rule, :locals => {:access_admin => false} %>
+                    <%= render :partial => 'ninth_age/equipment_unit_troops/show', :collection => army_list_unit.unit.equipment_unit_troops.joins(:equipment).includes(equipment: [:translations]).where({ninth_age_equipments: {type_lvl: NinthAge::Equipment.type_lvls[:Global] }}), :as => :equipment, :locals => {:access_admin => false} %>
                   </ul>
                 </td>
               </tr>
@@ -158,34 +136,12 @@
               <td><%= army_list_unit.unit.carac_res %></td>
               <td><%= army_list_unit.unit.carac_arm %></td>
               <td></td>
-              <td>                
-              <ul class="list-inline">
-                <% army_list_unit.unit.special_rule_unit_troops
-                        .joins(:special_rule)
-                        .includes(special_rule: [:translations])
-                        .where({ninth_age_special_rules: {type_lvl: NinthAge::SpecialRule.type_lvls[:Defensive]}})
-                        .each_with_index do |special_rule, index| %>
-                  <li>
-                    <%= link_to(ninth_age_special_rule_path(special_rule.special_rule_id), {:target => "_blank"}) do %><%= special_rule.special_rule.name %> 
-                      <%if !special_rule.info.nil? || !special_rule.jet.nil? %>
-                        (<%= special_rule.jet %><%= ", " if !special_rule.info.nil? && !special_rule.jet.nil? %><%= special_rule.info unless special_rule.info.nil? %>)
-                      <%end%>
-                    <%end%>,</li>
-                <% end %>
-                <% army_list_unit.unit.equipment_unit_troops
-                        .joins(:equipment)
-                        .includes(equipment: [:translations])
-                        .where({ninth_age_equipments: {type_lvl: NinthAge::Equipment.type_lvls[:Defensive]}})
-                        .each_with_index do |equipment, index| %>
-                        <li>
-                          <%= link_to(ninth_age_equipment_path(equipment.equipment_id), {:target => "_blank"}) do %><%= equipment.equipment.name %> 
-                            <%if !equipment.info.nil? || !equipment.jet.nil? %>
-                              (<%= equipment.jet %><%= ", " if !equipment.info.nil? && !equipment.jet.nil? %><%= equipment.info unless equipment.info.nil? %>)
-                            <%end%>
-                          <%end%>,</li>
-                <% end %>
-              </ul>
-            </td>
+              <td>              
+                <ul class="list-inline">
+                  <%= render :partial => 'ninth_age/equipment_unit_troops/show', :collection => army_list_unit.unit.equipment_unit_troops.joins(:equipment).includes(equipment: [:translations]).where({ninth_age_equipments: {type_lvl: NinthAge::Equipment.type_lvls[:Defensive] }}), :as => :equipment, :locals => {:access_admin => false} %>
+                  <%= render :partial => 'ninth_age/special_rule_unit_troops/show', :collection => army_list_unit.unit.special_rule_unit_troops.joins(:special_rule).includes(special_rule: [:translations]).where({ninth_age_special_rules: {type_lvl: NinthAge::SpecialRule.type_lvls[:Defensive] }}), :as => :special_rule, :locals => {:access_admin => false} %>
+                </ul>
+              </td>
             </tr>
             </tbody>
           </table>
@@ -210,60 +166,28 @@
                 <td><%= troop.carac_str %></td>
                 <td><%= troop.carac_ap %></td>
                 <td><%= troop.carac_agi %></td>
-                <td>                                
+                <td>                                 
                   <ul class="list-inline">
-                    <% army_list_unit.unit.special_rule_unit_troops
-                            .joins(:special_rule)
-                            .includes(special_rule: [:translations])
-                            .where({ninth_age_special_rules: {type_lvl: NinthAge::SpecialRule.type_lvls[:Offensive]}})
-                            .where(:troop => nil)
-                        .each_with_index do |special_rule, index| %>
-                  <li>
-                    <%= link_to(ninth_age_special_rule_path(special_rule.special_rule_id), {:target => "_blank"}) do %><%= special_rule.special_rule.name %> 
-                      <%if !special_rule.info.nil? || !special_rule.jet.nil? %>
-                        (<%= special_rule.jet %><%= ", " if !special_rule.info.nil? && !special_rule.jet.nil? %><%= special_rule.info unless special_rule.info.nil? %>)
-                      <%end%>
-                    <%end%>,</li>
-                    <% end %>
-                    <% army_list_unit.unit.special_rule_unit_troops
-                            .joins(:special_rule)
-                            .includes(special_rule: [:translations])
-                            .where({ninth_age_special_rules: {type_lvl: NinthAge::SpecialRule.type_lvls[:Offensive]}})
-                            .where(:troop => troop.id)
-                        .each_with_index do |special_rule, index| %>
-                  <li>
-                    <%= link_to(ninth_age_special_rule_path(special_rule.special_rule_id), {:target => "_blank"}) do %><%= special_rule.special_rule.name %> 
-                      <%if !special_rule.info.nil? || !special_rule.jet.nil? %>
-                        (<%= special_rule.jet %><%= ", " if !special_rule.info.nil? && !special_rule.jet.nil? %><%= special_rule.info unless special_rule.info.nil? %>)
-                      <%end%>
-                    <%end%>,</li>
-                    <% end %>
-                    <% army_list_unit.unit.equipment_unit_troops
-                            .joins(:equipment)
-                            .includes(equipment: [:translations])
-                            .where({ninth_age_equipments: {type_lvl: NinthAge::Equipment.type_lvls[:Offensive]}})
-                            .where(:troop => nil)
-                              .each_with_index do |equipment, index| %>
-                        <li>
-                          <%= link_to(ninth_age_equipment_path(equipment.equipment_id), {:target => "_blank"}) do %><%= equipment.equipment.name %> 
-                            <%if !equipment.info.nil? || !equipment.jet.nil? %>
-                              (<%= equipment.jet %><%= ", " if !equipment.info.nil? && !equipment.jet.nil? %><%= equipment.info unless equipment.info.nil? %>)
-                            <%end%>
-                          <%end%>,</li>
-                    <% end %>
-                    <% army_list_unit.unit.equipment_unit_troops
-                            .joins(:equipment)
-                            .includes(equipment: [:translations])
-                            .where({ninth_age_equipments: {type_lvl: NinthAge::Equipment.type_lvls[:Offensive]}})
-                            .where(:troop => troop.id)
-                              .each_with_index do |equipment, index| %>
-                        <li>
-                          <%= link_to(ninth_age_equipment_path(equipment.equipment_id), {:target => "_blank"}) do %><%= equipment.equipment.name %> 
-                            <%if !equipment.info.nil? || !equipment.jet.nil? %>
-                              (<%= equipment.jet %><%= ", " if !equipment.info.nil? && !equipment.jet.nil? %><%= equipment.info unless equipment.info.nil? %>)
-                            <%end%>
-                          <%end%>,</li>
-                    <% end %>
+                    <%= render :partial => 'ninth_age/equipment_unit_troops/show', :collection => army_list_unit.unit.equipment_unit_troops
+                                .joins(:equipment)
+                                .includes(equipment: [:translations])
+                                .where({ninth_age_equipments: {type_lvl: NinthAge::Equipment.type_lvls[:Offensive]}})
+                                .where(:troop => nil), :as => :equipment, :locals => {:access_admin => false} %>
+                    <%= render :partial => 'ninth_age/equipment_unit_troops/show', :collection => army_list_unit.unit.equipment_unit_troops
+                                .joins(:equipment)
+                                .includes(equipment: [:translations])
+                                .where({ninth_age_equipments: {type_lvl: NinthAge::Equipment.type_lvls[:Offensive]}})
+                                .where(:troop => troop.id), :as => :equipment, :locals => {:access_admin => false} %>
+                    <%= render :partial => 'ninth_age/special_rule_unit_troops/show', :collection => army_list_unit.unit.special_rule_unit_troops
+                                .joins(:special_rule)
+                                .includes(special_rule: [:translations])
+                                .where({ninth_age_special_rules: {type_lvl: NinthAge::SpecialRule.type_lvls[:Offensive]}})
+                                .where(:troop => nil), :as => :special_rule, :locals => {:access_admin => false} %>
+                    <%= render :partial => 'ninth_age/special_rule_unit_troops/show', :collection => army_list_unit.unit.special_rule_unit_troops
+                                .joins(:special_rule)
+                                .includes(special_rule: [:translations])
+                                .where({ninth_age_special_rules: {type_lvl: NinthAge::SpecialRule.type_lvls[:Offensive]}})
+                                .where(:troop => troop.id), :as => :special_rule, :locals => {:access_admin => false} %>
                   </ul>
                 </td>
               </tr>
@@ -304,22 +228,8 @@
                 <td></td>
                 <td>
                   <ul class="list-inline">
-                    <% mount.special_rule_unit_troops
-                            .joins(:special_rule)
-                            .includes(special_rule: [:translations])
-                            .where({ninth_age_special_rules: {type_lvl: NinthAge::SpecialRule.type_lvls[:Global] }})
-                            .map(&:special_rule)
-                            .each do |special_rule| %>
-                      <li><%= link_to(special_rule.name, ninth_age_special_rule_path(special_rule.id)) %>,</li>
-                    <% end %>
-                    <% mount.equipment_unit_troops
-                            .joins(:equipment)
-                            .includes(equipment: [:translations])
-                            .where({ninth_age_equipments: {type_lvl: NinthAge::Equipment.type_lvls[:Global] }})
-                            .map(&:equipment)
-                            .each do |equipment| %>
-                      <li><%= link_to(equipment.name, ninth_age_equipment_path(equipment.id)) %>,</li>
-                    <% end %>
+                    <%= render :partial => 'ninth_age/special_rule_unit_troops/show', :collection => mount.special_rule_unit_troops.joins(:special_rule).includes(special_rule: [:translations]).where({ninth_age_special_rules: {type_lvl: NinthAge::SpecialRule.type_lvls[:Global] }}), :as => :special_rule, :locals => {:access_admin => false} %>
+                    <%= render :partial => 'ninth_age/equipment_unit_troops/show', :collection => mount.equipment_unit_troops.joins(:equipment).includes(equipment: [:translations]).where({ninth_age_equipments: {type_lvl: NinthAge::Equipment.type_lvls[:Global] }}), :as => :equipment, :locals => {:access_admin => false} %>
                   </ul>
                 </td>
               </tr>
@@ -356,25 +266,11 @@
               <td><%= mount.carac_res %></td>
               <td><%= mount.carac_arm %></td>
               <td></td>
-              <td>                
-              <ul class="list-inline">
-                <% mount.special_rule_unit_troops
-                        .joins(:special_rule)
-                        .includes(special_rule: [:translations])
-                        .where({ninth_age_special_rules: {type_lvl: NinthAge::SpecialRule.type_lvls[:Defensive]}})
-                        .map(&:special_rule)
-                        .each do |special_rule| %>
-                  <li><%= link_to(special_rule.name, ninth_age_special_rule_path(special_rule.id)) %>,</li>
-                <% end %>
-                <% mount.equipment_unit_troops
-                        .joins(:equipment)
-                        .includes(equipment: [:translations])
-                        .where({ninth_age_equipments: {type_lvl: NinthAge::Equipment.type_lvls[:Defensive]}})
-                        .map(&:equipment)
-                        .each do |equipment| %>
-                  <li><%= link_to(equipment.name, ninth_age_equipment_path(equipment.id)) %>,</li>
-                <% end %>
-              </ul>
+              <td>               
+                <ul class="list-inline">
+                  <%= render :partial => 'ninth_age/equipment_unit_troops/show', :collection => mount.equipment_unit_troops.joins(:equipment).includes(equipment: [:translations]).where({ninth_age_equipments: {type_lvl: NinthAge::Equipment.type_lvls[:Defensive] }}), :as => :equipment, :locals => {:access_admin => false} %>
+                  <%= render :partial => 'ninth_age/special_rule_unit_troops/show', :collection => mount.special_rule_unit_troops.joins(:special_rule).includes(special_rule: [:translations]).where({ninth_age_special_rules: {type_lvl: NinthAge::SpecialRule.type_lvls[:Defensive] }}), :as => :special_rule, :locals => {:access_admin => false} %>
+                </ul>
             </td>
             </tr>
             </tbody>
@@ -402,42 +298,26 @@
                 <td><%= troop.carac_agi %></td>
                 <td>                                
                   <ul class="list-inline">
-                    <% mount.special_rule_unit_troops
-                            .joins(:special_rule)
-                            .includes(special_rule: [:translations])
-                            .where({ninth_age_special_rules: {type_lvl: NinthAge::SpecialRule.type_lvls[:Offensive]}})
-                            .where(:troop => nil)
-                            .map(&:special_rule)
-                            .each do |special_rule| %>
-                      <li><%= link_to(special_rule.name, ninth_age_special_rule_path(special_rule.id)) %>,</li>
-                    <% end %>
-                    <% mount.special_rule_unit_troops
-                            .joins(:special_rule)
-                            .includes(special_rule: [:translations])
-                            .where({ninth_age_special_rules: {type_lvl: NinthAge::SpecialRule.type_lvls[:Offensive]}})
-                            .where(:troop => troop.id)
-                            .map(&:special_rule)
-                            .each do |special_rule| %>
-                      <li><%= link_to(special_rule.name, ninth_age_special_rule_path(special_rule.id)) %>,</li>
-                    <% end %>
-                    <% mount.equipment_unit_troops
-                            .joins(:equipment)
-                            .includes(equipment: [:translations])
-                            .where({ninth_age_equipments: {type_lvl: NinthAge::Equipment.type_lvls[:Offensive]}})
-                            .where(:troop => nil)
-                            .map(&:equipment)
-                            .each do |equipment| %>
-                      <li><%= link_to(equipment.name, ninth_age_equipment_path(equipment.id)) %>,</li>
-                    <% end %>
-                    <% mount.equipment_unit_troops
-                            .joins(:equipment)
-                            .includes(equipment: [:translations])
-                            .where({ninth_age_equipments: {type_lvl: NinthAge::Equipment.type_lvls[:Offensive]}})
-                            .where(:troop => troop.id)
-                            .map(&:equipment)
-                            .each do |equipment| %>
-                      <li><%= link_to(equipment.name, ninth_age_equipment_path(equipment.id)) %>,</li>
-                    <% end %>
+                    <%= render :partial => 'ninth_age/equipment_unit_troops/show', :collection => mount.equipment_unit_troops
+                                .joins(:equipment)
+                                .includes(equipment: [:translations])
+                                .where({ninth_age_equipments: {type_lvl: NinthAge::Equipment.type_lvls[:Offensive]}})
+                                .where(:troop => nil), :as => :equipment, :locals => {:access_admin => false} %>
+                    <%= render :partial => 'ninth_age/equipment_unit_troops/show', :collection => mount.equipment_unit_troops
+                                .joins(:equipment)
+                                .includes(equipment: [:translations])
+                                .where({ninth_age_equipments: {type_lvl: NinthAge::Equipment.type_lvls[:Offensive]}})
+                                .where(:troop => troop.id), :as => :equipment, :locals => {:access_admin => false} %>
+                    <%= render :partial => 'ninth_age/special_rule_unit_troops/show', :collection => mount.special_rule_unit_troops
+                                .joins(:special_rule)
+                                .includes(special_rule: [:translations])
+                                .where({ninth_age_special_rules: {type_lvl: NinthAge::SpecialRule.type_lvls[:Offensive]}})
+                                .where(:troop => nil), :as => :special_rule, :locals => {:access_admin => false} %>
+                    <%= render :partial => 'ninth_age/special_rule_unit_troops/show', :collection => mount.special_rule_unit_troops
+                                .joins(:special_rule)
+                                .includes(special_rule: [:translations])
+                                .where({ninth_age_special_rules: {type_lvl: NinthAge::SpecialRule.type_lvls[:Offensive]}})
+                                .where(:troop => troop.id), :as => :special_rule, :locals => {:access_admin => false} %>
                   </ul>
                 </td>
               </tr>

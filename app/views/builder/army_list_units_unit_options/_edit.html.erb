@@ -8,8 +8,8 @@
 
   army_list_unit_unit_option = army_list_unit.army_list_unit_unit_options.detect { |aluuo| aluuo.unit_option == option }
 
-  unless army_list_unit_unit_option.nil?
-    value_points = army_list_unit_unit_option.quantity * option.value_points
+  unless army_list_unit_unit_option.nil? or option.value_points.nil?
+    value_points = (army_list_unit_unit_option.quantity.nil? ? 1 : army_list_unit_unit_option.quantity) * option.value_points
   else
 
   option_points = 
