@@ -483,12 +483,12 @@ en:
         title: Add teams
       form:
         name: Name
-        leader: 
-          name: Leader name
-          email: Leader email
+        email: Email@gmail.com
         submit: Add
     user_apply:
       name: User
+      manage: Manage Team
+      share_link: Share invitation link
       new:
         title: Add users
       form:

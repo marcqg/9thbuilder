@@ -48,6 +48,25 @@
     </div>
 </div>
 
+<% unless current_user.teams.empty? %>
+<div class="clearboth">
+  <h2 class="text-center"><%= t 'tournament.team.my' %></h2>
+  <% current_user.teams.each_with_index do |team, i| %>
+    <div class="col-md-3 col-12 col-sm-4 team cursor-pointer <%= alternate_cell_class(i) %>">
+      <div class="tournament_list_row">
+        <%= link_to(tournament_myteam_path(team)) do %>
+          <p><span class="user-name"><%= team.event.name %>: <%= team.name %></span>
+          <% if @current_user.user_applies.find_by({:team_id => team.id}).team_leader? %>
+            <%= icon('fas', 'user-shield', class: 'fa-2x') %>
+          <%end%>
+          </p>
+        <%end%>
+      </div>
+    </div>
+  <% end %>
+</div>
+<% end %>
+
 <div class="clearboth">
   <h2 class="text-center"><%= t 'army_list.index.title' %></h2>
   <% @army_lists.each_with_index do |army_list, i| %>
@@ -56,16 +75,15 @@
         <p class="thumb"><a href="<%= builder_army_list_path(army_list) %>">
           <% unless army_list.army.logo.nil? %>
               <%= image_tag army_list.army.logo_large.url, alt: army_list.army.name, :size => "220x132" %>
-          <% end %></a></p>
-        <p class="value_points"><%= value_points army_list.value_points %><br/>
-          <small style="font-size:20px">points</small>
+          <% end %></a>
         </p>
-        <p><%= army_list.name.truncate(60) %></p>
+        <p><%= army_list.name.truncate(60) %> <small>(<%= value_points army_list.value_points %> pts)</small></p>
       </div>
     </div>
   <% end %>
 </div>
 
+<% unless @paint_lists.empty? %>
 <div class="clearboth">
   <h2 class="text-center"><%= t 'paint_list.index.title' %></h2>
   <% @paint_lists.each_with_index do |paint_list, i| %>
@@ -92,3 +110,4 @@
     </div>
   <% end %>
 </div>
+<% end %>

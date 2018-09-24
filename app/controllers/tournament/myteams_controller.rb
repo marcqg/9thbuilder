@@ -13,14 +13,14 @@ module Tournament
       end
   
       # GET /tournament/myteams/1/add
-      def add
+      def edit
       end
   
       private
-  
+    
       # Use callbacks to share common setup or constraints between actions.
       def set_team
-        @team = Tournament::Team.find(params[:id])
+        @team = current_user.teams.find(params[:id])
       end
     end
   end

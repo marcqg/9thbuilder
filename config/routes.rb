@@ -141,10 +141,7 @@ Rails.application.routes.draw do
       resources :organisations,                   only: [:index]
       get '/searchs/users',                       to: 'searchs#users',                    as: :tournament_searchs_users
 
-      resources :myteams,                         only: [:index, :show]
-      scope '/myteam-:team_id' do
-        get '/add',                               to: 'myteams#add',                      as: :tournament_myteams_add
-      end
+      resources :myteams,                         only: [:index, :show, :edit, :update]
       
       scope '/event-:uuid' do
         scope '/user_applies' do
