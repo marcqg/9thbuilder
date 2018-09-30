@@ -22,8 +22,17 @@ class Tournament::UserApply < ApplicationRecord
   acts_as_list scope: :event
 
 
-  validates :name, :event_id, :state, presence: true
-
+  validates :name, presence: true
+  validates :event_id, presence: true
+  validates :state, presence: true
+  validates :position, presence: true
+  validates :team_leader, inclusion: { in: [true, false] }
+  # user_id
+  # army_id
+  # army_list_id
+  # email
+  #team_id
+  
   before_create on: :create do
     unless event.nil?
       self.position = self.event.user_applies.count + 1

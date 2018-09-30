@@ -12,8 +12,29 @@ module Tournament
       def show
       end
   
-      # GET /tournament/myteams/1/add
+      # GET /tournament/myteams/1/edit
       def edit
+      end
+  
+      # PATCH/PUT /tournament/myteams/1
+      # PATCH/PUT /tournament/myteams/1.json
+      def update
+        respond_to do |format|
+          if @team.update(tournament_params)
+
+            @team.user_applies
+                  .reject { |n| !n.new_record? }
+                  .each do |apply|
+              TournamentMailer.add_team_member(@team, leader || current_user, apply).deliver_later
+            end
+
+            format.html { redirect_to tournament_teams_url(@event), notice: 'Team was successfully updated.' }
+            format.json { render :show, status: :ok, location: @event }
+          else
+            format.html { render action: 'edit' }
+            format.json { render json: @team.errors, status: :unprocessable_entity }
+          end
+        end
       end
   
       private
@@ -21,6 +42,11 @@ module Tournament
       # Use callbacks to share common setup or constraints between actions.
       def set_team
         @team = current_user.teams.find(params[:id])
+      end
+  
+      # Never trust parameters from the scary internet, only allow the white list through.
+      def tournament_params
+        params.require(:tournament_team).permit(:name, user_applies_attributes: [:id, :name, :email, :team_leader, :user_id, :team_id, :event_id, :_destroy])
       end
     end
   end

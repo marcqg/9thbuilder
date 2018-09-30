@@ -3,7 +3,6 @@ class Tournament::Team < ApplicationRecord
     strip_attributes
   
     belongs_to :event
-    belongs_to :leader, class_name: "User"
 
     has_many :user_applies, -> { order 'position' }, dependent: :destroy
     accepts_nested_attributes_for :user_applies, :reject_if => :all_blank, :allow_destroy => true

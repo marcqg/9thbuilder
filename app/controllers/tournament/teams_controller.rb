@@ -35,8 +35,7 @@ module Tournament
         respond_to do |format|
           if @team.save
         
-            # Tell the UserMailer to send a welcome email after save
-            TournamentMailer.create_team_leader(current_user).deliver_later
+            send_email(@team)
 
             format.html { redirect_to tournament_teams_url(@event), notice: 'Team was successfully created.' }
             format.json { render :show, status: :created, location: @event }
@@ -52,6 +51,9 @@ module Tournament
       def update
         respond_to do |format|
           if @team.update(tournament_params)
+
+            send_email(@team)
+
             format.html { redirect_to tournament_teams_url(@event), notice: 'Team was successfully updated.' }
             format.json { render :show, status: :ok, location: @event }
           else
@@ -72,6 +74,20 @@ module Tournament
       end
   
       private
+
+      def send_email(team)
+
+            leader = team.user_applies.find_by({:team_leader => true}
+            if !leader.nil? && leader.new_record?
+              # Tell the UserMailer to send a welcome email after save
+              TournamentMailer.create_team_leader(leader).deliver_later
+            end
+            @team.user_applies
+                  .reject { |n| !n.new_record? }
+                  .each do |apply|
+                TournamentMailer.add_team_member(@team, leader || current_user, apply).deliver_later
+            end
+      end
   
       # Use callbacks to share common setup or constraints between actions.
       def set_event
