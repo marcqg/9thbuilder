@@ -1,7 +1,8 @@
 module Tournament
     class MyteamsController < ApplicationController
       before_action :authenticate_user!
-      before_action :set_team, only: [:show, :edit, :update, :destroy]
+      before_action :set_team, only: [:show, :edit, :update, :destroy, :invitations]
+      before_action :set_team_by_token, only: [:invitation_link]
  
       # GET /tournament/myteams
       def index
@@ -36,12 +37,30 @@ module Tournament
           end
         end
       end
+
+      # GET /tournament/myteam-:id/invitations
+      def invitations
+        if @team.invitation_token.nil?
+          @team.invitation_token = UUIDTools::UUID.random_create.to_s
+          @team.invitation_enabled = true
+          @team.save!
+        end
+      end
+
+      # GET /tournament/myteam-:id/invitation/:token
+      def invitation_link
+      end
   
       private
     
       # Use callbacks to share common setup or constraints between actions.
       def set_team
         @team = current_user.teams.find(params[:id])
+      end
+    
+      # Use callbacks to share common setup or constraints between actions.
+      def set_team_by_token
+        @team = Tournament::Team.find_by({:invitation_token => params[:token], :invitation_enabled => true})
       end
   
       # Never trust parameters from the scary internet, only allow the white list through.

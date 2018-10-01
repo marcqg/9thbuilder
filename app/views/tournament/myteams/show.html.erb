@@ -2,8 +2,8 @@
   <% unless @team.user_applies.where({:team_leader => true, :user_id => current_user.id}).empty? %>
   	<%= link_to(tournament_myteams_path, {:class => 'btn btn-age pull-right'}) do %><%= t('tournament.team.back') %><% end %>
   	<%= link_to(edit_tournament_myteam_path(@team), {:class => 'btn btn-age pull-right'}) do %><%= t('tournament.user_apply.manage') %><% end %>
+    <%= link_to(tournament_myteams_invitations_path(@team), {:class => 'btn btn-age pull-right', 'data-popin' => true}) do %><%= t('tournament.user_apply.share_link') %><% end %>
   <% end %>
-  <%= link_to("#", {:class => 'btn btn-age pull-right'}) do %><%= t('tournament.user_apply.share_link') %><% end %>
   
   <h1 class="team-name"><strong><%= @team.event.name %>:</strong><%= @team.name %></h1>
   

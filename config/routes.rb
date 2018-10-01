@@ -142,6 +142,8 @@ Rails.application.routes.draw do
       get '/searchs/users',                       to: 'searchs#users',                    as: :tournament_searchs_users
 
       resources :myteams,                         only: [:index, :show, :edit, :update]
+      get '/myteam-:id/invitations',              to: 'myteams#invitations',              as: :myteams_invitations
+      get '/myteams/invitation/:token',           to: 'myteams#invitation_link',          as: :myteams_invitation_link
       
       scope '/event-:uuid' do
         scope '/user_applies' do

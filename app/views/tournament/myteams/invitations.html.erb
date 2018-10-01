@@ -1,0 +1,15 @@
+<div class="popin invitation-link">
+  <div class="modal-header">
+    <h2 class="modal-title">Share with others</h2>
+  </div>
+  <div class="modal-body">
+  	<!-- Target -->
+	<input id="foo" value="<%= tournament_myteams_invitation_link_url(@team.id, @team.invitation_token) %>">
+
+	<!-- Trigger -->
+	<button class="btn" data-clipboard-target="#foo">
+	    <i class="far fa-2x actions fa-copy"></i>
+	</button>
+    
+  </div>
+</div>

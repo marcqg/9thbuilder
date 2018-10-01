@@ -25,5 +25,8 @@ class AddTeam < ActiveRecord::Migration[5.0]
     add_column :tournament_user_applies, :team_leader, :boolean, default: nil, null: true
     add_foreign_key :tournament_user_applies, :tournament_teams, column: "team_id"
     add_index :tournament_user_applies, :team_id, name: 'tournament_user_applies_team_id'
+    
+    add_column :tournament_teams, :invitation_token, :string, length: 36, default: nil, null: true
+    add_column :tournament_teams, :invitation_enabled, :boolean, default: false, null: false
   end
 end
